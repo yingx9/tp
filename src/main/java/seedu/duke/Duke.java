@@ -17,20 +17,5 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
-        Parser parser = new Parser();
-        waitForResponse(parser);
-
-    }
-    public static void waitForResponse(Parser parser) {
-        Scanner scanner = new Scanner(System.in);
-        String response;
-        do {
-            response = scanner.nextLine();
-            if (!"bye".equalsIgnoreCase(response)) {
-                parser.process(response);
-            }
-        } while (!"bye".equalsIgnoreCase(response));
-
-        scanner.close();
     }
 }
