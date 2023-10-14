@@ -8,7 +8,6 @@ ____________________________________________________________
 What do you want to do?
 ____________________________________________________________
 > This book is added: Moby Dick
-____________________________________________________________
 > Commands available:
 add: add an item (e.g. add /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE])
 delete: delete an item (e.g. delete /id 123456789)
