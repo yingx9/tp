@@ -8,6 +8,7 @@ import seedu.commands.DeleteCommand;
 import seedu.commands.FindCommand;
 import seedu.commands.HelpCommand;
 import seedu.commands.ListCommand;
+import seedu.commands.ExitCommand;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class Parser {
             put("delete", new DeleteCommand());
             put("find", new FindCommand());
             put("help", new HelpCommand());
+            put("bye", new ExitCommand());
             put("add", new AddCommand());
         }
     };

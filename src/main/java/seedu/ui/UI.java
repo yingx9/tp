@@ -25,7 +25,7 @@ public class UI {
     }
 
     public void showExitMessage(){
-        System.out.println("Bye, hope to see you again soon!\n");
+        System.out.println("Bye, hope to see you again soon!");
         showLine();
     }
 
