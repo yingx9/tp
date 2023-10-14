@@ -33,7 +33,7 @@ public class Duke {
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
 
-    public static void main(String... launchArgs) {
+    public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -44,12 +44,12 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
-        new Duke().run(launchArgs);
+        new Duke().run(args);
     }
 
     /** Runs the program until termination.  */
-    public void run(String[] launchArgs) {
-        start(launchArgs);
+    public void run(String[] args) {
+        start(args);
         runCommandLoopUntilExitCommand();
         exit();
     }
@@ -57,13 +57,13 @@ public class Duke {
     /**
      * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
      *
-     * @param launchArgs arguments supplied by the user at program launch
+     * @param args arguments supplied by the user at program launch
      *
      */
-    private void start(String[] launchArgs) {
+    private void start(String[] args) {
         try {
             this.ui = new TextUi();
-            this.storage = initializeStorage(launchArgs);
+            this.storage = initializeStorage(args);
             this.addressBook = storage.load();
             ui.showWelcomeMessage(VERSION, storage.getPath());
 
