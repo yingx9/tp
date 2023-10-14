@@ -22,7 +22,7 @@ public class Parser {
             put("delete", new DeleteCommand());
             put("find", new FindCommand());
             put("help", new HelpCommand());
-            put("bye", new ExitCommand());
+            put("exit", new ExitCommand());
             put("add", new AddCommand());
         }
     };
