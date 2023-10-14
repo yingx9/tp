@@ -7,6 +7,8 @@ ____________________________________________________________
        |___/                                     
 What do you want to do?
 ____________________________________________________________
+This book is added: Moby Dick
+____________________________________________________________
 > Commands available:
 add: add an item (e.g. add /n NAME /a AUTHOR /t TAG /IBSN IBSN [/g GENRE])
 delete: delete an item (e.g. delete /id 123456789)
