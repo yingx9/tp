@@ -1,14 +1,18 @@
 package data;
 
+import java.util.Arrays;
+
 public class Book extends Resource {
     private String author;
-    //private String[] genres;
-    private String synopsis;
-    public Book(String title, String isbn, String author, String synopsis) {
+    //private String synopsis;
+    private String[] genres;
+
+    public Book(String title, String isbn, String author, String[] genres) {
         super(title, isbn);
         setTag("B");
         setAuthor(author);
-        setSynopsis(synopsis);
+        //setSynopsis(synopsis);
+        setGenre(genres);
     }
     public String getAuthor() {
         return author;
@@ -18,18 +22,33 @@ public class Book extends Resource {
         this.author = author;
     }
 
-    public String getSynopsis() {
+    /*public String getSynopsis() {
         return synopsis;
     }
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }*/
+
+    public String[] getGenre() {
+        return genres;
+    }
+
+    public void setGenre(String[] genres) {
+        this.genres = genres;
     }
 
     @Override
     public String toString() {
-        return "[" + getTag() + "] " + getTitle() + " ISBN: " + getISBN() + "Author: "
-                    + getAuthor() + "\nSynopsis: " + getSynopsis() + System.lineSeparator();
+        StringBuilder genreString = new StringBuilder();
+        if (getGenre()[0] == null) {
+            genreString.append("-");
+        } else {
+            genreString.append(java.util.Arrays.toString(getGenre()).replace("[", "").replace("]", ""));
+        }
+
+        return "[" + getTag() + "] " + getTitle() + " ISBN: " + getISBN() + " Author: "
+                + getAuthor() + " Genre: " + genreString + System.lineSeparator();
     }
 }
 

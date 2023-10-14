@@ -2,20 +2,15 @@ package seedu.parser;
 
 import data.Resource;
 
-import seedu.commands.Command;
-import seedu.commands.AddCommand;
-import seedu.commands.DeleteCommand;
-import seedu.commands.FindCommand;
-import seedu.commands.HelpCommand;
-import seedu.commands.ListCommand;
-import seedu.commands.ExitCommand;
+import data.SysLibException;
+import seedu.commands.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Parser {
-    public List<Resource> taskList = new ArrayList<>();
+    public List<Resource> resourceList = new ArrayList<>();
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
         {
             put("list", new ListCommand());
@@ -32,7 +27,7 @@ public class Parser {
             String statement = removeFirstWord(response);
             try {
                 commandProcessor.get(command).execute(statement, this);
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | IllegalStateException | SysLibException e) {
                 System.out.println(e.getMessage());
             }
         } else {
