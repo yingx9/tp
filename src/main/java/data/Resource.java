@@ -12,6 +12,7 @@ public class Resource {
         setBorrowed(false);
         setISBN(isbn);
         setCopies(1);
+        setTag("");
     }
     public String getTitle() {
         return title;
@@ -51,4 +52,8 @@ public class Resource {
         this.isbn = isbn;
     }
 
+
+    public String toString() {
+        return "[" + tag + "] " + title;
+    }
 }

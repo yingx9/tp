@@ -25,5 +25,11 @@ public class Book extends Resource {
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
     }
+
+    @Override
+    public String toString() {
+        return "[" + getTag() + "] " + getTitle() + " ISBN: " + getISBN() + "Author: "
+                    + getAuthor() + "\nSynopsis: " + getSynopsis() + System.lineSeparator();
+    }
 }
 
