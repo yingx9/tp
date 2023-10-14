@@ -1,6 +1,7 @@
 package seedu.duke;
 
-import ui.UI;
+import seedu.parser.Parser;
+import seedu.ui.UI;
 
 public class Duke {
     /**
@@ -21,20 +22,14 @@ public class Duke {
     public void run(){
         ui.showWelcomeMessage();
 
-        parser.process(ui.readCommand());
-        waitForResponse(parser);
-
-        ui.showExitMessage();
-    }
-
-    public static void waitForResponse(Parser parser) {
-        String response;
-        do {
-            response = ui.readCommand();
-            if (!"bye".equalsIgnoreCase(response)) {
-                parser.process(response);
+        while (true) {
+            String response = ui.readCommand();
+            if (response.equalsIgnoreCase("bye")){
+                break;
             }
-        } while (!"bye".equalsIgnoreCase(response));
+            parser.process(response);
+        }
+        ui.showExitMessage();
     }
 
 }

@@ -1,4 +1,4 @@
-package ui;
+package seedu.ui;
 
 import java.util.Scanner;
 
@@ -19,13 +19,13 @@ public class UI {
 
     public void showWelcomeMessage(){
         showLine();
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+        System.out.println(logo);
+        System.out.println("What do you want to do?");
         showLine();
     }
 
     public void showExitMessage(){
-        System.out.println("Bye, hope to see you again soon!");
+        System.out.println("Bye, hope to see you again soon!\n");
         showLine();
     }
 
