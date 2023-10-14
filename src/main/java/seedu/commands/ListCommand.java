@@ -1,6 +1,6 @@
-package commands;
+package seedu.commands;
 
-import seedu.duke.Parser;
+import seedu.parser.Parser;
 
 public class ListCommand extends Command {
     @Override

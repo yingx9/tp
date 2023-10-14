@@ -1,12 +1,13 @@
-package seedu.duke;
+package seedu.parser;
 
-import commands.Command;
-import commands.DeleteCommand;
-import commands.FindCommand;
-import commands.HelpCommand;
-import commands.ListCommand;
-import commands.AddCommand;
 import data.Resource;
+
+import seedu.commands.Command;
+import seedu.commands.AddCommand;
+import seedu.commands.DeleteCommand;
+import seedu.commands.FindCommand;
+import seedu.commands.HelpCommand;
+import seedu.commands.ListCommand;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
         } else {
-            System.out.println("no commands found");
+            System.out.println("no commands found\n");
         }
 
     }

@@ -1,6 +1,7 @@
-# Duke
+# Syslib
 
-{Give product intro here}
+SysLib CLI is a robust command-line tool designed for system librarians to efficiently handle inventory, events, and patron assistance. With quick command-based actions, manage your library's resources and events seamlessly. Simplify administrative tasks, so you can focus on serving patrons better.
+
 
 Useful links:
 * [User Guide](UserGuide.md)

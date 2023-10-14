@@ -1,7 +1,7 @@
-package commands;
+package seedu.commands;
 
 import data.Resource;
-import seedu.duke.Parser;
+import seedu.parser.Parser;
 
 public class AddCommand extends Command{
     @Override
@@ -19,4 +19,5 @@ public class AddCommand extends Command{
         System.out.println("This task is added: " + title);
         parser.taskList.add(new Resource(title,isbn));
     }
+
 }
