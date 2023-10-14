@@ -1,8 +1,8 @@
-package UI;
+package ui;
 
 import java.util.Scanner;
 
-public class Ui {
+public class UI {
     protected static String logo =
             " ____            _     _ _        ____ _     ___ \n" +
             "/ ___| _   _ ___| |   (_) |__    / ___| |   |_ _|\n" +
@@ -10,10 +10,10 @@ public class Ui {
             " ___) | |_| \\__ \\ |___| | |_) | | |___| |___ | | \n" +
             "|____/ \\__, |___/_____|_|_.__/   \\____|_____|___|\n" +
             "       |___/                                     ";
-    protected static String LINE_DIVIDER = "____________________________________________________________";
+    protected static String LINEDIVIDER = "____________________________________________________________";
     protected Scanner myScanner;
 
-    public Ui(){
+    public UI(){
         this.myScanner = new Scanner(System.in);
     }
 
@@ -39,6 +39,6 @@ public class Ui {
     }
 
     public void showLine(){
-        System.out.println(LINE_DIVIDER);
+        System.out.println(LINEDIVIDER);
     }
 }

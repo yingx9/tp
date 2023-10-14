@@ -1,17 +1,17 @@
 package seedu.duke;
 
-import UI.Ui;
 import java.util.Scanner;
+import ui.UI;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    private static Ui UI;
+    private static UI ui;
 
     public Duke(){
         // init here
-        UI = new Ui();
+        ui = new UI();
     }
 
     public static void main(String[] args) {
@@ -19,20 +19,20 @@ public class Duke {
     }
 
     public void run(){
-        UI.showWelcomeMessage();
+        ui.showWelcomeMessage();
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
         Parser parser = new Parser();
         waitForResponse(parser);
 
-        UI.showExitMessage();
+        ui.showExitMessage();
     }
 
     public static void waitForResponse(Parser parser) {
         String response;
         do {
-            response = UI.readCommand();
+            response = ui.readCommand();
             if (!"bye".equalsIgnoreCase(response)) {
                 parser.process(response);
             }
