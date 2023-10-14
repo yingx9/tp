@@ -1,6 +1,6 @@
-package commands;
+package seedu.commands;
 
-import seedu.duke.Parser;
+import seedu.parser.Parser;
 
 public abstract class Command {
     public abstract void execute(String statement, Parser parser) throws IllegalArgumentException;

@@ -1,8 +1,8 @@
-package commands;
+package seedu.commands;
 
-import seedu.duke.Parser;
+import seedu.parser.Parser;
 
-public class ListCommand extends Command {
+public class FindCommand extends Command {
     @Override
     public void execute(String statement, Parser parser) throws IllegalArgumentException {
 
