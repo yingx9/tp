@@ -25,7 +25,7 @@ public class Duke {
         while (true) {
             String response = ui.readCommand();
             parser.process(response);
-            if (response.equalsIgnoreCase("bye")){
+            if (response.equalsIgnoreCase("exit")){
                 break;
             }
         }
