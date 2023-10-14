@@ -34,7 +34,7 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
         } else {
-            System.out.println("no commands found\n");
+            System.out.println("no commands found. Enter \"help\" for a list of commands.\n");
         }
 
     }
