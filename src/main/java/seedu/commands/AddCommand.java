@@ -44,14 +44,15 @@ public class AddCommand extends Command{
 
     @Override
     public void execute(String statement, Parser parser) throws SysLibException, IllegalStateException {
-        String title, author, tag, isbn, genre;
-        String[] genres = new String[1];
         String[] args = validateAdd(statement);
 
-        title = args[0]; // title
-        author = args[1]; // author
-        tag = args[2]; // tag
-        isbn = args[3]; // isbn
+        String title = args[0]; // title
+        String author = args[1]; // author
+        String tag = args[2]; // tag
+        String isbn = args[3]; // isbn
+
+        String genre;
+        String[] genres = new String[1];
         if (args[4] != null) {
             genre = args[4]; // genre
             genres = genre.split(", ");

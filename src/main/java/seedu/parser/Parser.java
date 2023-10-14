@@ -3,7 +3,13 @@ package seedu.parser;
 import data.Resource;
 
 import data.SysLibException;
-import seedu.commands.*;
+import seedu.commands.Command;
+import seedu.commands.AddCommand;
+import seedu.commands.DeleteCommand;
+import seedu.commands.FindCommand;
+import seedu.commands.ListCommand;
+import seedu.commands.HelpCommand;
+import seedu.commands.ExitCommand;
 
 import java.util.ArrayList;
 import java.util.HashMap;

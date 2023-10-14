@@ -1,7 +1,5 @@
 package data;
 
-import java.util.Arrays;
-
 public class Book extends Resource {
     private String author;
     //private String synopsis;
