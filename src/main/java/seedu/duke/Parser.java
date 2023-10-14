@@ -5,23 +5,25 @@ import commands.DeleteCommand;
 import commands.FindCommand;
 import commands.HelpCommand;
 import commands.ListCommand;
+import commands.AddCommand;
+import data.Resource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Parser {
-    public List<String> taskList = new ArrayList<>();
+    public List<Resource> taskList = new ArrayList<>();
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
         {
             put("list", new ListCommand());
             put("delete", new DeleteCommand());
             put("find", new FindCommand());
             put("help", new HelpCommand());
+            put("add", new AddCommand());
         }
     };
     public void process(String response) {
-        taskList.add("testing 123");
         String command = response.split(" ")[0];
         if (commandProcessor.containsKey(command)) {
             String statement = removeFirstWord(response);
