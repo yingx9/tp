@@ -30,9 +30,9 @@ public class UI {
 
     public void showHelpMessage(){
         System.out.println("Commands available:");
-        System.out.println("add: add an item (e.g. add /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE])");
+        System.out.println("add: add an item (e.g. add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE])");
         System.out.println("delete: delete an item (e.g. delete /id 123456789)");
-        System.out.println("list: (e.g. list /tag B /g Fiction /a J. K. Rowling)");
+        System.out.println("list: (e.g. list /tag B /g Fiction /a J. K. Rowling /i 9780763630188)");
         System.out.println("find: (e.g. find /i 9780763630188)");
         System.out.println("exit: (e.g. exit)");
         System.out.println("For more information, please refer to our user guide at:" +

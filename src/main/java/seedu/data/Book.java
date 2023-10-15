@@ -4,13 +4,15 @@ public class Book extends Resource {
     private String author;
     //private String synopsis;
     private String[] genres;
+    private int id;
 
-    public Book(String title, String isbn, String author, String[] genres) {
+    public Book(String title, String isbn, String author, String[] genres, int id) {
         super(title, isbn);
         setTag("B");
         setAuthor(author);
         //setSynopsis(synopsis);
         setGenre(genres);
+        setId(id);
     }
     public String getAuthor() {
         return author;
@@ -36,6 +38,14 @@ public class Book extends Resource {
         this.genres = genres;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         StringBuilder genreString = new StringBuilder();
@@ -45,7 +55,7 @@ public class Book extends Resource {
             genreString.append(java.util.Arrays.toString(getGenre()).replace("[", "").replace("]", ""));
         }
 
-        return "[" + getTag() + "] " + getTitle() + " ISBN: " + getISBN() + " Author: "
+        return "[" + getTag() + "] " + " ID: " + getId() + " Title: " + getTitle() + " ISBN: " + getISBN() + " Author: "
                 + getAuthor() + " Genre: " + genreString + System.lineSeparator();
     }
 }
