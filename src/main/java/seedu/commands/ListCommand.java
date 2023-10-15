@@ -1,23 +1,151 @@
 package seedu.commands;
 
+import seedu.data.Book;
+import seedu.data.Resource;
+import seedu.data.SysLibException;
 import seedu.parser.Parser;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ListCommand extends Command {
-    @Override
-    public void execute(String statement, Parser parser) throws IllegalArgumentException {
+
+
+    private static final String REGEX_PATTERN = "/(tag|genre)\\s+([^/]+)";
+    private static final String TAG_MESSAGE = "Listing all resources matching given tag: ";
+    private static final String GENRE_MESSAGE = "Listing all resources matching given genre: ";
+    private static final String GENERIC_MESSAGE = "Listing all resources in the Library: ";
+    private static final String TAG_GENRE_MESSAGE = "Listing all resources matching given tag and genre: ";
+    private static Pattern pattern = Pattern.compile(REGEX_PATTERN);
+
+    private static boolean isFilteredByTag = false;
+    private static boolean isFilteredByGenre = false;
+    public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         int size = parser.resourceList.size();
 
         if (size == 0){
             System.out.println("There are 0 resources in the library. \n");
-        } else {
-            System.out.println("Listing all Resources in the Library: \n");
-            for (int i = 0; i < size; i += 1) {
-                String resourceDetails = parser.resourceList.get(i).toString();
-                System.out.println(i+1 + ". " + resourceDetails + System.lineSeparator());
+        } else{
+            Matcher matcher = pattern.matcher(statement);
+            filterResources(matcher, parser);
+
+        }
+    }
+
+
+    public void filterResources(Matcher matcher, Parser parser) throws SysLibException{
+        List<Resource> matchedTagResources = new ArrayList<>();
+        List<Resource> matchedGenreResources = new ArrayList<>();
+
+        isFilteredByTag = false;
+        isFilteredByGenre = false;
+
+        while(matcher.find()){
+
+            String flag = matcher.group(1);
+            String keyword = matcher.group(2);
+            keyword = keyword.trim();
+
+            switch(flag){
+            case "tag":
+                filterByTag(matchedTagResources, parser.resourceList, keyword);
+                isFilteredByTag = true;
+                break;
+            case "genre":
+                filterByGenre(matchedGenreResources, parser.resourceList, keyword);
+                isFilteredByGenre = true;
+                break;
+            default:
+                throw new SysLibException("Please enter a valid filter /tag or /genre");
+            }
+
+        }
+        listResults(matchedTagResources, matchedGenreResources, parser);
+
+    }
+
+    public void listResults(List<Resource> matchedTagResources, List<Resource> matchedGenreResources, Parser parser){
+
+        if(isFilteredByTag == true && isFilteredByGenre == false){
+            displayResourcesDetails(matchedTagResources, TAG_MESSAGE);
+        } else if (isFilteredByTag == false && isFilteredByGenre == true){
+            displayResourcesDetails(matchedGenreResources, GENRE_MESSAGE);
+        } else if (isFilteredByTag && isFilteredByGenre){
+            System.out.println(TAG_GENRE_MESSAGE + System.lineSeparator());
+            filterBothTagGenre(matchedGenreResources, matchedTagResources);
+        } else{
+            displayResourcesDetails(parser.resourceList, GENERIC_MESSAGE);
+        }
+    }
+
+    public void filterByTag(List<Resource> matchedTagResources, List<Resource> resourcesList, String tag){
+
+
+        for(int i=0;i< resourcesList.size();i++){
+            Resource resource = resourcesList.get(i);
+            if (resource.getTag().equals(tag)){
+                matchedTagResources.add(resource);
+            }
+        }
+
+    }
+
+
+    public void filterByGenre(List<Resource> matchedGenreResources, List<Resource> resourcesList, String genre) {
+
+
+        for(int i=0;i< resourcesList.size();i++){
+            Resource r = resourcesList.get(i);
+            if (r instanceof Book){
+                Book bookResource = (Book) r;
+                boolean hasGenre = hasGenre(bookResource, genre);
+                if (hasGenre){
+                    matchedGenreResources.add(bookResource);
+                }
 
             }
 
-            System.out.println("There are currently " + size + " resource(s).\n");
         }
+
+    }
+
+    public boolean hasGenre(Book bookResource, String genre){
+        String[] genres = bookResource.getGenre();
+        for(int j =0; j < genres.length; j ++){
+            if (genres[j].equals(genre)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void filterBothTagGenre(List<Resource> matchedGenreResources, List<Resource> matchedTagResources){
+        int count = 0;
+        for(int i =0;i < matchedTagResources.size(); i++){
+
+            Resource r = matchedTagResources.get(i);
+            if (matchedGenreResources.contains(r)){
+                System.out.println(i+1 + ". " + r.toString());
+                count++;
+            }
+
+        }
+        System.out.println("There are currently " + count + " resource(s).\n");
+    }
+
+
+
+    public void displayResourcesDetails(List resourcesList, String message) {
+        System.out.println(message + System.lineSeparator());
+        for (int i = 0; i < resourcesList.size(); i += 1) {
+            String resourceDetails = resourcesList.get(i).toString();
+            System.out.println(i+1 + ". " + resourceDetails);
+
+        }
+        System.out.println("There are currently " + resourcesList.size() + " resource(s).\n");
     }
 
 }
