@@ -45,14 +45,15 @@ Adds a new book to the library inventory.
 > - Anything with `e` prior is an electronic version
     > i.e. `[eB]` is an eBook, `[eM]` is an eMagazine
 
+#### Notes about genre:
+Multiple genres are allowed for a single book. Separate the different genres using comma followed by a space `, `.
 
-
-Format: `add /n NAME /a AUTHOR /t TAG /IBSN IBSN [/g GENRE]...`
+Format: `add /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]...`
 
 **Example**
 ```
-add /n Moby Dick /a Herman Melville /t B /IBSN 9780763630188 /g Adventure Fiction
-add /n Harry Squatter /a J.K. /t M /IBSN 9780763630187 /g History
+add /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /g Adventure, Fiction
+add /t Harry Squatter /a J.K. /tag M /i 9780763630187 /g History
 ```
 
 ## Delete a listing: `delete` | [Return to contents](#Contents)
@@ -69,24 +70,24 @@ delete /id 123456789
 ## List all items: `list` | [Return to contents](#Contents)
 You can list all books OR from certain authors, tags, or genre.
 
-Format: `list [/tag TAG /genre GENRE /author AUTHOR ]`
+Format: `list [/tag TAG /g GENRE /a AUTHOR ]`
 
 **Example**
 ```
 list
-list /tag B /genre Fiction /author J. K. Rowling
-list /genre Thrill
+list /tag B /g Fiction /a J. K. Rowling
+list /g Thrill
 ```
 
 ## Find specific listings: `find` | [Return to contents](#Contents)
-Find a book by name, author, ISBN or given id.
+Find a book by title, author, ISBN or given id.
 
-Format: `find [/name NAME OR /ISBN ISBN OR /a AUTHOR OR /id ID]`
+Format: `find [/t TITLE OR /i ISBN OR /a AUTHOR OR /id ID]`
 
 **Example**
 ```
-find /n Moby Dick
-find /ISBN 9780763630188
+find /t Moby Dick
+find /i 9780763630188
 find /a J. K. Rowling
 find /id 123456789
 ```
@@ -107,12 +108,12 @@ Format: `exit`
 
 ## Command summary | [Return to contents](#Contents)
 
-| Action                | Command                                                                                                              |
-|-----------------------|----------------------------------------------------------------------------------------------------------------------|
-| Add listing           | `add /name <name of listing> /author <author of item> /tag <type of item> /IBSN <IBSN of item> [/g <genre of item>]` |
-| Delete listing        | `delete /id <id of listing>`                                                                                         |
-| Listing all items     | `list [/tag <type of item> /genre <genre of book> /author <author of book> ]`                                        |
-| Find specific listing | `find [/name NAME OR /isbn ISBN OR /a AUTHOR OR /id ID]`                                                             |
-| Exit                  | `exit`                                                                                                               |
-| View help             | `help`                                                                                                               |
+| Action                | Command                                                                                                    |
+|-----------------------|------------------------------------------------------------------------------------------------------------|
+| Add listing           | `add /t <title of listing> /a <author of item> /tag <type of item> /i <ISBN of item> [/g <genre of item>]` |
+| Delete listing        | `delete /id <id of listing>`                                                                               |
+| Listing all items     | `list [/tag <type of item> /g <genre of book> /a <author of book> ]`                                       |
+| Find specific listing | `find [/t <title of listing> OR /i <ISBN of item> OR /a AUTHOR OR /id ID]`                                 |
+| Exit                  | `exit`                                                                                                     |
+| View help             | `help`                                                                                                     |
 
