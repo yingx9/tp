@@ -5,7 +5,8 @@ import seedu.parser.Parser;
 
 public class AddCommand extends Command{
     @Override
-    public void execute(String statement, Parser parser) throws IllegalStateException, NumberFormatException, SysLibException {
+    public void execute(String statement, Parser parser) throws
+            IllegalStateException, NumberFormatException, SysLibException {
         String[] args = Parser.parseAddCommand(statement);
         String title = args[1];
         String tag = args[3];
