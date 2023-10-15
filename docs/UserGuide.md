@@ -52,8 +52,8 @@ Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]...`
 
 **Example**
 ```
-add /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /g Adventure, Fiction
-add /t Harry Squatter /a J.K. /tag M /i 9780763630187 /g History
+add /id 123456789 /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /g Adventure, Fiction
+add /id 123456789 /t Harry Squatter /a J.K. /tag M /i 9780763630187 /g History
 ```
 
 ## Delete a listing: `delete` | [Return to contents](#Contents)

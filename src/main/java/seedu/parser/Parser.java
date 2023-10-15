@@ -54,7 +54,7 @@ public class Parser {
     }
 
     public static String[] parseAddCommand(String statement) throws SysLibException {
-        String inputPattern = "(.+?) /t (.)";
+        String inputPattern = "(.+?) /tag (.)(.+)";
 
         Pattern pattern = Pattern.compile(inputPattern);
         Matcher matcher = pattern.matcher(statement);
