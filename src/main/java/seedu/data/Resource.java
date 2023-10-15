@@ -1,4 +1,4 @@
-package data;
+package seedu.data;
 
 public class Resource {
     private String title;
@@ -51,7 +51,6 @@ public class Resource {
     public void setISBN(String isbn) {
         this.isbn = isbn;
     }
-
 
     public String toString() {
         return "[" + tag + "] " + title;
