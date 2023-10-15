@@ -4,7 +4,8 @@ import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
 public abstract class Command {
-    public abstract void execute(String statement, Parser parser) throws IllegalArgumentException, SysLibException;
+    public abstract void execute(String statement, Parser parser) throws
+            IllegalArgumentException, IllegalStateException, SysLibException;
 
     public int parseInt(String value, Parser processor){
         try {

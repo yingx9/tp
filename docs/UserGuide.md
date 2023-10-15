@@ -48,12 +48,12 @@ Adds a new book to the library inventory.
 #### Notes about genre:
 Multiple genres are allowed for a single book. Separate the different genres using comma followed by a space `, `.
 
-Format: `add /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]...`
+Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]...`
 
 **Example**
 ```
-add /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /g Adventure, Fiction
-add /t Harry Squatter /a J.K. /tag M /i 9780763630187 /g History
+add /id 123456789 /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /g Adventure, Fiction
+add /id 123456789 /t Harry Squatter /a J.K. /tag M /i 9780763630187 /g History
 ```
 
 ## Delete a listing: `delete` | [Return to contents](#Contents)
@@ -70,7 +70,7 @@ delete /id 123456789
 ## List all items: `list` | [Return to contents](#Contents)
 You can list all books OR from certain authors, tags, or genre.
 
-Format: `list [/tag TAG /g GENRE /a AUTHOR ]`
+Format: `list [/tag TAG /g GENRE /a AUTHOR /i ISBN]`
 
 **Example**
 ```
