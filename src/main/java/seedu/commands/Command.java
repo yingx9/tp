@@ -1,6 +1,6 @@
 package seedu.commands;
 
-import data.SysLibException;
+import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
 public abstract class Command {

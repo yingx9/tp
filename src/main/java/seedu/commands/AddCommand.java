@@ -1,7 +1,7 @@
 package seedu.commands;
 
-import data.Book;
-import data.SysLibException;
+import seedu.data.Book;
+import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
 import java.util.regex.Matcher;

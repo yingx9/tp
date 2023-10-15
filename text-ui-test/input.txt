@@ -1,3 +1,4 @@
 add /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /g Adventure, Fiction
+find /t Moby Dick
 help
 exit

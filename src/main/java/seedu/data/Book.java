@@ -1,4 +1,4 @@
-package data;
+package seedu.data;
 
 public class Book extends Resource {
     private String author;

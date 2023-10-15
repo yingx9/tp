@@ -1,8 +1,8 @@
 package seedu.parser;
 
-import data.Resource;
+import seedu.data.Resource;
 
-import data.SysLibException;
+import seedu.data.SysLibException;
 import seedu.commands.Command;
 import seedu.commands.AddCommand;
 import seedu.commands.DeleteCommand;
@@ -14,8 +14,11 @@ import seedu.commands.ExitCommand;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
+
     public List<Resource> resourceList = new ArrayList<>();
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
         {
@@ -47,5 +50,11 @@ public class Parser {
             return "";
         }
         return response.substring(index + 1);
+    }
+
+    public Matcher parseFindCommand(String command) throws SysLibException{
+        // Define a regular expression pattern to match optional flags and their values
+        Pattern pattern = Pattern.compile("/(t|a|i|id)\\s+([^/]+)");
+        return pattern.matcher(command);
     }
 }
