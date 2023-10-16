@@ -25,8 +25,8 @@ class ParserTest {
         System.setOut(System.out);
         String output = outputStream.toString();
 
-        String expectedOutput = "Bye, hope to see you again soon!\n"+
-                "____________________________________________________________\n";
+        String expectedOutput = "Bye, hope to see you again soon!"+ System.lineSeparator()+
+                "____________________________________________________________"+System.lineSeparator();
         assertEquals(expectedOutput, output);
     }
 
@@ -42,15 +42,16 @@ class ParserTest {
         System.setOut(System.out);
         String output = outputStream.toString();
 
-        String expectedOutput = "Commands available:\n" +
-                "add: add an item (e.g. add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE])\n" +
-                "delete: delete an item (e.g. delete /id 123456789)\n" +
-                "list: (e.g. list /tag B /g Fiction /a J. K. Rowling /i 9780763630188)\n" +
-                "find: (e.g. find /i 9780763630188)\n" +
-                "exit: (e.g. exit)\n" +
+        String expectedOutput = "Commands available:" + System.lineSeparator()+
+                "add: add an item (e.g. add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE])" +
+                System.lineSeparator()+
+                "delete: delete an item (e.g. delete /id 123456789)" + System.lineSeparator()+
+                "list: (e.g. list /tag B /g Fiction /a J. K. Rowling /i 9780763630188)" + System.lineSeparator() +
+                "find: (e.g. find /i 9780763630188)" + System.lineSeparator() +
+                "exit: (e.g. exit)" + System.lineSeparator() +
                 "For more information, please refer to our user guide at:" +
-                "https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html\n" +
-                "____________________________________________________________\n";
+                "https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html" + System.lineSeparator() +
+                "____________________________________________________________" + System.lineSeparator();
 
         assertEquals(expectedOutput, output);
     }
@@ -68,8 +69,8 @@ class ParserTest {
         System.setOut(System.out);
         String output = outputStream.toString();
 
-        String expectedOutput = "no commands found. Enter \"help\" for a list of commands.\n" +
-                "____________________________________________________________\n";
+        String expectedOutput = "no commands found. Enter \"help\" for a list of commands." + System.lineSeparator() +
+                "____________________________________________________________" + System.lineSeparator();
 
         assertEquals(expectedOutput, output);
     }
@@ -88,41 +89,41 @@ class ParserTest {
 
         System.setOut(System.out);
         String output = outputStream.toString();
-        String expectedOutput = "This book is added: Surrounded by Idiots\n";
+        String expectedOutput = "This book is added: Surrounded by Idiots" + System.lineSeparator();
         assertEquals(expectedOutput, output);
         //Add second book
         validResponse = "add /id 2 /t The Subtle Art of Not Giving a F*ck /a Mark Manson " +
                 "/tag B /i 9780062457714 /g Self-help";
         parser.process(validResponse);
-        expectedOutput += "This book is added: The Subtle Art of Not Giving a F*ck\n";
+        expectedOutput += "This book is added: The Subtle Art of Not Giving a F*ck" + System.lineSeparator();
         //Test list
         validResponse = "list";
         parser.process(validResponse);
-        expectedOutput += "Listing all resources in the Library: \n\n" +
+        expectedOutput += "Listing all resources in the Library: " + System.lineSeparator() + System.lineSeparator() +
                 "1. [B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
-                "Author: Thomas Erikson Genre: Self-help\n\n" +
+                "Author: Thomas Erikson Genre: Self-help" + System.lineSeparator() + System.lineSeparator()+
                 "2. [B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 " +
-                "Author: Mark Manson Genre: Self-help\n\n" +
-                "There are currently 2 resource(s).\n\n";
+                "Author: Mark Manson Genre: Self-help" + System.lineSeparator() + System.lineSeparator() +
+                "There are currently 2 resource(s)." + System.lineSeparator() + System.lineSeparator();
         System.setOut(System.out);
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
         //Test find
         validResponse = "find /t The Subtle Art of Not Giving a F*ck";
         parser.process(validResponse);
-        expectedOutput += "Here are resources that matched the given filters: \n" +
+        expectedOutput += "Here are resources that matched the given filters: " + System.lineSeparator() +
                 "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 " +
-                "Author: Mark Manson Genre: Self-help\n\n";
+                "Author: Mark Manson Genre: Self-help" + System.lineSeparator() + System.lineSeparator();
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
         //Test delete
         validResponse = "delete /id 1";
         parser.process(validResponse);
         output = outputStream.toString();
-        expectedOutput += "Looking for ID: 1...\n" +
-                "This resource is removed: \n" +
+        expectedOutput += "Looking for ID: 1..." + System.lineSeparator() +
+                "This resource is removed: " + System.lineSeparator() +
                 "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
-                "Author: Thomas Erikson Genre: Self-help\n\n";
+                "Author: Thomas Erikson Genre: Self-help" + System.lineSeparator() + System.lineSeparator();
         assertEquals(expectedOutput, output);
     }
 

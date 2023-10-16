@@ -19,8 +19,8 @@ class ExitCommandTest {
         exitCommand.execute("", parser);
 
         String output = outputStream.toString();
-        String expectedOutput = "Bye, hope to see you again soon!\n"+
-                "____________________________________________________________\n";
+        String expectedOutput = "Bye, hope to see you again soon!" + System.lineSeparator()+
+                "____________________________________________________________" + System.lineSeparator();
 
         assertEquals(expectedOutput, output);
     }
