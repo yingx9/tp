@@ -28,7 +28,8 @@ public class ListCommand extends Command {
     public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         int size = parser.resourceList.size();
         if (size == 0){
-            System.out.println("There are 0 resources in the library. " + System.lineSeparator());
+            System.out.println("There are 0 resources in the library. " + System.lineSeparator() +
+                    "____________________________________________________________");
         } else {
             Matcher matcher = pattern.matcher(statement);
             filterResources(matcher, parser, statement);
@@ -65,12 +66,13 @@ public class ListCommand extends Command {
 
         }
 
-        boolean isListAllCommand = statement.equals("");
+        boolean isListAllCommand = statement.isEmpty();
         boolean isListTagOrGenre = (isFilteredByGenre || isFilteredByTag);
         if (isListAllCommand || isListTagOrGenre){
             listResults(matchedTagResources, matchedGenreResources, parser);
         } else{
-            throw new SysLibException("Please enter a valid list command!" + System.lineSeparator());
+            throw new SysLibException("Please enter a valid list command!" + System.lineSeparator() +
+                    "____________________________________________________________");
         }
 
     }
@@ -141,7 +143,8 @@ public class ListCommand extends Command {
             }
 
         }
-        System.out.println("There are currently " + count + " resource(s)." + System.lineSeparator());
+        System.out.println("There are currently " + count + " resource(s)." + System.lineSeparator() +
+                "____________________________________________________________");
     }
 
 
@@ -153,7 +156,8 @@ public class ListCommand extends Command {
             System.out.println(i+1 + ". " + resourceDetails);
 
         }
-        System.out.println("There are currently " + resourcesList.size() + " resource(s)." + System.lineSeparator());
+        System.out.println(System.lineSeparator() + "There are currently " + resourcesList.size() + " resource(s)." +
+                System.lineSeparator() + "____________________________________________________________");
     }
 
 }
