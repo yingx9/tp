@@ -72,7 +72,7 @@ class ParserTest {
 
         String expectedOutput = "no commands found. Enter \"help\" for a list of commands.";
         expectedOutput += System.lineSeparator();
-        expectedOutput +="____________________________________________________________";
+        expectedOutput += "____________________________________________________________";
         expectedOutput += System.lineSeparator();
 
         assertEquals(expectedOutput, output);
