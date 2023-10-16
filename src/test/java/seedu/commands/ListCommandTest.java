@@ -35,7 +35,8 @@ public class ListCommandTest {
     @Test
     private void assertEmptyListMessage() throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(listCommand, "list", emptyResourceList);
-        String expectedMessage = "There are 0 resources in the library. " + System.lineSeparator();
+        String expectedMessage = "There are 0 resources in the library. " + System.lineSeparator() +
+                "____________________________________________________________";
         expectedMessage += System.lineSeparator();
         assertEquals(expectedMessage, outputMessage);
 
@@ -57,14 +58,12 @@ public class ListCommandTest {
     @Test
     private void assertNoFilteredListDisplay() throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(listCommand, "list /g Thriller", testResourceList);
-        String expectedMessage = "Listing all resources matching given genre: " + System.lineSeparator()
+        String expectedMessage = "Listing all resources matching given genre:" + System.lineSeparator()
                 + System.lineSeparator();
-        expectedMessage += "There are currently 0 resource(s)." + System.lineSeparator();
+        expectedMessage += "There are currently 0 resource(s)." + System.lineSeparator() +
+                "____________________________________________________________";
         expectedMessage += System.lineSeparator();
         assertEquals(expectedMessage, outputMessage);
 
     }
-
-    
-
 }

@@ -19,11 +19,13 @@ public class DeleteCommand extends Command {
             if (b.getId() == id){
                 System.out.println("This resource is removed: ");
                 System.out.println(b);
+                System.out.println("____________________________________________________________");
                 toRemove.add(r);
             }
         }
         if(toRemove.isEmpty()){
-            System.out.println("No resources with id matching " + id);
+            System.out.println("No resources with id matching " + id + System.lineSeparator() +
+                    "____________________________________________________________");
         } else {
             parser.resourceList.removeAll(toRemove);
         }

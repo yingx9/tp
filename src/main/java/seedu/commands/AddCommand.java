@@ -13,8 +13,10 @@ public class AddCommand extends Command{
         if (tag.equalsIgnoreCase("b")) {
             parser.resourceList.add(Parser.createBook(args));
             System.out.println("This book is added: " + title);
+            System.out.println("____________________________________________________________");
         } else {
-            throw new SysLibException("Please enter a valid tag.");
+            throw new SysLibException("Please enter a valid tag." + System.lineSeparator() +
+                    "____________________________________________________________");
         }
     }
 
