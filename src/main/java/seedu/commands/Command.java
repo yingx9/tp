@@ -7,10 +7,10 @@ public abstract class Command {
     public abstract void execute(String statement, Parser parser) throws
             IllegalArgumentException, IllegalStateException, SysLibException;
 
-    public int parseInt(String value, Parser processor){
+    public int parseInt(String value){
         try {
-            int num = Integer.parseInt(value) - 1;
-            if ((0 <= num) && (num < processor.resourceList.size())){
+            int num = Integer.parseInt(value);
+            if (0 < num){
                 return num;
             }
             throw new IllegalArgumentException ("That is not a valid number!");
