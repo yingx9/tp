@@ -1,9 +1,9 @@
 package seedu.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.data.Book;
 import seedu.data.SysLibException;
 
-import javax.annotation.processing.AbstractProcessor;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -105,7 +105,7 @@ class ParserTest {
         validResponse = "find /t The Subtle Art of Not Giving a F*ck";
         parser.process(validResponse);
         expectedOutput += "Here are resources that matched the given filters: \n" +
-                "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help\n\n";
+                "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help\n\n";
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
         //Test delete
@@ -116,5 +116,56 @@ class ParserTest {
                 "This resource is removed: \n" +
                 "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help\n\n";
         assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    public void testParseAddCommand() throws SysLibException {
+        // Test case 1: Valid input with /tag b
+        String statement1 = "add /id ID /t TITLE /a AUTHOR /tag b /i ISBN /g GENRE";
+        String[] expectedArgs1 = {"ID", "TITLE", "AUTHOR", "b", "ISBN", "GENRE"};
+        assertArrayEquals(expectedArgs1, Parser.parseAddCommand(statement1));
+
+        // Test case 2: Invalid input (missing /tag b)
+        String statement2 = "add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN /g GENRE";
+        assertThrows(SysLibException.class, () -> Parser.parseAddCommand(statement2));
+    }
+
+    @Test
+    public void testParseAddBook() throws SysLibException {
+        // Test case 1: Valid input with /g GENRE
+        String statement1 = "/id ID /t TITLE /a AUTHOR /tag b /i ISBN /g GENRE";
+        String[] expectedArgs1 = {"ID", "TITLE", "AUTHOR", "b", "ISBN", "GENRE"};
+        assertArrayEquals(expectedArgs1, Parser.parseAddBook(statement1));
+
+        // Test case 2: Valid input without /g GENRE
+        String statement2 = "/id ID /t TITLE /a AUTHOR /tag b /i ISBN";
+        String[] expectedArgs2 = {"ID", "TITLE", "AUTHOR", "b", "ISBN", null};
+        assertArrayEquals(expectedArgs2, Parser.parseAddBook(statement2));
+    }
+
+    @Test
+    public void testCreateBook() {
+        String[] args = {"123", "CS2113T", "W11", "B", "1234", "Horror"};
+
+        Book book = null;
+        book = Parser.createBook(args);
+
+        int expectedId = 123;
+        String expectedTitle = "CS2113T";
+        String expectedAuthor = "W11";
+        String expectedIsbn = "1234";
+        String[] expectedGenres = { "Horror" };
+
+        assertEquals(expectedId, book.getId());
+        assertEquals(expectedTitle, book.getTitle());
+        assertEquals(expectedAuthor, book.getAuthor());
+        assertEquals(expectedIsbn, book.getISBN());
+        assertArrayEquals(expectedGenres, book.getGenre());
+    }
+    @Test
+    public void testCreateBookInvalidId() {
+        String[] args = {"not_a_number", "Sample Title", "Sample Author", "", "Sample ISBN", "Sample Genre"};
+
+        assertThrows(NumberFormatException.class, () -> Parser.createBook(args));
     }
 }
