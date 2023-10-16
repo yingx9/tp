@@ -154,10 +154,15 @@ public class ListCommand extends Command {
         for (int i = 0; i < resourcesList.size(); i += 1) {
             String resourceDetails = resourcesList.get(i).toString();
             System.out.println(i+1 + ". " + resourceDetails);
-
         }
-        System.out.println(System.lineSeparator() + "There are currently " + resourcesList.size() + " resource(s)." +
-                System.lineSeparator() + "____________________________________________________________");
+        if (resourcesList.isEmpty()){
+            System.out.println("There are currently 0 resource(s)." +
+                    System.lineSeparator() + "____________________________________________________________");
+        } else {
+            System.out.println(System.lineSeparator() + "There are currently " + resourcesList.size() +
+                    " resource(s)." + System.lineSeparator() +
+                    "____________________________________________________________");
+        }
     }
 
 }

@@ -1,4 +1,7 @@
 add /id 123456789 /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /g Adventure, Fiction
 find /t Moby Dick
 help
+list
+list /tag B
+list /g Horror
 exit
