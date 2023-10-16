@@ -11,24 +11,27 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class ListCommand extends Command {
 
 
-    private static final String REGEX_PATTERN = "/(tag|genre)\\s+([^/]+)";
+    private static final String LIST_REGEX_PATTERN = "/(tag|g)\\s+([^/]+)";
     private static final String TAG_MESSAGE = "Listing all resources matching given tag: ";
     private static final String GENRE_MESSAGE = "Listing all resources matching given genre: ";
     private static final String GENERIC_MESSAGE = "Listing all resources in the Library: ";
     private static final String TAG_GENRE_MESSAGE = "Listing all resources matching given tag and genre: ";
-    private static Pattern pattern = Pattern.compile(REGEX_PATTERN);
+    private static Pattern pattern = Pattern.compile(LIST_REGEX_PATTERN);
 
     private static boolean isFilteredByTag = false;
     private static boolean isFilteredByGenre = false;
+
+    @Override
     public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         int size = parser.resourceList.size();
 
         if (size == 0){
             System.out.println("There are 0 resources in the library. \n");
-        } else{
+        } else {
             Matcher matcher = pattern.matcher(statement);
             filterResources(matcher, parser);
 
@@ -54,7 +57,7 @@ public class ListCommand extends Command {
                 filterByTag(matchedTagResources, parser.resourceList, keyword);
                 isFilteredByTag = true;
                 break;
-            case "genre":
+            case "g":
                 filterByGenre(matchedGenreResources, parser.resourceList, keyword);
                 isFilteredByGenre = true;
                 break;
