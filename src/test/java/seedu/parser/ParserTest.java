@@ -70,8 +70,9 @@ class ParserTest {
         System.setOut(System.out);
         String output = outputStream.toString();
 
-        String expectedOutput = "no commands found. Enter \"help\" for a list of commands." + System.lineSeparator() +
-                "____________________________________________________________" + System.lineSeparator();
+        String expectedOutput = "no commands found. Enter \"help\" for a list of commands.";
+        expectedOutput += System.lineSeparator() + "____________________________________________________________";
+        expectedOutput += System.lineSeparator();
 
         assertEquals(expectedOutput, output);
     }
