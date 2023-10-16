@@ -34,8 +34,7 @@ public class ListCommandTest {
     }
     @Test
     private void assertEmptyListMessage() throws SysLibException {
-
-        String outputMessage = testUtil.getOutputMessage(listCommand, "list");
+        String outputMessage = testUtil.getOutputMessage(listCommand, "list", emptyResourceList);
         String expectedMessage = "There are 0 resources in the library. " + System.lineSeparator();
         expectedMessage += System.lineSeparator();
         assertEquals(expectedMessage, outputMessage);
