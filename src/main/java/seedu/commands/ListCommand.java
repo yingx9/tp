@@ -89,9 +89,9 @@ public class ListCommand extends Command {
         }
     }
 
-    public void filterByTag(List<Resource> matchedTagResources, List<Resource> resourcesList, String tag) throws SysLibException {
-
-
+    public void filterByTag(List<Resource> matchedTagResources, List<Resource> resourcesList,
+                            String tag) throws SysLibException {
+        
         for(int i=0;i< resourcesList.size();i++){
             Resource resource = resourcesList.get(i);
             if (resource.getTag().equals(tag)){
@@ -102,8 +102,8 @@ public class ListCommand extends Command {
     }
 
 
-    public void filterByGenre(List<Resource> matchedGenreResources, List<Resource> resourcesList, String genre) throws SysLibException {
-
+    public void filterByGenre(List<Resource> matchedGenreResources, List<Resource> resourcesList,
+                              String genre) throws SysLibException {
 
         for(int i=0;i< resourcesList.size();i++){
             Resource r = resourcesList.get(i);
