@@ -33,7 +33,7 @@ Format: `help`
 
 ## Add a listing: `add` | [Return to contents](#Contents)
 
-Adds a new book to the library inventory.
+Adds a new resource to the library inventory.
 
 #### Types of tags:
 `[B]` - Books
@@ -46,7 +46,7 @@ Adds a new book to the library inventory.
     > i.e. `[eB]` is an eBook, `[eM]` is an eMagazine
 
 #### Notes about genre:
-Multiple genres are allowed for a single book. Separate the different genres using comma followed by a space `, `.
+Multiple genres are allowed for a single resource. Separate the different genres using comma followed by a space `, `.
 
 Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]...`
 
@@ -58,7 +58,7 @@ add /id 123456789 /t Harry Squatter /a J.K. /tag M /i 9780763630187 /g History
 
 ## Delete a listing: `delete` | [Return to contents](#Contents)
 
-Deletes the book with the specified ID from the library inventory.
+Deletes the resource with the specified ID from the library inventory.
 
 Format: `delete /id ID`
 
@@ -68,19 +68,22 @@ delete /id 123456789
 ```
 
 ## List all items: `list` | [Return to contents](#Contents)
-You can list all books OR from certain authors, tags, or genre.
+You can list all resources OR filter by certain tags or genre.
 
-Format: `list [/tag TAG /g GENRE /a AUTHOR /i ISBN]`
+Format: `list [/tag TAG /g GENRE ]`
+- Including both filters `tag` and `genre` will only list resources satisfying both criteria:
+  - `list /tag B /g Horror` will list Books with Horror genre. 
 
 **Example**
 ```
 list
-list /tag B /g Fiction /a J. K. Rowling
+list /tag B
+list /tag B /g Fiction
 list /g Thrill
 ```
 
 ## Find specific listings: `find` | [Return to contents](#Contents)
-Find a book by title, author, ISBN or given id.
+Find a resource by title, author, ISBN or given id.
 
 Format: `find [/t TITLE OR /i ISBN OR /a AUTHOR OR /id ID]`
 
@@ -112,7 +115,7 @@ Format: `exit`
 |-----------------------|------------------------------------------------------------------------------------------------------------|
 | Add listing           | `add /t <title of listing> /a <author of item> /tag <type of item> /i <ISBN of item> [/g <genre of item>]` |
 | Delete listing        | `delete /id <id of listing>`                                                                               |
-| Listing all items     | `list [/tag <type of item> /g <genre of book> /a <author of book> ]`                                       |
+| Listing all items     | `list [/tag <type of item> /g <genre of book>]`                                                            |
 | Find specific listing | `find [/t <title of listing> OR /i <ISBN of item> OR /a AUTHOR OR /id ID]`                                 |
 | Exit                  | `exit`                                                                                                     |
 | View help             | `help`                                                                                                     |
