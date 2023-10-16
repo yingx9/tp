@@ -15,10 +15,10 @@ public class ListCommand extends Command {
 
 
     private static final String LIST_REGEX_PATTERN = "/(tag|g)\\s+([^/]+)";
-    private static final String TAG_MESSAGE = "Listing all resources matching given tag: ";
-    private static final String GENRE_MESSAGE = "Listing all resources matching given genre: ";
-    private static final String GENERIC_MESSAGE = "Listing all resources in the Library: ";
-    private static final String TAG_GENRE_MESSAGE = "Listing all resources matching given tag and genre: ";
+    private static final String TAG_MESSAGE = "Listing all resources matching given tag:";
+    private static final String GENRE_MESSAGE = "Listing all resources matching given genre:";
+    private static final String GENERIC_MESSAGE = "Listing all resources in the Library:";
+    private static final String TAG_GENRE_MESSAGE = "Listing all resources matching given tag and genre:";
     private static Pattern pattern = Pattern.compile(LIST_REGEX_PATTERN);
 
     private static boolean isFilteredByTag = false;

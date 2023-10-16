@@ -95,7 +95,7 @@ public class FindCommand extends Command {
             System.out.println("There are no resources found matching the given filters." +
                     "____________________________________________________________");
         }else{
-            System.out.println("Here are resources that matched the given filters: ");
+            System.out.println("Here are resources that matched the given filters:");
             for (Resource r: matchedResources){
                 System.out.println(r);
             }
