@@ -105,7 +105,7 @@ class ParserTest {
         //Test list
         validResponse = "list";
         parser.process(validResponse);
-        expectedOutput += "Listing all resources in the Library: " + System.lineSeparator() + System.lineSeparator() +
+        expectedOutput += "Listing all resources in the Library:" + System.lineSeparator() + System.lineSeparator() +
                 "1. [B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
                 "Author: Thomas Erikson Genre: Self-help" + System.lineSeparator()+
                 "2. [B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 " +
@@ -118,7 +118,7 @@ class ParserTest {
         //Test find
         validResponse = "find /t The Subtle Art of Not Giving a F*ck";
         parser.process(validResponse);
-        expectedOutput += "Here are resources that matched the given filters: " + System.lineSeparator() +
+        expectedOutput += "Here are resources that matched the given filters:" + System.lineSeparator() +
                 "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 " +
                 "Author: Mark Manson Genre: Self-help" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();;

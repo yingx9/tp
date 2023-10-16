@@ -58,7 +58,7 @@ public class ListCommandTest {
     @Test
     private void assertNoFilteredListDisplay() throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(listCommand, "list /g Thriller", testResourceList);
-        String expectedMessage = "Listing all resources matching given genre: " + System.lineSeparator()
+        String expectedMessage = "Listing all resources matching given genre:" + System.lineSeparator()
                 + System.lineSeparator();
         expectedMessage += "There are currently 0 resource(s)." + System.lineSeparator() +
                 "____________________________________________________________";
