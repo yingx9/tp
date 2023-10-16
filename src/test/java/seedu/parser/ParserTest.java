@@ -25,9 +25,10 @@ class ParserTest {
         System.setOut(System.out);
         String output = outputStream.toString();
 
-        String expectedOutput = "Bye, hope to see you again soon!"+ System.lineSeparator() +
+        String expectedOutput = "Bye, hope to see you again soon!";
+        expectedOutput += System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
-        //assertEquals(expectedOutput, output);
+        assertEquals(expectedOutput, output);
     }
 
     @Test
@@ -107,7 +108,7 @@ class ParserTest {
                 "There are currently 2 resource(s)." + System.lineSeparator() + System.lineSeparator();
         System.setOut(System.out);
         output = outputStream.toString();
-        //assertEquals(expectedOutput, output);
+        assertEquals(expectedOutput, output);
         //Test find
         validResponse = "find /t The Subtle Art of Not Giving a F*ck";
         parser.process(validResponse);
