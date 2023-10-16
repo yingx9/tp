@@ -42,7 +42,7 @@ public class Parser {
             }
         } else {
             System.out.println("no commands found. Enter \"help\" for a list of commands." + System.lineSeparator() +
-                    "____________________________________________________________" + System.lineSeparator());
+                    "____________________________________________________________");
         }
 
     }
