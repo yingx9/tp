@@ -5,7 +5,6 @@ import seedu.data.Resource;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -28,18 +27,17 @@ public class ListCommand extends Command {
     @Override
     public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         int size = parser.resourceList.size();
-
         if (size == 0){
-            System.out.println("There are 0 resources in the library. \n");
+            System.out.println("There are 0 resources in the library. " + System.lineSeparator());
         } else {
             Matcher matcher = pattern.matcher(statement);
-            filterResources(matcher, parser);
+            filterResources(matcher, parser, statement);
 
         }
     }
 
 
-    public void filterResources(Matcher matcher, Parser parser) throws SysLibException{
+    public void filterResources(Matcher matcher, Parser parser, String statement) throws SysLibException{
         List<Resource> matchedTagResources = new ArrayList<>();
         List<Resource> matchedGenreResources = new ArrayList<>();
 
@@ -62,11 +60,18 @@ public class ListCommand extends Command {
                 isFilteredByGenre = true;
                 break;
             default:
-                throw new SysLibException("Please enter a valid filter /tag or /genre");
+                throw new SysLibException("Please enter a valid filter /tag or /g");
             }
 
         }
-        listResults(matchedTagResources, matchedGenreResources, parser);
+
+        boolean isListAllCommand = statement.equals("");
+        boolean isListTagOrGenre = (isFilteredByGenre || isFilteredByTag);
+        if (isListAllCommand || isListTagOrGenre){
+            listResults(matchedTagResources, matchedGenreResources, parser);
+        } else{
+            throw new SysLibException("Please enter a valid list command!" + System.lineSeparator());
+        }
 
     }
 
@@ -84,7 +89,7 @@ public class ListCommand extends Command {
         }
     }
 
-    public void filterByTag(List<Resource> matchedTagResources, List<Resource> resourcesList, String tag){
+    public void filterByTag(List<Resource> matchedTagResources, List<Resource> resourcesList, String tag) throws SysLibException {
 
 
         for(int i=0;i< resourcesList.size();i++){
@@ -97,7 +102,7 @@ public class ListCommand extends Command {
     }
 
 
-    public void filterByGenre(List<Resource> matchedGenreResources, List<Resource> resourcesList, String genre) {
+    public void filterByGenre(List<Resource> matchedGenreResources, List<Resource> resourcesList, String genre) throws SysLibException {
 
 
         for(int i=0;i< resourcesList.size();i++){
@@ -136,7 +141,7 @@ public class ListCommand extends Command {
             }
 
         }
-        System.out.println("There are currently " + count + " resource(s).\n");
+        System.out.println("There are currently " + count + " resource(s)." + System.lineSeparator());
     }
 
 
@@ -148,7 +153,7 @@ public class ListCommand extends Command {
             System.out.println(i+1 + ". " + resourceDetails);
 
         }
-        System.out.println("There are currently " + resourcesList.size() + " resource(s).\n");
+        System.out.println("There are currently " + resourcesList.size() + " resource(s)." + System.lineSeparator());
     }
 
 }
