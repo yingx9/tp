@@ -53,6 +53,22 @@ public class Parser {
         }
         return response.substring(index + 1);
     }
+    public static String[] parseArgument(String statement) throws IllegalArgumentException, IllegalStateException {
+        String[] keys = {"id", "t", "a", "tag", "i", "g"};
+        String[] orderedArgs = new String[6];
+        int pointer = 0;
+        // Loop over each key and find its value if it exists
+        for (String key : keys) {
+            Pattern pattern = Pattern.compile("/" + key + " (.+?)(\\s|$)");
+            Matcher matcher = pattern.matcher(statement);
+            if (matcher.find()) {
+                orderedArgs[pointer] = matcher.group(1).trim();
+                System.out.println(key + ": " + orderedArgs[pointer]);
+            }
+            pointer++;
+        }
+        return orderedArgs;
+    }
 
     public static String[] parseAddCommand(String statement) throws SysLibException {
         String inputPattern = "(.+?) /tag (.)(.+)";

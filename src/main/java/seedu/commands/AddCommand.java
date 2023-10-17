@@ -4,10 +4,13 @@ import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
 public class AddCommand extends Command{
+
     @Override
     public void execute(String statement, Parser parser) throws
             IllegalStateException, NumberFormatException, SysLibException {
-        String[] args = Parser.parseAddCommand(statement);
+        required = new boolean[]{true, true, true, true, true, false};
+        String[] args = Parser.parseArgument(statement);
+        validate(args);
         String title = args[1];
         String tag = args[3];
         if (tag.equalsIgnoreCase("b")) {
