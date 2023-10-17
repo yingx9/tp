@@ -124,6 +124,11 @@ public class ListCommand extends Command {
 
     public boolean hasGenre(Book bookResource, String genre){
         String[] genres = bookResource.getGenre();
+
+        if (genres[0] == null ){
+            return false;
+        }
+
         for(int j =0; j < genres.length; j ++){
             if (genres[j].equals(genre)){
                 return true;
