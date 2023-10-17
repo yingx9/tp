@@ -124,12 +124,14 @@ public class ListCommand extends Command {
 
     public boolean hasGenre(Book bookResource, String genre){
         String[] genres = bookResource.getGenre();
-        for(int j =0; j < genres.length; j ++){
-            if (genres[j].equals(genre)){
-                return true;
-            }
+
+        if (genres[0] == null ){
+            return false;
+        } else if (genres[0].contains(genre)) {
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     public void filterBothTagGenre(List<Resource> matchedGenreResources, List<Resource> matchedTagResources){
