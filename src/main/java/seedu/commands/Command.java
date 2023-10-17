@@ -3,11 +3,9 @@ package seedu.commands;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
-import java.util.Arrays;
-
 public abstract class Command {
-    private final String[] keys = {"id", "t", "a", "tag", "i", "g"};
     protected boolean[] required;
+    private final String[] keys = {"id", "t", "a", "tag", "i", "g"};
     public abstract void execute(String statement, Parser parser) throws
             IllegalArgumentException, IllegalStateException, SysLibException;
 
