@@ -63,7 +63,6 @@ public class Parser {
             Matcher matcher = pattern.matcher(statement);
             if (matcher.find()) {
                 orderedArgs[pointer] = matcher.group(1).trim();
-                System.out.println(key + ": " + orderedArgs[pointer]);
             }
             pointer++;
         }

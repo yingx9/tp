@@ -13,7 +13,6 @@ public abstract class Command {
 
     public void validate(String[] args) throws IllegalArgumentException{
         int pointer = 0;
-        System.out.println(Arrays.toString(args));
         for (String arg : args){
             if(arg == null && required[pointer]){
                 throw new IllegalArgumentException(keys[pointer] + " is missing in the argument!");
