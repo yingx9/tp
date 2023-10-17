@@ -6,7 +6,12 @@ import seedu.data.SysLibException;
 import seedu.parser.Parser;
 import seedu.ui.UI;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
 
 public class FindCommand extends Command {
@@ -15,6 +20,26 @@ public class FindCommand extends Command {
     private static final String NO_RESOURCE_FOUND_MESSAGE = "There are no resources found matching the given filters.";
     private static final String RESOURCE_FOUND_MESSAGE = "Here are resources that matched the given filters:";
 
+    private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());
+
+    static {
+        // remove logs from showing in stdout
+        try {
+            Logger rootLogger = Logger.getLogger("");
+            for (java.util.logging.Handler handler : rootLogger.getHandlers()) {
+                if (handler instanceof java.util.logging.ConsoleHandler) {
+                    rootLogger.removeHandler(handler);
+                }
+            }
+
+            FileHandler fileHandler = new FileHandler("logs/findCommandLogs.log", true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            LOGGER.addHandler(fileHandler);
+            LOGGER.setLevel(Level.INFO);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Failed to set up log file handler", e);
+        }
+    }
     protected String title;
     protected String author;
     protected String isbn;
@@ -23,6 +48,7 @@ public class FindCommand extends Command {
 
     public FindCommand(){
         ui = new UI();
+        LOGGER.info("FindCommand instance created.");
     }
 
     public void setTitle(String title){
@@ -59,11 +85,14 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(String statement, Parser parser) throws IllegalArgumentException, SysLibException {
+        assert statement != null && !statement.trim().isEmpty() : "Statement to execute cannot be null or empty!";
+        assert parser != null : "Parser cannot be null!";
         Matcher matcher = parser.parseFindCommand(statement);
 
         while (matcher.find()) {
             String flag = matcher.group(1);
             String value = matcher.group(2);
+            LOGGER.info("Parsed flag: " + flag + " with value: " + value);
             switch (flag) {
             case "t":
                 this.setTitle(value);
@@ -96,12 +125,14 @@ public class FindCommand extends Command {
             }
         }
 
-        if (matchedResources.isEmpty()){
+        if (matchedResources.isEmpty()) {
+            LOGGER.warning("No resources matched the given filters.");
             System.out.println(NO_RESOURCE_FOUND_MESSAGE);
             ui.showLine();
-        }else{
+        } else {
+            LOGGER.info("Resources matched the given filters.");
             System.out.println(RESOURCE_FOUND_MESSAGE);
-            for (Resource r: matchedResources){
+            for (Resource r : matchedResources) {
                 System.out.println(r);
             }
             ui.showLine();
