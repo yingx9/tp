@@ -70,7 +70,8 @@ public class FindCommand extends Command {
                 break;
             default:
                 throw new IllegalArgumentException("Please use the format 'find [/t TITLE OR " +
-                "/i ISBN OR /a AUTHOR OR /id ID]'");
+                "/i ISBN OR /a AUTHOR OR /id ID]'" + "____________________________________________________________" +
+                        System.lineSeparator());
             }
 
         }
@@ -78,7 +79,8 @@ public class FindCommand extends Command {
         if (this.title == null && this.author == null &&  this.isbn == null &&
                 this.id == null) {
             throw new IllegalArgumentException("Please use the format 'find [/t TITLE OR " +
-                    "/i ISBN OR /a AUTHOR OR /id ID]'");
+                    "/i ISBN OR /a AUTHOR OR /id ID]'" +
+                    "____________________________________________________________" + System.lineSeparator());
         }
 
         ArrayList<Resource> matchedResources = new ArrayList<>();
@@ -90,12 +92,14 @@ public class FindCommand extends Command {
         }
 
         if (matchedResources.isEmpty()){
-            System.out.println("There are no resources found matching the given filters.");
+            System.out.println("There are no resources found matching the given filters." +
+                    "____________________________________________________________");
         }else{
-            System.out.println("Here are resources that matched the given filters: ");
+            System.out.println("Here are resources that matched the given filters:");
             for (Resource r: matchedResources){
                 System.out.println(r);
             }
+            System.out.println("____________________________________________________________");
         }
     }
 

@@ -66,11 +66,13 @@ public class Parser {
                 return parseAddBook(statement);
             } else {
                 throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'.");
+                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + System.lineSeparator() +
+                        "____________________________________________________________");
             }
         } else {
             throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'.");
+                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + System.lineSeparator() +
+                    "____________________________________________________________");
         }
     }
 
@@ -103,16 +105,19 @@ public class Parser {
 
                 if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[3].isEmpty()
                         || args[4].isEmpty()) {
-                    throw new SysLibException("Please state the id, title, author, tag, and ISBN.");
+                    throw new SysLibException("Please state the id, title, author, tag, and ISBN." +
+                            System.lineSeparator() + "____________________________________________________________");
                 }
             } else {
                 throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'.");
+                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + System.lineSeparator() +
+                        "____________________________________________________________");
             }
             return args;
         } catch (IllegalStateException | SysLibException e) {
             throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'.");
+                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + System.lineSeparator() +
+                    "____________________________________________________________");
         }
     }
 
@@ -121,7 +126,8 @@ public class Parser {
         try {
             id = Integer.parseInt(args[0]); // id
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Please enter a valid id.");
+            throw new NumberFormatException("Please enter a valid id." + System.lineSeparator() +
+                    "____________________________________________________________");
         }
 
         String title = args[1]; // title
