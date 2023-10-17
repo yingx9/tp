@@ -127,11 +127,13 @@ public class ListCommand extends Command {
 
         if (genres[0] == null ){
             return false;
-        } else if (genres[0].contains(genre)) {
-            return true;
-        } else {
-            return false;
         }
+        for(int j =0; j < genres.length; j ++){
+            if (genres[j].equals(genre)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void filterBothTagGenre(List<Resource> matchedGenreResources, List<Resource> matchedTagResources){
