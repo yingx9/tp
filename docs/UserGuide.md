@@ -27,7 +27,7 @@ SysLib CLI is a program designed specially for system libarians to manage their 
     >    * e.g `[/g GENRE]` ... can be used as `/g Horror /g Fantasy`
 
 ## Viewing help : `help` | [Return to contents](#Contents)
-Displays a list of available commands and their syntax format
+Displays a list of available commands with examples and their syntax format
 
 Format: `help`
 
