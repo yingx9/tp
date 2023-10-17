@@ -129,7 +129,7 @@ class ParserTest {
         //Negative find test
         validResponse = "find /t No Such Book";
         parser.process(validResponse);
-        expectedOutput += "There are no resources found matching the given filters." +
+        expectedOutput += "There are no resources found matching the given filters." + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();;
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
