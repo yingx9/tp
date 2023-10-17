@@ -1,7 +1,6 @@
 package seedu.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.data.Book;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
@@ -14,7 +13,7 @@ public class DeleteCommandTest {
     @Test
     void execute() throws SysLibException {
         Parser parser = new Parser();
-        
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         DeleteCommand deleteCommand = new DeleteCommand();
