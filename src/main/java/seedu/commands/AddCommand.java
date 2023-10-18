@@ -5,7 +5,7 @@ import seedu.parser.Parser;
 
 public class AddCommand extends Command{
     public AddCommand(){
-        args = new String[]{"id", "t", "a", "tag", "isbn", "genre"};
+        args = new String[]{"id", "t", "a", "tag", "i", "genre"};
         required = new boolean[]{true, true, true, true, true, false};
     }
     @Override
