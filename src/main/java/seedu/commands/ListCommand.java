@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class ListCommand extends Command {
 
 
@@ -44,12 +43,13 @@ public class ListCommand extends Command {
 
         isFilteredByTag = false;
         isFilteredByGenre = false;
-
+        assert !parser.resourceList.isEmpty(): "List should not be empty!";
         while(matcher.find()){
 
             String flag = matcher.group(1);
             String keyword = matcher.group(2);
             keyword = keyword.trim();
+
 
             switch(flag){
             case "tag":
