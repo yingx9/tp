@@ -3,7 +3,6 @@ package seedu.commands;
 import seedu.data.Book;
 import seedu.data.Resource;
 import seedu.data.SysLibException;
-import seedu.parser.DeleteParser;
 import seedu.parser.Parser;
 
 import java.util.ArrayList;
