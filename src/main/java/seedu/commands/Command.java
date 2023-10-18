@@ -21,7 +21,7 @@ public abstract class Command {
         for(int pointer = 0; pointer < args.length; pointer ++) {
             if(value[pointer] != null){
                 String arg = validateArg(statement, pointer);
-                statement = statement.replaceAll(arg+ "\\s*" + value[pointer], "");
+                statement = statement.replaceAll(arg+ "\\s*" + Pattern.quote(value[pointer].toLowerCase()), "");
             }
         }
         if (!statement.isBlank()){

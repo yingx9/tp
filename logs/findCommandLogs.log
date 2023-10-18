@@ -400,3 +400,55 @@ Oct 18, 2023 2:48:17 PM seedu.commands.ExitCommand execute
 INFO: Executing ExitCommand...
 Oct 18, 2023 2:48:20 PM seedu.commands.FindCommand <init>
 INFO: FindCommand instance created.
+Oct 18, 2023 2:53:19 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:53:19 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:53:19 PM seedu.commands.ExitCommand execute
+INFO: Executing ExitCommand...
+Oct 18, 2023 2:53:19 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:53:19 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:54:41 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:54:41 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:54:41 PM seedu.commands.ExitCommand execute
+INFO: Executing ExitCommand...
+Oct 18, 2023 2:54:41 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:54:41 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:54:49 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:56:15 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:56:15 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:56:15 PM seedu.commands.ExitCommand execute
+INFO: Executing ExitCommand...
+Oct 18, 2023 2:56:15 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:56:16 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 2:59:54 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 3:04:14 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 3:04:14 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 3:04:14 PM seedu.commands.ExitCommand execute
+INFO: Executing ExitCommand...
+Oct 18, 2023 3:04:14 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 3:04:14 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Oct 18, 2023 3:04:14 PM seedu.commands.FindCommand execute
+INFO: Parsed flag: t with value: The Subtle Art of Not Giving a F*ck
+Oct 18, 2023 3:04:14 PM seedu.commands.FindCommand execute
+INFO: Resources matched the given filters.
+Oct 18, 2023 3:04:14 PM seedu.commands.FindCommand execute
+INFO: Parsed flag: t with value: No Such Book
+Oct 18, 2023 3:04:14 PM seedu.commands.FindCommand execute
+WARNING: No resources matched the given filters.
