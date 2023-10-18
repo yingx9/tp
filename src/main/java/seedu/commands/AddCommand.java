@@ -4,13 +4,14 @@ import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
 public class AddCommand extends Command{
-
+    public AddCommand(){
+        args = new String[]{"id", "t", "a", "tag", "isbn", "genre"};
+        required = new boolean[]{true, true, true, true, true, false};
+    }
     @Override
     public void execute(String statement, Parser parser) throws
             IllegalStateException, NumberFormatException, SysLibException {
-        required = new boolean[]{true, true, true, true, true, false};
-        String[] args = Parser.parseArgument(statement);
-        validate(args);
+        String[] args = parseArgument(statement);
         String title = args[1];
         String tag = args[3];
         if (tag.equalsIgnoreCase("b")) {

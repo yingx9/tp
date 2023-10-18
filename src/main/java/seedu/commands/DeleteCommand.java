@@ -9,9 +9,13 @@ import seedu.parser.Parser;
 import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
+    public DeleteCommand(){
+        args = new String[]{"id"};
+        required = new boolean[]{true};
+    }
     @Override
     public void execute(String statement, Parser parser) throws SysLibException {
-        int id = parseInt(DeleteParser.parseDelete(statement));
+        int id = parseInt(parseArgument(statement)[0]);
         ArrayList<Resource> toRemove = new ArrayList<>();
         System.out.println("Looking for ID: " + id + "...");
         for (Resource r: parser.resourceList){
