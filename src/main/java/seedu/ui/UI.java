@@ -2,6 +2,8 @@ package seedu.ui;
 import java.util.Scanner;
 
 public class UI {
+    public static final String LINEDIVIDER = "____________________________________________________________";
+    public static final String SEPARATOR_LINEDIVIDER = System.lineSeparator() + LINEDIVIDER;
     protected static String logo =
             " ____            _     _ _        ____ _     ___ \n" +
                     "/ ___| _   _ ___| |   (_) |__    / ___| |   |_ _|\n" +
@@ -9,8 +11,10 @@ public class UI {
                     " ___) | |_| \\__ \\ |___| | |_) | | |___| |___ | | \n" +
                     "|____/ \\__, |___/_____|_|_.__/   \\____|_____|___|\n" +
                     "       |___/                                     ";
-    protected static final String LINEDIVIDER = "____________________________________________________________";
+
+
     protected Scanner myScanner;
+
 
     public UI(){
         this.myScanner = new Scanner(System.in);
@@ -35,7 +39,7 @@ public class UI {
         System.out.println("delete: deletes the resource with the specified ID from the library inventory. " +
                 "(e.g. delete /id 123456789)");
         System.out.println("list: list all resources OR filter by certain tags or genre." +
-                "(e.g. list /tag B /g Fiction /a J. K. Rowling /i 9780763630188)");
+                "(e.g. list /tag B /g Fiction");
         System.out.println("find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)");
         System.out.println("exit: displays a farewell message and exits the program (e.g. exit)");
         System.out.println("For more information, please refer to our user guide at:" +

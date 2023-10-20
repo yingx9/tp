@@ -11,6 +11,7 @@ import seedu.commands.FindCommand;
 import seedu.commands.ListCommand;
 import seedu.commands.HelpCommand;
 import seedu.commands.ExitCommand;
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,8 +42,7 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
         } else {
-            System.out.println("no commands found. Enter \"help\" for a list of commands." + System.lineSeparator() +
-                    "____________________________________________________________");
+            System.out.println("no commands found. Enter \"help\" for a list of commands." + SEPARATOR_LINEDIVIDER);
         }
 
     }
@@ -66,13 +66,11 @@ public class Parser {
                 return parseAddBook(statement);
             } else {
                 throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + System.lineSeparator() +
-                        "____________________________________________________________");
+                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + SEPARATOR_LINEDIVIDER);
             }
         } else {
             throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + System.lineSeparator() +
-                    "____________________________________________________________");
+                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + SEPARATOR_LINEDIVIDER);
         }
     }
 
@@ -106,18 +104,16 @@ public class Parser {
                 if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[3].isEmpty()
                         || args[4].isEmpty()) {
                     throw new SysLibException("Please state the id, title, author, tag, and ISBN." +
-                            System.lineSeparator() + "____________________________________________________________");
+                            SEPARATOR_LINEDIVIDER);
                 }
             } else {
                 throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + System.lineSeparator() +
-                        "____________________________________________________________");
+                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + SEPARATOR_LINEDIVIDER);
             }
             return args;
         } catch (IllegalStateException | SysLibException e) {
             throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + System.lineSeparator() +
-                    "____________________________________________________________");
+                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + SEPARATOR_LINEDIVIDER);
         }
     }
 
@@ -126,8 +122,7 @@ public class Parser {
         try {
             id = Integer.parseInt(args[0]); // id
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Please enter a valid id." + System.lineSeparator() +
-                    "____________________________________________________________");
+            throw new NumberFormatException("Please enter a valid id." + SEPARATOR_LINEDIVIDER);
         }
 
         String title = args[1]; // title
