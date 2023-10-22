@@ -22,6 +22,9 @@ import java.util.regex.Pattern;
 public class Parser {
 
     public List<Resource> resourceList = new ArrayList<>();
+    public List<Resource> getResourceList() {
+        return resourceList;
+    }
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
         {
             put("list", new ListCommand());

@@ -38,6 +38,10 @@ public class Book extends Resource {
         this.genres = genres;
     }
 
+    public String getGenreString() {
+        return String.join(", ", genres);
+    }
+
     public int getId() {
         return id;
     }
