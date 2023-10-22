@@ -22,9 +22,7 @@ import java.util.regex.Pattern;
 public class Parser {
 
     public List<Resource> resourceList = new ArrayList<>();
-    public List<Resource> getResourceList() {
-        return resourceList;
-    }
+
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
         {
             put("list", new ListCommand());
@@ -55,6 +53,10 @@ public class Parser {
             return "";
         }
         return response.substring(index + 1);
+    }
+
+    public List<Resource> getResourceList() {
+        return resourceList;
     }
 
     public static String[] parseAddCommand(String statement) throws SysLibException {
