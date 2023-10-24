@@ -15,6 +15,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(String statement, Parser parser) throws SysLibException {
         int id = parseInt(parseArgument(statement)[0]);
+        assert id > 0;
         ArrayList<Resource> toRemove = new ArrayList<>();
         System.out.println("Looking for ID: " + id + "...");
         for (Resource r: parser.resourceList){
