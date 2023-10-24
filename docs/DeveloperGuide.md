@@ -12,18 +12,23 @@
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+All librarians, not just system librarian!
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+To provide a platform to help librarians to quickly find the information they need to assist patrons.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|Version| As a ...  | I want to ...                                                                              | So that I can ...                                           |
+|--------|-----------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------|
+|v1.0| librarian | view a list of books that the library has                                                  | have an overview of all the books                           |
+|v1.0| librarian | add new books to our inventory by entering their title, author, ISBN, and publication year | keep our collection up-to-date                              |
+|v1.0| librarian | delete books from the database                                                             | let the patrons know our library no longer carries it       |
+|v1.0| librarian | tag a book as physical medium like newspapers, audio cds, books or online like eJournals   | patrons can know what type are available                    |
+|v1.0| librarian | have a help function                                                                       | know the commands of this programme                         |
+|v1.0| librarian | quickly find out how many books we have of a particular author and the names of the books  | know how many books are related to the author               |
+|v2.0| user      | find a to-do item by name                                                                  | locate a to-do without having to go through the entire list |
 
 ## Non-Functional Requirements
 
