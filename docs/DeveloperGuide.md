@@ -8,6 +8,10 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Architecture
+
+<img src="images/ArchitectureDiagram.png" />
+
 
 ## Product scope
 ### Target user profile
