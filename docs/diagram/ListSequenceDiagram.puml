@@ -1,0 +1,69 @@
+@startuml
+!include Style.puml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+skinparam ArrowFontStyle plain
+
+
+
+
+participant ":Main" as MAIN #grey
+participant ":UI" as UI UI_COLOR
+Actor User as user USER_COLOR
+participant ":Parser" as PARSER PARSER_COLOR
+
+
+box Command
+participant ":ListCommand" as LISTCOMMAND COMMAND_COLOR
+participant ":Command" as COMMAND COMMAND_COLOR
+end box
+
+MAIN -[#grey]> UI : readcommand()
+activate MAIN #grey
+activate UI UI_COLOR
+
+user -[USER_COLOR]> UI : "list /tag B"
+
+UI --[UI_COLOR]> MAIN
+deactivate UI  UI_COLOR
+MAIN -[#grey]> PARSER : process("list /tag B")
+activate PARSER PARSER_COLOR
+
+alt containsKey
+    PARSER -[PARSER_COLOR]> PARSER: removeFirstWord
+    activate PARSER PARSER_COLOR
+     PARSER --[PARSER_COLOR]> PARSER : String
+    deactivate PARSER PARSER_COLOR
+    PARSER -[PARSER_COLOR]> LISTCOMMAND: execute("/tag B")
+    activate LISTCOMMAND COMMAND_COLOR
+else noKey
+    PARSER --[PARSER_COLOR]> MAIN :
+end
+
+LISTCOMMAND -[COMMAND_COLOR]> LISTCOMMAND : resetVariables()
+activate LISTCOMMAND COMMAND_COLOR
+deactivate LISTCOMMAND COMMAND_COLOR
+
+LISTCOMMAND -[COMMAND_COLOR]> COMMAND : parseArg("/tag B)
+activate COMMAND COMMAND_COLOR
+COMMAND --[COMMAND_COLOR]> LISTCOMMAND : String[] values
+
+LISTCOMMAND -[COMMAND_COLOR]> COMMAND : validate("/tag B", values)
+
+COMMAND --[COMMAND_COLOR]> LISTCOMMAND :
+deactivate COMMAND COMMAND_COLOR
+LISTCOMMAND -[COMMAND_COLOR]> LISTCOMMAND : setListFilter()
+activate LISTCOMMAND COMMAND_COLOR
+deactivate LISTCOMMAND COMMAND_COLOR
+
+LISTCOMMAND -[COMMAND_COLOR]> LISTCOMMAND : filterResources()
+activate LISTCOMMAND COMMAND_COLOR
+deactivate LISTCOMMAND COMMAND_COLOR
+
+LISTCOMMAND --[COMMAND_COLOR]> PARSER
+deactivate LISTCOMMAND COMMAND_COLOR
+PARSER --[PARSER_COLOR]> MAIN :
+deactivate PARSER PARSER_COLOR
+@enduml

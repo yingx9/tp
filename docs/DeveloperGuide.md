@@ -8,8 +8,52 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Architecture
+
+<img src="images/ArchitectureDiagram.png" />
+
+
+**Main components of SysLib Architecture**
+
+SysLib currently consists of four main components:
+
+- `UI`: User Interaction
+- `Parser`: Parsing User Response 
+- `Command`: Command Executor
+- `Data`: Holds the data of SysLib
+
+
+   
+### UI Component
+
+### Parser Component
+
+### Command Component
+
+
+### Data Component
+
+## Implementation 
+
+### Listing Resources Feature
+
+The `list` command works with the `Parser` and `Command` component to execute the correct action. 
+
+`list` has four options:
+- list
+- list _/tag [tag]_
+- list _/g [genre]_
+- list _/tag [tag]_ _/g [genre]_
+
+When `list` is specified with both `tag` and `genre` filters, it is `AND` inclusive, listing only 
+Resources with the same tag and genre. 
+
+Sequence Diagram:
+<img src="images/ListSequenceDiagram.png" />
+
 
 ## Product scope
+
 ### Target user profile
 
 All librarians, not just system librarian!
@@ -29,6 +73,7 @@ To provide a platform to help librarians to quickly find the information they ne
 |v1.0| librarian | have a help function                                                                       | know the commands of this programme                         |
 |v1.0| librarian | quickly find out how many books we have of a particular author and the names of the books  | know how many books are related to the author               |
 |v2.0| user      | find a to-do item by name                                                                  | locate a to-do without having to go through the entire list |
+
 
 ## Non-Functional Requirements
 
