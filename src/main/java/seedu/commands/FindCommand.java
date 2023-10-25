@@ -12,14 +12,12 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-import java.util.regex.Matcher;
 
 public class FindCommand extends Command {
     private static final String INVALID_ARGUMENT_MESSAGE = "Please use the format 'find [/t TITLE OR "
             + "/i ISBN OR /a AUTHOR OR /id ID]'\n" + "____________________________________________________________";
     private static final String NO_RESOURCE_FOUND_MESSAGE = "There are no resources found matching the given filters.";
     private static final String RESOURCE_FOUND_MESSAGE = "Here are resources that matched the given filters:";
-
     private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());
 
     static {
@@ -47,6 +45,9 @@ public class FindCommand extends Command {
     protected UI ui;
 
     public FindCommand(){
+        args = new String[]{"id", "i", "a", "t"};
+        aliasArgs = new String[]{"id", "isbn", "author", "title"};
+        required = new boolean[]{false, false, false, false};
         ui = new UI();
         LOGGER.info("FindCommand instance created.");
     }
@@ -87,40 +88,17 @@ public class FindCommand extends Command {
     public void execute(String statement, Parser parser) throws IllegalArgumentException, SysLibException {
         assert statement != null && !statement.trim().isEmpty() : "Statement to execute cannot be null or empty!";
         assert parser != null : "Parser cannot be null!";
-        Matcher matcher = parser.parseFindCommand(statement);
+        String[] value = parseArgument(statement);
+        validate(statement, value);
 
-        while (matcher.find()) {
-            String flag = matcher.group(1);
-            String value = matcher.group(2);
-            LOGGER.info("Parsed flag: " + flag + " with value: " + value);
-            switch (flag) {
-            case "t":
-                this.setTitle(value);
-                break;
-            case "a":
-                this.setAuthor(value);
-                break;
-            case "i":
-                this.setISBN(value);
-                break;
-            case "id":
-                this.setID(value);
-                break;
-            default:
-                throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE + System.lineSeparator());
-            }
-
-        }
-
-        if (this.title == null && this.author == null &&  this.isbn == null &&
-                this.id == null) {
+        if (value[3]==null && value[2]==null && value[1]==null && value[0]==null) {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE + System.lineSeparator());
         }
 
         ArrayList<Resource> matchedResources = new ArrayList<>();
         for (Resource r: parser.resourceList){
             Book b = (Book) r;
-            if (b.getTitle().equals(this.title) || b.getISBN().equals(this.isbn) || b.getAuthor().equals(this.author)){
+            if (b.getTitle().equals(value[3]) || b.getISBN().equals(value[1]) || b.getAuthor().equals(value[2])){
                 matchedResources.add(b);
             }
         }
