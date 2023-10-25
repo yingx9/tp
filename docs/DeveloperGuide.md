@@ -37,6 +37,21 @@ SysLib currently consists of four main components:
 
 ### Listing Resources Feature
 
+The `list` command works with the `Parser` and `Command` component to execute the correct action. 
+
+`list` has four options:
+- list
+- list _/tag [tag]_
+- list _/g [genre]_
+- list _/tag [tag]_ _/g [genre]_
+
+When `list` is specified with both `tag` and `genre` filters, it is `AND` inclusive, listing only 
+Resources with the same tag and genre. 
+
+Sequence Diagram:
+<img src="images/ListSequenceDiagram.png" />
+
+
 ## Product scope
 
 ### Target user profile
