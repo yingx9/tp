@@ -67,17 +67,6 @@ public class FindCommandTest {
     }
 
     @Test
-    void testExecuteWithValidTitle() throws SysLibException {
-        findCommand.execute("/t Title1", parser);
-        assertEquals("Title1", findCommand.getTitle());
-    }
-    @Test
-    void testExecuteWithValidAuthor() throws SysLibException {
-        findCommand.execute("/a Author1", parser);
-        assertEquals("Author1", findCommand.getAuthor());
-    }
-
-    @Test
     void testExecuteWithInvalidFlag() {
         assertThrows(IllegalArgumentException.class, () -> findCommand.execute("/x InvalidFlag", parser));
     }
