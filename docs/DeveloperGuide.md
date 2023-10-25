@@ -13,7 +13,32 @@
 <img src="images/ArchitectureDiagram.png" />
 
 
+**Main components of SysLib Architecture**
+
+SysLib currently consists of four main components:
+
+- `UI`: User Interaction
+- `Parser`: Parsing User Response 
+- `Command`: Command Executor
+- `Data`: Holds the data of SysLib
+
+
+   
+### UI Component
+
+### Parser Component
+
+### Command Component
+
+
+### Data Component
+
+## Implementation 
+
+### Listing Resources Feature
+
 ## Product scope
+
 ### Target user profile
 
 All librarians, not just system librarian!
@@ -33,6 +58,7 @@ To provide a platform to help librarians to quickly find the information they ne
 |v1.0| librarian | have a help function                                                                       | know the commands of this programme                         |
 |v1.0| librarian | quickly find out how many books we have of a particular author and the names of the books  | know how many books are related to the author               |
 |v2.0| user      | find a to-do item by name                                                                  | locate a to-do without having to go through the entire list |
+
 
 ## Non-Functional Requirements
 
