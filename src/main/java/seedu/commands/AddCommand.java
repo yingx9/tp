@@ -12,12 +12,12 @@ public class AddCommand extends Command{
     @Override
     public void execute(String statement, Parser parser) throws
             IllegalStateException, NumberFormatException, SysLibException {
-        String[] value = parseArgument(statement);
-        validate(statement, value);
-        String title = value[1];
-        String tag = value[3];
+        String[] values = parseArgument(statement);
+        validate(statement, values);
+        String title = values[1];
+        String tag = values[3];
         if (tag.equalsIgnoreCase("b")) {
-            parser.resourceList.add(Parser.createBook(value));
+            parser.resourceList.add(Parser.createBook(values));
             System.out.println("This book is added: " + title);
             System.out.println("____________________________________________________________");
         } else {

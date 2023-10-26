@@ -1,0 +1,59 @@
+@startuml
+!include Style.puml
+skinparam ArrowFontStyle plain
+
+participant ":SysLib" as SYSLIB SYSLIB_COLOR
+participant ":UI" as UI UI_COLOR
+actor User as USER USER_COLOR
+participant ":Parser" as PARSER PARSER_COLOR
+
+box Command
+participant ":AddCommand" as ADDCOMMAND COMMAND_COLOR
+participant ":Command" as COMMAND COMMAND_COLOR
+end box
+
+SYSLIB -[SYSLIB_COLOR]> UI : readCommand()
+activate SYSLIB SYSLIB_COLOR
+activate UI UI_COLOR
+
+USER -[USER_COLOR]> UI : "add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction"
+
+UI --[UI_COLOR]> SYSLIB : input: String
+deactivate UI
+
+SYSLIB -[SYSLIB_COLOR]> PARSER : process("add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction")
+activate PARSER PARSER_COLOR
+
+alt containsKey
+    PARSER-[PARSER_COLOR]> PARSER: removeFirstWord(add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction)
+    activate PARSER PARSER_COLOR
+    PARSER --[PARSER_COLOR]> PARSER : "/id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction": String
+    deactivate PARSER
+
+    PARSER -[PARSER_COLOR]> ADDCOMMAND : execute("/id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction")
+    activate ADDCOMMAND COMMAND_COLOR
+else noKey
+    PARSER --[PARSER_COLOR]> SYSLIB
+end
+
+ADDCOMMAND -[COMMAND_COLOR]> COMMAND : parseArgument("/id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction")
+activate COMMAND COMMAND_COLOR
+COMMAND --[COMMAND_COLOR]> ADDCOMMAND : values: String[]
+
+ADDCOMMAND -[COMMAND_COLOR]> COMMAND : validate("/id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction", values)
+COMMAND --[COMMAND_COLOR]> ADDCOMMAND
+deactivate COMMAND
+
+alt equalsIgnoreCase("b")
+    ADDCOMMAND -[COMMAND_COLOR]> PARSER : createBook(values)
+    PARSER --[PARSER_COLOR]> ADDCOMMAND : new Book (title, isbn, author, genres, id)
+    ADDCOMMAND --[COMMAND_COLOR]> PARSER
+else notEqualsIgnoreCase("b")
+    ADDCOMMAND --[COMMAND_COLOR]> PARSER
+    deactivate ADDCOMMAND
+end
+
+PARSER --[PARSER_COLOR]> SYSLIB
+deactivate PARSER
+
+@enduml
