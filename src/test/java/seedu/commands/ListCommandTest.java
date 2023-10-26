@@ -9,7 +9,11 @@ import seedu.data.SysLibException;
 import seedu.parser.Parser;
 import seedu.util.TestUtil;
 
-import static seedu.commands.ListCommand.*;
+
+import static seedu.commands.ListCommand.GENERIC_MESSAGE;
+import static seedu.commands.ListCommand.FILTER_MESSAGE;
+import static seedu.commands.ListCommand.ZERO_RESOURCES_MESSAGE;
+
 import static seedu.ui.UI.LINESEPARATOR;
 
 
