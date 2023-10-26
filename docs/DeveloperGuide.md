@@ -106,8 +106,13 @@ When a user enters `list /tag B`, the Parser retrieves the parameters from the i
 calls the `execute` function of ListCommand.
 
 ListCommand then calls `parseArg` and `validate` from `Command`, which checks if the parameters are valid. If it passes
-the checks, `setListFilters` is called to check if the user selected any filters `[tag/genre/both]` or none. It will
-filter the `resourceList` with the given keywords, if any, and display the details of the resources.
+the checks, `filterResources` is called to begin the filtering process. First it calls `hasFilters()` check if the user 
+selected any filters `[tag/genre/both]` or none. 
+
+If hasFilters returns `true`, it filters the `resourceList` with the given keywords and display the details 
+of the resources.
+
+If hasFilters returns `false`, it skips the filtering process and displays the details of all the resources.
 
 ## Product scope
 
