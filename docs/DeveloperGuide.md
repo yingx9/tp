@@ -4,7 +4,12 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Setting Up & Getting Started
+
+1. Fork the repo at https://github.com/AY2324S1-CS2113T-W11-1/tp.
+2. Clone the fork into your computer.
+
+## Design & Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
@@ -34,6 +39,51 @@ SysLib currently consists of four main components:
 ### Data Component
 
 ## Implementation 
+This section provides details on how certain features are implemented. 
+
+### Add Resource Feature
+
+The `add` feature is responsible for processing user commands to add a new book to SysLib. It is facilitated by 
+the `AddCommand` component. It works with `Parser` and `Command` components to parse and validate the user input. 
+The new book is stored internally in `resourceList` as a `Book`. 
+
+`add` has six options:
+- add /id [id] /t [title] /a [author] /tag [tag] /i [isbn]
+- add /id [id] /t [title] /a [author] /tag [tag] /i [isbn] _/g [genre]_
+
+#### Implementation
+
+It implements the following operations:
+
+- `ADDCOMMAND#parseArgument(statement: String)` -- Parses the input command to extract relevant information.
+- `ADDCOMMAND#validate(statement: String, values: String[])` -- Validates the input statement to ensure that it is valid.
+- `ADDCOMMAND#createBook(values: String[])` -- Creates a new book based on the parsed and validated values.
+
+#### Example Usage Scenario
+
+Step 1. The user inputs the command: `add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction`
+
+Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
+
+Step 3. The `PARSER` processes the command and determines that it contains a valid key (`add`). It then calls 
+`ADDCOMMAND#execute(statement: String, this: Parser)` with the input command.
+
+Step 4. The `ADDCOMMMAND` component receives the command and performs the following operations:
+- Calls `ADDCOMMAND#parseArgument(statement: String)` to extract values for ID, title, author, ISBN, tag, and genres.
+- Calls `ADDCOMMAND#validate(statement: String, values: String[])` to ensure the validity of the input command.
+
+Step 5. The `COMMAND` component processes the input command to ensure that it meets the required format and constraints.
+It prepares the argument values for further processing.
+
+Step 6. Since the `tag` argument in the input command indicates that it is a book, the `ADDCOMMAND` determines that the
+key is equal to `b` (ignoring case). It then creates a new `Book` object using the parsed values (title, ISBN, author, 
+genres, ID).
+
+Step 7. The newly created book is forwarded to the `PARSER` to be added to the `resourceList`.
+
+#### Sequence Diagram
+The following sequence diagram shows how the add function works:
+<img src="images/AddSequenceDiagram.png"/>
 
 ### Listing Resources Feature
 
@@ -58,7 +108,10 @@ Sequence Diagram:
 
 All librarians, not just system librarian!
 
-### Value proposition
+- Needs to manage inventory with significant number of resources e.g. books
+- Is a fast typist
+
+### Value Proposition
 
 To provide a platform to help librarians to quickly find the information they need to assist patrons.
 
@@ -75,6 +128,29 @@ To provide a platform to help librarians to quickly find the information they ne
 |v2.0| user      | find a to-do item by name                                                                  | locate a to-do without having to go through the entire list |
 
 
+## Use Cases
+
+(For all use cases below, the System is the SysLib and the Actor is the user, unless specified otherwise)
+
+### Use case: Add a book
+
+#### MSS
+1. User requests to add a book
+2. AddressBook adds the book
+
+    Use case ends.
+
+#### Extensions
+- 1a. The given ID is invalid.
+  - 1a1. SysLib shows an error message.
+    
+    Use case ends.
+  
+- 1b. Insufficient data given.
+  - 1b1. SysLib shows an error message.
+
+    Use case ends.
+
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
@@ -83,6 +159,38 @@ To provide a platform to help librarians to quickly find the information they ne
 
 * *glossary item* - Definition
 
-## Instructions for manual testing
+## Instructions for Manual Testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+### Launch and Shutdown
+
+1. Initial launch
+   1. Download the jar file and copy it into an empty folder.
+   2. Open the command prompt and run `java -jar SysLib.jar`.
+
+
+### Adding a Book
+1. Add a book
+   1. Test case: `add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B`
+
+       Expected: A book with ID: 0005, Title: Frankenstein, Author: Mary Shelley, and ISBN: FKS0001 is created and added 
+       into the list. A message is shown to acknowledge that the book has been added successfully.
+   
+   2. Test case: `add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction`
+
+       Expected: A book with ID: 0005, Title: Frankenstein, Author: Mary Shelley, ISBN: FKS0001, and 
+       Genres: Gothic, Fiction is created and added into the list. A message is shown to acknowledge that the book 
+       has been added successfully.
+   
+   3. Test case: `add /id abcd /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction`
+        
+       Expected: No book is added. An error message is shown to indicate that the id is invalid.
+
+   4. Test case: `add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag A /g Gothic, Fiction`
+
+      Expected: No book is added. An error message is shown to indicate that the tag is invalid.
+
+   5. Test case: `add /id 0005 /t Frankenstein`
+   
+      Expected: No book is added. An error message is shown to indicate that the input is incomplete.
