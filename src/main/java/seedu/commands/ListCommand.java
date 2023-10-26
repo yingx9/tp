@@ -8,7 +8,8 @@ import seedu.parser.Parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import static seedu.common.Messages.*;
+import static seedu.common.Messages.formatLineSeparator;
+import static seedu.common.Messages.formatLastLineDivider;
 import static seedu.common.Messages.formatFirstLine;
 
 
