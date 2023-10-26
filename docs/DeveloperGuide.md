@@ -129,16 +129,19 @@ To provide a platform to help librarians to quickly find the information they ne
 
 ## User Stories
 
-|Version| As a ...  | I want to ...                                                                              | So that I can ...                                           |
-|--------|-----------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------|
-|v1.0| librarian | view a list of books that the library has                                                  | have an overview of all the books                           |
-|v1.0| librarian | add new books to our inventory by entering their title, author, ISBN, and publication year | keep our collection up-to-date                              |
-|v1.0| librarian | delete books from the database                                                             | let the patrons know our library no longer carries it       |
-|v1.0| librarian | tag a book as physical medium like newspapers, audio cds, books or online like eJournals   | patrons can know what type are available                    |
-|v1.0| librarian | have a help function                                                                       | know the commands of this programme                         |
-|v1.0| librarian | quickly find out how many books we have of a particular author and the names of the books  | know how many books are related to the author               |
-|v2.0| user      | find a to-do item by name                                                                  | locate a to-do without having to go through the entire list |
-
+| Version | As a ...  | I want to ...                                                                              | So that I can ...                                                              |
+|---------|-----------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| v1.0    | librarian | view a list of books that the library has                                                  | have an overview of all the books                                              |
+| v1.0    | librarian | add new books to our inventory by entering their title, author, ISBN, and publication year | keep our collection up-to-date                                                 |
+| v1.0    | librarian | delete books from the database                                                             | let the patrons know our library no longer carries it                          |
+| v1.0    | librarian | tag a book as physical medium like newspapers, audio cds, books or online like eJournals   | patrons can know what type are available                                       |
+| v1.0    | librarian | have a help function                                                                       | know the commands of this programme                                            |
+| v1.0    | librarian | quickly find out how many books we have of a particular author and the names of the books  | know how many books are related to the author                                  |
+| v2.0    | librarian | import/export our library's inventory data to a file format                                | easily share with other libraries to be used for backup and archival purposes. |
+| v2.0    | user      | find a to-do item by name                                                                  | locate a to-do without having to go through the entire list                    |
+| v2.0    | user      | get the status of an item                                                                  | know if it is available                                                        |
+| v2.0    | user      | update the details of a resource                                                           | fix any mistakes and maintain consistency                                      |
+| v2.0    | user      | add in different types of resources                                                        | differentiate between resources such as magazines, cds...                      |
 
 ## Use Cases
 
@@ -172,9 +175,74 @@ To provide a platform to help librarians to quickly find the information they ne
 * *glossary item* - Definition
 
 ## Instructions for Manual Testing
+Example input:
+```
+help
+```
+Example response:
+```
+Commands available:
+add: adds a new resource to the library inventory.(e.g. add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE])
+delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
+list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
+find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
+exit: displays a farewell message and exits the program (e.g. exit)
+For more information, please refer to our user guide at:https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html
+____________________________________________________________
+```
+Example input:
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+```
+add /id 1 /t The Great Gatsby /a F. Scott Fitzgerald /tag B /i 9780023381201 /g Novel, Fiction, Tragedy
+```
+Example response:
+```
+This book is added: The Great Gatsby
+____________________________________________________________
+```
+Example input:
+```
+add /id 2 /t To Kill a Mockingbird /a Harper Lee /tag B /i 9780061120084 /g Novel, Bildungsroman, Southern Gothic, Domestic Fiction, Thriller, Legal Story
+```
+Example response:
+```
+This book is added: To Kill a Mockingbird
+____________________________________________________________
+```
+Example input:
+```
+list
+```
+Example response:
+```
+Listing all resources in the Library:
 
+1. [B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy
+2. [B]  ID: 2 Title: To Kill a Mockingbird ISBN: 9780061120084 Author: Harper Lee Genre: Novel, Bildungsroman, Southern Gothic,
+
+There are currently 2 resource(s).
+____________________________________________________________
+```
+Example input:
+```
+delete /id 1
+```
+Example response:
+```
+Looking for ID: 1...
+This resource is removed: 
+[B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy
+____________________________________________________________
+```
+Example input:
+```
+exit
+```
+Example response:
+```
+Bye, hope to see you again soon!
+____________________________________________________________
+```
 ### Launch and Shutdown
 
 1. Initial launch
