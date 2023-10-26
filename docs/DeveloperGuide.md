@@ -99,8 +99,15 @@ When `list` is specified with both `tag` and `genre` filters, it is `AND` inclus
 Resources with the same tag and genre. 
 
 Sequence Diagram:
+
 <img src="images/ListSequenceDiagram.png" />
 
+When a user enters `list /tag B`, the Parser retrieves the parameters from the input and
+calls the `execute` function of ListCommand.
+
+ListCommand then calls `parseArg` and `validate` from `Command`, which checks if the parameters are valid. If it passes
+the checks, `setListFilters` is called to check if the user selected any filters `[tag/genre/both]` or none. It will
+filter the `resourceList` with the given keywords, if any, and display the details of the resources.
 
 ## Product scope
 
