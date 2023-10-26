@@ -55,4 +55,25 @@ public class Resource {
     public String toString() {
         return "[" + tag + "] " + title;
     }
+
+    public static boolean hasGenre(Resource resource, String genre){
+        Book bookResource;
+
+        if (resource instanceof Book) {
+            bookResource = (Book) resource;
+            String[] genres = bookResource.getGenre();
+            if (genres[0] == null ){
+                return false;
+            }
+
+            for(int j =0; j < genres.length; j ++){
+                if (genres[j].equals(genre)){
+                    return true;
+                }
+            }
+        }
+        return false;
+
+
+    }
 }

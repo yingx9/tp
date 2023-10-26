@@ -8,7 +8,14 @@ import seedu.data.Resource;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 import seedu.util.TestUtil;
-import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
+
+
+import static seedu.commands.ListCommand.GENERIC_MESSAGE;
+import static seedu.commands.ListCommand.FILTER_MESSAGE;
+import static seedu.commands.ListCommand.ZERO_RESOURCES_MESSAGE;
+
+import static seedu.ui.UI.LINESEPARATOR;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -24,7 +31,6 @@ public class ListCommandTest {
     private Command listCommand = new ListCommand();
 
 
-
     @Test
     void execute() throws SysLibException {
         testResourceList = TestUtil.fillTestList();
@@ -36,10 +42,8 @@ public class ListCommandTest {
     @Test
     private void assertEmptyListMessage() throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(listCommand, "", emptyResourceList);
-        String expectedMessage = "Listing all resources in the Library:" + System.lineSeparator()
-                + System.lineSeparator();
-        expectedMessage +=  "There are currently 0 resources." + SEPARATOR_LINEDIVIDER;
-        expectedMessage += System.lineSeparator();
+        String expectedMessage = GENERIC_MESSAGE;
+        expectedMessage +=  ZERO_RESOURCES_MESSAGE + LINESEPARATOR;
         assertEquals(expectedMessage, outputMessage);
 
     }
@@ -60,10 +64,8 @@ public class ListCommandTest {
     @Test
     private void assertNoFilteredListDisplay() throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(listCommand, "/g Thriller", testResourceList);
-        String expectedMessage = "Listing resources matching given filters: " + System.lineSeparator()
-                + System.lineSeparator();
-        expectedMessage += "There are currently 0 resources." + SEPARATOR_LINEDIVIDER;
-        expectedMessage += System.lineSeparator();
+        String expectedMessage = FILTER_MESSAGE;
+        expectedMessage += ZERO_RESOURCES_MESSAGE + LINESEPARATOR;
         assertEquals(expectedMessage, outputMessage);
 
     }

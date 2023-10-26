@@ -2,8 +2,9 @@ package seedu.ui;
 import java.util.Scanner;
 
 public class UI {
+    public static final String LINESEPARATOR = System.lineSeparator();
     public static final String LINEDIVIDER = "____________________________________________________________";
-    public static final String SEPARATOR_LINEDIVIDER = System.lineSeparator() + LINEDIVIDER;
+    public static final String SEPARATOR_LINEDIVIDER = LINESEPARATOR + LINEDIVIDER;
     protected static String logo =
             " ____            _     _ _        ____ _     ___ \n" +
                     "/ ___| _   _ ___| |   (_) |__    / ___| |   |_ _|\n" +

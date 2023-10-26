@@ -103,7 +103,8 @@ class ParserTest {
                 "/tag B /i 9780062457714 /g Self-help";
         parser.process(validResponse);
         expectedOutput += "This book is added: The Subtle Art of Not Giving a F*ck" + System.lineSeparator() +
-                "____________________________________________________________" + System.lineSeparator();;
+                "____________________________________________________________" + System.lineSeparator()
+                + System.lineSeparator();;
         //Test list
         validResponse = "list";
         parser.process(validResponse);
