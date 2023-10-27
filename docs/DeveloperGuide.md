@@ -41,6 +41,71 @@ SysLib currently consists of four main components:
 ## Implementation 
 This section provides details on how certain features are implemented. 
 
+### Find Resource Feature
+
+The `find` command allows users to search for resources based on specified filters such as author (`/a`), ISBN (`/i`), ID (`/id`), and title (`/t`). The results will show all resources that match any of the given filters.
+
+`find` has the following options:
+- `find /id [ID]`
+- `find /t [TITLE]`
+- `find /a [AUTHOR]`
+- `find /i [ISBN]`
+
+Multiple filters can also be combined:
+
+- `find /t [TITLE] /a [AUTHOR]`
+
+#### Implementation
+
+Upon receiving the `find` command, the system will:
+
+1. Parse the filters and their associated values.
+2. Filter the resources based on the given filters.
+3. Display the matching resources.
+
+#### Example Usage Scenario
+
+**Step 1.** The user inputs the command: `find /a "F. Scott Fitzgerald"`
+
+**Step 2.** The `UI` component forwards the input to `SYSLIB`, which then sends it to the `PARSER`.
+
+**Step 3.** The `PARSER` processes the command, extracts the `author` filter, and retrieves all resources written by "F. Scott Fitzgerald".
+
+**Step 4.** The matching resources are displayed to the user.
+
+#### Sequence Diagram
+A sequence diagram could be provided here to visually show how the `find` function works.
+
+(Note: You would include the actual sequence diagram image, similar to the diagrams shown for other features.)
+
+### Examples for Testing
+
+1. **Find by Author**
+    - Test case: `find /a "F. Scott Fitzgerald"`
+
+      Expected: All resources written by F. Scott Fitzgerald are displayed.
+
+2. **Find by ISBN**
+    - Test case: `find /i "9780061120084"`
+
+      Expected: The resource with ISBN "9780061120084" is displayed, which should be "To Kill a Mockingbird" by Harper Lee.
+
+3. **Find by ID**
+    - Test case: `find /id 2`
+
+      Expected: The resource with ID "2" is displayed, which should be "To Kill a Mockingbird" by Harper Lee.
+
+4. **Find by Title**
+    - Test case: `find /t "The Great Gatsby"`
+
+      Expected: The resource titled "The Great Gatsby" is displayed.
+
+5. **Combining Filters**
+    - Test case: `find /a "F. Scott Fitzgerald" /t "The Great Gatsby"`
+
+      Expected: Only the resource that matches both the title "The Great Gatsby" and the author "F. Scott Fitzgerald" is displayed.
+
+
 ### Add Resource Feature
 
 The `add` feature is responsible for processing user commands to add a new book to SysLib. It is facilitated by 
@@ -138,10 +203,10 @@ To provide a platform to help librarians to quickly find the information they ne
 | v1.0    | librarian | have a help function                                                                       | know the commands of this programme                                            |
 | v1.0    | librarian | quickly find out how many books we have of a particular author and the names of the books  | know how many books are related to the author                                  |
 | v2.0    | librarian | import/export our library's inventory data to a file format                                | easily share with other libraries to be used for backup and archival purposes. |
-| v2.0    | user      | find a to-do item by name                                                                  | locate a to-do without having to go through the entire list                    |
-| v2.0    | user      | get the status of an item                                                                  | know if it is available                                                        |
-| v2.0    | user      | update the details of a resource                                                           | fix any mistakes and maintain consistency                                      |
-| v2.0    | user      | add in different types of resources                                                        | differentiate between resources such as magazines, cds...                      |
+| v2.0    | librarian | find a to-do item by name                                                                  | locate a to-do without having to go through the entire list                    |
+| v2.0    | librarian | get the status of an item                                                                  | know if it is available                                                        |
+| v2.0    | librarian | update the details of a resource                                                           | fix any mistakes and maintain consistency                                      |
+| v2.0    | librarian | add in different types of resources                                                        | differentiate between resources such as magazines, cds...                      |
 
 ## Use Cases
 
