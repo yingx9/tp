@@ -59,7 +59,7 @@ Adds a new resource to the library inventory.
 >> i.e. `[eB]` is an eBook, `[eM]` is an eMagazine
 
 #### Notes about genre:
-Multiple genres are allowed for a single resource. Separate the different genres using comma followed by a space `, `.
+Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
 
 Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]...`
 
@@ -93,7 +93,7 @@ ____________________________________________________________
 ```
 
 ## List all items: `list` | [Return to contents](#contents)
-You can list all resources OR filter by certain tags or genre.
+List all resources OR filter by certain tags or genre.
 
 Format: `list [/tag TAG /g GENRE ]`
 - Including both filters `tag` and `genre` will only list resources satisfying both criteria:
@@ -142,7 +142,7 @@ ____________________________________________________________
 ```
 
 ## Exiting the program : `exit` | [Return to contents](#contents)
-Displays a farewell message and exits the program
+Displays a farewell message and exits the program.
 
 Format: `exit`
 
@@ -153,7 +153,7 @@ ____________________________________________________________
 ```
 
 ## Viewing help : `help` | [Return to contents](#contents)
-Displays a list of available commands with examples and their syntax format
+Displays a list of available commands with examples and their syntax format.
 
 Format: `help`
 
