@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
         for (Resource r: parser.resourceList){
             Book b = (Book) r;
             if (b.getId() == id){
-                System.out.println("This resource is removed:");
+                System.out.println("This resource is removed: ");
                 System.out.println(b);
                 System.out.println("____________________________________________________________");
                 toRemove.add(r);
