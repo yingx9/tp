@@ -24,7 +24,7 @@ public class UI {
     public void showWelcomeMessage(){
         showLine();
         System.out.println(logo);
-        System.out.println("What do you want to do?");
+        System.out.println("What would you like to do?");
         showLine();
     }
 
