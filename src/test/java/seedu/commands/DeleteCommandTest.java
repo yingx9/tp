@@ -1,7 +1,6 @@
 package seedu.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.data.Book;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
