@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class DeleteCommand extends Command {
     public DeleteCommand(){
         args = new String[]{"id"};
+        aliasArgs = new String[]{"i"};
         required = new boolean[]{true};
     }
     @Override
