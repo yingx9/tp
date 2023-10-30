@@ -12,6 +12,7 @@ import seedu.commands.FindCommand;
 import seedu.commands.ListCommand;
 import seedu.commands.HelpCommand;
 import seedu.commands.ExitCommand;
+import seedu.commands.EditCommand;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class Parser {
 
     public List<Resource> resourceList = new ArrayList<>();
 
+
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
         {
             put("list", new ListCommand());
@@ -32,8 +34,10 @@ public class Parser {
             put("help", new HelpCommand());
             put("exit", new ExitCommand());
             put("add", new AddCommand());
+            put("edit", new EditCommand());
         }
     };
+
     public void process(String response) {
         String command = response.split(" ")[0];
         if (commandProcessor.containsKey(command)) {
@@ -48,6 +52,7 @@ public class Parser {
         }
 
     }
+    
     public static String removeFirstWord(String response) {
         int index = response.indexOf(" ");
         if (index == -1) {
