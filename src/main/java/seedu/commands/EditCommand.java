@@ -3,6 +3,7 @@ package seedu.commands;
 
 import seedu.data.Book;
 import seedu.data.Resource;
+import seedu.data.Status;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
@@ -23,9 +24,9 @@ public class EditCommand extends Command{
     private static int resourceIndex;
 
     public EditCommand(){
-        args = new String[]{"i", "t", "a", "tag", "g"};
-        aliasArgs = new String[]{"isbn", "title", "author", "tag", "genre"};
-        required = new boolean[]{true, false, false, false, false};
+        args = new String[]{"i", "t", "a", "tag", "g", "s"};
+        aliasArgs = new String[]{"isbn", "title", "author", "tag", "genre", "status"};
+        required = new boolean[]{true, false, false, false, false, false};
     }
 
 
@@ -119,6 +120,13 @@ public class EditCommand extends Command{
                 book.setGenre(newGenres);
                 foundResource = book;
                 break;
+            case 5:
+                if (foundResource instanceof Book) {
+                    Book bookStatus = castResourceToBook(foundResource);
+                    bookStatus.setStatus(getStatusFromString(newValue));
+                    foundResource = bookStatus;
+                }
+                break;
             default:
                 throw new SysLibException("Input error");
 
@@ -132,7 +140,6 @@ public class EditCommand extends Command{
 
     public Book castResourceToBook(Resource resource) throws SysLibException {
 
-
         Book book;
 
         if (resource instanceof Book) {
@@ -141,9 +148,18 @@ public class EditCommand extends Command{
             throw new SysLibException(NOT_BOOK_ERROR);
         }
 
-
         return book;
+    }
 
+    public Status getStatusFromString(String statusString) {
+        statusString = statusString.toLowerCase().trim();
+        if (statusString.equals("borrowed")) {
+            return Status.BORROWED;
+        } else if (statusString.equals("lost")) {
+            return Status.LOST;
+        } else {
+            return Status.AVAILABLE;
+        }
     }
 
 }
