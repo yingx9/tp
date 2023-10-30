@@ -77,11 +77,12 @@ public class Parser {
                 return parseAddBook(statement);
             } else {
                 throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + SEPARATOR_LINEDIVIDER);
+                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'."
+                        + SEPARATOR_LINEDIVIDER);
             }
         } else {
             throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + SEPARATOR_LINEDIVIDER);
+                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'." + SEPARATOR_LINEDIVIDER);
         }
     }
 
@@ -89,7 +90,7 @@ public class Parser {
         try {
             String inputPattern = "/id (.+?) /t (.+?) /a (.+?) /tag (.+?) /i (.+)";
             String genrePattern = "(.+) /g (.+)";
-            String statusPattern = "(.+) /s (.+)?";
+            String statusPattern = "(.+) /s (.+)";
 
             Pattern pattern = Pattern.compile(inputPattern);
             Matcher matcher = pattern.matcher(statement);
@@ -103,7 +104,7 @@ public class Parser {
             Matcher sMatcher = sPattern.matcher(matcher.group(5));
             boolean sMatchFound = sMatcher.find();
 
-            String[] args = new String[7];
+            String[] args = new String[7]; // Increase the array size to accommodate status
 
             if (matchFound) {
                 args[0] = matcher.group(1).trim(); // id
@@ -112,7 +113,11 @@ public class Parser {
                 args[3] = matcher.group(4).trim(); // tag
                 if (gMatchFound) {
                     args[4] = gMatcher.group(1).trim(); // isbn
-                    args[5] = gMatcher.group(2).trim(); // genre
+                    if (sMatchFound){
+                        args[5] = gMatcher.group(2).split("/s")[0].trim(); // genre
+                    } else{
+                        args[5] = gMatcher.group(2).trim(); // genre
+                    }
                 } else {
                     args[4] = matcher.group(5).trim(); // isbn
                 }
@@ -120,7 +125,7 @@ public class Parser {
                 if (sMatchFound) {
                     args[6] = sMatcher.group(2).trim(); // status
                 } else {
-                    args[6] = "Available"; // Default to Available if status is not provided
+                    args[6] = "Available";
                 }
 
                 if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[3].isEmpty()
@@ -130,15 +135,17 @@ public class Parser {
                 }
             } else {
                 throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s Status]'."
+                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/s STATUS] [/g GENRE]'."
                         + SEPARATOR_LINEDIVIDER);
             }
             return args;
         } catch (IllegalStateException | SysLibException e) {
             throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s Status]'." + SEPARATOR_LINEDIVIDER);
+                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/s STATUS] [/g GENRE]'." + SEPARATOR_LINEDIVIDER);
         }
     }
+
+
 
     public static Book createBook(String[] args) throws IllegalStateException, NumberFormatException {
         int id;
@@ -169,7 +176,6 @@ public class Parser {
         Pattern pattern = Pattern.compile("/(t|a|i|id)\\s+([^/]+)");
         return pattern.matcher(command);
     }
-
     public static Status getStatusFromString(String statusString) {
         if (statusString != null) {
             statusString = statusString.toLowerCase().trim();
@@ -182,5 +188,4 @@ public class Parser {
         // Default to Available if the status is not provided or unrecognized
         return Status.AVAILABLE;
     }
-
 }

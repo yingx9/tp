@@ -48,8 +48,6 @@ public class TestUtil {
         testResourceList.add(testBook);
         testResourceList.add(testBook2);
         testResourceList.add(testBook3);
-
         return testResourceList;
     }
-
 }
