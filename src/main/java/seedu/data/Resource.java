@@ -6,13 +6,15 @@ public class Resource {
     private Integer copies;
     private String tag;
     private String isbn;
+    private Status status;
 
-    public Resource(String title, String isbn){
+    public Resource(String title, String isbn, Status status){
         setTitle(title);
         setBorrowed(false);
         setISBN(isbn);
         setCopies(1);
         setTag("");
+        setStatus(status);
     }
     public String getTitle() {
         return title;
@@ -75,5 +77,12 @@ public class Resource {
         return false;
 
 
+    }
+    public void setStatus(Status status){
+        this.status = status;
+    }
+
+    public Status getStatus(){
+        return status;
     }
 }

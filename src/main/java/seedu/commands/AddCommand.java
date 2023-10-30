@@ -5,9 +5,9 @@ import seedu.parser.Parser;
 
 public class AddCommand extends Command{
     public AddCommand(){
-        args = new String[]{"id", "t", "a", "tag", "i", "g"};
-        aliasArgs = new String[]{"id", "title", "author", "tag", "isbn", "genre"};
-        required = new boolean[]{true, true, true, true, true, false};
+        args = new String[]{"id", "t", "a", "tag", "i", "g", "s"};
+        aliasArgs = new String[]{"id", "title", "author", "tag", "isbn", "genre", "status"};
+        required = new boolean[]{true, true, true, true, true, false, false};
     }
     @Override
     public void execute(String statement, Parser parser) throws

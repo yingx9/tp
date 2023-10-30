@@ -3,6 +3,7 @@ package seedu.parser;
 import seedu.data.Book;
 import seedu.data.Resource;
 
+import seedu.data.Status;
 import seedu.data.SysLibException;
 import seedu.commands.Command;
 import seedu.commands.AddCommand;
@@ -83,6 +84,7 @@ public class Parser {
         try {
             String inputPattern = "/id (.+?) /t (.+?) /a (.+?) /tag (.+?) /i (.+)";
             String genrePattern = "(.+) /g (.+)";
+            String statusPattern = "(.+) /s (.+)?";
 
             Pattern pattern = Pattern.compile(inputPattern);
             Matcher matcher = pattern.matcher(statement);
@@ -92,7 +94,11 @@ public class Parser {
             Matcher gMatcher = gPattern.matcher(matcher.group(5));
             boolean gMatchFound = gMatcher.find();
 
-            String[] args = new String[6];
+            Pattern sPattern = Pattern.compile(statusPattern);
+            Matcher sMatcher = sPattern.matcher(matcher.group(5));
+            boolean sMatchFound = sMatcher.find();
+
+            String[] args = new String[7];
 
             if (matchFound) {
                 args[0] = matcher.group(1).trim(); // id
@@ -106,6 +112,12 @@ public class Parser {
                     args[4] = matcher.group(5).trim(); // isbn
                 }
 
+                if (sMatchFound) {
+                    args[6] = sMatcher.group(2).trim(); // status
+                } else {
+                    args[6] = "Available"; // Default to Available if status is not provided
+                }
+
                 if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[3].isEmpty()
                         || args[4].isEmpty()) {
                     throw new SysLibException("Please state the id, title, author, tag, and ISBN." +
@@ -113,12 +125,13 @@ public class Parser {
                 }
             } else {
                 throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + SEPARATOR_LINEDIVIDER);
+                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s Status]'."
+                        + SEPARATOR_LINEDIVIDER);
             }
             return args;
         } catch (IllegalStateException | SysLibException e) {
             throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]'." + SEPARATOR_LINEDIVIDER);
+                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s Status]'." + SEPARATOR_LINEDIVIDER);
         }
     }
 
@@ -133,6 +146,8 @@ public class Parser {
         String title = args[1]; // title
         String author = args[2]; // author
         String isbn = args[4]; // isbn
+        Status status = getStatusFromString(args[6]); // Get the status from the provided string
+
 
         String genre;
         String[] genres = new String[1];
@@ -141,7 +156,7 @@ public class Parser {
             genres = genre.split(", ");
         }
 
-        return new Book(title, isbn, author, genres, id);
+        return new Book(title, isbn, author, genres, id, status);
     }
 
     public Matcher parseFindCommand(String command) throws SysLibException{
@@ -150,6 +165,17 @@ public class Parser {
         return pattern.matcher(command);
     }
 
-
+    public static Status getStatusFromString(String statusString) {
+        if (statusString != null) {
+            statusString = statusString.toLowerCase().trim();
+            if (statusString.equalsIgnoreCase("borrowed")) {
+                return Status.BORROWED;
+            } else if (statusString.equalsIgnoreCase("lost")) {
+                return Status.LOST;
+            }
+        }
+        // Default to Available if the status is not provided or unrecognized
+        return Status.AVAILABLE;
+    }
 
 }
