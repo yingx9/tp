@@ -40,7 +40,7 @@ Listing resources matching given filters:
 
 There are currently 0 resources.
 ____________________________________________________________
-> Successfully updated! Your updated resource: 
+> Successfully updated! Your updated resource:
 
 [B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE
 ____________________________________________________________

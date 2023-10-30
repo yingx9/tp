@@ -18,7 +18,7 @@ public class EditCommand extends Command{
             "one detail to edit!");
     public static final String NOT_BOOK_ERROR =  formatLastLineDivider("Your resource is not a book!");
     public static final String RESOURCE_NOT_FOUND =  formatLastLineDivider("No such resource with given ISBN");
-    public static final String EDIT_SUCCESS = formatLineSeparator("Successfully updated! Your updated resource: ");
+    public static final String EDIT_SUCCESS = formatLineSeparator("Successfully updated! Your updated resource:");
     private static String feedbackToUser;
 
     private static int resourceIndex;

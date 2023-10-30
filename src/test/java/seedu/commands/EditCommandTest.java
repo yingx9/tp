@@ -72,7 +72,4 @@ public class EditCommandTest {
         expectedMessage += LINESEPARATOR;
         assertEquals(expectedMessage, outputMessage);
     }
-
-
-
 }
