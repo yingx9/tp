@@ -62,12 +62,12 @@ Adds a new resource to the library inventory.
 #### Notes about genre:
 Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
 
-Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE]...`
+Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]...`
 
 **Example input:**
 ```
 add /id 123456789 /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /g Adventure, Fiction
-add /id 123456789 /t Harry Squatter /a J.K. /tag M /i 9780763630187 /g History
+add /id 123456789 /t Harry Squatter /a J.K. /tag M /i 9780763630187 /g History /s lost
 ```
 **Example response:**
 ```
@@ -89,7 +89,7 @@ delete /id 123456789
 ```
 Looking for ID: 123456789...
 This resource is removed: 
-[B]  ID: 123456789 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction
+[B]  ID: 123456789 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: LOST
 ____________________________________________________________
 ```
 
@@ -112,11 +112,11 @@ list /g Thrill
 ```
 Listing all resources in the Library:
 
-1. [B]  ID: 1 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction
-2. [M]  ID: 2 Title: Harry Squatter ISBN: 9780763630187 Author: J.K. Genre: History
-3. [B]  ID: 3 Title: Frankenstein ISBN: FKS0001 Author: Mary Shelley Genre: -
-4. [B]  ID: 4 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy
-5. [B]  ID: 5 Title: To Kill a Mockingbird ISBN: 9780061120084 Author: Harper Lee Genre: Novel, Bildungsroman, Southern Gothic, Domestic Fiction, Thriller, Legal Story
+1. [B]  ID: 1 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE
+2. [M]  ID: 2 Title: Harry Squatter ISBN: 9780763630187 Author: J.K. Genre: History Status: AVAILABLE
+3. [B]  ID: 3 Title: Frankenstein ISBN: FKS0001 Author: Mary Shelley Genre: - Status: BORROWED
+4. [B]  ID: 4 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: AVAILABLE
+5. [B]  ID: 5 Title: To Kill a Mockingbird ISBN: 9780061120084 Author: Harper Lee Genre: Novel, Bildungsroman, Southern Gothic, Domestic Fiction, Thriller, Legal Story Status: LOST
 
 There are currently 5 resource(s).
 ____________________________________________________________
@@ -134,6 +134,12 @@ find /i 9780763630188
 find /a J. K. Rowling
 find /id 123456789
 ```
+**Example output:**
+```
+Here are resources that matched the given filters:
+[B]  ID: 123456789 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction
+____________________________________________________________
+```
 
 ## Edit a listing: `edit` | [Return to contents](#contents)
 Edit a listing by entering its `isbn` to update its details. 
@@ -141,12 +147,13 @@ Edit a listing by entering its `isbn` to update its details.
 Format: `edit /i ISBN /argumentname ARGUMENT`
 
 Argument Names:
-  - /t TITLE 
-  - /a AUTHOR 
-  - /tag TAG
-  - /g GENRES
+  - `/t TITLE `
+  - `/a AUTHOR `
+  - `/tag TAG`
+  - `/g GENRES`
     - If you're inputting **multiple genres**, separate them by  with comma `,`. For example: 
      `/g Horror, Fantasy`
+  - `/s STATUS`
 
   
 **Example input:**
@@ -154,13 +161,14 @@ Argument Names:
 edit /i 123 /t NEW_TITLE
 edit /i 123 /t NEW_TITLE /a NEW_AUTHOR
 edit /i 123 /g Horror, Adventure
+edit /i 123 /s lost
 ```
 
 **Example output:**
 ```
 Successfully updated! Your updated resource: 
 
-[B]  ID: 12312 Title: Mary ISBN: 123 Author: John Genre: Horror, Adventure
+[B]  ID: 12312 Title: Mary ISBN: 123 Author: John Genre: Horror, Adventure Status: LOST
 ____________________________________________________________
 ```
 
