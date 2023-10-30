@@ -9,6 +9,7 @@ This user guide is for System Librarians to ensure optimal use of Syslib
     * [Delete a listing: `delete`](#delete-a-listing-delete--return-to-contents)
     * [List items: `list`](#list-all-items-list--return-to-contents)
     * [Find listing by search parameter: `find`](#find-specific-listings-find--return-to-contents)
+    * [Edit a listing: `edit`](#edit-a-listing-edit--return-to-contents)
     * [Exiting the program : `exit`](#exiting-the-program--exit--return-to-contents)
     * [Get help: `help`](#viewing-help--help--return-to-contents)
 * [FAQ](#faq--return-to-contents)
@@ -134,10 +135,32 @@ find /a J. K. Rowling
 find /id 123456789
 ```
 
+## Edit a listing: `edit` | [Return to contents](#contents)
+Edit a listing by entering its `isbn` to update its details. 
+
+Format: `edit /i ISBN /argumentname ARGUMENT`
+
+Argument Names:
+  - /t TITLE 
+  - /a AUTHOR 
+  - /tag TAG
+  - /g GENRES
+    - If you're inputting **multiple genres**, separate them by  with comma `,`. For example: 
+     `/g Horror, Fantasy`
+
+  
+**Example input:**
+```
+edit /i 123 /t NEW_TITLE
+edit /i 123 /t NEW_TITLE /a NEW_AUTHOR
+edit /i 123 /g Horror, Adventure
+```
+
 **Example output:**
 ```
-Here are resources that matched the given filters:
-[B]  ID: 123456789 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction
+Successfully updated! Your updated resource: 
+
+[B]  ID: 12312 Title: Mary ISBN: 123 Author: John Genre: Horror, Adventure
 ____________________________________________________________
 ```
 
