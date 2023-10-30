@@ -139,7 +139,7 @@ class ParserTest {
         validResponse = "edit /i 9781250255174 /a Thomas";
         parser.process(validResponse);
         output = outputStream.toString();
-        expectedOutput += "Successfully updated! Your updated resource: " + System.lineSeparator()
+        expectedOutput += "Successfully updated! Your updated resource:" + System.lineSeparator()
                 + System.lineSeparator() + "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
                 "Author: Thomas Genre: Self-help Status: AVAILABLE" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
@@ -148,7 +148,7 @@ class ParserTest {
         validResponse = "edit /i 9781250255174 /s lost";
         parser.process(validResponse);
         output = outputStream.toString();
-        expectedOutput += "Successfully updated! Your updated resource: " + System.lineSeparator()
+        expectedOutput += "Successfully updated! Your updated resource:" + System.lineSeparator()
                 + System.lineSeparator() + "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
                 "Author: Thomas Genre: Self-help Status: LOST" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
