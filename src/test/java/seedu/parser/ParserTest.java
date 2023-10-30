@@ -135,6 +135,24 @@ class ParserTest {
                 "____________________________________________________________" + System.lineSeparator();;
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
+        //Test edit
+        validResponse = "edit /i 9781250255174 /a Thomas";
+        parser.process(validResponse);
+        output = outputStream.toString();
+        expectedOutput += "Successfully updated! Your updated resource: " + System.lineSeparator()
+                + System.lineSeparator() + "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
+                "Author: Thomas Genre: Self-help Status: AVAILABLE" + System.lineSeparator() +
+                "____________________________________________________________" + System.lineSeparator();
+        assertEquals(expectedOutput, output);
+
+        validResponse = "edit /i 9781250255174 /s lost";
+        parser.process(validResponse);
+        output = outputStream.toString();
+        expectedOutput += "Successfully updated! Your updated resource: " + System.lineSeparator()
+                + System.lineSeparator() + "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
+                "Author: Thomas Genre: Self-help Status: LOST" + System.lineSeparator() +
+                "____________________________________________________________" + System.lineSeparator();
+        assertEquals(expectedOutput, output);
         //Test delete
         validResponse = "delete /id 1";
         parser.process(validResponse);
@@ -142,7 +160,7 @@ class ParserTest {
         expectedOutput += "Looking for ID: 1..." + System.lineSeparator() +
                 "This resource is removed: " + System.lineSeparator() +
                 "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
-                "Author: Thomas Erikson Genre: Self-help Status: AVAILABLE" + System.lineSeparator() +
+                "Author: Thomas Genre: Self-help Status: LOST" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
         assertEquals(expectedOutput, output);
     }
