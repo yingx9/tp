@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import seedu.data.Book;
+import seedu.data.Status;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
@@ -31,8 +32,8 @@ public class FindCommandTest {
         parser.resourceList = new ArrayList<>();
         String[] genreTest1 = {"horror"};
         String[] genreTest2 = {"comedy"};
-        parser.resourceList.add(new Book("Title1", "ISBN1", "Author1", genreTest1, 1234));
-        parser.resourceList.add(new Book("Title2", "ISBN2", "Author2", genreTest2, 5678));
+        parser.resourceList.add(new Book("Title1", "ISBN1", "Author1", genreTest1, 1234, Status.AVAILABLE));
+        parser.resourceList.add(new Book("Title2", "ISBN2", "Author2", genreTest2, 5678, Status.LOST));
         outContent.reset();  // Clearing any old content
         System.setOut(new PrintStream(outContent));  // Redirect System.out
     }

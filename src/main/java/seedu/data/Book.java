@@ -6,8 +6,8 @@ public class Book extends Resource {
     private String[] genres;
     private int id;
 
-    public Book(String title, String isbn, String author, String[] genres, int id) {
-        super(title, isbn);
+    public Book(String title, String isbn, String author, String[] genres, int id, Status status) {
+        super(title, isbn, status);
         setTag("B");
         setAuthor(author);
         //setSynopsis(synopsis);
@@ -60,7 +60,7 @@ public class Book extends Resource {
         }
 
         return "[" + getTag() + "] " + " ID: " + getId() + " Title: " + getTitle() + " ISBN: " + getISBN() + " Author: "
-                + getAuthor() + " Genre: " + genreString;
+                + getAuthor() + " Genre: " + genreString + " Status: " + getStatus().name();
     }
 }
 

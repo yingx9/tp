@@ -112,9 +112,9 @@ The `add` feature is responsible for processing user commands to add a new book 
 the `AddCommand` component. It works with `Parser` and `Command` components to parse and validate the user input. 
 The new book is stored internally in `resourceList` as a `Book`. 
 
-`add` has six options:
+`add` has seven options:
 - add /id [id] /t [title] /a [author] /tag [tag] /i [isbn]
-- add /id [id] /t [title] /a [author] /tag [tag] /i [isbn] _/g [genre]_
+- add /id [id] /t [title] /a [author] /tag [tag] /i [isbn] _/g [genre] /s [status]_
 
 #### Implementation
 
@@ -251,6 +251,7 @@ add: adds a new resource to the library inventory.(e.g. add /id ID /t TITLE /a A
 delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
 list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
 find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
+edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)
 exit: displays a farewell message and exits the program (e.g. exit)
 For more information, please refer to our user guide at:https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html
 ____________________________________________________________
@@ -258,7 +259,7 @@ ____________________________________________________________
 Example input:
 
 ```
-add /id 1 /t The Great Gatsby /a F. Scott Fitzgerald /tag B /i 9780023381201 /g Novel, Fiction, Tragedy
+add /id 1 /t The Great Gatsby /a F. Scott Fitzgerald /tag B /i 9780023381201 /g Novel, Fiction, Tragedy /s lost
 ```
 Example response:
 ```
@@ -282,8 +283,8 @@ Example response:
 ```
 Listing all resources in the Library:
 
-1. [B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy
-2. [B]  ID: 2 Title: To Kill a Mockingbird ISBN: 9780061120084 Author: Harper Lee Genre: Novel, Bildungsroman, Southern Gothic,
+1. [B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: LOST
+2. [B]  ID: 2 Title: To Kill a Mockingbird ISBN: 9780061120084 Author: Harper Lee Genre: Novel, Bildungsroman, Southern Gothic Status: AVAILABLE
 
 There are currently 2 resource(s).
 ____________________________________________________________
@@ -296,7 +297,7 @@ Example response:
 ```
 Looking for ID: 1...
 This resource is removed: 
-[B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy
+[B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: LOST
 ____________________________________________________________
 ```
 Example input:

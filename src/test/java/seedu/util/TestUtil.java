@@ -3,6 +3,7 @@ package seedu.util;
 import seedu.commands.Command;
 import seedu.data.Book;
 import seedu.data.Resource;
+import seedu.data.Status;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
@@ -37,16 +38,16 @@ public class TestUtil {
         String[] genresAdventure = {"Adventure"};
         String[] genresNull = {null};
 
-        Resource test1 = new Resource("title1", "1");
-        Book testBook = new Book("title2", "2", "author", genres, 123123);
-        Book testBook2 = new Book("title3", "3", "author", genresAdventure, 123123);
-        Book testBook3 = new Book("title3", "4", "author", genresNull, 123123);
+        Resource test1 = new Resource("title1", "1", Status.AVAILABLE);
+        Book testBook = new Book("title2", "2", "author", genres, 123123, Status.AVAILABLE);
+        Book testBook2 = new Book("title3", "3", "author", genresAdventure, 123123,
+                Status.AVAILABLE);
+        Book testBook3 = new Book("title3", "4", "author", genresNull, 123123, Status.AVAILABLE);
+
         testResourceList.add(test1);
         testResourceList.add(testBook);
         testResourceList.add(testBook2);
         testResourceList.add(testBook3);
-
         return testResourceList;
     }
-
 }

@@ -2,6 +2,7 @@ package seedu.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.data.Book;
+import seedu.data.Status;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
@@ -18,7 +19,7 @@ public class AddCommandTest {
     @Test
     public void addCommandValidData() throws SysLibException {
         addCommand.execute("/id 123456789 /t The Minds of Billy Milligan /a Daniel Keyes /tag B /i 987654321 " +
-                "/g Non-Fiction, Biography", parser);
+                "/g Non-Fiction, Biography /s lost", parser);
 
         Book newBook = (Book) parser.getResourceList().get(0);
 
@@ -28,6 +29,7 @@ public class AddCommandTest {
         assertEquals(newBook.getTag(), "B");
         assertEquals(newBook.getISBN(), "987654321");
         assertEquals(newBook.getGenreString(), "Non-Fiction, Biography");
+        assertEquals(newBook.getStatus(), Status.LOST);
     }
 
     @Test
