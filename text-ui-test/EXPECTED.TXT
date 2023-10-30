@@ -40,5 +40,9 @@ Listing resources matching given filters:
 
 There are currently 0 resources.
 ____________________________________________________________
+> Successfully updated! Your updated resource: 
+
+[B]  ID: 123456789 Title: NEWTITLE ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction
+____________________________________________________________
 > Bye, hope to see you again soon!
 ____________________________________________________________
