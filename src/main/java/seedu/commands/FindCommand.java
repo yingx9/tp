@@ -46,7 +46,6 @@ public class FindCommand extends Command {
 
     public FindCommand(){
         args = new String[]{"id", "i", "a", "t"};
-        aliasArgs = new String[]{"id", "isbn", "author", "title"};
         required = new boolean[]{false, false, false, false};
         ui = new UI();
         LOGGER.info("FindCommand instance created.");
@@ -89,7 +88,7 @@ public class FindCommand extends Command {
         assert statement != null && !statement.trim().isEmpty() : "Statement to execute cannot be null or empty!";
         assert parser != null : "Parser cannot be null!";
         String[] value = parseArgument(statement);
-        validate(statement, value);
+        validateStatement(statement, value);
 
         if (value[3]==null && value[2]==null && value[1]==null && value[0]==null) {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE + System.lineSeparator());
