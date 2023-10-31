@@ -24,7 +24,6 @@ public class ListCommand extends Command {
 
     public ListCommand(){
         args = new String[]{"tag", "g"};
-        aliasArgs = new String[]{"tag", "genre"};
         required = new boolean[]{false, false};
     }
 
@@ -34,7 +33,7 @@ public class ListCommand extends Command {
     public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         feedbackToUser = "";
         String[] values = parseArgument(statement);
-        validate(statement, values);
+        validateStatement(statement, values);
         filterResources(values, parser.resourceList);
 
         System.out.println(feedbackToUser);
