@@ -30,7 +30,7 @@ public class CD extends Resource {
 
     @Override
     public String toString() {
-        return "[" + getTag() + "] " + " ID: " + getId() + " Title: " + getTitle() + " ISBN: " + getISBN() + " Creator: "
-                + getCreator() + " Type: " + getType() + " Status: " + getStatus().name();
+        return "[" + getTag() + "] " + " ID: " + getId() + " Title: " + getTitle() + " ISBN: " + getISBN() 
+                + " Creator: " + getCreator() + " Type: " + getType() + " Status: " + getStatus().name();
     }
 }
