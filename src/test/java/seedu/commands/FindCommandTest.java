@@ -74,7 +74,7 @@ public class FindCommandTest {
 
     @Test
     void testExecuteWithNoFilter() {
-        assertThrows(AssertionError.class, () -> findCommand.execute("", parser));
+        assertThrows(IllegalArgumentException.class, () -> findCommand.execute("", parser));
     }
 
     @Test
