@@ -2,6 +2,7 @@ package seedu.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.data.Book;
+import seedu.data.CreateResource;
 import seedu.data.Status;
 import seedu.data.SysLibException;
 
@@ -200,12 +201,13 @@ class ParserTest {
         assertArrayEquals(expectedArgs2, Parser.parseAddBook(statement2));
     }
 
+    // CreateResourceTest
     @Test
     public void testCreateBook() {
         String[] args = {"123", "CS2113T", "W11", "B", "1234", "Horror", "lost"};
 
         Book book = null;
-        book = Parser.createBook(args);
+        book = CreateResource.createBook(args);
 
         int expectedId = 123;
         String expectedTitle = "CS2113T";
@@ -225,6 +227,6 @@ class ParserTest {
     public void testCreateBookInvalidId() {
         String[] args = {"not_a_number", "Sample Title", "Sample Author", "", "Sample ISBN", "Sample Genre"};
 
-        assertThrows(NumberFormatException.class, () -> Parser.createBook(args));
+        assertThrows(NumberFormatException.class, () -> CreateResource.createBook(args));
     }
 }

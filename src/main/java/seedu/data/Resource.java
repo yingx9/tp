@@ -6,14 +6,16 @@ public class Resource {
     private Integer copies;
     private String tag;
     private String isbn;
+    private int id;
     private Status status;
 
-    public Resource(String title, String isbn, Status status){
+    public Resource(String title, String isbn, int id, Status status){
         setTitle(title);
         setBorrowed(false);
         setISBN(isbn);
         setCopies(1);
         setTag("");
+        setId(id);
         setStatus(status);
     }
     public String getTitle() {
@@ -52,6 +54,14 @@ public class Resource {
 
     public void setISBN(String isbn) {
         this.isbn = isbn;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String toString() {

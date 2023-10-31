@@ -52,13 +52,14 @@ Adds a new resource to the library inventory.
 #### Types of tags:
 `[B]` - Books
 `[CD]` - CDs
-`[N]` - Newspapers
 `[M]` - Magazines
+`[N]` - Newspapers
 
 > Note:
 > - Anything with `e` prior is an electronic version 
 >> i.e. `[eB]` is an eBook, `[eM]` is an eMagazine
 
+### Add Book
 #### Notes about genre:
 Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
 
@@ -67,11 +68,87 @@ Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]...`
 **Example input:**
 ```
 add /id 123456789 /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /g Adventure, Fiction
-add /id 123456789 /t Harry Squatter /a J.K. /tag M /i 9780763630187 /g History /s lost
+add /id 123456789 /t Harry Squatter /a J.K. /tag B /i 9780763630187 /g History /s lost
 ```
 **Example response:**
 ```
 This book is added: Moby Dick
+____________________________________________________________
+```
+
+### Add eBook
+#### Notes about genre:
+Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
+
+Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN /l LINK [/g GENRE /s STATUS]...`
+
+**Example input:**
+```
+add /id 123456789 /t Moby Dick /a Herman Melville /tag eB /i 9780763630188 /l abc.com /g Adventure, Fiction
+```
+**Example response:**
+```
+This eBook is added: Moby Dick
+____________________________________________________________
+```
+
+### Add CD
+Format: `add /id ID /t TITLE /c CREATOR /ty TYPE /tag TAG /i ISBN [/s STATUS]...`
+**Example input:**
+```
+add /id 123456789 /t Moby Dick /c Herman Melville /ty Audio Book /tag CD /i 9780763630188 
+```
+**Example response:**
+```
+This CD is added: Moby Dick
+____________________________________________________________
+```
+
+### Add Magazine
+Format: `add /id ID /t TITLE /b BRAND /is ISSUE /tag TAG /i ISBN [/s STATUS]...`
+**Example input:**
+```
+add /id 123456789 /t 2023 Hottest Trends /b Vogue /is AY23-01 /tag M /i 9780763630188 
+```
+**Example response:**
+```
+This magazine is added: 2023 Hottest Trends
+____________________________________________________________
+```
+
+### Add eMagazine
+Format: `add /id ID /t TITLE /b BRAND /is ISSUE /tag TAG /i ISBN /l LINK [/s STATUS]...`
+**Example input:**
+```
+add /id 123456789 /t 2023 Hottest Trends /b Vogue /is AY23-01 /tag eM /i 9780763630188 /l abc.com
+```
+**Example response:**
+```
+This eMagazine is added: 2023 Hottest Trends
+____________________________________________________________
+```
+
+### Add Newspaper
+Format: `add /id ID /t TITLE /p PUBLISHER /ed EDITION /tag TAG /i ISBN [/s STATUS]...`
+**Example input:**
+```
+add /id 123456789 /t Forbes 30 Under 30 2023 /p The Straits Times /ed AY23-30 /tag N /i 9780763630188
+```
+**Example response:**
+```
+This newspaper is added: Forbes 30 Under 30 2023
+____________________________________________________________
+```
+
+### Add eNewspaper
+Format: `add /id ID /t TITLE /p PUBLISHER /ed EDITION /tag TAG /i ISBN /l LINK [/s STATUS]...`
+**Example input:**
+```
+add /id 123456789 /t Forbes 30 Under 30 2023 /p The Straits Times /ed AY23-30 /tag eN /i 9780763630188 /l abc.com
+```
+**Example response:**
+```
+This eNewspaper is added: Forbes 30 Under 30 2023
 ____________________________________________________________
 ```
 
