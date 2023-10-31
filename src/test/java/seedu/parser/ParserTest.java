@@ -11,6 +11,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.util.TestUtil.getCurrentDate;
 
 class ParserTest {
@@ -175,7 +176,7 @@ class ParserTest {
 
     @Test
     public void testParseAddCommand() throws SysLibException {
-        // Test case 1: Valid input with /tag b
+        // Test case 1: Valid input with both genre and status
         String statement1 = "add /id 123456789 /t Moby Dick /a Herman Melville /tag B /i 9780763630188 " +
                 "/g Adventure, Fiction /s lost";
         String[] result = Parser.parseAddCommand(statement1);
@@ -188,10 +189,34 @@ class ParserTest {
         assertEquals("Adventure, Fiction", result[5]);
         assertEquals("lost", result[6]);
 
-        // Test case 2: Invalid input (missing /tag b)
-        String statement2 = "add /id 123456789 /t Moby Dick /a Herman Melville /tag C /i 9780763630188 " +
+        // Test case 2: Valid input without genre
+        String statement2 = "add /id 123 /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /s lost";
+        result = Parser.parseAddCommand(statement2);
+
+        assertEquals("123", result[0]);
+        assertEquals("Moby Dick", result[1]);
+        assertEquals("Herman Melville", result[2]);
+        assertEquals("B", result[3]);
+        assertEquals("9780763630188", result[4]);
+        assertNull(result[5]);
+        assertEquals("lost", result[6]);
+
+        // Test case 3: Valid input without status and genre
+        String statement3 = "add /id 456 /t Moby Dick /a Herman Melville /tag B /i 9780763630188";
+        result = Parser.parseAddCommand(statement3);
+
+        assertEquals("456", result[0]);
+        assertEquals("Moby Dick", result[1]);
+        assertEquals("Herman Melville", result[2]);
+        assertEquals("B", result[3]);
+        assertEquals("9780763630188", result[4]);
+        assertNull(result[5]);
+        assertEquals("Available", result[6]);
+
+        // Test case 4: Invalid input (missing /tag b)
+        String statement4 = "add /id 123456789 /t Moby Dick /a Herman Melville /tag C /i 9780763630188 " +
                 "/g Adventure, Fiction /s Borrowed";
-        assertThrows(SysLibException.class, () -> Parser.parseAddCommand(statement2));
+        assertThrows(SysLibException.class, () -> Parser.parseAddCommand(statement4));
     }
 
     @Test

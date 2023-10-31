@@ -115,17 +115,19 @@ public class Parser {
                     args[4] = gMatcher.group(1).trim(); // isbn
                     if (sMatchFound){
                         args[5] = gMatcher.group(2).split("/s")[0].trim(); // genre
+                        args[6] = sMatcher.group(2).trim(); // status
                     } else{
                         args[5] = gMatcher.group(2).trim(); // genre
                     }
                 } else {
-                    args[4] = matcher.group(5).trim(); // isbn
-                }
-
-                if (sMatchFound) {
-                    args[6] = sMatcher.group(2).trim(); // status
-                } else {
-                    args[6] = "Available";
+                    args[5] = null; //genre
+                    if (sMatchFound) {
+                        args[4] = sMatcher.group(1).trim(); //isbn
+                        args[6] = sMatcher.group(2).trim(); // status
+                    } else {
+                        args[4] = matcher.group(5).trim(); //isbn
+                        args[6] = "Available";
+                    }
                 }
 
                 if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[3].isEmpty()
@@ -135,13 +137,13 @@ public class Parser {
                 }
             } else {
                 throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/s STATUS] [/g GENRE]'."
+                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'."
                         + SEPARATOR_LINEDIVIDER);
             }
             return args;
         } catch (IllegalStateException | SysLibException e) {
             throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/s STATUS] [/g GENRE]'." + SEPARATOR_LINEDIVIDER);
+                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'." + SEPARATOR_LINEDIVIDER);
         }
     }
 
@@ -158,7 +160,7 @@ public class Parser {
         String title = args[1]; // title
         String author = args[2]; // author
         String isbn = args[4]; // isbn
-        Status status = getStatusFromString(args[6]); // Get the status from the provided string
+        Status status = getStatusFromString(args[6]); // status
 
 
         String genre;
