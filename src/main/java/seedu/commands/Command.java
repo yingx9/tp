@@ -95,6 +95,5 @@ public abstract class Command {
             throw new IllegalArgumentException ("The argument for id is not a number!");
         }
     }
-
 }
 
