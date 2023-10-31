@@ -1,10 +1,15 @@
 package seedu.parser;
 
+import seedu.commands.events.EventAddCommand;
+import seedu.commands.events.EventDeleteCommand;
+import seedu.commands.events.EventListCommand;
 import seedu.data.Book;
 import seedu.data.Resource;
 
 import seedu.data.Status;
 import seedu.data.SysLibException;
+import seedu.data.Event;
+
 import seedu.commands.Command;
 import seedu.commands.AddCommand;
 import seedu.commands.DeleteCommand;
@@ -24,6 +29,7 @@ import java.util.regex.Pattern;
 public class Parser {
 
     public List<Resource> resourceList = new ArrayList<>();
+    public List<Event> eventList = new ArrayList<>();
 
 
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
@@ -35,11 +41,14 @@ public class Parser {
             put("exit", new ExitCommand());
             put("add", new AddCommand());
             put("edit", new EditCommand());
+            put("eventadd", new EventAddCommand());
+            put("eventdelete", new EventDeleteCommand());
+            put("eventlist", new EventListCommand());
         }
     };
 
     public void process(String response) {
-        String command = response.split(" ")[0];
+        String command = response.split(" ")[0].toLowerCase();
         if (commandProcessor.containsKey(command)) {
             String statement = removeFirstWord(response);
             try {
