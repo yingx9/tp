@@ -25,7 +25,6 @@ public class EditCommand extends Command{
 
     public EditCommand(){
         args = new String[]{"i", "t", "a", "tag", "g", "s"};
-        aliasArgs = new String[]{"isbn", "title", "author", "tag", "genre", "status"};
         required = new boolean[]{true, false, false, false, false, false};
     }
 
@@ -35,7 +34,7 @@ public class EditCommand extends Command{
     public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         feedbackToUser = "";
         String[] givenParameters = parseArgument(statement);
-        validate(statement, givenParameters);
+        validateStatement(statement, givenParameters);
 
         if (hasOneArg(givenParameters)){
             String givenISBN = givenParameters[0];

@@ -6,14 +6,13 @@ import seedu.parser.Parser;
 public class AddCommand extends Command{
     public AddCommand(){
         args = new String[]{"id", "t", "a", "tag", "i", "g", "s"};
-        aliasArgs = new String[]{"id", "title", "author", "tag", "isbn", "genre", "status"};
         required = new boolean[]{true, true, true, true, true, false, false};
     }
     @Override
     public void execute(String statement, Parser parser) throws
             IllegalStateException, NumberFormatException, SysLibException {
         String[] values = parseArgument(statement);
-        validate(statement, values);
+        validateStatement(statement, values);
         String title = values[1];
         String tag = values[3];
         if (tag.equalsIgnoreCase("b")) {

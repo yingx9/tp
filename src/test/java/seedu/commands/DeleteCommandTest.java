@@ -3,6 +3,7 @@ package seedu.commands;
 import org.junit.jupiter.api.Test;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
+import static seedu.util.TestUtil.getCurrentDate;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -35,7 +36,7 @@ public class DeleteCommandTest {
         String expectedOutput = "Looking for ID: 123456789..." + System.lineSeparator()+
                 "This resource is removed: " + System.lineSeparator() +
                 "[B]  ID: 123456789 Title: The Minds of Billy Milligan ISBN: 987654321 Author: Daniel Keyes Genre: - " +
-                "Status: AVAILABLE" + System.lineSeparator() +
+                "Status: AVAILABLE "  + "Received Date: " + getCurrentDate() + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
 
         assertEquals(expectedOutput, output);
