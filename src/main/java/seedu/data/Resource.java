@@ -71,6 +71,7 @@ public class Resource {
 
     public void setId(int id) {
         this.id = id;
+    }
 
     public String getDateReceived(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
