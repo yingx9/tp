@@ -28,51 +28,47 @@ public class EditCommand extends Command{
         required = new boolean[]{true, false, false, false, false, false};
     }
 
-
-
     @Override
     public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         feedbackToUser = "";
         String[] givenParameters = parseArgument(statement);
         validateStatement(statement, givenParameters);
 
-        if (hasOneArg(givenParameters)){
+        if (hasOneArg(givenParameters)) {
             String givenISBN = givenParameters[0];
             Resource foundResource = findResourceByISBN(givenISBN, parser.resourceList);
 
-            if(foundResource != null){
+            if(foundResource != null) {
                 Resource updatedResource = editResource(foundResource, givenParameters);
 
                 parser.resourceList.set(resourceIndex, updatedResource);
                 feedbackToUser += EDIT_SUCCESS + formatLastLineDivider(updatedResource.toString());
 
-            } else{
+            } else {
                 feedbackToUser += RESOURCE_NOT_FOUND;
             }
 
-        } else{
+        } else {
             throw new SysLibException(MISSING_ARG_MESSAGE);
         }
-
         System.out.println(feedbackToUser);
     }
 
     public boolean hasOneArg(String[] givenParameters){
 
-        for (int i =1; i<givenParameters.length; i++){
+        for (int i =1; i<givenParameters.length; i++) {
             if (givenParameters[i] != null){
                 return true;
             }
         }
         return false;
-
     }
 
     public Resource findResourceByISBN(String givenISBN, List<Resource> resourceList){
 
         Resource foundResource = null;
 
-        for (int i=0;i < resourceList.size(); i++){
+        for (int i=0;i < resourceList.size(); i++) {
 
             Resource tempResource = resourceList.get(i);
 
@@ -82,9 +78,7 @@ public class EditCommand extends Command{
                 resourceIndex = i;
                 break;
             }
-
         }
-
         return foundResource;
     }
 
@@ -92,15 +86,15 @@ public class EditCommand extends Command{
 
         String newValue;
 
-        for(int i=1; i<givenParameters.length;i++){
+        for(int i=1; i<givenParameters.length;i++) {
 
-            if(givenParameters[i] == null){
+            if(givenParameters[i] == null) {
                 continue;
-            } else{
+            } else {
                 newValue = givenParameters[i];
             }
 
-            switch(i){
+            switch(i) {
 
             case 1:
                 foundResource.setTitle(newValue);

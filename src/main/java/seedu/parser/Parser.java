@@ -1,10 +1,13 @@
 package seedu.parser;
 
-import seedu.data.Book;
+import seedu.commands.events.EventAddCommand;
+import seedu.commands.events.EventDeleteCommand;
+import seedu.commands.events.EventListCommand;
 import seedu.data.Resource;
-
 import seedu.data.Status;
 import seedu.data.SysLibException;
+import seedu.data.Event;
+
 import seedu.commands.Command;
 import seedu.commands.AddCommand;
 import seedu.commands.DeleteCommand;
@@ -24,7 +27,7 @@ import java.util.regex.Pattern;
 public class Parser {
 
     public List<Resource> resourceList = new ArrayList<>();
-
+    public List<Event> eventList = new ArrayList<>();
 
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
         {
@@ -35,11 +38,14 @@ public class Parser {
             put("exit", new ExitCommand());
             put("add", new AddCommand());
             put("edit", new EditCommand());
+            put("eventadd", new EventAddCommand());
+            put("eventdelete", new EventDeleteCommand());
+            put("eventlist", new EventListCommand());
         }
     };
 
     public void process(String response) {
-        String command = response.split(" ")[0];
+        String command = response.split(" ")[0].toLowerCase();
         if (commandProcessor.containsKey(command)) {
             String statement = removeFirstWord(response);
             try {
@@ -86,6 +92,12 @@ public class Parser {
         }
     }
 
+    /**
+     * @param statement input of the user
+     * @return string array with arguments of the user
+     * @throws SysLibException missing arguments
+     * @throws IllegalStateException
+     */
     public static String[] parseAddBook(String statement) throws SysLibException, IllegalStateException {
         try {
             String inputPattern = "/id (.+?) /t (.+?) /a (.+?) /tag (.+?) /i (.+)";
@@ -115,17 +127,19 @@ public class Parser {
                     args[4] = gMatcher.group(1).trim(); // isbn
                     if (sMatchFound){
                         args[5] = gMatcher.group(2).split("/s")[0].trim(); // genre
-                    } else{
+                        args[6] = sMatcher.group(2).trim(); // status
+                    } else {
                         args[5] = gMatcher.group(2).trim(); // genre
                     }
                 } else {
-                    args[4] = matcher.group(5).trim(); // isbn
-                }
-
-                if (sMatchFound) {
-                    args[6] = sMatcher.group(2).trim(); // status
-                } else {
-                    args[6] = "Available";
+                    args[5] = null; //genre
+                    if (sMatchFound) {
+                        args[4] = sMatcher.group(1).trim(); // isbn
+                        args[6] = sMatcher.group(2).trim(); // status
+                    } else {
+                        args[4] = matcher.group(5).trim(); // isbn
+                        args[6] = "Available";
+                    }
                 }
 
                 if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[3].isEmpty()
@@ -135,13 +149,13 @@ public class Parser {
                 }
             } else {
                 throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/s STATUS] [/g GENRE]'."
+                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'."
                         + SEPARATOR_LINEDIVIDER);
             }
             return args;
         } catch (IllegalStateException | SysLibException e) {
             throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/s STATUS] [/g GENRE]'." + SEPARATOR_LINEDIVIDER);
+                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'." + SEPARATOR_LINEDIVIDER);
         }
     }
 
@@ -150,6 +164,11 @@ public class Parser {
         Pattern pattern = Pattern.compile("/(t|a|i|id)\\s+([^/]+)");
         return pattern.matcher(command);
     }
+
+    /**
+     * @param statusString input string status
+     * @return Status object
+     */
     public static Status getStatusFromString(String statusString) {
         if (statusString != null) {
             statusString = statusString.toLowerCase().trim();

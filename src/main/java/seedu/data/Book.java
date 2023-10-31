@@ -51,7 +51,8 @@ public class Book extends Resource {
         }
 
         return "[" + getTag() + "] " + " ID: " + getId() + " Title: " + getTitle() + " ISBN: " + getISBN() + " Author: "
-                + getAuthor() + " Genre: " + genreString + " Status: " + getStatus().name();
+                + getAuthor() + " Genre: " + genreString + " Status: " + getStatus().name() + " Received Date: " +
+                getDateReceived();
     }
 }
 

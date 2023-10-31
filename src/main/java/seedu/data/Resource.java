@@ -1,5 +1,7 @@
 package seedu.data;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class Resource {
     private String title;
     private boolean isBorrowed;
@@ -9,6 +11,9 @@ public class Resource {
     private int id;
     private Status status;
 
+    private LocalDateTime dateReceived; //To keep track of when the resource was entered into the system
+    
+
     public Resource(String title, String isbn, int id, Status status){
         setTitle(title);
         setBorrowed(false);
@@ -17,7 +22,9 @@ public class Resource {
         setTag("");
         setId(id);
         setStatus(status);
+        setReceivedDate();
     }
+
     public String getTitle() {
         return title;
     }
@@ -25,6 +32,7 @@ public class Resource {
     public void setTitle(String title) {
         this.title = title;
     }
+
     public boolean isBorrowed() {
         return isBorrowed;
     }
@@ -32,6 +40,7 @@ public class Resource {
     public void setBorrowed(boolean borrowed) {
         isBorrowed = borrowed;
     }
+
     public Integer getCopies() {
         return copies;
     }
@@ -64,6 +73,15 @@ public class Resource {
         this.id = id;
     }
 
+    public String getDateReceived(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return dateReceived.format(formatter);
+    }
+
+    public void setReceivedDate(){
+        dateReceived = LocalDateTime.now();
+    }
+
     public String toString() {
         return "[" + tag + "] " + title;
     }
@@ -78,15 +96,13 @@ public class Resource {
                 return false;
             }
 
-            for(int j =0; j < genres.length; j ++){
-                if (genres[j].equals(genre)){
+            for (String s : genres) {
+                if (s.equals(genre)) {
                     return true;
                 }
             }
         }
         return false;
-
-
     }
     public void setStatus(Status status){
         this.status = status;
