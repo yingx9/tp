@@ -25,7 +25,7 @@ public class EventDeleteCommand extends Command {
         int index = parseInt(value);
         int size = parser.eventList.size();
         if (index >= size || index < 0) {
-            throw new IllegalArgumentException("Index is out of range of the Calendar list!");
+            throw new IllegalArgumentException("Index is out of range of the event list!");
         }
         return index;
     }

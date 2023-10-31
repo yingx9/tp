@@ -87,7 +87,7 @@ public abstract class Command {
     public int parseInt(String value){
         try {
             int tempNum = Integer.parseInt(value);
-            if (0 < tempNum){
+            if (0 <= tempNum){
                 return tempNum;
             }
             throw new IllegalArgumentException ("The argument for id is not a valid number!");
