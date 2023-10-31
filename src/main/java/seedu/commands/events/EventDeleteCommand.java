@@ -16,14 +16,14 @@ public class EventDeleteCommand extends Command {
         String[] values = parseArgument(statement);
         int index = parseCalendarInt(values[0], parser);
         System.out.println("This event is removed:");
-        System.out.println(parser.calendar.get(index).toString());
+        System.out.println(parser.eventList.get(index).toString());
         System.out.println("____________________________________________________________");
-        parser.calendar.remove(index);
+        parser.eventList.remove(index);
     }
 
     public int parseCalendarInt(String value, Parser parser) {
         int index = parseInt(value);
-        int size = parser.calendar.size();
+        int size = parser.eventList.size();
         if (index >= size || index < 0) {
             throw new IllegalArgumentException("Index is out of range of the Calendar list!");
         }

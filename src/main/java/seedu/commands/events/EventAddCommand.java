@@ -21,21 +21,21 @@ public class EventAddCommand extends Command {
         String[] values = parseArgument(statement);
         Date currentDate = parseDate(values[1]);
         int index = binarySearch(parser, currentDate);
-        parser.calendar.add(index, new Event(values[0], currentDate, values[2]));
+        parser.eventList.add(index, new Event(values[0], currentDate, values[2]));
         System.out.println("Event inserted at: " + index);
         System.out.println("____________________________________________________________");
     }
 
     public static int binarySearch(Parser parser, Date key) {
-        if(parser.calendar.isEmpty()){
+        if(parser.eventList.isEmpty()){
             return 0;
         }
         int low = 0;
-        int high = parser.calendar.size() - 1;
+        int high = parser.eventList.size() - 1;
 
         while (low <= high) {
             int mid = (low + high)/2;
-            Date midVal = parser.calendar.get(mid).getDate();
+            Date midVal = parser.eventList.get(mid).getDate();
             int cmp = midVal.compareTo(key);
             if (cmp < 0) {
                 low = mid + 1;

@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 public class Parser {
 
     public List<Resource> resourceList = new ArrayList<>();
-    public List<Event> calendar = new ArrayList<>();
+    public List<Event> eventList = new ArrayList<>();
 
 
     public HashMap<String, Command> commandProcessor = new HashMap<>() {

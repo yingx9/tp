@@ -11,14 +11,14 @@ public class EventListCommand extends Command {
         if (!statement.isEmpty()){
             throw new IllegalArgumentException("'eventlist' command does not require arguments!");
         }
-        if(parser.calendar.isEmpty()){
+        if(parser.eventList.isEmpty()){
             System.out.println("The event list is empty!");
             System.out.println("____________________________________________________________");
         }
         else {
             System.out.println("This is the current event list:");
-            for(int index = 0; index < parser.calendar.size(); index += 1){
-                System.out.println(index + ": " + parser.calendar.get(index).toString());
+            for(int index = 0; index < parser.eventList.size(); index += 1){
+                System.out.println(index + ": " + parser.eventList.get(index).toString());
             }
             System.out.println("____________________________________________________________");
         }
