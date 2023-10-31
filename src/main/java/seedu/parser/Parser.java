@@ -5,7 +5,6 @@ import seedu.commands.events.EventDeleteCommand;
 import seedu.commands.events.EventListCommand;
 import seedu.data.Book;
 import seedu.data.Resource;
-
 import seedu.data.Status;
 import seedu.data.SysLibException;
 import seedu.data.Event;
@@ -30,7 +29,6 @@ public class Parser {
 
     public List<Resource> resourceList = new ArrayList<>();
     public List<Event> eventList = new ArrayList<>();
-
 
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
         {
@@ -95,6 +93,12 @@ public class Parser {
         }
     }
 
+    /**
+     * @param statement input of the user
+     * @return string array with arguments of the user
+     * @throws SysLibException missing arguments
+     * @throws IllegalStateException
+     */
     public static String[] parseAddBook(String statement) throws SysLibException, IllegalStateException {
         try {
             String inputPattern = "/id (.+?) /t (.+?) /a (.+?) /tag (.+?) /i (.+)";
@@ -125,16 +129,16 @@ public class Parser {
                     if (sMatchFound){
                         args[5] = gMatcher.group(2).split("/s")[0].trim(); // genre
                         args[6] = sMatcher.group(2).trim(); // status
-                    } else{
+                    } else {
                         args[5] = gMatcher.group(2).trim(); // genre
                     }
                 } else {
                     args[5] = null; //genre
                     if (sMatchFound) {
-                        args[4] = sMatcher.group(1).trim(); //isbn
+                        args[4] = sMatcher.group(1).trim(); // isbn
                         args[6] = sMatcher.group(2).trim(); // status
                     } else {
-                        args[4] = matcher.group(5).trim(); //isbn
+                        args[4] = matcher.group(5).trim(); // isbn
                         args[6] = "Available";
                     }
                 }
@@ -161,6 +165,11 @@ public class Parser {
         Pattern pattern = Pattern.compile("/(t|a|i|id)\\s+([^/]+)");
         return pattern.matcher(command);
     }
+
+    /**
+     * @param statusString input string status
+     * @return Status object
+     */
     public static Status getStatusFromString(String statusString) {
         if (statusString != null) {
             statusString = statusString.toLowerCase().trim();

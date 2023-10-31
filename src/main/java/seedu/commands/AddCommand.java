@@ -13,6 +13,7 @@ import static seedu.data.eMagazine.EMAGAZINE_TAG;
 import static seedu.data.eNewspaper.ENEWSPAPER_TAG;
 import static seedu.ui.UI.LINEDIVIDER;
 
+
 public class AddCommand extends Command{
 
     public AddCommand(){
@@ -27,6 +28,7 @@ public class AddCommand extends Command{
         validateStatement(statement, values);
         String title = values[1];
         String tag = values[3];
+
         if (tag.equalsIgnoreCase(BOOK_TAG)) {
             parser.resourceList.add(CreateResource.createBook(values));
             System.out.println("This book is added: " + title);
@@ -54,5 +56,4 @@ public class AddCommand extends Command{
         }
         System.out.println(LINEDIVIDER);
     }
-
 }

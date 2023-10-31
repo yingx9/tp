@@ -85,7 +85,6 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(String statement, Parser parser) throws IllegalArgumentException, SysLibException {
-        assert statement != null && !statement.trim().isEmpty() : "Statement to execute cannot be null or empty!";
         assert parser != null : "Parser cannot be null!";
         String[] value = parseArgument(statement);
         validateStatement(statement, value);
@@ -97,7 +96,7 @@ public class FindCommand extends Command {
         ArrayList<Resource> matchedResources = new ArrayList<>();
         for (Resource r: parser.resourceList){
             Book b = (Book) r;
-            if (b.getTitle().equals(value[3]) || b.getISBN().equals(value[1]) || b.getAuthor().equals(value[2])){
+            if (b.getTitle().equals(value[3]) || b.getISBN().equals(value[1]) || b.getAuthor().equals(value[2])) {
                 matchedResources.add(b);
             }
         }

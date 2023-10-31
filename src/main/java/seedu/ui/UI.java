@@ -13,9 +13,7 @@ public class UI {
                     "|____/ \\__, |___/_____|_|_.__/   \\____|_____|___|\n" +
                     "       |___/                                     ";
 
-
     protected Scanner myScanner;
-
 
     public UI(){
         this.myScanner = new Scanner(System.in);
