@@ -1,18 +1,17 @@
 package seedu.data;
 
 public class Book extends Resource {
+    public static final String BOOK_TAG = "B";
     private String author;
     //private String synopsis;
     private String[] genres;
-    private int id;
 
     public Book(String title, String isbn, String author, String[] genres, int id, Status status) {
-        super(title, isbn, status);
-        setTag("B");
+        super(title, isbn, id, status);
+        setTag(BOOK_TAG);
         setAuthor(author);
         //setSynopsis(synopsis);
         setGenre(genres);
-        setId(id);
     }
     public String getAuthor() {
         return author;
@@ -40,14 +39,6 @@ public class Book extends Resource {
 
     public String getGenreString() {
         return String.join(", ", genres);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

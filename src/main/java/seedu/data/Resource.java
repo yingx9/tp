@@ -8,17 +8,19 @@ public class Resource {
     private Integer copies;
     private String tag;
     private String isbn;
+    private int id;
     private Status status;
 
     private LocalDateTime dateReceived; //To keep track of when the resource was entered into the system
     
 
-    public Resource(String title, String isbn, Status status){
+    public Resource(String title, String isbn, int id, Status status){
         setTitle(title);
         setBorrowed(false);
         setISBN(isbn);
         setCopies(1);
         setTag("");
+        setId(id);
         setStatus(status);
         setReceivedDate();
     }
@@ -61,6 +63,14 @@ public class Resource {
 
     public void setISBN(String isbn) {
         this.isbn = isbn;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDateReceived(){

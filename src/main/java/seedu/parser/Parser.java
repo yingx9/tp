@@ -3,7 +3,6 @@ package seedu.parser;
 import seedu.commands.events.EventAddCommand;
 import seedu.commands.events.EventDeleteCommand;
 import seedu.commands.events.EventListCommand;
-import seedu.data.Book;
 import seedu.data.Resource;
 import seedu.data.Status;
 import seedu.data.SysLibException;
@@ -158,33 +157,6 @@ public class Parser {
             throw new SysLibException("Please use the format " +
                     "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'." + SEPARATOR_LINEDIVIDER);
         }
-    }
-
-    /**
-     * @param args array with arguments of the user
-     * @return Book object with arguments as attributes
-     * @throws NumberFormatException invalid id number
-     */
-    public static Book createBook(String[] args) throws IllegalStateException, NumberFormatException {
-        int id;
-        try {
-            id = Integer.parseInt(args[0]); // id
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Please enter a valid id." + SEPARATOR_LINEDIVIDER);
-        }
-
-        String title = args[1]; // title
-        String author = args[2]; // author
-        String isbn = args[4]; // isbn
-        Status status = getStatusFromString(args[6]); // status
-
-        String genre;
-        String[] genres = new String[1];
-        if (args[5] != null) {
-            genre = args[5]; // genre
-            genres = genre.split(", ");
-        }
-        return new Book(title, isbn, author, genres, id, status);
     }
 
     public Matcher parseFindCommand(String command) throws SysLibException{

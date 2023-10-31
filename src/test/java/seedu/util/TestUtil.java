@@ -39,7 +39,7 @@ public class TestUtil {
         String[] genresAdventure = {"Adventure"};
         String[] genresNull = {null};
 
-        Resource test1 = new Resource("title1", "1", Status.AVAILABLE);
+        Resource test1 = new Resource("title1", "1", 12345, Status.AVAILABLE);
         Book testBook = new Book("title2", "2", "author", genres, 123123, Status.AVAILABLE);
         Book testBook2 = new Book("title3", "3", "author", genresAdventure, 123123,
                 Status.AVAILABLE);
