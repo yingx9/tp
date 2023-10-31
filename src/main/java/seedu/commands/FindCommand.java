@@ -85,7 +85,6 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(String statement, Parser parser) throws IllegalArgumentException, SysLibException {
-        assert statement != null && !statement.trim().isEmpty() : "Statement to execute cannot be null or empty!";
         assert parser != null : "Parser cannot be null!";
         String[] value = parseArgument(statement);
         validateStatement(statement, value);
