@@ -3,6 +3,8 @@ package seedu.commands;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
+
 public class AddCommand extends Command{
     public AddCommand(){
         args = new String[]{"id", "t", "a", "tag", "i", "g", "s"};
@@ -17,12 +19,9 @@ public class AddCommand extends Command{
         String tag = values[3];
         if (tag.equalsIgnoreCase("b")) {
             parser.resourceList.add(Parser.createBook(values));
-            System.out.println("This book is added: " + title);
-            System.out.println("____________________________________________________________");
+            System.out.println("This book is added: " + title + SEPARATOR_LINEDIVIDER);
         } else {
-            throw new SysLibException("Please enter a valid tag." + System.lineSeparator() +
-                    "____________________________________________________________");
+            throw new SysLibException("Please enter a valid tag." + System.lineSeparator() + SEPARATOR_LINEDIVIDER);
         }
     }
-
 }

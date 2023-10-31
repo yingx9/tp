@@ -96,7 +96,7 @@ public class FindCommand extends Command {
         ArrayList<Resource> matchedResources = new ArrayList<>();
         for (Resource r: parser.resourceList){
             Book b = (Book) r;
-            if (b.getTitle().equals(value[3]) || b.getISBN().equals(value[1]) || b.getAuthor().equals(value[2])){
+            if (b.getTitle().equals(value[3]) || b.getISBN().equals(value[1]) || b.getAuthor().equals(value[2])) {
                 matchedResources.add(b);
             }
         }

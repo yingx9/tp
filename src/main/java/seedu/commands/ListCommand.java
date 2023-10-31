@@ -42,7 +42,6 @@ public class ListCommand extends Command {
 
     public void filterResources(String[] values, List<Resource> resourceList) throws SysLibException{
 
-
         boolean hasFilters = hasFilters((values));
 
         List<Resource> matchedResources = new ArrayList<>();
@@ -50,30 +49,26 @@ public class ListCommand extends Command {
         if(hasFilters){
             boolean isTagEqualToKeyword = true;
             boolean isGenreEqualToKeyword = true;
+            for (Resource resource : resourceList) {
 
-            for (int i=0; i <resourceList.size(); i++){
-
-                Resource resource = resourceList.get(i);
-
-                if(tagKeyword != null){
+                if (tagKeyword != null) {
                     String resourceTag = resource.getTag();
                     isTagEqualToKeyword = resourceTag.equals(tagKeyword);
                 }
 
-                if(genreKeyword != null){
+                if (genreKeyword != null) {
                     isGenreEqualToKeyword = Resource.hasGenre(resource, genreKeyword);
                 }
 
-                if (isTagEqualToKeyword && isGenreEqualToKeyword){
+                if (isTagEqualToKeyword && isGenreEqualToKeyword) {
                     matchedResources.add(resource);
                 }
 
             }
             feedbackToUser += FILTER_MESSAGE;
-
             displayResourcesDetails(matchedResources);
 
-        } else{
+        } else {
             feedbackToUser += GENERIC_MESSAGE;
 
             displayResourcesDetails(resourceList);
@@ -81,9 +76,6 @@ public class ListCommand extends Command {
 
 
     }
-
-
-
 
     public String displayResourcesDetails(List<Resource> resourcesList) {
 
@@ -108,13 +100,12 @@ public class ListCommand extends Command {
         return messageToDisplay;
     }
 
-
     public static boolean hasFilters(String[] values) throws SysLibException {
         tagKeyword = null;
         genreKeyword = null;
 
         boolean hasFilters = true;
-        if (values[0] == null && values[1] == null){
+        if (values[0] == null && values[1] == null) {
             return false;
         }
 
@@ -122,11 +113,9 @@ public class ListCommand extends Command {
             tagKeyword = values[0];
         }
 
-        if (values[1] != null){
+        if (values[1] != null) {
             genreKeyword = values[1];
         }
         return hasFilters;
-
     }
-
 }
