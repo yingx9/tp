@@ -57,7 +57,7 @@ Adds a new resource to the library inventory.
 
 > Note:
 > - Anything with `e` prior is an electronic version 
->> i.e. `[eB]` is an eBook, `[eM]` is an eMagazine
+>> i.e. `[eB]` is an eBook, `[eM]` is an eMagazine, `[eN]` is an eNewspaper
 
 ### Add Book
 #### Notes about genre:
