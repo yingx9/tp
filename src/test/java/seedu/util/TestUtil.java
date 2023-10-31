@@ -9,19 +9,13 @@ import seedu.parser.Parser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestUtil {
 
-
-    public String getOutputMessage(Command c, String m) throws SysLibException {
-        Parser parser = new Parser();
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        c.execute(m, parser);
-        return outputStream.toString();
-    }
 
     public String getOutputMessage(Command c, String m, List<Resource> resourceList) throws SysLibException {
         Parser parser = new Parser();
@@ -30,6 +24,13 @@ public class TestUtil {
         System.setOut(new PrintStream(outputStream));
         c.execute(m, parser);
         return outputStream.toString();
+    }
+
+    public static String getCurrentDate(){
+        LocalDateTime dateReceived = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        String formattedDate = dateReceived.format(formatter);
+        return formattedDate;
     }
 
     public static List<Resource> fillTestList() {

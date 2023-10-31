@@ -1,5 +1,7 @@
 package seedu.data;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class Resource {
     private String title;
     private boolean isBorrowed;
@@ -8,6 +10,9 @@ public class Resource {
     private String isbn;
     private Status status;
 
+    private LocalDateTime dateReceived; //To keep track of when the resource was entered into the system
+    
+
     public Resource(String title, String isbn, Status status){
         setTitle(title);
         setBorrowed(false);
@@ -15,6 +20,7 @@ public class Resource {
         setCopies(1);
         setTag("");
         setStatus(status);
+        setReceivedDate();
     }
     public String getTitle() {
         return title;
@@ -52,6 +58,15 @@ public class Resource {
 
     public void setISBN(String isbn) {
         this.isbn = isbn;
+    }
+
+    public String getDateReceived(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        String formattedDate = dateReceived.format(formatter);
+        return formattedDate;
+    }
+    public void setReceivedDate(){
+        dateReceived = LocalDateTime.now();
     }
 
     public String toString() {
