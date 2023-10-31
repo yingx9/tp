@@ -6,6 +6,8 @@ import seedu.parser.Parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
+
 public abstract class Command {
     protected String[] args;
     protected boolean[] required;
@@ -18,7 +20,7 @@ public abstract class Command {
      * @param values The extracted value(s) from the statement
      * @throws IllegalArgumentException The invalid arguments given
      */
-    public void validateStatement(String statement, String[] values) throws IllegalArgumentException{
+    public void validateStatement(String statement, String[] values) throws IllegalArgumentException {
         statement = statement.toLowerCase();
         for(int pointer = 0; pointer < args.length; pointer ++) {
             if(values[pointer] != null){
@@ -26,7 +28,7 @@ public abstract class Command {
                 statement = statement.replaceAll(arg+ "\\s*" + Pattern.quote(values[pointer].toLowerCase()), "");
             }
         }
-        if (!statement.isBlank()){
+        if (!statement.isBlank()) {
             throw new IllegalArgumentException("Unknown variable/command: " + statement);
         }
     }
@@ -37,14 +39,14 @@ public abstract class Command {
      * @param pointer The index of args being checked
      * @return The argument being checked
      */
-    public String checkDuplicate(String statement, int pointer){
+    public String checkDuplicate(String statement, int pointer) {
         String arg = "/" + args[pointer] + " ";
         int firstIndex = statement.indexOf(arg);
-        if (firstIndex == -1){
+        if (firstIndex == -1) {
             return arg;
         }
         int secondIndex = statement.indexOf(arg, firstIndex + arg.length());
-        if(secondIndex != -1){
+        if(secondIndex != -1) {
             throw new IllegalArgumentException("Duplicate instances of " + arg);
         }
         return arg;
@@ -61,7 +63,8 @@ public abstract class Command {
         for(int pointer = 0; pointer < args.length; pointer ++) {
             orderedArgs[pointer] = getMatch(statement, pointer);
             if(orderedArgs[pointer] == null && required[pointer]){
-                throw new IllegalArgumentException(args[pointer] + " is missing in the argument!");
+                throw new IllegalArgumentException(args[pointer] + " is missing in the argument!"
+                        + SEPARATOR_LINEDIVIDER);
             }
         }
         return orderedArgs;
@@ -74,7 +77,7 @@ public abstract class Command {
      * @return The matched argument information, null otherwise
      */
 
-    public String getMatch(String statement, int pointer){
+    public String getMatch(String statement, int pointer) {
         String key = args[pointer];
         Pattern pattern = Pattern.compile("/" + key + " (.+?)(?=\\s?/|$)", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(statement);
@@ -84,10 +87,10 @@ public abstract class Command {
         return null;
 
     }
-    public int parseInt(String value){
+    public int parseInt(String value) {
         try {
             int tempNum = Integer.parseInt(value);
-            if (0 < tempNum){
+            if (0 < tempNum) {
                 return tempNum;
             }
             throw new IllegalArgumentException ("The argument for id is not a valid number!");

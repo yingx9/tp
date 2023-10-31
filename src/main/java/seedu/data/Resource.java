@@ -22,6 +22,7 @@ public class Resource {
         setStatus(status);
         setReceivedDate();
     }
+
     public String getTitle() {
         return title;
     }
@@ -29,6 +30,7 @@ public class Resource {
     public void setTitle(String title) {
         this.title = title;
     }
+
     public boolean isBorrowed() {
         return isBorrowed;
     }
@@ -36,6 +38,7 @@ public class Resource {
     public void setBorrowed(boolean borrowed) {
         isBorrowed = borrowed;
     }
+
     public Integer getCopies() {
         return copies;
     }
@@ -62,9 +65,9 @@ public class Resource {
 
     public String getDateReceived(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        String formattedDate = dateReceived.format(formatter);
-        return formattedDate;
+        return dateReceived.format(formatter);
     }
+
     public void setReceivedDate(){
         dateReceived = LocalDateTime.now();
     }
@@ -83,15 +86,13 @@ public class Resource {
                 return false;
             }
 
-            for(int j =0; j < genres.length; j ++){
-                if (genres[j].equals(genre)){
+            for (String s : genres) {
+                if (s.equals(genre)) {
                     return true;
                 }
             }
         }
         return false;
-
-
     }
     public void setStatus(Status status){
         this.status = status;

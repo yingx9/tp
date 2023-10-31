@@ -10,7 +10,7 @@ public class Duke {
     private static UI ui;
     private static Parser parser;
 
-    public Duke(){
+    public Duke() {
         ui = new UI();
         parser = new Parser();
     }
@@ -19,16 +19,14 @@ public class Duke {
         new Duke().run();
     }
 
-    public void run(){
+    public void run() {
         ui.showWelcomeMessage();
-
         while (true) {
             String response = ui.readCommand();
             parser.process(response);
-            if (response.equalsIgnoreCase("exit")){
+            if (response.equalsIgnoreCase("exit")) {
                 break;
             }
         }
     }
-
 }
