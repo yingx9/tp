@@ -12,6 +12,8 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static seedu.util.TestUtil.getCurrentDate;
 
 class ParserTest {
 
@@ -55,7 +57,12 @@ class ParserTest {
                 "find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)" +
                 System.lineSeparator() + "edit: Edit a listing by entering its isbn to update its details. " +
                 "(e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)" + System.lineSeparator() +
-                "exit: displays a farewell message and exits the program (e.g. exit)" + System.lineSeparator() +
+                "eventadd: Add an event to the event list (e.g. eventadd /t TITLE /date DATE [/desc DESCRIPTION])" +
+                System.lineSeparator() + "eventlist: List out all the event list (e.g. eventlist)" +
+                System.lineSeparator() + "eventdelete: Delete an event in the event list based on the index " +
+                "(e.g. eventdelete /i INDEX)" + System.lineSeparator() +
+                "exit: displays a farewell message and exits the program (e.g. exit)" +
+                System.lineSeparator() +
                 "For more information, please refer to our user guide at:" +
                 "https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
@@ -113,10 +120,12 @@ class ParserTest {
         parser.process(validResponse);
         expectedOutput += "Listing all resources in the Library:" + System.lineSeparator() + System.lineSeparator() +
                 "1. [B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
-                "Author: Thomas Erikson Genre: Self-help Status: AVAILABLE" + System.lineSeparator()+
+                "Author: Thomas Erikson Genre: Self-help Status: AVAILABLE" + " Received Date: " + getCurrentDate()
+                 + System.lineSeparator() +
                 "2. [B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 " +
-                "Author: Mark Manson Genre: Self-help Status: AVAILABLE" + System.lineSeparator()
-                + System.lineSeparator() + "There are currently 2 resource(s)." + System.lineSeparator() +
+                "Author: Mark Manson Genre: Self-help Status: AVAILABLE" + " Received Date: " + getCurrentDate()
+                + System.lineSeparator() + System.lineSeparator() +
+                "There are currently 2 resource(s)." + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
         System.setOut(System.out);
         output = outputStream.toString();
@@ -126,7 +135,8 @@ class ParserTest {
         parser.process(validResponse);
         expectedOutput += "Here are resources that matched the given filters:" + System.lineSeparator() +
                 "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 " +
-                "Author: Mark Manson Genre: Self-help Status: AVAILABLE" + System.lineSeparator() +
+                "Author: Mark Manson Genre: Self-help Status: AVAILABLE" + " Received Date: " + getCurrentDate() +
+                System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();;
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
@@ -143,7 +153,8 @@ class ParserTest {
         output = outputStream.toString();
         expectedOutput += "Successfully updated! Your updated resource:" + System.lineSeparator()
                 + System.lineSeparator() + "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
-                "Author: Thomas Genre: Self-help Status: AVAILABLE" + System.lineSeparator() +
+                "Author: Thomas Genre: Self-help Status: AVAILABLE" + " Received Date: " + getCurrentDate()
+                +System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
         assertEquals(expectedOutput, output);
 
@@ -152,7 +163,8 @@ class ParserTest {
         output = outputStream.toString();
         expectedOutput += "Successfully updated! Your updated resource:" + System.lineSeparator()
                 + System.lineSeparator() + "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
-                "Author: Thomas Genre: Self-help Status: LOST" + System.lineSeparator() +
+                "Author: Thomas Genre: Self-help Status: LOST" + " Received Date: " + getCurrentDate()
+                +System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
         assertEquals(expectedOutput, output);
         //Test delete
@@ -162,14 +174,15 @@ class ParserTest {
         expectedOutput += "Looking for ID: 1..." + System.lineSeparator() +
                 "This resource is removed: " + System.lineSeparator() +
                 "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
-                "Author: Thomas Genre: Self-help Status: LOST" + System.lineSeparator() +
+                "Author: Thomas Genre: Self-help Status: LOST" + " Received Date: " + getCurrentDate()
+                + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
         assertEquals(expectedOutput, output);
     }
 
     @Test
     public void testParseAddCommand() throws SysLibException {
-        // Test case 1: Valid input with /tag b
+        // Test case 1: Valid input with both genre and status
         String statement1 = "add /id 123456789 /t Moby Dick /a Herman Melville /tag B /i 9780763630188 " +
                 "/g Adventure, Fiction /s lost";
         String[] result = Parser.parseAddCommand(statement1);
@@ -182,10 +195,34 @@ class ParserTest {
         assertEquals("Adventure, Fiction", result[5]);
         assertEquals("lost", result[6]);
 
-        // Test case 2: Invalid input (missing /tag b)
-        String statement2 = "add /id 123456789 /t Moby Dick /a Herman Melville /tag C /i 9780763630188 " +
+        // Test case 2: Valid input without genre
+        String statement2 = "add /id 123 /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /s lost";
+        result = Parser.parseAddCommand(statement2);
+
+        assertEquals("123", result[0]);
+        assertEquals("Moby Dick", result[1]);
+        assertEquals("Herman Melville", result[2]);
+        assertEquals("B", result[3]);
+        assertEquals("9780763630188", result[4]);
+        assertNull(result[5]);
+        assertEquals("lost", result[6]);
+
+        // Test case 3: Valid input without status and genre
+        String statement3 = "add /id 456 /t Moby Dick /a Herman Melville /tag B /i 9780763630188";
+        result = Parser.parseAddCommand(statement3);
+
+        assertEquals("456", result[0]);
+        assertEquals("Moby Dick", result[1]);
+        assertEquals("Herman Melville", result[2]);
+        assertEquals("B", result[3]);
+        assertEquals("9780763630188", result[4]);
+        assertNull(result[5]);
+        assertEquals("Available", result[6]);
+
+        // Test case 4: Invalid input (missing /tag b)
+        String statement4 = "add /id 123456789 /t Moby Dick /a Herman Melville /tag C /i 9780763630188 " +
                 "/g Adventure, Fiction /s Borrowed";
-        assertThrows(SysLibException.class, () -> Parser.parseAddCommand(statement2));
+        assertThrows(SysLibException.class, () -> Parser.parseAddCommand(statement4));
     }
 
     @Test
