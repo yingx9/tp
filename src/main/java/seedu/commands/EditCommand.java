@@ -23,6 +23,7 @@ public class EditCommand extends Command{
 
     private static int resourceIndex;
 
+
     public EditCommand(){
         args = new String[]{"i", "t", "a", "tag", "g", "s"};
         required = new boolean[]{true, false, false, false, false, false};
@@ -31,7 +32,7 @@ public class EditCommand extends Command{
 
 
     @Override
-    public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
+    public CommandResult execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         feedbackToUser = "";
         String[] givenParameters = parseArgument(statement);
         validateStatement(statement, givenParameters);
@@ -54,7 +55,7 @@ public class EditCommand extends Command{
             throw new SysLibException(MISSING_ARG_MESSAGE);
         }
 
-        System.out.println(feedbackToUser);
+        return new CommandResult(feedbackToUser);
     }
 
     public boolean hasOneArg(String[] givenParameters){

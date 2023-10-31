@@ -13,6 +13,7 @@ import seedu.commands.ListCommand;
 import seedu.commands.HelpCommand;
 import seedu.commands.ExitCommand;
 import seedu.commands.EditCommand;
+import seedu.commands.CommandResult;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 import java.util.ArrayList;
@@ -43,7 +44,8 @@ public class Parser {
         if (commandProcessor.containsKey(command)) {
             String statement = removeFirstWord(response);
             try {
-                commandProcessor.get(command).execute(statement, this);
+                CommandResult commandResult = commandProcessor.get(command).execute(statement, this);
+                System.out.print(commandResult.feedbackToUser);
             } catch (IllegalArgumentException | IllegalStateException | SysLibException e) {
                 System.out.println(e.getMessage());
             }

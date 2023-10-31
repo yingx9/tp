@@ -1,6 +1,7 @@
 package seedu.util;
 
 import seedu.commands.Command;
+import seedu.commands.CommandResult;
 import seedu.data.Book;
 import seedu.data.Resource;
 import seedu.data.Status;
@@ -20,10 +21,8 @@ public class TestUtil {
     public String getOutputMessage(Command c, String m, List<Resource> resourceList) throws SysLibException {
         Parser parser = new Parser();
         parser.resourceList = resourceList;
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        c.execute(m, parser);
-        return outputStream.toString();
+        CommandResult commandResult = c.execute(m, parser);
+        return commandResult.feedbackToUser;
     }
 
     public static String getCurrentDate(){
@@ -32,6 +31,8 @@ public class TestUtil {
         String formattedDate = dateReceived.format(formatter);
         return formattedDate;
     }
+
+
 
     public static List<Resource> fillTestList() {
         List<Resource> testResourceList = new ArrayList<>();

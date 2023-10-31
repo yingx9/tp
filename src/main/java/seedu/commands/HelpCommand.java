@@ -14,6 +14,8 @@ public class HelpCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());
 
+    private static String feedbackToUser;
+
     static {
         // remove logs from showing in stdout
         try {
@@ -34,11 +36,14 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(String statement, Parser parser) throws IllegalArgumentException {
+    public CommandResult execute(String statement, Parser parser) throws IllegalArgumentException {
+        feedbackToUser = "";
         assert statement != null : "Statement to execute cannot be null";
         assert parser != null : "Parser must not be null";
         UI ui = new UI();
         logger.log(Level.INFO, "Executing HelpCommand");
         ui.showHelpMessage();
+
+        return new CommandResult(feedbackToUser);
     }
 }

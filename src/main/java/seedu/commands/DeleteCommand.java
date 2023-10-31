@@ -8,12 +8,15 @@ import seedu.parser.Parser;
 import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
+    private static String feedbackToUser;
+
     public DeleteCommand(){
         args = new String[]{"id"};
         required = new boolean[]{true};
     }
     @Override
-    public void execute(String statement, Parser parser) throws SysLibException {
+    public CommandResult execute(String statement, Parser parser) throws SysLibException {
+        feedbackToUser = "";
         int id = parseInt(parseArgument(statement)[0]);
         assert id > 0;
         ArrayList<Resource> removals = new ArrayList<>();
@@ -33,6 +36,8 @@ public class DeleteCommand extends Command {
         } else {
             parser.resourceList.removeAll(removals);
         }
+
+        return new CommandResult(feedbackToUser);
     }
 
 }

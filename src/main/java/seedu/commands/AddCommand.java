@@ -4,13 +4,16 @@ import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
 public class AddCommand extends Command{
+    private static String feedbackToUser;
+
     public AddCommand(){
         args = new String[]{"id", "t", "a", "tag", "i", "g", "s"};
         required = new boolean[]{true, true, true, true, true, false, false};
     }
     @Override
-    public void execute(String statement, Parser parser) throws
+    public CommandResult execute(String statement, Parser parser) throws
             IllegalStateException, NumberFormatException, SysLibException {
+        feedbackToUser = "";
         String[] values = parseArgument(statement);
         validateStatement(statement, values);
         String title = values[1];
@@ -23,6 +26,8 @@ public class AddCommand extends Command{
             throw new SysLibException("Please enter a valid tag." + System.lineSeparator() +
                     "____________________________________________________________");
         }
+
+        return new CommandResult(feedbackToUser);
     }
 
 }
