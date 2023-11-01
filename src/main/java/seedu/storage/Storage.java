@@ -3,7 +3,6 @@ package seedu.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -149,7 +148,11 @@ public class Storage {
 
                         }
                     }else if (splitLineArguments[FIRST_INDEX].equals("E")) {
-                        System.out.println("event");
+                        // String name = splitLineArguments[SECOND_INDEX];
+                        // String description = splitLineArguments[THIRD_INDEX];
+                        // Date eventldt = parseDate(splitLineArguments[FOURTH_INDEX]);
+                        // Event newEventToAdd = new Event(name, eventldt, description);
+                        System.out.println("Not handled yet");
                     } else {
                         throw new SysLibException("Unknown data type found, data corrupted.");
                     }
@@ -272,11 +275,10 @@ public class Storage {
                 fw.write(resourceSaveFormat);
             }
             for (Event eventToSave : eventlist){
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 String eventSaveFormat = String.format("E | %s | %s | %s%n",
                         eventToSave.getName(),
                         eventToSave.getDescription(),
-                        sdf.format(eventToSave.getDate()));
+                        eventToSave.getDate());
                 fw.write(eventSaveFormat);
             }
             fw.close();
