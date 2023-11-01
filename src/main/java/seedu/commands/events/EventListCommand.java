@@ -21,7 +21,7 @@ public class EventListCommand extends Command {
         }
         else {
             System.out.println("This is the current event list:");
-            for(int index = 0; index < parser.eventList.size(); index += 1){
+            for(int index = 1; index < parser.eventList.size(); index += 1){
                 System.out.println(index + ": " + parser.eventList.get(index).toString());
             }
             System.out.println("____________________________________________________________");

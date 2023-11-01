@@ -73,6 +73,14 @@ public class Parser {
         return resourceList;
     }
 
+    public void setResourceList(List<Resource> resourcelist) {
+         this.resourceList = resourcelist;
+    }
+
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
     public static String[] parseAddCommand(String statement) throws SysLibException {
         String inputPattern = "(.+?) /tag (.)(.+)";
 

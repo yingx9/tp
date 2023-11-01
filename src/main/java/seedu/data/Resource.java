@@ -78,8 +78,16 @@ public class Resource {
         return dateReceived.format(formatter);
     }
 
+    public LocalDateTime getDateReceivedUnparsed(){
+        return dateReceived;
+    }
+
     public void setReceivedDate(){
         dateReceived = LocalDateTime.now();
+    }
+
+    public void setReceivedDateCustom(LocalDateTime LDT){
+        dateReceived = LDT;
     }
 
     public String toString() {

@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event {
-    private String name;
-    private Date date;
-    private String description;
+    private final String name;
+    private final Date date;
+    private final String description;
 
     public Event(String name, Date date, String description) {
         this.name = name;
@@ -16,6 +16,14 @@ public class Event {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
