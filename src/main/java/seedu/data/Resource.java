@@ -86,8 +86,8 @@ public class Resource {
         dateReceived = LocalDateTime.now();
     }
 
-    public void setReceivedDateCustom(LocalDateTime LDT){
-        dateReceived = LDT;
+    public void setReceivedDateCustom(LocalDateTime ldt){
+        dateReceived = ldt;
     }
 
     public String toString() {

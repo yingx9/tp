@@ -6,17 +6,16 @@ import seedu.parser.Parser;
 import seedu.storage.Storage;
 import seedu.ui.UI;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Syslib {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
+    public static final String FILEPATH = ".\\storage.txt";
     private static UI ui;
     private static Parser parser;
     private static Storage storage;
-    public static final String filepath = ".\\storage.txt";
 
     public Syslib(String filePath) {
         ui = new UI();
@@ -33,7 +32,7 @@ public class Syslib {
     }
 
     public static void main(String[] args) {
-        new Syslib(filepath).run();
+        new Syslib(FILEPATH).run();
     }
 
     public void run() {

@@ -74,7 +74,7 @@ public class Parser {
     }
 
     public void setResourceList(List<Resource> resourcelist) {
-         this.resourceList = resourcelist;
+        this.resourceList = resourcelist;
     }
 
     public List<Event> getEventList() {
