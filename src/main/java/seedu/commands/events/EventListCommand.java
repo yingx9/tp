@@ -1,12 +1,16 @@
 package seedu.commands.events;
 
 import seedu.commands.Command;
+import seedu.commands.CommandResult;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
 public class EventListCommand extends Command {
+
+    private static String feedbackToUser;
+
     @Override
-    public void execute(String statement, Parser parser) throws
+    public CommandResult execute(String statement, Parser parser) throws
             IllegalArgumentException, IllegalStateException, SysLibException {
         if (!statement.isEmpty()){
             throw new IllegalArgumentException("'eventlist' command does not require arguments!");
@@ -22,5 +26,7 @@ public class EventListCommand extends Command {
             }
             System.out.println("____________________________________________________________");
         }
+
+        return new CommandResult(feedbackToUser);
     }
 }

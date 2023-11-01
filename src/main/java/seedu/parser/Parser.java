@@ -9,6 +9,7 @@ import seedu.data.SysLibException;
 import seedu.data.Event;
 
 import seedu.commands.Command;
+import seedu.commands.CommandResult;
 import seedu.commands.AddCommand;
 import seedu.commands.DeleteCommand;
 import seedu.commands.FindCommand;
@@ -49,7 +50,8 @@ public class Parser {
         if (commandProcessor.containsKey(command)) {
             String statement = removeFirstWord(response);
             try {
-                commandProcessor.get(command).execute(statement, this);
+                CommandResult commandResult = commandProcessor.get(command).execute(statement, this);
+                System.out.print(commandResult.feedbackToUser);
             } catch (IllegalArgumentException | IllegalStateException | SysLibException e) {
                 System.out.println(e.getMessage());
             }
