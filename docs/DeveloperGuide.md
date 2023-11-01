@@ -218,9 +218,6 @@ Step 6. The `EVENTADDCOMMMAND` also calls the component:
 The whole eventList is sorted by date order.
 
 Step 7. The newly created event is forwarded to the `PARSER` to be added to the `eventList`.
-#### Sequence Diagram
-The following sequence diagram shows how the add function works:
-<temp>
 
 ### Event List Feature
 
@@ -250,10 +247,6 @@ Step 4. The `EVENTLISTCOMMMAND` component receives the command and performs the 
 - Calls `EVENTLISTCOMMAND#isEmpty()` to check if the user input any additional redundant arguments.
 
 Step 5. The `EVENTLISTCOMMAND` then outputs the events in the eventList.
-
-#### Sequence Diagram
-The following sequence diagram shows how the add function works:
-<temp>
 
 ### Event Delete Feature
 
@@ -293,9 +286,6 @@ Step 6. The `EVENTDELETECOMMAND` also calls the component:
 it is within range of eventList
 
 Step 7. The selected event at the index is then deleted from the eventList.
-#### Sequence Diagram
-The following sequence diagram shows how the add function works:
-<temp>
 
 ## Product scope
 
