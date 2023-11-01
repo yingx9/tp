@@ -179,6 +179,124 @@ of the resources.
 
 If hasFilters returns `false`, it skips the filtering process and displays the details of all the resources.
 
+### Event Add Feature
+
+The `eventadd` feature is responsible for processing user commands to add an event to SysLib. It is facilitated by
+the `EventAddCommand` component. It works with `Parser` and `Command` components to parse and validate the user input.
+The new book is stored internally in `eventList` as a `Event`.
+
+`eventadd` has two options:
+- eventadd /t [title] /date [date]
+- eventadd /t [title] /date [date] /desc [description]
+
+#### Implementation
+
+It implements the following operations:
+
+- `EVENTADDCOMMAND#parseArgument(statement: String)` -- Parses the input command to extract relevant information.
+- `EVENTADDCOMMAND#validate(statement: String, values: String[])` -- Validates the input statement to ensure that it is valid.
+- `EVENTADDCOMMAND#binarySearch(parser: Parser, date: Date)` -- Search for the correct index of event list to add the event.
+
+#### Example Usage Scenario
+
+Step 1. The user inputs the command: `eventadd /t birthday /date 10-12-2001`
+
+Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
+
+Step 3. The `PARSER` processes the command and determines that it contains a valid key (`eventadd`). It then calls
+`EVENTADDCOMMAND#execute(statement: String, this: Parser)` with the input command.
+
+Step 4. The `EVENTADDCOMMMAND` component receives the command and performs the following operations:
+- Calls `EVENTADDCOMMAND#parseArgument(statement: String)` to extract values for title, date and description.
+- Calls `EVENTADDCOMMAND#validate(statement: String, values: String[])` to ensure the validity of the input command.
+
+Step 5. The `COMMAND` component processes the input command to ensure that it meets the required format and constraints.
+It prepares the argument values for further processing.
+
+Step 6. The `EVENTADDCOMMMAND` also calls the component:
+- Calls `EVENTADDCOMMAND#binarySearch(parser: Parser, date: Date)` to find the correct index based on the date.
+The whole eventList is sorted by date order.
+
+Step 7. The newly created event is forwarded to the `PARSER` to be added to the `eventList`.
+#### Sequence Diagram
+The following sequence diagram shows how the add function works:
+<temp>
+
+### Event List Feature
+
+The `eventlist` command works with the `Parser` and `Command` component to execute the correct action. 
+This feature is responsible for listing out the events in eventList. 
+It is facilitated by the `EventListCommand` component. 
+
+`eventlist` has one option:
+- eventlist
+
+#### Implementation
+
+It implements the following operations:
+
+- `EVENTLISTCOMMAND#isEmpty()` -- Check user input has only 'eventlist'
+
+#### Example Usage Scenario
+
+Step 1. The user inputs the command: `eventlist`
+
+Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
+
+Step 3. The `PARSER` processes the command and determines that it contains a valid key (`eventlist`). It then calls
+`EVENTLISTCOMMAND#execute(statement: String, this: Parser)` with the input command.
+
+Step 4. The `EVENTLISTCOMMMAND` component receives the command and performs the following operations:
+- Calls `EVENTLISTCOMMAND#isEmpty()` to check if the user input any additional redundant arguments.
+
+Step 5. The `EVENTLISTCOMMAND` then outputs the events in the eventList.
+
+#### Sequence Diagram
+The following sequence diagram shows how the add function works:
+<temp>
+
+### Event Delete Feature
+
+The `eventdelete` feature is responsible for processing user commands to delete an event to SysLib. 
+It is facilitated by the `EventDeleteCommand` component. 
+It works with `Parser` and `Command` components to parse and validate the input.
+The `Event` is removed from `eventList`.
+
+`eventadd` has one options:
+- eventdelete /i [index]
+#### Implementation
+
+It implements the following operations:
+
+- `EVENTDELETECOMMAND#parseArgument(statement: String)` -- Parses the input command to extract relevant information.
+- `EVENTDELETECOMMAND#validate(statement: String, values: String[])` -- Validates the input statement.
+- `EVENTDELETECOMMAND#parseCalendarInt(value: String, parser: Parser)` -- Validate the index given.
+
+#### Example Usage Scenario
+
+Step 1. The user inputs the command: `eventdelete /i 0`
+
+Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
+
+Step 3. The `PARSER` processes the command and determines that it contains a valid key (`eventadd`). It then calls
+`EVENTDELETECOMMAND#execute(statement: String, this: Parser)` with the input command.
+
+Step 4. The `EVENTDELETECOMMAND` component receives the command and performs the following operations:
+- Calls `EVENTDELETECOMMAND#parseArgument(statement: String)` to extract values for title, date and description.
+- Calls `EVENTDELETECOMMAND#validate(statement: String, values: String[])` to ensure the validity of the input command.
+
+Step 5. The `COMMAND` component processes the input command to ensure that it meets the required format and constraints.
+It prepares the argument values for further processing.
+
+Step 6. The `EVENTDELETECOMMAND` also calls the component:
+- Calls `EVENTDELETECOMMAND#parseCalendarInt(value: String, parser: Parser)` to see if the index is an integer and that
+it is within range of eventList
+
+Step 7. The selected event at the index is then deleted from the eventList.
+#### Sequence Diagram
+The following sequence diagram shows how the add function works:
+<temp>
+
 ## Product scope
 
 ### Target user profile

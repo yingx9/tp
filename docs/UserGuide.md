@@ -248,6 +248,51 @@ Successfully updated! Your updated resource:
 [B]  ID: 12312 Title: Mary ISBN: 123 Author: John Genre: Horror, Adventure Status: LOST
 ____________________________________________________________
 ```
+## Add event: `eventadd` | [Return to contents](#contents)
+Add an event to the event list
+
+Format: `eventadd /t TITLE /date DATE /desc DESCRIPTION`
+
+**Example input:**
+```
+eventadd /t birthday /date 10-12-2001
+find /t guest visiting /date 1-10-2024 /desc president of xxx is coming
+```
+**Example output:**
+```
+Event inserted at: 0
+____________________________________________________________
+```
+## List event: `eventlist` | [Return to contents](#contents)
+List the events in the event list
+
+Format: `eventlist`
+
+**Example input:**
+```
+eventlist
+```
+**Example output:**
+```
+This is the current event list:
+0: birthday | 10-12-2001 | null
+____________________________________________________________
+```
+## Delete event: `eventdelete` | [Return to contents](#contents)
+Delete a event in the event list based on the index
+
+Format: `eventdelete /i INDEX`
+
+**Example input:**
+```
+eventdelete /i 0
+```
+**Example output:**
+```
+This event is removed:
+birthday | 10-12-2001 | null
+____________________________________________________________
+```
 
 ## Exiting the program : `exit` | [Return to contents](#contents)
 Displays a farewell message and exits the program.
