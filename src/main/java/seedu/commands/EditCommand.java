@@ -29,7 +29,7 @@ public class EditCommand extends Command{
     }
 
     @Override
-    public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
+    public CommandResult execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         feedbackToUser = "";
         String[] givenParameters = parseArgument(statement);
         validateStatement(statement, givenParameters);
@@ -51,7 +51,7 @@ public class EditCommand extends Command{
         } else {
             throw new SysLibException(MISSING_ARG_MESSAGE);
         }
-        System.out.println(feedbackToUser);
+        return new CommandResult(feedbackToUser);
     }
 
     public boolean hasOneArg(String[] givenParameters){

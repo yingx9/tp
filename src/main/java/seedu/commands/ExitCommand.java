@@ -16,7 +16,7 @@ import seedu.ui.UI;
  */
 public class ExitCommand extends Command{
     private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());
-
+    private static String feedbackToUser;
     static {
         // remove logs from showing in stdout
         try {
@@ -44,14 +44,15 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void execute(String statement, Parser parser) throws IllegalArgumentException {
+    public CommandResult execute(String statement, Parser parser) throws IllegalArgumentException {
 
         assert statement != null : "Statement to execute cannot be null";
         assert parser != null : "Parser must not be null";
+        feedbackToUser = "";
         LOGGER.log(Level.INFO, "Executing ExitCommand...");
         UI ui = new UI();
         ui.showExitMessage();
-
+        return new CommandResult(feedbackToUser);
     }
 
 }

@@ -14,7 +14,7 @@ import seedu.util.TestUtil;
 import static seedu.commands.EditCommand.RESOURCE_NOT_FOUND;
 import static seedu.commands.EditCommand.EDIT_SUCCESS;
 import static seedu.common.Messages.formatLastLineDivider;
-import static seedu.ui.UI.LINESEPARATOR;
+
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,7 +37,6 @@ public class EditCommandTest {
     public void testEditResourceNotFound() throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(editCommand, "/i 123 /t NEWTITLE", emptyResourceList);
         String expectedMessage =  RESOURCE_NOT_FOUND;
-        expectedMessage += LINESEPARATOR;
         assertEquals(expectedMessage, outputMessage);
     }
 
@@ -69,7 +68,6 @@ public class EditCommandTest {
     private void executeEditSuccessBehavior(String arguments) throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(editCommand, arguments, testResourceList);
         String expectedMessage = EDIT_SUCCESS + formatLastLineDivider((testResourceList.get(1)).toString());
-        expectedMessage += LINESEPARATOR;
         assertEquals(expectedMessage, outputMessage);
     }
 }

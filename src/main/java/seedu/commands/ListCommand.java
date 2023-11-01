@@ -30,13 +30,13 @@ public class ListCommand extends Command {
 
 
     @Override
-    public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
+    public CommandResult execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         feedbackToUser = "";
         String[] values = parseArgument(statement);
         validateStatement(statement, values);
         filterResources(values, parser.resourceList);
 
-        System.out.println(feedbackToUser);
+        return new CommandResult(feedbackToUser);
     }
 
 

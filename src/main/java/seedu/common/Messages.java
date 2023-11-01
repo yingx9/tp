@@ -12,6 +12,6 @@ public class Messages {
         return message + LINESEPARATOR;
     }
     public static String formatLastLineDivider(String message){
-        return LINESEPARATOR + message + SEPARATOR_LINEDIVIDER;
+        return LINESEPARATOR + message + SEPARATOR_LINEDIVIDER + LINESEPARATOR;
     }
 }
