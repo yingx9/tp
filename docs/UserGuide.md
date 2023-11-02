@@ -295,6 +295,8 @@ ____________________________________________________________
 | Delete listing        | `delete /id <id of listing>`                                                                               |
 | Listing all items     | `list [/tag <type of item> /g <genre of book>]`                                                            |
 | Find specific listing | `find [/t <title of listing> OR /i <ISBN of item> OR /a AUTHOR OR /id ID]`                                 |
+| Edit a listing        | `edit /i ISBN [/t <title of listing> /a AUTHOR /id ID /tag <type of item> /g <genre of item>] /s <status>` |
 | Exit                  | `exit`                                                                                                     |
 | View help             | `help`                                                                                                     |
+
 

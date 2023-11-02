@@ -8,20 +8,38 @@ import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
 
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 
 import static seedu.common.Messages.formatLastLineDivider;
 import static seedu.common.Messages.formatLineSeparator;
 
 public class EditCommand extends Command{
-    public static final String MISSING_ARG_MESSAGE =  formatLastLineDivider("Please provide at least" +
+    public static final String MISSING_ARG_MESSAGE =  formatLastLineDivider("Please provide at least " +
             "one detail to edit!");
     public static final String NOT_BOOK_ERROR =  formatLastLineDivider("Your resource is not a book!");
     public static final String RESOURCE_NOT_FOUND =  formatLastLineDivider("No such resource with given ISBN");
     public static final String EDIT_SUCCESS = formatLineSeparator("Successfully updated! Your updated resource:");
+    private static final Logger EDIT_LOGGER = Logger.getLogger(EditCommand.class.getName());
     private static String feedbackToUser;
 
     private static int resourceIndex;
+
+    static {
+        try {
+            FileHandler editFileHandler = new FileHandler("logs/editCommandLogs.log", true);
+            editFileHandler.setFormatter(new SimpleFormatter());
+            EDIT_LOGGER.addHandler(editFileHandler);
+        } catch (IOException e){
+            EDIT_LOGGER.log(Level.SEVERE,"Failed to set up Logging File Handler");
+
+        }
+    }
+
 
     public EditCommand(){
         args = new String[]{"i", "t", "a", "tag", "g", "s"};
@@ -31,6 +49,8 @@ public class EditCommand extends Command{
     @Override
     public CommandResult execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         feedbackToUser = "";
+        EDIT_LOGGER.info("Edit Command execute with " + statement);
+
         String[] givenParameters = parseArgument(statement);
         validateStatement(statement, givenParameters);
 
@@ -40,15 +60,19 @@ public class EditCommand extends Command{
 
             if(foundResource != null) {
                 Resource updatedResource = editResource(foundResource, givenParameters);
+                assert updatedResource != null;
+                assert resourceIndex < parser.resourceList.size();
 
                 parser.resourceList.set(resourceIndex, updatedResource);
                 feedbackToUser += EDIT_SUCCESS + formatLastLineDivider(updatedResource.toString());
-
+                EDIT_LOGGER.info("Edit success");
             } else {
                 feedbackToUser += RESOURCE_NOT_FOUND;
+                EDIT_LOGGER.warning(feedbackToUser);
             }
 
         } else {
+            EDIT_LOGGER.warning(MISSING_ARG_MESSAGE);
             throw new SysLibException(MISSING_ARG_MESSAGE);
         }
         return new CommandResult(feedbackToUser);
@@ -138,6 +162,7 @@ public class EditCommand extends Command{
         if (resource instanceof Book) {
             book = (Book) resource;
         } else{
+            EDIT_LOGGER.warning(NOT_BOOK_ERROR);
             throw new SysLibException(NOT_BOOK_ERROR);
         }
 
