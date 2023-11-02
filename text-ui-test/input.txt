@@ -7,4 +7,5 @@ list /g Horror
 edit /i 123 /t NEWTITLE
 edit /i 123 /s borrowed
 edit /i 123 /s lost
+delete /id 123456789
 exit

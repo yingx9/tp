@@ -33,7 +33,7 @@ public class Storage {
     public static final int NINTH_INDEX = 8;
     public static final int TENTH_INDEX = 9;
     public static final int ELEVENTH_INDEX = 10;
-    public static final int TWELTH_INDEX = 11;
+    public static final int TWELFTH_INDEX = 11;
 
     protected File dataFile;
     protected String filePath;
@@ -124,7 +124,7 @@ public class Storage {
                         case "EM":
                             String ebrand = splitLineArguments[TENTH_INDEX].trim();
                             String eissue = splitLineArguments[ELEVENTH_INDEX].trim();
-                            String mlink = splitLineArguments[TWELTH_INDEX];
+                            String mlink = splitLineArguments[TWELFTH_INDEX];
                             eMagazine emagazineToAdd = new eMagazine(title, isbn, ebrand, eissue, id,
                                     status, mlink);
                             emagazineToAdd.setCopies(copies);
