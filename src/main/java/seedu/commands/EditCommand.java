@@ -10,6 +10,7 @@ import seedu.parser.Parser;
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
 import java.util.logging.SimpleFormatter;
@@ -24,19 +25,18 @@ public class EditCommand extends Command{
     public static final String RESOURCE_NOT_FOUND =  formatLastLineDivider("No such resource with given ISBN");
     public static final String EDIT_SUCCESS = formatLineSeparator("Successfully updated! Your updated resource:");
     private static final Logger EDIT_LOGGER = Logger.getLogger(EditCommand.class.getName());
-    private static final FileHandler EDIT_FILEHANDLER;
     private static String feedbackToUser;
 
     private static int resourceIndex;
 
     static {
         try {
-            EDIT_FILEHANDLER = new FileHandler("logs/editCommandLogs.log", true);
-            EDIT_FILEHANDLER.setFormatter(new SimpleFormatter());
-            EDIT_LOGGER.addHandler(EDIT_FILEHANDLER);
+            FileHandler editFileHandler = new FileHandler("logs/editCommandLogs.log", true);
+            editFileHandler.setFormatter(new SimpleFormatter());
+            EDIT_LOGGER.addHandler(editFileHandler);
         } catch (IOException e){
-            EDIT_LOGGER.warning("Failed to set up Logging File Handler");
-            throw new RuntimeException();
+            EDIT_LOGGER.log(Level.SEVERE,"Failed to set up Logging File Handler");
+
         }
     }
 

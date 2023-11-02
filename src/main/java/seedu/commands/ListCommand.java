@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -24,7 +25,6 @@ public class ListCommand extends Command {
     public static final String ZERO_RESOURCES_MESSAGE =  formatLastLineDivider("There are currently 0 resources.");
     private static final Logger LIST_LOGGER = Logger.getLogger(ListCommand.class.getName());
 
-    private static final FileHandler LIST_FILEHANDLER;
     private static String tagKeyword;
     private static String genreKeyword;
     private static String feedbackToUser;
@@ -32,12 +32,12 @@ public class ListCommand extends Command {
 
     static {
         try {
-            LIST_FILEHANDLER = new FileHandler("logs/listCommandLogs.log", true);
-            LIST_FILEHANDLER.setFormatter(new SimpleFormatter());
-            LIST_LOGGER.addHandler(LIST_FILEHANDLER);
+            FileHandler listFileHandler = new FileHandler("logs/listCommandLogs.log", true);
+            listFileHandler.setFormatter(new SimpleFormatter());
+            LIST_LOGGER.addHandler(listFileHandler);
         } catch (IOException e){
-            LIST_LOGGER.warning("Failed to set up Logging File Handler");
-            throw new RuntimeException();
+            LIST_LOGGER.log(Level.INFO,"Failed to set up Logging File Handler");
+
         }
     }
 
