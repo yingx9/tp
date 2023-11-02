@@ -1,5 +1,5 @@
 # Syslib User guide
-SysLib is a program designed specially for system librarians to manage their work and responsibilities. Using intuitive commands, view, add, delete, and find books from the library inventory without any hassle. 
+SysLib is a program designed specially for system librarians to manage their work and responsibilities. Using intuitive commands, view, add, delete, and find books from the library inventory without any hassle.
 This user guide is for System Librarians to ensure optimal use of Syslib
 
 ## Contents
@@ -19,8 +19,8 @@ This user guide is for System Librarians to ensure optimal use of Syslib
 
 ## Quick start | [Return to contents](#contents)
 1. Make sure that you have Java 11 or above installed on your computer.
-   - Open terminal and type `java --version`
-   - [How do I check the version of my Java](https://www.java.com/en/download/help/version_manual.html)
+    - Open terminal and type `java --version`
+    - [How do I check the version of my Java](https://www.java.com/en/download/help/version_manual.html)
 2. [Download the latest release](https://github.com/AY2324S1-CS2113T-W11-1/tp/releases/tag/v1.0) of `Syslib.jar`
 3. Copy the `Syslib.jar` file into a folder on its own.
 4. Open a command terminal, type `cd <FILE_DIRECTORY>`, where <FILE_DIRECTORY> refers to the directory to the `Syslib.jar` file.
@@ -44,6 +44,8 @@ ____________________________________________________________
 > - Items in square brackets `[]` are optional arguments.
 > - Items with `...` after them can be used multiple times
     >    * e.g `[/g GENRE]` ... can be used as `/g Horror /g Fantasy`
+> - All resources and events in current list will be saved into an offline file "storage.txt" on exit.
+> - Resources and events from "storage.txt" will be loaded into the program at every start.
 
 ## Add a listing: `add` | [Return to contents](#contents)
 
@@ -56,7 +58,7 @@ Adds a new resource to the library inventory.
 `[N]` - Newspapers
 
 > Note:
-> - Anything with `e` prior is an electronic version 
+> - Anything with `e` prior is an electronic version
 >> i.e. `[eB]` is an eBook, `[eM]` is an eMagazine
 
 ### Add Book
@@ -175,7 +177,7 @@ List all resources OR filter by certain tags or genre.
 
 Format: `list [/tag TAG /g GENRE ]`
 - Including both filters `tag` and `genre` will only list resources satisfying both criteria:
-  - `list /tag B /g Horror` will list Books with Horror genre. 
+    - `list /tag B /g Horror` will list Books with Horror genre.
 
 **Example input:**
 ```
@@ -210,7 +212,9 @@ find /t Moby Dick
 find /i 9780763630188
 find /a J. K. Rowling
 find /id 123456789
+find /id 123456789 /i 9780763630188 
 ```
+
 **Example output:**
 ```
 Here are resources that matched the given filters:
@@ -219,20 +223,20 @@ ____________________________________________________________
 ```
 
 ## Edit a listing: `edit` | [Return to contents](#contents)
-Edit a listing by entering its `isbn` to update its details. 
+Edit a listing by entering its `isbn` to update its details.
 
 Format: `edit /i ISBN /argumentname ARGUMENT`
 
 Argument Names:
-  - `/t TITLE `
-  - `/a AUTHOR `
-  - `/tag TAG`
-  - `/g GENRES`
-    - If you're inputting **multiple genres**, separate them by  with comma `,`. For example: 
-     `/g Horror, Fantasy`
-  - `/s STATUS`
+- `/t TITLE `
+- `/a AUTHOR `
+- `/tag TAG`
+- `/g GENRES`
+    - If you're inputting **multiple genres**, separate them by  with comma `,`. For example:
+      `/g Horror, Fantasy`
+- `/s STATUS`
 
-  
+
 **Example input:**
 ```
 edit /i 123 /t NEW_TITLE
@@ -273,7 +277,11 @@ delete: deletes the resource with the specified ID from the library inventory. (
 list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
 find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
 edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)
+eventadd: Add an event to the event list (e.g. eventadd /t TITLE /date DATE [/desc DESCRIPTION])
+eventlist: List out all the event list (e.g. eventlist)
+eventdelete: Delete an event in the event list based on the index (e.g. eventdelete /i INDEX)
 exit: displays a farewell message and exits the program (e.g. exit)
+
 For more information, please refer to our user guide at:https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html
 ____________________________________________________________
 ```
@@ -297,6 +305,10 @@ ____________________________________________________________
 | Find specific listing | `find [/t <title of listing> OR /i <ISBN of item> OR /a AUTHOR OR /id ID]`                                 |
 | Edit a listing        | `edit /i ISBN [/t <title of listing> /a AUTHOR /id ID /tag <type of item> /g <genre of item>] /s <status>` |
 | Exit                  | `exit`                                                                                                     |
+| Add Event             | `eventadd /t TITLE /date DATE [/desc DESCRIPTION]` (Format for date DD-MM-YYYY)                            |
+| Delete Event          | `eventdelete /i INDEX`                                                                                     |
+| Add Event             | `eventlist`                                                                                                |
 | View help             | `help`                                                                                                     |
+| Exit                  | `exit`                                                                                                     |
 
 
