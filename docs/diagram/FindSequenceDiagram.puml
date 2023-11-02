@@ -17,7 +17,6 @@ participant ":Command" as COMMAND COMMAND_COLOR
 end box
 
 participant ":Logger" as LOGGER
-participant ":Resource" as RESOURCE
 participant ":Book" as BOOK
 
 MAIN -[#grey]> UI : readCommand()
@@ -76,12 +75,7 @@ activate FINDCOMMAND COMMAND_COLOR
 FINDCOMMAND --[COMMAND_COLOR]> LOGGER : warning("No resources matched the given filters.")
 activate LOGGER 
 LOGGER --[COMMAND_COLOR]> FINDCOMMAND
-deactivate LOGGER 
-
-FINDCOMMAND --[COMMAND_COLOR]> UI : showLine()
-activate UI UI_COLOR
-UI --[COMMAND_COLOR]> FINDCOMMAND
-deactivate UI UI_COLOR
+deactivate LOGGER
 
 deactivate FINDCOMMAND COMMAND_COLOR
 

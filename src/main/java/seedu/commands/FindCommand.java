@@ -4,7 +4,7 @@ import seedu.data.Book;
 import seedu.data.Resource;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
-import seedu.ui.UI;
+import static seedu.ui.UI.LINEDIVIDER;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+
 
 public class FindCommand extends Command {
     private static final String INVALID_ARGUMENT_MESSAGE = "Please use the format 'find [/t TITLE OR "
@@ -43,12 +44,10 @@ public class FindCommand extends Command {
     protected String author;
     protected String isbn;
     protected String id;
-    protected UI ui;
 
     public FindCommand(){
         args = new String[]{"id", "i", "a", "t"};
         required = new boolean[]{false, false, false, false};
-        ui = new UI();
         LOGGER.info("FindCommand instance created.");
     }
 
@@ -105,15 +104,16 @@ public class FindCommand extends Command {
 
         if (matchedResources.isEmpty()) {
             LOGGER.warning("No resources matched the given filters.");
-            System.out.println(NO_RESOURCE_FOUND_MESSAGE);
-            ui.showLine();
+            feedbackToUser += NO_RESOURCE_FOUND_MESSAGE + System.lineSeparator() + LINEDIVIDER + System.lineSeparator();
         } else {
             LOGGER.info("Resources matched the given filters.");
-            System.out.println(RESOURCE_FOUND_MESSAGE);
+            feedbackToUser += RESOURCE_FOUND_MESSAGE + System.lineSeparator();
             for (Resource r : matchedResources) {
-                System.out.println(r);
+                feedbackToUser += r.toString() + System.lineSeparator();
+
             }
-            ui.showLine();
+            feedbackToUser += LINEDIVIDER + System.lineSeparator();
+
         }
 
         return new CommandResult(feedbackToUser);
