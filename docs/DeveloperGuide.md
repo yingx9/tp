@@ -74,9 +74,8 @@ Upon receiving the `find` command, the system will:
 **Step 4.** The matching resources are displayed to the user.
 
 #### Sequence Diagram
-A sequence diagram could be provided here to visually show how the `find` function works.
 
-(Note: You would include the actual sequence diagram image, similar to the diagrams shown for other features.)
+<img src="images/FindSequenceDiagram.png" />
 
 ### Examples for Testing
 
@@ -103,7 +102,7 @@ A sequence diagram could be provided here to visually show how the `find` functi
 5. **Combining Filters**
     - Test case: `find /a "F. Scott Fitzgerald" /t "The Great Gatsby"`
 
-      Expected: Only the resource that matches both the title "The Great Gatsby" and the author "F. Scott Fitzgerald" is displayed.
+      Expected: Resources that match either the title "The Great Gatsby" or the author "F. Scott Fitzgerald" are displayed.
 
 
 ### Add Resource Feature
