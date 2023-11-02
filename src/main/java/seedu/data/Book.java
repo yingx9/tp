@@ -43,7 +43,12 @@ public class Book extends Resource {
 
     @Override
     public String toString() {
-        String genreString = String.join(",", genres);
+        StringBuilder genreString = new StringBuilder();
+        if (getGenre()[0] == null) {
+            genreString.append("-");
+        } else {
+            genreString.append(java.util.Arrays.toString(getGenre()).replace("[", "").replace("]", ""));
+        }
 
         return "[" + getTag() + "] " + " ID: " + getId() + " Title: " + getTitle() + " ISBN: " + getISBN() + " Author: "
                 + getAuthor() + " Genre: " + genreString + " Status: " + getStatus().name() + " Received Date: " +
