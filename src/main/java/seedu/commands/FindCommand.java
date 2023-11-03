@@ -96,7 +96,8 @@ public class FindCommand extends Command {
         validateStatement(statement, values);
 
         // all null
-        if (values[FOURTH_INDEX]==null && values[THIRD_INDEX]==null && values[SECOND_INDEX]==null && values[FIRST_INDEX]==null) {
+        if (values[FOURTH_INDEX]==null && values[THIRD_INDEX]==null && values[SECOND_INDEX]==null
+                && values[FIRST_INDEX]==null) {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE + System.lineSeparator());
         }
 

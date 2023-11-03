@@ -190,3 +190,19 @@ Nov 03, 2023 6:09:30 PM seedu.commands.ListCommand execute
 INFO: List Command execute with 
 Nov 03, 2023 6:09:30 PM seedu.commands.ListCommand execute
 INFO: List Command ends
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command ends
