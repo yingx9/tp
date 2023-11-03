@@ -119,12 +119,13 @@ public class FindCommand extends Command {
 
             // If all non-null criteria matched, add the book to the list
             if (isMatch) {
+                LOGGER.info(String.format("Resource %s matched given arguments.", b.getTitle()));
                 matchedResources.add(b);
             }
         }
 
         if (matchedResources.isEmpty()) {
-            LOGGER.warning("No resources matched the given filters.");
+            LOGGER.info("No resources matched the given filters.");
             System.out.println(NO_RESOURCE_FOUND_MESSAGE);
             ui.showLine();
         } else {
