@@ -1,0 +1,88 @@
+@startuml
+!include Style.puml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+skinparam ArrowFontStyle plain
+
+participant ":Main" as MAIN #grey
+participant ":UI" as UI UI_COLOR
+Actor User as user USER_COLOR
+participant ":Parser" as PARSER PARSER_COLOR
+
+box Command
+participant ":FindCommand" as FINDCOMMAND COMMAND_COLOR
+participant ":Command" as COMMAND COMMAND_COLOR
+end box
+
+participant ":Logger" as LOGGER
+participant ":Book" as BOOK
+
+MAIN -[#grey]> UI : readCommand()
+activate MAIN #grey
+activate UI UI_COLOR
+
+user -[USER_COLOR]> UI : "find /t TITLE"
+UI --[UI_COLOR]> MAIN : "find /t TITLE"
+deactivate UI UI_COLOR
+MAIN -[#grey]> PARSER : process("find /t TITLE")
+activate PARSER PARSER_COLOR
+
+alt containsKey
+    PARSER -[PARSER_COLOR]> PARSER: removeFirstWord("find /t TITLE")
+    activate PARSER PARSER_COLOR
+    PARSER --[PARSER_COLOR]> PARSER : "/t TITLE"
+    deactivate PARSER PARSER_COLOR
+    PARSER -[PARSER_COLOR]> FINDCOMMAND: execute("/t TITLE")
+    activate FINDCOMMAND COMMAND_COLOR
+else noKey
+    PARSER --[PARSER_COLOR]> MAIN :
+end
+
+FINDCOMMAND -[COMMAND_COLOR]> COMMAND : parseArg("/t TITLE")
+activate COMMAND COMMAND_COLOR
+COMMAND --[COMMAND_COLOR]> FINDCOMMAND : String[] values
+
+FINDCOMMAND -[COMMAND_COLOR]> COMMAND : validate("/t TITLE", values)
+COMMAND --[COMMAND_COLOR]> FINDCOMMAND :
+
+deactivate COMMAND COMMAND_COLOR
+
+FINDCOMMAND -[COMMAND_COLOR]> FINDCOMMAND : Check if all values are null
+activate FINDCOMMAND COMMAND_COLOR
+FINDCOMMAND --[COMMAND_COLOR]> user : IllegalArgumentException
+deactivate FINDCOMMAND COMMAND_COLOR
+
+FINDCOMMAND -[COMMAND_COLOR]> PARSER : resourceList
+activate PARSER PARSER_COLOR
+PARSER --[PARSER_COLOR]> FINDCOMMAND : List of resources
+deactivate PARSER PARSER_COLOR
+
+loop for each Resource in resourceList
+    FINDCOMMAND -[COMMAND_COLOR]> BOOK: getTitle(), getISBN(), getAuthor()
+    activate BOOK 
+    BOOK --[COMMAND_COLOR]> FINDCOMMAND
+    deactivate BOOK 
+    FINDCOMMAND -[COMMAND_COLOR]> FINDCOMMAND : Check if resource matches filters
+    activate FINDCOMMAND COMMAND_COLOR
+    FINDCOMMAND --[COMMAND_COLOR]> FINDCOMMAND : Add to matchedResources
+    deactivate FINDCOMMAND COMMAND_COLOR
+end
+
+FINDCOMMAND -[COMMAND_COLOR]> FINDCOMMAND : Check if matchedResources is empty
+activate FINDCOMMAND COMMAND_COLOR
+FINDCOMMAND --[COMMAND_COLOR]> LOGGER : warning("No resources matched the given filters.")
+activate LOGGER 
+LOGGER --[COMMAND_COLOR]> FINDCOMMAND
+deactivate LOGGER
+
+deactivate FINDCOMMAND COMMAND_COLOR
+
+FINDCOMMAND --[COMMAND_COLOR]> PARSER
+deactivate FINDCOMMAND COMMAND_COLOR
+deactivate FINDCOMMAND COMMAND_COLOR
+
+PARSER --[PARSER_COLOR]> MAIN :
+deactivate PARSER PARSER_COLOR
+@enduml

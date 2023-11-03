@@ -6,9 +6,8 @@ import seedu.data.Resource;
 import seedu.data.Status;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
+import seedu.commands.CommandResult;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,10 +19,8 @@ public class TestUtil {
     public String getOutputMessage(Command c, String m, List<Resource> resourceList) throws SysLibException {
         Parser parser = new Parser();
         parser.resourceList = resourceList;
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        c.execute(m, parser);
-        return outputStream.toString();
+        CommandResult commandResult = c.execute(m, parser);
+        return commandResult.feedbackToUser;
     }
 
     public static String getCurrentDate(){

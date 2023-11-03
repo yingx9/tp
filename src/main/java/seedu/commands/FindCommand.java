@@ -19,6 +19,7 @@ public class FindCommand extends Command {
     private static final String NO_RESOURCE_FOUND_MESSAGE = "There are no resources found matching the given filters.";
     private static final String RESOURCE_FOUND_MESSAGE = "Here are resources that matched the given filters:";
     private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());
+    private static String feedbackToUser;
 
     static {
         // remove logs from showing in stdout
@@ -84,8 +85,9 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(String statement, Parser parser) throws IllegalArgumentException, SysLibException {
+    public CommandResult execute(String statement, Parser parser) throws IllegalArgumentException, SysLibException {
         assert parser != null : "Parser cannot be null!";
+        feedbackToUser = "";
         String[] value = parseArgument(statement);
         validateStatement(statement, value);
 
@@ -113,6 +115,8 @@ public class FindCommand extends Command {
             }
             ui.showLine();
         }
+
+        return new CommandResult(feedbackToUser);
     }
 
 }

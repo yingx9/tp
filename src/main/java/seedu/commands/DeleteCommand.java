@@ -9,14 +9,16 @@ import java.util.ArrayList;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 public class DeleteCommand extends Command {
+    private static String feedbackToUser;
     public DeleteCommand(){
         args = new String[]{"id"};
         required = new boolean[]{true};
     }
     @Override
-    public void execute(String statement, Parser parser) throws SysLibException {
+    public CommandResult execute(String statement, Parser parser) throws SysLibException {
         int id = parseInt(parseArgument(statement)[0]);
         assert id > 0;
+        feedbackToUser = "";
         ArrayList<Resource> removals = new ArrayList<>();
         System.out.println("Looking for ID: " + id + "...");
         for (Resource r: parser.resourceList){
@@ -32,6 +34,7 @@ public class DeleteCommand extends Command {
         } else {
             parser.resourceList.removeAll(removals);
         }
+        return new CommandResult(feedbackToUser);
     }
 
 }

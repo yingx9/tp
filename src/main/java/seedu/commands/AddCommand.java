@@ -15,15 +15,18 @@ import static seedu.ui.UI.LINEDIVIDER;
 
 
 public class AddCommand extends Command{
-
+    private static String feedbackToUser;
     public AddCommand(){
         args = new String[]{"id", "t", "a", "tag", "i", "g", "s", "l", "c", "b", "p", "ty", "is", "ed"};
         required = new boolean[]{true, true, false, true, true, false, false, false, false, false, false, false, false
                 , false};
     }
+
+
     @Override
-    public void execute(String statement, Parser parser) throws
+    public CommandResult execute(String statement, Parser parser) throws
             IllegalStateException, NumberFormatException, SysLibException {
+        feedbackToUser = "";
         String[] values = parseArgument(statement);
         validateStatement(statement, values);
         String title = values[1];
@@ -55,5 +58,7 @@ public class AddCommand extends Command{
                     LINEDIVIDER);
         }
         System.out.println(LINEDIVIDER);
+
+        return new CommandResult(feedbackToUser);
     }
 }

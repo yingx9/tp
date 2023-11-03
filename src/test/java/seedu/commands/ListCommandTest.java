@@ -16,7 +16,6 @@ import static seedu.commands.ListCommand.GENERIC_MESSAGE;
 import static seedu.commands.ListCommand.FILTER_MESSAGE;
 import static seedu.commands.ListCommand.ZERO_RESOURCES_MESSAGE;
 
-import static seedu.ui.UI.LINESEPARATOR;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,7 +41,7 @@ public class ListCommandTest {
     public void testEmptyListMessage() throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(listCommand, "", emptyResourceList);
         String expectedMessage = GENERIC_MESSAGE;
-        expectedMessage +=  ZERO_RESOURCES_MESSAGE + LINESEPARATOR;
+        expectedMessage +=  ZERO_RESOURCES_MESSAGE;
         assertEquals(expectedMessage, outputMessage);
 
     }
@@ -64,7 +63,7 @@ public class ListCommandTest {
     public void testNoFilteredListDisplay() throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(listCommand, "/g Thriller", testResourceList);
         String expectedMessage = FILTER_MESSAGE;
-        expectedMessage += ZERO_RESOURCES_MESSAGE + LINESEPARATOR;
+        expectedMessage += ZERO_RESOURCES_MESSAGE;
         assertEquals(expectedMessage, outputMessage);
 
     }
