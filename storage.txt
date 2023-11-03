@@ -1,1 +1,4 @@
-R | Moby Dick | false | 123 | 1 | B | 123456789 | AVAILABLE | 2023-11-02T14:33:13.640545800 | Herman Melville | Adventure,    Fiction
+R | Moby Dick | false | 123 | 1 | B | 123456789 | AVAILABLE | 2023-11-02T14:33:13.640545800 | Herman Melville | Adventure,     Fiction
+E | Meet and Greet for xxx | buffet style | Wed Nov 10 00:00:00 SGT 2010
+E | Fan meetup for abc | null | Wed Nov 11 00:00:00 SGT 2020
+E | Fan meetup for def | queens! | Thu Nov 11 00:00:00 SGT 2021

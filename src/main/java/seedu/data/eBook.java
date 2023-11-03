@@ -1,10 +1,10 @@
 package seedu.data;
 
-public class eBook extends Book{
+public class EBook extends Book{
     public static final String EBOOK_TAG = "EB";
     private String link;
 
-    public eBook(String title, String isbn, String author, String[] genres, int id, Status status, String link) {
+    public EBook(String title, String isbn, String author, String[] genres, int id, Status status, String link) {
         super(title, isbn, author, genres, id, status);
         setTag(EBOOK_TAG);
         setLink(link);

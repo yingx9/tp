@@ -8,9 +8,9 @@ import static seedu.data.Book.BOOK_TAG;
 import static seedu.data.CD.CD_TAG;
 import static seedu.data.Magazine.MAGAZINE_TAG;
 import static seedu.data.Newspaper.NEWSPAPER_TAG;
-import static seedu.data.eBook.EBOOK_TAG;
-import static seedu.data.eMagazine.EMAGAZINE_TAG;
-import static seedu.data.eNewspaper.ENEWSPAPER_TAG;
+import static seedu.data.EBook.EBOOK_TAG;
+import static seedu.data.EMagazine.EMAGAZINE_TAG;
+import static seedu.data.ENewspaper.ENEWSPAPER_TAG;
 import static seedu.ui.UI.LINEDIVIDER;
 
 

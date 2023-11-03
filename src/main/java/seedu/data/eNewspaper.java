@@ -1,10 +1,10 @@
 package seedu.data;
 
-public class eNewspaper extends Newspaper{
+public class ENewspaper extends Newspaper{
     public static final String ENEWSPAPER_TAG = "EN";
     private String link;
 
-    public eNewspaper(String title, String isbn, String creator, String type, int id, Status status, String link) {
+    public ENewspaper(String title, String isbn, String creator, String type, int id, Status status, String link) {
         super(title, isbn, creator, type, id, status);
         setTag(ENEWSPAPER_TAG);
         setLink(link);

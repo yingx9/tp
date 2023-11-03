@@ -28,7 +28,7 @@ public class CreateResource {
         return new Book(title, isbn, author, genres, id, status);
     }
 
-    public static eBook createEBook(String[] args) throws IllegalStateException, NumberFormatException {
+    public static EBook createEBook(String[] args) throws IllegalStateException, NumberFormatException {
         int id;
         try {
             id = Integer.parseInt(args[0]);
@@ -49,7 +49,7 @@ public class CreateResource {
             genres = genre.split(", ");
         }
 
-        return new eBook(title, isbn, author, genres, id, status, link);
+        return new EBook(title, isbn, author, genres, id, status, link);
     }
 
     public static CD createCD(String[] args) throws IllegalStateException, NumberFormatException {
@@ -101,7 +101,7 @@ public class CreateResource {
         String issue = args[12];
         String link = args[7];
 
-        return new eMagazine(title, isbn, brand, issue, id, status, link);
+        return new EMagazine(title, isbn, brand, issue, id, status, link);
     }
 
     public static Newspaper createNewspaper(String[] args) throws IllegalStateException, NumberFormatException {
@@ -121,7 +121,7 @@ public class CreateResource {
         return new Newspaper(title, isbn, publisher, edition, id, status);
     }
 
-    public static eNewspaper createENewspaper(String[] args) throws IllegalStateException, NumberFormatException {
+    public static ENewspaper createENewspaper(String[] args) throws IllegalStateException, NumberFormatException {
         int id;
         try {
             id = Integer.parseInt(args[0]);
@@ -136,6 +136,6 @@ public class CreateResource {
         String edition = args[13];
         String link = args[7];
 
-        return new eNewspaper(title, isbn, publisher, edition, id, status, link);
+        return new ENewspaper(title, isbn, publisher, edition, id, status, link);
     }
 }
