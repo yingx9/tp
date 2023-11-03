@@ -14,6 +14,10 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class FindCommand extends Command {
+    public static final int FIRST_INDEX = 0;
+    public static final int SECOND_INDEX = 1;
+    public static final int THIRD_INDEX = 2;
+    public static final int FOURTH_INDEX = 3;
     private static final String INVALID_ARGUMENT_MESSAGE = "Please use the format 'find [/t TITLE OR "
             + "/i ISBN OR /a AUTHOR OR /id ID]'\n" + "____________________________________________________________";
     private static final String NO_RESOURCE_FOUND_MESSAGE = "There are no resources found matching the given filters.";
@@ -88,11 +92,11 @@ public class FindCommand extends Command {
     public CommandResult execute(String statement, Parser parser) throws IllegalArgumentException, SysLibException {
         assert parser != null : "Parser cannot be null!";
         feedbackToUser = "";
-        String[] value = parseArgument(statement);
-        validateStatement(statement, value);
+        String[] values = parseArgument(statement);
+        validateStatement(statement, values);
 
         // all null
-        if (value[3]==null && value[2]==null && value[1]==null && value[0]==null) {
+        if (values[FOURTH_INDEX]==null && values[THIRD_INDEX]==null && values[SECOND_INDEX]==null && values[FIRST_INDEX]==null) {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE + System.lineSeparator());
         }
 
@@ -101,25 +105,25 @@ public class FindCommand extends Command {
             Book b = (Book) resource;
             boolean isMatch = true;
 
-            if (value[3] != null && !b.getTitle().equals(value[3])) {
+            if (values[FIRST_INDEX] != null && b.getId() != Integer.parseInt(values[FIRST_INDEX])) {
                 isMatch = false;
             }
 
-            if (value[1] != null && !b.getISBN().equals(value[1])) {
+            if (values[SECOND_INDEX] != null && !b.getISBN().equals(values[SECOND_INDEX])) {
                 isMatch = false;
             }
 
-            if (value[2] != null && !b.getAuthor().equals(value[2])) {
+            if (values[THIRD_INDEX] != null && !b.getAuthor().equals(values[THIRD_INDEX])) {
                 isMatch = false;
             }
 
-            if (value[0] != null && b.getId() != Integer.parseInt(value[0])) {
+            if (values[FOURTH_INDEX] != null && !b.getTitle().equals(values[FOURTH_INDEX])) {
                 isMatch = false;
             }
 
             // If all non-null criteria matched, add the book to the list
             if (isMatch) {
-                LOGGER.info(String.format("Resource %s matched given arguments.", b.getTitle()));
+                LOGGER.info(String.format("Resource with name: %s matched given arguments.", b.getTitle()));
                 matchedResources.add(b);
             }
         }
