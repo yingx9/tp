@@ -20,7 +20,6 @@ import seedu.data.Status;
 import seedu.exception.SysLibException;
 import seedu.data.Event;
 import seedu.parser.Parser;
-import seedu.ui.UI;
 
 public class Storage {
     public static final int FIRST_INDEX = 0;
