@@ -45,6 +45,9 @@ This section provides details on how certain features are implemented.
 
 The `find` command allows users to search for resources based on specified filters such as author (`/a`), ISBN (`/i`), ID (`/id`), and title (`/t`). The results will show all resources that match any of the given filters.
 
+> For non-book resources, `author` refers to `publisher`,`creator` and `brand` for Newspapers, CD's and Magazines
+> respectively.
+
 `find` has the following options:
 - `find /id [ID]`
 - `find /t [TITLE]`
@@ -102,7 +105,7 @@ Upon receiving the `find` command, the system will:
 5. **Combining Filters**
     - Test case: `find /a "F. Scott Fitzgerald" /t "The Great Gatsby"`
 
-      Expected: Resources that match either the title "The Great Gatsby" or the author "F. Scott Fitzgerald" are displayed.
+      Expected: Resources that match both the title "The Great Gatsby" and the author "F. Scott Fitzgerald" are displayed.
 
 
 ### Add Resource Feature

@@ -216,6 +216,11 @@ ____________________________________________________________
 ## Find specific listings: `find` | [Return to contents](#contents)
 Find a resource by title, author, ISBN or given id.
 
+You can use multiple filters, and only results that match ALL the given criteria will be returned.
+
+> For non-book resources, `author` refers to `publisher`,`creator` and `brand` for Newspapers, CD's and Magazines 
+> respectively.
+
 Format: `find [/t TITLE OR /i ISBN OR /a AUTHOR OR /id ID]`
 
 **Example input:**
@@ -353,7 +358,7 @@ Commands available:
 add: adds a new resource to the library inventory.(e.g. add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE])
 delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
 list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
-find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
+find: find a resource by title, author(same as publisher/creator/brand), ISBN or given id. (e.g. find /i 9780763630188)
 edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)
 eventadd: Add an event to the event list (e.g. eventadd /t TITLE /date DATE [/desc DESCRIPTION])
 eventlist: List out all the event list (e.g. eventlist)
