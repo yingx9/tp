@@ -49,8 +49,8 @@ public class FindCommand extends Command {
     protected UI ui;
 
     public FindCommand(){
-        args = new String[]{"id", "i", "t", "tag"};
-        required = new boolean[]{false, false, false, false, true};
+        args = new String[]{"id", "i", "t", "a"};
+        required = new boolean[]{false, false, false, false};
         ui = new UI();
         LOGGER.info("FindCommand instance created.");
     }
