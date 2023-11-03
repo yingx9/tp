@@ -301,15 +301,6 @@ Format: `eventlist`
 ```
 eventlist
 ```
-**Example output:**
-```
-This is the current event list:
-0: birthday | 10-12-2001 | null
-____________________________________________________________
-```
-
-## Delete event: `eventdelete` | [Return to contents](#contents)
-Delete an event in the event list based on the index
 
 **Example output:**
 ```
@@ -331,12 +322,6 @@ Format: `eventdelete /i INDEX`
 **Example input:**
 ```
 eventdelete /i 0
-```
-
-**Example output:**
-```
-This event is removed:
-birthday | 10-12-2001 | null
 ```
 
 **Example output:**
