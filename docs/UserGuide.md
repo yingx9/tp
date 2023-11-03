@@ -10,6 +10,10 @@ This user guide is for System Librarians to ensure optimal use of Syslib
     * [List items: `list`](#list-all-items-list--return-to-contents)
     * [Find listing by search parameter: `find`](#find-specific-listings-find--return-to-contents)
     * [Edit a listing: `edit`](#edit-a-listing-edit--return-to-contents)
+    * [Events](#events--return-to-contents)
+      * [Event adding: `eventadd`](#event-adding-eventadd--return-to-contents)
+      * [Event listing: `eventlist`](#event-listing-eventlist--return-to-contents)
+      * [Event delete: `eventdelete`](#event-delete-eventdelete--return-to-contents)
     * [Exiting the program : `exit`](#exiting-the-program--exit--return-to-contents)
     * [Get help: `help`](#viewing-help--help--return-to-contents)
 * [FAQ](#faq--return-to-contents)
@@ -62,8 +66,8 @@ Adds a new resource to the library inventory.
 >> i.e. `[eB]` is an eBook, `[eM]` is an eMagazine
 
 ### Add Book
-#### Notes about genre:
-Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
+>Notes about genre:
+> - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
 
 Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]...`
 
@@ -79,8 +83,8 @@ ____________________________________________________________
 ```
 
 ### Add eBook
-#### Notes about genre:
-Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
+>Notes about genre:
+> - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
 
 Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN /l LINK [/g GENRE /s STATUS]...`
 
@@ -96,6 +100,7 @@ ____________________________________________________________
 
 ### Add CD
 Format: `add /id ID /t TITLE /c CREATOR /ty TYPE /tag TAG /i ISBN [/s STATUS]...`
+
 **Example input:**
 ```
 add /id 123456789 /t Moby Dick /c Herman Melville /ty Audio Book /tag CD /i 9780763630188 
@@ -108,6 +113,7 @@ ____________________________________________________________
 
 ### Add Magazine
 Format: `add /id ID /t TITLE /b BRAND /is ISSUE /tag TAG /i ISBN [/s STATUS]...`
+
 **Example input:**
 ```
 add /id 123456789 /t 2023 Hottest Trends /b Vogue /is AY23-01 /tag M /i 9780763630188 
@@ -120,6 +126,7 @@ ____________________________________________________________
 
 ### Add eMagazine
 Format: `add /id ID /t TITLE /b BRAND /is ISSUE /tag TAG /i ISBN /l LINK [/s STATUS]...`
+
 **Example input:**
 ```
 add /id 123456789 /t 2023 Hottest Trends /b Vogue /is AY23-01 /tag eM /i 9780763630188 /l abc.com
@@ -144,6 +151,7 @@ ____________________________________________________________
 
 ### Add eNewspaper
 Format: `add /id ID /t TITLE /p PUBLISHER /ed EDITION /tag TAG /i ISBN /l LINK [/s STATUS]...`
+
 **Example input:**
 ```
 add /id 123456789 /t Forbes 30 Under 30 2023 /p The Straits Times /ed AY23-30 /tag eN /i 9780763630188 /l abc.com
@@ -252,6 +260,71 @@ Successfully updated! Your updated resource:
 [B]  ID: 12312 Title: Mary ISBN: 123 Author: John Genre: Horror, Adventure Status: LOST
 ____________________________________________________________
 ```
+## Events | [Return to contents](#contents)
+>Note:
+> - Events are stored separately from resources
+> - They are stored in chronological order(events that are happening sooner are closer to index 0)
+
+## Event adding: `eventadd` | [Return to contents](#contents)
+>Notes about description:
+> - `desc` is optional for all events
+> - Event without descriptions with have it as `null`
+
+Add an event to the eventList
+
+Format: `eventadd /t TITLE /date DATE [/desc DESCRIPTION]`
+
+**Example input:**
+```
+eventadd /t Fan meetup for xxx /date 11-11-2001
+eventadd /t Meet and Greet for xxx /date 10-11-2010 /desc buffet style
+```
+
+**Example output:**
+```
+Event inserted at: 0
+____________________________________________________________
+```
+
+## Event listing: `eventlist` | [Return to contents](#contents)
+
+Display all events in the eventList
+
+Format: `eventlist`
+
+**Example input:**
+```
+eventlist
+```
+
+**Example output:**
+```
+This is the current event list:
+0: Fan meetup for xxx | 11-11-2001 | null
+1: Meet and Greet for xxx | 10-11-2010 | buffet style
+____________________________________________________________
+```
+
+## Event delete: `eventdelete` | [Return to contents](#contents)
+>Notes about INDEX:
+> - INDEX starts from 0 and can be viewed by calling `eventlist`
+> - INDEX might change as those with earlier dates are sorted first
+
+Delete an event to the eventList
+
+Format: `eventdelete /i INDEX`
+
+**Example input:**
+```
+eventdelete /i 0
+```
+
+**Example output:**
+```
+This event is removed:
+Fan meetup for xxx | 11-11-2001 | null
+____________________________________________________________
+```
 
 ## Exiting the program : `exit` | [Return to contents](#contents)
 Displays a farewell message and exits the program.
@@ -305,9 +378,9 @@ ____________________________________________________________
 | Find specific listing | `find [/t <title of listing> OR /i <ISBN of item> OR /a AUTHOR OR /id ID]`                                 |
 | Edit a listing        | `edit /i ISBN [/t <title of listing> /a AUTHOR /id ID /tag <type of item> /g <genre of item>] /s <status>` |
 | Exit                  | `exit`                                                                                                     |
-| Add Event             | `eventadd /t TITLE /date DATE [/desc DESCRIPTION]` (Format for date DD-MM-YYYY)                            |
-| Delete Event          | `eventdelete /i INDEX`                                                                                     |
-| Add Event             | `eventlist`                                                                                                |
+| Event Add             | `eventadd /t TITLE /date DATE [/desc DESCRIPTION]` (Format for date DD-MM-YYYY)                            |
+| Event Delete          | `eventdelete /i INDEX`                                                                                     |
+| Event Listing         | `eventlist`                                                                                                |
 | View help             | `help`                                                                                                     |
 | Exit                  | `exit`                                                                                                     |
 
