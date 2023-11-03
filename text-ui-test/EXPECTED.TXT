@@ -12,7 +12,7 @@ ____________________________________________________________
 > This book is added: Moby Dick
 ____________________________________________________________
 > Here are resources that matched the given filters:
-[B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 02 Nov 2023
+[B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 03 Nov 2023
 ____________________________________________________________
 > Commands available:
 add: adds a new resource to the library inventory.(e.g. add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS])
@@ -29,14 +29,14 @@ ____________________________________________________________
 > 
 Listing all resources in the Library:
 
-1. [B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 02 Nov 2023
+1. [B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 03 Nov 2023
 
 There are currently 1 resource(s).
 ____________________________________________________________
 > 
 Listing resources matching given filters: 
 
-1. [B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 02 Nov 2023
+1. [B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 03 Nov 2023
 
 There are currently 1 resource(s).
 ____________________________________________________________
@@ -48,19 +48,19 @@ There are currently 0 resources.
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 02 Nov 2023
+[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 03 Nov 2023
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: BORROWED Received Date: 02 Nov 2023
+[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: BORROWED Received Date: 03 Nov 2023
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 02 Nov 2023
+[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 03 Nov 2023
 ____________________________________________________________
 > Looking for ID: 123456789...
 This resource is removed: 
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 02 Nov 2023
+[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 03 Nov 2023
 ____________________________________________________________
 > Bye, hope to see you again soon!
 ____________________________________________________________
