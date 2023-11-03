@@ -264,6 +264,7 @@ Successfully updated! Your updated resource:
 [B]  ID: 12312 Title: Mary ISBN: 123 Author: John Genre: Horror, Adventure Status: LOST
 ____________________________________________________________
 ```
+
 ## Events | [Return to contents](#contents)
 >Note:
 > - Events are stored separately from resources
