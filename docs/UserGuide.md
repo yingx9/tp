@@ -58,13 +58,10 @@ Adds a new resource to the library inventory.
 `[N]` - Newspapers
 
 > Note:
-<<<<<<< HEAD
 > - Anything with `e` prior is an electronic version 
->> i.e. `[eB]` is an eBook, `[eM]` is an eMagazine, `[eN]` is an eNewspaper
-=======
+> i.e. `[eB]` is an eBook, `[eM]` is an eMagazine, `[eN]` is an eNewspaper
 > - Anything with `e` prior is an electronic version
->> i.e. `[eB]` is an eBook, `[eM]` is an eMagazine
->>>>>>> bf85077b8ffc0742d3e57802761516c0a7f71acc
+> i.e. `[eB]` is an eBook, `[eM]` is an eMagazine
 
 ### Add Book
 #### Notes about genre:
@@ -82,6 +79,8 @@ add /id 123456789 /t Harry Squatter /a J.K. /tag B /i 9780763630187 /g History /
 This book is added: Moby Dick
 ____________________________________________________________
 ```
+
+### (NOTE: Addition of resources other than Book is only available in v2.1)
 
 ### Add eBook
 #### Notes about genre:

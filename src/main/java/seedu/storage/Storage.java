@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import seedu.data.Book;
-import seedu.data.eBook;
-import seedu.data.eMagazine;
+import seedu.data.EBook;
+import seedu.data.EMagazine;
 import seedu.data.Magazine;
-import seedu.data.eNewspaper;
+import seedu.data.ENewspaper;
 import seedu.data.Newspaper;
 import seedu.data.CD;
 import seedu.data.Resource;
@@ -82,7 +82,7 @@ public class Storage {
                             String eauthor = splitLineArguments[TENTH_INDEX].trim();
                             String[] egenres = splitLineArguments[ELEVENTH_INDEX].split(",");
                             String blink = splitLineArguments[11];
-                            eBook ebookToAdd = new eBook(title, isbn, eauthor, egenres, id, status, blink);
+                            EBook ebookToAdd = new EBook(title, isbn, eauthor, egenres, id, status, blink);
                             ebookToAdd.setCopies(copies);
                             ebookToAdd.setBorrowed(isBorrowed);
                             ebookToAdd.setReceivedDateCustom(ldt);
@@ -103,7 +103,7 @@ public class Storage {
                             String epublisher = splitLineArguments[TENTH_INDEX].trim();
                             String eedition = splitLineArguments[ELEVENTH_INDEX].trim();
                             String nlink = splitLineArguments[11];
-                            eNewspaper enewspaperToAdd = new eNewspaper(title, isbn, epublisher, eedition,
+                            ENewspaper enewspaperToAdd = new ENewspaper(title, isbn, epublisher, eedition,
                                     id, status, nlink);
                             enewspaperToAdd.setCopies(copies);
                             enewspaperToAdd.setBorrowed(isBorrowed);
@@ -125,7 +125,7 @@ public class Storage {
                             String ebrand = splitLineArguments[TENTH_INDEX].trim();
                             String eissue = splitLineArguments[ELEVENTH_INDEX].trim();
                             String mlink = splitLineArguments[TWELFTH_INDEX];
-                            eMagazine emagazineToAdd = new eMagazine(title, isbn, ebrand, eissue, id,
+                            EMagazine emagazineToAdd = new EMagazine(title, isbn, ebrand, eissue, id,
                                     status, mlink);
                             emagazineToAdd.setCopies(copies);
                             emagazineToAdd.setBorrowed(isBorrowed);
@@ -187,7 +187,7 @@ public class Storage {
                             String.join(", ", book.getGenre()));
                     break;
                 case "EB": // eBook
-                    eBook ebook = (eBook) resourceToSave;
+                    EBook ebook = (EBook) resourceToSave;
                     resourceSaveFormat = String.format("R | %s | %b | %s | %d | %s | %s | %s | %s | %s | %s | %s%n",
                             ebook.getTitle(),
                             ebook.isBorrowed(),
@@ -230,7 +230,7 @@ public class Storage {
                             magazine.getIssue());
                     break;
                 case "EM": // eMagazine
-                    eMagazine emagazine = (eMagazine) resourceToSave;
+                    EMagazine emagazine = (EMagazine) resourceToSave;
                     resourceSaveFormat = String.format("R | %s | %b | %s | %d | %s | %s | %s | %s | %s%n",
                             emagazine.getTitle(),
                             emagazine.isBorrowed(),
@@ -257,7 +257,7 @@ public class Storage {
                             newspaper.getEdition());
                     break;
                 case "EN": // eNewspaper
-                    eNewspaper enewspaper = (eNewspaper) resourceToSave;
+                    ENewspaper enewspaper = (ENewspaper) resourceToSave;
                     resourceSaveFormat = String.format("R | %s | %b | %s | %d | %s | %s | %s | %s | %s%n",
                             enewspaper.getTitle(),
                             enewspaper.isBorrowed(),
