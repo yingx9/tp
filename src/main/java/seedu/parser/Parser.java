@@ -3,9 +3,9 @@ package seedu.parser;
 import seedu.commands.events.EventAddCommand;
 import seedu.commands.events.EventDeleteCommand;
 import seedu.commands.events.EventListCommand;
-import seedu.data.Resource;
+import seedu.data.resources.Resource;
 import seedu.data.Status;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.data.Event;
 
 import seedu.commands.Command;

@@ -1,6 +1,6 @@
 package seedu.commands;
 
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
 import java.util.regex.Matcher;

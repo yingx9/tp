@@ -1,7 +1,7 @@
 package seedu.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import static seedu.util.TestUtil.getCurrentDate;
 

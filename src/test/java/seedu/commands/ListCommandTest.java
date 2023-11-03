@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import seedu.data.Resource;
-import seedu.data.SysLibException;
+import seedu.data.resources.Resource;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.util.TestUtil;
 

@@ -1,4 +1,6 @@
-package seedu.data;
+package seedu.data.resources;
+
+import seedu.data.Status;
 
 public class EMagazine extends Magazine {
     public static final String EMAGAZINE_TAG = "EM";

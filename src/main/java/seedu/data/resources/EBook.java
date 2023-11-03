@@ -1,4 +1,6 @@
-package seedu.data;
+package seedu.data.resources;
+
+import seedu.data.Status;
 
 public class EBook extends Book{
     public static final String EBOOK_TAG = "EB";

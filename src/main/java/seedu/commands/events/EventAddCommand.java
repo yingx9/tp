@@ -3,7 +3,7 @@ package seedu.commands.events;
 import seedu.commands.Command;
 import seedu.commands.CommandResult;
 import seedu.data.Event;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
 import java.text.ParseException;

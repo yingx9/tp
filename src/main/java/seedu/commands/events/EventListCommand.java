@@ -2,7 +2,7 @@ package seedu.commands.events;
 
 import seedu.commands.Command;
 import seedu.commands.CommandResult;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
 public class EventListCommand extends Command {
@@ -12,6 +12,7 @@ public class EventListCommand extends Command {
     @Override
     public CommandResult execute(String statement, Parser parser) throws
             IllegalArgumentException, IllegalStateException, SysLibException {
+        feedbackToUser = "";
         if (!statement.isEmpty()){
             throw new IllegalArgumentException("'eventlist' command does not require arguments!");
         }

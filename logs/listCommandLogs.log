@@ -70,3 +70,139 @@ Nov 03, 2023 1:03:37 PM seedu.commands.ListCommand execute
 INFO: List Command execute with 
 Nov 03, 2023 1:03:37 PM seedu.commands.ListCommand execute
 INFO: List Command ends
+Nov 03, 2023 4:31:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 4:31:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 4:32:48 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 4:32:48 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 4:40:31 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 4:40:31 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 4:46:33 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 4:46:33 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 5:45:48 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 5:45:48 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 5:46:00 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 03, 2023 5:46:00 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 5:46:00 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 03, 2023 5:46:00 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 5:46:00 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 5:46:00 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 03, 2023 5:46:01 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 5:46:01 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 5:49:30 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 5:49:30 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 5:49:48 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 5:49:48 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 5:50:14 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 5:50:14 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 5:52:46 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 5:52:46 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:00:58 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 03, 2023 6:00:58 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:00:58 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 03, 2023 6:00:58 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:00:58 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:00:58 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 03, 2023 6:00:58 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:00:58 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:01:47 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 03, 2023 6:01:47 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:01:47 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 03, 2023 6:01:47 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:01:47 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:01:47 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 03, 2023 6:01:47 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:01:47 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:03:56 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 03, 2023 6:03:56 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:03:56 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 03, 2023 6:03:56 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:03:56 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:03:56 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 03, 2023 6:03:56 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:03:56 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:09:09 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 03, 2023 6:09:09 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:09:09 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 03, 2023 6:09:09 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:09:09 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:09:09 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 03, 2023 6:09:09 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:09:09 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:09:30 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:09:30 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 6:10:40 PM seedu.commands.ListCommand execute
+INFO: List Command ends

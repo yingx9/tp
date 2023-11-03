@@ -1,6 +1,8 @@
-package seedu.data;
+package seedu.data.resources;
 
-public class Magazine extends Resource{
+import seedu.data.Status;
+
+public class Magazine extends Resource {
     public static final String MAGAZINE_TAG = "M";
     private String brand;
     private String issue;

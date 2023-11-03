@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import seedu.data.Book;
-import seedu.data.EBook;
-import seedu.data.EMagazine;
-import seedu.data.Magazine;
-import seedu.data.ENewspaper;
-import seedu.data.Newspaper;
-import seedu.data.CD;
-import seedu.data.Resource;
+import seedu.data.resources.Book;
+import seedu.data.resources.EBook;
+import seedu.data.resources.EMagazine;
+import seedu.data.resources.Magazine;
+import seedu.data.resources.ENewspaper;
+import seedu.data.resources.Newspaper;
+import seedu.data.resources.CD;
+import seedu.data.resources.Resource;
 import seedu.data.Status;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.data.Event;
 import seedu.parser.Parser;
 
@@ -43,7 +43,6 @@ public class Storage {
         this.filePath = filePath;
         this.dataFile = new File(filePath);
         this.parser = parser;
-
     }
 
     public List<Resource> load() throws SysLibException {
@@ -57,16 +56,17 @@ public class Storage {
                 while (dataScanner.hasNext()) {
                     String dataLine = dataScanner.nextLine();
                     String[] splitLineArguments = dataLine.split(" \\| ");
-                    String title = splitLineArguments[SECOND_INDEX].trim();
-                    boolean isBorrowed = Boolean.parseBoolean(splitLineArguments[THIRD_INDEX].trim());
-                    String isbn = splitLineArguments[FOURTH_INDEX].trim();
-                    int copies = Integer.parseInt(splitLineArguments[FIFTH_INDEX].trim());
-                    String tag = splitLineArguments[SIXTH_INDEX].trim();
-                    int id = Integer.parseInt(splitLineArguments[SEVENTH_INDEX].trim());
-                    Status status = Status.valueOf(splitLineArguments[EIGHTH_INDEX].trim());
-                    LocalDateTime ldt = LocalDateTime.parse(splitLineArguments[NINTH_INDEX].trim());
 
                     if (splitLineArguments[FIRST_INDEX].equals("R")) {
+                        String title = splitLineArguments[SECOND_INDEX].trim();
+                        boolean isBorrowed = Boolean.parseBoolean(splitLineArguments[THIRD_INDEX].trim());
+                        String isbn = splitLineArguments[FOURTH_INDEX].trim();
+                        int copies = Integer.parseInt(splitLineArguments[FIFTH_INDEX].trim());
+                        String tag = splitLineArguments[SIXTH_INDEX].trim();
+                        int id = Integer.parseInt(splitLineArguments[SEVENTH_INDEX].trim());
+                        Status status = Status.valueOf(splitLineArguments[EIGHTH_INDEX].trim());
+                        LocalDateTime ldt = LocalDateTime.parse(splitLineArguments[NINTH_INDEX].trim());
+
                         switch(tag){
                         case "B":
                             String author = splitLineArguments[TENTH_INDEX].trim();
@@ -152,7 +152,7 @@ public class Storage {
                         // String description = splitLineArguments[THIRD_INDEX];
                         // Date eventldt = parseDate(splitLineArguments[FOURTH_INDEX]);
                         // Event newEventToAdd = new Event(name, eventldt, description);
-                        System.out.println("Not handled yet");
+                        System.out.println("Event loading not implemented yet.");
                     } else {
                         throw new SysLibException("Unknown data type found, data corrupted.");
                     }

@@ -1,8 +1,8 @@
 package seedu.commands;
 
-import seedu.data.Book;
-import seedu.data.Resource;
-import seedu.data.SysLibException;
+import seedu.data.resources.Book;
+import seedu.data.resources.Resource;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.ui.UI;
 
@@ -14,6 +14,10 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class FindCommand extends Command {
+    public static final int FIRST_INDEX = 0;
+    public static final int SECOND_INDEX = 1;
+    public static final int THIRD_INDEX = 2;
+    public static final int FOURTH_INDEX = 3;
     private static final String INVALID_ARGUMENT_MESSAGE = "Please use the format 'find [/t TITLE OR "
             + "/i ISBN OR /a AUTHOR OR /id ID]'\n" + "____________________________________________________________";
     private static final String NO_RESOURCE_FOUND_MESSAGE = "There are no resources found matching the given filters.";
@@ -88,23 +92,45 @@ public class FindCommand extends Command {
     public CommandResult execute(String statement, Parser parser) throws IllegalArgumentException, SysLibException {
         assert parser != null : "Parser cannot be null!";
         feedbackToUser = "";
-        String[] value = parseArgument(statement);
-        validateStatement(statement, value);
+        String[] values = parseArgument(statement);
+        validateStatement(statement, values);
 
-        if (value[3]==null && value[2]==null && value[1]==null && value[0]==null) {
+        // all null
+        if (values[FOURTH_INDEX]==null && values[THIRD_INDEX]==null && values[SECOND_INDEX]==null
+                && values[FIRST_INDEX]==null) {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE + System.lineSeparator());
         }
 
         ArrayList<Resource> matchedResources = new ArrayList<>();
-        for (Resource r: parser.resourceList){
-            Book b = (Book) r;
-            if (b.getTitle().equals(value[3]) || b.getISBN().equals(value[1]) || b.getAuthor().equals(value[2])) {
+        for (Resource resource: parser.resourceList){
+            Book b = (Book) resource;
+            boolean isMatch = true;
+
+            if (values[FIRST_INDEX] != null && b.getId() != Integer.parseInt(values[FIRST_INDEX])) {
+                isMatch = false;
+            }
+
+            if (values[SECOND_INDEX] != null && !b.getISBN().equals(values[SECOND_INDEX])) {
+                isMatch = false;
+            }
+
+            if (values[THIRD_INDEX] != null && !b.getAuthor().equals(values[THIRD_INDEX])) {
+                isMatch = false;
+            }
+
+            if (values[FOURTH_INDEX] != null && !b.getTitle().equals(values[FOURTH_INDEX])) {
+                isMatch = false;
+            }
+
+            // If all non-null criteria matched, add the book to the list
+            if (isMatch) {
+                LOGGER.info(String.format("Resource with name: %s matched given arguments.", b.getTitle()));
                 matchedResources.add(b);
             }
         }
 
         if (matchedResources.isEmpty()) {
-            LOGGER.warning("No resources matched the given filters.");
+            LOGGER.info("No resources matched the given filters.");
             System.out.println(NO_RESOURCE_FOUND_MESSAGE);
             ui.showLine();
         } else {
