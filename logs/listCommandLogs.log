@@ -66,3 +66,7 @@ Nov 02, 2023 2:46:13 PM seedu.commands.ListCommand execute
 INFO: List Command execute with 
 Nov 02, 2023 2:46:13 PM seedu.commands.ListCommand execute
 INFO: List Command ends
+Nov 03, 2023 1:03:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 03, 2023 1:03:37 PM seedu.commands.ListCommand execute
+INFO: List Command ends
