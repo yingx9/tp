@@ -109,7 +109,7 @@ public class FindCommand extends Command {
                 isMatch = false;
             }
 
-            if (values[SECOND_INDEX] != null && !resource.getISBN().equals(values[SECOND_INDEX])) {
+            if (values[SECOND_INDEX] != null && !resource.getISBN().equalsIgnoreCase(values[SECOND_INDEX])) {
                 isMatch = false;
             }
 
@@ -117,7 +117,7 @@ public class FindCommand extends Command {
                 case "B":
                 case "EB":
                     Book b = (Book) resource;
-                    if (values[THIRD_INDEX] != null && !b.getAuthor().trim().equalsIgnoreCase()equals(values[THIRD_INDEX])) {
+                    if (values[THIRD_INDEX] != null && !b.getAuthor().trim().equalsIgnoreCase((values[THIRD_INDEX]))) {
                         isMatch = false;
                     }
                     break;
@@ -147,7 +147,7 @@ public class FindCommand extends Command {
             }
 
 
-            if (values[FOURTH_INDEX] != null && !resource.getTitle().equals(values[FOURTH_INDEX])) {
+            if (values[FOURTH_INDEX] != null && !resource.getTitle().equalsIgnoreCase(values[FOURTH_INDEX])) {
                 isMatch = false;
             }
 
