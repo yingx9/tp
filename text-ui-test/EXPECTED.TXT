@@ -26,22 +26,22 @@ eventdelete: Delete an event in the event list based on the index (e.g. eventdel
 exit: displays a farewell message and exits the program (e.g. exit)
 For more information, please refer to our user guide at:https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html
 ____________________________________________________________
-> 
+>
 Listing all resources in the Library:
 
 1. [B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 03 Nov 2023
 
 There are currently 1 resource(s).
 ____________________________________________________________
-> 
-Listing resources matching given filters: 
+>
+Listing resources matching given filters:
 
 1. [B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 03 Nov 2023
 
 There are currently 1 resource(s).
 ____________________________________________________________
-> 
-Listing resources matching given filters: 
+>
+Listing resources matching given filters:
 
 
 There are currently 0 resources.
