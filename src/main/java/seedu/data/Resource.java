@@ -1,5 +1,7 @@
 package seedu.data;
 
+import seedu.data.resources.Book;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 public class Resource {

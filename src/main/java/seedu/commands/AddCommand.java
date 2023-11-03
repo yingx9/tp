@@ -1,16 +1,16 @@
 package seedu.commands;
 
 import seedu.data.CreateResource;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
-import static seedu.data.Book.BOOK_TAG;
-import static seedu.data.CD.CD_TAG;
-import static seedu.data.Magazine.MAGAZINE_TAG;
-import static seedu.data.Newspaper.NEWSPAPER_TAG;
-import static seedu.data.EBook.EBOOK_TAG;
-import static seedu.data.EMagazine.EMAGAZINE_TAG;
-import static seedu.data.ENewspaper.ENEWSPAPER_TAG;
+import static seedu.data.resources.Book.BOOK_TAG;
+import static seedu.data.resources.CD.CD_TAG;
+import static seedu.data.resources.Magazine.MAGAZINE_TAG;
+import static seedu.data.resources.Newspaper.NEWSPAPER_TAG;
+import static seedu.data.resources.EBook.EBOOK_TAG;
+import static seedu.data.resources.EMagazine.EMAGAZINE_TAG;
+import static seedu.data.resources.ENewspaper.ENEWSPAPER_TAG;
 import static seedu.ui.UI.LINEDIVIDER;
 
 

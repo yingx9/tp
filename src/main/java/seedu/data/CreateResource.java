@@ -1,5 +1,7 @@
 package seedu.data;
 
+import seedu.data.resources.*;
+
 import static seedu.parser.Parser.getStatusFromString;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 

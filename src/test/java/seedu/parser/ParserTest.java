@@ -1,10 +1,10 @@
 package seedu.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.data.Book;
+import seedu.data.resources.Book;
 import seedu.data.CreateResource;
 import seedu.data.Status;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

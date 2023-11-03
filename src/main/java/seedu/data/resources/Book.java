@@ -1,4 +1,7 @@
-package seedu.data;
+package seedu.data.resources;
+
+import seedu.data.Resource;
+import seedu.data.Status;
 
 public class Book extends Resource {
     public static final String BOOK_TAG = "B";

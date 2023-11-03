@@ -1,8 +1,8 @@
 package seedu.commands;
 
-import seedu.data.Book;
+import seedu.data.resources.Book;
 import seedu.data.Resource;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.ui.UI;
 
@@ -91,14 +91,34 @@ public class FindCommand extends Command {
         String[] value = parseArgument(statement);
         validateStatement(statement, value);
 
+        // all null
         if (value[3]==null && value[2]==null && value[1]==null && value[0]==null) {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE + System.lineSeparator());
         }
 
         ArrayList<Resource> matchedResources = new ArrayList<>();
-        for (Resource r: parser.resourceList){
-            Book b = (Book) r;
-            if (b.getTitle().equals(value[3]) || b.getISBN().equals(value[1]) || b.getAuthor().equals(value[2])) {
+        for (Resource resource: parser.resourceList){
+            Book b = (Book) resource;
+            boolean isMatch = true;
+
+            if (value[3] != null && !b.getTitle().equals(value[3])) {
+                isMatch = false;
+            }
+
+            if (value[1] != null && !b.getISBN().equals(value[1])) {
+                isMatch = false;
+            }
+
+            if (value[2] != null && !b.getAuthor().equals(value[2])) {
+                isMatch = false;
+            }
+
+            if (value[0] != null && b.getId() != Integer.parseInt(value[0])) {
+                isMatch = false;
+            }
+
+            // If all non-null criteria matched, add the book to the list
+            if (isMatch) {
                 matchedResources.add(b);
             }
         }

@@ -2,7 +2,7 @@ package seedu.commands;
 
 
 import seedu.data.Resource;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
 import java.io.IOException;

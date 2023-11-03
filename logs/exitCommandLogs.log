@@ -1,0 +1,10 @@
+Nov 03, 2023 4:32:55 PM seedu.commands.FindCommand execute
+INFO: Resources matched the given filters.
+Nov 03, 2023 4:33:01 PM seedu.commands.FindCommand execute
+INFO: Resources matched the given filters.
+Nov 03, 2023 4:33:06 PM seedu.commands.FindCommand execute
+INFO: Resources matched the given filters.
+Nov 03, 2023 4:38:42 PM seedu.commands.ExitCommand execute
+INFO: Executing ExitCommand...
+Nov 03, 2023 4:46:36 PM seedu.commands.ExitCommand execute
+INFO: Executing ExitCommand...

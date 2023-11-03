@@ -1,4 +1,7 @@
 package seedu.ui;
+import seedu.data.Resource;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class UI {
@@ -60,6 +63,12 @@ public class UI {
     public String readCommand(){
         System.out.print("> ");
         return myScanner.nextLine();
+    }
+
+    public void showLoadMessage(String filepath, List<Resource> resourcelist){
+        showLine();
+        System.out.println("Storage file found @ " + filepath);
+        System.out.printf("Loaded %d listings!%n", resourcelist.size());
     }
 
     public void showLine(){

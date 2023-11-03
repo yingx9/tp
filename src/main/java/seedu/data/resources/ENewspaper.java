@@ -1,4 +1,6 @@
-package seedu.data;
+package seedu.data.resources;
+
+import seedu.data.Status;
 
 public class ENewspaper extends Newspaper{
     public static final String ENEWSPAPER_TAG = "EN";

@@ -1,4 +1,7 @@
-package seedu.data;
+package seedu.data.resources;
+
+import seedu.data.Resource;
+import seedu.data.Status;
 
 public class Newspaper extends Resource {
     public static final String NEWSPAPER_TAG = "N";

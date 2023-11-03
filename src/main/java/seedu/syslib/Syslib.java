@@ -1,7 +1,7 @@
 package seedu.syslib;
 
 import seedu.data.Resource;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.storage.Storage;
 import seedu.ui.UI;
@@ -24,6 +24,7 @@ public class Syslib {
         try{
             List<Resource> resourceListLoad = storage.load();
             parser.setResourceList(resourceListLoad);
+            ui.showLoadMessage(filePath, parser.getResourceList());
 
         } catch (SysLibException SysLibEx){
             System.out.println(SysLibEx);

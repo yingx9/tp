@@ -1,7 +1,7 @@
 package seedu.commands.events;
 
 import org.junit.jupiter.api.Test;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
 import java.io.ByteArrayOutputStream;

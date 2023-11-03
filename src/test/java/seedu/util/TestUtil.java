@@ -1,10 +1,10 @@
 package seedu.util;
 
 import seedu.commands.Command;
-import seedu.data.Book;
+import seedu.data.resources.Book;
 import seedu.data.Resource;
 import seedu.data.Status;
-import seedu.data.SysLibException;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.commands.CommandResult;
 
