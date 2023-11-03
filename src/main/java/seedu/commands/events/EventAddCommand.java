@@ -1,6 +1,7 @@
 package seedu.commands.events;
 
 import seedu.commands.Command;
+import seedu.commands.CommandResult;
 import seedu.data.Event;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
@@ -11,19 +12,25 @@ import java.util.Date;
 
 public class EventAddCommand extends Command {
 
+    private static String feedbackToUser;
     public EventAddCommand() {
         args = new String[]{"t", "date", "desc"};
         required = new boolean[]{true, true, false};
     }
+
     @Override
-    public void execute(String statement, Parser parser)
+    public CommandResult execute(String statement, Parser parser)
             throws IllegalArgumentException, IllegalStateException, SysLibException {
+
+        feedbackToUser = "";
         String[] values = parseArgument(statement);
         Date currentDate = parseDate(values[1]);
         int index = binarySearch(parser, currentDate);
         parser.eventList.add(index, new Event(values[0], currentDate, values[2]));
         System.out.println("Event inserted at: " + index);
         System.out.println("____________________________________________________________");
+
+        return new CommandResult(feedbackToUser);
     }
 
     public static int binarySearch(Parser parser, Date key) {

@@ -5,8 +5,13 @@ import seedu.data.Resource;
 import seedu.data.SysLibException;
 import seedu.parser.Parser;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import static seedu.common.Messages.formatLineSeparator;
 import static seedu.common.Messages.formatLastLineDivider;
@@ -18,9 +23,23 @@ public class ListCommand extends Command {
     public static final String FILTER_MESSAGE  = formatFirstLine("Listing resources matching given filters: ");
     public static final String GENERIC_MESSAGE =  formatFirstLine("Listing all resources in the Library:");
     public static final String ZERO_RESOURCES_MESSAGE =  formatLastLineDivider("There are currently 0 resources.");
+    private static final Logger LIST_LOGGER = Logger.getLogger(ListCommand.class.getName());
+
     private static String tagKeyword;
     private static String genreKeyword;
     private static String feedbackToUser;
+
+
+    static {
+        try {
+            FileHandler listFileHandler = new FileHandler("logs/listCommandLogs.log", true);
+            listFileHandler.setFormatter(new SimpleFormatter());
+            LIST_LOGGER.addHandler(listFileHandler);
+        } catch (IOException e){
+            LIST_LOGGER.log(Level.INFO,"Failed to set up Logging File Handler");
+
+        }
+    }
 
     public ListCommand(){
         args = new String[]{"tag", "g"};
@@ -30,13 +49,16 @@ public class ListCommand extends Command {
 
 
     @Override
-    public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
+    public CommandResult execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
         feedbackToUser = "";
+        LIST_LOGGER.info("List Command execute with " + statement);
+
         String[] values = parseArgument(statement);
         validateStatement(statement, values);
         filterResources(values, parser.resourceList);
+        LIST_LOGGER.info("List Command ends");
+        return new CommandResult(feedbackToUser);
 
-        System.out.println(feedbackToUser);
     }
 
 
