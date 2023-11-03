@@ -1,5 +1,5 @@
 package seedu.ui;
-import seedu.data.Resource;
+import seedu.data.resources.Resource;
 
 import java.util.List;
 import java.util.Scanner;

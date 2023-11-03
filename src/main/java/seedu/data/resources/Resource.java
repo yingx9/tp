@@ -1,6 +1,6 @@
-package seedu.data;
+package seedu.data.resources;
 
-import seedu.data.resources.Book;
+import seedu.data.Status;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

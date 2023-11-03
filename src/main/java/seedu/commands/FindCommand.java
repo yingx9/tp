@@ -1,7 +1,7 @@
 package seedu.commands;
 
 import seedu.data.resources.Book;
-import seedu.data.Resource;
+import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.ui.UI;

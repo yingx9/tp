@@ -15,11 +15,12 @@ import seedu.data.resources.Magazine;
 import seedu.data.resources.ENewspaper;
 import seedu.data.resources.Newspaper;
 import seedu.data.resources.CD;
-import seedu.data.Resource;
+import seedu.data.resources.Resource;
 import seedu.data.Status;
 import seedu.exception.SysLibException;
 import seedu.data.Event;
 import seedu.parser.Parser;
+import seedu.ui.UI;
 
 public class Storage {
     public static final int FIRST_INDEX = 0;
@@ -43,7 +44,6 @@ public class Storage {
         this.filePath = filePath;
         this.dataFile = new File(filePath);
         this.parser = parser;
-
     }
 
     public List<Resource> load() throws SysLibException {

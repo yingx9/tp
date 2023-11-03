@@ -1,6 +1,5 @@
 package seedu.data.resources;
 
-import seedu.data.Resource;
 import seedu.data.Status;
 
 public class CD extends Resource {
