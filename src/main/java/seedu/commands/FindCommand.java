@@ -1,6 +1,10 @@
 package seedu.commands;
 
-import seedu.data.resources.*;
+import seedu.data.resources.Book;
+import seedu.data.resources.Magazine;
+import seedu.data.resources.Newspaper;
+import seedu.data.resources.Resource;
+import seedu.data.resources.CD;
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.ui.UI;
@@ -49,7 +53,7 @@ public class FindCommand extends Command {
     protected UI ui;
 
     public FindCommand(){
-        args = new String[]{"id", "i", "t", "a"};
+        args = new String[]{"id", "i", "a", "t"};
         required = new boolean[]{false, false, false, false};
         ui = new UI();
         LOGGER.info("FindCommand instance created.");
@@ -114,36 +118,36 @@ public class FindCommand extends Command {
             }
 
             switch (resourceType) {
-                case "B":
-                case "EB":
-                    Book b = (Book) resource;
-                    if (values[THIRD_INDEX] != null && !b.getAuthor().trim().equalsIgnoreCase((values[THIRD_INDEX]))) {
-                        isMatch = false;
-                    }
-                    break;
-                case "M":
-                case "EM":
-                    Magazine m = (Magazine) resource;
-                    if (values[THIRD_INDEX] != null && !m.getBrand().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
-                        isMatch = false;
-                    }
-                    break;
-                case "N":
-                case "EN":
-                    Newspaper n = (Newspaper) resource;
-                    if (values[THIRD_INDEX] != null && !n.getPublisher().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
-                        isMatch = false;
-                    }
-                    break;
-                case "CD":
-                    CD cd = (CD) resource;
-                    if (values[THIRD_INDEX] != null && !cd.getCreator().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
-                        isMatch = false;
-                    }
-                    break;
+            case "B":
+            case "EB":
+                Book b = (Book) resource;
+                if (values[THIRD_INDEX] != null && !b.getAuthor().trim().equalsIgnoreCase((values[THIRD_INDEX]))) {
+                    isMatch = false;
+                }
+                break;
+            case "M":
+            case "EM":
+                Magazine m = (Magazine) resource;
+                if (values[THIRD_INDEX] != null && !m.getBrand().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
+                    isMatch = false;
+                }
+                break;
+            case "N":
+            case "EN":
+                Newspaper n = (Newspaper) resource;
+                if (values[THIRD_INDEX] != null && !n.getPublisher().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
+                    isMatch = false;
+                }
+                break;
+            case "CD":
+                CD cd = (CD) resource;
+                if (values[THIRD_INDEX] != null && !cd.getCreator().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
+                    isMatch = false;
+                }
+                break;
 
-                default:
-                    throw new SysLibException("Unknown resource type found.");
+            default:
+                throw new SysLibException("Unknown resource type found.");
             }
 
 
