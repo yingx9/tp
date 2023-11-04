@@ -17,13 +17,13 @@ public class EventDeleteCommandTest {
 
     @Test
     public void eventDeleteCommandOutput() throws SysLibException {
-        eventAddCommand.execute("/t testrun /date 1-12-2001 /desc testing 123", parser);
+        eventAddCommand.execute("/t testrun /date 1 dec 2001 /desc testing 123", parser);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         eventDeleteCommand.execute("/i 0", parser);
         String output = outputStream.toString();
         String expectedOutput = "This event is removed:" + System.lineSeparator() +
-                "testrun | 01-12-2001 | testing 123" + System.lineSeparator() +
+                "testrun | 01 Dec 2001 | testing 123" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
 
         assertEquals(expectedOutput, output);

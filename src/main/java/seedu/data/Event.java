@@ -1,20 +1,22 @@
 package seedu.data;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Event {
     private final String name;
-    private final Date date;
+    private final LocalDate date;
     private final String description;
 
-    public Event(String name, Date date, String description) {
+    public Event(String name, LocalDate date, String description) {
         this.name = name;
         this.date = date;
         this.description = description;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -28,7 +30,7 @@ public class Event {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        return name + " | " + sdf.format(date) + " | " + description;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return name + " | " + date.format(formatter) + " | " + description;
     }
 }

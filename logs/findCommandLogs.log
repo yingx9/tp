@@ -1942,3 +1942,67 @@ Nov 04, 2023 12:53:09 AM seedu.commands.FindCommand execute
 INFO: Resources matched the given filters.
 Nov 04, 2023 12:53:09 AM seedu.commands.FindCommand execute
 INFO: No resources matched the given filters.
+Nov 04, 2023 10:11:47 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:11:48 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:11:48 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:11:48 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:12:01 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:12:01 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:12:01 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:12:01 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:21:19 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:24:42 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:28:00 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:32:27 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:35:07 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:37:54 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:45:24 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:46:24 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:52:38 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 10:58:32 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:00:32 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:01:23 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:03:37 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:08:31 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:08:31 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:08:31 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:08:31 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:09:10 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:09:10 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:09:10 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:09:10 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:09:57 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:09:57 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 04, 2023 11:09:57 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.

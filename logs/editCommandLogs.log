@@ -646,3 +646,7 @@ Nov 04, 2023 12:53:09 AM seedu.commands.EditCommand execute
 INFO: Edit Command execute with /i 9781250255174 /s lost
 Nov 04, 2023 12:53:09 AM seedu.commands.EditCommand execute
 INFO: Edit success
+Nov 04, 2023 11:00:44 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 04, 2023 11:00:44 PM seedu.commands.ListCommand execute
+INFO: List Command ends
