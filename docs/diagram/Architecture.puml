@@ -8,18 +8,29 @@ Package " "<<Rectangle>>{
     Class UI UI_COLOR
     Class Parser PARSER_COLOR
     Class Command COMMAND_COLOR
-    Class Data DATA_COLOR
     Class Main #grey
+    Class Storage STORAGE_COLOR
+    Class Data DATA_COLOR
 }
 
 Class "<$user>" as User STORAGE_COLOR_T2
-
-
-UI -[#green]> Parser
-Main -[#grey]-> UI
-Main -[#grey]-> Parser
-Parser -[#grey]-> Command
-Parser -[#blue]-> Data
+Class "<$documents>" as File UI_COLOR_T1
 
 User ..> UI
+
+Main -[#grey]-> UI
+Main -[#grey]-> Parser
+UI -[#green]->Parser
+
+Main -[#grey]-> Storage
+
+Parser -[#blue]-> Command
+
+Command ..>Parser
+
+Parser -[#blue]-> Data
+
+Storage -[STORAGE_COLOR]->Data
+Storage ..>File
+
 @enduml
