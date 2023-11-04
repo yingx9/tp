@@ -13,7 +13,7 @@ import seedu.util.TestUtil;
 
 import static seedu.commands.EditCommand.RESOURCE_NOT_FOUND;
 import static seedu.commands.EditCommand.EDIT_SUCCESS;
-import static seedu.common.Messages.formatLastLineDivider;
+import static seedu.common.FormatMessages.formatLastLineDivider;
 
 
 
@@ -65,8 +65,8 @@ public class EditCommandTest {
         executeEditSuccessBehavior("/i 2 /g Horror, Action, Fantasy");
     }
 
-    private void executeEditSuccessBehavior(String arguments) throws SysLibException {
-        String outputMessage = testUtil.getOutputMessage(editCommand, arguments, testResourceList);
+    private void executeEditSuccessBehavior(String argument) throws SysLibException {
+        String outputMessage = testUtil.getOutputMessage(editCommand, argument, testResourceList);
         String expectedMessage = EDIT_SUCCESS + formatLastLineDivider((testResourceList.get(1)).toString());
         assertEquals(expectedMessage, outputMessage);
     }

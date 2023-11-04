@@ -3,7 +3,7 @@ package seedu.common;
 import static seedu.ui.UI.LINESEPARATOR;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
-public class Messages {
+public class FormatMessages {
 
     public static String formatFirstLine(String message){
         return LINESEPARATOR + message + LINESEPARATOR + LINESEPARATOR;

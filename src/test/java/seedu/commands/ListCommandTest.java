@@ -15,6 +15,8 @@ import seedu.util.TestUtil;
 import static seedu.commands.ListCommand.GENERIC_MESSAGE;
 import static seedu.commands.ListCommand.FILTER_MESSAGE;
 import static seedu.commands.ListCommand.ZERO_RESOURCES_MESSAGE;
+import static seedu.commands.ListCommand.displayResourcesDetails;
+import static seedu.commands.ListCommand.matchedResources;
 
 
 
@@ -47,15 +49,49 @@ public class ListCommandTest {
     }
 
     @Test
-    public void testListByTagBehavior() {
+    public void testNoTagArgBehavior() {
         parser.resourceList = testResourceList;
         assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/tag", parser));
 
     }
     @Test
-    public void testListByGenreBehavior()  {
+    public void testNoGenreArgBehavior()  {
         parser.resourceList = testResourceList;
         assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/g", parser));
+
+    }
+
+    @Test
+    public void testNoStatusArgBehavior()  {
+        parser.resourceList = testResourceList;
+        assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/s", parser));
+
+    }
+
+    @Test
+    public void testListByTagFilterBehavior() throws SysLibException {
+        executeListFilterBehavior("/tag B");
+    }
+
+    @Test
+    public void testListByGenreFilterBehavior() throws SysLibException {
+        executeListFilterBehavior("/g Horror");
+        executeListFilterBehavior("/g Adventure");
+        executeListFilterBehavior("/g Fiction");
+    }
+
+    @Test
+    public void testListByStatusFilterBehavior() throws SysLibException {
+        executeListFilterBehavior("/s AVAILABLE");
+
+    }
+
+
+
+    public void executeListFilterBehavior(String argument) throws SysLibException {
+        String outputMessage = testUtil.getOutputMessage(listCommand, argument, testResourceList);
+        String expectedMessage = FILTER_MESSAGE + displayResourcesDetails(matchedResources);
+        assertEquals(expectedMessage, outputMessage);
 
     }
 
