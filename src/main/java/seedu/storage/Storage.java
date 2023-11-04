@@ -69,7 +69,7 @@ public class Storage {
 
                         switch(tag){
                         case "B":
-                            String author = splitLineArguments[TENTH_INDEX].trim();
+                            String author = splitLineArguments[TENTH_INDEX];
                             String[] genres = splitLineArguments[ELEVENTH_INDEX].split(",");
                             Book bookToAdd = new Book(title, isbn, author, genres, id, status);
                             bookToAdd.setCopies(copies);
@@ -79,7 +79,7 @@ public class Storage {
                             break;
 
                         case "EB":
-                            String eauthor = splitLineArguments[TENTH_INDEX].trim();
+                            String eauthor = splitLineArguments[TENTH_INDEX];
                             String[] egenres = splitLineArguments[ELEVENTH_INDEX].split(",");
                             String blink = splitLineArguments[11];
                             EBook ebookToAdd = new EBook(title, isbn, eauthor, egenres, id, status, blink);
@@ -90,8 +90,8 @@ public class Storage {
                             break;
 
                         case "N":
-                            String publisher = splitLineArguments[TENTH_INDEX].trim();
-                            String edition = splitLineArguments[ELEVENTH_INDEX].trim();
+                            String publisher = splitLineArguments[TENTH_INDEX];
+                            String edition = splitLineArguments[ELEVENTH_INDEX];
                             Newspaper newspaperToAdd = new Newspaper(title, isbn, publisher, edition, id, status);
                             newspaperToAdd.setCopies(copies);
                             newspaperToAdd.setBorrowed(isBorrowed);
@@ -100,8 +100,8 @@ public class Storage {
                             break;
 
                         case "EN":
-                            String epublisher = splitLineArguments[TENTH_INDEX].trim();
-                            String eedition = splitLineArguments[ELEVENTH_INDEX].trim();
+                            String epublisher = splitLineArguments[TENTH_INDEX];
+                            String eedition = splitLineArguments[ELEVENTH_INDEX];
                             String nlink = splitLineArguments[11];
                             ENewspaper enewspaperToAdd = new ENewspaper(title, isbn, epublisher, eedition,
                                     id, status, nlink);
@@ -112,8 +112,8 @@ public class Storage {
                             break;
 
                         case "M":
-                            String brand = splitLineArguments[TENTH_INDEX].trim();
-                            String issue = splitLineArguments[ELEVENTH_INDEX].trim();
+                            String brand = splitLineArguments[TENTH_INDEX];
+                            String issue = splitLineArguments[ELEVENTH_INDEX];
                             Magazine magazineToAdd = new Magazine(title, isbn, brand, issue, id, status);
                             magazineToAdd.setCopies(copies);
                             magazineToAdd.setBorrowed(isBorrowed);
@@ -122,8 +122,8 @@ public class Storage {
                             break;
 
                         case "EM":
-                            String ebrand = splitLineArguments[TENTH_INDEX].trim();
-                            String eissue = splitLineArguments[ELEVENTH_INDEX].trim();
+                            String ebrand = splitLineArguments[TENTH_INDEX];
+                            String eissue = splitLineArguments[ELEVENTH_INDEX];
                             String mlink = splitLineArguments[TWELFTH_INDEX];
                             EMagazine emagazineToAdd = new EMagazine(title, isbn, ebrand, eissue, id,
                                     status, mlink);
@@ -134,8 +134,8 @@ public class Storage {
                             break;
 
                         case "CD":
-                            String creator = splitLineArguments[TENTH_INDEX].trim();
-                            String type = splitLineArguments[ELEVENTH_INDEX].trim();
+                            String creator = splitLineArguments[TENTH_INDEX];
+                            String type = splitLineArguments[ELEVENTH_INDEX];
                             CD cdToAdd = new CD(title, isbn, creator, type, id, status);
                             cdToAdd.setCopies(copies);
                             cdToAdd.setBorrowed(isBorrowed);
@@ -184,7 +184,7 @@ public class Storage {
                             book.getStatus(),
                             book.getDateReceivedUnparsed(),
                             book.getAuthor(),
-                            String.join(", ", book.getGenre()));
+                            String.join(",", book.getGenre()));
                     break;
                 case "EB": // eBook
                     EBook ebook = (EBook) resourceToSave;
@@ -198,7 +198,7 @@ public class Storage {
                             ebook.getStatus(),
                             ebook.getDateReceivedUnparsed(),
                             ebook.getAuthor(),
-                            String.join(", ", ebook.getGenre()),
+                            String.join(",", ebook.getGenre()),
                             ebook.getLink());
                     break;
                 case "CD": // CD

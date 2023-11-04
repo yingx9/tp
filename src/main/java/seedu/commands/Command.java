@@ -87,7 +87,7 @@ public abstract class Command {
         return null;
 
     }
-    public int parseInt(String value) {
+    public static int parseInt(String value) {
         try {
             int tempNum = Integer.parseInt(value);
             if (0 <= tempNum){
