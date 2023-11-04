@@ -20,12 +20,13 @@
 
 **Main components of SysLib Architecture**
 
-SysLib currently consists of four main components:
+SysLib currently consists of five main components:
 
 - `UI`: User Interaction
 - `Parser`: Parsing User Response 
 - `Command`: Command Executor
-- `Data`: Holds the data of SysLib
+- `Data`: Holds the data of SysLib in memory such as the Resource List
+- `Storage`: Loads data from file in hard disk, and saves data to hard disk on program exit
 
 
    
@@ -37,6 +38,8 @@ SysLib currently consists of four main components:
 
 
 ### Data Component
+
+### Storage Component
 
 ## Implementation 
 This section provides details on how certain features are implemented. 
