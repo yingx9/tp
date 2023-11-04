@@ -187,9 +187,9 @@ ____________________________________________________________
 ## List all items: `list` | [Return to contents](#contents)
 List all resources OR filter by certain tags or genre.
 
-Format: `list [/tag TAG /g GENRE ]`
-- Including both filters `tag` and `genre` will only list resources satisfying both criteria:
-    - `list /tag B /g Horror` will list Books with Horror genre.
+Format: `list [/tag TAG /g GENRE /s STATUS]`
+- Including more than one filter will only list resources satisfying **ALL** given filters:
+    - Example: `list /tag B /g Horror` will list Books with Horror genre.
 
 **Example input:**
 ```
@@ -197,6 +197,7 @@ list
 list /tag B
 list /tag B /g Fiction
 list /g Thrill
+list /s Available
 ```
 
 **Example output:**
@@ -384,7 +385,7 @@ ____________________________________________________________
 |-----------------------|------------------------------------------------------------------------------------------------------------|
 | Add listing           | `add /t <title of listing> /a <author of item> /tag <type of item> /i <ISBN of item> [/g <genre of item>]` |
 | Delete listing        | `delete /id <id of listing>`                                                                               |
-| Listing all items     | `list [/tag <type of item> /g <genre of book>]`                                                            |
+| Listing all items     | `list [/tag <type of item> /g <genre of item> /s <status of item>]`                                        |
 | Find specific listing | `find [/t <title of listing> OR /i <ISBN of item> OR /a AUTHOR OR /id ID]`                                 |
 | Edit a listing        | `edit /i ISBN [/t <title of listing> /a AUTHOR /id ID /tag <type of item> /g <genre of item>] /s <status>` |
 | Exit                  | `exit`                                                                                                     |

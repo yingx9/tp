@@ -8,6 +8,7 @@ import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -15,8 +16,8 @@ import java.util.logging.Logger;
 import java.util.List;
 import java.util.logging.SimpleFormatter;
 
-import static seedu.common.Messages.formatLastLineDivider;
-import static seedu.common.Messages.formatLineSeparator;
+import static seedu.common.FormatMessages.formatLastLineDivider;
+import static seedu.common.FormatMessages.formatLineSeparator;
 
 public class EditCommand extends Command{
     public static final String MISSING_ARG_MESSAGE =  formatLastLineDivider("Please provide at least " +
@@ -30,14 +31,23 @@ public class EditCommand extends Command{
     private static int resourceIndex;
 
     static {
-        try {
-            FileHandler editFileHandler = new FileHandler("logs/editCommandLogs.log", true);
-            editFileHandler.setFormatter(new SimpleFormatter());
-            EDIT_LOGGER.addHandler(editFileHandler);
-        } catch (IOException e){
-            EDIT_LOGGER.log(Level.SEVERE,"Failed to set up Logging File Handler");
 
+        FileHandler editFileHandler = null;
+        try {
+            String loggingDirectoryPath = System.getProperty("user.dir") + "/logs";
+            String logFilePath = loggingDirectoryPath + "/editCommandLogs.log";
+            File directory = new File(loggingDirectoryPath);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            editFileHandler = new FileHandler(logFilePath, true);
+
+        } catch (IOException e) {
+            EDIT_LOGGER.log(Level.SEVERE, "Failed to initialize edit logging handler.");
+            throw new RuntimeException(e);
         }
+        editFileHandler.setFormatter(new SimpleFormatter());
+        EDIT_LOGGER.addHandler(editFileHandler);
     }
 
 

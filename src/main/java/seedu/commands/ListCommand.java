@@ -1,10 +1,12 @@
 package seedu.commands;
 
 
+import seedu.data.Status;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import static seedu.common.Messages.formatLineSeparator;
-import static seedu.common.Messages.formatLastLineDivider;
-import static seedu.common.Messages.formatFirstLine;
+import static seedu.common.FormatMessages.formatLineSeparator;
+import static seedu.common.FormatMessages.formatLastLineDivider;
+import static seedu.common.FormatMessages.formatFirstLine;
 
 
 public class ListCommand extends Command {
@@ -23,29 +25,41 @@ public class ListCommand extends Command {
     public static final String FILTER_MESSAGE  = formatFirstLine("Listing resources matching given filters: ");
     public static final String GENERIC_MESSAGE =  formatFirstLine("Listing all resources in the Library:");
     public static final String ZERO_RESOURCES_MESSAGE =  formatLastLineDivider("There are currently 0 resources.");
+
+    public static List<Resource> matchedResources;
     private static final Logger LIST_LOGGER = Logger.getLogger(ListCommand.class.getName());
 
     private static String tagKeyword;
     private static String genreKeyword;
+    private static String statusKeyword;
     private static String feedbackToUser;
 
 
-    static {
-        try {
-            FileHandler listFileHandler = new FileHandler("logs/listCommandLogs.log", true);
-            listFileHandler.setFormatter(new SimpleFormatter());
-            LIST_LOGGER.addHandler(listFileHandler);
-        } catch (IOException e){
-            LIST_LOGGER.log(Level.INFO,"Failed to set up Logging File Handler");
 
+    static {
+
+        FileHandler editFileHandler = null;
+        try {
+            String loggingDirectoryPath = System.getProperty("user.dir") + "/logs";
+            String logFilePath = loggingDirectoryPath + "/editCommandLogs.log";
+            File directory = new File(loggingDirectoryPath);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            editFileHandler = new FileHandler(logFilePath, true);
+
+        } catch (IOException e) {
+            LIST_LOGGER.log(Level.SEVERE, "Failed to initialize list logging handler.");
+            throw new RuntimeException(e);
         }
+        editFileHandler.setFormatter(new SimpleFormatter());
+        LIST_LOGGER.addHandler(editFileHandler);
     }
 
     public ListCommand(){
-        args = new String[]{"tag", "g"};
-        required = new boolean[]{false, false};
+        args = new String[]{"tag", "g", "s"};
+        required = new boolean[]{false, false, false};
     }
-
 
 
     @Override
@@ -66,11 +80,13 @@ public class ListCommand extends Command {
 
         boolean hasFilters = hasFilters((values));
 
-        List<Resource> matchedResources = new ArrayList<>();
+        matchedResources = new ArrayList<>();
 
         if(hasFilters){
             boolean isTagEqualToKeyword = true;
             boolean isGenreEqualToKeyword = true;
+            boolean isStatusEqualToKeyword = true;
+
             for (Resource resource : resourceList) {
 
                 if (tagKeyword != null) {
@@ -82,7 +98,14 @@ public class ListCommand extends Command {
                     isGenreEqualToKeyword = Resource.hasGenre(resource, genreKeyword);
                 }
 
-                if (isTagEqualToKeyword && isGenreEqualToKeyword) {
+                if (statusKeyword != null) {
+                    Status resourceStatus = resource.getStatus();
+                    isStatusEqualToKeyword = statusKeyword.equals(resourceStatus.name());
+
+                }
+
+
+                if (isTagEqualToKeyword && isGenreEqualToKeyword && isStatusEqualToKeyword) {
                     matchedResources.add(resource);
                 }
 
@@ -99,7 +122,7 @@ public class ListCommand extends Command {
 
     }
 
-    public String displayResourcesDetails(List<Resource> resourcesList) {
+    public static String displayResourcesDetails(List<Resource> resourcesList) {
 
         String messageToDisplay = "";
 
@@ -125,9 +148,10 @@ public class ListCommand extends Command {
     public static boolean hasFilters(String[] values) throws SysLibException {
         tagKeyword = null;
         genreKeyword = null;
+        statusKeyword = null;
 
         boolean hasFilters = true;
-        if (values[0] == null && values[1] == null) {
+        if (values[0] == null && values[1] == null && values[2] == null) {
             return false;
         }
 
@@ -138,6 +162,26 @@ public class ListCommand extends Command {
         if (values[1] != null) {
             genreKeyword = values[1];
         }
+
+        if (values[2] != null){
+            statusKeyword = values[2].toUpperCase();
+            validateStatus();
+        }
         return hasFilters;
+    }
+
+    public static void validateStatus() throws SysLibException {
+
+        switch(statusKeyword){
+        case "AVAILABLE":
+            //fallthrough
+        case "BORROWED":
+            //fallthrough
+        case "LOST":
+            break;
+        default:
+            throw new SysLibException("Please enter a valid status: AVAILABLE / BORROWED / LOST");
+
+        }
     }
 }
