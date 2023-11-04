@@ -6,9 +6,12 @@ import seedu.data.Event;
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.util.Locale;
 
 public class EventAddCommand extends Command {
 
@@ -24,7 +27,7 @@ public class EventAddCommand extends Command {
 
         feedbackToUser = "";
         String[] values = parseArgument(statement);
-        Date currentDate = parseDate(values[1]);
+        LocalDate currentDate = parseDate(values[1]);
         int index = binarySearch(parser, currentDate);
         parser.eventList.add(index, new Event(values[0], currentDate, values[2]));
         System.out.println("Event inserted at: " + index);
@@ -33,7 +36,7 @@ public class EventAddCommand extends Command {
         return new CommandResult(feedbackToUser);
     }
 
-    public static int binarySearch(Parser parser, Date key) {
+    public static int binarySearch(Parser parser, LocalDate key) {
         if(parser.eventList.isEmpty()){
             return 0;
         }
@@ -42,7 +45,7 @@ public class EventAddCommand extends Command {
 
         while (low <= high) {
             int mid = (low + high)/2;
-            Date midVal = parser.eventList.get(mid).getDate();
+            LocalDate midVal = parser.eventList.get(mid).getDate();
             int cmp = midVal.compareTo(key);
             if (cmp < 0) {
                 low = mid + 1;
@@ -55,14 +58,28 @@ public class EventAddCommand extends Command {
         return low;
     }
 
-    public static Date parseDate(String date) throws IllegalArgumentException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    public static LocalDate parseDate(String dateStr) throws IllegalArgumentException {
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .appendPattern("dd MMM yyyy")
+                .toFormatter(Locale.ENGLISH)
+                .withResolverStyle(ResolverStyle.SMART);
         try {
-            return sdf.parse(date);
-        } catch (ParseException e){
-            throw new IllegalArgumentException("Please enter a valid date in the format dd-mm-yyyy"
+            dateStr = checkDate(dateStr);
+            return LocalDate.parse(dateStr, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Please enter a valid date in the format 'dd MMM yyyy'"
                     + System.lineSeparator()
                     + "____________________________________________________________");
         }
+    }
+
+    public static String checkDate(String dateStr) throws IllegalArgumentException {
+        String[] temp = dateStr.split(" ");
+        int first = parseInt(temp[0]);
+        if(first < 10){
+            return "0" + dateStr;
+        }
+        return dateStr;
     }
 }
