@@ -5,6 +5,7 @@ import seedu.data.Status;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Formatter;
+import java.util.List;
 
 public class Resource {
     private String title;
@@ -130,4 +131,13 @@ public class Resource {
     public Status getStatus(){
         return status;
     }
+
+    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
+        int titleLength = getTitle().length();
+        if (titleLength > columnsWidth.get(2)){
+            columnsWidth.set(2,titleLength+1);
+        }
+        return columnsWidth;
+    }
+
 }

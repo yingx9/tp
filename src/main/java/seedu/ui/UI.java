@@ -1,15 +1,16 @@
 package seedu.ui;
 import seedu.data.resources.Resource;
-import seedu.data.resources.Book;
 import seedu.data.resources.Magazine;
-import seedu.data.resources.Newspaper;
+import seedu.data.resources.Book;
 import seedu.data.resources.CD;
+import seedu.data.resources.Newspaper;
+
 import seedu.exception.SysLibException;
 
 import java.util.Formatter;
 import java.util.List;
 import java.util.Scanner;
-
+import java.util.Arrays;
 import static seedu.common.FormatMessages.formatADivider;
 import static seedu.common.FormatMessages.formatLastLineDivider;
 
@@ -19,6 +20,7 @@ public class UI {
     public static final String SEPARATOR_LINEDIVIDER = LINESEPARATOR + LINEDIVIDER;
 
     public static final String ZERO_RESOURCES_MESSAGE =  formatLastLineDivider("There are currently 0 resources.");
+    protected static String customDivider;
     protected static String logo =
             " ____            _     _ _        ____ _     ___ \n" +
                     "/ ___| _   _ ___| |   (_) |__    / ___| |   |_ _|\n" +
@@ -28,6 +30,8 @@ public class UI {
                     "       |___/                                     ";
 
     protected Scanner myScanner;
+
+
 
     public UI(){
         this.myScanner = new Scanner(System.in);
@@ -95,7 +99,7 @@ public class UI {
 
         } else {
 
-            String displayFormat = "%-15s %-5s %-25s %-13s %-25s %-40s %-10s %-15s %-15s" + LINESEPARATOR;
+            String displayFormat =  buildDisplayHeader(resourcesList);
 
             Formatter bookDisplayFormatter = buildBookFormatter(displayFormat);
             Formatter magazineDisplayFormatter = buildMagazineFormatter(displayFormat);
@@ -153,22 +157,21 @@ public class UI {
     public static Formatter buildBookFormatter(String displayFormat){
         Object[] bookArgs = {"ID", "Tag", "Title", "ISBN", "Author", "Genre", "Link", "Status", "Received Date"};
         String bookHeader = String.format("%89s"+ LINESEPARATOR, "[BOOKS]");
-        Formatter bookDisplayFormatter = buildDisplayFormatter(displayFormat, bookArgs, bookHeader, "%-170s");
+        Formatter bookDisplayFormatter = buildDisplayFormatter(displayFormat, bookArgs, bookHeader);
 
         return bookDisplayFormatter;
     }
     public static Formatter buildMagazineFormatter(String displayFormat){
         Object[] magazineArgs = {"ID", "Tag", "Title", "ISBN", "Brand", "Issue", "Link", "Status", "Received Date"};
         String magazineHeader = String.format("%91s"+ LINESEPARATOR, "[MAGAZINES]");
-        Formatter magazineDisplayFormatter = buildDisplayFormatter(displayFormat, magazineArgs, magazineHeader,
-                "%-170s");
+        Formatter magazineDisplayFormatter = buildDisplayFormatter(displayFormat, magazineArgs, magazineHeader);
         return magazineDisplayFormatter;
     }
 
     public static Formatter buildCDFormatter(String displayFormat){
         Object[] cdArgs = { "ID", "Tag", "Title", "ISBN", "Creator", "Type", "Link", "Status", "Received Date"};
         String cdHeader = String.format("%86s"+ LINESEPARATOR, "[CDS]");
-        Formatter cdDisplayFormatter = buildDisplayFormatter(displayFormat, cdArgs, cdHeader, "%-170s");
+        Formatter cdDisplayFormatter = buildDisplayFormatter(displayFormat, cdArgs, cdHeader);
         return cdDisplayFormatter;
     }
 
@@ -176,12 +179,11 @@ public class UI {
         Object[] newspaperArgs = {"ID", "Tag", "Title", "ISBN", "Publisher", "Edition", "Link",
             "Status", "Received Date"};
         String newspaperHeader = String.format("%91s"+ LINESEPARATOR, "[NEWSPAPERS]");
-        Formatter newspaperFormatter = buildDisplayFormatter(displayFormat, newspaperArgs, newspaperHeader, "%-170s");
+        Formatter newspaperFormatter = buildDisplayFormatter(displayFormat, newspaperArgs, newspaperHeader);
         return newspaperFormatter;
     }
-    public static Formatter buildDisplayFormatter(String displayFormat, Object[] displayArgs, String header,
-                                                  String padding){
-        String customDivider = formatADivider(padding);
+    public static Formatter buildDisplayFormatter(String displayFormat, Object[] displayArgs, String header){
+
         Formatter displayFormatter = new Formatter();
         displayFormatter.format(header);
         displayFormatter.format(customDivider);
@@ -189,5 +191,32 @@ public class UI {
         displayFormatter.format(customDivider);
         return displayFormatter;
 
+    }
+
+    public static String buildDisplayHeader(List<Resource> resourcesList){
+
+
+        //Check columns at index 2, 4, 5, 6 as length is unrestricted
+        List<Integer> columnsWidth = Arrays.asList(15,5,40,14,25,30,15,10,15);
+
+        int paddingLength = 0;
+
+        for (Resource resource : resourcesList) {
+            columnsWidth = resource.checkColumnsWidths(columnsWidth);
+
+        }
+
+        String displayFormat = "";
+
+        for (int i= 0; i<columnsWidth.size();i++){
+            displayFormat += "%-" + columnsWidth.get(i) + "s";
+            paddingLength += columnsWidth.get(i);
+        }
+
+        displayFormat += LINESEPARATOR;
+
+        customDivider = formatADivider("%-" + Integer.toString(paddingLength) + "s");
+
+        return displayFormat;
     }
 }
