@@ -77,6 +77,10 @@ public class Parser {
         this.resourceList = resourcelist;
     }
 
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
+    }
+
     public List<Event> getEventList() {
         return eventList;
     }
