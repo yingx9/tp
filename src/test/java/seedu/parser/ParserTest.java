@@ -135,17 +135,28 @@ class ParserTest {
         validResponse = "find /t The Subtle Art of Not Giving a F*ck";
         parser.process(validResponse);
         expectedOutput += "Here are resources that matched the given filters:" + System.lineSeparator() +
-                "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 " +
-                "Author: Mark Manson Genre: Self-help Status: AVAILABLE" + " Received Date: " + getCurrentDate() +
+                "                                                                                  [BOOKS]" +
                 System.lineSeparator() +
-                "____________________________________________________________" + System.lineSeparator();;
+                "----------------------------------------------------------------------------------------------------" +
+                "----------------------------------------------------------------------" + System.lineSeparator() +
+                "ID              Tag   Title                     ISBN          Author                    Genre       " +
+                "                             Link       Status          Received Date  " + System.lineSeparator() +
+                "----------------------------------------------------------------------------------------------------" +
+                "----------------------------------------------------------------------" + System.lineSeparator() +
+                "2               B     The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson              " +
+                " Self-help                                null       AVAILABLE       " + getCurrentDate() + "    " +
+                System.lineSeparator() + System.lineSeparator() + System.lineSeparator() +
+                "There are currently 1 resource(s)." +
+                System.lineSeparator() +
+                "____________________________________________________________" + System.lineSeparator() +
+                System.lineSeparator();
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
         //Negative find test
         validResponse = "find /t No Such Book";
         parser.process(validResponse);
         expectedOutput += "There are no resources found matching the given filters." + System.lineSeparator() +
-                "____________________________________________________________" + System.lineSeparator();;
+                "____________________________________________________________" + System.lineSeparator();
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
         //Test edit

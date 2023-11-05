@@ -1,11 +1,8 @@
 package seedu.ui;
 import seedu.data.resources.Resource;
 import seedu.data.resources.Book;
-import seedu.data.resources.EBook;
 import seedu.data.resources.Magazine;
-import seedu.data.resources.EMagazine;
 import seedu.data.resources.Newspaper;
-import seedu.data.resources.ENewspaper;
 import seedu.data.resources.CD;
 import seedu.exception.SysLibException;
 
@@ -104,27 +101,45 @@ public class UI {
             Formatter magazineDisplayFormatter = buildMagazineFormatter(displayFormat);
             Formatter cdDisplayFormatter = buildCDFormatter(displayFormat);
             Formatter newspaperDisplayFormatter = buildNewspaperFormatter(displayFormat);
+            int bookCount = 0;
+            int magazineCount = 0;
+            int newspaperCount = 0;
+            int cdCount = 0;
 
 
-            for (int i = 0; i < resourcesList.size(); i += 1) {
-                Resource resource = resourcesList.get(i);
+            for (Resource resource : resourcesList) {
 
-                if (resource instanceof Book || resource instanceof EBook){
+                if (resource instanceof Book){
+                    bookCount++;
                     bookDisplayFormatter = resource.toTableFormat(displayFormat, bookDisplayFormatter);
-                } else if (resource instanceof Magazine || resource instanceof EMagazine){
+                } else if (resource instanceof Magazine){
+                    magazineCount++;
                     magazineDisplayFormatter = resource.toTableFormat(displayFormat, magazineDisplayFormatter);
                 } else if(resource instanceof CD ) {
+                    cdCount++;
                     cdDisplayFormatter = resource.toTableFormat(displayFormat, cdDisplayFormatter);
-                } else if(resource instanceof Newspaper || resource instanceof ENewspaper){
+                } else if(resource instanceof Newspaper){
+                    newspaperCount++;
                     newspaperDisplayFormatter = resource.toTableFormat(displayFormat, newspaperDisplayFormatter);
                 }
 
             }
 
-            messageToDisplay += bookDisplayFormatter.toString() + LINESEPARATOR;
-            messageToDisplay += magazineDisplayFormatter.toString()  + LINESEPARATOR;
-            messageToDisplay += cdDisplayFormatter.toString()  + LINESEPARATOR;
-            messageToDisplay += newspaperDisplayFormatter.toString() + LINESEPARATOR;
+            if (bookCount != 0){
+                messageToDisplay += bookDisplayFormatter.toString() + LINESEPARATOR;
+            }
+
+            if (magazineCount != 0){
+                messageToDisplay += magazineDisplayFormatter.toString()  + LINESEPARATOR;
+            }
+
+            if (cdCount != 0){
+                messageToDisplay += cdDisplayFormatter.toString()  + LINESEPARATOR;
+            }
+
+            if (newspaperCount != 0){
+                messageToDisplay += newspaperDisplayFormatter.toString() + LINESEPARATOR;
+            }
 
             messageToDisplay += formatLastLineDivider("There are currently " + resourcesList.size() +
                     " resource(s).");

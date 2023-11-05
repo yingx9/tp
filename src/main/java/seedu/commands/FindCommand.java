@@ -16,6 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import static seedu.ui.UI.showResourcesDetails;
+
 public class FindCommand extends Command {
     public static final int FIRST_INDEX = 0;
     public static final int SECOND_INDEX = 1;
@@ -104,6 +106,25 @@ public class FindCommand extends Command {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE + System.lineSeparator());
         }
 
+        ArrayList<Resource> matchedResources;
+        matchedResources = filterResources(parser, values);
+
+
+        if (matchedResources.isEmpty()) {
+            LOGGER.info("No resources matched the given filters.");
+            System.out.println(NO_RESOURCE_FOUND_MESSAGE);
+            ui.showLine();
+        } else {
+            LOGGER.info("Resources matched the given filters.");
+            System.out.println(RESOURCE_FOUND_MESSAGE);
+            System.out.println(showResourcesDetails(matchedResources));
+        }
+
+        return new CommandResult(feedbackToUser);
+    }
+
+
+    public ArrayList<Resource> filterResources(Parser parser, String[] values) throws SysLibException{
         ArrayList<Resource> matchedResources = new ArrayList<>();
         for (Resource resource: parser.resourceList){
             boolean isMatch = true;
@@ -150,7 +171,6 @@ public class FindCommand extends Command {
                 throw new SysLibException("Unknown resource type found.");
             }
 
-
             if (values[FOURTH_INDEX] != null && !resource.getTitle().equalsIgnoreCase(values[FOURTH_INDEX])) {
                 isMatch = false;
             }
@@ -162,20 +182,7 @@ public class FindCommand extends Command {
             }
         }
 
-        if (matchedResources.isEmpty()) {
-            LOGGER.info("No resources matched the given filters.");
-            System.out.println(NO_RESOURCE_FOUND_MESSAGE);
-            ui.showLine();
-        } else {
-            LOGGER.info("Resources matched the given filters.");
-            System.out.println(RESOURCE_FOUND_MESSAGE);
-            for (Resource r : matchedResources) {
-                System.out.println(r);
-            }
-            ui.showLine();
-        }
-
-        return new CommandResult(feedbackToUser);
+        return matchedResources;
     }
 
 }
