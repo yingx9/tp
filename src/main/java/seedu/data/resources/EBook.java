@@ -2,6 +2,8 @@ package seedu.data.resources;
 
 import seedu.data.Status;
 
+import java.util.Formatter;
+
 public class EBook extends Book{
     public static final String EBOOK_TAG = "EB";
     private String link;
@@ -31,5 +33,14 @@ public class EBook extends Book{
 
         return "[" + getTag() + "] " + " ID: " + getId() + " Title: " + getTitle() + " ISBN: " + getISBN() + " Author: "
                 + getAuthor() + " Genre: " + genreString + " Link: " + getLink();
+    }
+
+    @Override
+    public Formatter toTableFormat(String formatString, Formatter tableFormatter) {
+        tableFormatter.format(formatString,  getId(),
+                getTag(),getTitle(), getISBN(), getAuthor(),
+                getGenreString(), getLink(), getStatus(),
+                getDateReceived());
+        return tableFormatter;
     }
 }

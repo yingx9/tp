@@ -3,6 +3,14 @@ package seedu.commands;
 
 import seedu.data.Status;
 import seedu.data.resources.Resource;
+import seedu.data.resources.Book;
+import seedu.data.resources.EBook;
+import seedu.data.resources.Magazine;
+import seedu.data.resources.EMagazine;
+import seedu.data.resources.Newspaper;
+import seedu.data.resources.ENewspaper;
+import seedu.data.resources.CD;
+
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
@@ -14,10 +22,12 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import java.util.Formatter;
 
-import static seedu.common.FormatMessages.formatLineSeparator;
+import static seedu.common.FormatMessages.formatADivider;
 import static seedu.common.FormatMessages.formatLastLineDivider;
 import static seedu.common.FormatMessages.formatFirstLine;
+import static seedu.ui.UI.LINESEPARATOR;
 
 
 public class ListCommand extends Command {
@@ -122,7 +132,7 @@ public class ListCommand extends Command {
 
     }
 
-    public static String displayResourcesDetails(List<Resource> resourcesList) {
+    public static String displayResourcesDetails(List<Resource> resourcesList) throws SysLibException {
 
         String messageToDisplay = "";
 
@@ -131,10 +141,33 @@ public class ListCommand extends Command {
 
         } else {
 
+            String displayFormat = "%-15s %-5s %-25s %-13s %-25s %-40s %-10s %-15s %-15s" + LINESEPARATOR;
+
+            Formatter bookDisplayFormatter = buildBookFormatter(displayFormat);
+            Formatter magazineDisplayFormatter = buildMagazineFormatter(displayFormat);
+            Formatter cdDisplayFormatter = buildCDFormatter(displayFormat);
+            Formatter newspaperDisplayFormatter = buildNewspaperFormatter(displayFormat);
+
+
             for (int i = 0; i < resourcesList.size(); i += 1) {
-                String resourceDetails = resourcesList.get(i).toString();
-                messageToDisplay += formatLineSeparator(i+1 + ". " + resourceDetails);
+                Resource resource = resourcesList.get(i);
+
+                if (resource instanceof Book || resource instanceof EBook){
+                    bookDisplayFormatter = resource.toTableFormat(displayFormat, bookDisplayFormatter);
+                } else if (resource instanceof Magazine || resource instanceof EMagazine){
+                    magazineDisplayFormatter = resource.toTableFormat(displayFormat, magazineDisplayFormatter);
+                } else if(resource instanceof CD ) {
+                    cdDisplayFormatter = resource.toTableFormat(displayFormat, cdDisplayFormatter);
+                } else if(resource instanceof Newspaper || resource instanceof ENewspaper){
+                    newspaperDisplayFormatter = resource.toTableFormat(displayFormat, newspaperDisplayFormatter);
+                }
+
             }
+
+            messageToDisplay += bookDisplayFormatter.toString() + LINESEPARATOR;
+            messageToDisplay += magazineDisplayFormatter.toString()  + LINESEPARATOR;
+            messageToDisplay += cdDisplayFormatter.toString()  + LINESEPARATOR;
+            messageToDisplay += newspaperDisplayFormatter.toString() + LINESEPARATOR;
 
             messageToDisplay += formatLastLineDivider("There are currently " + resourcesList.size() +
                     " resource(s).");
@@ -184,4 +217,49 @@ public class ListCommand extends Command {
 
         }
     }
+
+    public static Formatter buildBookFormatter(String displayFormat){
+        Object[] bookArgs = {"ID", "Tag", "Title", "ISBN", "Author", "Genre", "Link", "Status", "Received Date"};
+        String bookHeader = String.format("%89s"+ LINESEPARATOR, "[BOOKS]");
+        Formatter bookDisplayFormatter = buildDisplayFormatter(displayFormat, bookArgs, bookHeader, "%-170s");
+
+        return bookDisplayFormatter;
+    }
+    public static Formatter buildMagazineFormatter(String displayFormat){
+        Object[] magazineArgs = {"ID", "Tag", "Title", "ISBN", "Brand", "Issue", "Link", "Status", "Received Date"};
+        String magazineHeader = String.format("%91s"+ LINESEPARATOR, "[MAGAZINES]");
+        Formatter magazineDisplayFormatter = buildDisplayFormatter(displayFormat, magazineArgs, magazineHeader,
+                "%-170s");
+        return magazineDisplayFormatter;
+    }
+
+    public static Formatter buildCDFormatter(String displayFormat){
+        Object[] cdArgs = { "ID", "Tag", "Title", "ISBN", "Creator", "Type", "Link", "Status", "Received Date"};
+        String cdHeader = String.format("%86s"+ LINESEPARATOR, "[CDS]");
+        Formatter cdDisplayFormatter = buildDisplayFormatter(displayFormat, cdArgs, cdHeader, "%-170s");
+        return cdDisplayFormatter;
+    }
+
+    public static Formatter buildNewspaperFormatter(String displayFormat){
+        Object[] newspaperArgs = {"ID", "Tag", "Title", "ISBN", "Publisher", "Edition", "Link",
+            "Status", "Received Date"};
+        String newspaperHeader = String.format("%91s"+ LINESEPARATOR, "[NEWSPAPERS]");
+        Formatter newspaperFormatter = buildDisplayFormatter(displayFormat, newspaperArgs, newspaperHeader, "%-170s");
+        return newspaperFormatter;
+    }
+    public static Formatter buildDisplayFormatter(String displayFormat, Object[] displayArgs, String header,
+                                                  String padding){
+        String customDivider = formatADivider(padding);
+        Formatter displayFormatter = new Formatter();
+        displayFormatter.format(header);
+        displayFormatter.format(customDivider);
+        displayFormatter.format(displayFormat, displayArgs);
+        displayFormatter.format(customDivider);
+        return displayFormatter;
+
+    }
+
+
+
+
 }

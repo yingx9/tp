@@ -2,6 +2,8 @@ package seedu.data.resources;
 
 import seedu.data.Status;
 
+import java.util.Formatter;
+
 public class EMagazine extends Magazine {
     public static final String EMAGAZINE_TAG = "EM";
     private String link;
@@ -24,5 +26,14 @@ public class EMagazine extends Magazine {
     public String toString() {
         return "[" + getTag() + "] " + " ID: " + getId() + " Title: " + getTitle() + " ISBN: " + getISBN() + " Brand: "
                 + getBrand() + " Issue: " + getIssue() + " Link: " + getLink();
+    }
+
+    @Override
+    public Formatter toTableFormat(String formatString, Formatter tableFormatter) {
+        tableFormatter.format(formatString,  getId(),
+                getTag(),getTitle(), getISBN(), getBrand(),
+                getIssue(), getLink(), getStatus(),
+                getDateReceived());
+        return tableFormatter;
     }
 }

@@ -4,6 +4,8 @@ import seedu.data.Status;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Formatter;
+
 public class Resource {
     private String title;
     private boolean isBorrowed;
@@ -96,6 +98,13 @@ public class Resource {
         return "[" + tag + "] " + title;
     }
 
+    public Formatter toTableFormat(String formatString, Formatter tableFormatter) {
+        tableFormatter.format(formatString, "null",
+                id, title, isbn, "null",
+                "null", status,
+                getDateReceived());
+        return tableFormatter;
+    }
     public static boolean hasGenre(Resource resource, String genre){
         Book bookResource;
 
