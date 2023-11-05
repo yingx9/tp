@@ -197,7 +197,10 @@ public class UI {
 
 
         //Check columns at index 2, 4, 5, 6 as length is unrestricted
-        List<Integer> columnsWidth = Arrays.asList(15,5,40,14,25,30,15,10,15);
+        //Columns represent:
+        // ID, Tag, Title, ISBN, Author/Brand/Creator/Publisher,
+        // Genre/Issue/Type/Edition, Link, Status, Received Date
+        List<Integer> columnsWidth = Arrays.asList(15,5,20,14,25,20,15,10,15);
 
         int paddingLength = 0;
 
@@ -215,7 +218,7 @@ public class UI {
 
         displayFormat += LINESEPARATOR;
 
-        customDivider = formatADivider("%-" + Integer.toString(paddingLength) + "s");
+        customDivider = formatADivider("%-" + paddingLength + "s");
 
         return displayFormat;
     }

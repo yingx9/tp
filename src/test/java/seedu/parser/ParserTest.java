@@ -143,44 +143,37 @@ class ParserTest {
         //Test find
         validResponse = "find /t The Subtle Art of Not Giving a F*ck";
         parser.process(validResponse);
-        expectedOutput += "Here are resources that matched the given filters:" + System.lineSeparator() +
-                "                                                                                  [BOOKS]" +
-                System.lineSeparator() +
-                "----------------------------------------------------------------------------------------------------" +
-                "----------------------------------------------------------------------" + System.lineSeparator() +
-                "ID              Tag   Title                     ISBN          Author                    Genre       " +
-                "                             Link       Status          Received Date  " + System.lineSeparator() +
-                "----------------------------------------------------------------------------------------------------" +
-                "----------------------------------------------------------------------" + System.lineSeparator() +
-                "2               B     The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson              " +
-                " Self-help                                null       AVAILABLE       " + getCurrentDate() + "    " +
-                System.lineSeparator() + System.lineSeparator() + System.lineSeparator() +
-                "There are currently 1 resource(s)." +
-                System.lineSeparator() +
-                "____________________________________________________________" + System.lineSeparator() +
-                System.lineSeparator();
+//        expectedOutput += "Here are resources that matched the given filters:" + System.lineSeparator() +
+//                "                                                                                  [BOOKS]" +
+//                System.lineSeparator() +
+//                "----------------------------------------------------------------------------------------------------" +
+//                "----------------------------------------------------------------------" + System.lineSeparator() +
+//                "ID              Tag   Title                     ISBN          Author                    Genre       " +
+//                "                             Link       Status          Received Date  " + System.lineSeparator() +
+//                "----------------------------------------------------------------------------------------------------" +
+//                "----------------------------------------------------------------------" + System.lineSeparator() +
+//                "2               B     The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson              " +
+//                " Self-help                                null       AVAILABLE       " + getCurrentDate() + "    " +
+//                System.lineSeparator() + System.lineSeparator() + System.lineSeparator() +
+//                "There are currently 1 resource(s)." +
+//                System.lineSeparator() +
+//                "____________________________________________________________" + System.lineSeparator() +
+//                System.lineSeparator();
         output = outputStream.toString();
         expectedOutput = "This book is added: Surrounded by Idiots" + System.lineSeparator() +
-                "____________________________________________________________" + System.lineSeparator() +
+                "____________________________________________________________" +System.lineSeparator() +
                 "This book is added: The Subtle Art of Not Giving a F*ck" +System.lineSeparator() +
                 "____________________________________________________________" +System.lineSeparator() +
                 "Here are resources that matched the given filters:" +System.lineSeparator() +
-                "                                                                                  [BOOKS]"
-                +System.lineSeparator() +
-                "--------------------------------------------------------------------------------------------" + "" +
-                "-----------------------------------------------------------------------------"
-                + System.lineSeparator() +
-                "ID             Tag  Title                                   ISBN          Author                " +
-                "   Genre                         Link           Status    Received Date  " + System.lineSeparator() +
-                "----------------------------------------------------------------------------------------------------" +
-                "---------------------------------------------------------------------" + System.lineSeparator() +
-                "2              B    The Subtle Art of Not Giving a F*ck     9780062457714 Mark Manson            " +
-                "  Self-help                     null           AVAILABLE 05 Nov 2023    " + System.lineSeparator() +
-                "" +System.lineSeparator() +
-                "" +System.lineSeparator() +
+                "                                                                                  [BOOKS]" +System.lineSeparator() +
+                "-----------------------------------------------------------------------------------------------------------------------------------------------------------" +System.lineSeparator() +
+                "ID             Tag  Title                               ISBN          Author                   Genre               Link           Status    Received Date  " +System.lineSeparator() +
+                "-----------------------------------------------------------------------------------------------------------------------------------------------------------" +System.lineSeparator() +
+                "2              B    The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson              Self-help           null           AVAILABLE 05 Nov 2023    " +System.lineSeparator() +
+                System.lineSeparator() +
+                System.lineSeparator() +
                 "There are currently 1 resource(s)." +System.lineSeparator() +
-                "____________________________________________________________" +System.lineSeparator() +
-                "" + System.lineSeparator();
+                "____________________________________________________________" +System.lineSeparator()  + System.lineSeparator();
         assertEquals(expectedOutput, output);
         //Negative find test
         validResponse = "find /t No Such Book";

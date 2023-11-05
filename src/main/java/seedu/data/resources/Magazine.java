@@ -50,6 +50,7 @@ public class Magazine extends Resource {
 
     @Override
     public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
+        columnsWidth = super.checkColumnsWidths(columnsWidth);
         int brandLength = getBrand().length();
         int issueLength = getIssue().length();
 
