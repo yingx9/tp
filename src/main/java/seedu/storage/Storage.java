@@ -3,8 +3,9 @@ package seedu.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -45,8 +46,7 @@ public class Storage {
         this.parser = parser;
     }
 
-    public List<Resource> load() throws SysLibException {
-        List<Resource> resources = new ArrayList<>();
+    public void load(List<Resource> resources, List<Event> events) throws SysLibException {
         try {
             if (this.dataFile.createNewFile()) {
                 System.out.println("Data file not found @ " + this.filePath +
@@ -58,14 +58,14 @@ public class Storage {
                     String[] splitLineArguments = dataLine.split(" \\| ");
 
                     if (splitLineArguments[FIRST_INDEX].equals("R")) {
-                        String title = splitLineArguments[SECOND_INDEX].trim();
-                        boolean isBorrowed = Boolean.parseBoolean(splitLineArguments[THIRD_INDEX].trim());
-                        String isbn = splitLineArguments[FOURTH_INDEX].trim();
-                        int copies = Integer.parseInt(splitLineArguments[FIFTH_INDEX].trim());
-                        String tag = splitLineArguments[SIXTH_INDEX].trim();
-                        int id = Integer.parseInt(splitLineArguments[SEVENTH_INDEX].trim());
-                        Status status = Status.valueOf(splitLineArguments[EIGHTH_INDEX].trim());
-                        LocalDateTime ldt = LocalDateTime.parse(splitLineArguments[NINTH_INDEX].trim());
+                        String title = splitLineArguments[SECOND_INDEX];
+                        boolean isBorrowed = Boolean.parseBoolean(splitLineArguments[THIRD_INDEX]);
+                        String isbn = splitLineArguments[FOURTH_INDEX];
+                        int copies = Integer.parseInt(splitLineArguments[FIFTH_INDEX]);
+                        String tag = splitLineArguments[SIXTH_INDEX];
+                        int id = Integer.parseInt(splitLineArguments[SEVENTH_INDEX]);
+                        Status status = Status.valueOf(splitLineArguments[EIGHTH_INDEX]);
+                        LocalDateTime ldt = LocalDateTime.parse(splitLineArguments[NINTH_INDEX]);
 
                         switch(tag){
                         case "B":
@@ -145,23 +145,23 @@ public class Storage {
 
                         default:
                             throw new SysLibException("Unknown resource type found, data corrupted.");
-
                         }
                     }else if (splitLineArguments[FIRST_INDEX].equals("E")) {
-                        // String name = splitLineArguments[SECOND_INDEX];
-                        // String description = splitLineArguments[THIRD_INDEX];
-                        // Date eventldt = parseDate(splitLineArguments[FOURTH_INDEX]);
-                        // Event newEventToAdd = new Event(name, eventldt, description);
-                        System.out.println("Event loading not implemented yet.");
+                        String name = splitLineArguments[SECOND_INDEX];
+                        String description = splitLineArguments[THIRD_INDEX];
+                        LocalDate eventld = LocalDate.parse(splitLineArguments[FOURTH_INDEX]);
+                        Event eventToAdd = new Event(name, eventld, description);
+                        events.add(eventToAdd);
                     } else {
-                        throw new SysLibException("Unknown data type found, data corrupted.");
+                        throw new SysLibException("Corrupted data found, unable to load.");
                     }
                 }
             }
         } catch (IOException IOEx) {
             throw new SysLibException("Unable to create storage file. Please try to run with admin permissions.");
+        } catch (IllegalArgumentException | DateTimeParseException | ArrayIndexOutOfBoundsException IAEx){
+            throw new SysLibException("Corrupted data found, unable to load.");
         }
-        return resources;
     }
 
     public void save() throws SysLibException {
@@ -283,7 +283,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException IOex){
-            throw new SysLibException("Unable to save to find @ ./storage.txt");
+            throw new SysLibException("Unable to save content to: " + filePath);
         }
 
     }

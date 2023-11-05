@@ -1,11 +1,13 @@
 package seedu.syslib;
 
+import seedu.data.Event;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.storage.Storage;
 import seedu.ui.UI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Syslib {
@@ -22,7 +24,12 @@ public class Syslib {
         parser = new Parser();
         storage = new Storage(filePath, parser);
         try{
-            List<Resource> resourceListLoad = storage.load();
+            List<Resource> resourceListLoad = new ArrayList<>();
+            List<Event> eventListLoad = new ArrayList<>();
+            storage.load(resourceListLoad, eventListLoad);
+            parser.setResourceList(resourceListLoad);
+            parser.setEventList(eventListLoad);
+
             if (!resourceListLoad.isEmpty()){
                 ui.showLoadMessage(filePath, resourceListLoad);
             }
