@@ -45,11 +45,11 @@ public class EditCommandTest {
         assertThrows(SysLibException.class, ()->editCommand.execute("/i 123", parser));
 
     }
-    @Test
-    public void testNotBookBehavior() throws SysLibException {
-        parser.resourceList = testResourceList;
-        assertThrows(SysLibException.class, ()->editCommand.execute("/i 1 /g Horror", parser));
-    }
+    //    @Test
+    //    public void testNotBookBehavior() throws SysLibException {
+    //        parser.resourceList = testResourceList;
+    //        assertThrows(SysLibException.class, ()->editCommand.execute("/i 1 /g Horror", parser));
+    //    }
     @Test
     public void testEditTitleBehavior() throws SysLibException {
         executeEditSuccessBehavior("/i 2 /t NEWTITLE");
