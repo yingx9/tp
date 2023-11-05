@@ -121,12 +121,12 @@ public class ListCommand extends Command {
 
             }
             feedbackToUser += FILTER_MESSAGE;
-            displayResourcesDetails(matchedResources);
+            feedbackToUser += displayResourcesDetails(matchedResources);
 
         } else {
             feedbackToUser += GENERIC_MESSAGE;
 
-            displayResourcesDetails(resourceList);
+            feedbackToUser += displayResourcesDetails(resourceList);
         }
 
 
@@ -174,7 +174,7 @@ public class ListCommand extends Command {
 
         }
 
-        feedbackToUser += messageToDisplay;
+
         return messageToDisplay;
     }
 
