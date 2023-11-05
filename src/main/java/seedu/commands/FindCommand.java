@@ -16,6 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import static seedu.ui.UI.showResourcesDetails;
+
 public class FindCommand extends Command {
     public static final int FIRST_INDEX = 0;
     public static final int SECOND_INDEX = 1;
@@ -23,8 +25,10 @@ public class FindCommand extends Command {
     public static final int FOURTH_INDEX = 3;
     private static final String INVALID_ARGUMENT_MESSAGE = "Please use the format 'find [/t TITLE OR "
             + "/i ISBN OR /a AUTHOR OR /id ID]'\n" + "____________________________________________________________";
-    private static final String NO_RESOURCE_FOUND_MESSAGE = "There are no resources found matching the given filters.";
-    private static final String RESOURCE_FOUND_MESSAGE = "Here are resources that matched the given filters:";
+    private static final String NO_RESOURCE_FOUND_MESSAGE = "There are no resources found matching the given filters."
+            + System.lineSeparator();
+    private static final String RESOURCE_FOUND_MESSAGE = "Here are resources that matched the given filters:"
+            + System.lineSeparator();
     private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());
     private static String feedbackToUser;
 
@@ -104,6 +108,27 @@ public class FindCommand extends Command {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE + System.lineSeparator());
         }
 
+        ArrayList<Resource> matchedResources;
+        matchedResources = filterResources(parser, values);
+
+
+        if (matchedResources.isEmpty()) {
+            LOGGER.info("No resources matched the given filters.");
+            feedbackToUser += NO_RESOURCE_FOUND_MESSAGE;
+            feedbackToUser += showResourcesDetails(matchedResources);
+            ui.showLine();
+        } else {
+            LOGGER.info("Resources matched the given filters.");
+            feedbackToUser += RESOURCE_FOUND_MESSAGE;
+            feedbackToUser += showResourcesDetails(matchedResources);
+            ui.showLine();
+        }
+
+        return new CommandResult(feedbackToUser);
+    }
+
+
+    public ArrayList<Resource> filterResources(Parser parser, String[] values) throws SysLibException{
         ArrayList<Resource> matchedResources = new ArrayList<>();
         for (Resource resource: parser.resourceList){
             boolean isMatch = true;
@@ -118,38 +143,37 @@ public class FindCommand extends Command {
             }
 
             switch (resourceType) {
-            case "B":
-            case "EB":
-                Book b = (Book) resource;
-                if (values[THIRD_INDEX] != null && !b.getAuthor().trim().equalsIgnoreCase((values[THIRD_INDEX]))) {
-                    isMatch = false;
-                }
-                break;
-            case "M":
-            case "EM":
-                Magazine m = (Magazine) resource;
-                if (values[THIRD_INDEX] != null && !m.getBrand().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
-                    isMatch = false;
-                }
-                break;
-            case "N":
-            case "EN":
-                Newspaper n = (Newspaper) resource;
-                if (values[THIRD_INDEX] != null && !n.getPublisher().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
-                    isMatch = false;
-                }
-                break;
-            case "CD":
-                CD cd = (CD) resource;
-                if (values[THIRD_INDEX] != null && !cd.getCreator().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
-                    isMatch = false;
-                }
-                break;
+                case "B":
+                case "EB":
+                    Book b = (Book) resource;
+                    if (values[THIRD_INDEX] != null && !b.getAuthor().trim().equalsIgnoreCase((values[THIRD_INDEX]))) {
+                        isMatch = false;
+                    }
+                    break;
+                case "M":
+                case "EM":
+                    Magazine m = (Magazine) resource;
+                    if (values[THIRD_INDEX] != null && !m.getBrand().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
+                        isMatch = false;
+                    }
+                    break;
+                case "N":
+                case "EN":
+                    Newspaper n = (Newspaper) resource;
+                    if (values[THIRD_INDEX] != null && !n.getPublisher().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
+                        isMatch = false;
+                    }
+                    break;
+                case "CD":
+                    CD cd = (CD) resource;
+                    if (values[THIRD_INDEX] != null && !cd.getCreator().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
+                        isMatch = false;
+                    }
+                    break;
 
-            default:
-                throw new SysLibException("Unknown resource type found.");
+                default:
+                    throw new SysLibException("Unknown resource type found.");
             }
-
 
             if (values[FOURTH_INDEX] != null && !resource.getTitle().equalsIgnoreCase(values[FOURTH_INDEX])) {
                 isMatch = false;
@@ -162,20 +186,7 @@ public class FindCommand extends Command {
             }
         }
 
-        if (matchedResources.isEmpty()) {
-            LOGGER.info("No resources matched the given filters.");
-            System.out.println(NO_RESOURCE_FOUND_MESSAGE);
-            ui.showLine();
-        } else {
-            LOGGER.info("Resources matched the given filters.");
-            System.out.println(RESOURCE_FOUND_MESSAGE);
-            for (Resource r : matchedResources) {
-                System.out.println(r);
-            }
-            ui.showLine();
-        }
-
-        return new CommandResult(feedbackToUser);
+        return matchedResources;
     }
 
 }
