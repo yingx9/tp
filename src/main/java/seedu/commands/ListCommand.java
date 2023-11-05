@@ -3,8 +3,11 @@ package seedu.commands;
 
 import seedu.data.Status;
 import seedu.data.resources.Resource;
+
+
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -15,9 +18,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import static seedu.common.FormatMessages.formatLineSeparator;
 import static seedu.common.FormatMessages.formatLastLineDivider;
 import static seedu.common.FormatMessages.formatFirstLine;
+import static seedu.ui.UI.showResourcesDetails;
 
 
 public class ListCommand extends Command {
@@ -111,39 +114,17 @@ public class ListCommand extends Command {
 
             }
             feedbackToUser += FILTER_MESSAGE;
-            displayResourcesDetails(matchedResources);
+            feedbackToUser += showResourcesDetails(matchedResources);
 
         } else {
             feedbackToUser += GENERIC_MESSAGE;
 
-            displayResourcesDetails(resourceList);
+            feedbackToUser += showResourcesDetails(resourceList);
         }
 
 
     }
 
-    public static String displayResourcesDetails(List<Resource> resourcesList) {
-
-        String messageToDisplay = "";
-
-        if (resourcesList.isEmpty()){
-            messageToDisplay += ZERO_RESOURCES_MESSAGE;
-
-        } else {
-
-            for (int i = 0; i < resourcesList.size(); i += 1) {
-                String resourceDetails = resourcesList.get(i).toString();
-                messageToDisplay += formatLineSeparator(i+1 + ". " + resourceDetails);
-            }
-
-            messageToDisplay += formatLastLineDivider("There are currently " + resourcesList.size() +
-                    " resource(s).");
-
-        }
-
-        feedbackToUser += messageToDisplay;
-        return messageToDisplay;
-    }
 
     public static boolean hasFilters(String[] values) throws SysLibException {
         tagKeyword = null;
@@ -184,4 +165,8 @@ public class ListCommand extends Command {
 
         }
     }
+
+
+
+
 }

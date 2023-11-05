@@ -14,4 +14,8 @@ public class FormatMessages {
     public static String formatLastLineDivider(String message){
         return LINESEPARATOR + message + SEPARATOR_LINEDIVIDER + LINESEPARATOR;
     }
+
+    public static String formatADivider(String padding){
+        return String.format(padding + LINESEPARATOR, "-").replace(' ', '-');
+    }
 }

@@ -2,6 +2,8 @@ package seedu.data.resources;
 
 import seedu.data.Status;
 
+import java.util.Formatter;
+
 public class ENewspaper extends Newspaper{
     public static final String ENEWSPAPER_TAG = "EN";
     private String link;
@@ -24,5 +26,14 @@ public class ENewspaper extends Newspaper{
     public String toString() {
         return "[" + getTag() + "] " + " ID: " + getId() + " Title: " + getTitle() + " ISBN: " + getISBN()
                 + " Publisher: " + getPublisher() + " Edition: " + getEdition() + " Link: " + getLink();
+    }
+
+    @Override
+    public Formatter toTableFormat(String formatString, Formatter tableFormatter) {
+        tableFormatter.format(formatString,  getId(),
+                getTag(),getTitle(), getISBN(), getPublisher(),
+                getEdition(), getLink(), getStatus(),
+                getDateReceived());
+        return tableFormatter;
     }
 }

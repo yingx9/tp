@@ -12,7 +12,7 @@ ____________________________________________________________
 > This book is added: Moby Dick
 ____________________________________________________________
 > Here are resources that matched the given filters:
-[B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 04 Nov 2023
+[B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 05 Nov 2023
 ____________________________________________________________
 > Commands available:
 add: adds a new resource to the library inventory.(e.g. add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS])
@@ -29,14 +29,54 @@ ____________________________________________________________
 > 
 Listing all resources in the Library:
 
-1. [B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 04 Nov 2023
+                                                                                  [BOOKS]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ID              Tag   Title                     ISBN          Author                    Genre                                    Link       Status          Received Date  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+123456789       B     Moby Dick                 123           Herman Melville           Adventure, Fiction                       null       AVAILABLE       05 Nov 2023    
+
+                                                                                [MAGAZINES]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ID              Tag   Title                     ISBN          Brand                     Issue                                    Link       Status          Received Date  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                                                                 [CDS]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ID              Tag   Title                     ISBN          Creator                   Type                                     Link       Status          Received Date  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                                                               [NEWSPAPERS]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ID              Tag   Title                     ISBN          Publisher                 Edition                                  Link       Status          Received Date  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 There are currently 1 resource(s).
 ____________________________________________________________
 > 
 Listing resources matching given filters: 
 
-1. [B]  ID: 123456789 Title: Moby Dick ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 04 Nov 2023
+                                                                                  [BOOKS]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ID              Tag   Title                     ISBN          Author                    Genre                                    Link       Status          Received Date  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+123456789       B     Moby Dick                 123           Herman Melville           Adventure, Fiction                       null       AVAILABLE       05 Nov 2023    
+
+                                                                                [MAGAZINES]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ID              Tag   Title                     ISBN          Brand                     Issue                                    Link       Status          Received Date  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                                                                 [CDS]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ID              Tag   Title                     ISBN          Creator                   Type                                     Link       Status          Received Date  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                                                               [NEWSPAPERS]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ID              Tag   Title                     ISBN          Publisher                 Edition                                  Link       Status          Received Date  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 There are currently 1 resource(s).
 ____________________________________________________________
@@ -48,19 +88,19 @@ There are currently 0 resources.
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 04 Nov 2023
+[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 05 Nov 2023
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: BORROWED Received Date: 04 Nov 2023
+[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: BORROWED Received Date: 05 Nov 2023
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 04 Nov 2023
+[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 05 Nov 2023
 ____________________________________________________________
 > Looking for ID: 123456789...
 This resource is removed: 
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 04 Nov 2023
+[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 05 Nov 2023
 ____________________________________________________________
 > Bye, hope to see you again soon!
 ____________________________________________________________

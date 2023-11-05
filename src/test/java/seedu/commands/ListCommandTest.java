@@ -15,9 +15,8 @@ import seedu.util.TestUtil;
 import static seedu.commands.ListCommand.GENERIC_MESSAGE;
 import static seedu.commands.ListCommand.FILTER_MESSAGE;
 import static seedu.commands.ListCommand.ZERO_RESOURCES_MESSAGE;
-import static seedu.commands.ListCommand.displayResourcesDetails;
 import static seedu.commands.ListCommand.matchedResources;
-
+import static seedu.ui.UI.showResourcesDetails;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -90,7 +89,7 @@ public class ListCommandTest {
 
     public void executeListFilterBehavior(String argument) throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(listCommand, argument, testResourceList);
-        String expectedMessage = FILTER_MESSAGE + displayResourcesDetails(matchedResources);
+        String expectedMessage = FILTER_MESSAGE + showResourcesDetails(matchedResources);
         assertEquals(expectedMessage, outputMessage);
 
     }
