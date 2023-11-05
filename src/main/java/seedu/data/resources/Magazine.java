@@ -3,6 +3,7 @@ package seedu.data.resources;
 import seedu.data.Status;
 
 import java.util.Formatter;
+import java.util.List;
 
 public class Magazine extends Resource {
     public static final String MAGAZINE_TAG = "M";
@@ -45,5 +46,22 @@ public class Magazine extends Resource {
                 getIssue(), "null", getStatus(),
                 getDateReceived());
         return tableFormatter;
+    }
+
+    @Override
+    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
+        columnsWidth = super.checkColumnsWidths(columnsWidth);
+        int brandLength = getBrand().length();
+        int issueLength = getIssue().length();
+
+        if (brandLength > columnsWidth.get(4)){
+            columnsWidth.set(4,brandLength+1);
+        }
+
+        if(issueLength > columnsWidth.get(5)){
+            columnsWidth.set(5,issueLength+1);
+        }
+
+        return columnsWidth;
     }
 }

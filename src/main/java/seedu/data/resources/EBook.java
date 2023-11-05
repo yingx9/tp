@@ -3,6 +3,7 @@ package seedu.data.resources;
 import seedu.data.Status;
 
 import java.util.Formatter;
+import java.util.List;
 
 public class EBook extends Book{
     public static final String EBOOK_TAG = "EB";
@@ -42,5 +43,18 @@ public class EBook extends Book{
                 getGenreString(), getLink(), getStatus(),
                 getDateReceived());
         return tableFormatter;
+    }
+
+    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
+
+        int linkLength = getLink().length();
+
+        columnsWidth = super.checkColumnsWidths(columnsWidth);
+
+        if(linkLength > columnsWidth.get(6)){
+            columnsWidth.set(6,linkLength+1);
+
+        }
+        return columnsWidth;
     }
 }
