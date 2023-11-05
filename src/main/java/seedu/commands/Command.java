@@ -66,6 +66,10 @@ public abstract class Command {
                 throw new IllegalArgumentException(args[pointer] + " is missing in the argument!"
                         + SEPARATOR_LINEDIVIDER);
             }
+            if(orderedArgs[pointer] != null && orderedArgs[pointer].isBlank()){
+                throw new IllegalArgumentException(args[pointer] + " has a blank argument!"
+                        + SEPARATOR_LINEDIVIDER);
+            }
         }
         return orderedArgs;
     }
@@ -82,10 +86,19 @@ public abstract class Command {
         Pattern pattern = Pattern.compile("/" + key + " (.+?)(?=\\s?/|$)", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(statement);
         if (matcher.find()) {
-            return matcher.group(1).trim();
+            String output = matcher.group(1).trim();
+            checkMatch(output, pointer);
+            return output;
         }
         return null;
 
+    }
+
+    public void checkMatch (String matched, int pointer){
+        if(matched.startsWith("/")){
+            throw new IllegalArgumentException("Avoid using '/' as names, your " + args[pointer] +
+                    " may have been empty to give this error" + SEPARATOR_LINEDIVIDER);
+        }
     }
     public static int parseInt(String value) {
         try {

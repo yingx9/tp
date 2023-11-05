@@ -27,6 +27,7 @@ public class EventAddCommand extends Command {
 
         feedbackToUser = "";
         String[] values = parseArgument(statement);
+        validateStatement(statement, values);
         LocalDate currentDate = parseDate(values[1]);
         int index = binarySearch(parser, currentDate);
         parser.eventList.add(index, new Event(values[0], currentDate, values[2]));
@@ -82,4 +83,5 @@ public class EventAddCommand extends Command {
         }
         return dateStr;
     }
+
 }
