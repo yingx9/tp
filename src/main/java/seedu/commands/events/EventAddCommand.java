@@ -77,6 +77,11 @@ public class EventAddCommand extends Command {
 
     public static String checkDate(String dateStr) throws IllegalArgumentException {
         String[] temp = dateStr.split(" ");
+        if(temp.length != 3){
+            throw new IllegalArgumentException("Please enter a valid date in the format 'dd MMM yyyy'"
+                    + System.lineSeparator()
+                    + "____________________________________________________________");
+        }
         int first = parseInt(temp[0]);
         if(first < 10){
             return "0" + dateStr;

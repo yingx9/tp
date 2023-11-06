@@ -95,7 +95,7 @@ public abstract class Command {
     }
 
     public void checkMatch (String matched, int pointer){
-        if(matched.startsWith("/")){
+        if(matched.contains("/")){
             throw new IllegalArgumentException("Avoid using '/' as names, your " + args[pointer] +
                     " may have been empty to give this error" + SEPARATOR_LINEDIVIDER);
         }
@@ -106,9 +106,9 @@ public abstract class Command {
             if (0 <= tempNum){
                 return tempNum;
             }
-            throw new IllegalArgumentException ("The argument for id is not a valid number!");
+            throw new IllegalArgumentException ("The integer argument(s) given is not a valid number!");
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException ("The argument for id is not a number!");
+            throw new IllegalArgumentException ("The integer argument(s) given is not a number!");
         }
     }
 }
