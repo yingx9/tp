@@ -2,7 +2,6 @@ package seedu.commands.events;
 
 import seedu.commands.Command;
 import seedu.commands.CommandResult;
-import seedu.commands.FindCommand;
 import seedu.data.Event;
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
