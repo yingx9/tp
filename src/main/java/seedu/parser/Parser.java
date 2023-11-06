@@ -17,6 +17,8 @@ import seedu.commands.ListCommand;
 import seedu.commands.HelpCommand;
 import seedu.commands.ExitCommand;
 import seedu.commands.EditCommand;
+
+import static seedu.ui.UI.LINEDIVIDER;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 import java.util.ArrayList;
@@ -85,24 +87,17 @@ public class Parser {
         return eventList;
     }
 
-    public static String[] parseAddCommand(String statement) throws SysLibException {
-        String inputPattern = "(.+?) /tag (.)(.+)";
+    public static String parseAddCommand(String statement) throws SysLibException {
+        String inputPattern = "/tag ([^/]+)";
 
         Pattern pattern = Pattern.compile(inputPattern);
         Matcher matcher = pattern.matcher(statement);
-        boolean matchFound = matcher.find();
+        boolean isMatching = matcher.find();
 
-        if (matchFound) {
-            if (matcher.group(2).equalsIgnoreCase("b")) {
-                return parseAddBook(statement);
-            } else {
-                throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'."
-                        + SEPARATOR_LINEDIVIDER);
-            }
+        if (isMatching) {
+            return matcher.group(1).trim();
         } else {
-            throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'." + SEPARATOR_LINEDIVIDER);
+            throw new SysLibException("Please enter a valid tag" + System.lineSeparator() + LINEDIVIDER);
         }
     }
 
@@ -112,7 +107,7 @@ public class Parser {
      * @throws SysLibException missing arguments
      * @throws IllegalStateException
      */
-    public static String[] parseAddBook(String statement) throws SysLibException, IllegalStateException {
+    /*public static String[] parseAddBook(String statement) throws SysLibException, IllegalStateException {
         try {
             String inputPattern = "/id (.+?) /t (.+?) /a (.+?) /tag (.+?) /i (.+)";
             String genrePattern = "(.+) /g (.+)";
@@ -171,7 +166,7 @@ public class Parser {
             throw new SysLibException("Please use the format " +
                     "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'." + SEPARATOR_LINEDIVIDER);
         }
-    }
+    }*/
 
     public Matcher parseFindCommand(String command) throws SysLibException{
         // Define a regular expression pattern to match optional flags and their values
