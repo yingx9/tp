@@ -61,7 +61,7 @@ public class UI {
         System.out.println("edit: Edit a listing by entering its isbn to update its details. " +
                 "(e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)");
         System.out.println("eventadd: Add an event to the event list " +
-                "(e.g. eventadd /t TITLE /date DATE [/desc DESCRIPTION])");
+                "(e.g. eventadd /t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])");
         System.out.println("eventlist: List out all the event list (e.g. eventlist)");
         System.out.println("eventdelete: Delete an event in the event list based on the index " +
                 "(e.g. eventdelete /i INDEX)");

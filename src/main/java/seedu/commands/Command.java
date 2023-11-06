@@ -29,7 +29,8 @@ public abstract class Command {
             }
         }
         if (!statement.isBlank()) {
-            throw new IllegalArgumentException("Unknown variable/command: " + statement);
+            throw new IllegalArgumentException("Unknown variable/command: " + statement +
+                    ", avoid using '/' in names/variables");
         }
     }
 
