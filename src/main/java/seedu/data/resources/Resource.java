@@ -100,8 +100,8 @@ public class Resource {
     }
 
     public Formatter toTableFormat(String formatString, Formatter tableFormatter, int index) {
-        tableFormatter.format(formatString, index,
-                id, title, isbn, "null",
+        tableFormatter.format(formatString, "null",
+                index, title, isbn, "null",
                 "null", status,
                 getDateReceived());
         return tableFormatter;
