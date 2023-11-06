@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Syslib {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the java.syslib.Syslib application.
      */
     public static final String FILEPATH = ".\\storage.txt";
     private static UI ui;

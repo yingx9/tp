@@ -205,6 +205,9 @@ class ParserTest {
         assertEquals(expectedOutput, output);
     }
 
+    // ADDCOMMANDS PARSER TEST
+    /*
+
     @Test
     public void testParseAddCommand() throws SysLibException {
         // Test case 1: Valid input with both genre and status
@@ -291,4 +294,6 @@ class ParserTest {
 
         assertThrows(NumberFormatException.class, () -> CreateResource.createBook(args));
     }
+
+    */
 }

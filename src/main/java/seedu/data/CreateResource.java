@@ -7,142 +7,105 @@ import seedu.data.resources.EBook;
 import seedu.data.resources.EMagazine;
 import seedu.data.resources.ENewspaper;
 import seedu.data.resources.CD;
+import seedu.exception.SysLibException;
 
 import static seedu.parser.Parser.getStatusFromString;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 public class CreateResource {
-    public static Book createBook(String[] args) throws IllegalStateException, NumberFormatException {
-        int id;
-        try {
-            id = Integer.parseInt(args[0]);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Please enter a valid id." + SEPARATOR_LINEDIVIDER);
-        }
-
+    public static Book createBook(String[] args, int id) throws IllegalStateException, NumberFormatException,
+            SysLibException {
+        String isbn = args[0];
         String title = args[1];
         String author = args[2];
-        String isbn = args[4];
-        Status status = getStatusFromString(args[6]);
-
+        Status status = getStatusFromString(args[4]);
 
         String genre;
         String[] genres = new String[1];
-        if (args[5] != null) {
-            genre = args[5];
+        if (args[3] != null) {
+            genre = args[3];
             genres = genre.split(", ");
+        }
+
+        if (genres.length > 3) {
+            throw new SysLibException("Please enter a maximum of 3 genres." + SEPARATOR_LINEDIVIDER);
         }
 
         return new Book(title, isbn, author, genres, id, status);
     }
 
-    public static EBook createEBook(String[] args) throws IllegalStateException, NumberFormatException {
-        int id;
-        try {
-            id = Integer.parseInt(args[0]);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Please enter a valid id." + SEPARATOR_LINEDIVIDER);
-        }
-
+    public static EBook createEBook(String[] args, int id) throws IllegalStateException, NumberFormatException,
+            SysLibException {
+        String isbn = args[0];
         String title = args[1];
         String author = args[2];
-        String isbn = args[4];
-        Status status = getStatusFromString(args[6]); // Get the status from the provided string
-        String link = args[7];
+        Status status = getStatusFromString(args[4]); // Get the status from the provided string
+        String link = args[6];
 
         String genre;
         String[] genres = new String[1];
-        if (args[5] != null) {
-            genre = args[5];
+        if (args[3] != null) {
+            genre = args[3];
             genres = genre.split(", ");
+        }
+
+        if (genres.length > 3) {
+            throw new SysLibException("Please enter a maximum of 3 genres.");
         }
 
         return new EBook(title, isbn, author, genres, id, status, link);
     }
 
-    public static CD createCD(String[] args) throws IllegalStateException, NumberFormatException {
-        int id;
-        try {
-            id = Integer.parseInt(args[0]);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Please enter a valid id." + SEPARATOR_LINEDIVIDER);
-        }
-
+    public static CD createCD(String[] args, int id) throws IllegalStateException, NumberFormatException {
+        String isbn = args[0];
         String title = args[1];
-        String creator = args[8];
-        String isbn = args[4];
-        Status status = getStatusFromString(args[6]);
-        String type = args[11];
+        String creator = args[2];
+        String type = args[3];
+        Status status = getStatusFromString(args[4]);
 
         return new CD(title, isbn, creator, type, id, status);
     }
 
-    public static Magazine createMagazine(String[] args) throws IllegalStateException, NumberFormatException {
-        int id;
-        try {
-            id = Integer.parseInt(args[0]);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Please enter a valid id." + SEPARATOR_LINEDIVIDER);
-        }
-
+    public static Magazine createMagazine(String[] args, int id) throws IllegalStateException, NumberFormatException {
+        String isbn = args[0];
         String title = args[1];
-        String brand = args[9];
-        String isbn = args[4];
-        Status status = getStatusFromString(args[6]);
-        String issue = args[12];
+        String brand = args[2];
+        String issue = args[3];
+        Status status = getStatusFromString(args[4]);
 
         return new Magazine(title, isbn, brand, issue, id, status);
     }
 
-    public static Magazine createEMagazine(String[] args) throws IllegalStateException, NumberFormatException {
-        int id;
-        try {
-            id = Integer.parseInt(args[0]);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Please enter a valid id." + SEPARATOR_LINEDIVIDER);
-        }
-
+    public static Magazine createEMagazine(String[] args, int id) throws IllegalStateException, NumberFormatException {
+        String isbn = args[0];
         String title = args[1];
-        String brand = args[9];
-        String isbn = args[4];
-        Status status = getStatusFromString(args[6]);
-        String issue = args[12];
-        String link = args[7];
+        String brand = args[2];
+        String issue = args[3];
+        Status status = getStatusFromString(args[4]);
+        String link = args[6];
 
         return new EMagazine(title, isbn, brand, issue, id, status, link);
     }
 
-    public static Newspaper createNewspaper(String[] args) throws IllegalStateException, NumberFormatException {
-        int id;
-        try {
-            id = Integer.parseInt(args[0]);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Please enter a valid id." + SEPARATOR_LINEDIVIDER);
-        }
-
+    public static Newspaper createNewspaper(String[] args, int id) throws IllegalStateException,
+            NumberFormatException {
+        String isbn = args[0];
         String title = args[1];
-        String publisher = args[10];
-        String isbn = args[4];
-        Status status = getStatusFromString(args[6]);
-        String edition = args[13];
+        String publisher = args[2];
+        String edition = args[3];
+        Status status = getStatusFromString(args[4]);
 
         return new Newspaper(title, isbn, publisher, edition, id, status);
     }
 
-    public static ENewspaper createENewspaper(String[] args) throws IllegalStateException, NumberFormatException {
-        int id;
-        try {
-            id = Integer.parseInt(args[0]);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Please enter a valid id." + SEPARATOR_LINEDIVIDER);
-        }
-
+    public static ENewspaper createENewspaper(String[] args, int id) throws IllegalStateException,
+            NumberFormatException {
+        String isbn = args[0];
         String title = args[1];
-        String publisher = args[10];
-        String isbn = args[4];
-        Status status = getStatusFromString(args[6]);
-        String edition = args[13];
-        String link = args[7];
+        String publisher = args[2];
+        String edition = args[3];
+        Status status = getStatusFromString(args[4]);
+        String link = args[6];
 
         return new ENewspaper(title, isbn, publisher, edition, id, status, link);
     }

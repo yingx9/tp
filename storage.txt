@@ -1,8 +1,7 @@
-R | Moby Dick | false | 123 | 1 | B | 123456789 | AVAILABLE | 2023-11-02T14:33:13.640545800 | Herman Melville | Adventure,Fiction
-R | Moby Dick | false | 123 | 1 | B | 1234 | AVAILABLE | 2023-11-03T16:32:13.930027500 | Herman Melville | Adventure,Fiction
-R | whatthefuck | false | 123 | 1 | B | 123456789 | AVAILABLE | 2023-11-03T16:32:36.132698900 | asdf | Adventure,Fiction
-R | asdf | false | 123 | 1 | B | 123456789 | AVAILABLE | 2023-11-03T16:32:46.226998500 | asdf | Adventure,Fiction
-R | Title1 | false | ISBN1 | 1 | B | 1234 | AVAILABLE | 2023-11-05T13:17:03.195210200 | Author1 | horror
-R | Title1 | false | ISBN1 | 1 | EB | 1234 | AVAILABLE | 2023-11-05T13:20:45.604646700 | Author1 | horror | null
-E | asdf | null | 2001-12-01
-E | abc | null | 2022-05-11
+R | Moby Dick | false | 9780763630188 | 1 | B | 1 | AVAILABLE | 2023-11-06T19:28:08.160716600 | Herman Melville | Adventure,Fiction
+R | Moby Dick | false | 9780763630188 | 1 | EB | 2 | AVAILABLE | 2023-11-06T19:28:20.261124700 | Herman Melville | Adventure,Fiction | www.abc.com
+R | Moby Dick | false | 9780763630188 | 1 | CD | 3 | AVAILABLE | 2023-11-06T19:28:33.392095 | Herman Melville | Audio Book
+R | 2023 Hottest Trends | false | 9780763630188 | 1 | M | 4 | AVAILABLE | 2023-11-06T19:28:41.469569100 | Vogue | Volume 32, Issue 5, May 2023
+R | 2023 Hottest Trends | false | 9780763630188 | 1 | EM | 5 | AVAILABLE | 2023-11-06T19:28:49.539682400 | www.abc.com
+R | Forbes 30 Under 30 2023 | false | 9780763630188 | 1 | N | 6 | AVAILABLE | 2023-11-06T19:28:58.614153700 | The Straits Times | Entrepreneurs
+R | Forbes 30 Under 30 2023 | false | 9780763630188 | 1 | EN | 7 | AVAILABLE | 2023-11-06T19:29:07.676977700 | www.abc.com
