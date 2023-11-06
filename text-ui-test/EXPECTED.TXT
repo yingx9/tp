@@ -9,21 +9,12 @@ ____________________________________________________________
        |___/                                     
 What would you like to do?
 ____________________________________________________________
-> This book is added: Moby Dick
+> Please enter a valid ISBN with 13 characters.
 ____________________________________________________________
-> Here are resources that matched the given filters:
-                                                                                  [BOOKS]
--------------------------------------------------------------------------------------------------------------------------------------------
-ID             Tag  Title               ISBN          Author                   Genre               Link           Status    Received Date  
--------------------------------------------------------------------------------------------------------------------------------------------
-123456789      B    Moby Dick           123           Herman Melville          Adventure, Fiction  null           AVAILABLE 05 Nov 2023    
-
-
-There are currently 1 resource(s).
+> There are no resources found matching the given filters.
 ____________________________________________________________
-
 > Commands available:
-add: adds a new resource to the library inventory.(e.g. add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS])
+add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
 delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
 list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
 find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
@@ -37,26 +28,8 @@ ____________________________________________________________
 > 
 Listing all resources in the Library:
 
-                                                                                  [BOOKS]
--------------------------------------------------------------------------------------------------------------------------------------------
-ID             Tag  Title               ISBN          Author                   Genre               Link           Status    Received Date  
--------------------------------------------------------------------------------------------------------------------------------------------
-123456789      B    Moby Dick           123           Herman Melville          Adventure, Fiction  null           AVAILABLE 05 Nov 2023    
 
-
-There are currently 1 resource(s).
-____________________________________________________________
-> 
-Listing resources matching given filters: 
-
-                                                                                  [BOOKS]
--------------------------------------------------------------------------------------------------------------------------------------------
-ID             Tag  Title               ISBN          Author                   Genre               Link           Status    Received Date  
--------------------------------------------------------------------------------------------------------------------------------------------
-123456789      B    Moby Dick           123           Herman Melville          Adventure, Fiction  null           AVAILABLE 05 Nov 2023    
-
-
-There are currently 1 resource(s).
+There are currently 0 resources.
 ____________________________________________________________
 > 
 Listing resources matching given filters: 
@@ -64,21 +37,24 @@ Listing resources matching given filters:
 
 There are currently 0 resources.
 ____________________________________________________________
-> Successfully updated! Your updated resource:
+> 
+Listing resources matching given filters: 
 
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 05 Nov 2023
+
+There are currently 0 resources.
 ____________________________________________________________
-> Successfully updated! Your updated resource:
-
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: BORROWED Received Date: 05 Nov 2023
+> 
+No such resource with given ISBN
 ____________________________________________________________
-> Successfully updated! Your updated resource:
-
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 05 Nov 2023
+> 
+No such resource with given ISBN
+____________________________________________________________
+> 
+No such resource with given ISBN
 ____________________________________________________________
 > Looking for ID: 123456789...
-This resource is removed: 
-[B]  ID: 123456789 Title: NEWTITLE ISBN: 123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 05 Nov 2023
+No resources with id matching 123456789
+
 ____________________________________________________________
 > Bye, hope to see you again soon!
 ____________________________________________________________
