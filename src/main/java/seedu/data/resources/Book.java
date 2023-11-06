@@ -64,10 +64,6 @@ public class Book extends Resource {
     @Override
     public Formatter toTableFormat(String formatString, Formatter tableFormatter) {
 
-        //Title, Author, Genre, Link
-        //Check length as they may break alignment
-
-
         tableFormatter.format(formatString,  getId(),
                 getTag(),getTitle(), getISBN(), getAuthor(),
                 getGenreString(), "null", getStatus(),

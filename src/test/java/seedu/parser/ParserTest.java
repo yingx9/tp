@@ -158,7 +158,7 @@ class ParserTest {
                 "---------------------------------------------------------------------------------------------------"
                 +"--------------------------------------------------------" +System.lineSeparator() +
                 "2              B    The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson        "+
-                "      Self-help           null           AVAILABLE 05 Nov 2023    " +System.lineSeparator() +
+                "      Self-help           null           AVAILABLE 06 Nov 2023    " +System.lineSeparator() +
                 System.lineSeparator() +
                 System.lineSeparator() +
                 "There are currently 1 resource(s)." +System.lineSeparator() +
