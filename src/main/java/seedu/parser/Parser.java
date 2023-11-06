@@ -17,6 +17,8 @@ import seedu.commands.ListCommand;
 import seedu.commands.HelpCommand;
 import seedu.commands.ExitCommand;
 import seedu.commands.EditCommand;
+
+import static seedu.ui.UI.LINEDIVIDER;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 import java.util.ArrayList;
@@ -95,7 +97,7 @@ public class Parser {
         if (isMatching) {
             return matcher.group(1).trim();
         } else {
-            throw new SysLibException("Please enter a valid tag");
+            throw new SysLibException("Please enter a valid tag" + System.lineSeparator() + LINEDIVIDER);
         }
     }
 

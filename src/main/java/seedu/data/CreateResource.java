@@ -10,7 +10,6 @@ import seedu.data.resources.CD;
 import seedu.exception.SysLibException;
 
 import static seedu.parser.Parser.getStatusFromString;
-import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 public class CreateResource {
     public static Book createBook(String[] args, int id) throws IllegalStateException, NumberFormatException,
@@ -43,10 +42,6 @@ public class CreateResource {
         if (args[3] != null) {
             genre = args[3];
             genres = genre.split(", ");
-        }
-
-        if (genres.length > 3) {
-            throw new SysLibException("Please enter a maximum of 3 genres.");
         }
 
         return new EBook(title, isbn, author, genres, id, status, link);

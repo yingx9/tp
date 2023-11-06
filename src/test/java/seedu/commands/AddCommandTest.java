@@ -11,7 +11,6 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.ui.UI.LINEDIVIDER;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 public class AddCommandTest {
@@ -43,7 +42,7 @@ public class AddCommandTest {
 
         String output = outputStream.toString();
 
-        String expectedOutput = "This book is added: \n" +
+        String expectedOutput = "This book is added:" + System.lineSeparator() +
                 "[B]  ID: 1 Title: The Minds of Billy Milligan ISBN: TMOBM00000001 Author: Daniel Keyes Genre: " +
                 "Non-Fiction, Biography Status: AVAILABLE Received Date: 06 Nov 2023" +
                 SEPARATOR_LINEDIVIDER + System.lineSeparator();

@@ -21,8 +21,8 @@ class HelpCommandTest {
 
         String output = outputStream.toString();
         String expectedOutput = "Commands available:" + System.lineSeparator() +
-                "add: adds a new resource to the library inventory.(e.g. add /id ID /t TITLE /a AUTHOR " +
-                "/tag TAG /i ISBN [/g GENRE /s STATUS])" + System.lineSeparator() +
+                "add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR " +
+                "/tag TAG [/g GENRE /s STATUS])" + System.lineSeparator() +
                 "delete: deletes the resource with the specified ID from the library inventory. " +
                 "(e.g. delete /id 123456789)" + System.lineSeparator() +
                 "list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction" +

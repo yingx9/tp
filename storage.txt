@@ -1,2 +1,4 @@
 R | The Minds of Billy Milligan | false | TMOBM00000001 | 1 | B | 1 | LOST | 2023-11-06T20:23:06.839500200 | Daniel Keyes | Non-Fiction,Biography
 R | The Lord of the Rings | false | TLOfTR0001AAA | 1 | B | 2 | LOST | 2023-11-06T20:47:32.425840900 | John Ronald | Fantasy,Non-Fiction,Thriller,Comedy
+R | Surrounded by Idiots | false | 9781250255174 | 1 | B | 3 | AVAILABLE | 2023-11-06T21:19:41.570378800 | Thomas Erikson | Self-help
+R | The Subtle Art of Not Giving a F*ck | false | 9780062457714 | 1 | B | 4 | AVAILABLE | 2023-11-06T21:27:14.023398800 | Mark Manson | Self-help

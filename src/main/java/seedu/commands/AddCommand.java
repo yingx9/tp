@@ -74,7 +74,7 @@ public class AddCommand extends Command{
         String[] values = parseAddBook(statement);
         Book newBook = createBook(values, resourceID);
         parser.resourceList.add(newBook);
-        System.out.println("This book is added: \n" + newBook.toString());
+        System.out.println("This book is added:"  + System.lineSeparator() + newBook.toString());
         resetBookArgs();
     }
 
@@ -82,7 +82,7 @@ public class AddCommand extends Command{
         String[] values = parseAddEBook(statement);
         EBook newEBook = createEBook(values, resourceID);
         parser.resourceList.add(newEBook);
-        System.out.println("This eBook is added: \n" + newEBook.toString());
+        System.out.println("This eBook is added:" + System.lineSeparator() + newEBook.toString());
         resetEBookArgs();
     }
 
@@ -90,7 +90,7 @@ public class AddCommand extends Command{
         String[] values = parseAddCD(statement);
         CD newCD = createCD(values, resourceID);
         parser.resourceList.add(newCD);
-        System.out.println("This CD is added: \n" + newCD.toString());
+        System.out.println("This CD is added:" + System.lineSeparator() + newCD.toString());
         resetCDArgs();
     }
 
@@ -98,7 +98,7 @@ public class AddCommand extends Command{
         String[] values = parseAddMagazine(statement);
         Magazine newMagazine = createMagazine(values, resourceID);
         parser.resourceList.add(newMagazine);
-        System.out.println("This magazine is added: \n" + newMagazine.toString());
+        System.out.println("This magazine is added:" + System.lineSeparator() + newMagazine.toString());
         resetMagazineArgs();
     }
 
@@ -106,7 +106,7 @@ public class AddCommand extends Command{
         String[] values = parseAddEMagazine(statement);
         EMagazine newEMagazine = (EMagazine) createEMagazine(values, resourceID);
         parser.resourceList.add(newEMagazine);
-        System.out.println("This eMagazine is added: \n" + newEMagazine.toString());
+        System.out.println("This eMagazine is added:" + System.lineSeparator() + newEMagazine.toString());
         resetEMagazineArgs();
     }
 
@@ -114,7 +114,7 @@ public class AddCommand extends Command{
         String[] values = parseAddNewspaper(statement);
         Newspaper newNewspaper = createNewspaper(values, resourceID);
         parser.resourceList.add(newNewspaper);
-        System.out.println("This newspaper is added: \n" + newNewspaper.toString());
+        System.out.println("This newspaper is added:" + System.lineSeparator() + newNewspaper.toString());
         resetNewspaperArgs();
     }
 
@@ -122,7 +122,7 @@ public class AddCommand extends Command{
         String[] values = parseAddENewspaper(statement);
         ENewspaper newENewspaper = createENewspaper(values, resourceID);
         parser.resourceList.add(newENewspaper);
-        System.out.println("This eNewspaper is added: \n" + newENewspaper.toString());
+        System.out.println("This eNewspaper is added:" + System.lineSeparator() + newENewspaper.toString());
         resetENewspaperArgs();
     }
 
