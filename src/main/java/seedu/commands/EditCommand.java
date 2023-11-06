@@ -2,6 +2,13 @@ package seedu.commands;
 
 
 import seedu.data.resources.Book;
+import seedu.data.resources.EBook;
+import seedu.data.resources.CD;
+
+import seedu.data.resources.EMagazine;
+import seedu.data.resources.ENewspaper;
+import seedu.data.resources.Magazine;
+import seedu.data.resources.Newspaper;
 import seedu.data.resources.Resource;
 import seedu.data.Status;
 import seedu.exception.SysLibException;
@@ -26,6 +33,9 @@ public class EditCommand extends Command{
     public static final String RESOURCE_NOT_FOUND =  formatLastLineDivider("No such resource with given ISBN");
     public static final String EDIT_SUCCESS = formatLineSeparator("Successfully updated! Your updated resource:");
     private static final Logger EDIT_LOGGER = Logger.getLogger(EditCommand.class.getName());
+    private static final String NOT_CD_ERROR =  formatLastLineDivider("Your resource is not a CD!");
+    private static final String NOT_NEWSPAPER_ERROR = formatLastLineDivider("Your resource is not a Newspaper!");
+    private static final String NOT_MAGAZINE_ERROR = formatLastLineDivider("Your resource is not a Magazine!");
     private static String feedbackToUser;
 
     private static int resourceIndex;
@@ -52,8 +62,8 @@ public class EditCommand extends Command{
 
 
     public EditCommand(){
-        args = new String[]{"i", "t", "a", "tag", "g", "s"};
-        required = new boolean[]{true, false, false, false, false, false};
+        args = new String[]{"i", "t", "a", "l", "g", "s", "c", "ty", "b", "is", "p", "ed"};
+        required = new boolean[]{true, false, false, false, false, false, false, false,false,false,false,false};
     }
 
     @Override
@@ -120,64 +130,174 @@ public class EditCommand extends Command{
 
         String newValue;
 
-        for(int i=1; i<givenParameters.length;i++) {
+        //First we check what type of Resource and call the appropriate function for it
+        //Disallow updating of tag as it completely changes the type of resource
 
-            if(givenParameters[i] == null) {
-                continue;
-            } else {
-                newValue = givenParameters[i];
-            }
+        //All resource type needs to check Title. So we check that first
+        if(givenParameters[1] != null){
+            foundResource.setTitle(givenParameters[1]);
+        }
 
-            switch(i) {
+        //Now we call respective edit functions based on resource type
 
-            case 1:
-                foundResource.setTitle(newValue);
-                break;
-            case 2:
-                Book bookResource= castResourceToBook(foundResource);
-                bookResource.setAuthor(newValue);
-                foundResource = bookResource;
-                break;
-            case 3:
-                foundResource.setTag(newValue);
-                break;
-            case 4:
-                Book book= castResourceToBook(foundResource);
-                String[] newGenres = newValue.split(", ");
-                book.setGenre(newGenres);
-                foundResource = book;
-                break;
-            case 5:
-                if (foundResource instanceof Book) {
-                    Book bookStatus = castResourceToBook(foundResource);
-                    bookStatus.setStatus(getStatusFromString(newValue));
-                    foundResource = bookStatus;
-                }
-                break;
-            default:
-                throw new SysLibException("Input error");
+        String resourceTag = foundResource.getTag();
 
-            }
+        switch(resourceTag){
+
+        case "B":
+            //fallthrough
+        case "EB":
+            foundResource = editBook(foundResource, givenParameters);
+            break;
+        case "CD":
+            foundResource = editCD(foundResource, givenParameters);
+            break;
+        case "M":
+            //fallthrough
+        case "EM":
+            foundResource = editMagazine(foundResource, givenParameters);
+            break;
+        case "N":
+            //fallthrough
+        case "EN":
+            foundResource = editNewspapers(foundResource, givenParameters);
+            break;
+        default:
+            throw new SysLibException("Invalid Resource!");
+
 
         }
+
+        if (givenParameters[5] != null){
+            foundResource.setStatus(getStatusFromString(givenParameters[5]));
+        }
+
 
         return foundResource;
     }
 
+    private Newspaper editNewspapers(Resource foundResource, String[] givenParameters) throws SysLibException {
 
-    public Book castResourceToBook(Resource resource) throws SysLibException {
+        //Newspapers/ENewspapers: Publisher [10], Edition [11]
+        String newLink = givenParameters[3];
+        String newPublisher = givenParameters[10];
+        String newEdition = givenParameters[11];
+        Newspaper newspaperResource;
+        try {
+            newspaperResource = (Newspaper) foundResource;
+        } catch (ClassCastException e){
+            EDIT_LOGGER.warning(NOT_NEWSPAPER_ERROR);
+            throw new SysLibException(NOT_NEWSPAPER_ERROR);
+        }
 
-        Book book;
+        if(newPublisher != null){
+            newspaperResource.setPublisher(newPublisher);
+        }
 
-        if (resource instanceof Book) {
-            book = (Book) resource;
-        } else{
+        if (newEdition != null){
+            newspaperResource.setEdition(newEdition);
+        }
+
+        if (newspaperResource instanceof ENewspaper){
+            if(newLink != null){
+                ENewspaper eNewspaperResource = (ENewspaper) newspaperResource;
+                eNewspaperResource.setLink(newLink);
+                newspaperResource = eNewspaperResource;
+            }
+        }
+        return newspaperResource;
+    }
+
+    private Magazine editMagazine(Resource foundResource, String[] givenParameters) throws SysLibException {
+        //Magazine/EMagazine: Brand [8], Issue [9], Link [3]
+        String newLink = givenParameters[3];
+        String newBrand = givenParameters[8];
+        String newIssue = givenParameters[9];
+        Magazine magazineResource;
+        try {
+            magazineResource = (Magazine) foundResource;
+        } catch (ClassCastException e){
+            EDIT_LOGGER.warning(NOT_MAGAZINE_ERROR);
+            throw new SysLibException(NOT_MAGAZINE_ERROR);
+        }
+
+        if(newBrand != null){
+            magazineResource.setBrand(newBrand);
+        }
+
+        if (newIssue != null){
+            magazineResource.setIssue(newIssue);
+        }
+
+        if (magazineResource instanceof EMagazine){
+            if(newLink != null){
+                EMagazine eMagazineResource = (EMagazine) magazineResource;
+                eMagazineResource.setLink(newLink);
+                magazineResource = eMagazineResource;
+            }
+        }
+        return magazineResource;
+    }
+
+    private CD editCD(Resource foundResource, String[] givenParameters) throws SysLibException {
+
+        //CD: Creator [6], Type [7]
+
+        String newCreator = givenParameters[6];
+        String newType = givenParameters[7];
+        CD cdResource;
+        try {
+            cdResource= (CD) foundResource;
+        } catch (ClassCastException e){
+            EDIT_LOGGER.warning(NOT_CD_ERROR);
+            throw new SysLibException(NOT_CD_ERROR);
+        }
+
+        if(newCreator != null){
+            cdResource.setCreator(newCreator);
+        }
+
+        if (newType != null){
+            cdResource.setType(newType);
+        }
+        return cdResource;
+    }
+
+    private Book editBook(Resource foundResource, String[] givenParameters) throws SysLibException {
+        //Book/eBook: Author [2], Genres [4], Link [3]
+
+        String newAuthor = givenParameters[2];
+        String newLink = givenParameters[3];
+        Book bookResource;
+        try {
+            bookResource= (Book) foundResource;
+        } catch (ClassCastException e){
             EDIT_LOGGER.warning(NOT_BOOK_ERROR);
             throw new SysLibException(NOT_BOOK_ERROR);
         }
 
-        return book;
+
+        if(newAuthor != null){
+            bookResource.setAuthor(newAuthor);
+        }
+
+        if (givenParameters[4] != null){
+            String[] newGenres = givenParameters[4].split(", ");
+            bookResource.setGenre(newGenres);
+        }
+
+        if (bookResource instanceof EBook){
+            if(newLink != null){
+                EBook eBookResource = (EBook) bookResource;
+                eBookResource.setLink(newLink);
+                bookResource = eBookResource;
+            }
+        }
+
+        return bookResource;
+
     }
+
 
     public Status getStatusFromString(String statusString) {
         statusString = statusString.toLowerCase().trim();

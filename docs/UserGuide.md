@@ -1,8 +1,8 @@
-# Syslib User guide
-SysLib is a program designed specially for system librarians to manage their work and responsibilities. Using intuitive commands, view, add, delete, and find books from the library inventory without any hassle.
-This user guide is for System Librarians to ensure optimal use of Syslib
+# User Guide
+<img src="images/SysLib Logo.png" /> 
 
 ## Contents
+* [Introduction](#introduction--return-to-contents)
 * [Quick start](#quick-start--return-to-contents)
 * [Features](#features--return-to-contents)
     * [Add a listing: `add`](#add-a-listing-add--return-to-contents)
@@ -19,6 +19,23 @@ This user guide is for System Librarians to ensure optimal use of Syslib
 * [FAQ](#faq--return-to-contents)
 * [Known Issues](#known-issues--return-to-contents)
 * [Command summary](#command-summary--return-to-contents)
+
+## Introduction | [Return to contents](#contents)
+
+Welcome to the SysLib User Guide: your all-in-one document to learn how to use SysLib to manage your work and responsibilities as a librarian. 
+
+Our user guide is for every librarian whether you're a beginner, novice, or expert in using a CLI library management software. 
+
+From viewing, adding, searching, and many more, SysLib provides all the features you need to optimize your work from hours to seconds. In no time, you will be typing intuitive commands to manage your library resources and upcoming events!
+
+Without further ado, let's get started with how to navigate the guide!
+
+### How to use the User Guide 
+
+Information about how to use
+the guide (e.g. how to navigate
+the document, meaning of
+icons and formatting used)
 
 
 ## Quick start | [Return to contents](#contents)
@@ -192,11 +209,17 @@ ____________________________________________________________
 ```
 
 ## List all items: `list` | [Return to contents](#contents)
-List all resources OR filter by certain tags or genre.
 
-Format: `list [/tag TAG /g GENRE /s STATUS]`
-- Including more than one filter will only list resources satisfying **ALL** given filters:
-    - Example: `list /tag B /g Horror` will list Books with Horror genre.
+
+The `list` command displays every resource in the library along with their details and categorized by their type `Book`, `Magazine`,`CD`, or `Newspaper`, giving you a quick and neat overview of all the resources in one place. 
+
+Looking for a more specific list? `list` also offers you the capability to **filter** for a specific **tag**, **genre**, or **status**, generating a tailored list for your needs. 
+
+**Format:** `list [/tag TAG /g GENRE /s STATUS]`
+
+**Notes:**
+- Including more than one filter will list resources that satisfy **ALL** given filters. 
+- For example, `list /tag B /g Horror` will list Books with Horror genre.
 
 **Example input:**
 ```
@@ -248,26 +271,38 @@ ____________________________________________________________
 ```
 
 ## Edit a listing: `edit` | [Return to contents](#contents)
-Edit a listing by entering its `isbn` to update its details.
 
-Format: `edit /i ISBN /argumentname ARGUMENT`
+We all know the horror of making a typo and having to delete and add a resource again—absolutely _dreadful_. 
 
-Argument Names:
-- `/t TITLE `
-- `/a AUTHOR `
-- `/tag TAG`
-- `/g GENRES`
-    - If you're inputting **multiple genres**, separate them by  with comma `,`. For example:
-      `/g Horror, Fantasy`
-- `/s STATUS`
+Fear not! Update a resource's details using the `edit` command and fix your typos in a flash. 
 
+**Format:** `edit /id ID /argumentname ARGUMENT [/argumentname2 ARGUMENT2..]`
+
+**Notes:**
+
+- If you have forgotten the **ID**, execute `list` to locate your target resource and ID.
+- At least **one** argument to edit must be given. 
+- You can edit multiple details in one go by specifying multiple arguments. E.g `edit /id 1 /t NEWTITLE /a NEWAUTHOR` updates title and author. 
+
+**Argument Names:**
+
+Argument names differ based on resource type. The table below shows the argument names you can enter for each resource type. 
+
+| Type                     | Argument Names                                                       | Notes                                                                                                                                                                            |
+|--------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Book<br/>eBook           | /t TITLE <br/>/a AUTHOR<br/>/g GENRES<br/>/s STATUS<br/>/l LINK      | **/g GENRES:** <br/>If you're inputting **multiple genres**, separate them by  with comma `,`. <br/>For example:  `/g Horror, Fantasy`     <br/>**/l LINK:**<br/>For eBook only. |
+| Magazine<br/>eMagazine   | /t TITLE <br/>/b BRAND<br/>/is ISSUE<br/>/s STATUS<br/>/l LINK       | **/l LINK:**<br/>For eMagazine only.                                                                                                                                             |
+| Newspaper<br/>eNewspaper | /t TITLE <br/>/p PUBLISHER<br/>/ed EDITION<br/>/s STATUS<br/>/l LINK | **/l LINK:**<br/>For eNewspaper only.                                                                                                                                            |
+| CD                       | /t TITLE <br/>/c CREATOR<br/>/ty TYPE<br/>/s STATUS      |                                                                                                                                                                                  |
+
+For example, if you would like to update a eBook, you can edit the attributes given under the **Argument Names** column, that is the title, author, genre, status, and link.
 
 **Example input:**
 ```
-edit /i 123 /t NEW_TITLE
-edit /i 123 /t NEW_TITLE /a NEW_AUTHOR
-edit /i 123 /g Horror, Adventure
-edit /i 123 /s lost
+edit /id 123 /t NEW_TITLE
+edit /id 123 /t NEW_TITLE /a NEW_AUTHOR
+edit /id 123 /g Horror, Adventure
+edit /id 123 /s lost
 ```
 
 **Example output:**
@@ -401,5 +436,6 @@ ____________________________________________________________
 | Event Listing         | `eventlist`                                                                                                                    |
 | View help             | `help`                                                                                                                         |
 | Exit                  | `exit`                                                                                                                         |
+
 
 

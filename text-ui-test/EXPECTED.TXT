@@ -12,6 +12,7 @@ ____________________________________________________________
 > Please enter a valid ISBN with 13 characters.
 ____________________________________________________________
 > There are no resources found matching the given filters.
+
 ____________________________________________________________
 > Commands available:
 add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
@@ -43,6 +44,7 @@ Listing resources matching given filters:
 
 There are currently 0 resources.
 ____________________________________________________________
+
 > 
 No such resource with given ISBN
 ____________________________________________________________
