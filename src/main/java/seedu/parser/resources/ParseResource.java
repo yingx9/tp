@@ -1,4 +1,4 @@
-package seedu.parser.Resources;
+package seedu.parser.resources;
 
 import seedu.data.Status;
 import seedu.exception.SysLibException;

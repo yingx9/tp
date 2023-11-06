@@ -1,12 +1,16 @@
-package seedu.parser.Resources;
+package seedu.parser.resources;
 
 import seedu.exception.SysLibException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.parser.Resources.ParseResource.*;
-import static seedu.parser.Resources.ParseResource.parseStatus;
+import static seedu.parser.resources.ParseResource.parseIsbn;
+import static seedu.parser.resources.ParseResource.parseTitle;
+import static seedu.parser.resources.ParseResource.parsePublisher;
+import static seedu.parser.resources.ParseResource.parseEdition;
+import static seedu.parser.resources.ParseResource.parseLink;
+import static seedu.parser.resources.ParseResource.parseStatus;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 public class ParseENewspaper {

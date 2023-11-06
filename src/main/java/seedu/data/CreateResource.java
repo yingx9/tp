@@ -27,10 +27,6 @@ public class CreateResource {
             genres = genre.split(", ");
         }
 
-        if (genres.length > 3) {
-            throw new SysLibException("Please enter a maximum of 3 genres." + SEPARATOR_LINEDIVIDER);
-        }
-
         return new Book(title, isbn, author, genres, id, status);
     }
 

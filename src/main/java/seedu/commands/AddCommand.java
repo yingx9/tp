@@ -1,11 +1,23 @@
 package seedu.commands;
 
-import seedu.data.resources.*;
+import seedu.data.resources.Book;
+import seedu.data.resources.EBook;
+import seedu.data.resources.CD;
+import seedu.data.resources.Magazine;
+import seedu.data.resources.EMagazine;
+import seedu.data.resources.Newspaper;
+import seedu.data.resources.ENewspaper;
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
 
-import static seedu.data.CreateResource.*;
+import static seedu.data.CreateResource.createBook;
+import static seedu.data.CreateResource.createEBook;
+import static seedu.data.CreateResource.createCD;
+import static seedu.data.CreateResource.createMagazine;
+import static seedu.data.CreateResource.createEMagazine;
+import static seedu.data.CreateResource.createNewspaper;
+import static seedu.data.CreateResource.createENewspaper;
 import static seedu.data.resources.Book.BOOK_TAG;
 import static seedu.data.resources.CD.CD_TAG;
 import static seedu.data.resources.EBook.EBOOK_TAG;
@@ -13,21 +25,21 @@ import static seedu.data.resources.EMagazine.EMAGAZINE_TAG;
 import static seedu.data.resources.ENewspaper.ENEWSPAPER_TAG;
 import static seedu.data.resources.Magazine.MAGAZINE_TAG;
 import static seedu.data.resources.Newspaper.NEWSPAPER_TAG;
-import static seedu.parser.Resources.ParseBook.parseAddBook;
-import static seedu.parser.Resources.ParseBook.resetBookArgs;
+import static seedu.parser.resources.ParseBook.parseAddBook;
+import static seedu.parser.resources.ParseBook.resetBookArgs;
 import static seedu.parser.Parser.parseAddCommand;
-import static seedu.parser.Resources.ParseCD.parseAddCD;
-import static seedu.parser.Resources.ParseCD.resetCDArgs;
-import static seedu.parser.Resources.ParseEBook.parseAddEBook;
-import static seedu.parser.Resources.ParseEBook.resetEBookArgs;
-import static seedu.parser.Resources.ParseEMagazine.parseAddEMagazine;
-import static seedu.parser.Resources.ParseEMagazine.resetEMagazineArgs;
-import static seedu.parser.Resources.ParseENewspaper.parseAddENewspaper;
-import static seedu.parser.Resources.ParseENewspaper.resetENewspaperArgs;
-import static seedu.parser.Resources.ParseMagazine.parseAddMagazine;
-import static seedu.parser.Resources.ParseMagazine.resetMagazineArgs;
-import static seedu.parser.Resources.ParseNewspaper.parseAddNewspaper;
-import static seedu.parser.Resources.ParseNewspaper.resetNewspaperArgs;
+import static seedu.parser.resources.ParseCD.parseAddCD;
+import static seedu.parser.resources.ParseCD.resetCDArgs;
+import static seedu.parser.resources.ParseEBook.parseAddEBook;
+import static seedu.parser.resources.ParseEBook.resetEBookArgs;
+import static seedu.parser.resources.ParseEMagazine.parseAddEMagazine;
+import static seedu.parser.resources.ParseEMagazine.resetEMagazineArgs;
+import static seedu.parser.resources.ParseENewspaper.parseAddENewspaper;
+import static seedu.parser.resources.ParseENewspaper.resetENewspaperArgs;
+import static seedu.parser.resources.ParseMagazine.parseAddMagazine;
+import static seedu.parser.resources.ParseMagazine.resetMagazineArgs;
+import static seedu.parser.resources.ParseNewspaper.parseAddNewspaper;
+import static seedu.parser.resources.ParseNewspaper.resetNewspaperArgs;
 import static seedu.ui.UI.LINEDIVIDER;
 
 
@@ -46,13 +58,14 @@ public class AddCommand extends Command{
     public static final String TYPE_OPTION = "ty";
     public static final String ISSUE_OPTION = "is";
     public static final String EDITION_OPTION = "ed";
-    private int resourceID;
+
     private static String feedbackToUser;
+    private int resourceID;
 
     public AddCommand(){
         args = new String[]{ID_OPTION, TITLE_OPTION, AUTHOR_OPTION, TAG_OPTION, ISBN_OPTION, GENRE_OPTION,
-                STATUS_OPTION, LINK_OPTION, CREATOR_OPTION, BRAND_OPTION, PUBLISHER_OPTION, TYPE_OPTION,
-                ISSUE_OPTION, EDITION_OPTION};
+            STATUS_OPTION, LINK_OPTION, CREATOR_OPTION, BRAND_OPTION, PUBLISHER_OPTION, TYPE_OPTION,
+            ISSUE_OPTION, EDITION_OPTION};
         required = new boolean[]{true, true, false, true, true, false, false, false, false, false, false, false, false
                 , false};
     }

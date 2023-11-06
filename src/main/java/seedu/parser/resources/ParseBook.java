@@ -1,11 +1,16 @@
-package seedu.parser.Resources;
+package seedu.parser.resources;
 
 import seedu.exception.SysLibException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.parser.Resources.ParseResource.*;
+import static seedu.parser.resources.ParseResource.parseIsbn;
+import static seedu.parser.resources.ParseResource.parseTitle;
+import static seedu.parser.resources.ParseResource.parseAuthor;
+import static seedu.parser.resources.ParseResource.parseTag;
+import static seedu.parser.resources.ParseResource.parseGenre;
+import static seedu.parser.resources.ParseResource.parseStatus;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 public class ParseBook {

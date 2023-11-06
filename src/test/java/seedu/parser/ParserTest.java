@@ -2,10 +2,10 @@ package seedu.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.data.resources.Book;
-import seedu.data.CreateResource;
+//import seedu.data.CreateResource;
 import seedu.data.Status;
 import seedu.data.resources.Resource;
-import seedu.exception.SysLibException;
+//import seedu.exception.SysLibException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -14,9 +14,9 @@ import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertNull;
+//import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+//import static org.junit.jupiter.api.Assertions.assertThrows;
+//import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.util.TestUtil.getCurrentDate;
 
 class ParserTest {
