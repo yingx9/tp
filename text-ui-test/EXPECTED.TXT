@@ -19,7 +19,7 @@ delete: deletes the resource with the specified ID from the library inventory. (
 list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
 find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
 edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)
-eventadd: Add an event to the event list (e.g. eventadd /t TITLE /date DATE [/desc DESCRIPTION])
+eventadd: Add an event to the event list (e.g. eventadd /t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])
 eventlist: List out all the event list (e.g. eventlist)
 eventdelete: Delete an event in the event list based on the index (e.g. eventdelete /i INDEX)
 exit: displays a farewell message and exits the program (e.g. exit)
