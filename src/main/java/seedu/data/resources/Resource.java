@@ -99,8 +99,8 @@ public class Resource {
         return "[" + tag + "] " + title;
     }
 
-    public Formatter toTableFormat(String formatString, Formatter tableFormatter) {
-        tableFormatter.format(formatString, "null",
+    public Formatter toTableFormat(String formatString, Formatter tableFormatter, int index) {
+        tableFormatter.format(formatString, index,
                 id, title, isbn, "null",
                 "null", status,
                 getDateReceived());

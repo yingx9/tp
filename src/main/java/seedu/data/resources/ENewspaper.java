@@ -30,8 +30,8 @@ public class ENewspaper extends Newspaper{
     }
 
     @Override
-    public Formatter toTableFormat(String formatString, Formatter tableFormatter) {
-        tableFormatter.format(formatString,  getId(),
+    public Formatter toTableFormat(String formatString, Formatter tableFormatter, int index) {
+        tableFormatter.format(formatString,  index,
                 getTag(),getTitle(), getISBN(), getPublisher(),
                 getEdition(), getLink(), getStatus(),
                 getDateReceived());

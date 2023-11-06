@@ -62,9 +62,9 @@ public class Book extends Resource {
     }
 
     @Override
-    public Formatter toTableFormat(String formatString, Formatter tableFormatter) {
+    public Formatter toTableFormat(String formatString, Formatter tableFormatter, int index) {
 
-        tableFormatter.format(formatString,  getId(),
+        tableFormatter.format(formatString, index,
                 getTag(),getTitle(), getISBN(), getAuthor(),
                 getGenreString(), "null", getStatus(),
                 getDateReceived());

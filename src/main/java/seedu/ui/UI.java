@@ -111,20 +111,22 @@ public class UI {
             int cdCount = 0;
 
 
-            for (Resource resource : resourcesList) {
+            for (int i =0;i<resourcesList.size();i++) {
 
+                Resource resource = resourcesList.get(i);
+                int index = i + 1;
                 if (resource instanceof Book){
                     bookCount++;
-                    bookDisplayFormatter = resource.toTableFormat(displayFormat, bookDisplayFormatter);
+                    bookDisplayFormatter = resource.toTableFormat(displayFormat, bookDisplayFormatter, index);
                 } else if (resource instanceof Magazine){
                     magazineCount++;
-                    magazineDisplayFormatter = resource.toTableFormat(displayFormat, magazineDisplayFormatter);
+                    magazineDisplayFormatter = resource.toTableFormat(displayFormat, magazineDisplayFormatter,index);
                 } else if(resource instanceof CD ) {
                     cdCount++;
-                    cdDisplayFormatter = resource.toTableFormat(displayFormat, cdDisplayFormatter);
+                    cdDisplayFormatter = resource.toTableFormat(displayFormat, cdDisplayFormatter,index);
                 } else if(resource instanceof Newspaper){
                     newspaperCount++;
-                    newspaperDisplayFormatter = resource.toTableFormat(displayFormat, newspaperDisplayFormatter);
+                    newspaperDisplayFormatter = resource.toTableFormat(displayFormat, newspaperDisplayFormatter,index);
                 }
 
             }
@@ -222,4 +224,6 @@ public class UI {
 
         return displayFormat;
     }
+
+
 }

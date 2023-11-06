@@ -157,7 +157,7 @@ class ParserTest {
                 "           Genre               Link           Status    Received Date  " +System.lineSeparator() +
                 "---------------------------------------------------------------------------------------------------"
                 +"--------------------------------------------------------" +System.lineSeparator() +
-                "2              B    The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson        "+
+                "1              B    The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson        "+
                 "      Self-help           null           AVAILABLE 06 Nov 2023    " +System.lineSeparator() +
                 System.lineSeparator() +
                 System.lineSeparator() +

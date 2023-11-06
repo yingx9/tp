@@ -37,8 +37,8 @@ public class EBook extends Book{
     }
 
     @Override
-    public Formatter toTableFormat(String formatString, Formatter tableFormatter) {
-        tableFormatter.format(formatString,  getId(),
+    public Formatter toTableFormat(String formatString, Formatter tableFormatter, int index) {
+        tableFormatter.format(formatString,  index,
                 getTag(),getTitle(), getISBN(), getAuthor(),
                 getGenreString(), getLink(), getStatus(),
                 getDateReceived());
