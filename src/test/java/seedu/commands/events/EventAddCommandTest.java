@@ -35,9 +35,15 @@ public class EventAddCommandTest {
     }
 
     @Test
-    public void eventAddCommandInvalidId() {
+    public void eventAddCommandInvalidDate() {
         assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute(
                 "/t testrun /date tmr /desc testing 123", parser));
+    }
+
+    @Test
+    public void eventAddCommandInvalidTitle() {
+        assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute(
+                "/t /date 12 Jan 2022", parser));
     }
 
     @Test
