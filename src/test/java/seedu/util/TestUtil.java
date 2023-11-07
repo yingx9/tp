@@ -18,7 +18,7 @@ public class TestUtil {
 
     public String getOutputMessage(Command c, String m, List<Resource> resourceList) throws SysLibException {
         Parser parser = new Parser();
-        parser.resourceList = resourceList;
+        parser.container.setResourceList(resourceList);
         CommandResult commandResult = c.execute(m, parser.container);
         return commandResult.feedbackToUser;
     }
@@ -36,13 +36,15 @@ public class TestUtil {
         String[] genresAdventure = {"Adventure"};
         String[] genresNull = {null};
 
-        Resource test1 = new Resource("title1", "1", 12345, Status.AVAILABLE);
-        Book testBook = new Book("title2", "2", "author", genres, 123123, Status.AVAILABLE);
-        Book testBook2 = new Book("title3", "3", "author", genresAdventure, 123123,
-                Status.AVAILABLE);
-        Book testBook3 = new Book("title3", "4", "author", genresNull, 123123, Status.AVAILABLE);
 
-        testResourceList.add(test1);
+        Book testBook = new Book("title2", "TMOBM00000001", "author", genres, 2,
+                Status.AVAILABLE);
+        Book testBook2 = new Book("title3", "TMOBM00000001", "author", genresAdventure, 3,
+                Status.AVAILABLE);
+        Book testBook3 = new Book("title3", "TMOBM00000001", "author", genresNull, 4,
+                Status.AVAILABLE);
+        
+
         testResourceList.add(testBook);
         testResourceList.add(testBook2);
         testResourceList.add(testBook3);
