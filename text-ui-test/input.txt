@@ -1,11 +1,11 @@
-add /id 123456789 /t Moby Dick /a Herman Melville /tag B /i 123 /g Adventure, Fiction
+add /t Moby Dick /a Herman Melville /tag B /i TMOBM00000001 /g Adventure, Fiction
 find /t Moby Dick
 help
 list
 list /tag B
 list /g Horror
-edit /i 123 /t NEWTITLE
-edit /i 123 /s borrowed
-edit /i 123 /s lost
-delete /id 123456789
+edit /id 1 /t NEWTITLE
+edit /id 1 /s borrowed
+edit /id 1 /s lost
+delete /id 1
 exit

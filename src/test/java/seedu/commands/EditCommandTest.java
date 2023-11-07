@@ -44,20 +44,20 @@ public class EditCommandTest {
 
     }
 
-     @Test
-     public void testEditTitleBehavior() throws SysLibException {
-         executeEditSuccessBehavior("/id 2 /t NEWTITLE");
-     }
+    @Test
+    public void testEditTitleBehavior() throws SysLibException {
+        executeEditSuccessBehavior("/id 2 /t NEWTITLE");
+    }
 
-     @Test
-     public void testEditAuthorBehavior() throws SysLibException {
-         executeEditSuccessBehavior("/id 2 /a NEWAUTHOR");
-     }
+    @Test
+    public void testEditAuthorBehavior() throws SysLibException {
+        executeEditSuccessBehavior("/id 2 /a NEWAUTHOR");
+    }
 
-     @Test
-     public void testEditGenreBehavior() throws SysLibException {
-         executeEditSuccessBehavior("/id 2 /g Horror, Action, Fantasy");
-     }
+    @Test
+    public void testEditGenreBehavior() throws SysLibException {
+        executeEditSuccessBehavior("/id 2 /g Horror, Action, Fantasy");
+    }
 
     private void executeEditSuccessBehavior(String argument) throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(editCommand, argument, testResourceList);

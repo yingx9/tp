@@ -145,17 +145,23 @@ class ParserTest {
         parser.process(validResponse);
         output = outputStream.toString();
         expectedOutput = "This book is added:" + LINESEPARATOR +
-                "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help Status: AVAILABLE Received Date: "+getCurrentDate() +LINESEPARATOR +
+                "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre:"+
+                " Self-help Status: AVAILABLE Received Date: "+getCurrentDate() +LINESEPARATOR +
                 "____________________________________________________________" +LINESEPARATOR +
                 "This book is added:" +LINESEPARATOR +
-                "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: "+getCurrentDate() +LINESEPARATOR +
+                "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark "+
+                "Manson Genre: Self-help Status: AVAILABLE Received Date: "+getCurrentDate() +LINESEPARATOR +
                 "____________________________________________________________" +LINESEPARATOR +
                 "Here are resources that matched the given filters:" +LINESEPARATOR +
                 "                                                                         [BOOKS]" +LINESEPARATOR +
-                "---------------------------------------------------------------------------------------------------------------------------------------------------" +LINESEPARATOR +
-                "ID     Tag  Title                               ISBN          Author                   Genre               Link           Status    Received Date  " +LINESEPARATOR +
-                "---------------------------------------------------------------------------------------------------------------------------------------------------" +LINESEPARATOR +
-                "2      B    The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson              Self-help           null           AVAILABLE "+getCurrentDate()+"    " +LINESEPARATOR +
+                "----------------------------------------------------------------------------------------"+
+                "-----------------------------------------------------------" +LINESEPARATOR +
+                "ID     Tag  Title                               ISBN          Author                "+
+                "   Genre               Link           Status    Received Date  " +LINESEPARATOR +
+                "----------------------------------------------------------------------------------------"+
+                "-----------------------------------------------------------" +LINESEPARATOR +
+                "2      B    The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson             "+
+                " Self-help           null           AVAILABLE "+getCurrentDate()+"    " +LINESEPARATOR +
                  LINESEPARATOR + LINESEPARATOR +
                 "There are currently 1 resource(s)." +LINESEPARATOR +
                 "____________________________________________________________" +LINESEPARATOR + LINESEPARATOR ;

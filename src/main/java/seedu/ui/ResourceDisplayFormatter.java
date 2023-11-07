@@ -11,16 +11,15 @@ import static seedu.ui.UI.LINESEPARATOR;
 
 public class ResourceDisplayFormatter {
 
-    private static String customDivider;
-
-    private String displayFormat;
-
     protected Formatter bookDisplayFormatter;
     protected Formatter magazineDisplayFormatter;
     protected Formatter cdDisplayFormatter;
     protected Formatter newspaperDisplayFormatter;
+    private String customDivider;
 
-    List<Boolean> hasResourceTypeList;
+    private String displayFormat;
+
+    private List<Boolean> hasResourceTypeList;
 
 
 
@@ -55,7 +54,7 @@ public class ResourceDisplayFormatter {
 
 
 
-    public static Formatter buildBookFormatter(String displayFormat){
+    private Formatter buildBookFormatter(String displayFormat){
         Object[] bookArgs = {"ID", "Tag", "Title", "ISBN", "Author", "Genre", "Link", "Status", "Received Date"};
         String headerPadding = "%" + (customDivider.length()/2 + 6) + "s" + LINESEPARATOR;
         String bookHeader = String.format(headerPadding, "[BOOKS]");
@@ -63,7 +62,7 @@ public class ResourceDisplayFormatter {
 
         return bookDisplayFormatter;
     }
-    public static Formatter buildMagazineFormatter(String displayFormat){
+    private Formatter buildMagazineFormatter(String displayFormat){
         Object[] magazineArgs = {"ID", "Tag", "Title", "ISBN", "Brand", "Issue", "Link", "Status", "Received Date"};
         String headerPadding = "%" + (customDivider.length()/2 + 10) + "s" + LINESEPARATOR;
         String magazineHeader = String.format(headerPadding, "[MAGAZINES]");
@@ -71,7 +70,7 @@ public class ResourceDisplayFormatter {
         return magazineDisplayFormatter;
     }
 
-    public static Formatter buildCDFormatter(String displayFormat){
+    private Formatter buildCDFormatter(String displayFormat){
         Object[] cdArgs = { "ID", "Tag", "Title", "ISBN", "Creator", "Type", "Link", "Status", "Received Date"};
         String headerPadding = "%" + (customDivider.length()/2 + 5) + "s" + LINESEPARATOR;
         String cdHeader = String.format(headerPadding, "[CDS]");
@@ -79,15 +78,15 @@ public class ResourceDisplayFormatter {
         return cdDisplayFormatter;
     }
 
-    public static Formatter buildNewspaperFormatter(String displayFormat){
+    private Formatter buildNewspaperFormatter(String displayFormat){
         Object[] newspaperArgs = {"ID", "Tag", "Title", "ISBN", "Publisher", "Edition", "Link",
-                "Status", "Received Date"};
+            "Status", "Received Date"};
         String headerPadding = "%" + (customDivider.length()/2 + 10) + "s" + LINESEPARATOR;
         String newspaperHeader = String.format(headerPadding, "[NEWSPAPERS]");
         Formatter newspaperFormatter = buildDisplayFormatter(displayFormat, newspaperArgs, newspaperHeader);
         return newspaperFormatter;
     }
-    public static Formatter buildDisplayFormatter(String displayFormat, Object[] displayArgs, String header){
+    public  Formatter buildDisplayFormatter(String displayFormat, Object[] displayArgs, String header){
 
         Formatter displayFormatter = new Formatter();
         displayFormatter.format(header);
@@ -98,7 +97,7 @@ public class ResourceDisplayFormatter {
 
     }
 
-    public static String buildDisplayHeader(List<Resource> resourcesList){
+    public String buildDisplayHeader(List<Resource> resourcesList){
 
 
         //Check columns at index 2, 4, 5, 6 as length is unrestricted
