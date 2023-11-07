@@ -102,8 +102,8 @@ public class EventEditCommand extends Command {
             System.out.println("Event was not edited as nothing was changed." + SEPARATOR_LINEDIVIDER);
         } else {
             LOGGER.info("Print event changed.");
-            System.out.println("Event edited successfully. New event details:\n" + index + ": "
-                    + editedEvent.toString() + SEPARATOR_LINEDIVIDER);
+            System.out.println("Event edited successfully. New event details:" + System.lineSeparator()
+                    + index + ": " + editedEvent.toString() + SEPARATOR_LINEDIVIDER);
         }
 
         return new CommandResult(feedbackToUser);
