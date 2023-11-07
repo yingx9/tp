@@ -252,7 +252,7 @@ You can use multiple filters, and only results that match ALL the given criteria
 > For non-book resources, `author` refers to `publisher`,`creator` and `brand` for Newspapers, CD's and Magazines 
 > respectively.
 
-Format: `find [/t TITLE OR /i ISBN OR /a AUTHOR OR /id ID]`
+Format: `find [/t TITLE OR /i ISBN OR /a AUTHOR/PUBLISHER/BRAND/CREATOR OR /id ID]`
 
 **Example input:**
 ```
@@ -265,8 +265,16 @@ find /id 123456789 /i 9780763630188
 
 **Example output:**
 ```
+> find /a Vogue
 Here are resources that matched the given filters:
-[B]  ID: 123456789 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction
+                                                                                [MAGAZINES]
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ID             Tag  Title               ISBN          Brand                    Issue                        Link           Status    Received Date  
+----------------------------------------------------------------------------------------------------------------------------------------------------
+5              M    2023 Hottest Trends 9780763630188 Vogue                    Volume 32, Issue 5, May 2023 null           AVAILABLE 07 Nov 2023    
+
+
+There are currently 1 resource(s).
 ____________________________________________________________
 ```
 

@@ -1,6 +1,9 @@
 Data file not found @ .\storage.txt
 Creating new data file @ .\storage.txt
 ____________________________________________________________
+Storage file found @ .\storage.txt
+No Resources or Events found in storage.
+____________________________________________________________
  ____            _     _ _        ____ _     ___ 
 / ___| _   _ ___| |   (_) |__    / ___| |   |_ _|
 \___ \| | | / __| |   | | '_ \  | |   | |    | | 

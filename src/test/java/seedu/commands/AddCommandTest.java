@@ -55,6 +55,7 @@ public class AddCommandTest {
     public void addCommandInvalidIsbn() {
         assertThrows(SysLibException.class, ()->addCommand.execute("/i TMOBM " +
                 "/t The Minds of Billy Milligan /a Daniel Keyes /tag B", parser.container));
+
     }
 
     @Test
