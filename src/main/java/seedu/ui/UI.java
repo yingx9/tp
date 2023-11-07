@@ -8,11 +8,9 @@ import seedu.data.resources.Newspaper;
 
 import seedu.exception.SysLibException;
 
-import java.util.Formatter;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Arrays;
-import static seedu.ui.MessageFormatter.formatADivider;
+
 import static seedu.ui.MessageFormatter.formatLastLineDivider;
 
 public class UI {
@@ -21,7 +19,6 @@ public class UI {
     public static final String SEPARATOR_LINEDIVIDER = LINESEPARATOR + LINEDIVIDER;
 
     public static final String ZERO_RESOURCES_MESSAGE =  formatLastLineDivider("There are currently 0 resources.");
-    protected static String customDivider;
     protected static String logo =
             " ____            _     _ _        ____ _     ___ \n" +
                     "/ ___| _   _ ___| |   (_) |__    / ___| |   |_ _|\n" +
@@ -103,125 +100,31 @@ public class UI {
 
         }
 
-        String displayFormat =  buildDisplayHeader(resourcesList);
-
-        Formatter bookDisplayFormatter = buildBookFormatter(displayFormat);
-        Formatter magazineDisplayFormatter = buildMagazineFormatter(displayFormat);
-        Formatter cdDisplayFormatter = buildCDFormatter(displayFormat);
-        Formatter newspaperDisplayFormatter = buildNewspaperFormatter(displayFormat);
-        int bookCount = 0;
-        int magazineCount = 0;
-        int newspaperCount = 0;
-        int cdCount = 0;
+        ResourceDisplayFormatter resourceDisplayFormatter = new ResourceDisplayFormatter(resourcesList);
 
 
         for (Resource resource : resourcesList) {
 
             if (resource instanceof Book){
-                bookCount++;
-                bookDisplayFormatter = resource.toTableFormat(displayFormat, bookDisplayFormatter);
+                resourceDisplayFormatter.setBookDisplayFormatter(resource);
             } else if (resource instanceof Magazine){
-                magazineCount++;
-                magazineDisplayFormatter = resource.toTableFormat(displayFormat, magazineDisplayFormatter);
+                resourceDisplayFormatter.setMagazineDisplayFormatter(resource);
             } else if(resource instanceof CD ) {
-                cdCount++;
-                cdDisplayFormatter = resource.toTableFormat(displayFormat, cdDisplayFormatter);
+                resourceDisplayFormatter.setCDDisplayFormatter(resource);
             } else if(resource instanceof Newspaper){
-                newspaperCount++;
-                newspaperDisplayFormatter = resource.toTableFormat(displayFormat, newspaperDisplayFormatter);
+                resourceDisplayFormatter.setNewspaperDisplayFormatter(resource);
+            } else{
+                throw new SysLibException("Invalid resource!");
             }
 
         }
 
-        if (bookCount != 0){
-            messageToDisplay += bookDisplayFormatter.toString() + LINESEPARATOR;
-        }
-
-        if (magazineCount != 0){
-            messageToDisplay += magazineDisplayFormatter.toString()  + LINESEPARATOR;
-        }
-
-        if (cdCount != 0){
-            messageToDisplay += cdDisplayFormatter.toString()  + LINESEPARATOR;
-        }
-
-        if (newspaperCount != 0){
-            messageToDisplay += newspaperDisplayFormatter.toString() + LINESEPARATOR;
-        }
+        messageToDisplay += resourceDisplayFormatter.getFinalDisplayFormat();
 
         messageToDisplay += formatLastLineDivider("There are currently " + resourcesList.size() +
                 " resource(s).");
 
-
         return messageToDisplay;
     }
 
-    public static Formatter buildBookFormatter(String displayFormat){
-        Object[] bookArgs = {"ID", "Tag", "Title", "ISBN", "Author", "Genre", "Link", "Status", "Received Date"};
-        String bookHeader = String.format("%89s"+ LINESEPARATOR, "[BOOKS]");
-        Formatter bookDisplayFormatter = buildDisplayFormatter(displayFormat, bookArgs, bookHeader);
-
-        return bookDisplayFormatter;
-    }
-    public static Formatter buildMagazineFormatter(String displayFormat){
-        Object[] magazineArgs = {"ID", "Tag", "Title", "ISBN", "Brand", "Issue", "Link", "Status", "Received Date"};
-        String magazineHeader = String.format("%91s"+ LINESEPARATOR, "[MAGAZINES]");
-        Formatter magazineDisplayFormatter = buildDisplayFormatter(displayFormat, magazineArgs, magazineHeader);
-        return magazineDisplayFormatter;
-    }
-
-    public static Formatter buildCDFormatter(String displayFormat){
-        Object[] cdArgs = { "ID", "Tag", "Title", "ISBN", "Creator", "Type", "Link", "Status", "Received Date"};
-        String cdHeader = String.format("%86s"+ LINESEPARATOR, "[CDS]");
-        Formatter cdDisplayFormatter = buildDisplayFormatter(displayFormat, cdArgs, cdHeader);
-        return cdDisplayFormatter;
-    }
-
-    public static Formatter buildNewspaperFormatter(String displayFormat){
-        Object[] newspaperArgs = {"ID", "Tag", "Title", "ISBN", "Publisher", "Edition", "Link",
-            "Status", "Received Date"};
-        String newspaperHeader = String.format("%91s"+ LINESEPARATOR, "[NEWSPAPERS]");
-        Formatter newspaperFormatter = buildDisplayFormatter(displayFormat, newspaperArgs, newspaperHeader);
-        return newspaperFormatter;
-    }
-    public static Formatter buildDisplayFormatter(String displayFormat, Object[] displayArgs, String header){
-
-        Formatter displayFormatter = new Formatter();
-        displayFormatter.format(header);
-        displayFormatter.format(customDivider);
-        displayFormatter.format(displayFormat, displayArgs);
-        displayFormatter.format(customDivider);
-        return displayFormatter;
-
-    }
-
-    public static String buildDisplayHeader(List<Resource> resourcesList){
-
-
-        //Check columns at index 2, 4, 5, 6 as length is unrestricted
-        //Columns represent:
-        // ID, Tag, Title, ISBN, Author/Brand/Creator/Publisher,
-        // Genre/Issue/Type/Edition, Link, Status, Received Date
-        List<Integer> columnsWidth = Arrays.asList(15,5,20,14,25,20,15,10,15);
-
-        int paddingLength = 0;
-
-        for (Resource resource : resourcesList) {
-            columnsWidth = resource.checkColumnsWidths(columnsWidth);
-
-        }
-
-        String displayFormat = "";
-
-        for (int i= 0; i<columnsWidth.size();i++){
-            displayFormat += "%-" + columnsWidth.get(i) + "s";
-            paddingLength += columnsWidth.get(i);
-        }
-
-        displayFormat += LINESEPARATOR;
-
-        customDivider = formatADivider("%-" + paddingLength + "s");
-
-        return displayFormat;
-    }
 }

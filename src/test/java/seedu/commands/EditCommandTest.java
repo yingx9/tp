@@ -13,12 +13,10 @@ import seedu.util.TestUtil;
 
 import static seedu.commands.EditCommand.RESOURCE_NOT_FOUND;
 import static seedu.commands.EditCommand.EDIT_SUCCESS;
-import static seedu.common.FormatMessages.formatLastLineDivider;
-
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.ui.MessageFormatter.formatLastLineDivider;
 
 public class EditCommandTest {
     private static List<Resource> testResourceList = new ArrayList<>();
@@ -28,46 +26,42 @@ public class EditCommandTest {
     private Command editCommand = new EditCommand();
 
     @BeforeAll
-    public static void setup() throws SysLibException {
+    public static void setup()  {
         testResourceList = TestUtil.fillTestList();
 
     }
 
     @Test
     public void testEditResourceNotFound() throws SysLibException {
-        String outputMessage = testUtil.getOutputMessage(editCommand, "/i 123 /t NEWTITLE", emptyResourceList);
+        String outputMessage = testUtil.getOutputMessage(editCommand, "/id 123 /t NEWTITLE", emptyResourceList);
         String expectedMessage =  RESOURCE_NOT_FOUND;
         assertEquals(expectedMessage, outputMessage);
     }
 
     @Test
     public void testNoArgumentGiven() throws SysLibException {
-        assertThrows(SysLibException.class, ()->editCommand.execute("/i 123", parser.container));
+        assertThrows(SysLibException.class, ()->editCommand.execute("/id 123", parser.container));
 
     }
-    //    @Test
-    //    public void testNotBookBehavior() throws SysLibException {
-    //        parser.resourceList = testResourceList;
-    //        assertThrows(SysLibException.class, ()->editCommand.execute("/i 1 /g Horror", parser));
-    //    }
-    // @Test
-    // public void testEditTitleBehavior() throws SysLibException {
-    //     executeEditSuccessBehavior("/i 2 /t NEWTITLE");
-    // }
-    //
-    // @Test
-    // public void testEditAuthorBehavior() throws SysLibException {
-    //     executeEditSuccessBehavior("/i 2 /a NEWAUTHOR");
-    // }
-    //
-    // @Test
-    // public void testEditGenreBehavior() throws SysLibException {
-    //     executeEditSuccessBehavior("/i 2 /g Horror, Action, Fantasy");
-    // }
+
+     @Test
+     public void testEditTitleBehavior() throws SysLibException {
+         executeEditSuccessBehavior("/id 2 /t NEWTITLE");
+     }
+
+     @Test
+     public void testEditAuthorBehavior() throws SysLibException {
+         executeEditSuccessBehavior("/id 2 /a NEWAUTHOR");
+     }
+
+     @Test
+     public void testEditGenreBehavior() throws SysLibException {
+         executeEditSuccessBehavior("/id 2 /g Horror, Action, Fantasy");
+     }
 
     private void executeEditSuccessBehavior(String argument) throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(editCommand, argument, testResourceList);
-        String expectedMessage = EDIT_SUCCESS + formatLastLineDivider((testResourceList.get(1)).toString());
+        String expectedMessage = EDIT_SUCCESS + formatLastLineDivider((testResourceList.get(0)).toString());
         assertEquals(expectedMessage, outputMessage);
     }
 }
