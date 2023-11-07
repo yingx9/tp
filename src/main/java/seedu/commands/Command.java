@@ -1,7 +1,9 @@
 package seedu.commands;
 
+import seedu.data.GenericList;
+import seedu.data.events.Event;
+import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +13,7 @@ import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 public abstract class Command {
     protected String[] args;
     protected boolean[] required;
-    public abstract CommandResult execute(String statement, Parser parser) throws
+    public abstract CommandResult execute(String statement, GenericList<Resource, Event> container) throws
             IllegalArgumentException, IllegalStateException, SysLibException;
 
     /**

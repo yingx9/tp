@@ -1,15 +1,16 @@
 package seedu.commands;
 
+import seedu.data.GenericList;
+import seedu.data.events.Event;
 import seedu.data.resources.Book;
-import seedu.data.resources.EBook;
 import seedu.data.resources.CD;
+import seedu.data.resources.EBook;
+import seedu.data.resources.Resource;
 import seedu.data.resources.Magazine;
 import seedu.data.resources.EMagazine;
 import seedu.data.resources.Newspaper;
 import seedu.data.resources.ENewspaper;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
-
 
 import static seedu.data.CreateResource.createBook;
 import static seedu.data.CreateResource.createEBook;
@@ -58,96 +59,95 @@ public class AddCommand extends Command{
     public static final String TYPE_OPTION = "ty";
     public static final String ISSUE_OPTION = "is";
     public static final String EDITION_OPTION = "ed";
-
     private static String feedbackToUser;
     private int resourceID;
 
     public AddCommand(){
-        args = new String[]{ID_OPTION, TITLE_OPTION, AUTHOR_OPTION, TAG_OPTION, ISBN_OPTION, GENRE_OPTION,
+        args = new String[] {ID_OPTION, TITLE_OPTION, AUTHOR_OPTION, TAG_OPTION, ISBN_OPTION, GENRE_OPTION,
             STATUS_OPTION, LINK_OPTION, CREATOR_OPTION, BRAND_OPTION, PUBLISHER_OPTION, TYPE_OPTION,
             ISSUE_OPTION, EDITION_OPTION};
         required = new boolean[]{true, true, false, true, true, false, false, false, false, false, false, false, false
                 , false};
     }
 
-    private void addBook(String statement, Parser parser) throws SysLibException {
+    private void addBook(String statement, GenericList<Resource, Event> container) throws SysLibException {
         String[] values = parseAddBook(statement);
         Book newBook = createBook(values, resourceID);
-        parser.resourceList.add(newBook);
+        container.getResourceList().add(newBook);
         System.out.println("This book is added:"  + System.lineSeparator() + newBook.toString());
         resetBookArgs();
     }
 
-    private void addEBook(String statement, Parser parser) throws SysLibException {
+    private void addEBook(String statement, GenericList<Resource, Event> container) throws SysLibException {
         String[] values = parseAddEBook(statement);
         EBook newEBook = createEBook(values, resourceID);
-        parser.resourceList.add(newEBook);
+        container.getResourceList().add(newEBook);
         System.out.println("This eBook is added:" + System.lineSeparator() + newEBook.toString());
         resetEBookArgs();
     }
 
-    private void addCD(String statement, Parser parser) throws SysLibException {
+    private void addCD(String statement, GenericList<Resource, Event> container) throws SysLibException {
         String[] values = parseAddCD(statement);
         CD newCD = createCD(values, resourceID);
-        parser.resourceList.add(newCD);
+        container.getResourceList().add(newCD);
         System.out.println("This CD is added:" + System.lineSeparator() + newCD.toString());
         resetCDArgs();
     }
 
-    private void addMagazine(String statement, Parser parser) throws SysLibException {
+    private void addMagazine(String statement, GenericList<Resource, Event> container) throws SysLibException {
         String[] values = parseAddMagazine(statement);
         Magazine newMagazine = createMagazine(values, resourceID);
-        parser.resourceList.add(newMagazine);
+        container.getResourceList().add(newMagazine);
         System.out.println("This magazine is added:" + System.lineSeparator() + newMagazine.toString());
         resetMagazineArgs();
     }
 
-    private void addEMagazine(String statement, Parser parser) throws SysLibException {
+    private void addEMagazine(String statement, GenericList<Resource, Event> container) throws SysLibException {
         String[] values = parseAddEMagazine(statement);
         EMagazine newEMagazine = (EMagazine) createEMagazine(values, resourceID);
-        parser.resourceList.add(newEMagazine);
+        container.getResourceList().add(newEMagazine);
         System.out.println("This eMagazine is added:" + System.lineSeparator() + newEMagazine.toString());
         resetEMagazineArgs();
     }
 
-    private void addNewspaper(String statement, Parser parser) throws SysLibException {
+    private void addNewspaper(String statement, GenericList<Resource, Event> container) throws SysLibException {
         String[] values = parseAddNewspaper(statement);
         Newspaper newNewspaper = createNewspaper(values, resourceID);
-        parser.resourceList.add(newNewspaper);
+        container.getResourceList().add(newNewspaper);
         System.out.println("This newspaper is added:" + System.lineSeparator() + newNewspaper.toString());
         resetNewspaperArgs();
     }
 
-    private void addENewspaper(String statement, Parser parser) throws SysLibException {
+    private void addENewspaper(String statement, GenericList<Resource, Event> container) throws SysLibException {
         String[] values = parseAddENewspaper(statement);
         ENewspaper newENewspaper = createENewspaper(values, resourceID);
-        parser.resourceList.add(newENewspaper);
+        container.getResourceList().add(newENewspaper);
         System.out.println("This eNewspaper is added:" + System.lineSeparator() + newENewspaper.toString());
         resetENewspaperArgs();
     }
 
     @Override
-    public CommandResult execute(String statement, Parser parser) throws
+    public CommandResult execute(String statement, GenericList<Resource, Event> container) throws
             IllegalStateException, NumberFormatException, SysLibException {
         feedbackToUser = "";
 
-        resourceID = parser.resourceList.size() + 1;
+        resourceID = container.getResourceList().size() + 1;
         String tag = parseAddCommand(statement);
 
         if (tag.equalsIgnoreCase(BOOK_TAG)) {
-            addBook(statement, parser);
+            addBook(statement, container);
         } else if (tag.equalsIgnoreCase(EBOOK_TAG)) {
-            addEBook(statement, parser);
+            addEBook(statement, container);
         } else if (tag.equalsIgnoreCase(CD_TAG)) {
-            addCD(statement, parser);
+            addCD(statement, container);
         } else if (tag.equalsIgnoreCase(MAGAZINE_TAG)) {
-            addMagazine(statement, parser);
+            addMagazine(statement, container);
         } else if (tag.equalsIgnoreCase(EMAGAZINE_TAG)) {
-            addEMagazine(statement, parser);
+            addEMagazine(statement, container);
         } else if (tag.equalsIgnoreCase(NEWSPAPER_TAG)) {
-            addNewspaper(statement, parser);
+            addNewspaper(statement, container);
         } else if (tag.equalsIgnoreCase(ENEWSPAPER_TAG)) {
-            addENewspaper(statement, parser);
+            addENewspaper(statement, container);
         } else {
             throw new SysLibException("Please enter a valid tag." + System.lineSeparator() + LINEDIVIDER);
         }

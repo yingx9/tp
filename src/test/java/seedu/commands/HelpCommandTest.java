@@ -17,7 +17,7 @@ class HelpCommandTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         HelpCommand helpCommand = new HelpCommand();
-        helpCommand.execute("", parser);
+        helpCommand.execute("", parser.container);
 
         String output = outputStream.toString();
         String expectedOutput = "Commands available:" + System.lineSeparator() +

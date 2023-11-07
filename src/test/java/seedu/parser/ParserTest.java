@@ -2,10 +2,8 @@ package seedu.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.data.resources.Book;
-//import seedu.data.CreateResource;
 import seedu.data.Status;
 import seedu.data.resources.Resource;
-//import seedu.exception.SysLibException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -14,9 +12,6 @@ import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-//import static org.junit.jupiter.api.Assertions.assertThrows;
-//import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 import static seedu.util.TestUtil.getCurrentDate;
 
@@ -118,7 +113,7 @@ class ParserTest {
         String output = outputStream.toString();
         String expectedOutput = "This book is added:" + System.lineSeparator() +
                 "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help " +
-                "Status: AVAILABLE Received Date: 06 Nov 2023" + SEPARATOR_LINEDIVIDER + System.lineSeparator();
+                "Status: AVAILABLE Received Date: " + getCurrentDate() + SEPARATOR_LINEDIVIDER + System.lineSeparator();
         assertEquals(expectedOutput, output);
         //Add second book
         validResponse = "add /i 9780062457714 /t The Subtle Art of Not Giving a F*ck /a Mark Manson " +
@@ -126,7 +121,7 @@ class ParserTest {
         parser.process(validResponse);
         expectedOutput += "This book is added:" + System.lineSeparator() +
                 "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson " +
-                "Genre: Self-help Status: AVAILABLE Received Date: 06 Nov 2023" + SEPARATOR_LINEDIVIDER +
+                "Genre: Self-help Status: AVAILABLE Received Date: " + getCurrentDate() + SEPARATOR_LINEDIVIDER +
                 System.lineSeparator();
         //            Test list
         //            validResponse = "list";
@@ -150,11 +145,11 @@ class ParserTest {
         output = outputStream.toString();
         expectedOutput = "This book is added:" + System.lineSeparator() +
                 "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help " +
-                "Status: AVAILABLE Received Date: 06 Nov 2023" +  System.lineSeparator() +
+                "Status: AVAILABLE Received Date: " + getCurrentDate() +  System.lineSeparator() +
                 "____________________________________________________________" +System.lineSeparator() +
                 "This book is added:" + System.lineSeparator() +
                 "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson " +
-                "Genre: Self-help Status: AVAILABLE Received Date: 06 Nov 2023" + System.lineSeparator() +
+                "Genre: Self-help Status: AVAILABLE Received Date: " + getCurrentDate() + System.lineSeparator() +
                 "____________________________________________________________" +System.lineSeparator() +
                 "Here are resources that matched the given filters:" +System.lineSeparator() +
                 "                                                                                  [BOOKS]"
@@ -166,9 +161,8 @@ class ParserTest {
                 "---------------------------------------------------------------------------------------------------"
                 +"--------------------------------------------------------" +System.lineSeparator() +
                 "2              B    The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson        "+
-                "      Self-help           null           AVAILABLE 06 Nov 2023    " +System.lineSeparator() +
-                System.lineSeparator() +
-                System.lineSeparator() +
+                "      Self-help           null           AVAILABLE " + getCurrentDate() +"    " +System.lineSeparator()
+                + System.lineSeparator() + System.lineSeparator() +
                 "There are currently 1 resource(s)." +System.lineSeparator() +
                 "____________________________________________________________" +System.lineSeparator()
                 + System.lineSeparator();
