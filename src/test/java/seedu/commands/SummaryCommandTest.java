@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SummaryCommandTest {
 
+    
+
     @Test
     public void testGenerateBar() {
         SummaryCommand summaryCommand = new SummaryCommand();
