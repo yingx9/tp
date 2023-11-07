@@ -2,8 +2,10 @@ package seedu.commands.events;
 
 import seedu.commands.Command;
 import seedu.commands.CommandResult;
+import seedu.data.GenericList;
+import seedu.data.events.Event;
+import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 
 public class EventDeleteCommand extends Command {
 
@@ -14,21 +16,21 @@ public class EventDeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(String statement, Parser parser)
+    public CommandResult execute(String statement, GenericList<Resource, Event> container)
             throws IllegalArgumentException, IllegalStateException, SysLibException {
         feedbackToUser = "";
         String[] values = parseArgument(statement);
-        int index = parseCalendarInt(values[0], parser);
+        int index = parseCalendarInt(values[0], container);
         System.out.println("This event is removed:");
-        System.out.println(parser.eventList.get(index).toString());
+        System.out.println(container.getEventList().get(index).toString());
         System.out.println("____________________________________________________________");
-        parser.eventList.remove(index);
+        container.getEventList().remove(index);
         return new CommandResult(feedbackToUser);
     }
 
-    public int parseCalendarInt(String value, Parser parser) {
+    public int parseCalendarInt(String value, GenericList<Resource, Event> container) {
         int index = parseInt(value);
-        int size = parser.eventList.size();
+        int size = container.getEventList().size();
         if (index >= size || index < 0) {
             throw new IllegalArgumentException("Index is out of range of the event list!");
         }

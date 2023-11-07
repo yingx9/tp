@@ -1,9 +1,10 @@
 package seedu.commands;
 
+import seedu.data.GenericList;
+import seedu.data.events.Event;
 import seedu.data.resources.Book;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 import java.util.ArrayList;
 
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
@@ -15,13 +16,13 @@ public class DeleteCommand extends Command {
         required = new boolean[]{true};
     }
     @Override
-    public CommandResult execute(String statement, Parser parser) throws SysLibException {
+    public CommandResult execute(String statement, GenericList<Resource, Event> container) throws SysLibException {
         int id = parseInt(parseArgument(statement)[0]);
         assert id > 0;
         feedbackToUser = "";
         ArrayList<Resource> removals = new ArrayList<>();
         System.out.println("Looking for ID: " + id + "...");
-        for (Resource r: parser.resourceList){
+        for (Resource r: container.getResourceList()){
             Book b = (Book) r;
             if (b.getId() == id){
                 System.out.println("This resource is removed: ");
@@ -32,7 +33,7 @@ public class DeleteCommand extends Command {
         if(removals.isEmpty()) {
             System.out.println("No resources with id matching " + id + System.lineSeparator() + SEPARATOR_LINEDIVIDER);
         } else {
-            parser.resourceList.removeAll(removals);
+            container.getResourceList().removeAll(removals);
         }
         return new CommandResult(feedbackToUser);
     }

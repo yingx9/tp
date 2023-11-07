@@ -13,7 +13,6 @@ import seedu.parser.Parser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -31,11 +30,14 @@ public class FindCommandTest {
         findCommand = new FindCommand();
         parser = new Parser();
 
-        parser.resourceList = new ArrayList<>();
-        parser.resourceList.add(new Book("Title1", "ISBN1", "Author1", new String[]{"horror"}, 1234, Status.AVAILABLE));
-        parser.resourceList.add(new Magazine("Title2", "ISBN2", "VOGUE2", "1234", 5678, Status.AVAILABLE));
-        parser.resourceList.add(new Newspaper("Title3", "ISBN3", "Publisher3", "1234", 9101, Status.AVAILABLE));
-        parser.resourceList.add(new CD("Title4", "Creator4", "Creator4", "1234", 1121, Status.AVAILABLE));
+        parser.container.getResourceList().add(new Book("Title1", "ISBN1", "Author1",
+                new String[]{"horror"}, 1234, Status.AVAILABLE));
+        parser.container.getResourceList().add(new Magazine("Title2", "ISBN2", "VOGUE2",
+                "1234", 5678, Status.AVAILABLE));
+        parser.container.getResourceList().add(new Newspaper("Title3", "ISBN3", "Publisher3",
+                "1234", 9101, Status.AVAILABLE));
+        parser.container.getResourceList().add(new CD("Title4", "Creator4", "Creator4",
+                "1234", 1121, Status.AVAILABLE));
 
         outContent.reset();
         System.setOut(new PrintStream(outContent));
@@ -72,67 +74,67 @@ public class FindCommandTest {
 
     @Test
     void testExecuteWithInvalidFlag() {
-        assertThrows(IllegalArgumentException.class, () -> findCommand.execute("/x InvalidFlag", parser));
+        assertThrows(IllegalArgumentException.class, () -> findCommand.execute("/x InvalidFlag", parser.container));
     }
 
     @Test
     void testExecuteWithNoFilter() {
-        assertThrows(IllegalArgumentException.class, () -> findCommand.execute("", parser));
+        assertThrows(IllegalArgumentException.class, () -> findCommand.execute("", parser.container));
     }
 
     @Test
     void testExecuteFindTitleMatch() throws SysLibException {
-        findCommand.execute("/t Title1", parser);
+        findCommand.execute("/t Title1", parser.container);
         assertTrue(outContent.toString().contains("Title1"));
     }
 
     @Test
     void testExecuteFindAuthorMatch() throws SysLibException {
-        findCommand.execute("/a Author1", parser);
+        findCommand.execute("/a Author1", parser.container);
         assertTrue(outContent.toString().contains("Author1"));
     }
 
     @Test
     void testExecuteFindISBNMatch() throws SysLibException {
-        findCommand.execute("/i ISBN1", parser);
+        findCommand.execute("/i ISBN1", parser.container);
         assertTrue(outContent.toString().contains("ISBN1"));
     }
 
     @Test
     void testExecuteNoMatchesFound() throws SysLibException {
-        findCommand.execute("/t NonexistentTitle", parser);
+        findCommand.execute("/t NonexistentTitle", parser.container);
         assertTrue(outContent.toString().contains("There are no resources found matching the given filters."));
     }
 
     @Test
     void testExecuteFindMagazineBrandMatch() throws SysLibException {
-        findCommand.execute("/a VOGUE2", parser);
+        findCommand.execute("/a VOGUE2", parser.container);
         assertTrue(outContent.toString().contains("VOGUE2"));
     }
 
     @Test
     void testExecuteFindNewspaperPublisherMatch() throws SysLibException {
-        findCommand.execute("/a Publisher3", parser);
+        findCommand.execute("/a Publisher3", parser.container);
         assertTrue(outContent.toString().contains("Publisher3"));
     }
 
     @Test
     void testExecuteFindCDMatch() throws SysLibException {
-        findCommand.execute("/a Creator4", parser);
+        findCommand.execute("/a Creator4", parser.container);
         assertTrue(outContent.toString().contains("Creator4"));
     }
 
 
     @Test
     void testExecuteMultipleFilters() throws SysLibException {
-        findCommand.execute("/t Title1 /a Author1", parser);
+        findCommand.execute("/t Title1 /a Author1", parser.container);
         assertTrue(outContent.toString().contains("Title1"));
         assertTrue(outContent.toString().contains("Author1"));
     }
 
     @Test
     void testExecuteInvalidFormat() {
-        assertThrows(IllegalArgumentException.class, () -> findCommand.execute("find /z Invalid", parser));
+        assertThrows(IllegalArgumentException.class, () -> findCommand.execute("find /z Invalid", parser.container));
     }
 
 }

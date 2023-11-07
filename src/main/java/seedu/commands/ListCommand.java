@@ -1,12 +1,13 @@
 package seedu.commands;
 
 
+import seedu.data.GenericList;
 import seedu.data.Status;
+import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 
 
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 
 
 import java.io.File;
@@ -66,13 +67,14 @@ public class ListCommand extends Command {
 
 
     @Override
-    public CommandResult execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
+    public CommandResult execute(String statement, GenericList<Resource, Event> container)
+            throws SysLibException, IllegalArgumentException {
         feedbackToUser = "";
         LIST_LOGGER.info("List Command execute with " + statement);
 
         String[] values = parseArgument(statement);
         validateStatement(statement, values);
-        filterResources(values, parser.resourceList);
+        filterResources(values, container.getResourceList());
         LIST_LOGGER.info("List Command ends");
         return new CommandResult(feedbackToUser);
 

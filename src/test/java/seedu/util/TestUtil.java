@@ -19,7 +19,7 @@ public class TestUtil {
     public String getOutputMessage(Command c, String m, List<Resource> resourceList) throws SysLibException {
         Parser parser = new Parser();
         parser.resourceList = resourceList;
-        CommandResult commandResult = c.execute(m, parser);
+        CommandResult commandResult = c.execute(m, parser.container);
         return commandResult.feedbackToUser;
     }
 

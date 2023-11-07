@@ -1,4 +1,5 @@
 package seedu.ui;
+import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 import seedu.data.resources.Magazine;
 import seedu.data.resources.Book;
@@ -71,19 +72,21 @@ public class UI {
         showLine();
     }
 
-    public void showError(Exception e){
-        System.out.println(e);
-    }
-
     public String readCommand(){
         System.out.print("> ");
         return myScanner.nextLine();
     }
 
-    public void showLoadMessage(String filepath, List<Resource> resourcelist){
+    public void showLoadMessage(String filepath, List<Resource> resourcelist, List<Event> eventlist){
         showLine();
         System.out.println("Storage file found @ " + filepath);
-        System.out.printf("Loaded %d listings!%n", resourcelist.size());
+        System.out.printf("Loaded %d resources and %d events!%n", resourcelist.size(), eventlist.size());
+    }
+
+    public void showLoadMessageEmpty(String filepath){
+        showLine();
+        System.out.println("Storage file found @ " + filepath);
+        System.out.println("No Resources or Events found in storage.");
     }
 
     public void showLine(){
