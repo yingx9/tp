@@ -1,3 +1,8 @@
+/**
+ * EventEditCommand represents a command to edit an event in a list of events.
+ * It allows users to update the title, date, or description of an existing event.
+ * If no changes are specified, it informs the user that nothing was edited.
+ */
 package seedu.commands.events;
 
 import seedu.commands.Command;
@@ -19,13 +24,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import static seedu.ui.UI.LINEDIVIDER;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
-public class EventAddCommand extends Command {
+public class EventEditCommand extends Command {
 
     private static String feedbackToUser;
-    private static final Logger LOGGER = Logger.getLogger(EventAddCommand.class.getName());
+
+    private static final Logger LOGGER = Logger.getLogger(EventEditCommand.class.getName());
 
     static {
         // remove logs from showing in stdout
@@ -45,48 +50,63 @@ public class EventAddCommand extends Command {
             LOGGER.log(Level.SEVERE, "Failed to set up log file handler", e);
         }
     }
-    public EventAddCommand() {
-        args = new String[]{"t", "date", "desc"};
-        required = new boolean[]{true, true, false};
-        LOGGER.info("EventAdd Command is created");
+
+    /**
+     * Constructs an EventEditCommand with default arguments and sets up logging.
+     */
+    public EventEditCommand() {
+        args = new String[]{"i", "t", "d", "desc"};
+        required = new boolean[]{true, false, false, false};
+        LOGGER.info("EventEdit Command created");
     }
+
+    /**
+     * Executes the EventEditCommand to edit an event in the provided container.
+     *
+     * @param statement   The user's input statement.
+     * @param container   The container containing events to be edited.
+     * @return            A CommandResult containing feedback to the user.
+     * @throws IllegalArgumentException  If the input statement or index is invalid.
+     * @throws IllegalStateException     If the container is in an invalid state.
+     * @throws SysLibException           If a system library exception occurs.
+     */
     @Override
     public CommandResult execute(String statement, GenericList<Resource, Event> container)
             throws IllegalArgumentException, IllegalStateException, SysLibException {
-
+        LOGGER.info("Executing EventEditCommand");
         feedbackToUser = "";
         String[] values = parseArgument(statement);
         validateStatement(statement, values);
-        LocalDate currentDate = parseDate(values[1]);
-        int index = binarySearch(container, currentDate);
-        container.getEventList().add(index, new Event(values[0], currentDate, values[2]));
-        System.out.println("Event inserted at: " + index);
-        System.out.println(LINEDIVIDER);
-        LOGGER.info("Successfully added an event");
+
+        int index = parseInt(values[0]);
+        if (index < 0 || index >= container.getEventList().size()) {
+            throw new IllegalArgumentException("Invalid event index" + SEPARATOR_LINEDIVIDER + "\n");
+        }
+        LOGGER.info("Getting old event");
+        Event oldEvent = container.getEventList().get(index);
+
+        String title = values[1] != null ? values[1] : oldEvent.getName();
+        LocalDate date = values[2] != null ? parseDate(values[2]) : oldEvent.getDate();
+        String description = values[3] != null ? values[3] : oldEvent.getDescription();
+
+        Event editedEvent = new Event(title, date, description);
+
+        container.getEventList().remove(index);
+        LOGGER.info("Old event removed.");
+        container.getEventList().add(editedEvent);
+        LOGGER.info("New event added.");
+        feedbackToUser = "";
+
+        if (values[1] == null && values[2] == null && values[3] == null){
+            LOGGER.info("Print nothing changed.");
+            System.out.println("Event was not edited as nothing was changed." + SEPARATOR_LINEDIVIDER);
+        } else {
+            LOGGER.info("Print event changed.");
+            System.out.println("Event edited successfully. New event details:" + System.lineSeparator()
+                    + index + ": " + editedEvent.toString() + SEPARATOR_LINEDIVIDER);
+        }
 
         return new CommandResult(feedbackToUser);
-    }
-
-    public static int binarySearch(GenericList<Resource, Event> container, LocalDate key) {
-        if(container.getEventList().isEmpty()){
-            return 0;
-        }
-        int low = 0;
-        int high = container.getEventList().size() - 1;
-
-        while (low <= high) {
-            int mid = (low + high)/2;
-            LocalDate midVal = container.getEventList().get(mid).getDate();
-            int cmp = midVal.compareTo(key);
-            if (cmp < 0) {
-                low = mid + 1;
-            } else if (cmp > 0) {
-                high = mid - 1;
-            } else {
-                return mid;
-            }
-        }
-        return low;
     }
 
     /**
@@ -97,19 +117,25 @@ public class EventAddCommand extends Command {
      * @throws IllegalArgumentException  If the date string is in an invalid format.
      */
     public static LocalDate parseDate(String dateStr) throws IllegalArgumentException {
+
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .parseCaseInsensitive()
                 .appendPattern("dd MMM yyyy")
                 .toFormatter(Locale.ENGLISH)
                 .withResolverStyle(ResolverStyle.SMART);
+
         try {
+
             dateStr = checkDate(dateStr);
             return LocalDate.parse(dateStr, formatter);
+
         } catch (DateTimeParseException e) {
-            LOGGER.info("failed date parsing");
+
             throw new IllegalArgumentException("Please enter a valid date in the format 'dd MMM yyyy'"
                     + SEPARATOR_LINEDIVIDER);
+
         }
+
     }
 
     /**
@@ -122,14 +148,19 @@ public class EventAddCommand extends Command {
     public static String checkDate(String dateStr) throws IllegalArgumentException {
         String[] temp = dateStr.split(" ");
         if(temp.length != 3){
-            LOGGER.info("failed checkDate function");
+
             throw new IllegalArgumentException("Please enter a valid date in the format 'dd MMM yyyy'"
                     + SEPARATOR_LINEDIVIDER);
+
         }
+
         int first = parseInt(temp[0]);
         if(first < 10){
+
             return "0" + dateStr;
+
         }
+
         return dateStr;
     }
 
