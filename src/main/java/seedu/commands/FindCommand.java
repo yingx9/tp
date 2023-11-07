@@ -26,7 +26,8 @@ public class FindCommand extends Command {
     public static final int THIRD_INDEX = 2;
     public static final int FOURTH_INDEX = 3;
     private static final String INVALID_ARGUMENT_MESSAGE = "Please use the format 'find [/t TITLE OR "
-            + "/i ISBN OR /a AUTHOR OR /id ID]'\n" + "____________________________________________________________";
+            + "/i ISBN OR /a AUTHOR/PUBLISHER/BRAND/CREATOR OR /id ID]'\n" + "________________________________" +
+            "____________________________";
     private static final String NO_RESOURCE_FOUND_MESSAGE = "There are no resources found matching the given filters.";
     private static final String RESOURCE_FOUND_MESSAGE = "Here are resources that matched the given filters:";
     private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());
@@ -133,6 +134,9 @@ public class FindCommand extends Command {
             String resourceType = resource.getTag();
 
             if (values[FIRST_INDEX] != null && resource.getId() != Integer.parseInt(values[FIRST_INDEX])) {
+                if (Integer.parseInt(values[FIRST_INDEX]) < 0){
+                    throw new SysLibException("ID cannot be negative.");
+                }
                 isMatch = false;
             }
 

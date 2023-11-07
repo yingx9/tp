@@ -61,12 +61,12 @@ The `find` command allows users to search for resources based on specified filte
 `find` has the following options:
 - `find /id [ID]`
 - `find /t [TITLE]`
-- `find /a [AUTHOR]`
+- `find /a [AUTHOR/PUBLISHER/BRAND/CREATOR]`
 - `find /i [ISBN]`
 
 Multiple filters can also be combined:
 
-- `find /t [TITLE] /a [AUTHOR]`
+- `find /t [TITLE] /a [AUTHOR/PUBLISHER/BRAND/CREATOR]`
 
 #### Implementation
 

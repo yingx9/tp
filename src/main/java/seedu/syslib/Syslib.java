@@ -32,6 +32,8 @@ public class Syslib {
 
             if (!resourceListLoad.isEmpty() || !eventListLoad.isEmpty()){
                 ui.showLoadMessage(filePath, resourceListLoad, eventListLoad);
+            } else {
+                ui.showLoadMessageEmpty(filePath);
             }
             parser.container.setResourceList(resourceListLoad);
             parser.container.setEventList(eventListLoad);

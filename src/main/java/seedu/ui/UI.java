@@ -72,10 +72,6 @@ public class UI {
         showLine();
     }
 
-    public void showError(Exception e){
-        System.out.println(e);
-    }
-
     public String readCommand(){
         System.out.print("> ");
         return myScanner.nextLine();
@@ -85,6 +81,12 @@ public class UI {
         showLine();
         System.out.println("Storage file found @ " + filepath);
         System.out.printf("Loaded %d resources and %d events!%n", resourcelist.size(), eventlist.size());
+    }
+
+    public void showLoadMessageEmpty(String filepath){
+        showLine();
+        System.out.println("Storage file found @ " + filepath);
+        System.out.println("No Resources or Events found in storage.");
     }
 
     public void showLine(){
