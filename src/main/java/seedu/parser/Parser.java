@@ -17,6 +17,7 @@ import seedu.commands.ListCommand;
 import seedu.commands.HelpCommand;
 import seedu.commands.ExitCommand;
 import seedu.commands.EditCommand;
+import seedu.commands.SummaryCommand;
 
 import static seedu.ui.UI.LINEDIVIDER;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
@@ -44,6 +45,7 @@ public class Parser {
             put("eventadd", new EventAddCommand());
             put("eventdelete", new EventDeleteCommand());
             put("eventlist", new EventListCommand());
+            put("summary", new SummaryCommand());
         }
     };
 
