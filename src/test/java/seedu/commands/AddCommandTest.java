@@ -44,7 +44,7 @@ public class AddCommandTest {
 
         String expectedOutput = "This book is added:" + System.lineSeparator() +
                 "[B]  ID: 1 Title: The Minds of Billy Milligan ISBN: TMOBM00000001 Author: Daniel Keyes Genre: " +
-                "Non-Fiction, Biography Status: AVAILABLE Received Date: 06 Nov 2023" +
+                "Non-Fiction, Biography Status: AVAILABLE Received Date: 07 Nov 2023" +
                 SEPARATOR_LINEDIVIDER + System.lineSeparator();
 
         assertEquals(expectedOutput, output);
