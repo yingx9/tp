@@ -2,6 +2,7 @@ package seedu.parser;
 
 import seedu.commands.events.EventAddCommand;
 import seedu.commands.events.EventDeleteCommand;
+import seedu.commands.events.EventEditCommand;
 import seedu.commands.events.EventListCommand;
 import seedu.data.GenericList;
 import seedu.data.Status;
@@ -45,6 +46,7 @@ public class Parser {
             put("edit", new EditCommand());
             put("eventadd", new EventAddCommand());
             put("eventdelete", new EventDeleteCommand());
+            put("eventedit", new EventEditCommand());
             put("eventlist", new EventListCommand());
         }
     };
