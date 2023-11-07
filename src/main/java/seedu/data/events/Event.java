@@ -1,4 +1,4 @@
-package seedu.data;
+package seedu.data.events;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

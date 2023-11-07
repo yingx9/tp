@@ -2,27 +2,29 @@ package seedu.commands.events;
 
 import seedu.commands.Command;
 import seedu.commands.CommandResult;
+import seedu.data.GenericList;
+import seedu.data.events.Event;
+import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 
 public class EventListCommand extends Command {
 
     private static String feedbackToUser;
 
     @Override
-    public CommandResult execute(String statement, Parser parser) throws
+    public CommandResult execute(String statement, GenericList<Resource, Event> container) throws
             IllegalArgumentException, IllegalStateException, SysLibException {
         feedbackToUser = "";
         if (!statement.isEmpty()){
             throw new IllegalArgumentException("'eventlist' command does not require arguments!");
         }
-        if(parser.eventList.isEmpty()){
+        if(container.getEventList().isEmpty()){
             System.out.println("The event list is empty!");
             System.out.println("____________________________________________________________");
         } else {
             System.out.println("This is the current event list:");
-            for(int index = 0; index < parser.eventList.size(); index += 1){
-                System.out.println(index + ": " + parser.eventList.get(index).toString());
+            for(int index = 0; index < container.getEventList().size(); index += 1){
+                System.out.println(index + ": " + container.getEventList().get(index).toString());
             }
             System.out.println("____________________________________________________________");
         }

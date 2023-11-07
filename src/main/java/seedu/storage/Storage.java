@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
+import seedu.data.GenericList;
 import seedu.data.resources.Book;
 import seedu.data.resources.EBook;
 import seedu.data.resources.EMagazine;
@@ -19,8 +20,7 @@ import seedu.data.resources.CD;
 import seedu.data.resources.Resource;
 import seedu.data.Status;
 import seedu.exception.SysLibException;
-import seedu.data.Event;
-import seedu.parser.Parser;
+import seedu.data.events.Event;
 
 public class Storage {
     public static final int FIRST_INDEX = 0;
@@ -38,12 +38,12 @@ public class Storage {
 
     protected File dataFile;
     protected String filePath;
-    protected Parser parser;
+    protected GenericList<Resource, Event> container;
 
-    public Storage(String filePath, Parser parser) {
+    public Storage(String filePath, GenericList<Resource, Event> container) {
         this.filePath = filePath;
         this.dataFile = new File(filePath);
-        this.parser = parser;
+        this.container = container;
     }
 
     public void load(List<Resource> resources, List<Event> events) throws SysLibException {
@@ -167,8 +167,8 @@ public class Storage {
     public void save() throws SysLibException {
         try {
             FileWriter fw = new FileWriter(this.filePath);
-            List<Resource> resourcelist = parser.getResourceList();
-            List<Event> eventlist = parser.getEventList();
+            List<Resource> resourcelist = container.getResourceList();
+            List<Event> eventlist = container.getEventList();
             for (Resource resourceToSave : resourcelist){
                 String resourceSaveFormat = "";
                 switch (resourceToSave.getTag()) {

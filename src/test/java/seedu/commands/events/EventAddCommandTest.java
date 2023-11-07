@@ -16,7 +16,7 @@ public class EventAddCommandTest {
 
     @Test
     public void eventAddCommandValidData() throws SysLibException {
-        eventAddCommand.execute("/t testrun /date 1 Dec 2001 /desc testing 123", parser);
+        eventAddCommand.execute("/t testrun /date 1 Dec 2001 /desc testing 123", parser.container);
         String output = parser.eventList.get(0).toString();
         String expectedOutput = "testrun | 01 Dec 2001 | testing 123";
         assertEquals(output, expectedOutput);
@@ -26,7 +26,7 @@ public class EventAddCommandTest {
     public void eventAddCommandOutput() throws SysLibException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        eventAddCommand.execute("/t testrun /date 1 DEC 2001 /desc testing 123", parser);
+        eventAddCommand.execute("/t testrun /date 1 DEC 2001 /desc testing 123", parser.container);
         String output = outputStream.toString();
         String expectedOutput = "Event inserted at: 0" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
@@ -37,17 +37,17 @@ public class EventAddCommandTest {
     @Test
     public void eventAddCommandInvalidDate() {
         assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute(
-                "/t testrun /date tmr /desc testing 123", parser));
+                "/t testrun /date tmr /desc testing 123", parser.container));
     }
 
     @Test
     public void eventAddCommandInvalidTitle() {
         assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute(
-                "/t /date 12 Jan 2022", parser));
+                "/t /date 12 Jan 2022", parser.container));
     }
 
     @Test
     public void eventAddCommandInsufficientData() {
-        assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute("/t ", parser));
+        assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute("/t ", parser.container));
     }
 }

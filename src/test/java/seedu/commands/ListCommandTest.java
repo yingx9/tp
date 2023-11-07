@@ -49,21 +49,21 @@ public class ListCommandTest {
 
     @Test
     public void testNoTagArgBehavior() {
-        parser.resourceList = testResourceList;
-        assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/tag", parser));
+        parser.container.setResourceList(testResourceList);
+        assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/tag", parser.container));
 
     }
     @Test
     public void testNoGenreArgBehavior()  {
-        parser.resourceList = testResourceList;
-        assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/g", parser));
+        parser.container.setResourceList(testResourceList);
+        assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/g", parser.container));
 
     }
 
     @Test
     public void testNoStatusArgBehavior()  {
-        parser.resourceList = testResourceList;
-        assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/s", parser));
+        parser.container.setResourceList(testResourceList);
+        assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/s", parser.container));
 
     }
 
