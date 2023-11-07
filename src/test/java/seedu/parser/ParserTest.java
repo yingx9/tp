@@ -185,7 +185,7 @@ class ParserTest {
         parser.process(validResponse);
         output = outputStream.toString();
         expectedOutput += "Looking for ID: 1..." + System.lineSeparator() +
-                "This resource is removed: " + System.lineSeparator() +
+                "This resource is removed:" + System.lineSeparator() +
                 "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
                 "Author: Thomas Genre: Self-help Status: LOST" + " Received Date: " + getCurrentDate()
                 + System.lineSeparator() +
