@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
         for (Resource r: container.getResourceList()){
             Book b = (Book) r;
             if (b.getId() == id){
-                System.out.println("This resource is removed: ");
+                System.out.println("This resource is removed:");
                 System.out.println(b + SEPARATOR_LINEDIVIDER);
                 removals.add(r);
             }

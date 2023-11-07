@@ -12,6 +12,7 @@ import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.ui.UI.LINESEPARATOR;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 import static seedu.util.TestUtil.getCurrentDate;
 
@@ -130,29 +131,27 @@ class ParserTest {
         validResponse = "find /t The Subtle Art of Not Giving a F*ck";
         parser.process(validResponse);
         output = outputStream.toString();
-        expectedOutput = "This book is added:" + System.lineSeparator() +
-                "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help " +
-                "Status: AVAILABLE Received Date: " + getCurrentDate() +  System.lineSeparator() +
-                "____________________________________________________________" +System.lineSeparator() +
-                "This book is added:" + System.lineSeparator() +
-                "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson " +
-                "Genre: Self-help Status: AVAILABLE Received Date: " + getCurrentDate() + System.lineSeparator() +
-                "____________________________________________________________" +System.lineSeparator() +
-                "Here are resources that matched the given filters:" +System.lineSeparator() +
-                "                                                                                  [BOOKS]"
-                + System.lineSeparator() +
-                "-----------------------------------------------------------------------------------------------" +
-                "------------------------------------------------------------" +System.lineSeparator() +
-                "ID             Tag  Title                               ISBN          Author        " +
-                "           Genre               Link           Status    Received Date  " +System.lineSeparator() +
-                "---------------------------------------------------------------------------------------------------"
-                +"--------------------------------------------------------" +System.lineSeparator() +
-                "2              B    The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson        "+
-                "      Self-help           null           AVAILABLE " + getCurrentDate() +"    " +System.lineSeparator()
-                + System.lineSeparator() + System.lineSeparator() +
-                "There are currently 1 resource(s)." +System.lineSeparator() +
-                "____________________________________________________________" +System.lineSeparator()
-                + System.lineSeparator();
+        expectedOutput = "This book is added:" + LINESEPARATOR +
+                "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre:"+
+                " Self-help Status: AVAILABLE Received Date: "+getCurrentDate() +LINESEPARATOR +
+                "____________________________________________________________" +LINESEPARATOR +
+                "This book is added:" +LINESEPARATOR +
+                "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark "+
+                "Manson Genre: Self-help Status: AVAILABLE Received Date: "+getCurrentDate() +LINESEPARATOR +
+                "____________________________________________________________" +LINESEPARATOR +
+                "Here are resources that matched the given filters:" +LINESEPARATOR +
+                "                                                                         [BOOKS]" +LINESEPARATOR +
+                "----------------------------------------------------------------------------------------"+
+                "-----------------------------------------------------------" +LINESEPARATOR +
+                "ID     Tag  Title                               ISBN          Author                "+
+                "   Genre               Link           Status    Received Date  " +LINESEPARATOR +
+                "----------------------------------------------------------------------------------------"+
+                "-----------------------------------------------------------" +LINESEPARATOR +
+                "2      B    The Subtle Art of Not Giving a F*ck 9780062457714 Mark Manson             "+
+                " Self-help           null           AVAILABLE "+getCurrentDate()+"    " +LINESEPARATOR +
+                 LINESEPARATOR + LINESEPARATOR +
+                "There are currently 1 resource(s)." +LINESEPARATOR +
+                "____________________________________________________________" +LINESEPARATOR + LINESEPARATOR ;
         assertEquals(expectedOutput, output);
         //Negative find test
         validResponse = "find /t No Such Book";
@@ -162,7 +161,7 @@ class ParserTest {
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
         //Test edit
-        validResponse = "edit /i 9781250255174 /a Thomas";
+        validResponse = "edit /id 1 /a Thomas";
         parser.process(validResponse);
         output = outputStream.toString();
         expectedOutput += "Successfully updated! Your updated resource:" + System.lineSeparator()
@@ -172,7 +171,7 @@ class ParserTest {
                 "____________________________________________________________" + System.lineSeparator();
         assertEquals(expectedOutput, output);
 
-        validResponse = "edit /i 9781250255174 /s lost";
+        validResponse = "edit /id 1 /s lost";
         parser.process(validResponse);
         output = outputStream.toString();
         expectedOutput += "Successfully updated! Your updated resource:" + System.lineSeparator()

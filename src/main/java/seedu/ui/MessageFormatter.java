@@ -1,9 +1,9 @@
-package seedu.common;
+package seedu.ui;
 
 import static seedu.ui.UI.LINESEPARATOR;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
-public class FormatMessages {
+public class MessageFormatter {
 
     public static String formatFirstLine(String message){
         return LINESEPARATOR + message + LINESEPARATOR + LINESEPARATOR;

@@ -24,14 +24,14 @@ import java.util.logging.Logger;
 import java.util.List;
 import java.util.logging.SimpleFormatter;
 
-import static seedu.common.FormatMessages.formatLastLineDivider;
-import static seedu.common.FormatMessages.formatLineSeparator;
 
+import static seedu.ui.MessageFormatter.formatLineSeparator;
+import static seedu.ui.MessageFormatter.formatLastLineDivider;
 public class EditCommand extends Command{
     public static final String MISSING_ARG_MESSAGE =  formatLastLineDivider("Please provide at least " +
             "one detail to edit!");
     public static final String NOT_BOOK_ERROR =  formatLastLineDivider("Your resource is not a book!");
-    public static final String RESOURCE_NOT_FOUND =  formatLastLineDivider("No such resource with given ISBN");
+    public static final String RESOURCE_NOT_FOUND =  formatLastLineDivider("No such resource with given ID");
     public static final String EDIT_SUCCESS = formatLineSeparator("Successfully updated! Your updated resource:");
     private static final Logger EDIT_LOGGER = Logger.getLogger(EditCommand.class.getName());
     private static final String NOT_CD_ERROR =  formatLastLineDivider("Your resource is not a CD!");
@@ -63,7 +63,7 @@ public class EditCommand extends Command{
 
 
     public EditCommand(){
-        args = new String[]{"i", "t", "a", "l", "g", "s", "c", "ty", "b", "is", "p", "ed"};
+        args = new String[]{"id", "t", "a", "l", "g", "s", "c", "ty", "b", "is", "p", "ed"};
         required = new boolean[]{true, false, false, false, false, false, false, false,false,false,false,false};
     }
 
@@ -76,27 +76,31 @@ public class EditCommand extends Command{
         String[] givenParameters = parseArgument(statement);
         validateStatement(statement, givenParameters);
 
-        if (hasOneArg(givenParameters)) {
-            String givenISBN = givenParameters[0];
-            Resource foundResource = findResourceByISBN(givenISBN, container.getResourceList());
+        boolean hasOneArg = hasOneArg(givenParameters);
 
-            if(foundResource != null) {
-                Resource updatedResource = editResource(foundResource, givenParameters);
-                assert updatedResource != null;
-                assert resourceIndex < container.getResourceList().size();
-
-                container.getResourceList().set(resourceIndex, updatedResource);
-                feedbackToUser += EDIT_SUCCESS + formatLastLineDivider(updatedResource.toString());
-                EDIT_LOGGER.info("Edit success");
-            } else {
-                feedbackToUser += RESOURCE_NOT_FOUND;
-                EDIT_LOGGER.warning(feedbackToUser);
-            }
-
-        } else {
+        if(!hasOneArg){
             EDIT_LOGGER.warning(MISSING_ARG_MESSAGE);
             throw new SysLibException(MISSING_ARG_MESSAGE);
         }
+
+        String givenID = givenParameters[0];
+        int givenIDNumber = parseInt(givenID);
+        Resource foundResource = findResourceByID(givenIDNumber, container.getResourceList());
+
+        if(foundResource == null){
+            feedbackToUser += RESOURCE_NOT_FOUND;
+            EDIT_LOGGER.warning(feedbackToUser);
+            return new CommandResult(feedbackToUser);
+        }
+
+        Resource updatedResource = editResource(foundResource, givenParameters);
+        assert updatedResource != null;
+        assert resourceIndex < container.getResourceList().size();
+
+        container.getResourceList().set(resourceIndex, updatedResource);
+        feedbackToUser += EDIT_SUCCESS + formatLastLineDivider(updatedResource.toString());
+
+
         return new CommandResult(feedbackToUser);
     }
 
@@ -110,7 +114,7 @@ public class EditCommand extends Command{
         return false;
     }
 
-    public Resource findResourceByISBN(String givenISBN, List<Resource> resourceList){
+    public Resource findResourceByID(int givenID, List<Resource> resourceList){
 
         Resource foundResource = null;
 
@@ -118,8 +122,8 @@ public class EditCommand extends Command{
 
             Resource tempResource = resourceList.get(i);
 
-            String resourceISBN = tempResource.getISBN();
-            if (resourceISBN.equals(givenISBN)){
+            int resourceID = tempResource.getId();
+            if (resourceID==givenID){
                 foundResource = tempResource;
                 resourceIndex = i;
                 break;
