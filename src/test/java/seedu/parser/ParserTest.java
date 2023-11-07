@@ -124,19 +124,6 @@ class ParserTest {
                 "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson " +
                 "Genre: Self-help Status: AVAILABLE Received Date: " + getCurrentDate() + SEPARATOR_LINEDIVIDER +
                 System.lineSeparator();
-        //            Test list
-        //            validResponse = "list";
-        //            parser.process(validResponse);
-        //            expectedOutput += "Listing all resources in the Library:" + System.lineSeparator()
-        //                    + System.lineSeparator() +
-        //                    "1. [B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
-        //                    "Author: Thomas Erikson Genre: Self-help Status: AVAILABLE" + " Received Date: "
-        //                    + getCurrentDate() + System.lineSeparator() +
-        //                    "2. [B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 " +
-        //                    "Author: Mark Manson Genre: Self-help Status: AVAILABLE" + " Received Date: "
-        //                    + getCurrentDate() + System.lineSeparator() + System.lineSeparator() +
-        //                    "There are currently 2 resource(s)." + System.lineSeparator() +
-        //                    "____________________________________________________________" + System.lineSeparator();
         System.setOut(System.out);
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
@@ -198,7 +185,7 @@ class ParserTest {
         parser.process(validResponse);
         output = outputStream.toString();
         expectedOutput += "Looking for ID: 1..." + System.lineSeparator() +
-                "This resource is removed: " + System.lineSeparator() +
+                "This resource is removed:" + System.lineSeparator() +
                 "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
                 "Author: Thomas Genre: Self-help Status: LOST" + " Received Date: " + getCurrentDate()
                 + System.lineSeparator() +

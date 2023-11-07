@@ -33,7 +33,7 @@ public class DeleteCommandTest {
         deleteCommand.execute("/id 1", parser.container);
         String output = outputStream.toString();
         String expectedOutput = "Looking for ID: 1..." + System.lineSeparator()+
-                "This resource is removed: " + System.lineSeparator() +
+                "This resource is removed:" + System.lineSeparator() +
                 "[B]  ID: 1 Title: The Minds of Billy Milligan ISBN: TMOBM00000001 Author: Daniel Keyes Genre: - " +
                 "Status: AVAILABLE "  + "Received Date: " + getCurrentDate() + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();

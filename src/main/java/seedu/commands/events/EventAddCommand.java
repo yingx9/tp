@@ -19,6 +19,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import static seedu.ui.UI.LINEDIVIDER;
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
+
 public class EventAddCommand extends Command {
 
     private static String feedbackToUser;
@@ -58,7 +61,7 @@ public class EventAddCommand extends Command {
         int index = binarySearch(container, currentDate);
         container.getEventList().add(index, new Event(values[0], currentDate, values[2]));
         System.out.println("Event inserted at: " + index);
-        System.out.println("____________________________________________________________");
+        System.out.println(LINEDIVIDER);
         LOGGER.info("Successfully added an event");
 
         return new CommandResult(feedbackToUser);
@@ -98,8 +101,7 @@ public class EventAddCommand extends Command {
         } catch (DateTimeParseException e) {
             LOGGER.info("failed date parsing");
             throw new IllegalArgumentException("Please enter a valid date in the format 'dd MMM yyyy'"
-                    + System.lineSeparator()
-                    + "____________________________________________________________");
+                    + SEPARATOR_LINEDIVIDER);
         }
     }
 
@@ -108,8 +110,7 @@ public class EventAddCommand extends Command {
         if(temp.length != 3){
             LOGGER.info("failed checkDate function");
             throw new IllegalArgumentException("Please enter a valid date in the format 'dd MMM yyyy'"
-                    + System.lineSeparator()
-                    + "____________________________________________________________");
+                    + SEPARATOR_LINEDIVIDER);
         }
         int first = parseInt(temp[0]);
         if(first < 10){
