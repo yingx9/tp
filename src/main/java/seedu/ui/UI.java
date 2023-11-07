@@ -11,8 +11,8 @@ import java.util.Formatter;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Arrays;
-import static seedu.common.FormatMessages.formatADivider;
-import static seedu.common.FormatMessages.formatLastLineDivider;
+import static seedu.ui.MessageFormatter.formatADivider;
+import static seedu.ui.MessageFormatter.formatLastLineDivider;
 
 public class UI {
     public static final String LINESEPARATOR = System.lineSeparator();
@@ -96,59 +96,58 @@ public class UI {
 
         if (resourcesList.isEmpty()){
             messageToDisplay += ZERO_RESOURCES_MESSAGE;
-
-        } else {
-
-            String displayFormat =  buildDisplayHeader(resourcesList);
-
-            Formatter bookDisplayFormatter = buildBookFormatter(displayFormat);
-            Formatter magazineDisplayFormatter = buildMagazineFormatter(displayFormat);
-            Formatter cdDisplayFormatter = buildCDFormatter(displayFormat);
-            Formatter newspaperDisplayFormatter = buildNewspaperFormatter(displayFormat);
-            int bookCount = 0;
-            int magazineCount = 0;
-            int newspaperCount = 0;
-            int cdCount = 0;
-
-
-            for (Resource resource : resourcesList) {
-
-                if (resource instanceof Book){
-                    bookCount++;
-                    bookDisplayFormatter = resource.toTableFormat(displayFormat, bookDisplayFormatter);
-                } else if (resource instanceof Magazine){
-                    magazineCount++;
-                    magazineDisplayFormatter = resource.toTableFormat(displayFormat, magazineDisplayFormatter);
-                } else if(resource instanceof CD ) {
-                    cdCount++;
-                    cdDisplayFormatter = resource.toTableFormat(displayFormat, cdDisplayFormatter);
-                } else if(resource instanceof Newspaper){
-                    newspaperCount++;
-                    newspaperDisplayFormatter = resource.toTableFormat(displayFormat, newspaperDisplayFormatter);
-                }
-
-            }
-
-            if (bookCount != 0){
-                messageToDisplay += bookDisplayFormatter.toString() + LINESEPARATOR;
-            }
-
-            if (magazineCount != 0){
-                messageToDisplay += magazineDisplayFormatter.toString()  + LINESEPARATOR;
-            }
-
-            if (cdCount != 0){
-                messageToDisplay += cdDisplayFormatter.toString()  + LINESEPARATOR;
-            }
-
-            if (newspaperCount != 0){
-                messageToDisplay += newspaperDisplayFormatter.toString() + LINESEPARATOR;
-            }
-
-            messageToDisplay += formatLastLineDivider("There are currently " + resourcesList.size() +
-                    " resource(s).");
+            return messageToDisplay;
 
         }
+
+        String displayFormat =  buildDisplayHeader(resourcesList);
+
+        Formatter bookDisplayFormatter = buildBookFormatter(displayFormat);
+        Formatter magazineDisplayFormatter = buildMagazineFormatter(displayFormat);
+        Formatter cdDisplayFormatter = buildCDFormatter(displayFormat);
+        Formatter newspaperDisplayFormatter = buildNewspaperFormatter(displayFormat);
+        int bookCount = 0;
+        int magazineCount = 0;
+        int newspaperCount = 0;
+        int cdCount = 0;
+
+
+        for (Resource resource : resourcesList) {
+
+            if (resource instanceof Book){
+                bookCount++;
+                bookDisplayFormatter = resource.toTableFormat(displayFormat, bookDisplayFormatter);
+            } else if (resource instanceof Magazine){
+                magazineCount++;
+                magazineDisplayFormatter = resource.toTableFormat(displayFormat, magazineDisplayFormatter);
+            } else if(resource instanceof CD ) {
+                cdCount++;
+                cdDisplayFormatter = resource.toTableFormat(displayFormat, cdDisplayFormatter);
+            } else if(resource instanceof Newspaper){
+                newspaperCount++;
+                newspaperDisplayFormatter = resource.toTableFormat(displayFormat, newspaperDisplayFormatter);
+            }
+
+        }
+
+        if (bookCount != 0){
+            messageToDisplay += bookDisplayFormatter.toString() + LINESEPARATOR;
+        }
+
+        if (magazineCount != 0){
+            messageToDisplay += magazineDisplayFormatter.toString()  + LINESEPARATOR;
+        }
+
+        if (cdCount != 0){
+            messageToDisplay += cdDisplayFormatter.toString()  + LINESEPARATOR;
+        }
+
+        if (newspaperCount != 0){
+            messageToDisplay += newspaperDisplayFormatter.toString() + LINESEPARATOR;
+        }
+
+        messageToDisplay += formatLastLineDivider("There are currently " + resourcesList.size() +
+                " resource(s).");
 
 
         return messageToDisplay;

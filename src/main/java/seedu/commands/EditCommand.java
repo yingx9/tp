@@ -23,8 +23,8 @@ import java.util.logging.Logger;
 import java.util.List;
 import java.util.logging.SimpleFormatter;
 
-import static seedu.common.FormatMessages.formatLastLineDivider;
-import static seedu.common.FormatMessages.formatLineSeparator;
+import static seedu.ui.MessageFormatter.formatLastLineDivider;
+import static seedu.ui.MessageFormatter.formatLineSeparator;
 
 public class EditCommand extends Command{
     public static final String MISSING_ARG_MESSAGE =  formatLastLineDivider("Please provide at least " +
@@ -62,7 +62,7 @@ public class EditCommand extends Command{
 
 
     public EditCommand(){
-        args = new String[]{"i", "t", "a", "l", "g", "s", "c", "ty", "b", "is", "p", "ed"};
+        args = new String[]{"id", "t", "a", "l", "g", "s", "c", "ty", "b", "is", "p", "ed"};
         required = new boolean[]{true, false, false, false, false, false, false, false,false,false,false,false};
     }
 
@@ -74,27 +74,29 @@ public class EditCommand extends Command{
         String[] givenParameters = parseArgument(statement);
         validateStatement(statement, givenParameters);
 
-        if (hasOneArg(givenParameters)) {
-            String givenISBN = givenParameters[0];
-            Resource foundResource = findResourceByISBN(givenISBN, parser.resourceList);
+        boolean hasOneArg = hasOneArg(givenParameters);
 
-            if(foundResource != null) {
-                Resource updatedResource = editResource(foundResource, givenParameters);
-                assert updatedResource != null;
-                assert resourceIndex < parser.resourceList.size();
-
-                parser.resourceList.set(resourceIndex, updatedResource);
-                feedbackToUser += EDIT_SUCCESS + formatLastLineDivider(updatedResource.toString());
-                EDIT_LOGGER.info("Edit success");
-            } else {
-                feedbackToUser += RESOURCE_NOT_FOUND;
-                EDIT_LOGGER.warning(feedbackToUser);
-            }
-
-        } else {
+        if(!hasOneArg){
             EDIT_LOGGER.warning(MISSING_ARG_MESSAGE);
             throw new SysLibException(MISSING_ARG_MESSAGE);
         }
+
+        int givenID = parseInt(givenParameters[0]);
+        Resource foundResource = findResourceByID(givenID, parser.resourceList);
+
+        if (foundResource == null){
+            feedbackToUser += RESOURCE_NOT_FOUND;
+            EDIT_LOGGER.warning(feedbackToUser);
+        } else {
+            Resource updatedResource = editResource(foundResource, givenParameters);
+            assert updatedResource != null;
+            assert resourceIndex < parser.resourceList.size();
+
+            parser.resourceList.set(resourceIndex, updatedResource);
+            feedbackToUser += EDIT_SUCCESS + formatLastLineDivider(updatedResource.toString());
+            EDIT_LOGGER.info("Edit success");
+        }
+
         return new CommandResult(feedbackToUser);
     }
 
@@ -108,7 +110,7 @@ public class EditCommand extends Command{
         return false;
     }
 
-    public Resource findResourceByISBN(String givenISBN, List<Resource> resourceList){
+    public Resource findResourceByID(int givenID, List<Resource> resourceList){
 
         Resource foundResource = null;
 
@@ -116,8 +118,8 @@ public class EditCommand extends Command{
 
             Resource tempResource = resourceList.get(i);
 
-            String resourceISBN = tempResource.getISBN();
-            if (resourceISBN.equals(givenISBN)){
+            int resourceID = tempResource.getId();
+            if (resourceID==givenID){
                 foundResource = tempResource;
                 resourceIndex = i;
                 break;

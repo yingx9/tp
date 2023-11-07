@@ -173,7 +173,7 @@ class ParserTest {
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
         //Test edit
-        validResponse = "edit /i 9781250255174 /a Thomas";
+        validResponse = "edit /id 1 /a Thomas";
         parser.process(validResponse);
         output = outputStream.toString();
         expectedOutput += "Successfully updated! Your updated resource:" + System.lineSeparator()
@@ -183,7 +183,7 @@ class ParserTest {
                 "____________________________________________________________" + System.lineSeparator();
         assertEquals(expectedOutput, output);
 
-        validResponse = "edit /i 9781250255174 /s lost";
+        validResponse = "edit /id 1 /s lost";
         parser.process(validResponse);
         output = outputStream.toString();
         expectedOutput += "Successfully updated! Your updated resource:" + System.lineSeparator()

@@ -18,8 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import static seedu.common.FormatMessages.formatLastLineDivider;
-import static seedu.common.FormatMessages.formatFirstLine;
+import static seedu.ui.MessageFormatter.formatLastLineDivider;
+import static seedu.ui.MessageFormatter.formatFirstLine;
 import static seedu.ui.UI.showResourcesDetails;
 
 
@@ -82,13 +82,16 @@ public class ListCommand extends Command {
     public void filterResources(String[] values, List<Resource> resourceList) throws SysLibException{
 
         boolean hasFilters = hasFilters((values));
+        boolean isTagEqualToKeyword = true;
+        boolean isGenreEqualToKeyword = true;
+        boolean isStatusEqualToKeyword = true;
 
         matchedResources = new ArrayList<>();
 
-        if(hasFilters){
-            boolean isTagEqualToKeyword = true;
-            boolean isGenreEqualToKeyword = true;
-            boolean isStatusEqualToKeyword = true;
+        if(!hasFilters){
+            feedbackToUser += GENERIC_MESSAGE;
+            feedbackToUser += showResourcesDetails(resourceList);
+        } else{
 
             for (Resource resource : resourceList) {
 
@@ -115,11 +118,6 @@ public class ListCommand extends Command {
             }
             feedbackToUser += FILTER_MESSAGE;
             feedbackToUser += showResourcesDetails(matchedResources);
-
-        } else {
-            feedbackToUser += GENERIC_MESSAGE;
-
-            feedbackToUser += showResourcesDetails(resourceList);
         }
 
 
