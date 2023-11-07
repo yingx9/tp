@@ -3,10 +3,11 @@ package seedu.parser;
 import seedu.commands.events.EventAddCommand;
 import seedu.commands.events.EventDeleteCommand;
 import seedu.commands.events.EventListCommand;
-import seedu.data.resources.Resource;
+import seedu.data.GenericList;
 import seedu.data.Status;
+import seedu.data.events.Event;
+import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
-import seedu.data.Event;
 
 import seedu.commands.Command;
 import seedu.commands.CommandResult;
@@ -30,6 +31,8 @@ public class Parser {
     public List<Resource> resourceList = new ArrayList<>();
     public List<Event> eventList = new ArrayList<>();
 
+    public GenericList<Resource, Event> container = new GenericList<>(resourceList, eventList);
+
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
         {
             put("list", new ListCommand());
@@ -50,7 +53,7 @@ public class Parser {
         if (commandProcessor.containsKey(command)) {
             String statement = removeFirstWord(response);
             try {
-                CommandResult commandResult = commandProcessor.get(command).execute(statement, this);
+                CommandResult commandResult = commandProcessor.get(command).execute(statement, container);
                 System.out.print(commandResult.feedbackToUser);
             } catch (IllegalArgumentException | IllegalStateException | SysLibException e) {
                 System.out.println(e.getMessage());
@@ -67,18 +70,6 @@ public class Parser {
             return "";
         }
         return response.substring(index + 1);
-    }
-
-    public List<Resource> getResourceList() {
-        return resourceList;
-    }
-
-    public void setResourceList(List<Resource> resourcelist) {
-        this.resourceList = resourcelist;
-    }
-
-    public List<Event> getEventList() {
-        return eventList;
     }
 
     public static String[] parseAddCommand(String statement) throws SysLibException {

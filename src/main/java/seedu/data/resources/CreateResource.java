@@ -1,12 +1,6 @@
-package seedu.data;
+package seedu.data.resources;
 
-import seedu.data.resources.Book;
-import seedu.data.resources.Magazine;
-import seedu.data.resources.Newspaper;
-import seedu.data.resources.EBook;
-import seedu.data.resources.EMagazine;
-import seedu.data.resources.ENewspaper;
-import seedu.data.resources.CD;
+import seedu.data.Status;
 
 import static seedu.parser.Parser.getStatusFromString;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;

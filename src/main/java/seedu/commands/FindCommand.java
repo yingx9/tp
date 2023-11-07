@@ -1,16 +1,18 @@
 package seedu.commands;
 
+import seedu.data.GenericList;
+import seedu.data.events.Event;
 import seedu.data.resources.Book;
 import seedu.data.resources.Magazine;
 import seedu.data.resources.Newspaper;
 import seedu.data.resources.Resource;
 import seedu.data.resources.CD;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 import seedu.ui.UI;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -94,8 +96,9 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(String statement, Parser parser) throws IllegalArgumentException, SysLibException {
-        assert parser != null : "Parser cannot be null!";
+    public CommandResult execute(String statement, GenericList<Resource, Event> container)
+            throws IllegalArgumentException, SysLibException {
+        assert container != null : "Parser cannot be null!";
         feedbackToUser = "";
         String[] values = parseArgument(statement);
         validateStatement(statement, values);
@@ -106,8 +109,7 @@ public class FindCommand extends Command {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE + System.lineSeparator());
         }
 
-        ArrayList<Resource> matchedResources;
-        matchedResources = filterResources(parser, values);
+        List<Resource> matchedResources = filterResources(container.getResourceList(), values);
 
 
         if (matchedResources.isEmpty()) {
@@ -124,9 +126,9 @@ public class FindCommand extends Command {
     }
 
 
-    public ArrayList<Resource> filterResources(Parser parser, String[] values) throws SysLibException{
-        ArrayList<Resource> matchedResources = new ArrayList<>();
-        for (Resource resource: parser.resourceList){
+    public List<Resource> filterResources(List<Resource> resourceList, String[] values) throws SysLibException{
+        List<Resource> matchedResources = new ArrayList<>();
+        for (Resource resource: resourceList){
             boolean isMatch = true;
             String resourceType = resource.getTag();
 

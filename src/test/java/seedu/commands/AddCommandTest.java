@@ -19,9 +19,9 @@ public class AddCommandTest {
     @Test
     public void addCommandValidData() throws SysLibException {
         addCommand.execute("/id 123456789 /t The Minds of Billy Milligan /a Daniel Keyes /tag B /i 987654321 " +
-                "/g Non-Fiction, Biography /s lost", parser);
+                "/g Non-Fiction, Biography /s lost", parser.container);
 
-        Book newBook = (Book) parser.getResourceList().get(0);
+        Book newBook = (Book) parser.container.getResourceList().get(0);
 
         assertEquals(newBook.getId(), 123456789);
         assertEquals(newBook.getTitle(), "The Minds of Billy Milligan");
@@ -37,7 +37,7 @@ public class AddCommandTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         addCommand.execute("/id 123456789 /t The Minds of Billy Milligan /a Daniel Keyes /tag B /i 987654321 " +
-                "/g Non-Fiction, Biography", parser);
+                "/g Non-Fiction, Biography", parser.container);
 
         String output = outputStream.toString();
 
@@ -50,11 +50,11 @@ public class AddCommandTest {
     @Test
     public void addCommandInvalidId() {
         assertThrows(IllegalArgumentException.class, ()->addCommand.execute("/id abcd " +
-                "/t The Minds of Billy Milligan /a Daniel Keyes /tag B /i 987654321", parser));
+                "/t The Minds of Billy Milligan /a Daniel Keyes /tag B /i 987654321", parser.container));
     }
 
     @Test
     public void addCommandInsufficientData() {
-        assertThrows(IllegalArgumentException.class, ()->addCommand.execute("/id ", parser));
+        assertThrows(IllegalArgumentException.class, ()->addCommand.execute("/id ", parser.container));
     }
 }

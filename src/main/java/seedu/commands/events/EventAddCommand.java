@@ -2,9 +2,10 @@ package seedu.commands.events;
 
 import seedu.commands.Command;
 import seedu.commands.CommandResult;
-import seedu.data.Event;
+import seedu.data.GenericList;
+import seedu.data.events.Event;
+import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,30 +23,30 @@ public class EventAddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(String statement, Parser parser)
+    public CommandResult execute(String statement, GenericList<Resource, Event> container)
             throws IllegalArgumentException, IllegalStateException, SysLibException {
 
         feedbackToUser = "";
         String[] values = parseArgument(statement);
         LocalDate currentDate = parseDate(values[1]);
-        int index = binarySearch(parser, currentDate);
-        parser.eventList.add(index, new Event(values[0], currentDate, values[2]));
+        int index = binarySearch(container, currentDate);
+        container.getEventList().add(index, new Event(values[0], currentDate, values[2]));
         System.out.println("Event inserted at: " + index);
         System.out.println("____________________________________________________________");
 
         return new CommandResult(feedbackToUser);
     }
 
-    public static int binarySearch(Parser parser, LocalDate key) {
-        if(parser.eventList.isEmpty()){
+    public static int binarySearch(GenericList<Resource, Event> container, LocalDate key) {
+        if(container.getEventList().isEmpty()){
             return 0;
         }
         int low = 0;
-        int high = parser.eventList.size() - 1;
+        int high = container.getEventList().size() - 1;
 
         while (low <= high) {
             int mid = (low + high)/2;
-            LocalDate midVal = parser.eventList.get(mid).getDate();
+            LocalDate midVal = container.getEventList().get(mid).getDate();
             int cmp = midVal.compareTo(key);
             if (cmp < 0) {
                 low = mid + 1;

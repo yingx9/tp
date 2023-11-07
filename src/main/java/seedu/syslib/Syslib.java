@@ -17,16 +17,18 @@ public class Syslib {
     private static Parser parser;
     private static Storage storage;
 
+
     public Syslib(String filePath) {
         ui = new UI();
         parser = new Parser();
-        storage = new Storage(filePath, parser);
+        storage = new Storage(filePath, parser.container);
         try{
             List<Resource> resourceListLoad = storage.load();
             if (!resourceListLoad.isEmpty()){
                 ui.showLoadMessage(filePath, resourceListLoad);
             }
-            parser.setResourceList(resourceListLoad);
+            parser.container.setResourceList(resourceListLoad);
+
 
         } catch (SysLibException SysLibEx){
             System.out.println(SysLibEx);

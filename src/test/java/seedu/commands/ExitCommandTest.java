@@ -16,7 +16,7 @@ class ExitCommandTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         ExitCommand exitCommand = new ExitCommand();
-        exitCommand.execute("", parser);
+        exitCommand.execute("", parser.container);
 
         String output = outputStream.toString();
         String expectedOutput = "Bye, hope to see you again soon!" + System.lineSeparator()+

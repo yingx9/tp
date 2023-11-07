@@ -1,8 +1,10 @@
 package seedu.commands;
 
-import seedu.data.CreateResource;
+import seedu.data.GenericList;
+import seedu.data.events.Event;
+import seedu.data.resources.CreateResource;
+import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 
 import static seedu.data.resources.Book.BOOK_TAG;
 import static seedu.data.resources.CD.CD_TAG;
@@ -24,7 +26,7 @@ public class AddCommand extends Command{
 
 
     @Override
-    public CommandResult execute(String statement, Parser parser) throws
+    public CommandResult execute(String statement, GenericList<Resource, Event> container) throws
             IllegalStateException, NumberFormatException, SysLibException {
         feedbackToUser = "";
         String[] values = parseArgument(statement);
@@ -33,25 +35,25 @@ public class AddCommand extends Command{
         String tag = values[3];
 
         if (tag.equalsIgnoreCase(BOOK_TAG)) {
-            parser.resourceList.add(CreateResource.createBook(values));
+            container.getResourceList().add(CreateResource.createBook(values));
             System.out.println("This book is added: " + title);
         } else if (tag.equalsIgnoreCase(EBOOK_TAG)) {
-            parser.resourceList.add(CreateResource.createEBook(values));
+            container.getResourceList().add(CreateResource.createEBook(values));
             System.out.println("This eBook is added: " + title);
         } else if (tag.equalsIgnoreCase(CD_TAG)) {
-            parser.resourceList.add(CreateResource.createCD(values));
+            container.getResourceList().add(CreateResource.createCD(values));
             System.out.println("This CD is added: " + title);
         } else if (tag.equalsIgnoreCase(MAGAZINE_TAG)) {
-            parser.resourceList.add(CreateResource.createMagazine(values));
+            container.getResourceList().add(CreateResource.createMagazine(values));
             System.out.println("This magazine is added: " + title);
         } else if (tag.equalsIgnoreCase(EMAGAZINE_TAG)) {
-            parser.resourceList.add(CreateResource.createEMagazine(values));
+            container.getResourceList().add(CreateResource.createEMagazine(values));
             System.out.println("This eMagazine is added: " + title);
         } else if (tag.equalsIgnoreCase(NEWSPAPER_TAG)) {
-            parser.resourceList.add(CreateResource.createNewspaper(values));
+            container.getResourceList().add(CreateResource.createNewspaper(values));
             System.out.println("This newspaper is added: " + title);
         } else if (tag.equalsIgnoreCase(ENEWSPAPER_TAG)) {
-            parser.resourceList.add(CreateResource.createENewspaper(values));
+            container.getResourceList().add(CreateResource.createENewspaper(values));
             System.out.println("This eNewspaper is added: " + title);
         } else {
             throw new SysLibException("Please enter a valid tag." + System.lineSeparator() +

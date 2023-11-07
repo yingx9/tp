@@ -18,9 +18,9 @@ public class DeleteCommandTest {
     @Test
     public void deleteCommandValidData() throws SysLibException {
         addCommand.execute("/id 123456789 /t The Minds of Billy Milligan /a Daniel Keyes /tag B /i 987654321 "
-                , parser);
+                , parser.container);
 
-        deleteCommand.execute("/id 123456789", parser);
+        deleteCommand.execute("/id 123456789", parser.container);
 
         assertEquals(parser.resourceList.size(), 0);
     }
@@ -28,10 +28,10 @@ public class DeleteCommandTest {
     @Test
     public void deleteCommandOutput() throws SysLibException {
         addCommand.execute("/id 123456789 /t The Minds of Billy Milligan /a Daniel Keyes /tag B /i 987654321 "
-                , parser);
+                , parser.container);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        deleteCommand.execute("/id 123456789", parser);
+        deleteCommand.execute("/id 123456789", parser.container);
         String output = outputStream.toString();
         String expectedOutput = "Looking for ID: 123456789..." + System.lineSeparator()+
                 "This resource is removed: " + System.lineSeparator() +
@@ -44,6 +44,6 @@ public class DeleteCommandTest {
 
     @Test
     public void deleteCommandInvalidId() {
-        assertThrows(IllegalArgumentException.class, () -> deleteCommand.execute("", parser));
+        assertThrows(IllegalArgumentException.class, () -> deleteCommand.execute("", parser.container));
     }
 }

@@ -1,11 +1,12 @@
 package seedu.commands;
 
 
+import seedu.data.GenericList;
+import seedu.data.events.Event;
 import seedu.data.resources.Book;
 import seedu.data.resources.Resource;
 import seedu.data.Status;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 
 
 import java.io.File;
@@ -57,7 +58,8 @@ public class EditCommand extends Command{
     }
 
     @Override
-    public CommandResult execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
+    public CommandResult execute(String statement, GenericList<Resource, Event> container)
+            throws SysLibException, IllegalArgumentException {
         feedbackToUser = "";
         EDIT_LOGGER.info("Edit Command execute with " + statement);
 
@@ -66,14 +68,14 @@ public class EditCommand extends Command{
 
         if (hasOneArg(givenParameters)) {
             String givenISBN = givenParameters[0];
-            Resource foundResource = findResourceByISBN(givenISBN, parser.resourceList);
+            Resource foundResource = findResourceByISBN(givenISBN, container.getResourceList());
 
             if(foundResource != null) {
                 Resource updatedResource = editResource(foundResource, givenParameters);
                 assert updatedResource != null;
-                assert resourceIndex < parser.resourceList.size();
+                assert resourceIndex < container.getResourceList().size();
 
-                parser.resourceList.set(resourceIndex, updatedResource);
+                container.getResourceList().set(resourceIndex, updatedResource);
                 feedbackToUser += EDIT_SUCCESS + formatLastLineDivider(updatedResource.toString());
                 EDIT_LOGGER.info("Edit success");
             } else {

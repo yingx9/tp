@@ -2,7 +2,7 @@ package seedu.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.data.resources.Book;
-import seedu.data.CreateResource;
+import seedu.data.resources.CreateResource;
 import seedu.data.Status;
 import seedu.exception.SysLibException;
 
