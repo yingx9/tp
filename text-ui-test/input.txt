@@ -1,7 +1,13 @@
-add /id 123456789 /t Moby Dick /a Herman Melville /tag B /i 123 /g Adventure, Fiction
-find /t Moby Dick
+add /id 1234567890123 /t Moby Dick /a Herman Melville /tag B /g Adventure, Fiction
+add /id 9780062457714 /t The Subtle Art of Not Giving a F*ck /a Mark Manson /tag B /g Self-help
+add /i 97812502551744 /t Surrounded by Idiots /a Thomas Erikson /tag B /tag B /g Self-help /s lost
+eventadd /t event1 /date 18 Dec 2023
+eventadd /t event2 /date 19 Jan 2024
+eventadd /t event3 /date 20 Mar 2023
+eventadd /t event4 /date 24 Deb 2024 /desc description4
 help
 list
+summary
 list /tag B
 list /g Horror
 edit /i 123 /t NEWTITLE

@@ -7,6 +7,8 @@ import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 
+import static seedu.ui.UI.LINEDIVIDER;
+
 public class EventDeleteCommand extends Command {
 
     private static String feedbackToUser;
@@ -23,7 +25,7 @@ public class EventDeleteCommand extends Command {
         int index = parseCalendarInt(values[0], container);
         System.out.println("This event is removed:");
         System.out.println(container.getEventList().get(index).toString());
-        System.out.println("____________________________________________________________");
+        System.out.println(LINEDIVIDER);
         container.getEventList().remove(index);
         return new CommandResult(feedbackToUser);
     }

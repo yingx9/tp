@@ -1,8 +1,6 @@
-Data file not found @ .\storage.txt
-Creating new data file @ .\storage.txt
 ____________________________________________________________
 Storage file found @ .\storage.txt
-No Resources or Events found in storage.
+Loaded 1 resources and 6 events!
 ____________________________________________________________
  ____            _     _ _        ____ _     ___ 
 / ___| _   _ ___| |   (_) |__    / ___| |   |_ _|
@@ -12,9 +10,19 @@ ____________________________________________________________
        |___/                                     
 What would you like to do?
 ____________________________________________________________
+> Please enter a valid ISBN.
+____________________________________________________________
+> Please enter a valid ISBN.
+____________________________________________________________
 > Please enter a valid ISBN with 13 characters.
 ____________________________________________________________
-> There are no resources found matching the given filters.
+> Event inserted at: 2
+____________________________________________________________
+> Event inserted at: 5
+____________________________________________________________
+> Event inserted at: 1
+____________________________________________________________
+> Please enter a valid date in the format 'dd MMM yyyy'
 ____________________________________________________________
 > Commands available:
 add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
@@ -31,14 +39,42 @@ ____________________________________________________________
 > 
 Listing all resources in the Library:
 
+                                                                                  [BOOKS]
+-------------------------------------------------------------------------------------------------------------------------------------------
+ID             Tag  Title               ISBN          Author                   Genre               Link           Status    Received Date
+-------------------------------------------------------------------------------------------------------------------------------------------
+1              B    Surrounded by Idiots9781250255174 Thomas Erikson           Self-help           null           LOST      07 Nov 2023
 
-There are currently 0 resources.
+
+There are currently 1 resource(s).
+____________________________________________________________
+> Total Resources: 1
+Total Books: [████] 1
+Total CDs: [] 0
+Total Magazines: [] 0
+Total E-Books: [] 0
+Total E-Magazines: [] 0
+Total Newspapers: [] 0
+Total E-Newspapers: [] 0
+
+Summary of Events:
+Total Events: 9
+Upcoming Events (Next 3):
+1. event1 | 18 Dec 2023 | null
+2. event1 | 18 Dec 2023 | null
+3. event1 | 18 Dec 2023 | null
 ____________________________________________________________
 > 
 Listing resources matching given filters: 
 
+                                                                                  [BOOKS]
+-------------------------------------------------------------------------------------------------------------------------------------------
+ID             Tag  Title               ISBN          Author                   Genre               Link           Status    Received Date
+-------------------------------------------------------------------------------------------------------------------------------------------
+1              B    Surrounded by Idiots9781250255174 Thomas Erikson           Self-help           null           LOST      07 Nov 2023
 
-There are currently 0 resources.
+
+There are currently 1 resource(s).
 ____________________________________________________________
 > 
 Listing resources matching given filters: 

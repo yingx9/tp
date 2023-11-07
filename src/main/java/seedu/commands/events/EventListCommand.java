@@ -7,6 +7,8 @@ import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 
+import static seedu.ui.UI.LINEDIVIDER;
+
 public class EventListCommand extends Command {
 
     private static String feedbackToUser;
@@ -20,13 +22,13 @@ public class EventListCommand extends Command {
         }
         if(container.getEventList().isEmpty()){
             System.out.println("The event list is empty!");
-            System.out.println("____________________________________________________________");
+            System.out.println(LINEDIVIDER);
         } else {
             System.out.println("This is the current event list:");
             for(int index = 0; index < container.getEventList().size(); index += 1){
                 System.out.println(index + ": " + container.getEventList().get(index).toString());
             }
-            System.out.println("____________________________________________________________");
+            System.out.println(LINEDIVIDER);
         }
 
         return new CommandResult(feedbackToUser);
