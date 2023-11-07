@@ -95,12 +95,15 @@ public class EventEditCommand extends Command {
         LOGGER.info("Old event removed.");
         container.getEventList().add(editedEvent);
         LOGGER.info("New event added.");
+        feedbackToUser = "";
 
         if (values[1] == null && values[2] == null && values[3] == null){
-            feedbackToUser = "Event was not edited as nothing was changed." + SEPARATOR_LINEDIVIDER + "\n";
+            LOGGER.info("Print nothing changed.");
+            System.out.println("Event was not edited as nothing was changed." + SEPARATOR_LINEDIVIDER);
         } else {
-            feedbackToUser = "Event edited successfully. New event details:\n" + index + ": "
-                    + editedEvent.toString() + SEPARATOR_LINEDIVIDER + "\n";
+            LOGGER.info("Print event changed.");
+            System.out.println("Event edited successfully. New event details:\n" + index + ": "
+                    + editedEvent.toString() + SEPARATOR_LINEDIVIDER);
         }
 
         return new CommandResult(feedbackToUser);

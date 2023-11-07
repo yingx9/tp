@@ -86,6 +86,13 @@ public class EventAddCommand extends Command {
         return low;
     }
 
+    /**
+     * Parses a date string into a LocalDate object with a specific format.
+     *
+     * @param dateStr   The date string to be parsed.
+     * @return          The parsed LocalDate object.
+     * @throws IllegalArgumentException  If the date string is in an invalid format.
+     */
     public static LocalDate parseDate(String dateStr) throws IllegalArgumentException {
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .parseCaseInsensitive()
@@ -103,6 +110,13 @@ public class EventAddCommand extends Command {
         }
     }
 
+    /**
+     * Checks and formats a date string to ensure it is in the correct format.
+     *
+     * @param dateStr   The date string to be checked.
+     * @return          The formatted date string.
+     * @throws IllegalArgumentException  If the date string is in an invalid format.
+     */
     public static String checkDate(String dateStr) throws IllegalArgumentException {
         String[] temp = dateStr.split(" ");
         if(temp.length != 3){
