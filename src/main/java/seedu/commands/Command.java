@@ -1,7 +1,9 @@
 package seedu.commands;
 
+import seedu.data.GenericList;
+import seedu.data.events.Event;
+import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +13,7 @@ import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 public abstract class Command {
     protected String[] args;
     protected boolean[] required;
-    public abstract CommandResult execute(String statement, Parser parser) throws
+    public abstract CommandResult execute(String statement, GenericList<Resource, Event> container) throws
             IllegalArgumentException, IllegalStateException, SysLibException;
 
     /**
@@ -29,7 +31,8 @@ public abstract class Command {
             }
         }
         if (!statement.isBlank()) {
-            throw new IllegalArgumentException("Unknown variable/command: " + statement);
+            throw new IllegalArgumentException("Unknown variable/command: " + statement +
+                    ", avoid using '/' in names/variables");
         }
     }
 
@@ -95,7 +98,7 @@ public abstract class Command {
     }
 
     public void checkMatch (String matched, int pointer){
-        if(matched.startsWith("/")){
+        if(matched.contains("/")){
             throw new IllegalArgumentException("Avoid using '/' as names, your " + args[pointer] +
                     " may have been empty to give this error" + SEPARATOR_LINEDIVIDER);
         }
@@ -106,9 +109,9 @@ public abstract class Command {
             if (0 <= tempNum){
                 return tempNum;
             }
-            throw new IllegalArgumentException ("The argument for id is not a valid number!");
+            throw new IllegalArgumentException ("The integer argument(s) given is not a valid number!");
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException ("The argument for id is not a number!");
+            throw new IllegalArgumentException ("The integer argument(s) given is not a number!");
         }
     }
 }

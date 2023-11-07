@@ -1,4 +1,5 @@
 package seedu.ui;
+import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 import seedu.data.resources.Magazine;
 import seedu.data.resources.Book;
@@ -52,7 +53,7 @@ public class UI {
     public void showHelpMessage(){
         System.out.println("Commands available:");
         System.out.println("add: adds a new resource to the library inventory." +
-                "(e.g. add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS])");
+                "(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])");
         System.out.println("delete: deletes the resource with the specified ID from the library inventory. " +
                 "(e.g. delete /id 123456789)");
         System.out.println("list: list all resources OR filter by certain tags or genre." +
@@ -61,7 +62,7 @@ public class UI {
         System.out.println("edit: Edit a listing by entering its isbn to update its details. " +
                 "(e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)");
         System.out.println("eventadd: Add an event to the event list " +
-                "(e.g. eventadd /t TITLE /date DATE [/desc DESCRIPTION])");
+                "(e.g. eventadd /t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])");
         System.out.println("eventlist: List out all the event list (e.g. eventlist)");
         System.out.println("eventdelete: Delete an event in the event list based on the index " +
                 "(e.g. eventdelete /i INDEX)");
@@ -71,19 +72,21 @@ public class UI {
         showLine();
     }
 
-    public void showError(Exception e){
-        System.out.println(e);
-    }
-
     public String readCommand(){
         System.out.print("> ");
         return myScanner.nextLine();
     }
 
-    public void showLoadMessage(String filepath, List<Resource> resourcelist){
+    public void showLoadMessage(String filepath, List<Resource> resourcelist, List<Event> eventlist){
         showLine();
         System.out.println("Storage file found @ " + filepath);
-        System.out.printf("Loaded %d listings!%n", resourcelist.size());
+        System.out.printf("Loaded %d resources and %d events!%n", resourcelist.size(), eventlist.size());
+    }
+
+    public void showLoadMessageEmpty(String filepath){
+        showLine();
+        System.out.println("Storage file found @ " + filepath);
+        System.out.println("No Resources or Events found in storage.");
     }
 
     public void showLine(){

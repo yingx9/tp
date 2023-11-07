@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+actor User
+participant "Parser" as Parser PARSER_COLOR
+participant "Command" as Command DATA_COLOR
+
+User -> Parser : inputs statement
+activate Parser
+
+Parser -> Command : execute(statement)
+activate Command
+
+Command -> Command : parseArgument(statement)
+activate Command
+Command -> Command : getMatch(statement, pointer)
+Command -> Command : checkMatch(matched, pointer)
+Command --> Command : return
+deactivate Command
+
+Command -> Command : validateStatement(statement, values)
+
+activate Command
+Command -> Command : checkDuplicate(statement, pointer)
+Command --> Command : return
+
+deactivate Command
+Command --> Parser : CommandResult
+deactivate Command
+
+Parser --> User : result
+deactivate Parser
+@enduml

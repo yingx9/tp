@@ -88,16 +88,17 @@ Adds a new resource to the library inventory.
 >Notes about genre:
 > - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
 
-Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]...`
+Format: `add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS]...`
 
 **Example input:**
 ```
-add /id 123456789 /t Moby Dick /a Herman Melville /tag B /i 9780763630188 /g Adventure, Fiction
-add /id 123456789 /t Harry Squatter /a J.K. /tag B /i 9780763630187 /g History /s lost
+add /i 9780763630188 /t Moby Dick /a Herman Melville /tag B /g Adventure, Fiction
+add /i 9780763630187 /t Harry Squatter /a J.K. /tag B /g History /s lost
 ```
 **Example response:**
 ```
-This book is added: Moby Dick
+This book is added: 
+[B]  ID: 1 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 06 Nov 2023
 ____________________________________________________________
 ```
 
@@ -107,79 +108,85 @@ ____________________________________________________________
 >Notes about genre:
 > - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
 
-Format: `add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN /l LINK [/g GENRE /s STATUS]...`
+Format: `add /i ISBN /t TITLE /a AUTHOR /tag TAG /l LINK [/g GENRE /s STATUS]`
 
 **Example input:**
 ```
-add /id 123456789 /t Moby Dick /a Herman Melville /tag eB /i 9780763630188 /l abc.com /g Adventure, Fiction
+add /i 9780763630188 /t Moby Dick /a Herman Melville /tag eB /l www.abc.com /g Adventure, Fiction
 ```
 **Example response:**
 ```
-This eBook is added: Moby Dick
+This eBook is added: 
+[EB]  ID: 2 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Link: www.abc.com
 ____________________________________________________________
 ```
 
 ### Add CD
-Format: `add /id ID /t TITLE /c CREATOR /ty TYPE /tag TAG /i ISBN [/s STATUS]...`
+Format: `add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag TAG [/s STATUS]`
 
 **Example input:**
 ```
-add /id 123456789 /t Moby Dick /c Herman Melville /ty Audio Book /tag CD /i 9780763630188 
+add /i 9780763630188 /t Moby Dick /c Herman Melville /ty Audio Book /tag CD
 ```
 **Example response:**
 ```
-This CD is added: Moby Dick
+This CD is added: 
+[CD]  ID: 3 Title: Moby Dick ISBN: 9780763630188 Creator: Herman Melville Type: Audio Book Status: AVAILABLE
 ____________________________________________________________
 ```
 
 ### Add Magazine
-Format: `add /id ID /t TITLE /b BRAND /is ISSUE /tag TAG /i ISBN [/s STATUS]...`
+Format: `add /i ISBN /t TITLE /b BRAND /is ISSUE /tag TAG [/s STATUS]`
 
 **Example input:**
 ```
-add /id 123456789 /t 2023 Hottest Trends /b Vogue /is AY23-01 /tag M /i 9780763630188 
+add /i 9780763630188 /t 2023 Hottest Trends /b Vogue /is Volume 32, Issue 5, May 2023 /tag M
 ```
 **Example response:**
 ```
-This magazine is added: 2023 Hottest Trends
+This magazine is added: 
+[M]  ID: 4 Title: 2023 Hottest Trends ISBN: 9780763630188 Brand: Vogue Issue: Volume 32, Issue 5, May 2023 Status: AVAILABLE
 ____________________________________________________________
 ```
 
 ### Add eMagazine
-Format: `add /id ID /t TITLE /b BRAND /is ISSUE /tag TAG /i ISBN /l LINK [/s STATUS]...`
+Format: `add /i ISBN /t TITLE /b BRAND /is ISSUE /tag TAG /l LINK [/s STATUS]`
 
 **Example input:**
 ```
-add /id 123456789 /t 2023 Hottest Trends /b Vogue /is AY23-01 /tag eM /i 9780763630188 /l abc.com
+add /i 9780763630188 /t 2023 Hottest Trends /b Vogue /is Volume 32, Issue 5, May 2023 /tag eM /l www.abc.com
 ```
 **Example response:**
 ```
-This eMagazine is added: 2023 Hottest Trends
+This eMagazine is added: 
+[EM]  ID: 5 Title: 2023 Hottest Trends ISBN: 9780763630188 Brand: Vogue Issue: Volume 32, Issue 5, May 2023 Link: www.abc.com
 ____________________________________________________________
 ```
 
 ### Add Newspaper
-Format: `add /id ID /t TITLE /p PUBLISHER /ed EDITION /tag TAG /i ISBN [/s STATUS]...`
+Format: `add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag TAG [/s STATUS]`
 **Example input:**
 ```
-add /id 123456789 /t Forbes 30 Under 30 2023 /p The Straits Times /ed AY23-30 /tag N /i 9780763630188
+add /i 9780763630188 /t Forbes 30 Under 30 2023 /p The Straits Times /ed Entrepreneurs /tag N
 ```
 **Example response:**
 ```
-This newspaper is added: Forbes 30 Under 30 2023
+This newspaper is added: 
+[N]  ID: 6 Title: Forbes 30 Under 30 2023 ISBN: 9780763630188 Publisher: The Straits Times Edition: Entrepreneurs Status: AVAILABLE
 ____________________________________________________________
 ```
 
 ### Add eNewspaper
-Format: `add /id ID /t TITLE /p PUBLISHER /ed EDITION /tag TAG /i ISBN /l LINK [/s STATUS]...`
+Format: `add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag TAG /l LINK [/s STATUS]`
 
 **Example input:**
 ```
-add /id 123456789 /t Forbes 30 Under 30 2023 /p The Straits Times /ed AY23-30 /tag eN /i 9780763630188 /l abc.com
+add /i 9780763630188 /t Forbes 30 Under 30 2023 /p The Straits Times /ed Entrepreneurs /tag eN /l www.abc.com
 ```
 **Example response:**
 ```
-This eNewspaper is added: Forbes 30 Under 30 2023
+This eNewspaper is added: 
+[EN]  ID: 7 Title: Forbes 30 Under 30 2023 ISBN: 9780763630188 Publisher: The Straits Times Edition: Entrepreneurs Link: www.abc.com
 ____________________________________________________________
 ```
 
@@ -245,7 +252,7 @@ You can use multiple filters, and only results that match ALL the given criteria
 > For non-book resources, `author` refers to `publisher`,`creator` and `brand` for Newspapers, CD's and Magazines 
 > respectively.
 
-Format: `find [/t TITLE OR /i ISBN OR /a AUTHOR OR /id ID]`
+Format: `find [/t TITLE OR /i ISBN OR /a AUTHOR/PUBLISHER/BRAND/CREATOR OR /id ID]`
 
 **Example input:**
 ```
@@ -258,8 +265,16 @@ find /id 123456789 /i 9780763630188
 
 **Example output:**
 ```
+> find /a Vogue
 Here are resources that matched the given filters:
-[B]  ID: 123456789 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction
+                                                                                [MAGAZINES]
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ID             Tag  Title               ISBN          Brand                    Issue                        Link           Status    Received Date  
+----------------------------------------------------------------------------------------------------------------------------------------------------
+5              M    2023 Hottest Trends 9780763630188 Vogue                    Volume 32, Issue 5, May 2023 null           AVAILABLE 07 Nov 2023    
+
+
+There are currently 1 resource(s).
 ____________________________________________________________
 ```
 
@@ -416,18 +431,19 @@ ____________________________________________________________
 
 ## Command summary | [Return to contents](#contents)
 
-| Action                | Command                                                                                                    |
-|-----------------------|------------------------------------------------------------------------------------------------------------|
-| Add listing           | `add /t <title of listing> /a <author of item> /tag <type of item> /i <ISBN of item> [/g <genre of item>]` |
-| Delete listing        | `delete /id <id of listing>`                                                                               |
-| Listing all items     | `list [/tag <type of item> /g <genre of item> /s <status of item>]`                                        |
-| Find specific listing | `find [/t <title of listing> OR /i <ISBN of item> OR /a AUTHOR OR /id ID]`                                 |
-| Edit a listing        | `edit /id ID [/t <title of listing> /a AUTHOR /id ID /tag <type of item> /g <genre of item> /s <status>] ` |
-| Exit                  | `exit`                                                                                                     |
-| Event Add             | `eventadd /t TITLE /date DATE [/desc DESCRIPTION]` (Format for date DD-MM-YYYY)                            |
-| Event Delete          | `eventdelete /i INDEX`                                                                                     |
-| Event Listing         | `eventlist`                                                                                                |
-| View help             | `help`                                                                                                     |
-| Exit                  | `exit`                                                                                                     |
+| Action                | Command                                                                                                                        |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| Add listing           | `add /i <ISBN of item> /t <title of listing> /a <author of item> /tag <type of item> [/g <genre of item> /s <status of item>]` |
+| Delete listing        | `delete /id <id of listing>`                                                                                                   |
+| Listing all items     | `list [/tag <type of item> /g <genre of item> /s <status of item>]`                                                            |
+| Find specific listing | `find [/t <title of listing> OR /i <ISBN of item> OR /a AUTHOR OR /id ID]`                                                     |
+| Edit a listing        | `edit /i ISBN [/t <title of listing> /a AUTHOR /id ID /tag <type of item> /g <genre of item> /s <status of item>]`             |
+| Exit                  | `exit`                                                                                                                         |
+| Event Add             | `eventadd /t TITLE /date DATE [/desc DESCRIPTION]` (Format for date DD-MM-YYYY)                                                |
+| Event Delete          | `eventdelete /i INDEX`                                                                                                         |
+| Event Listing         | `eventlist`                                                                                                                    |
+| View help             | `help`                                                                                                                         |
+| Exit                  | `exit`                                                                                                                         |
+
 
 

@@ -34,6 +34,13 @@ SysLib currently consists of five main components:
 
 ### Parser Component
 
+The parsing for a generic command can be seen here:
+<img src="images/Parsing.png" />
+
+For some commands that does not require arguments (etc: help, exit), parseArgument
+and validateStatement will not be called
+
+For more details on each Command check them out below
 ### Command Component
 
 
@@ -54,12 +61,12 @@ The `find` command allows users to search for resources based on specified filte
 `find` has the following options:
 - `find /id [ID]`
 - `find /t [TITLE]`
-- `find /a [AUTHOR]`
+- `find /a [AUTHOR/PUBLISHER/BRAND/CREATOR]`
 - `find /i [ISBN]`
 
 Multiple filters can also be combined:
 
-- `find /t [TITLE] /a [AUTHOR]`
+- `find /t [TITLE] /a [AUTHOR/PUBLISHER/BRAND/CREATOR]`
 
 #### Implementation
 
@@ -224,6 +231,8 @@ The whole eventList is sorted by date order.
 
 Step 7. The newly created event is forwarded to the `PARSER` to be added to the `eventList`.
 
+Sequence Diagram:
+<img src="images/EventAdd.png"/>
 ### Event List Feature
 
 The `eventlist` command works with the `Parser` and `Command` component to execute the correct action. 
