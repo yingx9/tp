@@ -86,6 +86,13 @@ Adds a new resource to the library inventory.
 > - Anything with `e` prior is an electronic version
 > i.e. `[eB]` is an eBook, `[eM]` is an eMagazine
 
+#### Types of Status:
+- `AVAILABLE`
+- `BORROWED`
+- `LOST`
+> Note:
+> - Resource will default to `AVAILABLE` if no status is input
+
 ### Add Book
 >Notes about genre:
 > - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
