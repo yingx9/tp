@@ -177,9 +177,7 @@ public class EditCommandTest {
 
     @Test
     public void testNoArgumentGiven()  {
-        SysLibException exception = assertThrows(SysLibException.class, ()->editCommand.execute("/id 123",
-                parser.container));
-        assertEquals(MISSING_ARG_MESSAGE, exception.getMessage());
+        executeAssertSysLibExceptionThrown("/id 123", MISSING_ARG_MESSAGE);
 
     }
 
