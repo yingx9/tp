@@ -55,7 +55,7 @@ public class EventEditCommand extends Command {
      * Constructs an EventEditCommand with default arguments and sets up logging.
      */
     public EventEditCommand() {
-        args = new String[]{"i", "t", "d", "desc"};
+        args = new String[]{"i", "t", "date", "desc"};
         required = new boolean[]{true, false, false, false};
         LOGGER.info("EventEdit Command created");
     }
@@ -86,15 +86,22 @@ public class EventEditCommand extends Command {
         Event oldEvent = container.getEventList().get(index);
 
         String title = values[1] != null ? values[1] : oldEvent.getName();
+        LOGGER.info("Processed title change.");
+
         LocalDate date = values[2] != null ? parseDate(values[2]) : oldEvent.getDate();
+        LOGGER.info("Processed date change.");
+
         String description = values[3] != null ? values[3] : oldEvent.getDescription();
+        LOGGER.info("Processed description change.");
 
         Event editedEvent = new Event(title, date, description);
 
         container.getEventList().remove(index);
         LOGGER.info("Old event removed.");
+
         container.getEventList().add(editedEvent);
         LOGGER.info("New event added.");
+
         feedbackToUser = "";
 
         if (values[1] == null && values[2] == null && values[3] == null){

@@ -8,6 +8,7 @@ import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 
 import static seedu.ui.UI.LINEDIVIDER;
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 public class EventListCommand extends Command {
 
@@ -18,7 +19,8 @@ public class EventListCommand extends Command {
             IllegalArgumentException, IllegalStateException, SysLibException {
         feedbackToUser = "";
         if (!statement.isEmpty()){
-            throw new IllegalArgumentException("'eventlist' command does not require arguments!");
+            throw new IllegalArgumentException("'eventlist' command does not require arguments!"
+                    + SEPARATOR_LINEDIVIDER);
         }
         if(container.getEventList().isEmpty()){
             System.out.println("The event list is empty!");
