@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
             }
         }
         if(removals.isEmpty()) {
-            System.out.println("No resources with id matching " + id + System.lineSeparator() + SEPARATOR_LINEDIVIDER);
+            System.out.println("No resources with id matching " + id +SEPARATOR_LINEDIVIDER);
         } else {
             container.getResourceList().removeAll(removals);
         }
