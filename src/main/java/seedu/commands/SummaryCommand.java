@@ -101,7 +101,7 @@ public class SummaryCommand extends Command {
 
         int maxCount = Math.max(totalBooks, Math.max(totalCDs, Math.max(totalMagazines, Math.max(totalEBooks,
                 Math.max(totalEMagazines, Math.max(totalNewspapers, totalENewspapers))))));
-        int maxBarLength = 20; // Maximum length of the bar
+        int maxBarLength = 20;
         int bookBarLength = (int) (maxBarLength * ((double) totalBooks / maxCount));
         int cdBarLength = (int) (maxBarLength * ((double) totalCDs / maxCount));
         int magazineBarLength = (int) (maxBarLength * ((double) totalMagazines / maxCount));
@@ -136,9 +136,14 @@ public class SummaryCommand extends Command {
             graph.append("Upcoming Events (Next 3):\n");
             for (int i = 0; i < upcomingEvents.size(); i++) {
                 Event event = upcomingEvents.get(i);
-                graph.append(i + 1).append(". ").append(event.getName()).append(" | ")
-                        .append(event.getDate().format(formatter)).append(" | ")
-                        .append(event.getDescription()).append("\n");
+                graph.append(i + 1)
+                        .append(". ")
+                        .append(event.getName())
+                        .append(" | ")
+                        .append(event.getDate().format(formatter))
+                        .append(" | ")
+                        .append(event.getDescription())
+                        .append("\n");
             }
         }
         graph.append(LINEDIVIDER+"\n");
