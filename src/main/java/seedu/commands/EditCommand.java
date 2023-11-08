@@ -33,17 +33,27 @@ public class EditCommand extends Command{
     public static final String NOT_BOOK_ERROR =  formatLastLineDivider("Your resource is not a book!");
     public static final String RESOURCE_NOT_FOUND =  formatLastLineDivider("No such resource with given ID");
     public static final String EDIT_SUCCESS = formatLineSeparator("Successfully updated! Your updated resource:");
-    private static final Logger EDIT_LOGGER = Logger.getLogger(EditCommand.class.getName());
     private static final String NOT_CD_ERROR =  formatLastLineDivider("Your resource is not a CD!");
     private static final String NOT_NEWSPAPER_ERROR = formatLastLineDivider("Your resource is not a Newspaper!");
     private static final String NOT_MAGAZINE_ERROR = formatLastLineDivider("Your resource is not a Magazine!");
-    private static String feedbackToUser;
+    private static final String INVALID_EDIT_ARGS =  formatLineSeparator("Invalid edit arguments!");
+    private static final String NEWSPAPERS_ARGS_MESSAGE =
+            "For Newspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS" +
+            formatLastLineDivider("For ENewspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS /l LINK");
+    private static final String BOOK_ARGS_MESSAGE = "For Books: /t TITLE /a AUTHOR /g GENRES /s STATUS" +
+            formatLastLineDivider("For EBooks: /t TITLE /a AUTHOR /g GENRES /s STATUS /l LINK");
+    private static final String CD_ARGS_MESSAGE = formatLastLineDivider("For CDs: /t TITLE /p PUBLISHER" +
+            " /ed EDITION /s STATUS");
+    private static final String MAGAZINE_ARGS_MESSAGE = "For Magazines: /t TITLE /b BRAND /is ISSUE /s STATUS" +
+            formatLastLineDivider("For EMagazines: /t TITLE /b BRAND /is ISSUE /s STATUS /l LINK");
 
+    private static final Logger EDIT_LOGGER = Logger.getLogger(EditCommand.class.getName());
+    private static String feedbackToUser;
     private static int resourceIndex;
 
     static {
 
-        FileHandler editFileHandler = null;
+        FileHandler editFileHandler;
         try {
             String loggingDirectoryPath = System.getProperty("user.dir") + "/logs";
             String logFilePath = loggingDirectoryPath + "/editCommandLogs.log";
@@ -61,7 +71,6 @@ public class EditCommand extends Command{
         EDIT_LOGGER.addHandler(editFileHandler);
     }
 
-
     public EditCommand(){
         args = new String[]{"id", "t", "a", "l", "g", "s", "c", "ty", "b", "is", "p", "ed"};
         required = new boolean[]{true, false, false, false, false, false, false, false,false,false,false,false};
@@ -76,16 +85,11 @@ public class EditCommand extends Command{
         String[] givenParameters = parseArgument(statement);
         validateStatement(statement, givenParameters);
 
-        boolean hasOneArg = hasOneArg(givenParameters);
+        List<Resource> resourcesList =  container.getResourceList();
+        int givenArgsCount = countGivenArgs(givenParameters);
+        int givenIDNumber = parseInt(givenParameters[0]);
 
-        if(!hasOneArg){
-            EDIT_LOGGER.warning(MISSING_ARG_MESSAGE);
-            throw new SysLibException(MISSING_ARG_MESSAGE);
-        }
-
-        String givenID = givenParameters[0];
-        int givenIDNumber = parseInt(givenID);
-        Resource foundResource = findResourceByID(givenIDNumber, container.getResourceList());
+        Resource foundResource = findResourceByID(givenIDNumber, resourcesList);
 
         if(foundResource == null){
             feedbackToUser += RESOURCE_NOT_FOUND;
@@ -93,25 +97,33 @@ public class EditCommand extends Command{
             return new CommandResult(feedbackToUser);
         }
 
-        Resource updatedResource = editResource(foundResource, givenParameters);
+        Resource updatedResource = editResource(foundResource, givenParameters, givenArgsCount);
         assert updatedResource != null;
         assert resourceIndex < container.getResourceList().size();
 
-        container.getResourceList().set(resourceIndex, updatedResource);
+        resourcesList.set(resourceIndex, updatedResource);
         feedbackToUser += EDIT_SUCCESS + formatLastLineDivider(updatedResource.toString());
-
 
         return new CommandResult(feedbackToUser);
     }
 
-    public boolean hasOneArg(String[] givenParameters){
+    public int countGivenArgs(String[] givenParameters) throws SysLibException {
+
+        int argsCount = 0;
 
         for (int i =1; i<givenParameters.length; i++) {
             if (givenParameters[i] != null){
-                return true;
+                argsCount++;
             }
         }
-        return false;
+
+        boolean hasAtLeastOneArg = argsCount > 0;
+
+        if(!hasAtLeastOneArg){
+            EDIT_LOGGER.warning(MISSING_ARG_MESSAGE);
+            throw new SysLibException(MISSING_ARG_MESSAGE);
+        }
+        return argsCount;
     }
 
     public Resource findResourceByID(int givenID, List<Resource> resourceList){
@@ -132,19 +144,18 @@ public class EditCommand extends Command{
         return foundResource;
     }
 
-    public Resource editResource(Resource foundResource, String[] givenParameters) throws SysLibException {
+    public Resource editResource(Resource foundResource, String[] givenParameters, int givenArgsCount)
+            throws SysLibException {
 
-        String newValue;
-
-        //First we check what type of Resource and call the appropriate function for it
-        //Disallow updating of tag as it completely changes the type of resource
-
-        //All resource type needs to check Title. So we check that first
+        //All resource type needs to check Title and Status.
         if(givenParameters[1] != null){
             foundResource.setTitle(givenParameters[1]);
         }
+        if (givenParameters[5] != null){
+            foundResource.setStatus(getStatusFromString(givenParameters[5]));
+        }
 
-        //Now we call respective edit functions based on resource type
+        //Call respective edit functions based on resource type
 
         String resourceTag = foundResource.getTag();
 
@@ -153,41 +164,101 @@ public class EditCommand extends Command{
         case "B":
             //fallthrough
         case "EB":
+            validateBookParameters(givenParameters, resourceTag, givenArgsCount);
             foundResource = editBook(foundResource, givenParameters);
             break;
         case "CD":
+            validateCDParameters(givenParameters, resourceTag, givenArgsCount);
             foundResource = editCD(foundResource, givenParameters);
             break;
         case "M":
             //fallthrough
         case "EM":
+            validateMagazineParameters(givenParameters, resourceTag, givenArgsCount);
             foundResource = editMagazine(foundResource, givenParameters);
             break;
         case "N":
             //fallthrough
         case "EN":
+            validateNewspaperParameters(givenParameters, resourceTag, givenArgsCount);
             foundResource = editNewspapers(foundResource, givenParameters);
             break;
         default:
             throw new SysLibException("Invalid Resource!");
-
-
         }
-
-        if (givenParameters[5] != null){
-            foundResource.setStatus(getStatusFromString(givenParameters[5]));
-        }
-
 
         return foundResource;
     }
 
+    private void validateBookParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
+            throws SysLibException {
+
+        if (resourceTag == "B" && givenParameters[3] != null){
+            throw new SysLibException(INVALID_EDIT_ARGS + BOOK_ARGS_MESSAGE);
+        }
+
+        int[] indexToCheck = {1,2,3,4,5};
+
+        checkGivenParameters(givenArgsCount,givenParameters, indexToCheck, BOOK_ARGS_MESSAGE);
+
+    }
+
+    private void validateNewspaperParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
+            throws SysLibException {
+
+        if (resourceTag == "N" && givenParameters[3] != null){
+            throw new SysLibException(INVALID_EDIT_ARGS + NEWSPAPERS_ARGS_MESSAGE);
+        }
+
+        int[] indexToCheck = {1,3,5,10,11};
+
+        checkGivenParameters(givenArgsCount,givenParameters, indexToCheck, NEWSPAPERS_ARGS_MESSAGE);
+
+    }
+
+    private void validateCDParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
+            throws SysLibException {
+
+        int[] indexToCheck = {1,5,6,7};
+        checkGivenParameters(givenArgsCount,givenParameters, indexToCheck, CD_ARGS_MESSAGE);
+
+    }
+
+    private void validateMagazineParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
+            throws SysLibException {
+
+        if (resourceTag == "M" && givenParameters[3] != null){
+            throw new SysLibException(INVALID_EDIT_ARGS + MAGAZINE_ARGS_MESSAGE);
+        }
+
+        int[] indexToCheck = {1,3,5,8,9};
+
+        checkGivenParameters(givenArgsCount,givenParameters, indexToCheck, MAGAZINE_ARGS_MESSAGE);
+
+    }
+
+    private void checkGivenParameters(int givenArgsCount,  String[] givenParameters,int[] indexToCheck,
+                                      String argsMessage) throws SysLibException {
+        int argsCount = 0;
+
+        for(int i=0;i<indexToCheck.length;i++){
+            int index = indexToCheck[i];
+            if (givenParameters[index] != null){
+                argsCount++;
+            }
+        }
+
+        if(argsCount != givenArgsCount){
+            throw new SysLibException(INVALID_EDIT_ARGS + argsMessage);
+        }
+    }
+
     private Newspaper editNewspapers(Resource foundResource, String[] givenParameters) throws SysLibException {
 
-        //Newspapers/ENewspapers: Publisher [10], Edition [11]
         String newLink = givenParameters[3];
         String newPublisher = givenParameters[10];
         String newEdition = givenParameters[11];
+
         Newspaper newspaperResource;
         try {
             newspaperResource = (Newspaper) foundResource;
@@ -211,14 +282,15 @@ public class EditCommand extends Command{
                 newspaperResource = eNewspaperResource;
             }
         }
+
         return newspaperResource;
     }
 
     private Magazine editMagazine(Resource foundResource, String[] givenParameters) throws SysLibException {
-        //Magazine/EMagazine: Brand [8], Issue [9], Link [3]
         String newLink = givenParameters[3];
         String newBrand = givenParameters[8];
         String newIssue = givenParameters[9];
+
         Magazine magazineResource;
         try {
             magazineResource = (Magazine) foundResource;
@@ -246,11 +318,9 @@ public class EditCommand extends Command{
     }
 
     private CD editCD(Resource foundResource, String[] givenParameters) throws SysLibException {
-
-        //CD: Creator [6], Type [7]
-
         String newCreator = givenParameters[6];
         String newType = givenParameters[7];
+
         CD cdResource;
         try {
             cdResource= (CD) foundResource;
@@ -270,10 +340,9 @@ public class EditCommand extends Command{
     }
 
     private Book editBook(Resource foundResource, String[] givenParameters) throws SysLibException {
-        //Book/eBook: Author [2], Genres [4], Link [3]
-
         String newAuthor = givenParameters[2];
         String newLink = givenParameters[3];
+
         Book bookResource;
         try {
             bookResource= (Book) foundResource;
@@ -281,8 +350,6 @@ public class EditCommand extends Command{
             EDIT_LOGGER.warning(NOT_BOOK_ERROR);
             throw new SysLibException(NOT_BOOK_ERROR);
         }
-
-
         if(newAuthor != null){
             bookResource.setAuthor(newAuthor);
         }
@@ -299,9 +366,7 @@ public class EditCommand extends Command{
                 bookResource = eBookResource;
             }
         }
-
         return bookResource;
-
     }
 
 

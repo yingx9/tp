@@ -5,6 +5,14 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import seedu.data.resources.Book;
+import seedu.data.resources.CD;
+import seedu.data.resources.EBook;
+import seedu.data.resources.EMagazine;
+import seedu.data.resources.ENewspaper;
+import seedu.data.resources.Magazine;
+import seedu.data.resources.Newspaper;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
@@ -45,23 +53,119 @@ public class EditCommandTest {
     }
 
     @Test
+    public void testNotCorrectResourceTypeError() {
+        List<Resource> dummyList = testUtil.addDummyResource(testResourceList);
+        parser.container.setResourceList(dummyList);
+        assertThrows(SysLibException.class, ()->editCommand.execute("/id 1", parser.container));
+    }
+
+    @Test
     public void testEditTitleBehavior() throws SysLibException {
-        executeEditSuccessBehavior("/id 2 /t NEWTITLE");
+        Resource targetResource = testResourceList.get(0);
+        String expectedMessage = targetResource.toString();
+        expectedMessage = expectedMessage.replace(targetResource.getTitle(), "NEW TITLE");
+        executeEditSuccessBehavior("/id 2 /t NEW TITLE", expectedMessage );
     }
 
     @Test
-    public void testEditAuthorBehavior() throws SysLibException {
-        executeEditSuccessBehavior("/id 2 /a NEWAUTHOR");
+    public void testEditStatusBehavior() throws SysLibException {
+        Resource targetResource = testResourceList.get(0);
+        String expectedMessage = targetResource.toString();
+        expectedMessage = expectedMessage.replace(targetResource.getStatus().name(), "LOST");
+        executeEditSuccessBehavior("/id 2 /s LOST", expectedMessage );
     }
 
     @Test
-    public void testEditGenreBehavior() throws SysLibException {
-        executeEditSuccessBehavior("/id 2 /g Horror, Action, Fantasy");
+    public void testEditBookAuthorBehavior() throws SysLibException {
+        Book targetBook = (Book) testResourceList.get(0);
+        String expectedMessage = targetBook.toString();
+        expectedMessage = expectedMessage.replace(targetBook.getAuthor(), "NEW AUTHOR");
+        executeEditSuccessBehavior("/id 2 /a NEW AUTHOR", expectedMessage);
     }
 
-    private void executeEditSuccessBehavior(String argument) throws SysLibException {
+    @Test
+    public void testEditBookGenreBehavior() throws SysLibException {
+        Book targetBook = (Book) testResourceList.get(0);
+        String expectedMessage = targetBook.toString();
+        expectedMessage = expectedMessage.replace(targetBook.getGenreString(), "Horror, Action, Fantasy");
+        executeEditSuccessBehavior("/id 2 /g Horror, Action, Fantasy",expectedMessage);
+    }
+
+    @Test
+    public void testEditMagazineBrandBehavior() throws SysLibException {
+        Magazine targetMagazine = (Magazine) testResourceList.get(4);
+        String expectedMessage = targetMagazine.toString();
+        expectedMessage = expectedMessage.replace(targetMagazine.getBrand(), "NEW BRAND");
+        executeEditSuccessBehavior("/id 6 /b NEW BRAND",expectedMessage);
+    }
+
+    @Test
+    public void testEditMagazineIssueBehavior() throws SysLibException {
+        Magazine targetMagazine = (Magazine) testResourceList.get(4);
+        String expectedMessage = targetMagazine.toString();
+        expectedMessage = expectedMessage.replace(targetMagazine.getIssue(), "NEW ISSUE");
+        executeEditSuccessBehavior("/id 6 /is NEW ISSUE",expectedMessage);
+    }
+
+
+    @Test
+    public void testEditCDCreatorBehavior() throws SysLibException {
+        CD targetCD = (CD) testResourceList.get(6);
+        String expectedMessage = targetCD.toString();
+        expectedMessage = expectedMessage.replace(targetCD.getCreator(), "NEW CREATOR");
+        executeEditSuccessBehavior("/id 8 /c NEW CREATOR",expectedMessage);
+    }
+
+    @Test
+    public void testEditCDTypeBehavior() throws SysLibException {
+        CD targetCD = (CD) testResourceList.get(6);
+        String expectedMessage = targetCD.toString();
+        expectedMessage = expectedMessage.replace(targetCD.getType(), "NEW TYPE");
+        executeEditSuccessBehavior("/id 8 /ty NEW TYPE",expectedMessage);
+    }
+
+    @Test
+    public void testEditNewspaperPublisherBehavior() throws SysLibException {
+        Newspaper targetNewspaper = (Newspaper) testResourceList.get(7);
+        String expectedMessage = targetNewspaper.toString();
+        expectedMessage = expectedMessage.replace(targetNewspaper.getPublisher(), "NEW PUBLISHER");
+        executeEditSuccessBehavior("/id 9 /p NEW PUBLISHER",expectedMessage);
+    }
+
+    @Test
+    public void testEditNewspaperEditionBehavior() throws SysLibException {
+        Newspaper targetNewspaper = (Newspaper) testResourceList.get(7);
+        String expectedMessage = targetNewspaper.toString();
+        expectedMessage = expectedMessage.replace(targetNewspaper.getEdition(), "NEW EDITION");
+        executeEditSuccessBehavior("/id 9 /ed NEW EDITION",expectedMessage);
+    }
+    @Test
+    public void testEditEBookLinkBehavior() throws SysLibException {
+        EBook targetEBook = (EBook) testResourceList.get(3);
+        String expectedMessage = targetEBook.toString();
+        expectedMessage = expectedMessage.replace(targetEBook.getLink(), "NEW LINK");
+        executeEditSuccessBehavior("/id 5 /l NEW LINK",expectedMessage);
+    }
+    @Test
+    public void testEditEMagazineLinkBehavior() throws SysLibException {
+        EMagazine targetEMagazine = (EMagazine) testResourceList.get(5);
+        String expectedMessage = targetEMagazine.toString();
+        expectedMessage = expectedMessage.replace(targetEMagazine.getLink(), "NEW LINK");
+        executeEditSuccessBehavior("/id 7 /l NEW LINK",expectedMessage);
+    }
+
+    @Test
+    public void testEditENewspaperLinkBehavior() throws SysLibException {
+        ENewspaper targetENewspaper = (ENewspaper) testResourceList.get(8);
+        String expectedMessage = targetENewspaper.toString();
+        expectedMessage = expectedMessage.replace(targetENewspaper.getLink(), "NEW LINK");
+        executeEditSuccessBehavior("/id 10 /l NEW LINK",expectedMessage);
+    }
+
+
+    private void executeEditSuccessBehavior(String argument, String expectedMessage) throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(editCommand, argument, testResourceList);
-        String expectedMessage = EDIT_SUCCESS + formatLastLineDivider((testResourceList.get(0)).toString());
+        expectedMessage = EDIT_SUCCESS + formatLastLineDivider(expectedMessage);
         assertEquals(expectedMessage, outputMessage);
     }
 }
