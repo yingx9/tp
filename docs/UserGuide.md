@@ -14,6 +14,8 @@
       * [Event adding: `eventadd`](#event-adding-eventadd--return-to-contents)
       * [Event listing: `eventlist`](#event-listing-eventlist--return-to-contents)
       * [Event delete: `eventdelete`](#event-delete-eventdelete--return-to-contents)
+      * [Event edit: `eventedit`](#event-edit-eventedit--return-to-contents)
+    * [Summary of resources & events: `summary`](#summary-summary--return-to-contents)
     * [Exiting the program : `exit`](#exiting-the-program--exit--return-to-contents)
     * [Get help: `help`](#viewing-help--help--return-to-contents)
 * [FAQ](#faq--return-to-contents)
@@ -84,6 +86,13 @@ Adds a new resource to the library inventory.
 > - Anything with `e` prior is an electronic version
 > i.e. `[eB]` is an eBook, `[eM]` is an eMagazine
 
+#### Types of Status:
+- `AVAILABLE`
+- `BORROWED`
+- `LOST`
+> Note:
+> - Resource will default to `AVAILABLE` if no status is input
+
 ### Add Book
 >Notes about genre:
 > - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
@@ -97,8 +106,8 @@ add /i 9780763630187 /t Harry Squatter /a J.K. /tag B /g History /s lost
 ```
 **Example response:**
 ```
-This book is added: 
-[B]  ID: 1 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 06 Nov 2023
+This book is added:
+[B]  ID: 5 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 08 Nov 2023
 ____________________________________________________________
 ```
 
@@ -116,8 +125,8 @@ add /i 9780763630188 /t Moby Dick /a Herman Melville /tag eB /l www.abc.com /g A
 ```
 **Example response:**
 ```
-This eBook is added: 
-[EB]  ID: 2 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Link: www.abc.com
+This eBook is added:
+[EB]  ID: 7 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Link: www.abc.com
 ____________________________________________________________
 ```
 
@@ -130,8 +139,8 @@ add /i 9780763630188 /t Moby Dick /c Herman Melville /ty Audio Book /tag CD
 ```
 **Example response:**
 ```
-This CD is added: 
-[CD]  ID: 3 Title: Moby Dick ISBN: 9780763630188 Creator: Herman Melville Type: Audio Book Status: AVAILABLE
+This CD is added:
+[CD]  ID: 8 Title: Moby Dick ISBN: 9780763630188 Creator: Herman Melville Type: Audio Book Status: AVAILABLE
 ____________________________________________________________
 ```
 
@@ -158,8 +167,8 @@ add /i 9780763630188 /t 2023 Hottest Trends /b Vogue /is Volume 32, Issue 5, May
 ```
 **Example response:**
 ```
-This eMagazine is added: 
-[EM]  ID: 5 Title: 2023 Hottest Trends ISBN: 9780763630188 Brand: Vogue Issue: Volume 32, Issue 5, May 2023 Link: www.abc.com
+This eMagazine is added:
+[EM]  ID: 10 Title: 2023 Hottest Trends ISBN: 9780763630188 Brand: Vogue Issue: Volume 32, Issue 5, May 2023 Link: www.abc.com
 ____________________________________________________________
 ```
 
@@ -171,8 +180,8 @@ add /i 9780763630188 /t Forbes 30 Under 30 2023 /p The Straits Times /ed Entrepr
 ```
 **Example response:**
 ```
-This newspaper is added: 
-[N]  ID: 6 Title: Forbes 30 Under 30 2023 ISBN: 9780763630188 Publisher: The Straits Times Edition: Entrepreneurs Status: AVAILABLE
+This newspaper is added:
+[N]  ID: 11 Title: Forbes 30 Under 30 2023 ISBN: 9780763630188 Publisher: The Straits Times Edition: Entrepreneurs Status: AVAILABLE
 ____________________________________________________________
 ```
 
@@ -185,8 +194,8 @@ add /i 9780763630188 /t Forbes 30 Under 30 2023 /p The Straits Times /ed Entrepr
 ```
 **Example response:**
 ```
-This eNewspaper is added: 
-[EN]  ID: 7 Title: Forbes 30 Under 30 2023 ISBN: 9780763630188 Publisher: The Straits Times Edition: Entrepreneurs Link: www.abc.com
+This eNewspaper is added:
+[EN]  ID: 12 Title: Forbes 30 Under 30 2023 ISBN: 9780763630188 Publisher: The Straits Times Edition: Entrepreneurs Link: www.abc.com
 ____________________________________________________________
 ```
 
@@ -198,11 +207,11 @@ Format: `delete /id ID`
 
 **Example input:**
 ```
-delete /id 123456789
+delete /id 8
 ```
 **Example input:**
 ```
-Looking for ID: 123456789...
+Looking for ID: 8...
 This resource is removed: 
 [B]  ID: 123456789 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: LOST
 ____________________________________________________________
@@ -234,13 +243,36 @@ list /s Available
 ```
 Listing all resources in the Library:
 
-1. [B]  ID: 1 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE
-2. [M]  ID: 2 Title: Harry Squatter ISBN: 9780763630187 Author: J.K. Genre: History Status: AVAILABLE
-3. [B]  ID: 3 Title: Frankenstein ISBN: FKS0001 Author: Mary Shelley Genre: - Status: BORROWED
-4. [B]  ID: 4 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: AVAILABLE
-5. [B]  ID: 5 Title: To Kill a Mockingbird ISBN: 9780061120084 Author: Harper Lee Genre: Novel, Bildungsroman, Southern Gothic, Domestic Fiction, Thriller, Legal Story Status: LOST
+                                                                       [BOOKS]
+------------------------------------------------------------------------------------------------------------------------------------------------
+ID     Tag  Title                   ISBN          Author                   Genre                        Link           Status    Received Date  
+------------------------------------------------------------------------------------------------------------------------------------------------
+1      B    Moby Dick               9780763630188 Herman Melville          Adventure, Fiction           null           AVAILABLE 08 Nov 2023    
+2      B    Harry Squatter          9780763630187 J.K.                     History                      null           LOST      08 Nov 2023    
+3      EB   Moby Dick               9780763630188 Herman Melville          Adventure, Fiction           www.abc.com    AVAILABLE 08 Nov 2023    
 
-There are currently 5 resource(s).
+                                                                       [MAGAZINES]
+------------------------------------------------------------------------------------------------------------------------------------------------
+ID     Tag  Title                   ISBN          Brand                    Issue                        Link           Status    Received Date  
+------------------------------------------------------------------------------------------------------------------------------------------------
+5      M    2023 Hottest Trends     9780763630188 Vogue                    Volume 32, Issue 5, May 2023 null           AVAILABLE 08 Nov 2023    
+6      EM   2023 Hottest Trends     9780763630188 Vogue                    Volume 32, Issue 5, May 2023 www.abc.com    AVAILABLE 08 Nov 2023    
+
+                                                                        [CDS]
+------------------------------------------------------------------------------------------------------------------------------------------------
+ID     Tag  Title                   ISBN          Creator                  Type                         Link           Status    Received Date  
+------------------------------------------------------------------------------------------------------------------------------------------------
+4      CD   Moby Dick               9780763630188 Herman Melville          Audio Book                   null           AVAILABLE 08 Nov 2023    
+
+                                                                      [NEWSPAPERS]
+------------------------------------------------------------------------------------------------------------------------------------------------
+ID     Tag  Title                   ISBN          Publisher                Edition                      Link           Status    Received Date  
+------------------------------------------------------------------------------------------------------------------------------------------------
+7      N    Forbes 30 Under 30 2023 9780763630188 The Straits Times        Entrepreneurs                null           AVAILABLE 08 Nov 2023    
+8      EN   Forbes 30 Under 30 2023 9780763630188 The Straits Times        Entrepreneurs                www.abc.com    AVAILABLE 08 Nov 2023    
+
+
+There are currently 8 resource(s).
 ____________________________________________________________
 ```
 
@@ -261,11 +293,11 @@ find /i 9780763630188
 find /a J. K. Rowling
 find /id 123456789
 find /id 123456789 /i 9780763630188 
+find /a Vogue
 ```
 
 **Example output:**
 ```
-> find /a Vogue
 Here are resources that matched the given filters:
                                                                                 [MAGAZINES]
 ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -307,17 +339,17 @@ For example, if you would like to update a eBook, you can edit the attributes gi
 
 **Example input:**
 ```
-edit /id 123 /t NEW_TITLE
-edit /id 123 /t NEW_TITLE /a NEW_AUTHOR
-edit /id 123 /g Horror, Adventure
-edit /id 123 /s lost
+edit /id 1 /t NEW_TITLE
+edit /id 2 /t NEW_TITLE /a NEW_AUTHOR
+edit /id 2 /g Horror, Adventure
+edit /id 3 /s lost
 ```
 
 **Example output:**
 ```
 Successfully updated! Your updated resource: 
 
-[B]  ID: 12312 Title: Mary ISBN: 123 Author: John Genre: Horror, Adventure Status: LOST
+[B]  ID: 3 Title: Mary ISBN: 123 Author: John Genre: Horror, Adventure Status: LOST
 ____________________________________________________________
 ```
 
@@ -387,14 +419,55 @@ Fan meetup for xxx | 11-11-2001 | null
 ____________________________________________________________
 ```
 
-## Exiting the program : `exit` | [Return to contents](#contents)
-Displays a farewell message and exits the program.
+## Event edit: `eventedit` | [Return to contents](#contents)
+>Notes about INDEX:
+> - INDEX starts from 0 and can be viewed by calling `eventlist`
+> - INDEX might change as those with earlier dates are sorted first
 
-Format: `exit`
+Delete an event to the eventList
 
-**Example**
+Format: `eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION]`
+
+**Example input:**
 ```
-Bye, hope to see you again soon!
+eventedit /i 0 /t NEW TITLE
+eventedit /i 2 /t NEW TITLE /date 23 Jan 2024 /desc NEW DESCRIPTION
+```
+
+**Example output:**
+```
+Event edited successfully. New event details:
+0: NEW TITLE | 23-01-2024 | NEW DESCRIPTION
+____________________________________________________________
+```
+
+## Summary: `summary` | [Return to contents](#contents)
+Provide a summary of resources added and upcoming 3 events (e.g. summary)
+
+Format: `summary`
+
+**Example input:**
+```
+eventedit /i 0 /t NEW TITLE
+```
+
+**Example output**
+```
+Total Resources: 26
+Total Books: [████████████████] 12
+Total CDs: [███] 2
+Total Magazines: [██████] 4
+Total E-Books: [█] 1
+Total E-Magazines: [████] 3
+Total Newspapers: [███] 2
+Total E-Newspapers: [███] 2
+
+Summary of Events:
+Total Events: 7
+Upcoming Events (Next 3):
+1. Storey telling session | 21 Dec 2023 | null
+2. Maintenance | 21 Dec 2023 | null
+3. New Year | 01 Jan 2024 | null
 ____________________________________________________________
 ```
 
@@ -414,6 +487,8 @@ edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 1
 eventadd: Add an event to the event list (e.g. eventadd /t TITLE /date DATE [/desc DESCRIPTION])
 eventlist: List out all the event list (e.g. eventlist)
 eventdelete: Delete an event in the event list based on the index (e.g. eventdelete /i INDEX)
+eventedit: Edit an event in the event based (e.g eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION])
+summary: Provide a summary of resources added and upcoming 3 events (e.g. summary)
 exit: displays a farewell message and exits the program (e.g. exit)
 
 For more information, please refer to our user guide at:https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html

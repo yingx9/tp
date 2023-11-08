@@ -49,23 +49,21 @@ class ParserTest {
         String output = outputStream.toString();
 
         String expectedOutput = "Commands available:" + System.lineSeparator() +
-                "add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR " +
-                "/tag TAG [/g GENRE /s STATUS])" + System.lineSeparator() +
+                "add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR "
+                + "/tag TAG [/g GENRE /s STATUS])" + System.lineSeparator() +
                 "delete: deletes the resource with the specified ID from the library inventory. " +
                 "(e.g. delete /id 123456789)" + System.lineSeparator() +
-                "list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction" +
-                System.lineSeparator() +
+                "list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction"
+                + System.lineSeparator() +
                 "find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)" +
-                System.lineSeparator() + "edit: Edit a listing by entering its isbn to update its details. " +
-                "(e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)" + System.lineSeparator() +
-                "eventadd: Add an event to the event list (e.g. eventadd /t TITLE " +
-                "/date 23 Dec 2023 [/desc DESCRIPTION])" +
-                System.lineSeparator() + "eventlist: List out all the event list (e.g. eventlist)" +
-                System.lineSeparator() + "eventdelete: Delete an event in the event list based on the index " +
-                "(e.g. eventdelete /i INDEX)" + System.lineSeparator() +
-                "exit: displays a farewell message and exits the program (e.g. exit)" +
-                System.lineSeparator() +
-                "For more information, please refer to our user guide at:" +
+                System.lineSeparator() + "edit: Edit a listing by entering its isbn to update its details. "
+                + "(e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)" + System.lineSeparator()
+                + "eventadd: Add an event to the event list (e.g. eventadd " +
+                "/t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])" + System.lineSeparator()
+                + "eventlist: List out all the event list (e.g. eventlist)" + System.lineSeparator()
+                + "eventdelete: Delete an event in the event list based on the index (e.g. eventdelete /i INDEX)"
+                + System.lineSeparator() + "exit: displays a farewell message and exits the program (e.g. exit)"
+                + System.lineSeparator() + "For more information, please refer to our user guide at:" +
                 "https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
 
@@ -97,13 +95,12 @@ class ParserTest {
     public void testProcessCommands() {
         //temporary fix
         List<Resource> resources = new ArrayList<>();
-        Book book = new Book("The Subtle Art of Not Giving a F*ck /a Mark Manson",
-                "9780062457714", "Mark Manson", new String[]{"Self-help"}, 2, Status.AVAILABLE);
+        Book book = new Book("The Subtle Art of Not Giving a F*ck /a Mark Manson", "9780062457714",
+                "Mark Manson", new String[]{"Self-help"}, 2, Status.AVAILABLE);
         resources.add(book);
         //Test add
         Parser parser = new Parser();
-        String validResponse = "add /i 9781250255174 /t Surrounded by Idiots /a Thomas Erikson " +
-                "/tag B /g Self-help";
+        String validResponse = "add /i 9781250255174 /t Surrounded by Idiots /a Thomas Erikson /tag B /g Self-help";
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
@@ -112,18 +109,19 @@ class ParserTest {
 
         System.setOut(System.out);
         String output = outputStream.toString();
-        String expectedOutput = "This book is added:" + System.lineSeparator() +
-                "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help " +
-                "Status: AVAILABLE Received Date: " + getCurrentDate() + SEPARATOR_LINEDIVIDER + System.lineSeparator();
+        String expectedOutput = "This book is added:" + System.lineSeparator()
+                + "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson " +
+                "Genre: Self-help Status: AVAILABLE Received Date: " + getCurrentDate()
+                + SEPARATOR_LINEDIVIDER + System.lineSeparator();
         assertEquals(expectedOutput, output);
         //Add second book
-        validResponse = "add /i 9780062457714 /t The Subtle Art of Not Giving a F*ck /a Mark Manson " +
-                "/tag B /g Self-help";
+        validResponse = "add /i 9780062457714 /t The Subtle Art of Not Giving a F*ck " +
+                "/a Mark Manson /tag B /g Self-help";
         parser.process(validResponse);
-        expectedOutput += "This book is added:" + System.lineSeparator() +
-                "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson " +
-                "Genre: Self-help Status: AVAILABLE Received Date: " + getCurrentDate() + SEPARATOR_LINEDIVIDER +
-                System.lineSeparator();
+        expectedOutput += "This book is added:" + System.lineSeparator()
+                + "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 " +
+                "Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: "
+                + getCurrentDate() + SEPARATOR_LINEDIVIDER + System.lineSeparator();
         System.setOut(System.out);
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
@@ -187,8 +185,8 @@ class ParserTest {
         expectedOutput += "Looking for ID: 1..." + System.lineSeparator() +
                 "This resource is removed:" + System.lineSeparator() +
                 "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
-                "Author: Thomas Genre: Self-help Status: LOST" + " Received Date: " + getCurrentDate()
-                + System.lineSeparator() +
+                "Author: Thomas Genre: Self-help Status: LOST" + " Received Date: "
+                + getCurrentDate() + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
         assertEquals(expectedOutput, output);
     }

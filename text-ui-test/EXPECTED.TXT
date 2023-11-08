@@ -13,13 +13,13 @@ ____________________________________________________________
 What would you like to do?
 ____________________________________________________________
 > This book is added:
-[B]  ID: 1 Title: Moby Dick ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 07 Nov 2023
+[B]  ID: 1 Title: Moby Dick ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 08 Nov 2023
 ____________________________________________________________
 > This book is added:
-[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 07 Nov 2023
+[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 08 Nov 2023
 ____________________________________________________________
 > This book is added:
-[B]  ID: 3 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help Status: LOST Received Date: 07 Nov 2023
+[B]  ID: 3 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help Status: LOST Received Date: 08 Nov 2023
 ____________________________________________________________
 > Event inserted at: 0
 ____________________________________________________________
@@ -30,7 +30,7 @@ ____________________________________________________________
 > Please enter a valid date in the format 'dd MMM yyyy'
 ____________________________________________________________
 > This book is added:
-[B]  ID: 4 Title: Moby Dick ISBN: TMOBM00000001 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 07 Nov 2023
+[B]  ID: 4 Title: Moby Dick ISBN: TMOBM00000001 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 08 Nov 2023
 ____________________________________________________________
 > Commands available:
 add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
@@ -61,23 +61,23 @@ Upcoming Events (Next 3):
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 07 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 08 Nov 2023
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: BORROWED Received Date: 07 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: BORROWED Received Date: 08 Nov 2023
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 07 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 08 Nov 2023
 ____________________________________________________________
 > Looking for ID: 1...
 This resource is removed:
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 07 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 08 Nov 2023
 ____________________________________________________________
 > Looking for ID: 2...
 This resource is removed:
-[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 07 Nov 2023
+[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 08 Nov 2023
 ____________________________________________________________
 > Index is out of range of the event list!
 > This event is removed:

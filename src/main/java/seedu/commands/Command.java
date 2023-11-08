@@ -32,7 +32,7 @@ public abstract class Command {
         }
         if (!statement.isBlank()) {
             throw new IllegalArgumentException("Unknown variable/command: " + statement +
-                    ", avoid using '/' in names/variables");
+                    ", avoid using '/' in names/variables" + SEPARATOR_LINEDIVIDER);
         }
     }
 

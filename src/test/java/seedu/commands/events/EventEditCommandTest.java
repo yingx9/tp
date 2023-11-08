@@ -45,7 +45,7 @@ public class EventEditCommandTest {
         eventAddCommand.execute("/t testrun /date 1 dec 2001 /desc testing 123", parser.container);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        eventEditCommand.execute("/i 0 /d 23 Dec 2023", parser.container);
+        eventEditCommand.execute("/i 0 /date 23 Dec 2023", parser.container);
         String output = outputStream.toString();
         String expectedOutput = "Event edited successfully. New event details:" + System.lineSeparator() +
                 "0: testrun | 23 Dec 2023 | testing 123" + System.lineSeparator() +
