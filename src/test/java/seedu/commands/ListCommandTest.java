@@ -14,6 +14,7 @@ import seedu.util.TestUtil;
 
 import static seedu.commands.ListCommand.GENERIC_MESSAGE;
 import static seedu.commands.ListCommand.FILTER_MESSAGE;
+import static seedu.commands.ListCommand.STATUS_ERROR_MESSAGE;
 import static seedu.commands.ListCommand.ZERO_RESOURCES_MESSAGE;
 import static seedu.commands.ListCommand.matchedResources;
 import static seedu.ui.UI.showResourcesDetails;
@@ -25,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ListCommandTest {
 
     private static List<Resource> testResourceList = new ArrayList<>();
-    private Parser parser = new Parser();
+    private static Parser parser = new Parser();
     private List<Resource> emptyResourceList = new ArrayList<>();
     private TestUtil testUtil = new TestUtil();
 
@@ -35,6 +36,7 @@ public class ListCommandTest {
     @BeforeAll
     public static void setup() throws SysLibException {
         testResourceList = TestUtil.fillTestList();
+        parser.container.setResourceList(testResourceList);
 
     }
 
@@ -49,20 +51,17 @@ public class ListCommandTest {
 
     @Test
     public void testNoTagArgBehavior() {
-        parser.container.setResourceList(testResourceList);
         assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/tag", parser.container));
 
     }
     @Test
     public void testNoGenreArgBehavior()  {
-        parser.container.setResourceList(testResourceList);
         assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/g", parser.container));
 
     }
 
     @Test
     public void testNoStatusArgBehavior()  {
-        parser.container.setResourceList(testResourceList);
         assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/s", parser.container));
 
     }
@@ -82,10 +81,10 @@ public class ListCommandTest {
     @Test
     public void testListByStatusFilterBehavior() throws SysLibException {
         executeListFilterBehavior("/s AVAILABLE");
+        executeListFilterBehavior("/s BORROWED");
+        executeListFilterBehavior("/s LOST");
 
     }
-
-
 
     public void executeListFilterBehavior(String argument) throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(listCommand, argument, testResourceList);
@@ -101,5 +100,16 @@ public class ListCommandTest {
         expectedMessage += ZERO_RESOURCES_MESSAGE;
         assertEquals(expectedMessage, outputMessage);
 
+    }
+
+    @Test
+    public void testInvalidStatusInput(){
+        executeAssertSysLibExceptionThrown("/s INVALIDSTATUS",STATUS_ERROR_MESSAGE);
+    }
+
+    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage){
+        SysLibException exception = assertThrows(SysLibException.class, ()->listCommand.execute(
+                arguments, parser.container));
+        assertEquals(expectedMessage, exception.getMessage());
     }
 }

@@ -25,27 +25,30 @@ import java.util.List;
 import java.util.logging.SimpleFormatter;
 
 
+import static seedu.commands.ListCommand.STATUS_ERROR_MESSAGE;
 import static seedu.ui.MessageFormatter.formatLineSeparator;
 import static seedu.ui.MessageFormatter.formatLastLineDivider;
 public class EditCommand extends Command{
+
+    public static final String INVALID_EDIT_ARGS =  formatLineSeparator("Invalid edit arguments!");
+    public static final String NEWSPAPERS_ARGS_MESSAGE =
+            "For Newspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS" +
+                    formatLastLineDivider("For ENewspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS /l LINK");
+    public static final String BOOK_ARGS_MESSAGE = "For Books: /t TITLE /a AUTHOR /g GENRES /s STATUS" +
+            formatLastLineDivider("For EBooks: /t TITLE /a AUTHOR /g GENRES /s STATUS /l LINK");
+    public static final String CD_ARGS_MESSAGE = formatLastLineDivider("For CDs: /t TITLE /p PUBLISHER" +
+            " /ed EDITION /s STATUS");
+    public static final String MAGAZINE_ARGS_MESSAGE = "For Magazines: /t TITLE /b BRAND /is ISSUE /s STATUS" +
+            formatLastLineDivider("For EMagazines: /t TITLE /b BRAND /is ISSUE /s STATUS /l LINK");
+
+    public static final String EDIT_SUCCESS = formatLineSeparator("Successfully updated! Your updated resource:");
     public static final String MISSING_ARG_MESSAGE =  formatLastLineDivider("Please provide at least " +
             "one detail to edit!");
     public static final String NOT_BOOK_ERROR =  formatLastLineDivider("Your resource is not a book!");
     public static final String RESOURCE_NOT_FOUND =  formatLastLineDivider("No such resource with given ID");
-    public static final String EDIT_SUCCESS = formatLineSeparator("Successfully updated! Your updated resource:");
     private static final String NOT_CD_ERROR =  formatLastLineDivider("Your resource is not a CD!");
     private static final String NOT_NEWSPAPER_ERROR = formatLastLineDivider("Your resource is not a Newspaper!");
     private static final String NOT_MAGAZINE_ERROR = formatLastLineDivider("Your resource is not a Magazine!");
-    private static final String INVALID_EDIT_ARGS =  formatLineSeparator("Invalid edit arguments!");
-    private static final String NEWSPAPERS_ARGS_MESSAGE =
-            "For Newspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS" +
-            formatLastLineDivider("For ENewspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS /l LINK");
-    private static final String BOOK_ARGS_MESSAGE = "For Books: /t TITLE /a AUTHOR /g GENRES /s STATUS" +
-            formatLastLineDivider("For EBooks: /t TITLE /a AUTHOR /g GENRES /s STATUS /l LINK");
-    private static final String CD_ARGS_MESSAGE = formatLastLineDivider("For CDs: /t TITLE /p PUBLISHER" +
-            " /ed EDITION /s STATUS");
-    private static final String MAGAZINE_ARGS_MESSAGE = "For Magazines: /t TITLE /b BRAND /is ISSUE /s STATUS" +
-            formatLastLineDivider("For EMagazines: /t TITLE /b BRAND /is ISSUE /s STATUS /l LINK");
 
     private static final Logger EDIT_LOGGER = Logger.getLogger(EditCommand.class.getName());
     private static String feedbackToUser;
@@ -72,8 +75,8 @@ public class EditCommand extends Command{
     }
 
     public EditCommand(){
-        args = new String[]{"id", "t", "a", "l", "g", "s", "c", "ty", "b", "is", "p", "ed"};
-        required = new boolean[]{true, false, false, false, false, false, false, false,false,false,false,false};
+        args = new String[]{"id", "t", "a", "l", "g", "s", "c", "ty", "b", "is", "p", "ed", "i"};
+        required = new boolean[]{true, false, false, false, false, false, false, false,false,false,false,false, false};
     }
 
     @Override
@@ -107,7 +110,7 @@ public class EditCommand extends Command{
         return new CommandResult(feedbackToUser);
     }
 
-    public int countGivenArgs(String[] givenParameters) throws SysLibException {
+    private int countGivenArgs(String[] givenParameters) throws SysLibException {
 
         int argsCount = 0;
 
@@ -126,7 +129,7 @@ public class EditCommand extends Command{
         return argsCount;
     }
 
-    public Resource findResourceByID(int givenID, List<Resource> resourceList){
+    private Resource findResourceByID(int givenID, List<Resource> resourceList){
 
         Resource foundResource = null;
 
@@ -144,15 +147,21 @@ public class EditCommand extends Command{
         return foundResource;
     }
 
-    public Resource editResource(Resource foundResource, String[] givenParameters, int givenArgsCount)
+    private Resource editResource(Resource foundResource, String[] givenParameters, int givenArgsCount)
             throws SysLibException {
 
-        //All resource type needs to check Title and Status.
+        //All resource type needs to check Title, Status, and ISBN.
         if(givenParameters[1] != null){
             foundResource.setTitle(givenParameters[1]);
         }
         if (givenParameters[5] != null){
             foundResource.setStatus(getStatusFromString(givenParameters[5]));
+        }
+        if (givenParameters[12] != null){
+            if (givenParameters[12].length() != 13){
+                throw new SysLibException("ISBN must be 13 characters!");
+            }
+            foundResource.setISBN(givenParameters[12]);
         }
 
         //Call respective edit functions based on resource type
@@ -193,45 +202,42 @@ public class EditCommand extends Command{
     private void validateBookParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
             throws SysLibException {
 
-        if (resourceTag == "B" && givenParameters[3] != null){
+        if (resourceTag.equals("B")  && givenParameters[3] != null){
             throw new SysLibException(INVALID_EDIT_ARGS + BOOK_ARGS_MESSAGE);
         }
 
-        int[] indexToCheck = {1,2,3,4,5};
+        int[] indexToCheck = {1,2,3,4,5,12};
 
         checkGivenParameters(givenArgsCount,givenParameters, indexToCheck, BOOK_ARGS_MESSAGE);
-
-    }
-
-    private void validateNewspaperParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
-            throws SysLibException {
-
-        if (resourceTag == "N" && givenParameters[3] != null){
-            throw new SysLibException(INVALID_EDIT_ARGS + NEWSPAPERS_ARGS_MESSAGE);
-        }
-
-        int[] indexToCheck = {1,3,5,10,11};
-
-        checkGivenParameters(givenArgsCount,givenParameters, indexToCheck, NEWSPAPERS_ARGS_MESSAGE);
 
     }
 
     private void validateCDParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
             throws SysLibException {
 
-        int[] indexToCheck = {1,5,6,7};
+        int[] indexToCheck = {1,5,6,7,12};
         checkGivenParameters(givenArgsCount,givenParameters, indexToCheck, CD_ARGS_MESSAGE);
+    }
 
+    private void validateNewspaperParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
+            throws SysLibException {
+
+        if (resourceTag.equals("N") && givenParameters[3] != null){
+            throw new SysLibException(INVALID_EDIT_ARGS + NEWSPAPERS_ARGS_MESSAGE);
+        }
+
+        int[] indexToCheck = {1,3,5,10,11,12};
+        checkGivenParameters(givenArgsCount,givenParameters, indexToCheck, NEWSPAPERS_ARGS_MESSAGE);
     }
 
     private void validateMagazineParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
             throws SysLibException {
 
-        if (resourceTag == "M" && givenParameters[3] != null){
+        if (resourceTag.equals("M") && givenParameters[3] != null){
             throw new SysLibException(INVALID_EDIT_ARGS + MAGAZINE_ARGS_MESSAGE);
         }
 
-        int[] indexToCheck = {1,3,5,8,9};
+        int[] indexToCheck = {1,3,5,8,9,12};
 
         checkGivenParameters(givenArgsCount,givenParameters, indexToCheck, MAGAZINE_ARGS_MESSAGE);
 
@@ -251,6 +257,87 @@ public class EditCommand extends Command{
         if(argsCount != givenArgsCount){
             throw new SysLibException(INVALID_EDIT_ARGS + argsMessage);
         }
+    }
+    private Book editBook(Resource foundResource, String[] givenParameters) throws SysLibException {
+        String newAuthor = givenParameters[2];
+        String newLink = givenParameters[3];
+
+        Book bookResource;
+
+        try {
+            bookResource= (Book) foundResource;
+        } catch (ClassCastException e){
+            EDIT_LOGGER.warning(NOT_BOOK_ERROR);
+            throw new SysLibException(NOT_BOOK_ERROR);
+        }
+        if(newAuthor != null){
+            bookResource.setAuthor(newAuthor);
+        }
+
+        if (givenParameters[4] != null){
+            String[] newGenres = givenParameters[4].split(", ");
+            bookResource.setGenre(newGenres);
+        }
+
+        if (bookResource instanceof EBook){
+            if(newLink != null){
+                EBook eBookResource = (EBook) bookResource;
+                eBookResource.setLink(newLink);
+                bookResource = eBookResource;
+            }
+        }
+        return bookResource;
+    }
+    private CD editCD(Resource foundResource, String[] givenParameters) throws SysLibException {
+        String newCreator = givenParameters[6];
+        String newType = givenParameters[7];
+
+        CD cdResource;
+        try {
+            cdResource= (CD) foundResource;
+        } catch (ClassCastException e){
+            EDIT_LOGGER.warning(NOT_CD_ERROR);
+            throw new SysLibException(NOT_CD_ERROR);
+        }
+
+        if(newCreator != null){
+            cdResource.setCreator(newCreator);
+        }
+
+        if (newType != null){
+            cdResource.setType(newType);
+        }
+        return cdResource;
+    }
+    private Magazine editMagazine(Resource foundResource, String[] givenParameters) throws SysLibException {
+        String newLink = givenParameters[3];
+        String newBrand = givenParameters[8];
+        String newIssue = givenParameters[9];
+
+        Magazine magazineResource;
+        try {
+            magazineResource = (Magazine) foundResource;
+        } catch (ClassCastException e){
+            EDIT_LOGGER.warning(NOT_MAGAZINE_ERROR);
+            throw new SysLibException(NOT_MAGAZINE_ERROR);
+        }
+
+        if(newBrand != null){
+            magazineResource.setBrand(newBrand);
+        }
+
+        if (newIssue != null){
+            magazineResource.setIssue(newIssue);
+        }
+
+        if (magazineResource instanceof EMagazine){
+            if(newLink != null){
+                EMagazine eMagazineResource = (EMagazine) magazineResource;
+                eMagazineResource.setLink(newLink);
+                magazineResource = eMagazineResource;
+            }
+        }
+        return magazineResource;
     }
 
     private Newspaper editNewspapers(Resource foundResource, String[] givenParameters) throws SysLibException {
@@ -286,99 +373,19 @@ public class EditCommand extends Command{
         return newspaperResource;
     }
 
-    private Magazine editMagazine(Resource foundResource, String[] givenParameters) throws SysLibException {
-        String newLink = givenParameters[3];
-        String newBrand = givenParameters[8];
-        String newIssue = givenParameters[9];
-
-        Magazine magazineResource;
-        try {
-            magazineResource = (Magazine) foundResource;
-        } catch (ClassCastException e){
-            EDIT_LOGGER.warning(NOT_MAGAZINE_ERROR);
-            throw new SysLibException(NOT_MAGAZINE_ERROR);
-        }
-
-        if(newBrand != null){
-            magazineResource.setBrand(newBrand);
-        }
-
-        if (newIssue != null){
-            magazineResource.setIssue(newIssue);
-        }
-
-        if (magazineResource instanceof EMagazine){
-            if(newLink != null){
-                EMagazine eMagazineResource = (EMagazine) magazineResource;
-                eMagazineResource.setLink(newLink);
-                magazineResource = eMagazineResource;
-            }
-        }
-        return magazineResource;
-    }
-
-    private CD editCD(Resource foundResource, String[] givenParameters) throws SysLibException {
-        String newCreator = givenParameters[6];
-        String newType = givenParameters[7];
-
-        CD cdResource;
-        try {
-            cdResource= (CD) foundResource;
-        } catch (ClassCastException e){
-            EDIT_LOGGER.warning(NOT_CD_ERROR);
-            throw new SysLibException(NOT_CD_ERROR);
-        }
-
-        if(newCreator != null){
-            cdResource.setCreator(newCreator);
-        }
-
-        if (newType != null){
-            cdResource.setType(newType);
-        }
-        return cdResource;
-    }
-
-    private Book editBook(Resource foundResource, String[] givenParameters) throws SysLibException {
-        String newAuthor = givenParameters[2];
-        String newLink = givenParameters[3];
-
-        Book bookResource;
-        try {
-            bookResource= (Book) foundResource;
-        } catch (ClassCastException e){
-            EDIT_LOGGER.warning(NOT_BOOK_ERROR);
-            throw new SysLibException(NOT_BOOK_ERROR);
-        }
-        if(newAuthor != null){
-            bookResource.setAuthor(newAuthor);
-        }
-
-        if (givenParameters[4] != null){
-            String[] newGenres = givenParameters[4].split(", ");
-            bookResource.setGenre(newGenres);
-        }
-
-        if (bookResource instanceof EBook){
-            if(newLink != null){
-                EBook eBookResource = (EBook) bookResource;
-                eBookResource.setLink(newLink);
-                bookResource = eBookResource;
-            }
-        }
-        return bookResource;
-    }
-
-
-    public Status getStatusFromString(String statusString) {
+    private Status getStatusFromString(String statusString) throws SysLibException {
         statusString = statusString.toLowerCase().trim();
         if (statusString.equals("borrowed")) {
             return Status.BORROWED;
         } else if (statusString.equals("lost")) {
             return Status.LOST;
-        } else {
+        } else if (statusString.equals("available")){
             return Status.AVAILABLE;
+        } else {
+
+            throw new SysLibException(STATUS_ERROR_MESSAGE);
         }
+
     }
 
 }

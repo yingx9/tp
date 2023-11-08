@@ -328,14 +328,14 @@ Fear not! Update a resource's details using the `edit` command and fix your typo
 
 Argument names differ based on resource type. The table below shows the argument names you can enter for each resource type. 
 
-| Type                     | Argument Names                                                       | Notes                                                                                                                                                                            |
-|--------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Book<br/>eBook           | /t TITLE <br/>/a AUTHOR<br/>/g GENRES<br/>/s STATUS<br/>/l LINK      | **/g GENRES:** <br/>If you're inputting **multiple genres**, separate them by  with comma `,`. <br/>For example:  `/g Horror, Fantasy`     <br/>**/l LINK:**<br/>For eBook only. |
-| Magazine<br/>eMagazine   | /t TITLE <br/>/b BRAND<br/>/is ISSUE<br/>/s STATUS<br/>/l LINK       | **/l LINK:**<br/>For eMagazine only.                                                                                                                                             |
-| Newspaper<br/>eNewspaper | /t TITLE <br/>/p PUBLISHER<br/>/ed EDITION<br/>/s STATUS<br/>/l LINK | **/l LINK:**<br/>For eNewspaper only.                                                                                                                                            |
-| CD                       | /t TITLE <br/>/c CREATOR<br/>/ty TYPE<br/>/s STATUS      |                                                                                                                                                                                  |
+| Type                     | Argument Names                                                                   | Notes                                                                                                                                                                             |
+|--------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Book<br/>eBook           | /t TITLE <br/>/a AUTHOR<br/>/g GENRES<br/>/s STATUS<br/>/l LINK<br/>/i ISBN      | **/g GENRES:** <br/>If you're inputting **multiple genres**, separate them by  with comma `,`. <br/><br/>For example:  `/g Horror, Fantasy` <br/>**/l LINK:**<br/>For eBook only. |
+| Magazine<br/>eMagazine   | /t TITLE <br/>/b BRAND<br/>/is ISSUE<br/>/s STATUS<br/>/l LINK<br/>/i ISBN       | **/l LINK:**<br/>For eMagazine only.                                                                                                                                              |
+| Newspaper<br/>eNewspaper | /t TITLE <br/>/p PUBLISHER<br/>/ed EDITION<br/>/s STATUS<br/>/l LINK<br/>/i ISBN | **/l LINK:**<br/>For eNewspaper only.                                                                                                                                             |
+| CD                       | /t TITLE <br/>/c CREATOR<br/>/ty TYPE<br/>/s STATUS<br/>/i ISBN                  |                                                                                                                                                                                   |
 
-For example, if you would like to update a eBook, you can edit the attributes given under the **Argument Names** column, that is the title, author, genre, status, and link.
+For example, if you would like to update a eBook, you can edit the attributes given under the **Argument Names** column, that is the title, author, genre, status, link, and isbn.
 
 **Example input:**
 ```

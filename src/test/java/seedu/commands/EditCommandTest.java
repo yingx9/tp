@@ -19,16 +19,22 @@ import seedu.parser.Parser;
 import seedu.util.TestUtil;
 
 
+import static seedu.commands.EditCommand.BOOK_ARGS_MESSAGE;
+import static seedu.commands.EditCommand.INVALID_EDIT_ARGS;
+import static seedu.commands.EditCommand.MAGAZINE_ARGS_MESSAGE;
+import static seedu.commands.EditCommand.MISSING_ARG_MESSAGE;
+import static seedu.commands.EditCommand.NEWSPAPERS_ARGS_MESSAGE;
 import static seedu.commands.EditCommand.RESOURCE_NOT_FOUND;
 import static seedu.commands.EditCommand.EDIT_SUCCESS;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.commands.ListCommand.STATUS_ERROR_MESSAGE;
 import static seedu.ui.MessageFormatter.formatLastLineDivider;
 
 public class EditCommandTest {
     private static List<Resource> testResourceList = new ArrayList<>();
-    private Parser parser = new Parser();
+    private static Parser parser = new Parser();
     private List<Resource> emptyResourceList = new ArrayList<>();
     private TestUtil testUtil = new TestUtil();
     private Command editCommand = new EditCommand();
@@ -36,27 +42,8 @@ public class EditCommandTest {
     @BeforeAll
     public static void setup()  {
         testResourceList = TestUtil.fillTestList();
+        parser.container.setResourceList(testResourceList);
 
-    }
-
-    @Test
-    public void testEditResourceNotFound() throws SysLibException {
-        String outputMessage = testUtil.getOutputMessage(editCommand, "/id 123 /t NEWTITLE", emptyResourceList);
-        String expectedMessage =  RESOURCE_NOT_FOUND;
-        assertEquals(expectedMessage, outputMessage);
-    }
-
-    @Test
-    public void testNoArgumentGiven() throws SysLibException {
-        assertThrows(SysLibException.class, ()->editCommand.execute("/id 123", parser.container));
-
-    }
-
-    @Test
-    public void testNotCorrectResourceTypeError() {
-        List<Resource> dummyList = testUtil.addDummyResource(testResourceList);
-        parser.container.setResourceList(dummyList);
-        assertThrows(SysLibException.class, ()->editCommand.execute("/id 1", parser.container));
     }
 
     @Test
@@ -73,6 +60,18 @@ public class EditCommandTest {
         String expectedMessage = targetResource.toString();
         expectedMessage = expectedMessage.replace(targetResource.getStatus().name(), "LOST");
         executeEditSuccessBehavior("/id 2 /s LOST", expectedMessage );
+        expectedMessage = expectedMessage.replace(targetResource.getStatus().name(), "AVAILABLE");
+        executeEditSuccessBehavior("/id 2 /s AVAILABLE", expectedMessage );
+        expectedMessage = expectedMessage.replace(targetResource.getStatus().name(), "BORROWED");
+        executeEditSuccessBehavior("/id 2 /s BORROWED", expectedMessage );
+    }
+
+    @Test
+    public void testEditISBNBehavior() throws SysLibException {
+        Resource targetResource = testResourceList.get(0);
+        String expectedMessage = targetResource.toString();
+        expectedMessage = expectedMessage.replace(targetResource.getISBN(), "1234567891234");
+        executeEditSuccessBehavior("/id 2 /i 1234567891234", expectedMessage );
     }
 
     @Test
@@ -162,10 +161,79 @@ public class EditCommandTest {
         executeEditSuccessBehavior("/id 10 /l NEW LINK",expectedMessage);
     }
 
-
     private void executeEditSuccessBehavior(String argument, String expectedMessage) throws SysLibException {
         String outputMessage = testUtil.getOutputMessage(editCommand, argument, testResourceList);
         expectedMessage = EDIT_SUCCESS + formatLastLineDivider(expectedMessage);
         assertEquals(expectedMessage, outputMessage);
     }
+
+
+    @Test
+    public void testEditResourceNotFound() throws SysLibException {
+        String outputMessage = testUtil.getOutputMessage(editCommand, "/id 123 /t NEWTITLE", emptyResourceList);
+        String expectedMessage =  RESOURCE_NOT_FOUND;
+        assertEquals(expectedMessage, outputMessage);
+    }
+
+    @Test
+    public void testNoArgumentGiven()  {
+        SysLibException exception = assertThrows(SysLibException.class, ()->editCommand.execute("/id 123",
+                parser.container));
+        assertEquals(MISSING_ARG_MESSAGE, exception.getMessage());
+
+    }
+
+    @Test
+    public void testNotCorrectResourceTypeError() {
+        List<Resource> dummyList = testUtil.addDummyResource(testResourceList);
+        parser.container.setResourceList(dummyList);
+        executeAssertSysLibExceptionThrown("/id 1 /t dummyTitle", "Invalid Resource!");
+
+    }
+
+    @Test
+    public void testEditStatusError(){
+        executeAssertSysLibExceptionThrown("/id 2 /s INVALIDSTATUS",
+                STATUS_ERROR_MESSAGE);
+    }
+
+    @Test
+    public void testEditISBNError(){
+        executeAssertSysLibExceptionThrown("/id 2 /i invalid",
+                "ISBN must be 13 characters!");
+    }
+
+    @Test
+    public void testEditBookLinkError(){
+        executeAssertSysLibExceptionThrown("/id 2 /l dummyLink",
+                INVALID_EDIT_ARGS + BOOK_ARGS_MESSAGE);
+    }
+
+    @Test
+    public void testEditNewspaperLinkError(){
+        executeAssertSysLibExceptionThrown("/id 9 /l dummyLink",
+                INVALID_EDIT_ARGS + NEWSPAPERS_ARGS_MESSAGE);
+    }
+
+    @Test
+    public void testEditMagazineLinkError(){
+        executeAssertSysLibExceptionThrown("/id 6 /l dummyLink",
+                INVALID_EDIT_ARGS + MAGAZINE_ARGS_MESSAGE);
+    }
+
+    @Test
+    public void testEditBookInvalidArgsGiven(){
+        executeAssertSysLibExceptionThrown("/id 2 /t TITLE /s LOST /p PUBLISHER /g GENRES /ed EDITION " +
+                "/c CREATOR /ty TYPE /b BRAND /is ISSUE", INVALID_EDIT_ARGS+BOOK_ARGS_MESSAGE);
+    }
+
+    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage){
+        SysLibException exception = assertThrows(SysLibException.class, ()->editCommand.execute(
+                arguments, parser.container));
+        assertEquals(expectedMessage, exception.getMessage());
+    }
+
+
+
+
 }
