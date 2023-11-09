@@ -100,7 +100,7 @@ public class ResourceDisplayFormatter {
         //Columns represent:
         // ID, Tag, Title, ISBN, Author/Brand/Creator/Publisher,
         // Genre/Issue/Type/Edition, Link, Status, Received Date
-        List<Integer> columnsWidth = Arrays.asList(7,5,20,14,25,20,15,10,15);
+        List<Integer> columnsWidth = Arrays.asList(7,5,20,20,25,20,15,10,15);
 
         int paddingLength = 0;
 
