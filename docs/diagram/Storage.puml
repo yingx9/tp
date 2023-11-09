@@ -1,0 +1,60 @@
+@startuml
+!include Style.puml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+
+actor User as User USER_COLOR
+participant "UI" as UI UI_COLOR
+participant "Storage" as Storage STORAGE_COLOR
+participant "Resource" as Resource SYSLIB_COLOR
+participant "Event" as Event SYSLIB_COLOR
+participant "Scanner" as Scanner SYSLIB_COLOR
+database "Data File" as DataFile
+
+User -> UI : initiateLoad()
+activate UI UI_COLOR
+
+UI -> Storage : load(resources, events)
+activate Storage STORAGE_COLOR
+
+Storage -> DataFile : openFile()
+activate DataFile SYSLIB_COLOR
+DataFile --> Storage : fileStream
+deactivate DataFile
+
+Storage -> Scanner : create(fileStream)
+activate Scanner SYSLIB_COLOR
+
+loop until EOF
+    Scanner -> Scanner : hasNext()
+    Scanner --> Storage : boolean
+    Storage -> Scanner : nextLine()
+    activate Scanner SYSLIB_COLOR
+    Scanner --> Storage : dataLine
+    deactivate Scanner
+
+    Storage -> Storage : parseDataLine(dataLine)
+    activate Storage STORAGE_COLOR
+    alt is ResourceType
+        Storage -> Resource : createFromData(parsedData)
+        activate Resource SYSLIB_COLOR
+        Resource --> Storage : resource
+        deactivate Resource
+        Storage -> UI : updateResourceList(resource)
+    else is EventType
+        Storage -> Event : createFromData(parsedData)
+        activate Event SYSLIB_COLOR
+        Event --> Storage : event
+        deactivate Event
+        Storage -> UI : updateEventList(event)
+    else
+        Storage -> UI : showError(error)
+    end
+end
+
+deactivate Storage
+UI --> User : loadResult()
+deactivate UI
+@enduml

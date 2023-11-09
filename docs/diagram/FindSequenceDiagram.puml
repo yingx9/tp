@@ -7,15 +7,15 @@
 skinparam ArrowFontStyle plain
 
 Actor User as user USER_COLOR
-participant ":UI" as UI UI_COLOR
-participant ":Parser" as PARSER PARSER_COLOR
+participant "UI" as UI UI_COLOR
+participant "Parser" as PARSER PARSER_COLOR
 
 box Command
-participant ":FindCommand" as FINDCOMMAND COMMAND_COLOR
-participant ":Command" as COMMAND COMMAND_COLOR
+participant "FindCommand" as FINDCOMMAND COMMAND_COLOR
+participant "Command" as COMMAND COMMAND_COLOR
 end box
 
-participant ":Resource" as RESOURCE
+participant "Resource" as RESOURCE
 
 user -[USER_COLOR]> UI : "find /t TITLE"
 activate UI UI_COLOR

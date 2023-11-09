@@ -1,8 +1,6 @@
-Data file not found @ .\storage.txt
-Creating new data file @ .\storage.txt
 ____________________________________________________________
-Storage file found @ .\storage.txt
-No Resources or Events found in storage.
+Storage file not found.
+Creating new data file @ .\storage.txt
 ____________________________________________________________
              .....................                  
           -##@*+*@*++++++++++#@++##                 
@@ -107,5 +105,6 @@ ____________________________________________________________
 > This event is removed:
 event3 | 20 Mar 2023 | null
 ____________________________________________________________
-> Bye, hope to see you again soon!
+> Thanks for using SysLib CLI! We have saved the current resources and events created.
+Hope to see you again soon!
 ____________________________________________________________

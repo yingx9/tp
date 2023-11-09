@@ -381,21 +381,6 @@ INFO: List Command execute with
 Nov 07, 2023 2:03:39 PM seedu.commands.ListCommand execute
 INFO: List Command ends
 Nov 09, 2023 6:04:17 PM seedu.commands.EditCommand execute
-INFO: Edit Command execute with /id 9 /ed NEW EDITION
-Nov 09, 2023 6:04:17 PM seedu.commands.EditCommand execute
-INFO: Edit Command execute with /id 2 /i 1234567891234
-Nov 09, 2023 6:04:17 PM seedu.commands.EditCommand execute
-INFO: Edit Command execute with /id 7 /l NEW LINK
-Nov 09, 2023 6:04:17 PM seedu.commands.EditCommand execute
-INFO: Edit Command execute with /id 6 /l dummyLink
-Nov 09, 2023 6:04:17 PM seedu.commands.EditCommand execute
-INFO: Edit Command execute with /id 123
-Nov 09, 2023 6:04:17 PM seedu.commands.EditCommand countGivenArgs
-WARNING: 
-Please provide at least one detail to edit!
-____________________________________________________________
-
-Nov 09, 2023 6:04:17 PM seedu.commands.EditCommand execute
 INFO: Edit Command execute with /id 2 /g Horror, Action, Fantasy
 Nov 09, 2023 6:04:17 PM seedu.commands.EditCommand execute
 INFO: Edit Command execute with /id 6 /b NEW BRAND
