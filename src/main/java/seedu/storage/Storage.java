@@ -47,6 +47,19 @@ public class Storage {
         this.container = container;
     }
 
+
+    /**
+     * Loads resources and events from a data file. The method reads the file line by line,
+     * parses each line to create Resource or Event objects, and adds them to the provided container.
+     * It distinguishes between resource types (books, magazines, etc.) and event types,
+     * and populates the appropriate lists within the container.
+     *
+     * @param resources The List of Resources holding the parsed Resources.
+     * @param events The List of Events holding the parsed Events.
+     * @throws IllegalArgumentException If the file format is not as expected or if arguments for
+     *                                  resources or events are invalid.
+     * @throws SysLibException          If there's a problem with the system's library operations.
+     */
     public boolean load(List<Resource> resources, List<Event> events) throws SysLibException {
         try {
             int id = 0;

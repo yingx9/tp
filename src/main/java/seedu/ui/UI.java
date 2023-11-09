@@ -58,7 +58,8 @@ public class UI {
     }
 
     public void showExitMessage(){
-        System.out.println("Bye, hope to see you again soon!");
+        System.out.println("Thanks for using SysLib CLI! We have saved the current resources and events created.");
+        System.out.println("Hope to see you again soon!");
         showLine();
     }
 
