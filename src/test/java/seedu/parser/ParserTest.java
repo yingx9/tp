@@ -92,6 +92,28 @@ class ParserTest {
     }
 
     @Test
+    public void testProcessSuggestCommand() {
+        Parser parser = new Parser();
+        String validResponse = "hel";
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        parser.processUserResponse(validResponse);
+
+        System.setOut(System.out);
+        String output = outputStream.toString();
+
+        String expectedOutput = "no commands found. Enter \"help\" for a list of commands.";
+        expectedOutput += System.lineSeparator();
+        expectedOutput += "Did you mean: 'help'";
+        expectedOutput += System.lineSeparator();
+        expectedOutput += "____________________________________________________________";
+        expectedOutput += System.lineSeparator();
+        assertEquals(expectedOutput, output);
+    }
+
+    @Test
     public void testProcessCommands() {
         //temporary fix
         List<Resource> resources = new ArrayList<>();

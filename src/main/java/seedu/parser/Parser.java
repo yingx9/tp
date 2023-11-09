@@ -54,6 +54,8 @@ public class Parser {
         }
     };
 
+    public ArrayList<String> commands = new ArrayList<>(commandProcessor.keySet());
+
     // @@author DavinciDelta
     public void processUserResponse(String response) {
         String command = response.split(" ")[0].toLowerCase();
@@ -66,7 +68,12 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
         } else {
-            System.out.println("no commands found. Enter \"help\" for a list of commands." + SEPARATOR_LINEDIVIDER);
+            String suggestion = SuggestParser.suggest(command, commands);
+            System.out.println("no commands found. Enter \"help\" for a list of commands.");
+            if (suggestion != null){
+                System.out.println("Did you mean: '" + suggestion + "'");
+            }
+            System.out.println(LINEDIVIDER);
         }
 
     }
