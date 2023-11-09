@@ -30,6 +30,8 @@ public class ListCommand extends Command {
     public static final String GENERIC_MESSAGE =  formatFirstLine("Listing all resources in the Library:");
     public static final String ZERO_RESOURCES_MESSAGE =  formatLastLineDivider("There are currently 0 resources.");
 
+    public static final String STATUS_ERROR_MESSAGE =  formatLastLineDivider("Invalid Status! Status must be: " +
+            "AVAILABLE, BORROWED, OR LOST");
     public static List<Resource> matchedResources;
     private static final Logger LIST_LOGGER = Logger.getLogger(ListCommand.class.getName());
 
@@ -37,8 +39,6 @@ public class ListCommand extends Command {
     private static String genreKeyword;
     private static String statusKeyword;
     private static String feedbackToUser;
-
-
 
     static {
 
@@ -161,7 +161,7 @@ public class ListCommand extends Command {
         case "LOST":
             break;
         default:
-            throw new SysLibException("Please enter a valid status: AVAILABLE / BORROWED / LOST");
+            throw new SysLibException(STATUS_ERROR_MESSAGE);
 
         }
     }
