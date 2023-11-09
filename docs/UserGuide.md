@@ -5,6 +5,7 @@
 * [Introduction](#introduction--return-to-contents)
 * [Quick start](#quick-start--return-to-contents)
 * [Features](#features--return-to-contents)
+    * [Save your work](#save-your-work--return-to-contents)
     * [Add a listing: `add`](#add-a-listing-add--return-to-contents)
     * [Delete a listing: `delete`](#delete-a-listing-delete--return-to-contents)
     * [List items: `list`](#list-all-items-list--return-to-contents)
@@ -67,8 +68,24 @@ ____________________________________________________________
 > - Items in square brackets `[]` are optional arguments.
 > - Items with `...` after them can be used multiple times
     >    * e.g `[/g GENRE]` ... can be used as `/g Horror /g Fantasy`
-> - All resources and events in current list will be saved into an offline file "storage.txt" on exit.
-> - Resources and events from "storage.txt" will be loaded into the program at every start.
+
+## Save your work | [Return to contents](#contents)
+> - All resources and events in the current list will automatically be saved into an offline file `storage.txt` on exit.
+> - Resources and events from `storage.txt` will be loaded into the program at every start.
+> - The `storage.txt` file will be located in the same directory as the jar file.
+> - On start:
+> ```
+> ____________________________________________________________
+> Storage file found @ .\storage.txt
+> Loaded 2 resources and 1 events!
+> ____________________________________________________________
+> >```
+> - On exit: 
+> ```
+> > exit
+> Thanks for using SysLib CLI! We have saved the current resources and events created.
+> Hope to see you again soon!
+> ```
 
 ## Add a listing: `add` | [Return to contents](#contents)
 
@@ -469,6 +486,17 @@ Upcoming Events (Next 3):
 2. Maintenance | 21 Dec 2023 | null
 3. New Year | 01 Jan 2024 | null
 ____________________________________________________________
+```
+## Exiting the Program : `exit` | [Return to contents](#contents)
+Exits the program, all data in resource list and event list will be saved to a storage file.
+
+Format: `Exit`
+
+Example:
+```
+> exit
+Thanks for using SysLib CLI! We have saved the current resources and events created.
+Hope to see you again soon!
 ```
 
 ## Viewing help : `help` | [Return to contents](#contents)

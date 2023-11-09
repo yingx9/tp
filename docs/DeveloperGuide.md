@@ -32,10 +32,13 @@ SysLib currently consists of five main components:
    
 ### UI Component
 
+The UI Component consists of methods to print messages to the user as output. 
+
 ### Parser Component
 
 The parsing for a generic command can be seen here:
-<img src="images/Parsing.png" />
+<img src="images/Parsi
+ng.png" />
 
 For some commands that does not require arguments (etc: help, exit), parseArgument
 and validateStatement will not be called
@@ -46,7 +49,15 @@ For more details on each Command check them out below
 
 ### Data Component
 
+The `Data` Component is implemented using the `GenericList` which acts as a container for 2 List's of types `Resource` and `Event`.
+When starting the program, the GenericList will be loaded with data from the storage file. On exit, the data from the GenericList will be saved back into the storage file.
+
 ### Storage Component
+
+The storage component saves all resources and events in GenericList on exit. On start, it also loads currently saved resources and events in storage.txt
+
+<img src="images/StorageDiagram.png" />
+
 
 ## Implementation 
 This section provides details on how certain features are implemented. 

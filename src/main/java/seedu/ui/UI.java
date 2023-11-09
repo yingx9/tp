@@ -58,7 +58,8 @@ public class UI {
     }
 
     public void showExitMessage(){
-        System.out.println("Bye, hope to see you again soon!");
+        System.out.println("Thanks for using SysLib CLI! We have saved the current resources and events created.");
+        System.out.println("Hope to see you again soon!");
         showLine();
     }
 
@@ -87,6 +88,12 @@ public class UI {
     public String readCommand(){
         System.out.print("> ");
         return myScanner.nextLine();
+    }
+
+    public void showNoFileFoundMessage(String filePath){
+        showLine();
+        System.out.println("Storage file not found.");
+        System.out.println("Creating new data file @ " + filePath);
     }
 
     public void showLoadMessage(String filepath, List<Resource> resourcelist, List<Event> eventlist){
