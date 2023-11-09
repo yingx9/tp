@@ -99,6 +99,13 @@ public class Resource {
         return "[" + tag + "] " + title;
     }
 
+    /**
+     * Constructs and returns a string of resource details formatted with given format specifiers.
+     *
+     * @param formatString String containing format specifiers and messages to display.
+     * @param tableFormatter Formatter storing formatted string for display.
+     */
+
     public Formatter toTableFormat(String formatString, Formatter tableFormatter) {
         tableFormatter.format(formatString, "null",
                 id, title, isbn, "null",
@@ -132,6 +139,12 @@ public class Resource {
         return status;
     }
 
+    /**
+     * Checks if attributes length are longer than the current width of columns for a table displaying its details.
+     * Updates columnsWidth if it is longer to ensure alignment is correct.
+     *
+     * @param columnsWidth List containing column width of each resource attribute.
+     */
     public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
         int titleLength = getTitle().length();
         if (titleLength > columnsWidth.get(2)){

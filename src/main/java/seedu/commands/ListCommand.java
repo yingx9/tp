@@ -42,22 +42,22 @@ public class ListCommand extends Command {
 
     static {
 
-        FileHandler editFileHandler = null;
+        FileHandler listFileHandler = null;
         try {
             String loggingDirectoryPath = System.getProperty("user.dir") + "/logs";
-            String logFilePath = loggingDirectoryPath + "/editCommandLogs.log";
+            String logFilePath = loggingDirectoryPath + "/listCommandLogs.log";
             File directory = new File(loggingDirectoryPath);
             if (!directory.exists()) {
                 directory.mkdir();
             }
-            editFileHandler = new FileHandler(logFilePath, true);
+            listFileHandler = new FileHandler(logFilePath, true);
 
         } catch (IOException e) {
             LIST_LOGGER.log(Level.SEVERE, "Failed to initialize list logging handler.");
             throw new RuntimeException(e);
         }
-        editFileHandler.setFormatter(new SimpleFormatter());
-        LIST_LOGGER.addHandler(editFileHandler);
+        listFileHandler.setFormatter(new SimpleFormatter());
+        LIST_LOGGER.addHandler(listFileHandler);
     }
 
     public ListCommand(){

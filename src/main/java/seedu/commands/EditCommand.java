@@ -55,7 +55,6 @@ public class EditCommand extends Command{
     private static int resourceIndex;
 
     static {
-
         FileHandler editFileHandler;
         try {
             String loggingDirectoryPath = System.getProperty("user.dir") + "/logs";
@@ -79,6 +78,9 @@ public class EditCommand extends Command{
         required = new boolean[]{true, false, false, false, false, false, false, false,false,false,false,false, false};
     }
 
+    /**
+     * Validates parameters, finds and edits chosen resource, and returns a message to feedback to user.
+     */
     @Override
     public CommandResult execute(String statement, GenericList<Resource, Event> container)
             throws SysLibException, IllegalArgumentException {
@@ -110,6 +112,12 @@ public class EditCommand extends Command{
         return new CommandResult(feedbackToUser);
     }
 
+    /**
+     * Counts the number of edit arguments given by user.
+     * Checks if user has given at least one edit argument.
+     *
+     * @throws SysLibException If argsCount <= 1.
+     */
     private int countGivenArgs(String[] givenParameters) throws SysLibException {
 
         int argsCount = 0;
@@ -150,7 +158,7 @@ public class EditCommand extends Command{
     private Resource editResource(Resource foundResource, String[] givenParameters, int givenArgsCount)
             throws SysLibException {
 
-        //All resource type needs to check Title, Status, and ISBN.
+        //Check Title, Status, and ISBN first as all resources share these attributes regardless of type
         if(givenParameters[1] != null){
             foundResource.setTitle(givenParameters[1]);
         }
@@ -164,7 +172,6 @@ public class EditCommand extends Command{
             foundResource.setISBN(givenParameters[12]);
         }
 
-        //Call respective edit functions based on resource type
 
         String resourceTag = foundResource.getTag();
 
@@ -243,6 +250,15 @@ public class EditCommand extends Command{
 
     }
 
+    /**
+     * Checks if given parameters are valid for the chosen resource type.
+     *
+     * @param givenArgsCount Number of edit arguments the user gave.
+     * @param givenParameters Array that holds the values to edit to.
+     * @param indexToCheck Array that holds the indexes to check against in givenParameters array.
+     * @param argsMessage Message notifying users the valid arguments for their chosen resource type.
+     * @throws SysLibException If number of valid args found not equals to number of givenArgs.
+     */
     private void checkGivenParameters(int givenArgsCount,  String[] givenParameters,int[] indexToCheck,
                                       String argsMessage) throws SysLibException {
         int argsCount = 0;
