@@ -380,3 +380,211 @@ Nov 07, 2023 2:03:39 PM seedu.commands.ListCommand execute
 INFO: List Command execute with 
 Nov 07, 2023 2:03:39 PM seedu.commands.ListCommand execute
 INFO: List Command ends
+Nov 09, 2023 3:45:56 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 3:45:56 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 3:47:32 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 3:47:32 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:21:06 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 4:21:06 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:21:20 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 4:21:20 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:21:56 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 4:21:56 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:37:01 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 4:37:01 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s AVAILABLE
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s BORROWED
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s LOST
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Horror
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Adventure
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Fiction
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag B
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s INVALIDSTATUS
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 4:37:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 5:03:07 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 5:03:07 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 5:24:35 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 5:24:35 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s AVAILABLE
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s BORROWED
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s LOST
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Horror
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Adventure
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Fiction
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag B
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s INVALIDSTATUS
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 6:11:03 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s AVAILABLE
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s BORROWED
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s LOST
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Horror
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Adventure
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Fiction
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag B
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s INVALIDSTATUS
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 6:11:57 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s AVAILABLE
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s BORROWED
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s LOST
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Horror
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Adventure
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Fiction
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag B
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s INVALIDSTATUS
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 09, 2023 6:12:41 PM seedu.commands.ListCommand execute
+INFO: List Command ends
