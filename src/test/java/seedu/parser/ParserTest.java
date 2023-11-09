@@ -25,7 +25,7 @@ class ParserTest {
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        parser.process(validResponse);
+        parser.processUserResponse(validResponse);
 
         System.setOut(System.out);
         String output = outputStream.toString();
@@ -44,7 +44,7 @@ class ParserTest {
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        parser.process(validResponse);
+        parser.processUserResponse(validResponse);
 
         System.setOut(System.out);
         String output = outputStream.toString();
@@ -79,7 +79,7 @@ class ParserTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        parser.process(validResponse);
+        parser.processUserResponse(validResponse);
 
         System.setOut(System.out);
         String output = outputStream.toString();
@@ -106,7 +106,7 @@ class ParserTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        parser.process(validResponse);
+        parser.processUserResponse(validResponse);
 
         System.setOut(System.out);
         String output = outputStream.toString();
@@ -118,7 +118,7 @@ class ParserTest {
         //Add second book
         validResponse = "add /i 9780062457714 /t The Subtle Art of Not Giving a F*ck " +
                 "/a Mark Manson /tag B /g Self-help";
-        parser.process(validResponse);
+        parser.processUserResponse(validResponse);
         expectedOutput += "This book is added:" + System.lineSeparator()
                 + "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 " +
                 "Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: "
@@ -128,7 +128,7 @@ class ParserTest {
         assertEquals(expectedOutput, output);
         //Test find
         validResponse = "find /t The Subtle Art of Not Giving a F*ck";
-        parser.process(validResponse);
+        parser.processUserResponse(validResponse);
         output = outputStream.toString();
         expectedOutput = "This book is added:" + LINESEPARATOR +
                 "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre:"+
@@ -154,14 +154,14 @@ class ParserTest {
         assertEquals(expectedOutput, output);
         //Negative find test
         validResponse = "find /t No Such Book";
-        parser.process(validResponse);
+        parser.processUserResponse(validResponse);
         expectedOutput += "There are no resources found matching the given filters." + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
         output = outputStream.toString();
         assertEquals(expectedOutput, output);
         //Test edit
         validResponse = "edit /id 1 /a Thomas";
-        parser.process(validResponse);
+        parser.processUserResponse(validResponse);
         output = outputStream.toString();
         expectedOutput += "Successfully updated! Your updated resource:" + System.lineSeparator()
                 + System.lineSeparator() + "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
@@ -171,7 +171,7 @@ class ParserTest {
         assertEquals(expectedOutput, output);
 
         validResponse = "edit /id 1 /s lost";
-        parser.process(validResponse);
+        parser.processUserResponse(validResponse);
         output = outputStream.toString();
         expectedOutput += "Successfully updated! Your updated resource:" + System.lineSeparator()
                 + System.lineSeparator() + "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 " +
@@ -181,7 +181,7 @@ class ParserTest {
         assertEquals(expectedOutput, output);
         //Test delete
         validResponse = "delete /id 1";
-        parser.process(validResponse);
+        parser.processUserResponse(validResponse);
         output = outputStream.toString();
         expectedOutput += "Looking for ID: 1..." + System.lineSeparator() +
                 "This resource is removed:" + System.lineSeparator() +

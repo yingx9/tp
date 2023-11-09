@@ -55,7 +55,7 @@ public class Syslib {
         ui.showWelcomeMessage();
         while (true) {
             String response = ui.readCommand();
-            parser.process(response);
+            parser.processUserResponse(response);
             try {
                 storage.save();
             } catch (SysLibException SysLibEx){

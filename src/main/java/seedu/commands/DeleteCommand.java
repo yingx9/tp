@@ -2,7 +2,6 @@ package seedu.commands;
 
 import seedu.data.GenericList;
 import seedu.data.events.Event;
-import seedu.data.resources.Book;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 import java.util.ArrayList;
@@ -17,16 +16,16 @@ public class DeleteCommand extends Command {
     }
     @Override
     public CommandResult execute(String statement, GenericList<Resource, Event> container) throws SysLibException {
-        int id = parseInt(parseArgument(statement)[0]);
+        String[] values = parseArgument(statement);
+        int id = parseInt(values[0]);
         assert id > 0;
         feedbackToUser = "";
         ArrayList<Resource> removals = new ArrayList<>();
         System.out.println("Looking for ID: " + id + "...");
         for (Resource r: container.getResourceList()){
-            Book b = (Book) r;
-            if (b.getId() == id){
+            if (r.getId() == id){
                 System.out.println("This resource is removed:");
-                System.out.println(b + SEPARATOR_LINEDIVIDER);
+                System.out.println(r + SEPARATOR_LINEDIVIDER);
                 removals.add(r);
             }
         }
