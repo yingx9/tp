@@ -36,7 +36,7 @@ public class Parser {
     public List<Event> eventList = new ArrayList<>();
     public GenericList<Resource, Event> container = new GenericList<>(resourceList, eventList);
 
-    //@@author DavinciDelta
+    // @@author DavinciDelta
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
         {
             put("list", new ListCommand());
@@ -54,7 +54,7 @@ public class Parser {
         }
     };
 
-    //@@author DavinciDelta
+    // @@author DavinciDelta
     public void processUserResponse(String response) {
         String command = response.split(" ")[0].toLowerCase();
         if (commandProcessor.containsKey(command)) {
@@ -71,7 +71,7 @@ public class Parser {
 
     }
 
-    //@@author DavinciDelta
+    // @@author DavinciDelta
     public static String removeFirstWord(String response) {
         int index = response.indexOf(" ");
         if (index == -1) {
@@ -80,7 +80,7 @@ public class Parser {
         return response.substring(index + 1);
     }
 
-    //@@author JoanneJo
+    // @@author JoanneJo
     public static String parseAddCommand(String statement) throws SysLibException {
         String inputPattern = "/tag ([^/]+)";
 
@@ -157,7 +157,7 @@ public class Parser {
         }
     }*/
 
-    //@@author bnjm2000
+    // @@author bnjm2000
     /**
      * @param statusString input string status
      * @return Status object
