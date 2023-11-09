@@ -89,6 +89,12 @@ public class UI {
         return myScanner.nextLine();
     }
 
+    public void showNoFileFoundMessage(String filePath){
+        showLine();
+        System.out.println("Storage file not found.");
+        System.out.println("Creating new data file @ " + filePath);
+    }
+
     public void showLoadMessage(String filepath, List<Resource> resourcelist, List<Event> eventlist){
         showLine();
         System.out.println("Storage file found @ " + filepath);

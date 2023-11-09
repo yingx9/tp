@@ -27,14 +27,16 @@ public class Syslib {
         try{
             List<Resource> resourceListLoad = new ArrayList<>();
             List<Event> eventListLoad = new ArrayList<>();
-            storage.load(resourceListLoad, eventListLoad);
-
-
-            if (!resourceListLoad.isEmpty() || !eventListLoad.isEmpty()){
-                ui.showLoadMessage(filePath, resourceListLoad, eventListLoad);
+            if (storage.load(resourceListLoad, eventListLoad)){
+                if (!resourceListLoad.isEmpty() || !eventListLoad.isEmpty()){
+                    ui.showLoadMessage(filePath, resourceListLoad, eventListLoad);
+                } else {
+                    ui.showLoadMessageEmpty(filePath);
+                }
             } else {
-                ui.showLoadMessageEmpty(filePath);
+                ui.showNoFileFoundMessage(filePath);
             }
+
             parser.container.setResourceList(resourceListLoad);
             parser.container.setEventList(eventListLoad);
 

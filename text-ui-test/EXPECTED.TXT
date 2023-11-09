@@ -1,8 +1,6 @@
-Data file not found @ .\storage.txt
-Creating new data file @ .\storage.txt
 ____________________________________________________________
-Storage file found @ .\storage.txt
-No Resources or Events found in storage.
+Storage file not found.
+Creating new data file @ .\storage.txt
 ____________________________________________________________
              .....................                  
           -##@*+*@*++++++++++#@++##                 

@@ -21,6 +21,7 @@ import seedu.data.resources.Resource;
 import seedu.data.Status;
 import seedu.exception.SysLibException;
 import seedu.data.events.Event;
+import seedu.ui.UI;
 
 public class Storage {
     public static final int FIRST_INDEX = 0;
@@ -34,11 +35,11 @@ public class Storage {
     public static final int NINTH_INDEX = 8;
     public static final int TENTH_INDEX = 9;
     public static final int ELEVENTH_INDEX = 10;
-    public static final int TWELFTH_INDEX = 11;
 
     protected File dataFile;
     protected String filePath;
     protected GenericList<Resource, Event> container;
+    protected UI ui = new UI();
 
     public Storage(String filePath, GenericList<Resource, Event> container) {
         this.filePath = filePath;
@@ -46,12 +47,12 @@ public class Storage {
         this.container = container;
     }
 
-    public void load(List<Resource> resources, List<Event> events) throws SysLibException {
+    public boolean load(List<Resource> resources, List<Event> events) throws SysLibException {
         try {
             int id = 0;
             if (this.dataFile.createNewFile()) {
-                System.out.println("Data file not found @ " + this.filePath +
-                        "\nCreating new data file @ " + this.filePath);
+                return false;
+
             } else {
                 Scanner dataScanner = new Scanner(dataFile);
                 while (dataScanner.hasNext()) {
@@ -166,6 +167,8 @@ public class Storage {
         } catch (IllegalArgumentException | DateTimeParseException | ArrayIndexOutOfBoundsException IAEx){
             throw new SysLibException("Corrupted data found, unable to load.");
         }
+
+        return true;
     }
 
     public void save() throws SysLibException {
@@ -231,7 +234,7 @@ public class Storage {
                     break;
                 case "EM": // eMagazine
                     EMagazine emagazine = (EMagazine) resourceToSave;
-                    resourceSaveFormat = String.format("R | %s | %b | %s | %d | %s | %s | %s | %s%n",
+                    resourceSaveFormat = String.format("R | %s | %b | %s | %d | %s | %s | %s | %s | %s | %s%n",
                             emagazine.getTitle(),
                             emagazine.isBorrowed(),
                             emagazine.getISBN(),
@@ -239,6 +242,8 @@ public class Storage {
                             emagazine.getTag(),
                             emagazine.getStatus(),
                             emagazine.getDateReceivedUnparsed(),
+                            emagazine.getBrand(),
+                            emagazine.getIssue(),
                             emagazine.getLink());
                     break;
                 case "N": // Newspaper
@@ -256,7 +261,7 @@ public class Storage {
                     break;
                 case "EN": // eNewspaper
                     ENewspaper enewspaper = (ENewspaper) resourceToSave;
-                    resourceSaveFormat = String.format("R | %s | %b | %s | %d | %s | %s | %s | %s%n",
+                    resourceSaveFormat = String.format("R | %s | %b | %s | %d | %s | %s | %s | %s | %s | %s%n",
                             enewspaper.getTitle(),
                             enewspaper.isBorrowed(),
                             enewspaper.getISBN(),
@@ -264,6 +269,8 @@ public class Storage {
                             enewspaper.getTag(),
                             enewspaper.getStatus(),
                             enewspaper.getDateReceivedUnparsed(),
+                            enewspaper.getPublisher(),
+                            enewspaper.getEdition(),
                             enewspaper.getLink());
                     break;
                 default:
