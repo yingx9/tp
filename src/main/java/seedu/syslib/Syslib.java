@@ -1,6 +1,6 @@
 package seedu.syslib;
 
-import seedu.data.Event;
+import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
@@ -12,28 +12,34 @@ import java.util.List;
 
 public class Syslib {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the java.syslib.Syslib application.
      */
     public static final String FILEPATH = ".\\storage.txt";
     private static UI ui;
     private static Parser parser;
     private static Storage storage;
 
+
     public Syslib(String filePath) {
         ui = new UI();
         parser = new Parser();
-        storage = new Storage(filePath, parser);
+        storage = new Storage(filePath, parser.container);
         try{
             List<Resource> resourceListLoad = new ArrayList<>();
             List<Event> eventListLoad = new ArrayList<>();
-            storage.load(resourceListLoad, eventListLoad);
-            parser.setResourceList(resourceListLoad);
-            parser.setEventList(eventListLoad);
-
-            if (!resourceListLoad.isEmpty()){
-                ui.showLoadMessage(filePath, resourceListLoad);
+            if (storage.load(resourceListLoad, eventListLoad)){
+                if (!resourceListLoad.isEmpty() || !eventListLoad.isEmpty()){
+                    ui.showLoadMessage(filePath, resourceListLoad, eventListLoad);
+                } else {
+                    ui.showLoadMessageEmpty(filePath);
+                }
+            } else {
+                ui.showNoFileFoundMessage(filePath);
             }
-            parser.setResourceList(resourceListLoad);
+
+            parser.container.setResourceList(resourceListLoad);
+            parser.container.setEventList(eventListLoad);
+
 
         } catch (SysLibException SysLibEx){
             System.out.println(SysLibEx);
@@ -49,7 +55,7 @@ public class Syslib {
         ui.showWelcomeMessage();
         while (true) {
             String response = ui.readCommand();
-            parser.process(response);
+            parser.processUserResponse(response);
             try {
                 storage.save();
             } catch (SysLibException SysLibEx){

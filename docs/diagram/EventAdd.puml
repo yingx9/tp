@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+actor User
+participant "Parser" as Parser PARSER_COLOR
+participant "EventAddCommand" as Command COMMAND_COLOR
+participant "EventList" as EventList DATA_COLOR
+
+User -> Parser : inputs statement
+activate Parser
+Parser -> Command : execute(statement, parser)
+activate Command
+
+Command -> Command : parseArgument(statement)
+activate Command
+Command --> Command : return
+deactivate Command
+
+Command -> Command : validateStatement(statement, values)
+activate Command
+Command --> Command : return
+deactivate Command
+
+Command -> Command : parseDate(values[1])
+activate Command
+Command --> Command : currentDate
+deactivate Command
+
+Command -> Command : binarySearch(parser, currentDate)
+activate Command
+Command --> Command : index
+deactivate Command
+
+Command -> EventList : add(index, new Event(...))
+activate EventList
+EventList --> Command : return
+deactivate EventList
+Command --> Parser : new CommandResult(feedbackToUser)
+deactivate Command
+
+Parser --> User : result
+deactivate Parser
+
+@enduml

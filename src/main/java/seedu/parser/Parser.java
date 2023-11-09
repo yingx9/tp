@@ -2,11 +2,13 @@ package seedu.parser;
 
 import seedu.commands.events.EventAddCommand;
 import seedu.commands.events.EventDeleteCommand;
+import seedu.commands.events.EventEditCommand;
 import seedu.commands.events.EventListCommand;
-import seedu.data.resources.Resource;
+import seedu.data.GenericList;
 import seedu.data.Status;
+import seedu.data.events.Event;
+import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
-import seedu.data.Event;
 
 import seedu.commands.Command;
 import seedu.commands.CommandResult;
@@ -17,6 +19,9 @@ import seedu.commands.ListCommand;
 import seedu.commands.HelpCommand;
 import seedu.commands.ExitCommand;
 import seedu.commands.EditCommand;
+import seedu.commands.SummaryCommand;
+
+import static seedu.ui.UI.LINEDIVIDER;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 import java.util.ArrayList;
@@ -29,7 +34,9 @@ public class Parser {
 
     public List<Resource> resourceList = new ArrayList<>();
     public List<Event> eventList = new ArrayList<>();
+    public GenericList<Resource, Event> container = new GenericList<>(resourceList, eventList);
 
+    // @@author DavinciDelta
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
         {
             put("list", new ListCommand());
@@ -41,16 +48,19 @@ public class Parser {
             put("edit", new EditCommand());
             put("eventadd", new EventAddCommand());
             put("eventdelete", new EventDeleteCommand());
+            put("eventedit", new EventEditCommand());
             put("eventlist", new EventListCommand());
+            put("summary", new SummaryCommand());
         }
     };
 
-    public void process(String response) {
+    // @@author DavinciDelta
+    public void processUserResponse(String response) {
         String command = response.split(" ")[0].toLowerCase();
         if (commandProcessor.containsKey(command)) {
             String statement = removeFirstWord(response);
             try {
-                CommandResult commandResult = commandProcessor.get(command).execute(statement, this);
+                CommandResult commandResult = commandProcessor.get(command).execute(statement, container);
                 System.out.print(commandResult.feedbackToUser);
             } catch (IllegalArgumentException | IllegalStateException | SysLibException e) {
                 System.out.println(e.getMessage());
@@ -60,7 +70,8 @@ public class Parser {
         }
 
     }
-    
+
+    // @@author DavinciDelta
     public static String removeFirstWord(String response) {
         int index = response.indexOf(" ");
         if (index == -1) {
@@ -69,50 +80,23 @@ public class Parser {
         return response.substring(index + 1);
     }
 
-    public List<Resource> getResourceList() {
-        return resourceList;
-    }
-
-    public void setResourceList(List<Resource> resourcelist) {
-        this.resourceList = resourcelist;
-    }
-
-    public void setEventList(List<Event> eventList) {
-        this.eventList = eventList;
-    }
-
-    public List<Event> getEventList() {
-        return eventList;
-    }
-
-    public static String[] parseAddCommand(String statement) throws SysLibException {
-        String inputPattern = "(.+?) /tag (.)(.+)";
+    // @@author JoanneJo
+    public static String parseAddCommand(String statement) throws SysLibException {
+        String inputPattern = "/tag ([^/]+)";
 
         Pattern pattern = Pattern.compile(inputPattern);
         Matcher matcher = pattern.matcher(statement);
-        boolean matchFound = matcher.find();
+        boolean isMatching = matcher.find();
 
-        if (matchFound) {
-            if (matcher.group(2).equalsIgnoreCase("b")) {
-                return parseAddBook(statement);
-            } else {
-                throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'."
-                        + SEPARATOR_LINEDIVIDER);
-            }
+        if (isMatching) {
+            return matcher.group(1).trim();
         } else {
-            throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'." + SEPARATOR_LINEDIVIDER);
+            throw new SysLibException("Please enter a valid tag" + System.lineSeparator() + LINEDIVIDER);
         }
     }
 
-    /**
-     * @param statement input of the user
-     * @return string array with arguments of the user
-     * @throws SysLibException missing arguments
-     * @throws IllegalStateException
-     */
-    public static String[] parseAddBook(String statement) throws SysLibException, IllegalStateException {
+
+    /*public static String[] parseAddBook(String statement) throws SysLibException, IllegalStateException {
         try {
             String inputPattern = "/id (.+?) /t (.+?) /a (.+?) /tag (.+?) /i (.+)";
             String genrePattern = "(.+) /g (.+)";
@@ -171,14 +155,9 @@ public class Parser {
             throw new SysLibException("Please use the format " +
                     "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'." + SEPARATOR_LINEDIVIDER);
         }
-    }
+    }*/
 
-    public Matcher parseFindCommand(String command) throws SysLibException{
-        // Define a regular expression pattern to match optional flags and their values
-        Pattern pattern = Pattern.compile("/(t|a|i|id)\\s+([^/]+)");
-        return pattern.matcher(command);
-    }
-
+    // @@author bnjm2000
     /**
      * @param statusString input string status
      * @return Status object

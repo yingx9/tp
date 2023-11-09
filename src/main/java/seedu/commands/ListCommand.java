@@ -1,12 +1,13 @@
 package seedu.commands;
 
 
+import seedu.data.GenericList;
 import seedu.data.Status;
+import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 
 
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 
 
 import java.io.File;
@@ -18,8 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import static seedu.common.FormatMessages.formatLastLineDivider;
-import static seedu.common.FormatMessages.formatFirstLine;
+import static seedu.ui.MessageFormatter.formatLastLineDivider;
+import static seedu.ui.MessageFormatter.formatFirstLine;
 import static seedu.ui.UI.showResourcesDetails;
 
 
@@ -29,6 +30,8 @@ public class ListCommand extends Command {
     public static final String GENERIC_MESSAGE =  formatFirstLine("Listing all resources in the Library:");
     public static final String ZERO_RESOURCES_MESSAGE =  formatLastLineDivider("There are currently 0 resources.");
 
+    public static final String STATUS_ERROR_MESSAGE =  formatLastLineDivider("Invalid Status! Status must be: " +
+            "AVAILABLE, BORROWED, OR LOST");
     public static List<Resource> matchedResources;
     private static final Logger LIST_LOGGER = Logger.getLogger(ListCommand.class.getName());
 
@@ -37,26 +40,24 @@ public class ListCommand extends Command {
     private static String statusKeyword;
     private static String feedbackToUser;
 
-
-
     static {
 
-        FileHandler editFileHandler = null;
+        FileHandler listFileHandler = null;
         try {
             String loggingDirectoryPath = System.getProperty("user.dir") + "/logs";
-            String logFilePath = loggingDirectoryPath + "/editCommandLogs.log";
+            String logFilePath = loggingDirectoryPath + "/listCommandLogs.log";
             File directory = new File(loggingDirectoryPath);
             if (!directory.exists()) {
                 directory.mkdir();
             }
-            editFileHandler = new FileHandler(logFilePath, true);
+            listFileHandler = new FileHandler(logFilePath, true);
 
         } catch (IOException e) {
             LIST_LOGGER.log(Level.SEVERE, "Failed to initialize list logging handler.");
             throw new RuntimeException(e);
         }
-        editFileHandler.setFormatter(new SimpleFormatter());
-        LIST_LOGGER.addHandler(editFileHandler);
+        listFileHandler.setFormatter(new SimpleFormatter());
+        LIST_LOGGER.addHandler(listFileHandler);
     }
 
     public ListCommand(){
@@ -66,13 +67,14 @@ public class ListCommand extends Command {
 
 
     @Override
-    public CommandResult execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
+    public CommandResult execute(String statement, GenericList<Resource, Event> container)
+            throws SysLibException, IllegalArgumentException {
         feedbackToUser = "";
         LIST_LOGGER.info("List Command execute with " + statement);
 
         String[] values = parseArgument(statement);
         validateStatement(statement, values);
-        filterResources(values, parser.resourceList);
+        filterResources(values, container.getResourceList());
         LIST_LOGGER.info("List Command ends");
         return new CommandResult(feedbackToUser);
 
@@ -82,13 +84,16 @@ public class ListCommand extends Command {
     public void filterResources(String[] values, List<Resource> resourceList) throws SysLibException{
 
         boolean hasFilters = hasFilters((values));
+        boolean isTagEqualToKeyword = true;
+        boolean isGenreEqualToKeyword = true;
+        boolean isStatusEqualToKeyword = true;
 
         matchedResources = new ArrayList<>();
 
-        if(hasFilters){
-            boolean isTagEqualToKeyword = true;
-            boolean isGenreEqualToKeyword = true;
-            boolean isStatusEqualToKeyword = true;
+        if(!hasFilters){
+            feedbackToUser += GENERIC_MESSAGE;
+            feedbackToUser += showResourcesDetails(resourceList);
+        } else{
 
             for (Resource resource : resourceList) {
 
@@ -115,11 +120,6 @@ public class ListCommand extends Command {
             }
             feedbackToUser += FILTER_MESSAGE;
             feedbackToUser += showResourcesDetails(matchedResources);
-
-        } else {
-            feedbackToUser += GENERIC_MESSAGE;
-
-            feedbackToUser += showResourcesDetails(resourceList);
         }
 
 
@@ -161,7 +161,7 @@ public class ListCommand extends Command {
         case "LOST":
             break;
         default:
-            throw new SysLibException("Please enter a valid status: AVAILABLE / BORROWED / LOST");
+            throw new SysLibException(STATUS_ERROR_MESSAGE);
 
         }
     }

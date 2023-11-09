@@ -19,4 +19,5 @@ logs/exitCommandLogs.log
 logs/findCommandLogs.log
 logs/helpCommandLogs.log
 logs/listCommandLogs.log
+logs/*
 *.log
