@@ -12,6 +12,13 @@ import seedu.data.resources.Newspaper;
 import seedu.data.resources.ENewspaper;
 import seedu.exception.SysLibException;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
 import static seedu.data.CreateResource.createBook;
 import static seedu.data.CreateResource.createEBook;
 import static seedu.data.CreateResource.createCD;
@@ -45,29 +52,48 @@ import static seedu.ui.UI.LINEDIVIDER;
 
 
 public class AddCommand extends Command{
-    public static final String ID_OPTION = "id";
-    public static final String TITLE_OPTION = "t";
-    public static final String AUTHOR_OPTION = "a";
-    public static final String TAG_OPTION = "tag";
-    public static final String ISBN_OPTION = "i";
-    public static final String GENRE_OPTION = "g";
-    public static final String STATUS_OPTION = "s";
-    public static final String LINK_OPTION = "l";
-    public static final String CREATOR_OPTION = "c";
-    public static final String BRAND_OPTION = "b";
-    public static final String PUBLISHER_OPTION = "p";
-    public static final String TYPE_OPTION = "ty";
-    public static final String ISSUE_OPTION = "is";
-    public static final String EDITION_OPTION = "ed";
+    private static final String TITLE_OPTION = "t";
+    private static final String AUTHOR_OPTION = "a";
+    private static final String TAG_OPTION = "tag";
+    private static final String ISBN_OPTION = "i";
+    private static final String GENRE_OPTION = "g";
+    private static final String STATUS_OPTION = "s";
+    private static final String LINK_OPTION = "l";
+    private static final String CREATOR_OPTION = "c";
+    private static final String BRAND_OPTION = "b";
+    private static final String PUBLISHER_OPTION = "p";
+    private static final String TYPE_OPTION = "ty";
+    private static final String ISSUE_OPTION = "is";
+    private static final String EDITION_OPTION = "ed";
+    private static final Logger ADDLOGGER = Logger.getLogger(AddCommand.class.getName());
     private static String feedbackToUser;
     private int resourceID;
 
+    static {
+        try {
+            String logDir = System.getProperty("user.dir") + "/logs";
+            String logFile = logDir + "/addCommandLogs.log";
+            File directory = new File(logDir);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            FileHandler fileHandler = new FileHandler(logFile, true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            ADDLOGGER.addHandler(fileHandler);
+            ADDLOGGER.setLevel(Level.INFO);
+        } catch (IOException e) {
+            ADDLOGGER.log(Level.SEVERE, "Error occured while initializing log.");
+            throw new RuntimeException(e);
+        }
+    }
+
     public AddCommand(){
-        args = new String[] {ID_OPTION, TITLE_OPTION, AUTHOR_OPTION, TAG_OPTION, ISBN_OPTION, GENRE_OPTION,
-            STATUS_OPTION, LINK_OPTION, CREATOR_OPTION, BRAND_OPTION, PUBLISHER_OPTION, TYPE_OPTION,
-            ISSUE_OPTION, EDITION_OPTION};
-        required = new boolean[]{true, true, false, true, true, false, false, false, false, false, false, false, false
-                , false};
+        args = new String[] {TAG_OPTION, ISBN_OPTION, TITLE_OPTION, AUTHOR_OPTION, GENRE_OPTION,
+            CREATOR_OPTION, BRAND_OPTION, PUBLISHER_OPTION, TYPE_OPTION, ISSUE_OPTION, EDITION_OPTION, LINK_OPTION,
+            STATUS_OPTION};
+        required = new boolean[]{true, true, true, false, false, false, false, false, false, false, false, false,
+            false};
     }
 
     private void addBook(String statement, GenericList<Resource, Event> container) throws SysLibException {
@@ -76,14 +102,16 @@ public class AddCommand extends Command{
         container.getResourceList().add(newBook);
         System.out.println("This book is added:"  + System.lineSeparator() + newBook.toString());
         resetBookArgs();
+        ADDLOGGER.log(Level.INFO, "Added Book: " + newBook.toString());
     }
 
     private void addEBook(String statement, GenericList<Resource, Event> container) throws SysLibException {
         String[] values = parseAddEBook(statement);
         EBook newEBook = createEBook(values, resourceID);
         container.getResourceList().add(newEBook);
-        System.out.println("This eBook is added:" + System.lineSeparator() + newEBook.toString());
+        System.out.println("This e-book is added:" + System.lineSeparator() + newEBook.toString());
         resetEBookArgs();
+        ADDLOGGER.log(Level.INFO, "Added E-Book: " + newEBook.toString());
     }
 
     private void addCD(String statement, GenericList<Resource, Event> container) throws SysLibException {
@@ -92,6 +120,7 @@ public class AddCommand extends Command{
         container.getResourceList().add(newCD);
         System.out.println("This CD is added:" + System.lineSeparator() + newCD.toString());
         resetCDArgs();
+        ADDLOGGER.log(Level.INFO, "Added CD: " + newCD.toString());
     }
 
     private void addMagazine(String statement, GenericList<Resource, Event> container) throws SysLibException {
@@ -100,14 +129,16 @@ public class AddCommand extends Command{
         container.getResourceList().add(newMagazine);
         System.out.println("This magazine is added:" + System.lineSeparator() + newMagazine.toString());
         resetMagazineArgs();
+        ADDLOGGER.log(Level.INFO, "Added Magazine: " + newMagazine.toString());
     }
 
     private void addEMagazine(String statement, GenericList<Resource, Event> container) throws SysLibException {
         String[] values = parseAddEMagazine(statement);
         EMagazine newEMagazine = (EMagazine) createEMagazine(values, resourceID);
         container.getResourceList().add(newEMagazine);
-        System.out.println("This eMagazine is added:" + System.lineSeparator() + newEMagazine.toString());
+        System.out.println("This e-magazine is added:" + System.lineSeparator() + newEMagazine.toString());
         resetEMagazineArgs();
+        ADDLOGGER.log(Level.INFO, "Added E-Magazine: " + newEMagazine.toString());
     }
 
     private void addNewspaper(String statement, GenericList<Resource, Event> container) throws SysLibException {
@@ -116,19 +147,23 @@ public class AddCommand extends Command{
         container.getResourceList().add(newNewspaper);
         System.out.println("This newspaper is added:" + System.lineSeparator() + newNewspaper.toString());
         resetNewspaperArgs();
+        ADDLOGGER.log(Level.INFO, "Added Newspaper: " + newNewspaper.toString());
     }
 
     private void addENewspaper(String statement, GenericList<Resource, Event> container) throws SysLibException {
         String[] values = parseAddENewspaper(statement);
         ENewspaper newENewspaper = createENewspaper(values, resourceID);
         container.getResourceList().add(newENewspaper);
-        System.out.println("This eNewspaper is added:" + System.lineSeparator() + newENewspaper.toString());
+        System.out.println("This e-newspaper is added:" + System.lineSeparator() + newENewspaper.toString());
         resetENewspaperArgs();
+        ADDLOGGER.log(Level.INFO, "Added E-Newspaper: " + newENewspaper.toString());
     }
 
     @Override
     public CommandResult execute(String statement, GenericList<Resource, Event> container) throws
             IllegalStateException, NumberFormatException, SysLibException {
+        ADDLOGGER.log(Level.INFO, "Executing Add. Input Arguments: " + statement);
+
         feedbackToUser = "";
 
         resourceID = container.getResourceList().size() + 1;

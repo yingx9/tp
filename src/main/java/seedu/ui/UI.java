@@ -19,17 +19,32 @@ public class UI {
     public static final String SEPARATOR_LINEDIVIDER = LINESEPARATOR + LINEDIVIDER;
 
     public static final String ZERO_RESOURCES_MESSAGE =  formatLastLineDivider("There are currently 0 resources.");
-    protected static String logo =
-            " ____            _     _ _        ____ _     ___ \n" +
-                    "/ ___| _   _ ___| |   (_) |__    / ___| |   |_ _|\n" +
-                    "\\___ \\| | | / __| |   | | '_ \\  | |   | |    | | \n" +
-                    " ___) | |_| \\__ \\ |___| | |_) | | |___| |___ | | \n" +
-                    "|____/ \\__, |___/_____|_|_.__/   \\____|_____|___|\n" +
-                    "       |___/                                     ";
+    protected static final String LOGO =
+            "             .....................                  \n" +
+            "          -##@*+*@*++++++++++#@++##                 \n" +
+            "         .@. @-=%=            *#-+%                 \n" +
+            "         :@  @+-  :----------. .=#%                 \n" +
+            "         :@  @.  *%----------@-  =%                 \n" +
+            "         :@  @.  #*          @=  =%                 \n" +
+            "         :@  @.  #*          *:  :+                 \n" +
+            "         :@  @.  *%-----.  .=+****+-.               \n" +
+            "         :@  @.   :-----.-#*-.   .:-*#-             \n" +
+            "         :@  @.        .%+.     .@*#+.*%.           \n" +
+            "         :@  @:        %=       %*  +@.=%           \n" +
+            "         :@  @*#*.    -@      *###***+. @-          \n" +
+            "         :@ .@:.=@... -@ .+*#*####      @-          \n" +
+            "         :@#*++++++++. %=.%+  +#       +%           \n" +
+            "         :@. =++++++++-.%*.+%*@.      *%.           \n" +
+            "          %+  ........   =#*-::   .-*%=             \n" +
+            "           =*************. .=+****+-.               \n" +
+            " ____            _     _ _        ____ _     ___    \n" +
+            "/ ___| _   _ ___| |   (_) |__    / ___| |   |_ _|   \n" +
+            "\\___ \\| | | / __| |   | | '_ \\  | |   | |    | | \n" +
+            " ___) | |_| \\__ \\ |___| | |_) | | |___| |___ | |  \n" +
+            "|____/ \\__, |___/_____|_|_.__/   \\____|_____|___| \n" +
+            "       |___/                                        \n";
 
     protected Scanner myScanner;
-
-
 
     public UI(){
         this.myScanner = new Scanner(System.in);
@@ -37,8 +52,8 @@ public class UI {
 
     public void showWelcomeMessage(){
         showLine();
-        System.out.println(logo);
-        System.out.println("What would you like to do?");
+        System.out.println(LOGO);
+        System.out.println("Hello! What would you like to do?");
         showLine();
     }
 
