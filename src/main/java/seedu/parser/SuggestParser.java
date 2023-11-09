@@ -17,23 +17,28 @@ public class SuggestParser {
         return closestMatch;
     }
 
-    public static int levenshteinDistance(String a, String b) {
-        int[][] dp = new int[a.length() + 1][b.length() + 1];
+    public static int levenshteinDistance(String first, String second) {
+        int[][] array = new int[first.length() + 1][second.length() + 1];
 
-        for (int i = 0; i <= a.length(); i++) {
-            for (int j = 0; j <= b.length(); j++) {
-                if (i == 0) {
-                    dp[i][j] = j;
-                } else if (j == 0) {
-                    dp[i][j] = i;
+        for (int firstPointer = 0; firstPointer <= first.length(); firstPointer++) {
+            for (int secondPointer = 0; secondPointer <= second.length(); secondPointer++) {
+                if (firstPointer == 0) {
+                    array[firstPointer][secondPointer] = secondPointer;
+                } else if (secondPointer == 0) {
+                    array[firstPointer][secondPointer] = firstPointer;
                 } else {
-                    dp[i][j] = Math.min(Math.min(dp[i - 1][j - 1] + (a.charAt(i - 1) == b.charAt(j - 1) ? 0 : 1),
-                                    dp[i - 1][j] + 1),
-                            dp[i][j - 1] + 1);
+                    int temp = 1;
+                    if(first.charAt(firstPointer - 1) == second.charAt(secondPointer - 1) ){
+                        temp = 0;
+                    }
+                    int firstMin = Math.min(array[firstPointer - 1][secondPointer - 1] + temp,
+                            array[firstPointer - 1][secondPointer] + 1);
+                    array[firstPointer][secondPointer] = Math.min(firstMin,
+                            array[firstPointer][secondPointer - 1] + 1);
                 }
             }
         }
-        return dp[a.length()][b.length()];
+        return array[first.length()][second.length()];
     }
 
 }

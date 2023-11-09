@@ -22,7 +22,6 @@ import seedu.commands.EditCommand;
 import seedu.commands.SummaryCommand;
 
 import static seedu.ui.UI.LINEDIVIDER;
-import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,67 +101,6 @@ public class Parser {
         }
     }
 
-
-    /*public static String[] parseAddBook(String statement) throws SysLibException, IllegalStateException {
-        try {
-            String inputPattern = "/id (.+?) /t (.+?) /a (.+?) /tag (.+?) /i (.+)";
-            String genrePattern = "(.+) /g (.+)";
-            String statusPattern = "(.+) /s (.+)";
-
-            Pattern pattern = Pattern.compile(inputPattern);
-            Matcher matcher = pattern.matcher(statement);
-            boolean matchFound = matcher.find();
-
-            Pattern gPattern = Pattern.compile(genrePattern);
-            Matcher gMatcher = gPattern.matcher(matcher.group(5));
-            boolean gMatchFound = gMatcher.find();
-
-            Pattern sPattern = Pattern.compile(statusPattern);
-            Matcher sMatcher = sPattern.matcher(matcher.group(5));
-            boolean sMatchFound = sMatcher.find();
-
-            String[] args = new String[7]; // Increase the array size to accommodate status
-
-            if (matchFound) {
-                args[0] = matcher.group(1).trim(); // id
-                args[1] = matcher.group(2).trim(); // title
-                args[2] = matcher.group(3).trim(); // author
-                args[3] = matcher.group(4).trim(); // tag
-                if (gMatchFound) {
-                    args[4] = gMatcher.group(1).trim(); // isbn
-                    if (sMatchFound){
-                        args[5] = gMatcher.group(2).split("/s")[0].trim(); // genre
-                        args[6] = sMatcher.group(2).trim(); // status
-                    } else {
-                        args[5] = gMatcher.group(2).trim(); // genre
-                    }
-                } else {
-                    args[5] = null; //genre
-                    if (sMatchFound) {
-                        args[4] = sMatcher.group(1).trim(); // isbn
-                        args[6] = sMatcher.group(2).trim(); // status
-                    } else {
-                        args[4] = matcher.group(5).trim(); // isbn
-                        args[6] = "Available";
-                    }
-                }
-
-                if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[3].isEmpty()
-                        || args[4].isEmpty()) {
-                    throw new SysLibException("Please state the id, title, author, tag, and ISBN." +
-                            SEPARATOR_LINEDIVIDER);
-                }
-            } else {
-                throw new SysLibException("Please use the format " +
-                        "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'."
-                        + SEPARATOR_LINEDIVIDER);
-            }
-            return args;
-        } catch (IllegalStateException | SysLibException e) {
-            throw new SysLibException("Please use the format " +
-                    "'add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE /s STATUS]'." + SEPARATOR_LINEDIVIDER);
-        }
-    }*/
 
     // @@author bnjm2000
     /**
