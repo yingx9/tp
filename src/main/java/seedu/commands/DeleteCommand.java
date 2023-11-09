@@ -2,7 +2,6 @@ package seedu.commands;
 
 import seedu.data.GenericList;
 import seedu.data.events.Event;
-import seedu.data.resources.Book;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 import java.util.ArrayList;
