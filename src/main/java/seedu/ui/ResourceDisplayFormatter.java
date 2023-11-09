@@ -9,6 +9,7 @@ import java.util.List;
 import static seedu.ui.MessageFormatter.formatADivider;
 import static seedu.ui.UI.LINESEPARATOR;
 
+/** Handles display and formatting of resources to show to users as a table **/
 public class ResourceDisplayFormatter {
 
     protected Formatter bookDisplayFormatter;
@@ -20,8 +21,6 @@ public class ResourceDisplayFormatter {
     private String displayFormat;
 
     private List<Boolean> hasResourceTypeList;
-
-
 
     public ResourceDisplayFormatter(List<Resource> resourcesList){
         displayFormat = buildDisplayHeader(resourcesList);
@@ -51,8 +50,6 @@ public class ResourceDisplayFormatter {
         newspaperDisplayFormatter = resource.toTableFormat(displayFormat, newspaperDisplayFormatter);
         hasResourceTypeList.set(3,true);
     }
-
-
 
     private Formatter buildBookFormatter(String displayFormat){
         Object[] bookArgs = {"ID", "Tag", "Title", "ISBN", "Author", "Genre", "Link", "Status", "Received Date"};
@@ -86,7 +83,7 @@ public class ResourceDisplayFormatter {
         Formatter newspaperFormatter = buildDisplayFormatter(displayFormat, newspaperArgs, newspaperHeader);
         return newspaperFormatter;
     }
-    public  Formatter buildDisplayFormatter(String displayFormat, Object[] displayArgs, String header){
+    public Formatter buildDisplayFormatter(String displayFormat, Object[] displayArgs, String header){
 
         Formatter displayFormatter = new Formatter();
         displayFormatter.format(header);
@@ -98,7 +95,6 @@ public class ResourceDisplayFormatter {
     }
 
     public String buildDisplayHeader(List<Resource> resourcesList){
-
 
         //Check columns at index 2, 4, 5, 6 as length is unrestricted
         //Columns represent:
@@ -127,6 +123,11 @@ public class ResourceDisplayFormatter {
         return displayFormat;
     }
 
+    /**
+     * Constructs the final display message by adding a resource type only if it contains at least one resource to show.
+     *
+     * @return messageToDisplay
+     */
     public String getFinalDisplayFormat() {
 
         String messageToDisplay ="";
@@ -147,4 +148,5 @@ public class ResourceDisplayFormatter {
         }
         return messageToDisplay;
     }
+
 }
