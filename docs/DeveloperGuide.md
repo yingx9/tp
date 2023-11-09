@@ -28,6 +28,8 @@ SysLib currently consists of five main components:
 - `Data`: Holds the data of SysLib in memory such as the Resource List
 - `Storage`: Loads data from file in hard disk, and saves data to hard disk on program exit
 
+**How the architecture components interact with each other**
+
 
    
 ### UI Component
@@ -168,7 +170,10 @@ The `list` command works with the `Parser` and `Command` component to execute th
 When `list` is specified with both `tag` and `genre` filters, it is `AND` inclusive, listing only 
 Resources with the same tag and genre. 
 
-Sequence Diagram:
+#### Implementation 
+
+
+#### Sequence Diagram:
 
 <img src="images/ListSequenceDiagram.png" />
 
@@ -183,6 +188,9 @@ If hasFilters returns `true`, it filters the `resourceList` with the given keywo
 of the resources.
 
 If hasFilters returns `false`, it skips the filtering process and displays the details of all the resources.
+
+
+#### Example Usage Scenario
 
 ### Event Add Feature
 
@@ -453,3 +461,7 @@ ____________________________________________________________
    5. Test case: `add /id 0005 /t Frankenstein`
    
       Expected: No book is added. An error message is shown to indicate that the input is incomplete.
+
+### Listing Resources
+
+### Editing a Resource
