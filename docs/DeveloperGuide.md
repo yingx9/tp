@@ -175,40 +175,77 @@ Step 7. The newly created book is forwarded to the `PARSER` to be added to the `
 The following sequence diagram shows how the add function works:
 <img src="images/AddSequenceDiagram.png"/>
 
+### Show Resources Feature
+
+Show resources feature is facilitated by the `UI` and `Data` component. It makes use of a class `ResourceDisplayFormatter` in `UI` to show the details of all resources stored in `GenericList` of the `Data` component, sorted by resource type. 
+
+#### Implementation
+
+Show Resources feature implements the following operations:
+- `UI#showResourcesDetails()` — Displays a table showing details of all resources sorted by resource type.
+- `Resource#checkColumnsWidth()` — Checks the length of certain resource attributes against the width of columns and adjusts width if displaying the resource attribute would break the alignment
+- `Resource#toTableFormat()` — Formats a string of aligned resource details 
+
+Show Resources feature can be used when the user wants a list of resources and their details, such as when executing the `list` command or showing the results of `find` command. 
+
+The following sequence diagram shows how the show resources feature works in a scenario where the ListCommand calls showResourcesDetails() method.
+
+<img src="images/ShowResourcesSequenceDiagram.png" />
+
+**ResourceDisplayFormatter class:** 
+
+1. A List< Resource > resourceList is passed in to `showResourcesDetails` method from the calling function. It can be the resourcesList retrieved from the GenericList in memory which contains the data of all resources, or a custom resourceList containing filtered resources.
+2. A new `ResourceDisplayFormatter` is instantiated and the constructor calls `buildDisplayHeader()` to create a table header. 
+3. `buildDisplayHeader()` then calls `checkColumnsWidth()` for every resource in `resourceList`. It passes an integer array containing the current column width for each resource attribute (Title...Author..et cetera).
+4. `checkColumnsWidth()` adjusts the width as needed depending on the length of the resource attributes and returns to Formatter
+5. A format specifier is created with the columns' width. Example: `"%-5s %-20s ..."`
+6. Formatter objects are created for each resource type: Book, Newspapers, Magazine, CDs. 
+
+**UI Class:** 
+7. Now the UI loops through the resourceList and calls `setDisplayFormatter(Resource)` to add the formatted string to its respective display formatter. 
+8. A final call to `getFinalDisplayFormat()` returns the final formatted message of the table and all the resource details as `messageToDisplay`
+9. `messageToDisplay` is returned to the calling function to be printed to user or for testing. 
+
 ### Listing Resources Feature
 
-The `list` command works with the `Parser` and `Command` component to execute the correct action. 
+The `list` command is facilitated by `Parser` and `UI` component to show the details of all resources in `GenericList`. Furthermore, **filter** options can be provided to only list specific resources that match the given filters. 
 
-`list` has four options:
+`list` has five possible options:
 - list
 - list _/tag [tag]_
 - list _/g [genre]_
-- list _/tag [tag]_ _/g [genre]_
+- list _/s [status]_
+- list _/tag [tag]_ _/g [genre]_ _/s [status]_
 
-When `list` is specified with both `tag` and `genre` filters, it is `AND` inclusive, listing only 
-Resources with the same tag and genre. 
+Arguments in italics are filter options and are **optional**. 
+
 
 #### Implementation 
 
+ListCommand implements the following operations:
+- `ListCommand#filterResources` — Filters resources based on given filter values
 
-#### Sequence Diagram:
+
+Given below is an example usage scenario where a user enters the input `list /tag B` to list all Resources with tag `B` 
+and the corresponding sequence diagram. 
 
 <img src="images/ListSequenceDiagram.png" />
 
 When a user enters `list /tag B`, the Parser retrieves the parameters from the input and
-calls the `execute` function of ListCommand.
+calls the `execute` function of ListCommand, passing the argument given: `/tag B`.
 
 ListCommand then calls `parseArg` and `validate` from `Command`, which checks if the parameters are valid. If it passes
-the checks, `filterResources` is called to begin the filtering process. First it calls `hasFilters()` check if the user 
-selected any filters `[tag/genre/both]` or none. 
+   the checks, `filterResources` is called to begin the filtering process. First it calls `hasFilters()` check if the user
+   selected any filters `[tag/genre/status]` or none. 
 
-If hasFilters returns `true`, it filters the `resourceList` with the given keywords and display the details 
-of the resources.
+If hasFilters returns `true`, it filters the `resourceList` with the given keywords. Resources matching the filters are added to a temporary list called `matchedResources`. After all resources has been checked, `matchedResources` list is passed to `showResourcesDetails()`, a method called from `UI` to display the details 
+of the resources. 
 
 If hasFilters returns `false`, it skips the filtering process and displays the details of all the resources.
 
+Finally, `ListCommand` instantiates the `CommandResult` class with a string `feedbackToUser`, which is returned to the `Parser` which will `print(commandResult.feedbackToUser)` to show the resource details.
 
-#### Example Usage Scenario
+
 
 ### Event Add Feature
 
