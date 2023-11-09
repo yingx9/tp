@@ -4,7 +4,7 @@ import static seedu.ui.UI.LINESEPARATOR;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 /**
- * Contains methods to format messages with commonly used line separators and dividers
+ * Contains methods to format messages with commonly used line separators and dividers.
  */
 public class MessageFormatter {
 

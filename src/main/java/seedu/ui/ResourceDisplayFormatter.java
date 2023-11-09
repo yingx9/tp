@@ -9,7 +9,7 @@ import java.util.List;
 import static seedu.ui.MessageFormatter.formatADivider;
 import static seedu.ui.UI.LINESEPARATOR;
 
-/** Handles display and formatting of resources to show to users as a table **/
+/** Handles display and formatting of resources to show to users as a table. **/
 public class ResourceDisplayFormatter {
 
     protected Formatter bookDisplayFormatter;
@@ -126,7 +126,7 @@ public class ResourceDisplayFormatter {
     /**
      * Constructs the final display message by adding a resource type only if it contains at least one resource to show.
      *
-     * @return messageToDisplay
+     * @return messageToDisplay.
      */
     public String getFinalDisplayFormat() {
 
