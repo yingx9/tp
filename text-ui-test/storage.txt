@@ -1,0 +1,2 @@
+R | Surrounded by Idiots | false | 9781250255174 | 1 | B | LOST | 2023-11-09T18:03:42.189750 | Thomas Erikson | Self-help
+R | Moby Dick | false | TMOBM00000001 | 1 | B | AVAILABLE | 2023-11-09T18:03:42.205054200 | Herman Melville | Adventure,Fiction
