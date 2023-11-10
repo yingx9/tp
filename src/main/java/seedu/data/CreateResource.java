@@ -12,8 +12,10 @@ import seedu.exception.SysLibException;
 import static seedu.parser.Parser.getStatusFromString;
 
 public class CreateResource {
-    public static Book createBook(String[] args, int id) throws IllegalStateException, NumberFormatException,
-            SysLibException {
+    public static Book createBook(String[] args, int id) throws IllegalStateException, NumberFormatException {
+        assert args != null : "Arguments should not be null";
+        assert id > 0 : "ID should be greater than 0";
+
         String isbn = args[0];
         String title = args[1];
         String author = args[2];
@@ -25,12 +27,17 @@ public class CreateResource {
             genre = args[3];
             genres = genre.split(", ");
         }
+        if (genres[0] == null) {
+            System.out.println("Attention: Genre is not stated. Genre not set.");
+        }
 
         return new Book(title, isbn, author, genres, id, status);
     }
 
-    public static EBook createEBook(String[] args, int id) throws IllegalStateException, NumberFormatException,
-            SysLibException {
+    public static EBook createEBook(String[] args, int id) throws IllegalStateException, NumberFormatException {
+        assert args != null : "Arguments should not be null";
+        assert id > 0 : "ID should be greater than 0";
+
         String isbn = args[0];
         String title = args[1];
         String author = args[2];
@@ -48,6 +55,9 @@ public class CreateResource {
     }
 
     public static CD createCD(String[] args, int id) throws IllegalStateException, NumberFormatException {
+        assert args != null : "Arguments should not be null";
+        assert id > 0 : "ID should be greater than 0";
+
         String isbn = args[0];
         String title = args[1];
         String creator = args[2];
@@ -58,6 +68,9 @@ public class CreateResource {
     }
 
     public static Magazine createMagazine(String[] args, int id) throws IllegalStateException, NumberFormatException {
+        assert args != null : "Arguments should not be null";
+        assert id > 0 : "ID should be greater than 0";
+
         String isbn = args[0];
         String title = args[1];
         String brand = args[2];
@@ -68,6 +81,9 @@ public class CreateResource {
     }
 
     public static Magazine createEMagazine(String[] args, int id) throws IllegalStateException, NumberFormatException {
+        assert args != null : "Arguments should not be null";
+        assert id > 0 : "ID should be greater than 0";
+
         String isbn = args[0];
         String title = args[1];
         String brand = args[2];
@@ -80,6 +96,9 @@ public class CreateResource {
 
     public static Newspaper createNewspaper(String[] args, int id) throws IllegalStateException,
             NumberFormatException {
+        assert args != null : "Arguments should not be null";
+        assert id > 0 : "ID should be greater than 0";
+
         String isbn = args[0];
         String title = args[1];
         String publisher = args[2];
@@ -91,6 +110,9 @@ public class CreateResource {
 
     public static ENewspaper createENewspaper(String[] args, int id) throws IllegalStateException,
             NumberFormatException {
+        assert args != null : "Arguments should not be null";
+        assert id > 0 : "ID should be greater than 0";
+
         String isbn = args[0];
         String title = args[1];
         String publisher = args[2];
