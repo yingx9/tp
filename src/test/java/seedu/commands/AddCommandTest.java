@@ -20,7 +20,7 @@ public class AddCommandTest {
 
     @Test
     public void addCommandValidData() throws SysLibException {
-        addCommand.execute("/i TMOBM00000001 /t The Minds of Billy Milligan /a Daniel Keyes /tag B " +
+        addCommand.execute("/i 9783161484100 /t The Minds of Billy Milligan /a Daniel Keyes /tag B " +
                 "/g Non-Fiction, Biography /s LOST", parser.container);
 
         Book newBook = (Book) parser.container.getResourceList().get(0);
@@ -29,7 +29,7 @@ public class AddCommandTest {
         assertEquals(newBook.getTitle(), "The Minds of Billy Milligan");
         assertEquals(newBook.getAuthor(), "Daniel Keyes");
         assertEquals(newBook.getTag(), "B");
-        assertEquals(newBook.getISBN(), "TMOBM00000001");
+        assertEquals(newBook.getISBN(), "9783161484100");
         assertEquals(newBook.getGenreString(), "Non-Fiction, Biography");
         assertEquals(newBook.getStatus(), Status.LOST);
     }
@@ -38,13 +38,13 @@ public class AddCommandTest {
     public void addCommandOutput() throws SysLibException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        addCommand.execute("/i TMOBM00000001 /t The Minds of Billy Milligan /a Daniel Keyes /tag B " +
+        addCommand.execute("/i 9783161484100 /t The Minds of Billy Milligan /a Daniel Keyes /tag B " +
                 "/g Non-Fiction, Biography", parser.container);
 
         String output = outputStream.toString();
 
         String expectedOutput = "This book is added:" + System.lineSeparator() +
-                "[B]  ID: 1 Title: The Minds of Billy Milligan ISBN: TMOBM00000001 Author: Daniel Keyes Genre: " +
+                "[B]  ID: 1 Title: The Minds of Billy Milligan ISBN: 9783161484100 Author: Daniel Keyes Genre: " +
                 "Non-Fiction, Biography Status: AVAILABLE Received Date: " + getCurrentDate() +
                 SEPARATOR_LINEDIVIDER + System.lineSeparator();
 

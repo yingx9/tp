@@ -90,8 +90,6 @@ public class Parser {
     public static String parseAddCommand(String statement) throws SysLibException {
         assert statement != null : "Statement should not be null";
 
-        System.out.println(statement);
-
         String inputPattern = "/tag ([^/]+)";
 
         Pattern pattern = Pattern.compile(inputPattern);
