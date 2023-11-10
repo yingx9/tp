@@ -43,7 +43,8 @@ public class AddCommandTest {
 
         String output = outputStream.toString();
 
-        String expectedOutput = "This book is added:" + System.lineSeparator() +
+        String expectedOutput = "Attention: Status is not stated. Status set to default: AVAILABLE." +
+                System.lineSeparator() + "This book is added:" + System.lineSeparator() +
                 "[B]  ID: 1 Title: The Minds of Billy Milligan ISBN: 9783161484100 Author: Daniel Keyes Genre: " +
                 "Non-Fiction, Biography Status: AVAILABLE Received Date: " + getCurrentDate() +
                 SEPARATOR_LINEDIVIDER + System.lineSeparator();
