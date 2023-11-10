@@ -55,6 +55,22 @@ public class EventEditCommandTest {
     }
 
     @Test
+    void testExecuteWithDateChange() throws SysLibException {
+        eventAddCommand.execute("/t test1 /date 1 dec 2001 /desc testing 123", parser.container);
+        eventAddCommand.execute("/t test2 /date 2 dec 2001 /desc testing 123", parser.container);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        eventEditCommand.execute("/i 0 /date 23 Dec 2023", parser.container);
+        String output = outputStream.toString();
+        String expectedOutput = "Event index has changed as the date was changed." + System.lineSeparator() +
+                "Event edited successfully. New event details:" + System.lineSeparator() +
+                "1: test1 | 23 Dec 2023 | testing 123" + System.lineSeparator() +
+                "____________________________________________________________" + System.lineSeparator();
+
+        assertEquals(expectedOutput, output);
+    }
+
+    @Test
     void testParseDateWithInvalidFormat() {
         assertThrows(IllegalArgumentException.class, () -> EventEditCommand.parseDate("2023-01-01"));
     }
