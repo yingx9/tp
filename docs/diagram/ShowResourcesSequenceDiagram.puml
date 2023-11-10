@@ -1,0 +1,65 @@
+@startuml
+!include Style.puml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+skinparam ArrowFontStyle plain
+
+participant ":ListCommand" as ListCommand COMMAND_COLOR
+participant ":UI" as UI UI_COLOR
+participant ":ResourceDisplayFormatter" as ResourceDisplayFormatter PARSER_COLOR
+participant ":Resource" as Resource #grey
+
+
+
+ListCommand -[COMMAND_COLOR]>UI : showResourcesDetails(list)
+activate UI UI_COLOR
+create ResourceDisplayFormatter
+UI -[UI_COLOR]>ResourceDisplayFormatter : ResourceDisplayFormatter(list)
+activate ResourceDisplayFormatter
+
+ResourceDisplayFormatter -[PARSER_COLOR]> ResourceDisplayFormatter : buildDisplayHeader(resourcesList)
+activate ResourceDisplayFormatter
+
+ResourceDisplayFormatter -[PARSER_COLOR]> Resource : checkColumnsWidth(columnsWidth)
+activate Resource
+Resource --> ResourceDisplayFormatter : columnsWidth
+deactivate Resource
+
+ResourceDisplayFormatter --> ResourceDisplayFormatter : displayFormat
+deactivate ResourceDisplayFormatter
+
+
+ResourceDisplayFormatter -[PARSER_COLOR]> ResourceDisplayFormatter : buildFormatter(displayFormat)
+activate ResourceDisplayFormatter
+ResourceDisplayFormatter --> ResourceDisplayFormatter : Formatter
+deactivate ResourceDisplayFormatter
+
+
+ResourceDisplayFormatter --> UI : resourceDisplayFormatter
+deactivate ResourceDisplayFormatter
+
+loop until end of ResourceList
+UI -[UI_COLOR]>ResourceDisplayFormatter : setDisplayFormatter(Resource)
+activate ResourceDisplayFormatter
+ResourceDisplayFormatter -[PARSER_COLOR]> Resource : toTableFormat(displayFormat)
+activate Resource
+Resource --> ResourceDisplayFormatter : resourceDetails
+deactivate Resource
+ResourceDisplayFormatter --[PARSER_COLOR]> UI : resourceDisplayFormatter
+deactivate ResourceDisplayFormatter
+end
+
+UI -[UI_COLOR]>ResourceDisplayFormatter : getFinalDisplayFormat()
+activate ResourceDisplayFormatter
+ResourceDisplayFormatter --[PARSER_COLOR]> UI : messageToDisplay
+deactivate ResourceDisplayFormatter
+ResourceDisplayFormatter -[hidden]> UI : messageToDisplay
+
+UI --[UI_COLOR]> ListCommand : messageToDisplay
+deactivate UI
+destroy ResourceDisplayFormatter
+
+
+@enduml

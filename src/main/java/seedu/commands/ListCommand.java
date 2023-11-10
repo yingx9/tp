@@ -72,18 +72,18 @@ public class ListCommand extends Command {
         feedbackToUser = "";
         LIST_LOGGER.info("List Command execute with " + statement);
 
-        String[] values = parseArgument(statement);
-        validateStatement(statement, values);
-        filterResources(values, container.getResourceList());
+        String[] givenParameters = parseArgument(statement);
+        validateStatement(statement, givenParameters);
+        filterResources(givenParameters, container.getResourceList());
         LIST_LOGGER.info("List Command ends");
         return new CommandResult(feedbackToUser);
 
     }
 
 
-    public void filterResources(String[] values, List<Resource> resourceList) throws SysLibException{
+    public void filterResources(String[] givenParameters, List<Resource> resourceList) throws SysLibException{
 
-        boolean hasFilters = hasFilters((values));
+        boolean hasFilters = hasFilters((givenParameters));
         boolean isTagEqualToKeyword = true;
         boolean isGenreEqualToKeyword = true;
         boolean isStatusEqualToKeyword = true;
@@ -126,26 +126,26 @@ public class ListCommand extends Command {
     }
 
 
-    public static boolean hasFilters(String[] values) throws SysLibException {
+    public static boolean hasFilters(String[] givenParameters) throws SysLibException {
         tagKeyword = null;
         genreKeyword = null;
         statusKeyword = null;
 
         boolean hasFilters = true;
-        if (values[0] == null && values[1] == null && values[2] == null) {
+        if (givenParameters[0] == null && givenParameters[1] == null && givenParameters[2] == null) {
             return false;
         }
 
-        if (values[0] != null) {
-            tagKeyword = values[0];
+        if (givenParameters[0] != null) {
+            tagKeyword = givenParameters[0];
         }
 
-        if (values[1] != null) {
-            genreKeyword = values[1];
+        if (givenParameters[1] != null) {
+            genreKeyword = givenParameters[1];
         }
 
-        if (values[2] != null){
-            statusKeyword = values[2].toUpperCase();
+        if (givenParameters[2] != null){
+            statusKeyword = givenParameters[2].toUpperCase();
             validateStatus();
         }
         return hasFilters;
