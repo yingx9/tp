@@ -68,7 +68,6 @@ public class EventAddCommand extends Command {
     }
 
     /**
-     *
      * @param container Contains ResourceList and EventList.
      * @param key date to search for.
      * @return index to insert to.
