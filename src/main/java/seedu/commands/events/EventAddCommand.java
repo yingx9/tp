@@ -67,6 +67,12 @@ public class EventAddCommand extends Command {
         return new CommandResult(feedbackToUser);
     }
 
+    /**
+     *
+     * @param container Contains ResourceList and EventList.
+     * @param key date to search for.
+     * @return index to insert to.
+     */
     public static int binarySearch(GenericList<Resource, Event> container, LocalDate key) {
         if(container.getEventList().isEmpty()){
             return 0;
