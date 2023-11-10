@@ -99,7 +99,8 @@ public class EventEditCommand extends Command {
         container.getEventList().remove(index);
         LOGGER.info("Old event removed.");
 
-        container.getEventList().add(editedEvent);
+        int idx = binarySearch(container, date);
+        container.getEventList().add(idx,editedEvent);
         LOGGER.info("New event added.");
 
         feedbackToUser = "";
@@ -109,11 +110,36 @@ public class EventEditCommand extends Command {
             System.out.println("Event was not edited as nothing was changed." + SEPARATOR_LINEDIVIDER);
         } else {
             LOGGER.info("Print event changed.");
+            if (idx != index){
+                System.out.println("Event index has changed. New index is: " + idx);
+            }
             System.out.println("Event edited successfully. New event details:" + System.lineSeparator()
-                    + index + ": " + editedEvent.toString() + SEPARATOR_LINEDIVIDER);
+                    + idx + ": " + editedEvent.toString() + SEPARATOR_LINEDIVIDER);
         }
 
         return new CommandResult(feedbackToUser);
+    }
+
+    public static int binarySearch(GenericList<Resource, Event> container, LocalDate key) {
+        if(container.getEventList().isEmpty()){
+            return 0;
+        }
+        int low = 0;
+        int high = container.getEventList().size() - 1;
+
+        while (low <= high) {
+            int mid = (low + high)/2;
+            LocalDate midVal = container.getEventList().get(mid).getDate();
+            int cmp = midVal.compareTo(key);
+            if (cmp < 0) {
+                low = mid + 1;
+            } else if (cmp > 0) {
+                high = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return low;
     }
 
     /**
