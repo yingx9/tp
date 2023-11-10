@@ -224,13 +224,13 @@ Format: `delete /id ID`
 
 **Example input:**
 ```
-delete /id 8
+delete /id 1234567890123
 ```
 **Example input:**
 ```
-Looking for ID: 8...
+Looking for ID: 1234567890123...
 This resource is removed: 
-[B]  ID: 123456789 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: LOST
+[B]  ID: 1234567890123 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: LOST
 ____________________________________________________________
 ```
 
