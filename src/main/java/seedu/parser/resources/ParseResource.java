@@ -10,7 +10,9 @@ import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 public class ParseResource {
     public static void parseIsbn(String statement) throws SysLibException {
-        String pattern = "(?=.*/i ([a-zA-Z0-9]+))";
+        assert statement != null : "Statement should not be null";
+
+        String pattern = "(?=.*/i ([\\d]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
 
@@ -19,11 +21,13 @@ public class ParseResource {
         }
 
         if (matcher.group(1).trim().length() != 13) {
-            throw new SysLibException("Please enter a valid ISBN with 13 characters." + SEPARATOR_LINEDIVIDER);
+            throw new SysLibException("Please enter a valid ISBN with 13 digits." + SEPARATOR_LINEDIVIDER);
         }
     }
 
     public static void parseTitle(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         String pattern = "(?=.*/t ([^/]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
@@ -34,6 +38,8 @@ public class ParseResource {
     }
 
     public static void parseAuthor(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         String pattern = "(?=.*/a ([^/]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
@@ -44,7 +50,9 @@ public class ParseResource {
     }
 
     public static void parseTag(String statement) throws SysLibException {
-        String pattern = "(?=.*/tag ([\\sa-zA-Z]+))";
+        assert statement != null : "Statement should not be null";
+
+        String pattern = "(?=.*/tag ([\\s\\w]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
 
@@ -53,13 +61,17 @@ public class ParseResource {
         }
     }
 
-    public static boolean parseGenre(String statement) throws SysLibException {
+    public static boolean parseGenre(String statement) {
+        assert statement != null : "Statement should not be null";
+
         String pattern = "(?=.*/g ([\\w-]+(,\\s[\\w-]+)*))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         return matcher.find();
     }
 
     public static void parseCreator(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         String pattern = "(?=.*/c ([^/]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
@@ -70,6 +82,8 @@ public class ParseResource {
     }
 
     public static void parseType(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         String pattern = "(?=.*/ty ([^/]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
@@ -80,6 +94,8 @@ public class ParseResource {
     }
 
     public static void parseBrand(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         String pattern = "(?=.*/b ([^/]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
@@ -90,6 +106,8 @@ public class ParseResource {
     }
 
     public static void parseIssue(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         String pattern = "(?=.*/is ([^/]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
@@ -100,6 +118,8 @@ public class ParseResource {
     }
 
     public static void parsePublisher(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         String pattern = "(?=.*/p ([^/]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
@@ -110,6 +130,8 @@ public class ParseResource {
     }
 
     public static void parseEdition(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         String pattern = "(?=.*/ed ([^/]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
@@ -120,6 +142,8 @@ public class ParseResource {
     }
 
     public static void parseLink(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         String pattern = "(?=.*/l ([^\\s]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
@@ -130,7 +154,9 @@ public class ParseResource {
     }
 
     public static boolean parseStatus(String statement) throws SysLibException {
-        String pattern = "(?=.*/s ([a-zA-Z]+))";
+        assert statement != null : "Statement should not be null";
+
+        String pattern = "(?=.*/s ([\\w]+))";
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
         boolean isMatching = matcher.find();
 
@@ -145,6 +171,8 @@ public class ParseResource {
             } else {
                 throw new SysLibException("Please enter a valid status." + SEPARATOR_LINEDIVIDER);
             }
+        } else {
+            System.out.println("Attention: Status is not stated. Status set to default: AVAILABLE.");
         }
 
         return isMatching;
