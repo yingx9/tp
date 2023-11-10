@@ -182,9 +182,9 @@ Show resources feature is facilitated by the `UI` and `Data` component. It makes
 #### Implementation
 
 Show Resources feature implements the following operations:
-- `UI#showResourcesDetails()` — Displays a table showing details of all resources sorted by resource type.
-- `Resource#checkColumnsWidth()` — Checks the length of certain resource attributes against the width of columns and adjusts width if displaying the resource attribute would break the alignment
-- `Resource#toTableFormat()` — Formats a string of aligned resource details 
+- `UI#showResourcesDetails(resourcesList: List<Resource>)` — Displays a table showing details of all resources sorted by resource type.
+- `Resource#checkColumnsWidth(columnsWidth: List<Integer>)` — Checks the length of certain resource attributes against the width of columns and adjusts width if displaying the resource attribute would break the alignment
+- `Resource#toTableFormat(formatString: String, tableFormatter: Formatter)` — Formats a string of aligned resource details 
 
 Show Resources feature can be used when the user wants a list of resources and their details, such as when executing the `list` command or showing the results of `find` command. 
 
@@ -223,8 +223,8 @@ Arguments in italics are filter options and are **optional**.
 #### Implementation 
 
 ListCommand implements the following operations:
-- `ListCommmand#execute` — Executes and carries out list feature operations
-- `ListCommand#filterResources` — Filters resources based on given filter values
+- `ListCommmand#execute(statement: String, container: GenericList<Resource, Event>)` — Executes and carries out list feature operations
+- `ListCommand#filterResources(givenParameters: String[], resourcesList: List<Resource>>)` — Filters resources based on given filter values
 
 
 Given below is an example usage scenario where a user enters the input `list /tag B` to list all Resources with tag `B` 
@@ -254,8 +254,8 @@ The `edit` command is facilitated by `Parser` and `Data` component to update the
 #### Implementation
 
 EditCommand implements the following operations:
-- `EditCommand#execute()` — Executes and handles editing of a resource
-- `EditCommand#editResources()` — Validates parameters and updates a resource details
+- `EditCommand#execute(statement: String, container: GenericList<Resource, Event>)` — Executes and handles editing of a resource
+- `EditCommand#editResources(foundResource: Resource, givenParameters: String[], resourceList: List<Resource>)` — Validates parameters and updates a resource details
 
 #### Usage Scenario 
 
