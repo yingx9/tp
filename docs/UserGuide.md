@@ -128,8 +128,6 @@ This book is added:
 ____________________________________________________________
 ```
 
-### (NOTE: Addition of resources other than Book is only available in v2.1)
-
 ### Add eBook
 >Notes about genre:
 > - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
