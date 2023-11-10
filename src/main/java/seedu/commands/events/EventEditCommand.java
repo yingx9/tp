@@ -111,7 +111,8 @@ public class EventEditCommand extends Command {
         } else {
             LOGGER.info("Print event changed.");
             if (idx != index){
-                System.out.println("Event index has changed. New index is: " + idx);
+                LOGGER.info("Index changed");
+                System.out.println("Event index has changed as the date was changed.");
             }
             System.out.println("Event edited successfully. New event details:" + System.lineSeparator()
                     + idx + ": " + editedEvent.toString() + SEPARATOR_LINEDIVIDER);
