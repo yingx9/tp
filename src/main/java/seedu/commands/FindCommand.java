@@ -1,24 +1,43 @@
 package seedu.commands;
 
-import seedu.data.Book;
-import seedu.data.Resource;
-import seedu.data.SysLibException;
-import seedu.parser.Parser;
+import seedu.data.GenericList;
+import seedu.data.events.Event;
+import seedu.data.resources.Book;
+import seedu.data.resources.Magazine;
+import seedu.data.resources.Newspaper;
+import seedu.data.resources.Resource;
+import seedu.data.resources.CD;
+import seedu.exception.SysLibException;
 import seedu.ui.UI;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import static seedu.ui.UI.showResourcesDetails;
+
+/**
+ * The FindCommand class is responsible for handling the "find" command within the application.
+ * It allows the user to search for resources in the system based on various criteria such as ID, ISBN,
+ * author/publisher/brand/creator, or title. It extends the Command class and overrides the execute method
+ * to perform the search operation.
+ */
 public class FindCommand extends Command {
+    public static final int FIRST_INDEX = 0;
+    public static final int SECOND_INDEX = 1;
+    public static final int THIRD_INDEX = 2;
+    public static final int FOURTH_INDEX = 3;
     private static final String INVALID_ARGUMENT_MESSAGE = "Please use the format 'find [/t TITLE OR "
-            + "/i ISBN OR /a AUTHOR OR /id ID]'\n" + "____________________________________________________________";
+            + "/i ISBN OR /a AUTHOR/PUBLISHER/BRAND/CREATOR OR /id ID]'\n" + "________________________________" +
+            "____________________________";
     private static final String NO_RESOURCE_FOUND_MESSAGE = "There are no resources found matching the given filters.";
     private static final String RESOURCE_FOUND_MESSAGE = "Here are resources that matched the given filters:";
     private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());
+    private static String feedbackToUser;
 
     static {
         // remove logs from showing in stdout
@@ -46,7 +65,6 @@ public class FindCommand extends Command {
 
     public FindCommand(){
         args = new String[]{"id", "i", "a", "t"};
-        aliasArgs = new String[]{"id", "isbn", "author", "title"};
         required = new boolean[]{false, false, false, false};
         ui = new UI();
         LOGGER.info("FindCommand instance created.");
@@ -85,36 +103,112 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(String statement, Parser parser) throws IllegalArgumentException, SysLibException {
-        assert statement != null && !statement.trim().isEmpty() : "Statement to execute cannot be null or empty!";
-        assert parser != null : "Parser cannot be null!";
-        String[] value = parseArgument(statement);
-        validate(statement, value);
+    public CommandResult execute(String statement, GenericList<Resource, Event> container)
+            throws IllegalArgumentException, SysLibException {
+        assert container != null : "Parser cannot be null!";
+        feedbackToUser = "";
+        String[] values = parseArgument(statement);
+        validateStatement(statement, values);
 
-        if (value[3]==null && value[2]==null && value[1]==null && value[0]==null) {
+        // all null
+        if (values[FOURTH_INDEX]==null && values[THIRD_INDEX]==null && values[SECOND_INDEX]==null
+                && values[FIRST_INDEX]==null) {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE + System.lineSeparator());
         }
 
-        ArrayList<Resource> matchedResources = new ArrayList<>();
-        for (Resource r: parser.resourceList){
-            Book b = (Book) r;
-            if (b.getTitle().equals(value[3]) || b.getISBN().equals(value[1]) || b.getAuthor().equals(value[2])){
-                matchedResources.add(b);
-            }
-        }
+        List<Resource> matchedResources = filterResources(container.getResourceList(), values);
+
 
         if (matchedResources.isEmpty()) {
-            LOGGER.warning("No resources matched the given filters.");
+            LOGGER.info("No resources matched the given filters.");
             System.out.println(NO_RESOURCE_FOUND_MESSAGE);
             ui.showLine();
         } else {
             LOGGER.info("Resources matched the given filters.");
             System.out.println(RESOURCE_FOUND_MESSAGE);
-            for (Resource r : matchedResources) {
-                System.out.println(r);
-            }
-            ui.showLine();
+            System.out.println(showResourcesDetails(matchedResources));
         }
+
+        return new CommandResult(feedbackToUser);
+    }
+
+    /*
+     * Filters the provided list of resources based on the search criteria.
+     * This method will iterate through each resource in the resourceList and check if it matches
+     * the given search criteria passed in the values array. Each index in the values array corresponds
+     * to a different type of search filter (ID, ISBN, author/publisher/brand/creator, or title).
+     * @param resourceList The list of resources to filter.
+     * @param values       An array of search criteria where:
+     *                     - values[0] represents the ID to match (null if not searching by ID)
+     *                     - values[1] represents the ISBN to match (null if not searching by ISBN)
+     *                     - values[2] represents the author/publisher/brand/creator to match (null if not searching
+     *  by these criteria)
+     *                     - values[3] represents the title to match (null if not searching by title)
+     * @return A list of resources that match the given criteria.
+     * @throws SysLibException If any of the search criteria is invalid or if an unknown resource type is encountered.
+     */
+    public List<Resource> filterResources(List<Resource> resourceList, String[] values) throws SysLibException{
+        List<Resource> matchedResources = new ArrayList<>();
+        for (Resource resource: resourceList){
+            boolean isMatch = true;
+            String resourceType = resource.getTag();
+
+            if (values[FIRST_INDEX] != null && resource.getId() != Integer.parseInt(values[FIRST_INDEX])) {
+                if (Integer.parseInt(values[FIRST_INDEX]) < 0){
+                    throw new SysLibException("ID cannot be negative.");
+                }
+                isMatch = false;
+            }
+
+            if (values[SECOND_INDEX] != null && !resource.getISBN().equalsIgnoreCase(values[SECOND_INDEX])) {
+                isMatch = false;
+            }
+
+            switch (resourceType) {
+            case "B":
+            case "EB":
+                Book b = (Book) resource;
+                if (values[THIRD_INDEX] != null && !b.getAuthor().trim().equalsIgnoreCase((values[THIRD_INDEX]))) {
+                    isMatch = false;
+                }
+                break;
+            case "M":
+            case "EM":
+                Magazine m = (Magazine) resource;
+                if (values[THIRD_INDEX] != null && !m.getBrand().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
+                    isMatch = false;
+                }
+                break;
+            case "N":
+            case "EN":
+                Newspaper n = (Newspaper) resource;
+                if (values[THIRD_INDEX] != null && !n.getPublisher().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
+                    isMatch = false;
+                }
+                break;
+            case "CD":
+                CD cd = (CD) resource;
+                if (values[THIRD_INDEX] != null && !cd.getCreator().trim().equalsIgnoreCase(values[THIRD_INDEX])) {
+                    isMatch = false;
+                }
+                break;
+
+            default:
+                throw new SysLibException("Unknown resource type found.");
+            }
+
+            if (values[FOURTH_INDEX] != null && !resource.getTitle().equalsIgnoreCase(values[FOURTH_INDEX])) {
+                isMatch = false;
+            }
+
+            // If all non-null criteria matched, add the book to the list
+            if (isMatch) {
+                LOGGER.info(String.format("Resource with name: %s matched given arguments.", resource.getTitle()));
+                matchedResources.add(resource);
+            }
+        }
+
+        return matchedResources;
     }
 
 }

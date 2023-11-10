@@ -1,0 +1,63 @@
+@startuml
+!include Style.puml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+participant "UI" as UI UI_COLOR
+participant "Parser" as PARSER PARSER_COLOR
+
+box Command
+participant "FindCommand" as FINDCOMMAND COMMAND_COLOR
+participant "Command" as COMMAND COMMAND_COLOR
+end box
+
+participant "Resource" as RESOURCE
+
+user -[USER_COLOR]> UI : "find /t TITLE"
+activate UI UI_COLOR
+
+UI -[UI_COLOR]> PARSER : process("find /t TITLE")
+activate PARSER PARSER_COLOR
+
+alt containsKey
+    PARSER -[PARSER_COLOR]> PARSER: removeFirstWord("find /t TITLE")
+    PARSER -[PARSER_COLOR]> FINDCOMMAND: execute("/t TITLE")
+    activate FINDCOMMAND COMMAND_COLOR
+else noKey
+    PARSER --[PARSER_COLOR]> UI :
+end
+
+FINDCOMMAND -[COMMAND_COLOR]> COMMAND : parseArg("/t TITLE")
+activate COMMAND COMMAND_COLOR
+COMMAND --[COMMAND_COLOR]> FINDCOMMAND : String[] values
+
+FINDCOMMAND -[COMMAND_COLOR]> COMMAND : validate("/t TITLE", values)
+COMMAND --[COMMAND_COLOR]> FINDCOMMAND :
+deactivate COMMAND COMMAND_COLOR
+
+FINDCOMMAND -[COMMAND_COLOR]> PARSER : resourceList
+activate PARSER PARSER_COLOR
+PARSER --[PARSER_COLOR]> FINDCOMMAND : List of resources
+deactivate PARSER PARSER_COLOR
+
+loop for each Resource in resourceList
+    FINDCOMMAND -[COMMAND_COLOR]> RESOURCE: getId(), getISBN(), getTitle(), getTag()
+    activate RESOURCE
+    RESOURCE --[COMMAND_COLOR]> FINDCOMMAND
+    deactivate RESOURCE
+
+    FINDCOMMAND -> FINDCOMMAND : Check and filter based on Id, ISBN, Title, and Tag
+    alt isMatch
+        FINDCOMMAND -> FINDCOMMAND : Add to matchedResources
+    end
+end
+
+FINDCOMMAND -> FINDCOMMAND : Check if matchedResources is empty
+FINDCOMMAND -> UI : showLine()
+deactivate FINDCOMMAND COMMAND_COLOR
+deactivate UI UI_COLOR
+@enduml
