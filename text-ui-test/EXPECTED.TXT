@@ -28,10 +28,12 @@ ____________________________________________________________
 
 Hello! What would you like to do?
 ____________________________________________________________
-> This book is added:
+> Attention: Status is not stated. Status set to default: AVAILABLE.
+This book is added:
 [B]  ID: 1 Title: Moby Dick ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 10 Nov 2023
 ____________________________________________________________
-> This book is added:
+> Attention: Status is not stated. Status set to default: AVAILABLE.
+This book is added:
 [B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 10 Nov 2023
 ____________________________________________________________
 > This book is added:
@@ -45,8 +47,7 @@ ____________________________________________________________
 ____________________________________________________________
 > Please enter a valid date in the format 'dd MMM yyyy'
 ____________________________________________________________
-> This book is added:
-[B]  ID: 4 Title: Moby Dick ISBN: TMOBM00000001 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 10 Nov 2023
+> Please enter a valid ISBN.
 ____________________________________________________________
 > Commands available:
 add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
@@ -60,8 +61,8 @@ eventdelete: Delete an event in the event list based on the index (e.g. eventdel
 exit: displays a farewell message and exits the program (e.g. exit)
 For more information, please refer to our user guide at:https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html
 ____________________________________________________________
-> Total Resources: 4
-Total Books: [████] 4
+> Total Resources: 3
+Total Books: [████] 3
 Total CDs: [] 0
 Total Magazines: [] 0
 Total E-Books: [] 0

@@ -39,8 +39,7 @@ The UI Component consists of methods to print messages to the user as output.
 ### Parser Component
 
 The parsing for a generic command can be seen here:
-<img src="images/Parsi
-ng.png" />
+<img src="images/Parsing.png" />
 
 For some commands that does not require arguments (etc: help, exit), parseArgument
 and validateStatement will not be called

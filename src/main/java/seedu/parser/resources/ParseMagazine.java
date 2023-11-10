@@ -15,9 +15,11 @@ import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 public class ParseMagazine {
     public static String[] args = new String[6];
     public static String[] parseAddMagazine(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         try {
-            String inputPattern = "^(?=.*/i ([a-zA-Z0-9]+))(?=.*/t ([^/]+))(?=.*/b ([^/]+))" +
-                    "(?=.*/tag ([\\sa-zA-Z]+))(?=.*/is ([^/]+))(?=.*/s ([a-zA-Z]+))?.*$";
+            String inputPattern = "^(?=.*/i ([\\d]+))(?=.*/t ([^/]+))(?=.*/b ([^/]+))" +
+                    "(?=.*/tag ([\\s\\w]+))(?=.*/is ([^/]+))(?=.*/s ([\\w]+))?.*$";
             Matcher matcher = Pattern.compile(inputPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
             boolean isMatching = matcher.find();
 
@@ -47,6 +49,8 @@ public class ParseMagazine {
     }
 
     public static Boolean parseMagazineArgs(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         parseIsbn(statement);
         parseTitle(statement);
         parseBrand(statement);
@@ -56,6 +60,8 @@ public class ParseMagazine {
     }
 
     public static void checkEmptyMagazineArgs(String[] args) throws SysLibException {
+        assert args != null : "Arguments should not be null";
+
         if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[3].isEmpty() || args[5].isEmpty()) {
             throw new SysLibException("Please enter the ISBN, title, brand, issue, and tag." +
                     SEPARATOR_LINEDIVIDER);

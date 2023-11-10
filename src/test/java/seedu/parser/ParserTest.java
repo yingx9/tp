@@ -132,16 +132,18 @@ class ParserTest {
 
         System.setOut(System.out);
         String output = outputStream.toString();
-        String expectedOutput = "This book is added:" + System.lineSeparator()
-                + "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson " +
-                "Genre: Self-help Status: AVAILABLE Received Date: " + getCurrentDate()
-                + SEPARATOR_LINEDIVIDER + System.lineSeparator();
+        String expectedOutput = "Attention: Status is not stated. Status set to default: AVAILABLE." +
+                System.lineSeparator() + "This book is added:" + System.lineSeparator() +
+                "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson " +
+                "Genre: Self-help Status: AVAILABLE Received Date: " + getCurrentDate() +
+                SEPARATOR_LINEDIVIDER + System.lineSeparator();
         assertEquals(expectedOutput, output);
         //Add second book
         validResponse = "add /i 9780062457714 /t The Subtle Art of Not Giving a F*ck " +
                 "/a Mark Manson /tag B /g Self-help";
         parser.processUserResponse(validResponse);
-        expectedOutput += "This book is added:" + System.lineSeparator()
+        expectedOutput += "Attention: Status is not stated. Status set to default: AVAILABLE." +
+                System.lineSeparator() + "This book is added:" + System.lineSeparator()
                 + "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 " +
                 "Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: "
                 + getCurrentDate() + SEPARATOR_LINEDIVIDER + System.lineSeparator();
@@ -152,11 +154,13 @@ class ParserTest {
         validResponse = "find /t The Subtle Art of Not Giving a F*ck";
         parser.processUserResponse(validResponse);
         output = outputStream.toString();
-        expectedOutput = "This book is added:" + LINESEPARATOR +
+        expectedOutput = "Attention: Status is not stated. Status set to default: AVAILABLE." +
+                System.lineSeparator() + "This book is added:" + LINESEPARATOR +
                 "[B]  ID: 1 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre:"+
                 " Self-help Status: AVAILABLE Received Date: "+getCurrentDate() +LINESEPARATOR +
                 "____________________________________________________________" +LINESEPARATOR +
-                "This book is added:" +LINESEPARATOR +
+                "Attention: Status is not stated. Status set to default: AVAILABLE." +
+                System.lineSeparator() + "This book is added:" + LINESEPARATOR +
                 "[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark "+
                 "Manson Genre: Self-help Status: AVAILABLE Received Date: "+getCurrentDate() +LINESEPARATOR +
                 "____________________________________________________________" +LINESEPARATOR +

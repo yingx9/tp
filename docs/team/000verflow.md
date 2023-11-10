@@ -40,7 +40,7 @@ Main implementation: `FindCommand` class
 Implemented the **Find** feature that will return resources that match given filters such as `author`, `title`, `id` and `isbn`.
 Only returns results that match `ALL` the given filters not `ANY`.
 
-**3. Storage Class **
+**3. Storage Class**
 
 Main implementation: `Storage` class
 
