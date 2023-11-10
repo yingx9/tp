@@ -223,6 +223,7 @@ Arguments in italics are filter options and are **optional**.
 #### Implementation 
 
 ListCommand implements the following operations:
+- `ListCommmand#execute` — Executes and carries out list feature operations
 - `ListCommand#filterResources` — Filters resources based on given filter values
 
 
@@ -244,6 +245,31 @@ of the resources.
 If hasFilters returns `false`, it skips the filtering process and displays the details of all the resources.
 
 Finally, `ListCommand` instantiates the `CommandResult` class with a string `feedbackToUser`, which is returned to the `Parser` which will `print(commandResult.feedbackToUser)` to show the resource details.
+
+### Edit Command Feature 
+
+The `edit` command is facilitated by `Parser` and `Data` component to update the attributes of any resource type. Users can edit all attributes except ID, Tag, and Received Date, and must provide at least one argument to edit when calling the `edit` command. 
+
+
+#### Implementation
+
+EditCommand implements the following operations:
+- `EditCommand#execute()` — Executes and handles editing of a resource
+- `EditCommand#editResources()` — Validates parameters and updates a resource details
+
+#### Usage Scenario 
+
+EditCommand may be used when the user would like to update a resource [Book/Newspaper/CDs/Magazines/...] et cetera. Below is an activity diagram showing the flow of SysLib when a user enters `"edit /id 1 /t NEWTITLE /a NEWAUTHOR"`. The diagram starts off with EditCommand's `execute()` method.
+
+<img src="images/EditActivityDiagram.png" />
+
+First, `EditCommand` checks if the user has given at least one argument to edit. For example, `/t` or `/a`. If true, it searches for the resource that has the ID matching the ID given by the user. In this case, it searches for `id == 1`. 
+
+Once found, it moves on to the `editResouce()` method, which contains a switch case that further calls the appropriate edit function based on the resource type. For example, if the resource is a Book or EBook, `validateBookParameters()` and `editBook()` is called. Else, it checks if it's a `CD` and so on. 
+
+The edit methods updates the resource with all the details the user has provided. In this case, `title` is updated to `NEWTITLE` and `author` is updated to `NEWAUTHOR`.
+
+Finally, the resource list currently in memory is updated with the new resource details by calling `resourcesList.set(resourceIndex, updatedResource)`.
 
 
 
@@ -363,12 +389,17 @@ Step 7. The selected event at the index is then deleted from the eventList.
 
 All librarians, not just system librarian!
 
-- Needs to manage inventory with significant number of resources e.g. books
+- Needs to manage events and inventory with significant number of resources e.g. books
 - Is a fast typist
 
 ### Value Proposition
 
 To provide a platform to help librarians to quickly find the information they need to assist patrons.
+
+SysLib CLI is a robust command-line tool designed for fast typists librarians to efficiently handle inventory and events. 
+
+With quick command-based actions, they can manage library's resources and events seamlessly. Administrative tasks are simplified, so they can focus on serving patrons better.
+
 
 ## User Stories
 
@@ -385,6 +416,7 @@ To provide a platform to help librarians to quickly find the information they ne
 | v2.0    | librarian | get the status of an item                                                                  | know if it is available                                                        |
 | v2.0    | librarian | update the details of a resource                                                           | fix any mistakes and maintain consistency                                      |
 | v2.0    | librarian | add in different types of resources                                                        | differentiate between resources such as magazines, cds...                      |
+
 
 ## Use Cases
 
@@ -409,13 +441,44 @@ To provide a platform to help librarians to quickly find the information they ne
 
     Use case ends.
 
+### Use case: Edit a resource
+
+#### MSS
+
+1. User requests to list resources
+2. SysLib shows a table of resources and their details
+3. User requests to edit a resource by specifying their ID shown in list.
+4. SysLib updates resource with new given details. 
+
+   Use case ends. 
+
+#### Extensions
+
+- 1a. List is empty 
+  - SysLib shows a message there are no resources to list.
+  - Use case ends.
+
+- 3a. Provided ID does not exist
+  - SysLib shows a message stating resource not found.
+  - Use case ends.
+
+- 3b. User does not provide any arguments to edit
+  - SysLib shows a message prompting for at least one argument.
+  - Use case ends.
+
+- 3c. User provides the wrong arguments for the type of resource they specified
+  - SysLib shows an invalid argument message and displays the right arguments for the resource type
+  - Use case ends.
+
+
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
 
 ## Glossary
 
-* *glossary item* - Definition
+* *Resource* - A generic term for items in library inventory.
+  * Further divided into: Book, EBook, Magazines, EMagazines, Newspapers, ENewspapers, and CDs. 
 
 ## Instructions for Manual Testing
 Example input:
@@ -521,4 +584,43 @@ ____________________________________________________________
 
 ### Listing Resources
 
+1. List all resources
+    1. Prerequisites: At least one resource present in list   
+   
+    2. Test case: `list`
+
+       Expected: A table showing details of current resources, in order of BOOKS, MAGAZINE, CDs, and NEWSPAPERS.
+
+   2. List when no resources are in list
+       1. Prerequisites: No resources currently in SysLib
+
+       2. Test case: `list`
+
+       Expected: An error message saying "There are currently 0 resources."
+
+3. List resources with filter options
+
+   1. Test case: `list /tag B `
+
+       Expected: A table showing details of `Book` resources with tag `B`, or a message stating no resources found or empty list if applicable. 
+
+   2. Test case: `list /tag B /s AVAILABLE`
+
+      Expected: A table showing details of `Book` resources with tag `B` and status `AVAILABLE`, or a message stating no resources found or empty list if applicable.
+
+4. Other incorrect commands to try: list X, list /tag , ... 
+   Expected: Invalid argument message. 
+
 ### Editing a Resource
+
+1. Edit a resource 
+   1. Prerequisite: A list containing at least one resource. `list` all the resources to see their `ids`. 
+   2. Test case: `edit /id 1 /t NEWTILE /a AUTHOR`
+
+      Expected: An edit success message displaying the new details of the edited resource, IF resource with `id 1` is a Book (Author is a Book argument). Else, error message saying wrong arguments and showing the right arguments.
+   3. Test case: `edit /id 1 /c NEWCREATOR`
+
+      Expected: An edit success message displaying the new details of the edited resource, IF resource with `id 1` is a CD (Creator is a CD argument). Else, error message saying wrong arguments and showing the right arguments.
+
+2. Other incorrect commands to try: edit X, edit /t , ...
+   Expected: Invalid argument message. 

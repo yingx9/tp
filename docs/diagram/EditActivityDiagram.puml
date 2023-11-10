@@ -1,0 +1,46 @@
+ @startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:execute();
+if (hasOneArg?) then (true)
+  :findResourceByID();
+  if (foundResouce?) then (yes)
+     :editResource();
+
+     if (Book?) then (yes)
+        :validateBook();
+        :editBook();
+
+     else if (CD?) then (yes)
+        :validateCD();
+        :editCD();
+     else if (Magazine?) then (yes)
+        :validateMagazine();
+        :editMagazine();
+     else if (Newspaper?) then (yes)
+        :validateNewspaper();
+        :editNewspaper();
+     else (no)
+       stop
+     endif
+  :Update Resource List;
+  stop
+
+  else (no)
+     stop
+
+
+  endif
+
+
+else (false)
+  stop
+
+
+
+endif
+
+
+
+@enduml
