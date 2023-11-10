@@ -7,7 +7,6 @@ import seedu.data.resources.EBook;
 import seedu.data.resources.EMagazine;
 import seedu.data.resources.ENewspaper;
 import seedu.data.resources.CD;
-import seedu.exception.SysLibException;
 
 import static seedu.parser.Parser.getStatusFromString;
 
