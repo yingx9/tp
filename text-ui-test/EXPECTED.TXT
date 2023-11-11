@@ -47,7 +47,7 @@ ____________________________________________________________
 ____________________________________________________________
 > Please enter a valid date in the format 'dd MMM yyyy'
 ____________________________________________________________
-> Please enter a valid ISBN.
+> Please enter a valid ISBN with 13 digits.
 ____________________________________________________________
 > Commands available:
 add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
