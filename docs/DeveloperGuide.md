@@ -132,47 +132,117 @@ Upon receiving the `find` command, the system will:
 
 ### Add Resource Feature
 
-The `add` feature is responsible for processing user commands to add a new book to SysLib. It is facilitated by 
+The `add` feature is responsible for processing user commands to add a new resource to SysLib. It is facilitated by 
 the `AddCommand` component. It works with `Parser` and `Command` components to parse and validate the user input. 
-The new book is stored internally in `resourceList` as a `Book`. 
+The new resource is stored internally in `resourceList` as a `Book`, `EBook`, `CD`, `Magazine`, `EMagazine`, `Newspaper`, 
+or `ENewspaper` depending on the type of resources specified by `tag`. 
 
-`add` has seven options:
-- add /id [id] /t [title] /a [author] /tag [tag] /i [isbn]
-- add /id [id] /t [title] /a [author] /tag [tag] /i [isbn] _/g [genre] /s [status]_
+There are seven types of `Resource`:
+- Book
+- EBook
+- CD
+- Magazine
+- EMagazine
+- Newspaper
+- ENewspaper
+
+`add` has eighteen possible options:  
+
+- **Book** has four options:
+  - add /i [isbn] /t [title] /a [author] /tag [tag] 
+  - add /i [isbn] /t [title] /a [author] /tag [tag] _/g [genre]_
+  - add /i [isbn] /t [title] /a [author] /tag [tag] _/s [status]_
+  - add /i [isbn] /t [title] /a [author] /tag [tag] _/g [genre] /s [status]_
+- **EBook** has four options:
+    - add /i [isbn] /t [title] /a [author] /tag [tag] /l [link]
+    - add /i [isbn] /t [title] /a [author] /tag [tag] /l [link] _/g [genre]_
+    - add /i [isbn] /t [title] /a [author] /tag [tag] /l [link] _/s [status]_
+    - add /i [isbn] /t [title] /a [author] /tag [tag] /l [link] _/g [genre] /s [status]_
+- **CD** has two options:
+    - add /i [isbn] /t [title] /c [creator] /ty [type] /tag [tag]
+    - add /i [isbn] /t [title] /c [creator] /ty [type] /tag [tag] _/s [status]_
+- **Magazine** has two options:
+    - add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag]
+    - add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag] _/s [status]_
+- **EMagazine** has two options:
+    - add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag] /l [link]
+    - add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag] /l [link] _/s [status]_
+- **Newspaper** has two options:
+    - add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag]
+    - add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] _/s [status]_
+- **ENewspaper** has two options:
+    - add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] /l [link]
+    - add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] /l [link] _/s [status]_
 
 #### Implementation
 
 It implements the following operations:
 
-- `ADDCOMMAND#parseArgument(statement: String)` -- Parses the input command to extract relevant information.
-- `ADDCOMMAND#validate(statement: String, values: String[])` -- Validates the input statement to ensure that it is valid.
-- `ADDCOMMAND#createBook(values: String[])` -- Creates a new book based on the parsed and validated values.
+- `AddCommand#execute(statement: String, container: GenericList<Resource, Event>)` -- Validates and adds the new resource into the resource list.
+- `Parser#parseAddCommand(statement: String)` -- Parses the input command to extract the tag indicating the type of resource.
+- `AddCommand#addResource*(statement: String, container: GenericList<Resource, Event>)` -- Adds a new resource to the resource list after validation.
+- `ParserResource*#parseAddResource*(statement: String)` -- Parses the input command to ensure that it follows the right format for the particular resource.
+- `CreateResource#createResource*(values: String[], resourceID: int)` -- Creates a new resource with the given information.
+- `ParserResource*#parseResource*Args(statement: String)` -- Parses the input command to ensure that all attributes required by the particular resource are parsed.
+- `ParserResource#parseAttribute*(statement: String)`-- Parses the input command to ensure that each attribute follows the right format.
+- `ParserResource*#checkEmptyResource*Args(args: String[])` -- Parses the arguments to ensure that they are not empty.
+- `ParserResource*#resetResource*Args()` - Clears the previous arguments to receive new arguments for new resource.
 
 #### Example Usage Scenario
 
-Step 1. The user inputs the command: `add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction`
+Step 1. The user inputs the command: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B /g Fiction /s lost`.
 
-Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
+Step 2. The `Parser` processes the command and calls `AddCommand#execute(statement: String, container: GenericList<Resource, Event>)` 
+with `/i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B /g Fiction /s lost`.
 
-Step 3. The `PARSER` processes the command and determines that it contains a valid key (`add`). It then calls 
-`ADDCOMMAND#execute(statement: String, this: Parser)` with the input command.
+Step 3. `AddCommand` receives the command and calls `Parser#parseAddCommand(statement: String)` to extract the tag.
 
-Step 4. The `ADDCOMMMAND` component receives the command and performs the following operations:
-- Calls `ADDCOMMAND#parseArgument(statement: String)` to extract values for ID, title, author, ISBN, tag, and genres.
-- Calls `ADDCOMMAND#validate(statement: String, values: String[])` to ensure the validity of the input command.
+Step 4. Since the `tag` argument in the input command indicates that it is a book, the `AddCommand` calls
+`AddCommand#addBook(statement: String, container: GenericList<Resource, Event>)`.
 
-Step 5. The `COMMAND` component processes the input command to ensure that it meets the required format and constraints.
-It prepares the argument values for further processing.
+Step 5. Before adding the book, validation needs to be done so `ParseBook#parseAddBook(statement: String)` was called 
+to ensure that the overall input is in the correct format and the required arguments are provided.
 
-Step 6. Since the `tag` argument in the input command indicates that it is a book, the `ADDCOMMAND` determines that the
-key is equal to `b` (ignoring case). It then creates a new `Book` object using the parsed values (title, ISBN, author, 
-genres, ID).
+Step 6. After `ParseBook` receives the command, it calls `ParserBook#parseBookArgs(statement: String)` to start
+the process of parsing every attribute of the resource.
 
-Step 7. The newly created book is forwarded to the `PARSER` to be added to the `resourceList`.
+Step 7. `ParseBook` performs the following operations:
+- Calls `ParserResource#parseIsbn(statement: String)` to validate and extract ISBN.
+- Calls `ParserResource#parseTitle(statement: String)` to validate and extract title.
+- Calls `ParserResource#parseAuthor(statement: String)` to validate and extract author.
+- Calls `ParserResource#parseTag(statement: String)` to validate and extract tag.
+- Calls `ParserResource#parseGenre(statement: String)` to validate and extract genres.
+- Calls `ParserResource#parseStatus(statement: String)` to validate and extract status.
+
+Step 8. `ParseBook` proceeds to check if optional arguments were provided by the user and whether there were empty arguments. 
+After that, all the arguments are forwarded to `AddCommand`.
+
+Step 9. `AddCommand` receives the arguments and calls `CreateResource#createBook(values: String[], resourceID: int` to 
+craft a new book with the validated arguments.
+
+Step 10. The newly created book is then added to the `resourceList`.
+
+Step 11. Calls to `ParserResource#resetBookArgs()` prepares the arguments list for new processes.
+
+Step 12. Feedback to users are then sent to `CommandResult` to be displayed to the users.
+
 
 #### Sequence Diagram
 The following sequence diagram shows how the add function works:
+
 <img src="images/AddSequenceDiagram.png"/>
+
+Note: 
+- UserInput is a placeholder in the sequence diagram for the actual user input without the first word "add"
+  - An example UserInput could be: "/i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B /g Fiction /s lost"
+- parseIsbn(UserInput), parseTitle(UserInput), parseTag(UserInput), parseStatus(UserInput) are common methods called by all resources from ParseResource* to ParseResource.
+  Every resource will call more methods specific to the attributes of the resource.
+
+#### Note
+- The word "Resource*" can be replaced by any of the resources 
+  - For example, ParseResource* and CreateResource* can be interpreted as ParseBook and CreateBook for the process of adding a book
+- The word "Attribute*" can be replaced by any of the attributes
+  - For example, parseAttribute* can be interpreted as parseTag or parseIsbn or parseTitle, etc
 
 ### Show Resources Feature
 
@@ -407,14 +477,14 @@ With quick command-based actions, they can manage library's resources and events
 | v1.0    | librarian | view a list of books that the library has                                                  | have an overview of all the books                                              |
 | v1.0    | librarian | add new books to our inventory by entering their title, author, ISBN, and publication year | keep our collection up-to-date                                                 |
 | v1.0    | librarian | delete books from the database                                                             | let the patrons know our library no longer carries it                          |
-| v1.0    | librarian | tag a book as physical medium like newspapers, audio cds, books or online like eJournals   | patrons can know what type are available                                       |
+| v1.0    | librarian | tag a book as physical medium like newspapers, audio cds, books or online like eMagazines  | patrons can know what type are available                                       |
 | v1.0    | librarian | have a help function                                                                       | know the commands of this programme                                            |
 | v1.0    | librarian | quickly find out how many books we have of a particular author and the names of the books  | know how many books are related to the author                                  |
 | v2.0    | librarian | import/export our library's inventory data to a file format                                | easily share with other libraries to be used for backup and archival purposes. |
 | v2.0    | librarian | find a to-do item by name                                                                  | locate a to-do without having to go through the entire list                    |
 | v2.0    | librarian | get the status of an item                                                                  | know if it is available                                                        |
 | v2.0    | librarian | update the details of a resource                                                           | fix any mistakes and maintain consistency                                      |
-| v2.0    | librarian | add in different types of resources                                                        | differentiate between resources such as magazines, cds...                      |
+| v2.1    | librarian | add in different types of resources                                                        | differentiate between resources such as magazines, cds...                      |
 
 
 ## Use Cases
@@ -425,18 +495,18 @@ With quick command-based actions, they can manage library's resources and events
 
 #### MSS
 1. User requests to add a book
-2. AddressBook adds the book
+2. SysLib adds the book
 
     Use case ends.
 
 #### Extensions
-- 1a. The given ID is invalid.
-  - 1a1. SysLib shows an error message.
+- 1a. The given ISBN is invalid.
+  - 1a1. SysLib displays an error message.
     
     Use case ends.
   
 - 1b. Insufficient data given.
-  - 1b1. SysLib shows an error message.
+  - 1b1. SysLib displays an error message.
 
     Use case ends.
 
@@ -487,7 +557,7 @@ help
 Example response:
 ```
 Commands available:
-add: adds a new resource to the library inventory.(e.g. add /id ID /t TITLE /a AUTHOR /tag TAG /i ISBN [/g GENRE])
+add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
 delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
 list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
 find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
@@ -497,13 +567,13 @@ For more information, please refer to our user guide at:https://ay2324s1-cs2113t
 ____________________________________________________________
 ```
 Example input:
-
 ```
-add /id 1 /t The Great Gatsby /a F. Scott Fitzgerald /tag B /i 9780023381201 /g Novel, Fiction, Tragedy /s lost
+add /i 9780763630187 /t Harry Squatter /a J.K. /tag b /g History /s lost
 ```
 Example response:
 ```
-This book is added: The Great Gatsby
+This book is added:
+[B]  ID: 1 Title: Harry Squatter ISBN: 9780763630187 Author: J.K. Genre: History Status: LOST Received Date: 11 Nov 2023
 ____________________________________________________________
 ```
 Example input:
@@ -549,37 +619,41 @@ Example response:
 Bye, hope to see you again soon!
 ____________________________________________________________
 ```
-### Launch and Shutdown
+### Launch & Shutdown
 
 1. Initial launch
    1. Download the jar file and copy it into an empty folder.
-   2. Open the command prompt and run `java -jar SysLib.jar`.
+   2. Open the command prompt / terminal and run `java -jar SysLib.jar`.
+2. Shutdown
+   1. Enter the command "exit" into the program.
+   2. Close the command prompt / terminal.
 
 
 ### Adding a Book
 1. Add a book
-   1. Test case: `add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B`
+   1. Test case: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B`
 
-       Expected: A book with ID: 0005, Title: Frankenstein, Author: Mary Shelley, and ISBN: FKS0001 is created and added 
-       into the list. A message is shown to acknowledge that the book has been added successfully.
+       Expected: A book with ISBN: 9783161484100, Title: Crime and Punishment, Author: Dostoevsky, and Status: AVAILABLE 
+       is created and added into the list. A message with details of the added book is displayed to acknowledge that the 
+       book has been added successfully.
    
-   2. Test case: `add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction`
+   2. Test case: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B /g Fiction /s lost`
 
-       Expected: A book with ID: 0005, Title: Frankenstein, Author: Mary Shelley, ISBN: FKS0001, and 
-       Genres: Gothic, Fiction is created and added into the list. A message is shown to acknowledge that the book 
-       has been added successfully.
+       Expected: A book with ISBN: 9783161484100, Title: Crime and Punishment, Author: Dostoevsky, Genre: Fiction, and 
+       Status: LOST is created and added into the list. A message with details of the added book is displayed to 
+       acknowledge that the book has been added successfully.
    
-   3. Test case: `add /id abcd /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction`
+   3. Test case: `add /i CAP123 /t Crime and Punishment /a Dostoevsky /tag B`
         
-       Expected: No book is added. An error message is shown to indicate that the id is invalid.
+       Expected: No book is added. An error message is displayed to indicate that the ISBN is invalid.
 
-   4. Test case: `add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag A /g Gothic, Fiction`
+   4. Test case: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag A`
 
-      Expected: No book is added. An error message is shown to indicate that the tag is invalid.
+      Expected: No book is added. An error message is displayed to indicate that the tag is invalid.
 
-   5. Test case: `add /id 0005 /t Frankenstein`
+   5. Test case: `add /tag B`
    
-      Expected: No book is added. An error message is shown to indicate that the input is incomplete.
+      Expected: No book is added. An error message displayed to indicate that the input is incomplete.
 
 ### Listing Resources
 

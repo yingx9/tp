@@ -65,6 +65,7 @@ public class AddCommand extends Command{
     private static final String TYPE_OPTION = "ty";
     private static final String ISSUE_OPTION = "is";
     private static final String EDITION_OPTION = "ed";
+    private static final int RESOURCEID_INCREMENT = 1;
     private static final Logger ADDLOGGER = Logger.getLogger(AddCommand.class.getName());
     private static String feedbackToUser;
     private int resourceID;
@@ -190,7 +191,7 @@ public class AddCommand extends Command{
 
         feedbackToUser = "";
 
-        resourceID = container.getResourceList().size() + 1;
+        resourceID = container.getResourceList().size() + RESOURCEID_INCREMENT;
         String tag = parseAddCommand(statement);
 
         if (tag.equalsIgnoreCase(BOOK_TAG)) {
