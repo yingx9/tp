@@ -32,7 +32,7 @@ public class ParseCD {
                 args[2] = matcher.group(3).trim(); // creator
                 args[3] = matcher.group(5).trim(); // type
                 if (isStatusMatching) {
-                    args[4] = matcher.group(7).trim(); // status
+                    args[4] = matcher.group(6).trim(); // status
                 }
                 args[5] = matcher.group(4).trim(); // tag
 

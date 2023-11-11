@@ -31,7 +31,7 @@ public class ParseMagazine {
                 args[2] = matcher.group(3).trim(); // brand
                 args[3] = matcher.group(5).trim(); // issue
                 if (isStatusMatching) {
-                    args[4] = matcher.group(7).trim(); // status
+                    args[4] = matcher.group(6).trim(); // status
                 }
                 args[5] = matcher.group(4).trim(); // tag
 
