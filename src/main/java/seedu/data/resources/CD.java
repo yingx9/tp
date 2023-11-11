@@ -17,6 +17,7 @@ public class CD extends Resource {
         setType(type);
         setId(id);
     }
+
     public String getCreator() {
         return creator;
     }
@@ -47,7 +48,6 @@ public class CD extends Resource {
                 getDateReceived());
         return tableFormatter;
     }
-
 
     @Override
     public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){

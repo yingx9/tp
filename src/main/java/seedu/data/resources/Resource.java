@@ -15,9 +15,7 @@ public class Resource {
     private String isbn;
     private int id;
     private Status status;
-
     private LocalDateTime dateReceived; //To keep track of when the resource was entered into the system
-    
 
     public Resource(String title, String isbn, int id, Status status){
         setTitle(title);

@@ -9,11 +9,14 @@ import seedu.data.resources.ENewspaper;
 import seedu.data.resources.CD;
 
 import static seedu.parser.Parser.getStatusFromString;
+import static seedu.ui.Messages.ASSERT_ARGUMENTS;
+import static seedu.ui.Messages.ASSERT_ID;
+import static seedu.ui.Messages.ATTENTION_GENRE;
 
 public class CreateResource {
     public static Book createBook(String[] args, int id) throws IllegalStateException, NumberFormatException {
-        assert args != null : "Arguments should not be null";
-        assert id > 0 : "ID should be greater than 0";
+        assert args != null : ASSERT_ARGUMENTS;
+        assert id > 0 : ASSERT_ID;
 
         String isbn = args[0];
         String title = args[1];
@@ -27,15 +30,15 @@ public class CreateResource {
             genres = genre.split(", ");
         }
         if (genres[0] == null) {
-            System.out.println("Attention: Genre is not stated. Genre not set.");
+            System.out.println(ATTENTION_GENRE);
         }
 
         return new Book(title, isbn, author, genres, id, status);
     }
 
     public static EBook createEBook(String[] args, int id) throws IllegalStateException, NumberFormatException {
-        assert args != null : "Arguments should not be null";
-        assert id > 0 : "ID should be greater than 0";
+        assert args != null : ASSERT_ARGUMENTS;
+        assert id > 0 : ASSERT_ID;
 
         String isbn = args[0];
         String title = args[1];
@@ -54,8 +57,8 @@ public class CreateResource {
     }
 
     public static CD createCD(String[] args, int id) throws IllegalStateException, NumberFormatException {
-        assert args != null : "Arguments should not be null";
-        assert id > 0 : "ID should be greater than 0";
+        assert args != null : ASSERT_ARGUMENTS;
+        assert id > 0 : ASSERT_ID;
 
         String isbn = args[0];
         String title = args[1];
@@ -67,8 +70,8 @@ public class CreateResource {
     }
 
     public static Magazine createMagazine(String[] args, int id) throws IllegalStateException, NumberFormatException {
-        assert args != null : "Arguments should not be null";
-        assert id > 0 : "ID should be greater than 0";
+        assert args != null : ASSERT_ARGUMENTS;
+        assert id > 0 : ASSERT_ID;
 
         String isbn = args[0];
         String title = args[1];
@@ -79,9 +82,9 @@ public class CreateResource {
         return new Magazine(title, isbn, brand, issue, id, status);
     }
 
-    public static Magazine createEMagazine(String[] args, int id) throws IllegalStateException, NumberFormatException {
-        assert args != null : "Arguments should not be null";
-        assert id > 0 : "ID should be greater than 0";
+    public static EMagazine createEMagazine(String[] args, int id) throws IllegalStateException, NumberFormatException {
+        assert args != null : ASSERT_ARGUMENTS;
+        assert id > 0 : ASSERT_ID;
 
         String isbn = args[0];
         String title = args[1];
@@ -95,8 +98,8 @@ public class CreateResource {
 
     public static Newspaper createNewspaper(String[] args, int id) throws IllegalStateException,
             NumberFormatException {
-        assert args != null : "Arguments should not be null";
-        assert id > 0 : "ID should be greater than 0";
+        assert args != null : ASSERT_ARGUMENTS;
+        assert id > 0 : ASSERT_ID;
 
         String isbn = args[0];
         String title = args[1];
@@ -109,8 +112,8 @@ public class CreateResource {
 
     public static ENewspaper createENewspaper(String[] args, int id) throws IllegalStateException,
             NumberFormatException {
-        assert args != null : "Arguments should not be null";
-        assert id > 0 : "ID should be greater than 0";
+        assert args != null : ASSERT_ARGUMENTS;
+        assert id > 0 : ASSERT_ID;
 
         String isbn = args[0];
         String title = args[1];
