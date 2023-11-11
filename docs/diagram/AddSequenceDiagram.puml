@@ -2,58 +2,90 @@
 !include Style.puml
 skinparam ArrowFontStyle plain
 
-participant ":SysLib" as SYSLIB SYSLIB_COLOR
-participant ":UI" as UI UI_COLOR
-actor User as USER USER_COLOR
+box Parser
 participant ":Parser" as PARSER PARSER_COLOR
-
-box Command
-participant ":AddCommand" as ADDCOMMAND COMMAND_COLOR
-participant ":Command" as COMMAND COMMAND_COLOR
+participant ":ParseResource*" as PARSERESOURCE PARSER_COLOR
+participant ":ParseResource" as PARSE PARSER_COLOR
 end box
 
-SYSLIB -[SYSLIB_COLOR]> UI : readCommand()
-activate SYSLIB SYSLIB_COLOR
-activate UI UI_COLOR
+box Command
+participant ":CommandResult" as COMMANDRESULT COMMAND_COLOR
+participant ":AddCommand" as ADDCOMMAND COMMAND_COLOR
+end box
 
-USER -[USER_COLOR]> UI : "add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction"
+participant ":CreateResource*" as CREATE CREATE_COLOR
 
-UI --[UI_COLOR]> SYSLIB : input: String
-deactivate UI
-
-SYSLIB -[SYSLIB_COLOR]> PARSER : process("add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction")
 activate PARSER PARSER_COLOR
+PARSER -[PARSER_COLOR]> ADDCOMMAND : execute(UserInput)
+activate ADDCOMMAND COMMAND_COLOR
 
-alt containsKey
-    PARSER-[PARSER_COLOR]> PARSER: removeFirstWord(add /id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction)
-    activate PARSER PARSER_COLOR
-    PARSER --[PARSER_COLOR]> PARSER : "/id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction": String
-    deactivate PARSER
+ADDCOMMAND -[COMMAND_COLOR]> PARSER : parseAddCommand(UserInput)
+PARSER --[PARSER_COLOR]> ADDCOMMAND : tag: String
 
-    PARSER -[PARSER_COLOR]> ADDCOMMAND : execute("/id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction")
+alt resource*
+    ADDCOMMAND -[COMMAND_COLOR]> ADDCOMMAND : addResource*(UserInput, container)
     activate ADDCOMMAND COMMAND_COLOR
-else noKey
-    PARSER --[PARSER_COLOR]> SYSLIB
-end
 
-ADDCOMMAND -[COMMAND_COLOR]> COMMAND : parseArgument("/id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction")
-activate COMMAND COMMAND_COLOR
-COMMAND --[COMMAND_COLOR]> ADDCOMMAND : values: String[]
+    ADDCOMMAND -[COMMAND_COLOR]> PARSERESOURCE : parseAddResource*(UserInput)
+    activate PARSERESOURCE PARSER_COLOR
 
-ADDCOMMAND -[COMMAND_COLOR]> COMMAND : validate("/id 0005 /t Frankenstein /a Mary Shelley /i FKS0001 /tag B /g Gothic, Fiction", values)
-COMMAND --[COMMAND_COLOR]> ADDCOMMAND
-deactivate COMMAND
+    PARSERESOURCE -[PARSER_COLOR]> PARSERESOURCE : parseResource*Args(UserInput)
+    activate PARSERESOURCE PARSER_COLOR
 
-alt equalsIgnoreCase("b")
-    ADDCOMMAND -[COMMAND_COLOR]> PARSER : createBook(values)
-    PARSER --[PARSER_COLOR]> ADDCOMMAND : new Book (title, isbn, author, genres, id)
-    ADDCOMMAND --[COMMAND_COLOR]> PARSER
-else notEqualsIgnoreCase("b")
+    PARSERESOURCE -[PARSER_COLOR]> PARSE : parseIsbn(UserInput)
+    activate PARSE PARSER_COLOR
+    PARSE --[PARSER_COLOR]> PARSERESOURCE
+    deactivate PARSE
+
+    PARSERESOURCE -[PARSER_COLOR]> PARSE : parseTitle(UserInput)
+    activate PARSE PARSER_COLOR
+    PARSE --[PARSER_COLOR]> PARSERESOURCE
+    deactivate PARSE
+
+    PARSERESOURCE -[PARSER_COLOR]> PARSE : parseTag(UserInput)
+    activate PARSE PARSER_COLOR
+    PARSE --[PARSER_COLOR]> PARSERESOURCE
+    deactivate PARSE
+
+    PARSERESOURCE -[PARSER_COLOR]> PARSE : parseStatus(UserInput)
+    activate PARSE PARSER_COLOR
+    PARSE --[PARSER_COLOR]> PARSERESOURCE : isStatusPresent: Boolean
+    deactivate PARSE
+
+    PARSERESOURCE --[PARSER_COLOR]> PARSERESOURCE : isOptionalMatching: Boolean[]
+    deactivate PARSERESOURCE
+
+    PARSERESOURCE -[PARSER_COLOR]> PARSERESOURCE : checkEmptyResource*Args(UserInput)
+    activate PARSERESOURCE PARSER_COLOR
+    PARSERESOURCE --[PARSER_COLOR]> PARSERESOURCE
+    deactivate PARSERESOURCE
+
+    PARSERESOURCE --[PARSER_COLOR]> ADDCOMMAND : values: String[]
+
+    ADDCOMMAND -[COMMAND_COLOR]> CREATE : createResource*(values, resourceID)
+    activate CREATE CREATE_COLOR
+    CREATE --[CREATE_COLOR]> ADDCOMMAND : newResource*: Resource*
+    deactivate CREATE
+
+    ADDCOMMAND -[COMMAND_COLOR]> PARSERESOURCE : resetResource*Args()
+    PARSERESOURCE --[PARSER_COLOR]> ADDCOMMAND
+    deactivate PARSERESOURCE
+
+    ADDCOMMAND --[COMMAND_COLOR]> ADDCOMMAND
+    deactivate ADDCOMMAND
+
+    create COMMANDRESULT
+    ADDCOMMAND -[COMMAND_COLOR]> COMMANDRESULT : feedbackToUser: String
+
+    activate COMMANDRESULT COMMAND_COLOR
+    COMMANDRESULT --[COMMAND_COLOR]> PARSER
+    deactivate COMMANDRESULT
+
+else else
     ADDCOMMAND --[COMMAND_COLOR]> PARSER
     deactivate ADDCOMMAND
 end
 
-PARSER --[PARSER_COLOR]> SYSLIB
 deactivate PARSER
 
 @enduml
