@@ -1,15 +1,23 @@
 package seedu.commands;
 
+import seedu.data.GenericList;
+import seedu.data.events.Event;
 import seedu.data.resources.Book;
-import seedu.data.resources.EBook;
 import seedu.data.resources.CD;
+import seedu.data.resources.EBook;
+import seedu.data.resources.Resource;
 import seedu.data.resources.Magazine;
 import seedu.data.resources.EMagazine;
 import seedu.data.resources.Newspaper;
 import seedu.data.resources.ENewspaper;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import static seedu.data.CreateResource.createBook;
 import static seedu.data.CreateResource.createEBook;
@@ -44,110 +52,162 @@ import static seedu.ui.UI.LINEDIVIDER;
 
 
 public class AddCommand extends Command{
-    public static final String ID_OPTION = "id";
-    public static final String TITLE_OPTION = "t";
-    public static final String AUTHOR_OPTION = "a";
-    public static final String TAG_OPTION = "tag";
-    public static final String ISBN_OPTION = "i";
-    public static final String GENRE_OPTION = "g";
-    public static final String STATUS_OPTION = "s";
-    public static final String LINK_OPTION = "l";
-    public static final String CREATOR_OPTION = "c";
-    public static final String BRAND_OPTION = "b";
-    public static final String PUBLISHER_OPTION = "p";
-    public static final String TYPE_OPTION = "ty";
-    public static final String ISSUE_OPTION = "is";
-    public static final String EDITION_OPTION = "ed";
-
+    private static final String TITLE_OPTION = "t";
+    private static final String AUTHOR_OPTION = "a";
+    private static final String TAG_OPTION = "tag";
+    private static final String ISBN_OPTION = "i";
+    private static final String GENRE_OPTION = "g";
+    private static final String STATUS_OPTION = "s";
+    private static final String LINK_OPTION = "l";
+    private static final String CREATOR_OPTION = "c";
+    private static final String BRAND_OPTION = "b";
+    private static final String PUBLISHER_OPTION = "p";
+    private static final String TYPE_OPTION = "ty";
+    private static final String ISSUE_OPTION = "is";
+    private static final String EDITION_OPTION = "ed";
+    private static final int RESOURCEID_INCREMENT = 1;
+    private static final Logger ADDLOGGER = Logger.getLogger(AddCommand.class.getName());
     private static String feedbackToUser;
     private int resourceID;
 
-    public AddCommand(){
-        args = new String[]{ID_OPTION, TITLE_OPTION, AUTHOR_OPTION, TAG_OPTION, ISBN_OPTION, GENRE_OPTION,
-            STATUS_OPTION, LINK_OPTION, CREATOR_OPTION, BRAND_OPTION, PUBLISHER_OPTION, TYPE_OPTION,
-            ISSUE_OPTION, EDITION_OPTION};
-        required = new boolean[]{true, true, false, true, true, false, false, false, false, false, false, false, false
-                , false};
+    static {
+        try {
+            String logDir = System.getProperty("user.dir") + "/logs";
+            String logFile = logDir + "/addCommandLogs.log";
+            File directory = new File(logDir);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            FileHandler fileHandler = new FileHandler(logFile, true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            ADDLOGGER.addHandler(fileHandler);
+            ADDLOGGER.setLevel(Level.INFO);
+        } catch (IOException e) {
+            ADDLOGGER.log(Level.SEVERE, "Error occured while initializing log.");
+            throw new RuntimeException(e);
+        }
     }
 
-    private void addBook(String statement, Parser parser) throws SysLibException {
+    public AddCommand(){
+        args = new String[] {TAG_OPTION, ISBN_OPTION, TITLE_OPTION, AUTHOR_OPTION, GENRE_OPTION,
+            CREATOR_OPTION, BRAND_OPTION, PUBLISHER_OPTION, TYPE_OPTION, ISSUE_OPTION, EDITION_OPTION, LINK_OPTION,
+            STATUS_OPTION};
+        required = new boolean[]{true, true, true, false, false, false, false, false, false, false, false, false,
+            false};
+    }
+
+    private void addBook(String statement, GenericList<Resource, Event> container) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+        assert container != null : "Container should not be null";
+
         String[] values = parseAddBook(statement);
         Book newBook = createBook(values, resourceID);
-        parser.resourceList.add(newBook);
+        container.getResourceList().add(newBook);
         System.out.println("This book is added:"  + System.lineSeparator() + newBook.toString());
         resetBookArgs();
+        ADDLOGGER.log(Level.INFO, "Added Book: " + newBook.toString());
     }
 
-    private void addEBook(String statement, Parser parser) throws SysLibException {
+    private void addEBook(String statement, GenericList<Resource, Event> container) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+        assert container != null : "Container should not be null";
+
         String[] values = parseAddEBook(statement);
         EBook newEBook = createEBook(values, resourceID);
-        parser.resourceList.add(newEBook);
-        System.out.println("This eBook is added:" + System.lineSeparator() + newEBook.toString());
+        container.getResourceList().add(newEBook);
+        System.out.println("This e-book is added:" + System.lineSeparator() + newEBook.toString());
         resetEBookArgs();
+        ADDLOGGER.log(Level.INFO, "Added E-Book: " + newEBook.toString());
     }
 
-    private void addCD(String statement, Parser parser) throws SysLibException {
+    private void addCD(String statement, GenericList<Resource, Event> container) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+        assert container != null : "Container should not be null";
+
         String[] values = parseAddCD(statement);
         CD newCD = createCD(values, resourceID);
-        parser.resourceList.add(newCD);
+        container.getResourceList().add(newCD);
         System.out.println("This CD is added:" + System.lineSeparator() + newCD.toString());
         resetCDArgs();
+        ADDLOGGER.log(Level.INFO, "Added CD: " + newCD.toString());
     }
 
-    private void addMagazine(String statement, Parser parser) throws SysLibException {
+    private void addMagazine(String statement, GenericList<Resource, Event> container) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+        assert container != null : "Container should not be null";
+
         String[] values = parseAddMagazine(statement);
         Magazine newMagazine = createMagazine(values, resourceID);
-        parser.resourceList.add(newMagazine);
+        container.getResourceList().add(newMagazine);
         System.out.println("This magazine is added:" + System.lineSeparator() + newMagazine.toString());
         resetMagazineArgs();
+        ADDLOGGER.log(Level.INFO, "Added Magazine: " + newMagazine.toString());
     }
 
-    private void addEMagazine(String statement, Parser parser) throws SysLibException {
+    private void addEMagazine(String statement, GenericList<Resource, Event> container) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+        assert container != null : "Container should not be null";
+
         String[] values = parseAddEMagazine(statement);
         EMagazine newEMagazine = (EMagazine) createEMagazine(values, resourceID);
-        parser.resourceList.add(newEMagazine);
-        System.out.println("This eMagazine is added:" + System.lineSeparator() + newEMagazine.toString());
+        container.getResourceList().add(newEMagazine);
+        System.out.println("This e-magazine is added:" + System.lineSeparator() + newEMagazine.toString());
         resetEMagazineArgs();
+        ADDLOGGER.log(Level.INFO, "Added E-Magazine: " + newEMagazine.toString());
     }
 
-    private void addNewspaper(String statement, Parser parser) throws SysLibException {
+    private void addNewspaper(String statement, GenericList<Resource, Event> container) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+        assert container != null : "Container should not be null";
+
         String[] values = parseAddNewspaper(statement);
         Newspaper newNewspaper = createNewspaper(values, resourceID);
-        parser.resourceList.add(newNewspaper);
+        container.getResourceList().add(newNewspaper);
         System.out.println("This newspaper is added:" + System.lineSeparator() + newNewspaper.toString());
         resetNewspaperArgs();
+        ADDLOGGER.log(Level.INFO, "Added Newspaper: " + newNewspaper.toString());
     }
 
-    private void addENewspaper(String statement, Parser parser) throws SysLibException {
+    private void addENewspaper(String statement, GenericList<Resource, Event> container) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+        assert container != null : "Container should not be null";
+
         String[] values = parseAddENewspaper(statement);
         ENewspaper newENewspaper = createENewspaper(values, resourceID);
-        parser.resourceList.add(newENewspaper);
-        System.out.println("This eNewspaper is added:" + System.lineSeparator() + newENewspaper.toString());
+        container.getResourceList().add(newENewspaper);
+        System.out.println("This e-newspaper is added:" + System.lineSeparator() + newENewspaper.toString());
         resetENewspaperArgs();
+        ADDLOGGER.log(Level.INFO, "Added E-Newspaper: " + newENewspaper.toString());
     }
 
     @Override
-    public CommandResult execute(String statement, Parser parser) throws
+    public CommandResult execute(String statement, GenericList<Resource, Event> container) throws
             IllegalStateException, NumberFormatException, SysLibException {
+        assert statement != null : "Statement should not be null";
+        assert container != null : "Container should not be null";
+
+        ADDLOGGER.log(Level.INFO, "Executing Add. Input Arguments: " + statement);
+
         feedbackToUser = "";
 
-        resourceID = parser.resourceList.size() + 1;
+        resourceID = container.getResourceList().size() + RESOURCEID_INCREMENT;
         String tag = parseAddCommand(statement);
 
         if (tag.equalsIgnoreCase(BOOK_TAG)) {
-            addBook(statement, parser);
+            addBook(statement, container);
         } else if (tag.equalsIgnoreCase(EBOOK_TAG)) {
-            addEBook(statement, parser);
+            addEBook(statement, container);
         } else if (tag.equalsIgnoreCase(CD_TAG)) {
-            addCD(statement, parser);
+            addCD(statement, container);
         } else if (tag.equalsIgnoreCase(MAGAZINE_TAG)) {
-            addMagazine(statement, parser);
+            addMagazine(statement, container);
         } else if (tag.equalsIgnoreCase(EMAGAZINE_TAG)) {
-            addEMagazine(statement, parser);
+            addEMagazine(statement, container);
         } else if (tag.equalsIgnoreCase(NEWSPAPER_TAG)) {
-            addNewspaper(statement, parser);
+            addNewspaper(statement, container);
         } else if (tag.equalsIgnoreCase(ENEWSPAPER_TAG)) {
-            addENewspaper(statement, parser);
+            addENewspaper(statement, container);
         } else {
             throw new SysLibException("Please enter a valid tag." + System.lineSeparator() + LINEDIVIDER);
         }

@@ -1,6 +1,3 @@
-R | The Minds of Billy Milligan | false | TMOBM00000001 | 1 | B | 1 | LOST | 2023-11-06T20:23:06.839500200 | Daniel Keyes | Non-Fiction,Biography
-R | The Lord of the Rings | false | TLOfTR0001AAA | 1 | B | 2 | LOST | 2023-11-06T20:47:32.425840900 | John Ronald | Fantasy,Non-Fiction,Thriller,Comedy
-R | Surrounded by Idiots | false | 9781250255174 | 1 | B | 3 | AVAILABLE | 2023-11-06T21:19:41.570378800 | Thomas Erikson | Self-help
-R | The Subtle Art of Not Giving a F*ck | false | 9780062457714 | 1 | B | 4 | AVAILABLE | 2023-11-06T21:27:14.023398800 | Mark Manson | Self-help
-R | Moby Dick | false | 9780763630188 | 1 | B | 5 | AVAILABLE | 2023-11-06T21:46:27.539331700 | Herman Melville | null
-R | Moby Dick | false | 9780763630188 | 1 | B | 6 | AVAILABLE | 2023-11-06T21:46:45.647192600 | Herman Melville | null
+R | 2023 Hottest Trends | false | 9780763630188 | 1 | EM | AVAILABLE | 2023-11-09T17:24:31.143490700 | Vogue | Volume 32, Issue 5, May 2023 | www.abc.com
+R | Forbes 30 Under 30 2023 | false | 9780763630188 | 1 | EN | AVAILABLE | 2023-11-09T17:24:34.165794600 | The Straits Times | Entrepreneurs | www.abc.com
+E | CS2113 | null | 2023-12-23

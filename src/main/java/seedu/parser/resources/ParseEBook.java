@@ -17,9 +17,11 @@ import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 public class ParseEBook {
     public static String[] args = new String[7];
     public static String[] parseAddEBook(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         try {
-            String inputPattern = "^(?=.*/i ([a-zA-Z0-9]+))(?=.*/t ([^/]+))(?=.*/a ([^/]+))" +
-                    "(?=.*/tag ([\\sa-zA-Z]+))(?=.*/g ([\\w-]+(,\\s[\\w-]+)*))?(?=.*/s ([a-zA-Z]+))?" +
+            String inputPattern = "^(?=.*/i ([\\d]+))(?=.*/t ([^/]+))(?=.*/a ([^/]+))" +
+                    "(?=.*/tag ([\\s\\w]+))(?=.*/g ([\\w-]+(,\\s[\\w-]+)*))?(?=.*/s ([\\w]+))?" +
                     "(?=.*/l ([^\\s]+)).*$";
             Matcher matcher = Pattern.compile(inputPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
             boolean isMatching = matcher.find();
@@ -49,6 +51,8 @@ public class ParseEBook {
     }
 
     public static Boolean[] parseEBookArgs(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         parseIsbn(statement);
         parseTitle(statement);
         parseAuthor(statement);
@@ -59,6 +63,8 @@ public class ParseEBook {
     }
 
     public static void checkEmptyEBookArgs(String[] args) throws SysLibException {
+        assert args != null : "Arguments should not be null";
+
         if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[5].isEmpty() || args[6].isEmpty()) {
             throw new SysLibException("Please enter the ISBN, title, author, link, and tag." +
                     SEPARATOR_LINEDIVIDER);

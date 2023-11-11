@@ -16,9 +16,11 @@ import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 public class ParseCD {
     public static String[] args = new String[6];
     public static String[] parseAddCD(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         try {
-            String inputPattern = "^(?=.*/i ([a-zA-Z0-9]+))(?=.*/t ([^/]+))(?=.*/c ([^/]+))" +
-                    "(?=.*/tag ([\\sa-zA-Z]+))(?=.*/ty ([^/]+))(?=.*/s ([a-zA-Z]+))?.*$";
+            String inputPattern = "^(?=.*/i ([\\d]+))(?=.*/t ([^/]+))(?=.*/c ([^/]+))" +
+                    "(?=.*/tag ([\\s\\w]+))(?=.*/ty ([^/]+))(?=.*/s ([\\w]+))?.*$";
             Matcher matcher = Pattern.compile(inputPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
             boolean isMatching = matcher.find();
 
@@ -48,6 +50,8 @@ public class ParseCD {
     }
 
     public static Boolean parseCDArgs(String statement) throws SysLibException {
+        assert statement != null : "Statement should not be null";
+
         parseIsbn(statement);
         parseTitle(statement);
         parseCreator(statement);
@@ -56,6 +60,8 @@ public class ParseCD {
     }
 
     public static void checkEmptyCDArgs(String[] args) throws SysLibException {
+        assert args != null : "Arguments should not be null";
+
         if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[3].isEmpty() || args[5].isEmpty()) {
             throw new SysLibException("Please enter the ISBN, title, creator, type, and tag." +
                     SEPARATOR_LINEDIVIDER);

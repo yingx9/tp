@@ -1,9 +1,9 @@
 package seedu.commands;
 
-import seedu.data.resources.Book;
+import seedu.data.GenericList;
+import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
-import seedu.parser.Parser;
 import java.util.ArrayList;
 
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
@@ -15,24 +15,24 @@ public class DeleteCommand extends Command {
         required = new boolean[]{true};
     }
     @Override
-    public CommandResult execute(String statement, Parser parser) throws SysLibException {
-        int id = parseInt(parseArgument(statement)[0]);
+    public CommandResult execute(String statement, GenericList<Resource, Event> container) throws SysLibException {
+        String[] values = parseArgument(statement);
+        int id = parseInt(values[0]);
         assert id > 0;
         feedbackToUser = "";
         ArrayList<Resource> removals = new ArrayList<>();
         System.out.println("Looking for ID: " + id + "...");
-        for (Resource r: parser.resourceList){
-            Book b = (Book) r;
-            if (b.getId() == id){
-                System.out.println("This resource is removed: ");
-                System.out.println(b + SEPARATOR_LINEDIVIDER);
+        for (Resource r: container.getResourceList()){
+            if (r.getId() == id){
+                System.out.println("This resource is removed:");
+                System.out.println(r + SEPARATOR_LINEDIVIDER);
                 removals.add(r);
             }
         }
         if(removals.isEmpty()) {
-            System.out.println("No resources with id matching " + id + System.lineSeparator() + SEPARATOR_LINEDIVIDER);
+            System.out.println("No resources with id matching " + id +SEPARATOR_LINEDIVIDER);
         } else {
-            parser.resourceList.removeAll(removals);
+            container.getResourceList().removeAll(removals);
         }
         return new CommandResult(feedbackToUser);
     }
