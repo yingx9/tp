@@ -21,27 +21,30 @@ class HelpCommandTest {
 
         String output = outputStream.toString();
         String expectedOutput = "Commands available:" + System.lineSeparator() +
-                "add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR " +
-                "/tag TAG [/g GENRE /s STATUS])" + System.lineSeparator() +
-                "delete: deletes the resource with the specified ID from the library inventory. " +
+                "[add] adds a new resource to the library inventory. " +
+                "(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])" + System.lineSeparator() +
+                "[delete] deletes the resource with the specified ID from the library inventory. " +
                 "(e.g. delete /id 123456789)" + System.lineSeparator() +
-                "list: list all resources OR filter by certain tags, genre, or status. " +
-                "(e.g. list /tag B /g Fiction /s AVAILABLE)" +
-                 System.lineSeparator() +
-                "find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188 /a AUTHOR)" +
-                System.lineSeparator() + "edit: Edit a listing by entering its id to update its details. " +
+                "[list] lists all resources OR filter by certain tags, genre, or status. " +
+                "(e.g. list /tag B /g Fiction /s AVAILABLE)" + System.lineSeparator() +
+                "[find] finds a resource by title, author, ISBN or given id. " +
+                "(e.g. find /i 9780763630188 /a AUTHOR)" + System.lineSeparator() +
+                "[edit] edits a listing by entering its id to update its details. " +
                 "(e.g. edit /id 123 /t NEW_TITLE /a NEW_AUTHOR)" + System.lineSeparator() +
-                "eventadd: Add an event to the event list (e.g. eventadd /t TITLE " +
-                "/date 23 Dec 2023 [/desc DESCRIPTION])" +
-                System.lineSeparator() + "eventlist: List out all the event list (e.g. eventlist)" +
-                System.lineSeparator() + "eventdelete: Delete an event in the event list based on the index " +
+                "[eventadd] adds an event to the database. " +
+                "(e.g. eventadd /t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])" + System.lineSeparator() +
+                "[eventlist] lists out all events in the database. " +
+                "(e.g. eventlist)" + System.lineSeparator() +
+                "[eventdelete] deletes an event from the database based on the index. " +
                 "(e.g. eventdelete /i INDEX)" + System.lineSeparator() +
-                "eventedit: Edit an event in the event list based on the index " +
+                "[eventedit] edits an event in the event list based on the information given. " +
                 "(e.g. eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION])" + System.lineSeparator() +
-                "exit: displays a farewell message and exits the program (e.g. exit)" +
-                System.lineSeparator() +
-                "For more information, please refer to our user guide at:" +
-                "https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html" + System.lineSeparator() +
+                "[summary] shows a summary of all resources and the next 3 events. " +
+                "(e.g. summary)" + System.lineSeparator() +
+                "[exit] displays a farewell message and exits the program. " +
+                "(e.g. exit)" + System.lineSeparator() + System.lineSeparator() +
+                "For more information, please refer to our user guide at: https://bit.ly/SyslibUserGuide"
+                + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
 
         assertEquals(expectedOutput, output);
