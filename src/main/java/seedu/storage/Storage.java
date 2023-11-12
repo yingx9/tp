@@ -164,7 +164,7 @@ public class Storage {
             Status status = Status.valueOf(data[SEVENTH_INDEX]);
             LocalDateTime ldt = LocalDateTime.parse(data[EIGHTH_INDEX]);
 
-            switch(tag){
+            switch(tag) {
             case "B":
                 String author = data[NINTH_INDEX];
                 String[] genres = data[TENTH_INDEX].split(",");

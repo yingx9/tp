@@ -49,7 +49,7 @@ public class Newspaper extends Resource {
     }
 
     @Override
-    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
+    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth) {
 
         columnsWidth = super.checkColumnsWidths(columnsWidth);
         int publisherLength = getPublisher().length();

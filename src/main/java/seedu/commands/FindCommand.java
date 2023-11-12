@@ -80,35 +80,35 @@ public class FindCommand extends Command {
         }
     }
 
-    public void setTitle(String title){
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return this.title;
     }
 
-    public void setAuthor(String author){
+    public void setAuthor(String author) {
         this.author = author;
     }
 
-    public String getAuthor(){
+    public String getAuthor() {
         return this.author;
     }
 
-    public void setISBN(String isbn){
+    public void setISBN(String isbn) {
         this.isbn = isbn;
     }
 
-    public String getISBN(){
+    public String getISBN() {
         return this.isbn;
     }
 
-    public void setID(String id){
+    public void setID(String id) {
         this.id = id;
     }
 
-    public String getID(){
+    public String getID() {
         return this.id;
     }
 
@@ -189,7 +189,7 @@ public class FindCommand extends Command {
             String resourceType = resource.getTag();
 
             if (values[FIRST_INDEX] != null && resource.getId() != Integer.parseInt(values[FIRST_INDEX])) {
-                if (Integer.parseInt(values[FIRST_INDEX]) < 0){
+                if (Integer.parseInt(values[FIRST_INDEX]) < 0) {
                     throw new SysLibException("ID cannot be negative.");
                 }
                 isMatch = false;
