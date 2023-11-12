@@ -697,7 +697,7 @@ should be able to accomplish most of the tasks faster using commands than using 
    1. Download the jar file and copy it into an empty folder.
    2. Open the command prompt / terminal and run `java -jar SysLib.jar`.
 2. Shutdown
-   1. Enter the command "exit" into the program.
+   1. Enter the command `exit` into the program.
    2. Close the command prompt / terminal.
 
 
@@ -708,25 +708,45 @@ should be able to accomplish most of the tasks faster using commands than using 
        Expected: A book with ISBN: 9783161484100, Title: Crime and Punishment, Author: Dostoevsky, and Status: AVAILABLE 
        is created and added into the list. A message with details of the added book is displayed to acknowledge that the 
        book has been added successfully.
+
+    ```
+    This book is added:
+    [B]  ID: 1 Title: Crime and Punishment ISBN: 9783161484100 Author: Dostoevsky Genre: - Status: AVAILABLE Received Date: 12 Nov 2023
+    ____________________________________________________________
+    ```
    
    2. Test case: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B /g Fiction /s lost`
 
        Expected: A book with ISBN: 9783161484100, Title: Crime and Punishment, Author: Dostoevsky, Genre: Fiction, and 
        Status: LOST is created and added into the list. A message with details of the added book is displayed to 
        acknowledge that the book has been added successfully.
+    ```
+    This book is added:
+    [B]  ID: 2 Title: Crime and Punishment ISBN: 9783161484100 Author: Dostoevsky Genre: Fiction Status: LOST Received Date: 12 Nov 2023
+    ____________________________________________________________
+    ```
    
    3. Test case: `add /i CAP123 /t Crime and Punishment /a Dostoevsky /tag B`
         
        Expected: No book is added. An error message is displayed to indicate that the ISBN is invalid.
-
+    ```
+    Please enter a valid ISBN with 13 digits.
+    ____________________________________________________________
+    ```
    4. Test case: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag A`
 
       Expected: No book is added. An error message is displayed to indicate that the tag is invalid.
-
+    ```
+    Please enter a valid tag.
+    ____________________________________________________________
+    ```
    5. Test case: `add /tag B`
    
       Expected: No book is added. An error message displayed to indicate that the input is incomplete.
-
+    ```
+    Please enter a valid ISBN with 13 digits.
+    ____________________________________________________________
+    ```
 ### Listing Resources
 
 1. List all resources
@@ -735,14 +755,32 @@ should be able to accomplish most of the tasks faster using commands than using 
     2. Test case: `list`
 
        Expected: A table showing details of current resources, in order of BOOKS, MAGAZINE, CDs, and NEWSPAPERS.
+    ```
+   Listing all resources in the Library:
 
+                                                                 [BOOKS]
+    -----------------------------------------------------------------------------------------------------------------------------------
+    ID     Tag  Title               ISBN          Author                   Genre               Link           Status    Received Date
+    -----------------------------------------------------------------------------------------------------------------------------------
+    1      B    Crime and Punishment9783161484100 Dostoevsky               null                null           AVAILABLE 12 Nov 2023    
+
+   
+    There are currently 2 resource(s).
+    ____________________________________________________________
+    ```
    2. List when no resources are in list
        1. Prerequisites: No resources currently in SysLib
 
        2. Test case: `list`
 
        Expected: An error message saying "There are currently 0 resources."
+    ```
+    Listing all resources in the Library:
 
+
+    There are currently 0 resources.
+    ____________________________________________________________
+    ```
 3. List resources with filter options
 
    1. Test case: `list /tag B `
@@ -769,6 +807,76 @@ should be able to accomplish most of the tasks faster using commands than using 
 
 2. Other incorrect commands to try: edit X, edit /t , ...
    Expected: Invalid argument message. 
+
+Example input:
+```
+help
+```
+Example response:
+```
+Commands available:
+add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
+delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
+list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
+find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
+edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)
+exit: displays a farewell message and exits the program (e.g. exit)
+For more information, please refer to our user guide at:https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html
+____________________________________________________________
+```
+Example input:
+```
+add /i 9780763630187 /t Harry Squatter /a J.K. /tag b /g History /s lost
+```
+Example response:
+```
+This book is added:
+[B]  ID: 1 Title: Harry Squatter ISBN: 9780763630187 Author: J.K. Genre: History Status: LOST Received Date: 11 Nov 2023
+____________________________________________________________
+```
+Example input:
+```
+add /id 2 /t To Kill a Mockingbird /a Harper Lee /tag B /i 9780061120084 /g Novel, Bildungsroman, Southern Gothic, Domestic Fiction, Thriller, Legal Story
+```
+Example response:
+```
+This book is added: To Kill a Mockingbird
+____________________________________________________________
+```
+Example input:
+```
+list
+```
+Example response:
+```
+Listing all resources in the Library:
+
+1. [B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: LOST
+2. [B]  ID: 2 Title: To Kill a Mockingbird ISBN: 9780061120084 Author: Harper Lee Genre: Novel, Bildungsroman, Southern Gothic Status: AVAILABLE
+
+There are currently 2 resource(s).
+____________________________________________________________
+```
+Example input:
+```
+delete /id 1
+```
+Example response:
+```
+Looking for ID: 1...
+This resource is removed: 
+[B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: LOST
+____________________________________________________________
+```
+Example input:
+```
+exit
+```
+Example response:
+```
+Bye, hope to see you again soon!
+____________________________________________________________
+```
 
 ### Saving data
 
