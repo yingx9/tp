@@ -46,7 +46,13 @@ and validateStatement will not be called
 
 For more details on each Command check them out below
 ### Command Component
+The `Command` component is linked to the `Parser` component. 
+After the `Parser` filters out the correct command, that particular command will be executed.
 
+Each `Command` uses a `GenericList` to get events or resources to manipulate. 
+Then the commands will generate a `CommandResult` to give informative feedback to the user.
+
+<img src="images/CommandClassDiagram.png" />
 
 ### Data Component
 
