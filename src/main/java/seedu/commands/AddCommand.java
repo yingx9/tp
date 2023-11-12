@@ -91,7 +91,7 @@ public class AddCommand extends Command{
         }
     }
 
-    public AddCommand(){
+    public AddCommand() {
         args = new String[] {TAG_OPTION, ISBN_OPTION, TITLE_OPTION, AUTHOR_OPTION, GENRE_OPTION,
             CREATOR_OPTION, BRAND_OPTION, PUBLISHER_OPTION, TYPE_OPTION, ISSUE_OPTION, EDITION_OPTION, LINK_OPTION,
             STATUS_OPTION};

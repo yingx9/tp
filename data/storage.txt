@@ -1,2 +1,0 @@
-R | Crime and Punishment | false | 9783161484100 | 1 | B | LOST | 2023-11-12T22:56:29.341174900 | Dostoevsky | Fiction
-R | Frankenstein | false | 9780763630189 | 1 | CD | AVAILABLE | 2023-11-12T22:56:32.372047900 | Mary Shelley | Audio Book

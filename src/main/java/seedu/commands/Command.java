@@ -24,8 +24,8 @@ public abstract class Command {
      */
     public void validateStatement(String statement, String[] values) throws IllegalArgumentException {
         statement = statement.toLowerCase();
-        for(int pointer = 0; pointer < args.length; pointer ++) {
-            if(values[pointer] != null){
+        for (int pointer = 0; pointer < args.length; pointer ++) {
+            if (values[pointer] != null) {
                 String arg = checkDuplicate(statement, pointer);
                 statement = statement.replaceAll(arg+ "\\s*" + Pattern.quote(values[pointer].toLowerCase()), "");
             }
@@ -49,7 +49,7 @@ public abstract class Command {
             return arg;
         }
         int secondIndex = statement.indexOf(arg, firstIndex + arg.length());
-        if(secondIndex != -1) {
+        if (secondIndex != -1) {
             throw new IllegalArgumentException("Duplicate instances of " + arg);
         }
         return arg;
@@ -63,13 +63,13 @@ public abstract class Command {
      */
     public String[] parseArgument(String statement) throws IllegalArgumentException {
         String[] orderedArgs = new String[args.length];
-        for(int pointer = 0; pointer < args.length; pointer ++) {
+        for (int pointer = 0; pointer < args.length; pointer ++) {
             orderedArgs[pointer] = getMatch(statement, pointer);
-            if(orderedArgs[pointer] == null && required[pointer]){
+            if (orderedArgs[pointer] == null && required[pointer]) {
                 throw new IllegalArgumentException(args[pointer] + " is missing in the argument!"
                         + SEPARATOR_LINEDIVIDER);
             }
-            if(orderedArgs[pointer] != null && orderedArgs[pointer].isBlank()){
+            if (orderedArgs[pointer] != null && orderedArgs[pointer].isBlank()) {
                 throw new IllegalArgumentException(args[pointer] + " has a blank argument!"
                         + SEPARATOR_LINEDIVIDER);
             }
@@ -98,7 +98,7 @@ public abstract class Command {
     }
 
     public void checkMatch (String matched, int pointer){
-        if(matched.contains("/")){
+        if (matched.contains("/")) {
             throw new IllegalArgumentException("Avoid using '/' as names, your " + args[pointer] +
                     " may have been empty to give this error" + SEPARATOR_LINEDIVIDER);
         }
@@ -106,7 +106,7 @@ public abstract class Command {
     public static int parseInt(String value) {
         try {
             int tempNum = Integer.parseInt(value);
-            if (0 <= tempNum){
+            if (0 <= tempNum) {
                 return tempNum;
             }
             throw new IllegalArgumentException ("The integer argument(s) given is not a valid number!");

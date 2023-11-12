@@ -61,6 +61,7 @@ public class EventAddCommand extends Command {
         int index = binarySearch(container, currentDate);
         container.getEventsList().add(index, new Event(values[0], currentDate, values[2]));
         System.out.println("Event inserted at: " + index);
+        System.out.println(index + ": " + container.getEventsList().get(index).toString());
         System.out.println(LINEDIVIDER);
         LOGGER.info("Successfully added an event");
 
@@ -73,7 +74,7 @@ public class EventAddCommand extends Command {
      * @return index to insert to.
      */
     public static int binarySearch(GenericList<Resource, Event> container, LocalDate key) {
-        if(container.getEventsList().isEmpty()){
+        if (container.getEventsList().isEmpty()) {
             return 0;
         }
         int low = 0;
@@ -126,13 +127,13 @@ public class EventAddCommand extends Command {
      */
     public static String checkDate(String dateStr) throws IllegalArgumentException {
         String[] temp = dateStr.split(" ");
-        if(temp.length != 3){
+        if (temp.length != 3) {
             LOGGER.info("failed checkDate function");
             throw new IllegalArgumentException("Please enter a valid date in the format 'dd MMM yyyy'"
                     + SEPARATOR_LINEDIVIDER);
         }
         int first = parseInt(temp[0]);
-        if(first < 10){
+        if (first < 10) {
             return "0" + dateStr;
         }
         return dateStr;

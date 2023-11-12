@@ -112,14 +112,14 @@ public class EditCommand extends Command{
         int argsCount = 0;
 
         for (int i =1; i<givenParameters.length; i++) {
-            if (givenParameters[i] != null){
+            if (givenParameters[i] != null) {
                 argsCount++;
             }
         }
 
         boolean hasAtLeastOneArg = argsCount > 0;
 
-        if(!hasAtLeastOneArg){
+        if (!hasAtLeastOneArg) {
             EDIT_LOGGER.warning(MISSING_ARG_MESSAGE);
             throw new SysLibException(MISSING_ARG_MESSAGE);
         }
@@ -148,14 +148,14 @@ public class EditCommand extends Command{
             throws SysLibException {
 
         //Check Title, Status, and ISBN first as all resources share these attributes regardless of type
-        if(givenParameters[1] != null){
+        if (givenParameters[1] != null) {
             foundResource.setTitle(givenParameters[1]);
         }
-        if (givenParameters[5] != null){
+        if (givenParameters[5] != null) {
             foundResource.setStatus(getStatusFromString(givenParameters[5]));
         }
-        if (givenParameters[12] != null){
-            if (givenParameters[12].length() != 13){
+        if (givenParameters[12] != null) {
+            if (givenParameters[12].length() != 13) {
                 throw new SysLibException("ISBN must be 13 characters!");
             }
             foundResource.setISBN(givenParameters[12]);
@@ -163,7 +163,7 @@ public class EditCommand extends Command{
 
         String resourceTag = foundResource.getTag();
 
-        switch(resourceTag){
+        switch(resourceTag) {
         case "B":
             // Fallthrough
         case "EB":
@@ -216,7 +216,7 @@ public class EditCommand extends Command{
     private void validateNewspaperParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
             throws SysLibException {
 
-        if (resourceTag.equals("N") && givenParameters[3] != null){
+        if (resourceTag.equals("N") && givenParameters[3] != null) {
             throw new SysLibException(INVALID_EDIT_ARGS + NEWSPAPERS_ARGS_MESSAGE);
         }
 
@@ -227,7 +227,7 @@ public class EditCommand extends Command{
     private void validateMagazineParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
             throws SysLibException {
 
-        if (resourceTag.equals("M") && givenParameters[3] != null){
+        if (resourceTag.equals("M") && givenParameters[3] != null) {
             throw new SysLibException(INVALID_EDIT_ARGS + MAGAZINE_ARGS_MESSAGE);
         }
 
@@ -269,20 +269,20 @@ public class EditCommand extends Command{
 
         try {
             bookResource= (Book) foundResource;
-        } catch (ClassCastException e){
+        } catch (ClassCastException e) {
             EDIT_LOGGER.warning(NOT_BOOK_ERROR);
             throw new SysLibException(NOT_BOOK_ERROR);
         }
-        if(newAuthor != null){
+        if(newAuthor != null) {
             bookResource.setAuthor(newAuthor);
         }
 
-        if (givenParameters[4] != null){
+        if (givenParameters[4] != null) {
             String[] newGenres = givenParameters[4].split(", ");
             bookResource.setGenre(newGenres);
         }
 
-        if (bookResource instanceof EBook){
+        if (bookResource instanceof EBook) {
             if (newLink != null) {
                 EBook eBookResource = (EBook) bookResource;
                 eBookResource.setLink(newLink);
@@ -303,11 +303,11 @@ public class EditCommand extends Command{
             throw new SysLibException(NOT_CD_ERROR);
         }
 
-        if(newCreator != null){
+        if (newCreator != null) {
             cdResource.setCreator(newCreator);
         }
 
-        if (newType != null){
+        if (newType != null) {
             cdResource.setType(newType);
         }
         return cdResource;
@@ -333,7 +333,7 @@ public class EditCommand extends Command{
             magazineResource.setIssue(newIssue);
         }
 
-        if (magazineResource instanceof EMagazine){
+        if (magazineResource instanceof EMagazine) {
             if (newLink != null) {
                 EMagazine eMagazineResource = (EMagazine) magazineResource;
                 eMagazineResource.setLink(newLink);
