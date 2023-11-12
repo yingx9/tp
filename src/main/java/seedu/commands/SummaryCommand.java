@@ -27,7 +27,6 @@ import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
 
 import static seedu.ui.Messages.ASSERT_CONTAINER;
-import static seedu.ui.Messages.ASSERT_STATEMENT;
 import static seedu.ui.UI.LINEDIVIDER;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
