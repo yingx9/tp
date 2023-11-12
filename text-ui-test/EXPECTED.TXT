@@ -41,10 +41,13 @@ ____________________________________________________________
 [B]  ID: 3 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help Status: LOST Received Date: 12 Nov 2023
 ____________________________________________________________
 > Event inserted at: 0
+0: event1 | 18 Dec 2023 | null
 ____________________________________________________________
 > Event inserted at: 1
+1: event2 | 19 Jan 2024 | null
 ____________________________________________________________
 > Event inserted at: 0
+0: event3 | 20 Mar 2023 | null
 ____________________________________________________________
 > Please enter a valid date in the format 'dd MMM yyyy'
 ____________________________________________________________
@@ -101,15 +104,13 @@ ____________________________________________________________
 This resource is removed:
 [B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 12 Nov 2023
 ____________________________________________________________
-> Index is out of range of the event list!
-> This event is removed:
-event2 | 19 Jan 2024 | null
+> id is missing in the argument!
 ____________________________________________________________
-> This event is removed:
-event1 | 18 Dec 2023 | null
+> id is missing in the argument!
 ____________________________________________________________
-> This event is removed:
-event3 | 20 Mar 2023 | null
+> id is missing in the argument!
+____________________________________________________________
+> id is missing in the argument!
 ____________________________________________________________
 > Thanks for using SysLib CLI! We have saved the current resources and events.
 See you next time!

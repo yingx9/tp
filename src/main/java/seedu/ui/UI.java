@@ -46,11 +46,11 @@ public class UI {
 
     protected Scanner myScanner;
 
-    public UI(){
+    public UI() {
         this.myScanner = new Scanner(System.in);
     }
 
-    public void showWelcomeMessage(){
+    public void showWelcomeMessage() {
         showLine();
         System.out.println(LOGO);
         System.out.println("Hello! What would you like to do?");
@@ -63,7 +63,7 @@ public class UI {
         showLine();
     }
 
-    public void showHelpMessage(){
+    public void showHelpMessage() {
         System.out.println("Commands available:");
         System.out.println("[add] adds a new resource to the library inventory. " +
                 "(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])");
@@ -91,27 +91,27 @@ public class UI {
         showLine();
     }
 
-    public String readCommand(){
+    public String readCommand() {
         System.out.print("> ");
         return myScanner.nextLine();
     }
 
-    public void showNoFileFoundMessage(String filePath){
+    public void showNoFileFoundMessage(String filePath) {
         showLine();
         System.out.println("Storage file not found.");
         System.out.println("Creating new data file @ " + filePath);
     }
 
-    public void showFileFoundMessage(String filePath){
+    public void showFileFoundMessage(String filePath) {
         showLine();
         System.out.println("Storage file found @ " + filePath);
     }
 
-    public void showLoadMessage(String filepath, List<Resource> resourcelist, List<Event> eventlist){
+    public void showLoadMessage(String filepath, List<Resource> resourcelist, List<Event> eventlist) {
         System.out.printf("Loaded %d resources and %d events!%n", resourcelist.size(), eventlist.size());
     }
 
-    public void showLine(){
+    public void showLine() {
         System.out.println(LINEDIVIDER);
     }
 

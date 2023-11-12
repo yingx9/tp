@@ -39,7 +39,7 @@ public class EditCommandTest {
     private Command editCommand = new EditCommand();
 
     @BeforeAll
-    public static void setup()  {
+    public static void setup() {
         testResourceList = TestUtil.fillTestList();
         parser.container.setResourceList(testResourceList);
 
@@ -175,7 +175,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void testNoArgumentGiven()  {
+    public void testNoArgumentGiven() {
         executeAssertSysLibExceptionThrown("/id 123", MISSING_ARG_MESSAGE);
 
     }
@@ -189,42 +189,42 @@ public class EditCommandTest {
     }
 
     @Test
-    public void testEditStatusError(){
+    public void testEditStatusError() {
         executeAssertSysLibExceptionThrown("/id 2 /s INVALIDSTATUS",
                 STATUS_ERROR_MESSAGE);
     }
 
     @Test
-    public void testEditISBNError(){
+    public void testEditISBNError() {
         executeAssertSysLibExceptionThrown("/id 2 /i invalid",
                 "ISBN must be 13 characters!");
     }
 
     @Test
-    public void testEditBookLinkError(){
+    public void testEditBookLinkError() {
         executeAssertSysLibExceptionThrown("/id 2 /l dummyLink",
                 INVALID_EDIT_ARGS + BOOK_ARGS_MESSAGE);
     }
 
     @Test
-    public void testEditNewspaperLinkError(){
+    public void testEditNewspaperLinkError() {
         executeAssertSysLibExceptionThrown("/id 9 /l dummyLink",
                 INVALID_EDIT_ARGS + NEWSPAPERS_ARGS_MESSAGE);
     }
 
     @Test
-    public void testEditMagazineLinkError(){
+    public void testEditMagazineLinkError() {
         executeAssertSysLibExceptionThrown("/id 6 /l dummyLink",
                 INVALID_EDIT_ARGS + MAGAZINE_ARGS_MESSAGE);
     }
 
     @Test
-    public void testEditBookInvalidArgsGiven(){
+    public void testEditBookInvalidArgsGiven() {
         executeAssertSysLibExceptionThrown("/id 2 /t TITLE /s LOST /p PUBLISHER /g GENRES /ed EDITION " +
                 "/c CREATOR /ty TYPE /b BRAND /is ISSUE", INVALID_EDIT_ARGS+BOOK_ARGS_MESSAGE);
     }
 
-    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage){
+    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage) {
         SysLibException exception = assertThrows(SysLibException.class, ()->editCommand.execute(
                 arguments, parser.container));
         assertEquals(expectedMessage, exception.getMessage());

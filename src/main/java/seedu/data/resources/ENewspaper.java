@@ -38,7 +38,7 @@ public class ENewspaper extends Newspaper{
         return tableFormatter;
     }
 
-    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
+    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth) {
 
         int linkLength = getLink().length();
 

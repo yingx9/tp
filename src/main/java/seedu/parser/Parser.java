@@ -71,7 +71,7 @@ public class Parser {
         } else {
             String suggestion = SuggestParser.suggest(command, commands);
             System.out.println("no commands found. Enter \"help\" for a list of commands.");
-            if (suggestion != null){
+            if (suggestion != null) {
                 System.out.println("Did you mean: '" + suggestion + "'");
             }
             System.out.println(LINEDIVIDER);

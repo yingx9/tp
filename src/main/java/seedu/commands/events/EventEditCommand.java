@@ -57,7 +57,7 @@ public class EventEditCommand extends Command {
      * Constructs an EventEditCommand with default arguments and sets up logging.
      */
     public EventEditCommand() {
-        args = new String[]{"i", "t", "date", "desc"};
+        args = new String[]{"id", "t", "date", "desc"};
         required = new boolean[]{true, false, false, false};
         LOGGER.info("EventEdit Command created");
     }
@@ -111,12 +111,12 @@ public class EventEditCommand extends Command {
 
         feedbackToUser = "";
 
-        if (values[1] == null && values[2] == null && values[3] == null){
+        if (values[1] == null && values[2] == null && values[3] == null) {
             LOGGER.info("Print nothing changed.");
             System.out.println("Event was not edited as nothing was changed." + SEPARATOR_LINEDIVIDER);
         } else {
             LOGGER.info("Print event changed.");
-            if (idx != index){
+            if (idx != index) {
                 LOGGER.info("Index changed");
                 System.out.println("Event index has changed as the date was changed.");
             }
@@ -134,7 +134,7 @@ public class EventEditCommand extends Command {
      */
     public static int binarySearch(GenericList<Resource, Event> container, LocalDate key) {
         LOGGER.info("binary search method activated.");
-        if(container.getEventsList().isEmpty()){
+        if (container.getEventsList().isEmpty()) {
             return 0;
         }
         int low = 0;
@@ -193,7 +193,7 @@ public class EventEditCommand extends Command {
      */
     public static String checkDate(String dateStr) throws IllegalArgumentException {
         String[] temp = dateStr.split(" ");
-        if(temp.length != 3){
+        if (temp.length != 3) {
 
             throw new IllegalArgumentException("Please enter a valid date in the format 'dd MMM yyyy'"
                     + SEPARATOR_LINEDIVIDER);
@@ -201,7 +201,7 @@ public class EventEditCommand extends Command {
         }
 
         int first = parseInt(temp[0]);
-        if(first < 10){
+        if (first < 10) {
 
             return "0" + dateStr;
 

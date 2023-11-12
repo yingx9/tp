@@ -18,13 +18,7 @@ public class EventListCommandTest {
 
     @Test
     public void eventListCommandOutputEmpty() throws SysLibException {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        eventListCommand.execute("", parser.container);
-        String output = outputStream.toString();
-        String expectedOutput = "The event list is empty!" + System.lineSeparator() +
-                "____________________________________________________________" + System.lineSeparator();
-        assertEquals(output, expectedOutput);
+        assertThrows(SysLibException.class, ()->eventListCommand.execute("", parser.container));
     }
 
     @Test

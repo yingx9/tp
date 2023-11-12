@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ExitCommandTest {
     @Test
-    void execute() {
+    void testExecute() {
         Parser parser = new Parser();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

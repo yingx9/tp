@@ -38,7 +38,7 @@ public class EMagazine extends Magazine {
         return tableFormatter;
     }
 
-    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
+    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth) {
 
         int linkLength = getLink().length();
 

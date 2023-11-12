@@ -11,7 +11,7 @@ import seedu.parser.Parser;
 class HelpCommandTest {
 
     @Test
-    void execute() {
+    void testExecute() {
         Parser parser = new Parser();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

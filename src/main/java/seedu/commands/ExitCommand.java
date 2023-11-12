@@ -24,13 +24,9 @@ public class ExitCommand extends Command{
         try {
             Logger rootLogger = Logger.getLogger("");
             for (java.util.logging.Handler handler : rootLogger.getHandlers()) {
-
                 if (handler instanceof java.util.logging.ConsoleHandler) {
-
                     rootLogger.removeHandler(handler);
-
                 }
-
             }
 
             FileHandler fileHandler = new FileHandler("logs/exitCommandLogs.log", true);
