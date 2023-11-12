@@ -23,7 +23,7 @@ public class AddCommandTest {
         addCommand.execute("/i 9783161484100 /t The Minds of Billy Milligan /a Daniel Keyes /tag B " +
                 "/g Non-Fiction, Biography /s LOST", parser.container);
 
-        Book newBook = (Book) parser.container.getResourceList().get(0);
+        Book newBook = (Book) parser.container.getResourcesList().get(0);
 
         assertEquals(newBook.getId(), 1);
         assertEquals(newBook.getTitle(), "The Minds of Billy Milligan");

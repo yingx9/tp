@@ -1,22 +1,91 @@
 # Developer Guide
 
+## Table of Contents
+* [About this guide](#about-this-guide)
+* [Acknowledgements](#acknowledgements)
+* [Setting up](#setting-up--getting-started)
+* [Design and Implementation](#design--implementation)
+    * [Architecture Overview](#architecture-overview--return-to-contents)
+    * [Component Overview](#component-overview--return-to-contents)
+        * [UI Component](#ui-component)
+        * [Parser Component](#parser-component)
+        * [Command Component](#command-component)
+        * [Storage Component](#storage-component)
+    * [Implementation](#implementation--return-to-contents)
+        * [Find Resources](#find-resource-feature--return-to-contents)
+        * [Add Resources](#add-resource-feature--return-to-contents)
+        * [Show Resources](#show-resources-feature--return-to-contents)
+        * [List Resources](#listing-resources-feature--return-to-contents)
+        * [Edit Resources](#edit-command-feature--return-to-contents)
+        * [Add Events](#event-add-feature--return-to-contents)
+        * [List Events](#event-list-feature--return-to-contents)
+        * [Delete Events](#event-delete-feature--return-to-contents)
+* [Product Scope](#product-scope--return-to-contents)
+* [User Stories](#user-stories--return-to-contents)
+* [Use Cases](#use-cases--return-to-contents)
+* [Non-Functional Requirements](#non-functional-requirements--return-to-contents)
+* [Glossary](#glossary--return-to-contents)
+* [Manual Testing](#instructions-for-manual-testing--return-to-contents)
+
+## About this guide
+This developer guide serves as a documentation of the development of Syslib CLI!, an application that was created to help librarians to manage their work.
+
+This technical document is meant for current and future developers of Syslib CLI! as a reference point on the design, implementation, and other technical and non-technical aspects of the application.
+
 ## Acknowledgements
 
 Reused [Style.puml](https://github.com/se-edu/addressbook-level3/blob/master/docs/diagrams/style.puml) and [CommandResult](https://github.com/se-edu/addressbook-level3/blob/master/src/main/java/seedu/address/logic/commands/CommandResult.java) class from [AddressBook](https://github.com/se-edu/addressbook-level3) with slight modifications.
 
 ## Setting Up & Getting Started
-
 1. Fork the repo at https://github.com/AY2324S1-CS2113T-W11-1/tp.
 2. Clone the fork into your computer.
+3. Set up your local repo in your IDE.
+   - Ensure that the project in your IDE is configured to run on Java JDK version 11.
+   - A guide on setting your project to use JDK 11 in your IntelliJ IDEA IDE can be found here.
+4. Run Syslib.java. If you have set up your environment correctly, you should see the following output in your terminal:
+
+```
+____________________________________________________________
+Storage file not found.
+Creating new data file @ .\data\storage.txt
+Loaded 0 resources and 0 events!
+____________________________________________________________
+             .....................                  
+          -##@*+*@*++++++++++#@++##                 
+         .@. @-=%=            *#-+%                 
+         :@  @+-  :----------. .=#%                 
+         :@  @.  *%----------@-  =%                 
+         :@  @.  #*          @=  =%                 
+         :@  @.  #*          *:  :+                 
+         :@  @.  *%-----.  .=+****+-.               
+         :@  @.   :-----.-#*-.   .:-*#-             
+         :@  @.        .%+.     .@*#+.*%.           
+         :@  @:        %=       %*  +@.=%           
+         :@  @*#*.    -@      *###***+. @-          
+         :@ .@:.=@... -@ .+*#*####      @-          
+         :@#*++++++++. %=.%+  +#       +%           
+         :@. =++++++++-.%*.+%*@.      *%.           
+          %+  ........   =#*-::   .-*%=             
+           =*************. .=+****+-.               
+ ____            _     _ _        ____ _     ___    
+/ ___| _   _ ___| |   (_) |__    / ___| |   |_ _|   
+\___ \| | | / __| |   | | '_ \  | |   | |    | | 
+ ___) | |_| \__ \ |___| | |_) | | |___| |___ | |  
+|____/ \__, |___/_____|_|_.__/   \____|_____|___| 
+       |___/                                        
+
+Hello! What would you like to do?
+____________________________________________________________
+> 
+```
+5. Type `exit` to exit the program.
+
+You are now ready to begin developing!
 
 ## Design & Implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
-### Architecture
+## Architecture Overview | [Return to contents](#table-of-contents)
 
 <img src="images/ArchitectureDiagram.png" />
-
 
 **Main components of SysLib Architecture**
 
@@ -32,6 +101,8 @@ SysLib currently consists of five main components:
 
 
    
+## Component Overview | [Return to contents](#table-of-contents)
+
 ### UI Component
 
 The UI Component consists of methods to print messages to the user as output. 
@@ -39,6 +110,7 @@ The UI Component consists of methods to print messages to the user as output.
 ### Parser Component
 
 The parsing for a generic command can be seen here:
+
 <img src="images/Parsing.png" />
 
 For some commands that does not require arguments (etc: help, exit), parseArgument
@@ -54,6 +126,7 @@ Then the commands will generate a `CommandResult` to give informative feedback t
 
 <img src="images/CommandClassDiagram.png" />
 
+
 ### Data Component
 
 The `Data` Component is implemented using the `GenericList` which acts as a container for 2 List's of types `Resource` and `Event`.
@@ -61,15 +134,31 @@ When starting the program, the GenericList will be loaded with data from the sto
 
 ### Storage Component
 
-The storage component saves all resources and events in GenericList on exit. On start, it also loads currently saved resources and events in storage.txt
+This component of Syslib CLI is mainly responsible for reading and writing application data from and to files stored on the user’s filesystem. This is to allow the user to retain the data he/she has entered into Syslib CLI and be able to continue using the data when he/she starts Syslib CLI the next time.
+
+The following class diagram shows how the storage component’s classes and how it interacts with some other components and classes in Syslib CLI:
 
 <img src="images/StorageDiagram.png" />
 
+On the user’s local filesystem, the organisation of the application files are as follows:
 
-## Implementation 
+```
+ data/        // Primary folder for storage
+ └── storage.txt                    // Text file containing a list of resources and events saved.
+ logs/        // Folder for logs of each command
+ ├── findCommandLogs.log            // Log file containing logs created by the Find Command
+ ├── addCommandLogs.log             // Log file containing logs created by the Add Command
+ ├── eventCommandLogs.log           // Log file containing logs created by the Event Commands
+ ├── helpCommandLogs.log            // Log file containing logs created by the Help Command
+ ├── listCommandLogs.log            // Log file containing logs created by the List Command
+ ├── Storage.log                    // Log file containing logs created by the Storage uses
+ └── summaryCommandLogs.log         // Log file containing logs created by the Summary Command
+```
+
+## Implementation | [Return to contents](#table-of-contents)
 This section provides details on how certain features are implemented. 
 
-### Find Resource Feature
+### Find Resource Feature | [Return to contents](#table-of-contents)
 
 The `find` command allows users to search for resources based on specified filters such as author (`/a`), ISBN (`/i`), ID (`/id`), and title (`/t`). The results will show all resources that match any of the given filters.
 
@@ -136,7 +225,7 @@ Upon receiving the `find` command, the system will:
       Expected: Resources that match both the title "The Great Gatsby" and the author "F. Scott Fitzgerald" are displayed.
 
 
-### Add Resource Feature
+### Add Resource Feature | [Return to contents](#table-of-contents)
 
 The `add` feature is responsible for processing user commands to add a new resource to SysLib. It is facilitated by 
 the `AddCommand` component. It works with `Parser` and `Command` components to parse and validate the user input. 
@@ -233,7 +322,7 @@ Step 11. Calls to `ParserResource#resetBookArgs()` prepares the arguments list f
 Step 12. Feedback to users are then sent to `CommandResult` to be displayed to the users.
 
 
-#### Sequence Diagram
+#### Sequence Diagram 
 The following sequence diagram shows how the add function works:
 
 <img src="images/AddSequenceDiagram.png"/>
@@ -250,7 +339,7 @@ Note:
 - The word "Attribute*" can be replaced by any of the attributes
   - For example, parseAttribute* can be interpreted as parseTag or parseIsbn or parseTitle, etc
 
-### Show Resources Feature
+### Show Resources Feature | [Return to contents](#table-of-contents)
 
 Show resources feature is facilitated by the `UI` and `Data` component. It makes use of a class `ResourceDisplayFormatter` in `UI` to show the details of all resources stored in `GenericList` of the `Data` component, sorted by resource type. 
 
@@ -281,7 +370,7 @@ The following sequence diagram shows how the show resources feature works in a s
 8. A final call to `getFinalDisplayFormat()` returns the final formatted message of the table and all the resource details as `messageToDisplay`
 9. `messageToDisplay` is returned to the calling function to be printed to user or for testing. 
 
-### Listing Resources Feature
+### Listing Resources Feature | [Return to contents](#table-of-contents)
 
 The `list` command is facilitated by `Parser` and `UI` component to show the details of all resources in `GenericList`. Furthermore, **filter** options can be provided to only list specific resources that match the given filters. 
 
@@ -321,7 +410,7 @@ If hasFilters returns `false`, it skips the filtering process and displays the d
 
 Finally, `ListCommand` instantiates the `CommandResult` class with a string `feedbackToUser`, which is returned to the `Parser` which will `print(commandResult.feedbackToUser)` to show the resource details.
 
-### Edit Command Feature 
+### Edit Command Feature | [Return to contents](#table-of-contents)
 
 The `edit` command is facilitated by `Parser` and `Data` component to update the attributes of any resource type. Users can edit all attributes except ID, Tag, and Received Date, and must provide at least one argument to edit when calling the `edit` command. 
 
@@ -348,7 +437,7 @@ Finally, the resource list currently in memory is updated with the new resource 
 
 
 
-### Event Add Feature
+### Event Add Feature | [Return to contents](#table-of-contents)
 
 The `eventadd` feature is responsible for processing user commands to add an event to SysLib. It is facilitated by
 the `EventAddCommand` component. It works with `Parser` and `Command` components to parse and validate the user input.
@@ -390,7 +479,7 @@ Step 7. The newly created event is forwarded to the `PARSER` to be added to the 
 
 Sequence Diagram:
 <img src="images/EventAdd.png"/>
-### Event List Feature
+### Event List Feature | [Return to contents](#table-of-contents)
 
 The `eventlist` command works with the `Parser` and `Command` component to execute the correct action. 
 This feature is responsible for listing out the events in eventList. 
@@ -419,7 +508,7 @@ Step 4. The `EVENTLISTCOMMMAND` component receives the command and performs the 
 
 Step 5. The `EVENTLISTCOMMAND` then outputs the events in the eventList.
 
-### Event Delete Feature
+### Event Delete Feature | [Return to contents](#table-of-contents)
 
 The `eventdelete` feature is responsible for processing user commands to delete an event to SysLib. 
 It is facilitated by the `EventDeleteCommand` component. 
@@ -458,7 +547,7 @@ it is within range of eventList
 
 Step 7. The selected event at the index is then deleted from the eventList.
 
-## Product scope
+## Product scope | [Return to contents](#table-of-contents)
 
 ### Target user profile
 
@@ -476,7 +565,7 @@ SysLib CLI is a robust command-line tool designed for fast typists librarians to
 With quick command-based actions, they can manage library's resources and events seamlessly. Administrative tasks are simplified, so they can focus on serving patrons better.
 
 
-## User Stories
+## User Stories | [Return to contents](#table-of-contents)
 
 | Version | As a ...  | I want to ...                                                                              | So that I can ...                                                                                  |
 |---------|-----------|--------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
@@ -493,7 +582,7 @@ With quick command-based actions, they can manage library's resources and events
 | v2.1    | librarian | add in different types of resources                                                        | differentiate between resources such as books, cds, magazines, newspapers, and electronic versions |
 
 
-## Use Cases
+## Use Cases | [Return to contents](#table-of-contents)
 
 (For all use cases below, the System is the SysLib and the Actor is the user, unless specified otherwise)
 
@@ -546,7 +635,7 @@ With quick command-based actions, they can manage library's resources and events
   - Use case ends.
 
 
-## Non-Functional Requirements
+## Non-Functional Requirements | [Return to contents](#table-of-contents)
 
 - Should work on any mainstream OS as long as it has Java 11 or above installed.
 - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -555,81 +644,15 @@ With quick command-based actions, they can manage library's resources and events
 should be able to accomplish most of the tasks faster using commands than using the mouse.
 - All user data relating to resources and events will be stored in a txt file in the same folder as this jar file.
 
-## Glossary
+## Glossary | [Return to contents](#table-of-contents)
 
 * *Resource* - A generic term for items in library inventory.
   * Further divided into: Book, EBook, Magazines, EMagazines, Newspapers, ENewspapers, and CDs. 
 
-## Instructions for Manual Testing
-Example input:
-```
-help
-```
-Example response:
-```
-Commands available:
-add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
-delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
-list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
-find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
-edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)
-exit: displays a farewell message and exits the program (e.g. exit)
-For more information, please refer to our user guide at:https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html
-____________________________________________________________
-```
-Example input:
-```
-add /i 9780763630187 /t Harry Squatter /a J.K. /tag b /g History /s lost
-```
-Example response:
-```
-This book is added:
-[B]  ID: 1 Title: Harry Squatter ISBN: 9780763630187 Author: J.K. Genre: History Status: LOST Received Date: 11 Nov 2023
-____________________________________________________________
-```
-Example input:
-```
-add /id 2 /t To Kill a Mockingbird /a Harper Lee /tag B /i 9780061120084 /g Novel, Bildungsroman, Southern Gothic, Domestic Fiction, Thriller, Legal Story
-```
-Example response:
-```
-This book is added: To Kill a Mockingbird
-____________________________________________________________
-```
-Example input:
-```
-list
-```
-Example response:
-```
-Listing all resources in the Library:
+## Instructions for Manual Testing | [Return to contents](#table-of-contents)
 
-1. [B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: LOST
-2. [B]  ID: 2 Title: To Kill a Mockingbird ISBN: 9780061120084 Author: Harper Lee Genre: Novel, Bildungsroman, Southern Gothic Status: AVAILABLE
-
-There are currently 2 resource(s).
-____________________________________________________________
-```
-Example input:
-```
-delete /id 1
-```
-Example response:
-```
-Looking for ID: 1...
-This resource is removed: 
-[B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: LOST
-____________________________________________________________
-```
-Example input:
-```
-exit
-```
-Example response:
-```
-Bye, hope to see you again soon!
-____________________________________________________________
-```
+> Note: These instructions only provide a starting point for testers to work on; Testers are expected to do more _exploratory_ testing.
+> 
 ### Launch & Shutdown
 
 1. Initial launch
@@ -708,3 +731,24 @@ ____________________________________________________________
 
 2. Other incorrect commands to try: edit X, edit /t , ...
    Expected: Invalid argument message. 
+
+### Saving data
+
+The following are some test cases for you to try: 
+
+> **Important!** These test cases are done on the assumption that storage.txt file is empty.
+> If you have some data written into these files or modified storage.txt, please do the following prior to conducting the test cases mentioned below:
+> 
+>(1) If Syslib CLI is running, exit the application.
+> 
+>(2) Backup your existing `storage.txt` file in the `data` directory.
+> 
+>(3) Delete the `data` directory (not your backup!)
+> 
+>(4) Start Syslib CLI to generate a fresh `storage.txt` in `data` directory.
+
+| Test Case                             | Command                                                                                                                                                                                                                                                          | Expected result                                                                                                                                                                                    |
+|:--------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1. Write new data into `storage.txt`. | (a) `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B `<br/>(b) `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B /g Fiction /s lost`  <br/> (c) `add /i 9780763630189 /t Frankenstein /c Mary Shelley /ty Audio Book /tag cd` | The following two lines are added to `storage.txt` on exit:<br/><br/>![storage.txt](images/StorageNewResources.png)                                                                                |
+| 2. Update data in `storage.txt`.      | `edit /id 1 /t NEWTITLE /a AUTHOR`                                                                                                                                                                                                                               | The book `Crime and Punishment` with id `1` has new title: `NEWTITLE`, new author `AUTHOR`. `storage.txt` should look something like this:<br/><br/>![storage.txt](images/StorageEditResource.png) |
+| 3. Delete data from `storage.txt`.    | `delete /id 1`                                                                                                                                                                                                                                                   | The book `Crime and Punishment` with id `1` will be removed:<br/><br/>![storage.txt](images/StorageDeleteResource.png)                                                                             |
