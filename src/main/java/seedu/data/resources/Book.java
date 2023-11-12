@@ -63,7 +63,7 @@ public class Book extends Resource {
     }
 
     @Override
-    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
+    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth) {
 
         columnsWidth = super.checkColumnsWidths(columnsWidth);
         int authorLength = getAuthor().length();

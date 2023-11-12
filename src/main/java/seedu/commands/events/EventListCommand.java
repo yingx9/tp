@@ -45,19 +45,19 @@ public class EventListCommand extends Command {
     public CommandResult execute(String statement, GenericList<Resource, Event> container) throws
             IllegalArgumentException, IllegalStateException, SysLibException {
         feedbackToUser = "";
-        if (!statement.isEmpty()){
+        if (!statement.isEmpty()) {
             LOGGER.warning("EventList was given arguments when none was expected");
             throw new IllegalArgumentException("'eventlist' command does not require arguments!"
                     + SEPARATOR_LINEDIVIDER);
         }
-        if(container.getEventsList().isEmpty()){
+        if (container.getEventsList().isEmpty()) {
             LOGGER.info("EventList is empty.");
-            System.out.println("The event list is empty!");
+            System.out.println("There are currently no Events in Syslib!");
             System.out.println(LINEDIVIDER);
         } else {
             LOGGER.info("Printing events in EventList");
             System.out.println("This is the current event list:");
-            for(int index = 0; index < container.getEventsList().size(); index += 1){
+            for (int index = 0; index < container.getEventsList().size(); index += 1) {
                 System.out.println(index + ": " + container.getEventsList().get(index).toString());
             }
             System.out.println(LINEDIVIDER);

@@ -28,7 +28,7 @@ public class SuggestParser {
                     array[firstPointer][secondPointer] = firstPointer;
                 } else {
                     int temp = 1;
-                    if(first.charAt(firstPointer - 1) == second.charAt(secondPointer - 1) ){
+                    if(first.charAt(firstPointer - 1) == second.charAt(secondPointer - 1) ) {
                         temp = 0;
                     }
                     int firstMin = Math.min(array[firstPointer - 1][secondPointer - 1] + temp,

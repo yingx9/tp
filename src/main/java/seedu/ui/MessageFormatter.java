@@ -8,13 +8,13 @@ import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
  */
 public class MessageFormatter {
 
-    public static String formatFirstLine(String message){
+    public static String formatFirstLine(String message) {
         return message + LINESEPARATOR + LINESEPARATOR;
     }
-    public static String formatLineSeparator(String message){
+    public static String formatLineSeparator(String message) {
         return message + LINESEPARATOR;
     }
-    public static String formatLastLineDivider(String message){
+    public static String formatLastLineDivider(String message) {
         return LINESEPARATOR + message + SEPARATOR_LINEDIVIDER + LINESEPARATOR;
     }
     public static String formatSeparatorLineDivider(String message) {
@@ -24,7 +24,7 @@ public class MessageFormatter {
     /**
      * Formats a line dashed divider with provided length.
      */
-    public static String formatADivider(String dividerLength){
+    public static String formatADivider(String dividerLength) {
         return String.format(dividerLength + LINESEPARATOR, "-").replace(' ', '-');
     }
 }
