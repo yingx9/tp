@@ -20,11 +20,11 @@ class GenericList<R, E> {
     - resourcesList : List<R>
     - eventsList : List<E>
     --
-    + GenericList
-    + getResourcesList : List<R>
-    + getEventsList : List<e>
-    + setResourcesList
-    + setEventsList
+    + GenericList(resourcesList: List<R>, eventsList: List<E>)
+    + getResourcesList() : List<R>
+    + getEventsList() : List<e>
+    + setResourcesList(resourcesList: List<R>): void
+    + setEventsList(eventsList: List<E>): void
 }
 
 class Resource {
