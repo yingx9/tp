@@ -24,6 +24,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import static seedu.ui.Messages.ASSERT_CONTAINER;
+import static seedu.ui.Messages.ASSERT_STATEMENT;
 import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 public class EventEditCommand extends Command {
@@ -73,6 +75,10 @@ public class EventEditCommand extends Command {
     @Override
     public CommandResult execute(String statement, GenericList<Resource, Event> container)
             throws IllegalArgumentException, IllegalStateException, SysLibException {
+
+        assert statement != null : ASSERT_STATEMENT;
+        assert container != null : ASSERT_CONTAINER;
+
         LOGGER.info("Executing EventEditCommand");
         feedbackToUser = "";
         String[] values = parseArgument(statement);

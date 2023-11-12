@@ -26,6 +26,8 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
 
+import static seedu.ui.Messages.ASSERT_CONTAINER;
+import static seedu.ui.Messages.ASSERT_STATEMENT;
 import static seedu.ui.UI.LINEDIVIDER;
 
 
@@ -62,6 +64,10 @@ public class SummaryCommand extends Command {
     @Override
     public CommandResult execute(String statement, GenericList<Resource, Event> container)
             throws SysLibException {
+
+        assert statement != null : ASSERT_STATEMENT;
+        assert container != null : ASSERT_CONTAINER;
+
         LOGGER.info("Executing Summary Command.");
         int totalResources = container.getResourceList().size();
         LOGGER.info("Retrieved resourcelist size.");
