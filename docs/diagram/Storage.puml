@@ -1,60 +1,43 @@
 @startuml
-!include Style.puml
-!include <office/Concepts/globe_internet>
-!include <office/Concepts/documents>
-!include <office/Users/user>
+'https://plantuml.com/class-diagram
+
+class Storage {
+    - filePath : String
+    - container : GenericList<Resource, Event>
+    __
+    + Storage(filePath : String, container : GenericList<Resource, Event>)
+    + load(resources : List<Resource>, events : List<Event>) : void
+    + save() : void
+    - ensureFileExists() : void
+    - createResource(data : String[], id : int) : Resource
+    - createEvent(data : String[]) : Event
+    - getResourceSaveFormat(resourceToSave : Resource) : String
+    - getEventSaveFormat(eventToSave : Event) : String
+    {static} - setupLogger() : void
+}
+
+class GenericList<R, E> {
+    - resourcesList : List<R>
+    - eventsList : List<E>
+    --
+    + GenericList
+    + getResourcesList : List<R>
+    + getEventsList : List<e>
+    + setResourcesList
+    + setEventsList
+}
+
+class Resource {
+}
+
+class Event {
+
+}
+
+' Relationships
+Storage "1" -- "1" GenericList : contains
+GenericList "1" - "*" Resource : contains
+GenericList "1" - "*" Event : contains
 
 
-actor User as User USER_COLOR
-participant "UI" as UI UI_COLOR
-participant "Storage" as Storage STORAGE_COLOR
-participant "Resource" as Resource SYSLIB_COLOR
-participant "Event" as Event SYSLIB_COLOR
-participant "Scanner" as Scanner SYSLIB_COLOR
-database "Data File" as DataFile
-
-User -> UI : initiateLoad()
-activate UI UI_COLOR
-
-UI -> Storage : load(resources, events)
-activate Storage STORAGE_COLOR
-
-Storage -> DataFile : openFile()
-activate DataFile SYSLIB_COLOR
-DataFile --> Storage : fileStream
-deactivate DataFile
-
-Storage -> Scanner : create(fileStream)
-activate Scanner SYSLIB_COLOR
-
-loop until EOF
-    Scanner -> Scanner : hasNext()
-    Scanner --> Storage : boolean
-    Storage -> Scanner : nextLine()
-    activate Scanner SYSLIB_COLOR
-    Scanner --> Storage : dataLine
-    deactivate Scanner
-
-    Storage -> Storage : parseDataLine(dataLine)
-    activate Storage STORAGE_COLOR
-    alt is ResourceType
-        Storage -> Resource : createFromData(parsedData)
-        activate Resource SYSLIB_COLOR
-        Resource --> Storage : resource
-        deactivate Resource
-        Storage -> UI : updateResourceList(resource)
-    else is EventType
-        Storage -> Event : createFromData(parsedData)
-        activate Event SYSLIB_COLOR
-        Event --> Storage : event
-        deactivate Event
-        Storage -> UI : updateEventList(event)
-    else
-        Storage -> UI : showError(error)
-    end
-end
-
-deactivate Storage
-UI --> User : loadResult()
-deactivate UI
 @enduml

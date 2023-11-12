@@ -128,11 +128,13 @@ When starting the program, the GenericList will be loaded with data from the sto
 
 ### Storage Component
 
-The storage component saves all resources and events in GenericList on exit. On start, it also loads currently saved resources and events in storage.txt
+This component of Syslib CLI is mainly responsible for reading and writing application data from and to files stored on the user’s filesystem. This is to allow the user to retain the data he/she has entered into Syslib CLI and be able to continue using the data when he/she starts Syslib CLI the next time.
+
+The following class diagram shows how the storage component’s classes and how it interacts with some other components and classes in Syslib CLI:
 
 <img src="images/StorageDiagram.png" />
 
-
+On the user’s local filesystem, the organisation of the application files are as follows:
 
 ```
  data/        // Primary folder for storage
@@ -635,75 +637,9 @@ With quick command-based actions, they can manage library's resources and events
   * Further divided into: Book, EBook, Magazines, EMagazines, Newspapers, ENewspapers, and CDs. 
 
 ## Instructions for Manual Testing | [Return to contents](#table-of-contents)
-Example input:
-```
-help
-```
-Example response:
-```
-Commands available:
-add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
-delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
-list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
-find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
-edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)
-exit: displays a farewell message and exits the program (e.g. exit)
-For more information, please refer to our user guide at:https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html
-____________________________________________________________
-```
-Example input:
-```
-add /i 9780763630187 /t Harry Squatter /a J.K. /tag b /g History /s lost
-```
-Example response:
-```
-This book is added:
-[B]  ID: 1 Title: Harry Squatter ISBN: 9780763630187 Author: J.K. Genre: History Status: LOST Received Date: 11 Nov 2023
-____________________________________________________________
-```
-Example input:
-```
-add /id 2 /t To Kill a Mockingbird /a Harper Lee /tag B /i 9780061120084 /g Novel, Bildungsroman, Southern Gothic, Domestic Fiction, Thriller, Legal Story
-```
-Example response:
-```
-This book is added: To Kill a Mockingbird
-____________________________________________________________
-```
-Example input:
-```
-list
-```
-Example response:
-```
-Listing all resources in the Library:
 
-1. [B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: LOST
-2. [B]  ID: 2 Title: To Kill a Mockingbird ISBN: 9780061120084 Author: Harper Lee Genre: Novel, Bildungsroman, Southern Gothic Status: AVAILABLE
-
-There are currently 2 resource(s).
-____________________________________________________________
-```
-Example input:
-```
-delete /id 1
-```
-Example response:
-```
-Looking for ID: 1...
-This resource is removed: 
-[B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: LOST
-____________________________________________________________
-```
-Example input:
-```
-exit
-```
-Example response:
-```
-Bye, hope to see you again soon!
-____________________________________________________________
-```
+> Note: These instructions only provide a starting point for testers to work on; Testers are expected to do more _exploratory_ testing.
+> 
 ### Launch & Shutdown
 
 1. Initial launch
@@ -782,3 +718,24 @@ ____________________________________________________________
 
 2. Other incorrect commands to try: edit X, edit /t , ...
    Expected: Invalid argument message. 
+
+### Saving data
+
+The following are some test cases for you to try: 
+
+> **Important!** These test cases are done on the assumption that storage.txt file is empty.
+> If you have some data written into these files or modified storage.txt, please do the following prior to conducting the test cases mentioned below:
+> 
+>(1) If Syslib CLI is running, exit the application.
+> 
+>(2) Backup your existing `storage.txt` file in the `data` directory.
+> 
+>(3) Delete the `data` directory (not your backup!)
+> 
+>(4) Start Syslib CLI to generate a fresh `storage.txt` in `data` directory.
+
+| Test Case                             | Command                                                                                                                                                                                                                                                          | Expected result                                                                                                                                                                                    |
+|:--------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1. Write new data into `storage.txt`. | (a) `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B `<br/>(b) `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B /g Fiction /s lost`  <br/> (c) `add /i 9780763630189 /t Frankenstein /c Mary Shelley /ty Audio Book /tag cd` | The following two lines are added to `storage.txt` on exit:<br/><br/>![storage.txt](images/StorageNewResources.png)                                                                                |
+| 2. Update data in `storage.txt`.      | `edit /id 1 /t NEWTITLE /a AUTHOR`                                                                                                                                                                                                                               | The book `Crime and Punishment` with id `1` has new title: `NEWTITLE`, new author `AUTHOR`. `storage.txt` should look something like this:<br/><br/>![storage.txt](images/StorageEditResource.png) |
+| 3. Delete data from `storage.txt`.    | `delete /id 1`                                                                                                                                                                                                                                                   | The book `Crime and Punishment` with id `1` will be removed:<br/><br/>![storage.txt](images/StorageDeleteResource.png)                                                                             |
