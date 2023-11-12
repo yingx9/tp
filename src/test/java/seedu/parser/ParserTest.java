@@ -1,15 +1,9 @@
 package seedu.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.data.resources.Book;
-import seedu.data.Status;
-import seedu.data.resources.Resource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ui.UI.LINESEPARATOR;
