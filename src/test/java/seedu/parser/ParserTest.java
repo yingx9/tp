@@ -116,11 +116,7 @@ class ParserTest {
 
     @Test
     public void testProcessCommands() {
-        //temporary fix
-        List<Resource> resources = new ArrayList<>();
-        Book book = new Book("The Subtle Art of Not Giving a F*ck /a Mark Manson", "9780062457714",
-                "Mark Manson", new String[]{"Self-help"}, 2, Status.AVAILABLE);
-        resources.add(book);
+
         //Test add
         Parser parser = new Parser();
         String validResponse = "add /i 9781250255174 /t Surrounded by Idiots /a Thomas Erikson /tag B /g Self-help";
