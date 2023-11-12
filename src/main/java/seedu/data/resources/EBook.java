@@ -52,7 +52,7 @@ public class EBook extends Book{
 
         columnsWidth = super.checkColumnsWidths(columnsWidth);
 
-        if(linkLength > columnsWidth.get(6)){
+        if (linkLength > columnsWidth.get(6)) {
             columnsWidth.set(6,linkLength+1);
 
         }

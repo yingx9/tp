@@ -18,7 +18,6 @@ import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.util.TestUtil;
 
-
 import static seedu.ui.EditCommandMessages.BOOK_ARGS_MESSAGE;
 import static seedu.ui.EditCommandMessages.INVALID_EDIT_ARGS;
 import static seedu.ui.EditCommandMessages.MAGAZINE_ARGS_MESSAGE;
@@ -230,8 +229,5 @@ public class EditCommandTest {
                 arguments, parser.container));
         assertEquals(expectedMessage, exception.getMessage());
     }
-
-
-
 
 }

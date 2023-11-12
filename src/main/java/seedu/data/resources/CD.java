@@ -55,11 +55,11 @@ public class CD extends Resource {
         int creatorLength = getCreator().length();
         int typeLength = getType().length();
 
-        if (creatorLength > columnsWidth.get(4)){
+        if (creatorLength > columnsWidth.get(4)) {
             columnsWidth.set(4,creatorLength+1);
         }
 
-        if(typeLength > columnsWidth.get(5)){
+        if (typeLength > columnsWidth.get(5)) {
             columnsWidth.set(5,typeLength+1);
         }
 

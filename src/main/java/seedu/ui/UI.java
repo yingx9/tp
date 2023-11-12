@@ -119,23 +119,21 @@ public class UI {
         if (resourcesList.isEmpty()){
             messageToDisplay += ZERO_RESOURCES_MESSAGE;
             return messageToDisplay;
-
         }
 
         ResourceDisplayFormatter resourceDisplayFormatter = new ResourceDisplayFormatter(resourcesList);
-
 
         for (Resource resource : resourcesList) {
 
             if (resource instanceof Book){
                 resourceDisplayFormatter.setBookDisplayFormatter(resource);
-            } else if (resource instanceof Magazine){
+            } else if (resource instanceof Magazine) {
                 resourceDisplayFormatter.setMagazineDisplayFormatter(resource);
             } else if(resource instanceof CD ) {
                 resourceDisplayFormatter.setCDDisplayFormatter(resource);
             } else if(resource instanceof Newspaper){
                 resourceDisplayFormatter.setNewspaperDisplayFormatter(resource);
-            } else{
+            } else {
                 throw new SysLibException("Invalid resource!");
             }
 

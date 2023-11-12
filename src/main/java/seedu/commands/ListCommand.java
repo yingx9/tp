@@ -1,15 +1,12 @@
 package seedu.commands;
 
-
 import seedu.data.GenericList;
 import seedu.data.Status;
 import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 
-
 import seedu.exception.SysLibException;
 import seedu.ui.ListCommandMessages;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -22,12 +19,10 @@ import java.util.logging.SimpleFormatter;
 
 import static seedu.ui.UI.showResourcesDetails;
 
-
 public class ListCommand extends Command {
 
     public static List<Resource> matchedResources;
     private static final Logger LIST_LOGGER = Logger.getLogger(ListCommand.class.getName());
-
     private static String tagKeyword;
     private static String genreKeyword;
     private static String statusKeyword;
@@ -35,7 +30,7 @@ public class ListCommand extends Command {
 
     static {
 
-        FileHandler listFileHandler = null;
+        FileHandler listFileHandler;
         try {
             String loggingDirectoryPath = System.getProperty("user.dir") + "/logs";
             String logFilePath = loggingDirectoryPath + "/listCommandLogs.log";
@@ -58,7 +53,6 @@ public class ListCommand extends Command {
         required = new boolean[]{false, false, false};
     }
 
-
     @Override
     public CommandResult execute(String statement, GenericList<Resource, Event> container)
             throws SysLibException, IllegalArgumentException {
@@ -73,8 +67,7 @@ public class ListCommand extends Command {
 
     }
 
-
-    public void filterResources(String[] givenParameters, List<Resource> resourceList) throws SysLibException{
+    private void filterResources(String[] givenParameters, List<Resource> resourceList) throws SysLibException{
 
         boolean hasFilters = hasFilters((givenParameters));
         boolean isTagEqualToKeyword = true;
@@ -105,21 +98,17 @@ public class ListCommand extends Command {
 
                 }
 
-
                 if (isTagEqualToKeyword && isGenreEqualToKeyword && isStatusEqualToKeyword) {
                     matchedResources.add(resource);
                 }
-
             }
             feedbackToUser +=  ListCommandMessages.FILTER_MESSAGE;
             feedbackToUser += showResourcesDetails(matchedResources);
         }
 
-
     }
 
-
-    public static boolean hasFilters(String[] givenParameters) throws SysLibException {
+    private static boolean hasFilters(String[] givenParameters) throws SysLibException {
         tagKeyword = null;
         genreKeyword = null;
         statusKeyword = null;
@@ -143,10 +132,5 @@ public class ListCommand extends Command {
         }
         return hasFilters;
     }
-
-
-
-
-
 
 }

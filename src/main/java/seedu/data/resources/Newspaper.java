@@ -55,11 +55,11 @@ public class Newspaper extends Resource {
         int publisherLength = getPublisher().length();
         int editionLength = getEdition().length();
 
-        if (publisherLength > columnsWidth.get(4)){
+        if (publisherLength > columnsWidth.get(4)) {
             columnsWidth.set(4,publisherLength+1);
         }
 
-        if(editionLength > columnsWidth.get(5)){
+        if (editionLength > columnsWidth.get(5)) {
             columnsWidth.set(5,editionLength+1);
         }
 

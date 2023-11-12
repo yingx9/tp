@@ -85,7 +85,7 @@ public class EditCommand extends Command{
 
         Resource foundResource = findResourceByID(givenIDNumber, resourcesList);
 
-        if(foundResource == null){
+        if (foundResource == null) {
             feedbackToUser += RESOURCE_NOT_FOUND;
             EDIT_LOGGER.warning(feedbackToUser);
             return new CommandResult(feedbackToUser);
@@ -126,16 +126,16 @@ public class EditCommand extends Command{
         return argsCount;
     }
 
-    private Resource findResourceByID(int givenID, List<Resource> resourceList){
+    private Resource findResourceByID(int givenID, List<Resource> resourceList) {
 
         Resource foundResource = null;
 
-        for (int i=0;i < resourceList.size(); i++) {
+        for (int i=0; i < resourceList.size(); i++) {
 
             Resource tempResource = resourceList.get(i);
 
             int resourceID = tempResource.getId();
-            if (resourceID==givenID){
+            if (resourceID==givenID) {
                 foundResource = tempResource;
                 resourceIndex = i;
                 break;
@@ -161,11 +161,9 @@ public class EditCommand extends Command{
             foundResource.setISBN(givenParameters[12]);
         }
 
-
         String resourceTag = foundResource.getTag();
 
         switch(resourceTag){
-
         case "B":
             // Fallthrough
         case "EB":
@@ -198,7 +196,7 @@ public class EditCommand extends Command{
     private void validateBookParameters(String[] givenParameters, String resourceTag, int givenArgsCount)
             throws SysLibException {
 
-        if (resourceTag.equals("B")  && givenParameters[3] != null){
+        if (resourceTag.equals("B")  && givenParameters[3] != null) {
             throw new SysLibException(INVALID_EDIT_ARGS + BOOK_ARGS_MESSAGE);
         }
 
@@ -252,14 +250,14 @@ public class EditCommand extends Command{
                                       String argsMessage) throws SysLibException {
         int argsCount = 0;
 
-        for(int i=0;i<indexToCheck.length;i++){
+        for (int i=0;i<indexToCheck.length;i++) {
             int index = indexToCheck[i];
-            if (givenParameters[index] != null){
+            if (givenParameters[index] != null) {
                 argsCount++;
             }
         }
 
-        if(argsCount != givenArgsCount){
+        if (argsCount != givenArgsCount) {
             throw new SysLibException(INVALID_EDIT_ARGS + argsMessage);
         }
     }
@@ -285,7 +283,7 @@ public class EditCommand extends Command{
         }
 
         if (bookResource instanceof EBook){
-            if(newLink != null){
+            if (newLink != null) {
                 EBook eBookResource = (EBook) bookResource;
                 eBookResource.setLink(newLink);
                 bookResource = eBookResource;
@@ -327,16 +325,16 @@ public class EditCommand extends Command{
             throw new SysLibException(NOT_MAGAZINE_ERROR);
         }
 
-        if(newBrand != null){
+        if (newBrand != null) {
             magazineResource.setBrand(newBrand);
         }
 
-        if (newIssue != null){
+        if (newIssue != null) {
             magazineResource.setIssue(newIssue);
         }
 
         if (magazineResource instanceof EMagazine){
-            if(newLink != null){
+            if (newLink != null) {
                 EMagazine eMagazineResource = (EMagazine) magazineResource;
                 eMagazineResource.setLink(newLink);
                 magazineResource = eMagazineResource;
@@ -359,16 +357,16 @@ public class EditCommand extends Command{
             throw new SysLibException(NOT_NEWSPAPER_ERROR);
         }
 
-        if(newPublisher != null){
+        if (newPublisher != null) {
             newspaperResource.setPublisher(newPublisher);
         }
 
-        if (newEdition != null){
+        if (newEdition != null) {
             newspaperResource.setEdition(newEdition);
         }
 
-        if (newspaperResource instanceof ENewspaper){
-            if(newLink != null){
+        if (newspaperResource instanceof ENewspaper) {
+            if (newLink != null) {
                 ENewspaper eNewspaperResource = (ENewspaper) newspaperResource;
                 eNewspaperResource.setLink(newLink);
                 newspaperResource = eNewspaperResource;
@@ -384,7 +382,7 @@ public class EditCommand extends Command{
             return Status.BORROWED;
         } else if (statusString.equals("lost")) {
             return Status.LOST;
-        } else if (statusString.equals("available")){
+        } else if (statusString.equals("available")) {
             return Status.AVAILABLE;
         } else {
             throw new SysLibException(STATUS_ERROR_MESSAGE);

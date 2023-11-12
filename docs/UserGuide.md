@@ -94,8 +94,7 @@ ____________________________________________________________
 
 > **Note**:
 > - Items in square brackets `[]` are optional arguments.
-> - Items with `...` after them can be used multiple times
-    >    * e.g `[/g GENRE]` ... can be used as `/g Horror /g Fantasy`
+
 
 ## Save Your Work | [Return to Contents](#contents)
 > - All resources and events in the current list will automatically be saved into an offline file `storage.txt` on exit.
@@ -562,9 +561,9 @@ Example:
 Commands available:
 add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
 delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
-list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
+list: list all resources OR filter by certain tags, genre, or status.(e.g. list /tag B /g Fiction /s AVAILABLE)
 find: find a resource by title, author(same as publisher/creator/brand), ISBN or given id. (e.g. find /i 9780763630188)
-edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)
+edit: Edit a listing by entering its id to update its details. (e.g. edit /id 123 /t NEW_TITLE /a NEW_AUTHOR)
 eventadd: Add an event to the event list (e.g. eventadd /t TITLE /date DATE [/desc DESCRIPTION])
 eventlist: List out all the event list (e.g. eventlist)
 eventdelete: Delete an event in the event list based on the index (e.g. eventdelete /i INDEX)
