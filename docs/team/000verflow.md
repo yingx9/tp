@@ -66,8 +66,10 @@ Sections contributed:
 #### Contributions to the DG:
 
 Sections contributed:
-- Storage Class section and Storage sequence diagram
+- Storage Class section and Storage class diagram
 - Find Command section and FindCommand sequence diagram
+- Manual testing for data saving
+- structural changes
 
 
 #### Contributions to team-based tasks
