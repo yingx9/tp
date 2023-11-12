@@ -1,19 +1,25 @@
 # Developer Guide
 
-## Acknowledgements
-
-Reused [Style.puml](https://github.com/se-edu/addressbook-level3/blob/master/docs/diagrams/style.puml) and [CommandResult](https://github.com/se-edu/addressbook-level3/blob/master/src/main/java/seedu/address/logic/commands/CommandResult.java) class from [AddressBook](https://github.com/se-edu/addressbook-level3) with slight modifications.
-
-## Setting Up & Getting Started
-
-1. Fork the repo at https://github.com/AY2324S1-CS2113T-W11-1/tp.
-2. Clone the fork into your computer.
-
 ## Table of Contents
+* [About this guide](#about-this-guide)
+* [Acknowledgements](#acknowledgements)
+* [Setting up](#setting-up--getting-started)
 * [Design and Implementation](#design--implementation)
-  * [Architecture Overview](#architecture-overview--return-to-contents)
-  * [Component Overview](#component-overview--return-to-contents)
-  * [Implementation Overview](#implementation-overview--return-to-contents)
+    * [Architecture Overview](#architecture-overview--return-to-contents)
+    * [Component Overview](#component-overview--return-to-contents)
+        * [UI Component](#ui-component)
+        * [Parser Component](#parser-component)
+        * [Command Component](#command-component)
+        * [Storage Component](#storage-component)
+    * [Implementation](#implementation--return-to-contents)
+        * [Find Resources](#find-resource-feature--return-to-contents)
+        * [Add Resources](#add-resource-feature--return-to-contents)
+        * [Show Resources](#show-resources-feature--return-to-contents)
+        * [List Resources](#listing-resources-feature--return-to-contents)
+        * [Edit Resources](#edit-command-feature--return-to-contents)
+        * [Add Events](#event-add-feature--return-to-contents)
+        * [List Events](#event-list-feature--return-to-contents)
+        * [Delete Events](#event-delete-feature--return-to-contents)
 * [Product Scope](#product-scope--return-to-contents)
 * [User Stories](#user-stories--return-to-contents)
 * [Use Cases](#use-cases--return-to-contents)
@@ -21,11 +27,65 @@ Reused [Style.puml](https://github.com/se-edu/addressbook-level3/blob/master/doc
 * [Glossary](#glossary--return-to-contents)
 * [Manual Testing](#instructions-for-manual-testing--return-to-contents)
 
+## About this guide
+This developer guide serves as a documentation of the development of Syslib CLI!, an application that was created to help librarians to manage their work.
+
+This technical document is meant for current and future developers of Syslib CLI! as a reference point on the design, implementation, and other technical and non-technical aspects of the application.
+
+## Acknowledgements
+
+Reused [Style.puml](https://github.com/se-edu/addressbook-level3/blob/master/docs/diagrams/style.puml) and [CommandResult](https://github.com/se-edu/addressbook-level3/blob/master/src/main/java/seedu/address/logic/commands/CommandResult.java) class from [AddressBook](https://github.com/se-edu/addressbook-level3) with slight modifications.
+
+## Setting Up & Getting Started
+1. Fork the repo at https://github.com/AY2324S1-CS2113T-W11-1/tp.
+2. Clone the fork into your computer.
+3. Set up your local repo in your IDE.
+   - Ensure that the project in your IDE is configured to run on Java JDK version 11.
+   - A guide on setting your project to use JDK 11 in your IntelliJ IDEA IDE can be found here.
+4. Run Syslib.java. If you have set up your environment correctly, you should see the following output in your terminal:
+
+```
+____________________________________________________________
+Storage file not found.
+Creating new data file @ .\data\storage.txt
+Loaded 0 resources and 0 events!
+____________________________________________________________
+             .....................                  
+          -##@*+*@*++++++++++#@++##                 
+         .@. @-=%=            *#-+%                 
+         :@  @+-  :----------. .=#%                 
+         :@  @.  *%----------@-  =%                 
+         :@  @.  #*          @=  =%                 
+         :@  @.  #*          *:  :+                 
+         :@  @.  *%-----.  .=+****+-.               
+         :@  @.   :-----.-#*-.   .:-*#-             
+         :@  @.        .%+.     .@*#+.*%.           
+         :@  @:        %=       %*  +@.=%           
+         :@  @*#*.    -@      *###***+. @-          
+         :@ .@:.=@... -@ .+*#*####      @-          
+         :@#*++++++++. %=.%+  +#       +%           
+         :@. =++++++++-.%*.+%*@.      *%.           
+          %+  ........   =#*-::   .-*%=             
+           =*************. .=+****+-.               
+ ____            _     _ _        ____ _     ___    
+/ ___| _   _ ___| |   (_) |__    / ___| |   |_ _|   
+\___ \| | | / __| |   | | '_ \  | |   | |    | | 
+ ___) | |_| \__ \ |___| | |_) | | |___| |___ | |  
+|____/ \__, |___/_____|_|_.__/   \____|_____|___| 
+       |___/                                        
+
+Hello! What would you like to do?
+____________________________________________________________
+> 
+```
+5. Type `exit` to exit the program.
+
+You are now ready to begin developing!
+
 ## Design & Implementation
 ## Architecture Overview | [Return to contents](#table-of-contents)
 
 <img src="images/ArchitectureDiagram.png" />
-
 
 **Main components of SysLib Architecture**
 
@@ -43,11 +103,11 @@ SysLib currently consists of five main components:
    
 ## Component Overview | [Return to contents](#table-of-contents)
 
-### UI Component | [Return to contents](#table-of-contents)
+### UI Component
 
 The UI Component consists of methods to print messages to the user as output. 
 
-### Parser Component | [Return to contents](#table-of-contents)
+### Parser Component
 
 The parsing for a generic command can be seen here:
 
@@ -57,20 +117,22 @@ For some commands that does not require arguments (etc: help, exit), parseArgume
 and validateStatement will not be called
 
 For more details on each Command check them out below
-### Command Component | [Return to contents](#table-of-contents)
+### Command Component
 
 
 
-### Data Component | [Return to contents](#table-of-contents)
+### Data Component
 
 The `Data` Component is implemented using the `GenericList` which acts as a container for 2 List's of types `Resource` and `Event`.
 When starting the program, the GenericList will be loaded with data from the storage file. On exit, the data from the GenericList will be saved back into the storage file.
 
-### Storage Component | [Return to contents](#table-of-contents)
+### Storage Component
 
 The storage component saves all resources and events in GenericList on exit. On start, it also loads currently saved resources and events in storage.txt
 
 <img src="images/StorageDiagram.png" />
+
+
 
 ```
  data/        // Primary folder for storage
@@ -85,7 +147,7 @@ The storage component saves all resources and events in GenericList on exit. On 
  └── summaryCommandLogs.log         // Log file containing logs created by the Summary Command
 ```
 
-## Implementation Overview | [Return to contents](#table-of-contents)
+## Implementation | [Return to contents](#table-of-contents)
 This section provides details on how certain features are implemented. 
 
 ### Find Resource Feature | [Return to contents](#table-of-contents)
@@ -300,7 +362,7 @@ The following sequence diagram shows how the show resources feature works in a s
 8. A final call to `getFinalDisplayFormat()` returns the final formatted message of the table and all the resource details as `messageToDisplay`
 9. `messageToDisplay` is returned to the calling function to be printed to user or for testing. 
 
-### Listing Resources Feature
+### Listing Resources Feature | [Return to contents](#table-of-contents)
 
 The `list` command is facilitated by `Parser` and `UI` component to show the details of all resources in `GenericList`. Furthermore, **filter** options can be provided to only list specific resources that match the given filters. 
 
