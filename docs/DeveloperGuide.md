@@ -637,6 +637,13 @@ With quick command-based actions, they can manage library's resources and events
 
 ## Non-Functional Requirements | [Return to contents](#table-of-contents)
 
+- Should work on any mainstream OS as long as it has Java 11 or above installed.
+- Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+- The system should respond to user input within 3 seconds under normal operating conditions.
+- A user with above-average typing speed for regular English text (i.e., not code, not system admin commands) 
+should be able to accomplish most of the tasks faster using commands than using the mouse.
+- All user data relating to resources and events will be stored in a txt file in the same folder as this jar file.
+
 ## Glossary | [Return to contents](#table-of-contents)
 
 * *Resource* - A generic term for items in library inventory.
