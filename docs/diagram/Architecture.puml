@@ -8,9 +8,8 @@ Package " "<<Rectangle>>{
     Class UI UI_COLOR
     Class Parser PARSER_COLOR
     Class Command COMMAND_COLOR
-    Class Main #grey
+    Class Syslib #grey
     Class Storage STORAGE_COLOR
-    Class Data DATA_COLOR
 }
 
 Class "<$user>" as User STORAGE_COLOR_T2
@@ -18,19 +17,18 @@ Class "<$documents>" as File UI_COLOR_T1
 
 User ..> UI
 
-Main -[#grey]-> UI
-Main -[#grey]-> Parser
-UI -[#green]->Parser
+Syslib -[#grey]-> UI
+Syslib -[#grey]-> Parser
 
-Main -[#grey]-> Storage
+
+Syslib -[#grey]-> Storage
 
 Parser -[#blue]-> Command
-
+Parser ..>Storage
 Command ..>Parser
 
-Parser -[#blue]-> Data
+Storage -[#red]>Parser
 
-Storage -[STORAGE_COLOR]->Data
 Storage ..>File
-
+File ..>Storage
 @enduml

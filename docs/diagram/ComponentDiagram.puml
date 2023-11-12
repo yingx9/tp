@@ -1,0 +1,55 @@
+@startuml
+!include Style.puml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+skinparam ArrowFontStyle plain
+
+participant ":Syslib" as Syslib #GREY
+participant ":Storage" as Storage STORAGE_COLOR
+participant ":Parser" as Parser PARSER_COLOR
+participant ":UI" as UI UI_COLOR
+participant ":Command" as Command COMMAND_COLOR
+
+activate Syslib #GREY
+Syslib -[#GREY]>Storage: Load data file
+
+activate Storage STORAGE_COLOR
+Storage --[STORAGE_COLOR]> Syslib: Lists with loaded data
+deactivate Storage
+
+Syslib -[#GREY]>Parser: Set Lists to returned lists
+activate Parser PARSER_COLOR
+deactivate Parser
+
+Syslib -[#GREY]>UI: Get user input
+activate UI UI_COLOR
+UI --[UI_COLOR]> Syslib: String User Input
+deactivate UI
+
+Syslib -[#GREY]> Parser : Process User Response
+activate Parser PARSER_COLOR
+
+Parser -[PARSER_COLOR]> Command: Execute Appropriate Command
+activate Command COMMAND_COLOR
+Command --[COMMAND_COLOR]>Parser: feedback to user
+deactivate Command
+deactivate Parser
+Syslib -[#GREY]> Storage: Save current data to file
+activate Storage STORAGE_COLOR
+Storage -[STORAGE_COLOR]> Parser: Get data in lists
+activate Parser PARSER_COLOR
+Parser --> Storage
+deactivate Parser
+deactivate Storage
+
+
+
+
+
+
+
+
+
+@enduml

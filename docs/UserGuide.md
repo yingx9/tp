@@ -607,7 +607,7 @@ You can try any of the following solutions to fix this issue:
   ![ListProblem.png](images/List%20Screenshots/listimage.png)
 
 - **Resize** your window by:
-  1. Move your cursor to bottom right corner of your terminal window until you see an icon with double arrows like:   ![free-resize-1438243-1216204 (1).png](..%2F..%2Fpics%2Ffree-resize-1438243-1216204%20%281%29.png)
+  1. Move your cursor to bottom right corner of your terminal window until you see an icon with double arrows like:   ![resizeicon.png](images/List Screenshots/resizeicon.png)
   2. Drag your cursor down until you see the full table 
 
 
