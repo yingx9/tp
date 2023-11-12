@@ -126,13 +126,13 @@ public class EditCommand extends Command{
         return argsCount;
     }
 
-    private Resource findResourceByID(int givenID, List<Resource> resourceList) {
+    private Resource findResourceByID(int givenID, List<Resource> resourcesList) {
 
         Resource foundResource = null;
 
-        for (int i=0; i < resourceList.size(); i++) {
+        for (int i=0; i < resourcesList.size(); i++) {
 
-            Resource tempResource = resourceList.get(i);
+            Resource tempResource = resourcesList.get(i);
 
             int resourceID = tempResource.getId();
             if (resourceID==givenID) {

@@ -67,7 +67,7 @@ public class ListCommand extends Command {
 
     }
 
-    private void filterResources(String[] givenParameters, List<Resource> resourceList) throws SysLibException{
+    private void filterResources(String[] givenParameters, List<Resource> resourcesList) throws SysLibException{
 
         boolean hasFilters = hasFilters((givenParameters));
         boolean isTagEqualToKeyword = true;
@@ -78,10 +78,10 @@ public class ListCommand extends Command {
 
         if(!hasFilters){
             feedbackToUser += ListCommandMessages.GENERIC_MESSAGE;
-            feedbackToUser += showResourcesDetails(resourceList);
+            feedbackToUser += showResourcesDetails(resourcesList);
         } else{
 
-            for (Resource resource : resourceList) {
+            for (Resource resource : resourcesList) {
 
                 if (tagKeyword != null) {
                     String resourceTag = resource.getTag();

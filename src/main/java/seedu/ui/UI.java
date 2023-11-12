@@ -96,10 +96,10 @@ public class UI {
         System.out.println("Creating new data file @ " + filePath);
     }
 
-    public void showLoadMessage(String filepath, List<Resource> resourcelist, List<Event> eventlist){
+    public void showLoadMessage(String filepath, List<Resource> resourceslist, List<Event> eventlist){
         showLine();
         System.out.println("Storage file found @ " + filepath);
-        System.out.printf("Loaded %d resources and %d events!%n", resourcelist.size(), eventlist.size());
+        System.out.printf("Loaded %d resources and %d events!%n", resourceslist.size(), eventlist.size());
     }
 
     public void showLoadMessageEmpty(String filepath){
