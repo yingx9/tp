@@ -784,28 +784,7 @@ ____________________________________________________________
     Please enter a valid ISBN with 13 digits.
     ____________________________________________________________
     ```
-### Deleting Resources
-1. Delete a resource 
-   1. Prerequisites: At least one resource present.
-   2. Test case: `delete /id 1`
 
-    Expected: Resoruce with ID 1 is removed
-    ```
-    Looking for ID: 1...
-    This resource is removed:
-    [B]  ID: 1 Title: Crime and Punishment ISBN: 9783161484100 Author: Dostoevsky Genre: null Status: AVAILABLE Received Date: 13 Nov 2023
-    ____________________________________________________________
-    ```
-2. Delete a resource that is not there
-   1. Prerequisites: Resource is non-existent
-   2. Test case: `delete /id 10`
-
-   Expected: Error message saying the resource with given ID is not found.
-   ```
-    Looking for ID: 10...
-    No resources with id matching 10
-    ____________________________________________________________
-    ```
 ### Listing Resources
 
 1. List all resources
@@ -813,7 +792,7 @@ ____________________________________________________________
    
     2. Test case: `list`
 
-       Expected: A table showing details of current resources, in order of BOOKS, MAGAZINE, CDs, and NEWSPAPERS.
+    Expected: A table showing details of current resources, in order of BOOKS, MAGAZINE, CDs, and NEWSPAPERS.
     ```
    Listing all resources in the Library:
 
@@ -867,6 +846,160 @@ ____________________________________________________________
 2. Other incorrect commands to try: edit X, edit /t , ...
    Expected: Invalid argument message.
 
+### Deleting Resources
+1. Delete a resource
+    1. Prerequisites: At least one resource present.
+    2. Test case: `delete /id 1`
+
+   Expected: Resoruce with ID 1 is removed
+    ```
+    Looking for ID: 1...
+    This resource is removed:
+    [B]  ID: 1 Title: Crime and Punishment ISBN: 9783161484100 Author: Dostoevsky Genre: null Status: AVAILABLE Received Date: 13 Nov 2023
+    ____________________________________________________________
+    ```
+2. Delete a resource that is not there
+    1. Prerequisites: Resource is non-existent
+    2. Test case: `delete /id 10`
+
+   Expected: Error message saying the resource with given ID is not found.
+   ```
+    Looking for ID: 10...
+    No resources with id matching 10
+    ____________________________________________________________
+    ```
+
+### Adding an Event
+1. Add an Event
+    1. Test case: `eventadd /t New Year /date 1 Jan 2024`
+
+       Expected: An Event with Title: New Year, Date: 1 Jan 2024, Description: null is 
+       created and added into the list. A message with details of the added event is displayed to acknowledge that the
+       event has been added successfully.
+
+    ```
+    Event inserted at: 0
+    0: New Year | 01 Jan 2024 | null
+    ____________________________________________________________
+    ```
+
+    2. Test case: `eventadd /t Meeting /date 23 Dec 2023 /desc Board Meeting`
+
+       Expected: An Event with Title: Meeting, Date: 23 Dec 2023, Description: Board Meeting is
+       created and added into the list. A message with details of the added event is displayed to acknowledge that the
+       event has been added successfully.
+    ```
+    Event inserted at: 0
+    0: Meeting | 23 Dec 2023 | Board Meeting
+    ____________________________________________________________
+    ```
+
+    3. Test case: `eventadd /date 23 Dec 2023`
+
+       Expected: No event is added. An error message is displayed to indicate that the Title is missing.
+    ```
+    t is missing in the argument!
+    ____________________________________________________________
+    ```
+    4. Test case: `eventadd /t Meeting`
+
+       Expected: No event is added. An error message is displayed to indicate that the date is missing.
+    ```
+    date is missing in the argument!
+    ____________________________________________________________
+    ```
+
+### Listing Events
+
+1. List all events
+    1. Prerequisites: At least one event present in list
+
+    2. Test case: `eventlist`
+
+   Expected: A list showing details of current events, in order of its date.
+    ```
+    This is the current event list:
+    0: Meeting | 23 Dec 2023 | Board Meeting
+    1: New Year | 01 Jan 2024 | null
+    ____________________________________________________________
+    ```
+2. List when no resources are in list
+    1. Prerequisites: No events currently in SysLib
+
+    2. Test case: `eventlist`
+
+   Expected: An error message saying "There event list is empty."
+    ```
+    The event list is empty!
+    ____________________________________________________________
+    ```
+3. List with unexpected arguments
+   1. Test case: `eventlist /t title`
+
+   Expected: An error message saying "'eventlist' command does not require arguments!"
+    ```
+    'eventlist' command does not require arguments!
+    ____________________________________________________________
+    ```
+
+### Editing an Event
+
+1. Edit a resource
+    1. Prerequisite: A list containing at least one event. Use `eventlist` to see their `ids`.
+    2. Test case: `eventedit /id 0 /t Board Meeting`
+
+       Expected: An edit success message displaying the new details of the edited event.
+    ```
+    Event edited successfully. New event details:
+    0: Board Meeting | 23 Dec 2023 | Board Meeting
+    ____________________________________________________________
+    ```
+
+   2. Test case: `eventedit /id 0 /t Meeting /date 22 Dec 2023 /desc Board Meeting with CEO`
+
+       Expected: An edit success message displaying the new details of the edited event.
+    ```
+    Event edited successfully. New event details:
+    0: Meeting | 22 Dec 2023 | Board Meeting with CEO
+    ____________________________________________________________
+    ```
+2. Edit id given but no parameters were given
+   1. Test case: `eventedit /id 0`
+   
+       Expected: An error message saying "Event was not edited as nothing was changed."
+    ```
+    Event was not edited as nothing was changed.
+    ____________________________________________________________
+    ```
+3. Invalid id was given
+    1. Test case: `eventedit /id 0`
+
+       Expected: An error message saying "Event was not edited as nothing was changed."
+    ```
+    Invalid event index
+    ____________________________________________________________
+    ```
+### Deleting Event
+1. Delete an event
+    1. Prerequisites: At least one resource present.
+    2. Test case: `eventdelete /id 0`
+
+   Expected: Event with ID 0 is removed
+    ```
+    This event is removed:
+    Meeting | 22 Dec 2023 | Board Meeting with CEO
+    ____________________________________________________________
+    ```
+2. Delete an event that is not there
+    1. Prerequisites: Event is non-existent
+    2. Test case: `eventdelete /id 10`
+
+   Expected: Error message saying the event with given ID is not found.
+    ```
+    Index is out of range of the event list!
+    ____________________________________________________________
+    ```
+   
 ### Saving data
 
 The following are some test cases for you to try: 
