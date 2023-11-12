@@ -54,8 +54,7 @@ public class EventListCommand extends Command {
             LOGGER.info("EventList is empty.");
             throw new SysLibException("There are currently no Events in Syslib!"
                     + SEPARATOR_LINEDIVIDER);
-        }
-        else {
+        } else {
             LOGGER.info("Printing events in EventList");
             System.out.println("This is the current event list:");
             for (int index = 0; index < container.getEventsList().size(); index += 1) {
