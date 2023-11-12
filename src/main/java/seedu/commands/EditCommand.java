@@ -220,8 +220,7 @@ public class EditCommand extends Command{
             throws SysLibException {
 
         if (resourceTag.equals("N") && givenParameters[3] != null){
-            throw new SysLibException(EditCommandMessages.INVALID_EDIT_ARGS +
-                    EditCommandMessages.NEWSPAPERS_ARGS_MESSAGE);
+            throw new SysLibException(INVALID_EDIT_ARGS + NEWSPAPERS_ARGS_MESSAGE);
         }
 
         int[] indexToCheck = {1,3,5,10,11,12};
@@ -232,8 +231,7 @@ public class EditCommand extends Command{
             throws SysLibException {
 
         if (resourceTag.equals("M") && givenParameters[3] != null){
-            throw new SysLibException(EditCommandMessages.INVALID_EDIT_ARGS +
-                    EditCommandMessages.MAGAZINE_ARGS_MESSAGE);
+            throw new SysLibException(INVALID_EDIT_ARGS + MAGAZINE_ARGS_MESSAGE);
         }
 
         int[] indexToCheck = {1,3,5,8,9,12};
