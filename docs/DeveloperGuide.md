@@ -11,9 +11,14 @@ Reused [Style.puml](https://github.com/se-edu/addressbook-level3/blob/master/doc
 
 ## Design & Implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Table of Contents
+* [Architecture Overview](#architecture-overview--return-to-contents)
+* [Component Overview](#component-overview--return-to-contents)
+* [Implementation Overview](#impl)
+* [Product Scope](#product-scope--return-to-contents)
 
-### Architecture
+
+## Architecture Overview | [Return to contents](#table-of-contents)
 
 <img src="images/ArchitectureDiagram.png" />
 
@@ -32,38 +37,54 @@ SysLib currently consists of five main components:
 
 
    
-### UI Component
+## Component Overview | [Return to contents](#table-of-contents)
+
+### UI Component | [Return to contents](#table-of-contents)
 
 The UI Component consists of methods to print messages to the user as output. 
 
-### Parser Component
+### Parser Component | [Return to contents](#table-of-contents)
 
 The parsing for a generic command can be seen here:
+
 <img src="images/Parsing.png" />
 
 For some commands that does not require arguments (etc: help, exit), parseArgument
 and validateStatement will not be called
 
 For more details on each Command check them out below
-### Command Component
+### Command Component | [Return to contents](#table-of-contents)
 
 
-### Data Component
+
+### Data Component | [Return to contents](#table-of-contents)
 
 The `Data` Component is implemented using the `GenericList` which acts as a container for 2 List's of types `Resource` and `Event`.
 When starting the program, the GenericList will be loaded with data from the storage file. On exit, the data from the GenericList will be saved back into the storage file.
 
-### Storage Component
+### Storage Component | [Return to contents](#table-of-contents)
 
 The storage component saves all resources and events in GenericList on exit. On start, it also loads currently saved resources and events in storage.txt
 
 <img src="images/StorageDiagram.png" />
 
+```
+ data/        // Primary folder for storage
+ └── storage.txt                    // Text file containing a list of resources and events saved.
+ logs/        // Folder for logs of each command
+ ├── findCommandLogs.log            // Log file containing logs created by the Find Command
+ ├── addCommandLogs.log             // Log file containing logs created by the Add Command
+ ├── eventCommandLogs.log           // Log file containing logs created by the Event Commands
+ ├── helpCommandLogs.log            // Log file containing logs created by the Help Command
+ ├── listCommandLogs.log            // Log file containing logs created by the List Command
+ ├── Storage.log                    // Log file containing logs created by the Storage uses
+ └── summaryCommandLogs.log         // Log file containing logs created by the Summary Command
+```
 
-## Implementation 
+## Implementation Overview | [Return to contents](#table-of-contents)
 This section provides details on how certain features are implemented. 
 
-### Find Resource Feature
+### Find Resource Feature | [Return to contents](#table-of-contents)
 
 The `find` command allows users to search for resources based on specified filters such as author (`/a`), ISBN (`/i`), ID (`/id`), and title (`/t`). The results will show all resources that match any of the given filters.
 
@@ -130,7 +151,7 @@ Upon receiving the `find` command, the system will:
       Expected: Resources that match both the title "The Great Gatsby" and the author "F. Scott Fitzgerald" are displayed.
 
 
-### Add Resource Feature
+### Add Resource Feature | [Return to contents](#table-of-contents)
 
 The `add` feature is responsible for processing user commands to add a new resource to SysLib. It is facilitated by 
 the `AddCommand` component. It works with `Parser` and `Command` components to parse and validate the user input. 
@@ -227,7 +248,7 @@ Step 11. Calls to `ParserResource#resetBookArgs()` prepares the arguments list f
 Step 12. Feedback to users are then sent to `CommandResult` to be displayed to the users.
 
 
-#### Sequence Diagram
+#### Sequence Diagram 
 The following sequence diagram shows how the add function works:
 
 <img src="images/AddSequenceDiagram.png"/>
@@ -244,7 +265,7 @@ Note:
 - The word "Attribute*" can be replaced by any of the attributes
   - For example, parseAttribute* can be interpreted as parseTag or parseIsbn or parseTitle, etc
 
-### Show Resources Feature
+### Show Resources Feature | [Return to contents](#table-of-contents)
 
 Show resources feature is facilitated by the `UI` and `Data` component. It makes use of a class `ResourceDisplayFormatter` in `UI` to show the details of all resources stored in `GenericList` of the `Data` component, sorted by resource type. 
 
@@ -315,7 +336,7 @@ If hasFilters returns `false`, it skips the filtering process and displays the d
 
 Finally, `ListCommand` instantiates the `CommandResult` class with a string `feedbackToUser`, which is returned to the `Parser` which will `print(commandResult.feedbackToUser)` to show the resource details.
 
-### Edit Command Feature 
+### Edit Command Feature | [Return to contents](#table-of-contents)
 
 The `edit` command is facilitated by `Parser` and `Data` component to update the attributes of any resource type. Users can edit all attributes except ID, Tag, and Received Date, and must provide at least one argument to edit when calling the `edit` command. 
 
@@ -342,7 +363,7 @@ Finally, the resource list currently in memory is updated with the new resource 
 
 
 
-### Event Add Feature
+### Event Add Feature | [Return to contents](#table-of-contents)
 
 The `eventadd` feature is responsible for processing user commands to add an event to SysLib. It is facilitated by
 the `EventAddCommand` component. It works with `Parser` and `Command` components to parse and validate the user input.
@@ -384,7 +405,7 @@ Step 7. The newly created event is forwarded to the `PARSER` to be added to the 
 
 Sequence Diagram:
 <img src="images/EventAdd.png"/>
-### Event List Feature
+### Event List Feature | [Return to contents](#table-of-contents)
 
 The `eventlist` command works with the `Parser` and `Command` component to execute the correct action. 
 This feature is responsible for listing out the events in eventList. 
@@ -413,7 +434,7 @@ Step 4. The `EVENTLISTCOMMMAND` component receives the command and performs the 
 
 Step 5. The `EVENTLISTCOMMAND` then outputs the events in the eventList.
 
-### Event Delete Feature
+### Event Delete Feature | [Return to contents](#table-of-contents)
 
 The `eventdelete` feature is responsible for processing user commands to delete an event to SysLib. 
 It is facilitated by the `EventDeleteCommand` component. 
@@ -452,7 +473,7 @@ it is within range of eventList
 
 Step 7. The selected event at the index is then deleted from the eventList.
 
-## Product scope
+## Product scope | [Return to contents](#table-of-contents)
 
 ### Target user profile
 
@@ -470,7 +491,7 @@ SysLib CLI is a robust command-line tool designed for fast typists librarians to
 With quick command-based actions, they can manage library's resources and events seamlessly. Administrative tasks are simplified, so they can focus on serving patrons better.
 
 
-## User Stories
+## User Stories | [Return to contents](#table-of-contents)
 
 | Version | As a ...  | I want to ...                                                                              | So that I can ...                                                                                  |
 |---------|-----------|--------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
@@ -487,7 +508,7 @@ With quick command-based actions, they can manage library's resources and events
 | v2.1    | librarian | add in different types of resources                                                        | differentiate between resources such as books, cds, magazines, newspapers, and electronic versions |
 
 
-## Use Cases
+## Use Cases | [Return to contents](#table-of-contents)
 
 (For all use cases below, the System is the SysLib and the Actor is the user, unless specified otherwise)
 
@@ -540,16 +561,14 @@ With quick command-based actions, they can manage library's resources and events
   - Use case ends.
 
 
-## Non-Functional Requirements
+## Non-Functional Requirements | [Return to contents](#table-of-contents)
 
-{Give non-functional requirements}
-
-## Glossary
+## Glossary | [Return to contents](#table-of-contents)
 
 * *Resource* - A generic term for items in library inventory.
   * Further divided into: Book, EBook, Magazines, EMagazines, Newspapers, ENewspapers, and CDs. 
 
-## Instructions for Manual Testing
+## Instructions for Manual Testing | [Return to contents](#table-of-contents)
 Example input:
 ```
 help
