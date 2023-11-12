@@ -695,11 +695,48 @@ should be able to accomplish most of the tasks faster using commands than using 
 
 1. Initial launch
    1. Download the jar file and copy it into an empty folder.
-   2. Open the command prompt / terminal and run `java -jar SysLib.jar`.
+   2. Open the command prompt / terminal and run `java -jar SysLib.jar`. You should see the following welcome message:
+```
+____________________________________________________________
+Storage file not found.
+Creating new data file @ .\data\storage.txt
+Loaded 0 resources and 0 events!
+____________________________________________________________
+             .....................                  
+          -##@*+*@*++++++++++#@++##                 
+         .@. @-=%=            *#-+%                 
+         :@  @+-  :----------. .=#%                 
+         :@  @.  *%----------@-  =%                 
+         :@  @.  #*          @=  =%                 
+         :@  @.  #*          *:  :+                 
+         :@  @.  *%-----.  .=+****+-.               
+         :@  @.   :-----.-#*-.   .:-*#-             
+         :@  @.        .%+.     .@*#+.*%.           
+         :@  @:        %=       %*  +@.=%           
+         :@  @*#*.    -@      *###***+. @-          
+         :@ .@:.=@... -@ .+*#*####      @-          
+         :@#*++++++++. %=.%+  +#       +%           
+         :@. =++++++++-.%*.+%*@.      *%.           
+          %+  ........   =#*-::   .-*%=             
+           =*************. .=+****+-.               
+ ____            _     _ _        ____ _     ___    
+/ ___| _   _ ___| |   (_) |__    / ___| |   |_ _|   
+\___ \| | | / __| |   | | '_ \  | |   | |    | | 
+ ___) | |_| \__ \ |___| | |_) | | |___| |___ | |  
+|____/ \__, |___/_____|_|_.__/   \____|_____|___| 
+       |___/                                        
+
+Hello! What would you like to do?
+____________________________________________________________
+```
 2. Shutdown
    1. Enter the command `exit` into the program.
    2. Close the command prompt / terminal.
-
+Example response:
+```
+Bye, hope to see you again soon!
+____________________________________________________________
+```
 
 ### Adding a Book
 1. Add a book
@@ -747,6 +784,28 @@ should be able to accomplish most of the tasks faster using commands than using 
     Please enter a valid ISBN with 13 digits.
     ____________________________________________________________
     ```
+### Deleting Resources
+1. Delete a resource 
+   1. Prerequisites: At least one resource present.
+   2. Test case: `delete /id 1`
+
+    Expected: Resoruce with ID 1 is removed
+    ```
+    Looking for ID: 1...
+    This resource is removed:
+    [B]  ID: 1 Title: Crime and Punishment ISBN: 9783161484100 Author: Dostoevsky Genre: null Status: AVAILABLE Received Date: 13 Nov 2023
+    ____________________________________________________________
+    ```
+2. Delete a resource that is not there
+   1. Prerequisites: Resource is non-existent
+   2. Test case: `delete /id 10`
+
+   Expected: Error message saying the resource with given ID is not found.
+   ```
+    Looking for ID: 10...
+    No resources with id matching 10
+    ____________________________________________________________
+    ```
 ### Listing Resources
 
 1. List all resources
@@ -768,12 +827,12 @@ should be able to accomplish most of the tasks faster using commands than using 
     There are currently 2 resource(s).
     ____________________________________________________________
     ```
-   2. List when no resources are in list
-       1. Prerequisites: No resources currently in SysLib
+2. List when no resources are in list
+    1. Prerequisites: No resources currently in SysLib
 
-       2. Test case: `list`
+    2. Test case: `list`
 
-       Expected: An error message saying "There are currently 0 resources."
+    Expected: An error message saying "There are currently 0 resources."
     ```
     Listing all resources in the Library:
 
@@ -806,77 +865,7 @@ should be able to accomplish most of the tasks faster using commands than using 
       Expected: An edit success message displaying the new details of the edited resource, IF resource with `id 1` is a CD (Creator is a CD argument). Else, error message saying wrong arguments and showing the right arguments.
 
 2. Other incorrect commands to try: edit X, edit /t , ...
-   Expected: Invalid argument message. 
-
-Example input:
-```
-help
-```
-Example response:
-```
-Commands available:
-add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
-delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
-list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
-find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
-edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)
-exit: displays a farewell message and exits the program (e.g. exit)
-For more information, please refer to our user guide at:https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html
-____________________________________________________________
-```
-Example input:
-```
-add /i 9780763630187 /t Harry Squatter /a J.K. /tag b /g History /s lost
-```
-Example response:
-```
-This book is added:
-[B]  ID: 1 Title: Harry Squatter ISBN: 9780763630187 Author: J.K. Genre: History Status: LOST Received Date: 11 Nov 2023
-____________________________________________________________
-```
-Example input:
-```
-add /id 2 /t To Kill a Mockingbird /a Harper Lee /tag B /i 9780061120084 /g Novel, Bildungsroman, Southern Gothic, Domestic Fiction, Thriller, Legal Story
-```
-Example response:
-```
-This book is added: To Kill a Mockingbird
-____________________________________________________________
-```
-Example input:
-```
-list
-```
-Example response:
-```
-Listing all resources in the Library:
-
-1. [B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: LOST
-2. [B]  ID: 2 Title: To Kill a Mockingbird ISBN: 9780061120084 Author: Harper Lee Genre: Novel, Bildungsroman, Southern Gothic Status: AVAILABLE
-
-There are currently 2 resource(s).
-____________________________________________________________
-```
-Example input:
-```
-delete /id 1
-```
-Example response:
-```
-Looking for ID: 1...
-This resource is removed: 
-[B]  ID: 1 Title: The Great Gatsby ISBN: 9780023381201 Author: F. Scott Fitzgerald Genre: Novel, Fiction, Tragedy Status: LOST
-____________________________________________________________
-```
-Example input:
-```
-exit
-```
-Example response:
-```
-Bye, hope to see you again soon!
-____________________________________________________________
-```
+   Expected: Invalid argument message.
 
 ### Saving data
 
