@@ -21,7 +21,13 @@ public class EventEditCommandTest {
     private GenericList<Resource, Event> container;
 
     @Test
-    public void eventEditCommandOutput() throws SysLibException {
+    public void testInvalidIndex() throws SysLibException {
+        assertThrows(IllegalArgumentException.class,
+                () -> eventEditCommand.execute("/id 10", parser.container));
+    }
+
+    @Test
+    public void testeventEditCommandOutput() throws SysLibException {
         eventAddCommand.execute("/t testrun /date 1 dec 2001 /desc testing 123", parser.container);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));

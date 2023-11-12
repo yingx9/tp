@@ -45,4 +45,16 @@ public class DeleteCommandTest {
     public void deleteCommandInvalidId() {
         assertThrows(IllegalArgumentException.class, () -> deleteCommand.execute("", parser.container));
     }
+
+    @Test
+    public void deleteCommandEmptyList() throws SysLibException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        deleteCommand.execute("/id 1", parser.container);
+        String output = outputStream.toString();
+        String expectedOutput = "Looking for ID: 1..." + System.lineSeparator() +
+                "No resources with id matching 1" + System.lineSeparator() +
+                "____________________________________________________________" + System.lineSeparator();
+        assertEquals(expectedOutput, output);
+    }
 }
