@@ -81,8 +81,8 @@ Hello! What would you like to do?
 ____________________________________________________________
 > 
 ```
-5. Type `exit` to exit the program.
-6. 
+4. Type `exit` to exit the program.
+
 You are now ready to begin developing!
 
 ## Design & Implementation
@@ -141,12 +141,6 @@ Each `Command` uses a `GenericList` to get events or resources to manipulate.
 Then the commands will generate a `CommandResult` to give informative feedback to the user.
 
 <img src="images/CommandClassDiagram.png" />
-
-
-### Data Component
-
-The `Data` Component is implemented using the `GenericList` which acts as a container for 2 List's of types `Resource` and `Event`.
-When starting the program, the GenericList will be loaded with data from the storage file. On exit, the data from the GenericList will be saved back into the storage file.
 
 ### Storage Component
 
