@@ -26,10 +26,7 @@ public class Syslib {
         ui = new UI();
         parser = new Parser();
         File dir = new File(DIRECTORYPATH);
-        if (!dir.mkdirs()){
-            throw new SysLibException("Unable to create 'data' directory. Please run again " +
-                    "with administrative privileges.");
-        }
+        dir.mkdirs();
         storage = new Storage(filePath, parser.container);
         try{
             List<Resource> resourceListLoad = new ArrayList<>();
