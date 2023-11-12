@@ -69,11 +69,11 @@ public class Book extends Resource {
         int authorLength = getAuthor().length();
         int genreLength = getGenreString().length();
 
-        if (authorLength > columnsWidth.get(4)){
+        if (authorLength > columnsWidth.get(4)) {
             columnsWidth.set(4,authorLength+1);
         }
 
-        if(genreLength > columnsWidth.get(5)){
+        if (genreLength > columnsWidth.get(5)) {
             columnsWidth.set(5,genreLength+1);
         }
 

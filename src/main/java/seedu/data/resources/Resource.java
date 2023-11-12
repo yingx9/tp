@@ -145,7 +145,7 @@ public class Resource {
      */
     public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
         int titleLength = getTitle().length();
-        if (titleLength > columnsWidth.get(2)){
+        if (titleLength > columnsWidth.get(2)) {
             columnsWidth.set(2,titleLength+1);
         }
         return columnsWidth;

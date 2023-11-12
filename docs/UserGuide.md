@@ -94,8 +94,7 @@ ____________________________________________________________
 
 > **Note**:
 > - Items in square brackets `[]` are optional arguments.
-> - Items with `...` after them can be used multiple times
-    >    * e.g `[/g GENRE]` ... can be used as `/g Horror /g Fantasy`
+
 
 ## Save Your Work | [Return to Contents](#contents)
 > - All resources and events in the current list will automatically be saved into an offline file `storage.txt` on exit.
@@ -300,6 +299,10 @@ Looking for a more specific list? `list` also offers you the capability to **fil
 - Including more than one filter will list resources that satisfy **ALL** given filters. 
 - For example, `list /tag B /g Horror` will list Books with Horror genre.
 
+**Potential Issues:**
+
+You may face an issue where you are unable to see the list, or it's difficult to read the table due to the display alignment. Kindly click [here](#list-table-looks-messy-or-unable-to-see-the-full-details-return-to-list-feature) to jump to the Known Issues section to solve any issues regarding the list. 
+
 **Example input:**
 ```
 list
@@ -382,7 +385,7 @@ ____________________________________________________________
 
 ## Edit a Listing: `edit` | [Return to Contents](#contents)
 
-We all know the horror of making a typo and having to delete and add a resource again—absolutely _dreadful_. 
+We all know the horror of making a typo and having to delete and add a resource again—it's absolutely _dreadful_. 
 
 Fear not! Update a resource's details using the `edit` command and fix your typos in a flash. 
 
@@ -562,9 +565,9 @@ Example:
 Commands available:
 add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
 delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
-list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
+list: list all resources OR filter by certain tags, genre, or status.(e.g. list /tag B /g Fiction /s AVAILABLE)
 find: find a resource by title, author(same as publisher/creator/brand), ISBN or given id. (e.g. find /i 9780763630188)
-edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)
+edit: Edit a listing by entering its id to update its details. (e.g. edit /id 123 /t NEW_TITLE /a NEW_AUTHOR)
 eventadd: Add an event to the event list (e.g. eventadd /t TITLE /date DATE [/desc DESCRIPTION])
 eventlist: List out all the event list (e.g. eventlist)
 eventdelete: Delete an event in the event list based on the index (e.g. eventdelete /i INDEX)
@@ -588,7 +591,36 @@ icon in the **Dock**, type **Terminal** in the search field, then click **Termin
 
 ## Known Issues | [Return to Contents](#contents)
 
-...
+### List Table looks messy or unable to see the full details: [[Return to list feature]](#list-all-items-list--return-to-contents)
+
+Upon executing `list`, you  may encounter an issue where the table is out of alignment: 
+
+![ListProblem.png](images/List%20Screenshots/listproblemimg.png)
+
+This issue is due to the **window size** of your command line terminal and occurs when you have long details in your resources. 
+
+**Solutions:**
+
+You can try any of the following solutions to fix this issue:
+- Make your terminal **full screen** by clicking the square on the top right.
+
+  ![ListProblem.png](images/List%20Screenshots/listimage.png)
+
+- **Resize** your window by:
+  1. Move your cursor to bottom right corner of your terminal window until you see an icon with double arrows like:   ![free-resize-1438243-1216204 (1).png](..%2F..%2Fpics%2Ffree-resize-1438243-1216204%20%281%29.png)
+  2. Drag your cursor down until you see the full table 
+
+
+- Decrease your **font size** by:
+
+  - Right-click your terminal and click "Properties"
+  
+    ![img_2.png](images/List%20Screenshots/terminalimg.png)
+  
+  - Click on "Font" tab and select a smaller font size that suits your display.
+  
+    ![img_3.png](images/List%20Screenshots/fontsize.png)
+
 
 ## Command summary | [Return to Contents](#contents)
 

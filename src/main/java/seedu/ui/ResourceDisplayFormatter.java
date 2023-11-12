@@ -17,9 +17,7 @@ public class ResourceDisplayFormatter {
     protected Formatter cdDisplayFormatter;
     protected Formatter newspaperDisplayFormatter;
     private String customDivider;
-
     private String displayFormat;
-
     private List<Boolean> hasResourceTypeList;
 
     public ResourceDisplayFormatter(List<Resource> resourcesList){
@@ -96,8 +94,8 @@ public class ResourceDisplayFormatter {
 
     public String buildDisplayHeader(List<Resource> resourcesList){
 
-        //Check columns at index 2, 4, 5, 6 as length is unrestricted
-        //Columns represent:
+        // Check columns at index 2, 4, 5, 6 as length is unrestricted
+        // Columns represent:
         // ID, Tag, Title, ISBN, Author/Brand/Creator/Publisher,
         // Genre/Issue/Type/Edition, Link, Status, Received Date
         List<Integer> columnsWidth = Arrays.asList(7,5,20,14,25,20,15,10,15);
@@ -106,12 +104,11 @@ public class ResourceDisplayFormatter {
 
         for (Resource resource : resourcesList) {
             columnsWidth = resource.checkColumnsWidths(columnsWidth);
-
         }
 
         String displayFormat = "";
 
-        for (int i= 0; i<columnsWidth.size();i++){
+        for (int i= 0; i<columnsWidth.size();i++) {
             displayFormat += "%-" + columnsWidth.get(i) + "s";
             paddingLength += columnsWidth.get(i);
         }
@@ -131,19 +128,19 @@ public class ResourceDisplayFormatter {
     public String getFinalDisplayFormat() {
 
         String messageToDisplay ="";
-        if(hasResourceTypeList.get(0)){
+        if (hasResourceTypeList.get(0)) {
             messageToDisplay += bookDisplayFormatter + LINESEPARATOR;
         }
 
-        if(hasResourceTypeList.get(1)){
+        if (hasResourceTypeList.get(1)) {
             messageToDisplay += magazineDisplayFormatter+ LINESEPARATOR;
         }
 
-        if(hasResourceTypeList.get(2)){
+        if (hasResourceTypeList.get(2)) {
             messageToDisplay += cdDisplayFormatter+ LINESEPARATOR;
         }
 
-        if(hasResourceTypeList.get(3)){
+        if (hasResourceTypeList.get(3)) {
             messageToDisplay += newspaperDisplayFormatter+ LINESEPARATOR;
         }
         return messageToDisplay;
