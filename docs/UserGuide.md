@@ -478,11 +478,11 @@ ____________________________________________________________
 
 Deletes an event from the database based on the index provided.
 
-Format: `eventdelete /i INDEX`
+Format: `eventdelete /id INDEX`
 
 **Example input:**
 ```
-eventdelete /i 0
+eventdelete /id 0
 ```
 
 **Example output:**
@@ -499,12 +499,12 @@ ____________________________________________________________
 
 edits attributes of an event based on information provided.
 
-Format: `eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION]`
+Format: `eventedit /id INDEX [/t TITLE /date DATE /desc DESCRIPTION]`
 
 **Example input:**
 ```
-eventedit /i 0 /t NEW TITLE
-eventedit /i 2 /t NEW TITLE /date 23 Jan 2024 /desc NEW DESCRIPTION
+eventedit /id 0 /t NEW TITLE
+eventedit /id 2 /t NEW TITLE /date 23 Jan 2024 /desc NEW DESCRIPTION
 ```
 
 **Example output:**
@@ -547,7 +547,7 @@ ____________________________________________________________
 ## Exiting the Program : `exit` | [Return to Contents](#contents)
 Exits the program, all data in resource list and event list will be saved to a storage file.
 
-Format: `Exit`
+Format: `exit`
 
 Example:
 ```
@@ -569,11 +569,12 @@ Commands available:
 [list] lists all resources OR filter by certain tags, genre, or status. (e.g. list /tag B /g Fiction /s AVAILABLE)
 [find] finds a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188 /a AUTHOR)
 [edit] edits a listing by entering its id to update its details. (e.g. edit /id 123 /t NEW_TITLE /a NEW_AUTHOR)
-[eventadd] adds an event to the event list (e.g. eventadd /t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])
-[eventlist] lists out all the event list (e.g. eventlist)
-[eventdelete] deletes an event in the event list based on the index (e.g. eventdelete /i INDEX)
-[eventedit] edits an event in the event list based on the index (e.g. eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION])
-[exit] displays a farewell message and exits the program (e.g. exit)
+[eventadd] adds an event to the database. (e.g. eventadd /t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])
+[eventlist] lists out all events in the database. (e.g. eventlist)
+[eventdelete] deletes an event from the database based on the index. (e.g. eventdelete /i INDEX)
+[eventedit] edits an event in the event list based on the information given. (e.g. eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION])
+[summary] shows a summary of all resources and the next 3 events. (e.g. summary)
+[exit] displays a farewell message and exits the program. (e.g. exit)
 
 For more information, please refer to our user guide at: https://bit.ly/SyslibUserGuide
 ____________________________________________________________
@@ -624,24 +625,26 @@ You can try any of the following solutions to fix this issue:
 
 ## Command summary | [Return to Contents](#contents)
 
-| Action                | Command                                                                         |
-|-----------------------|---------------------------------------------------------------------------------|
-| Add Book              | `add /i ISBN /t TITLE /a AUTHOR /tag b [/g GENRE /s STATUS]`                    |
-| Add eBook             | `add /i ISBN /t TITLE /a AUTHOR /tag eb /l LINK [/g GENRE /s STATUS]`           |
-| Add CD                | `add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag cd [/s STATUS]`                  |
-| Add Magazine          | `add /i ISBN /t TITLE /b BRAND /is ISSUE /tag m [/s STATUS]`                    |
-| Add eMagazine         | `add /i ISBN /t TITLE /b BRAND /is ISSUE /tag em /l LINK [/s STATUS]`           |
-| Add Newspaper         | `add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag n [/s STATUS]`              |
-| Add eNewspaper        | `add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag en /l LINK [/s STATUS]`     |
-| Delete Listing        | `delete /id <id of listing>`                                                    |
-| Listing All Items     | `list [/tag <type of item> /g <genre of item> /s <status of item>]`             |
-| Find Specific Listing | `find [/t <title of listing> OR /i <ISBN of item> OR /a AUTHOR OR /id ID]`      |
-| Edit a Listing        | `edit /id ID /argument1 <ARGUMENT1> [/argument2 <ARGUMENT2>]...`                |
-| Event Add             | `eventadd /t TITLE /date DATE [/desc DESCRIPTION]` (Format for date DD-MM-YYYY) |
-| Event Delete          | `eventdelete /i INDEX`                                                          |
-| Event Listing         | `eventlist`                                                                     |
-| View Help             | `help`                                                                          |
-| Exit                  | `exit`                                                                          |
+| Action                | Command                                                                          |
+|-----------------------|----------------------------------------------------------------------------------|
+| Add Book              | `add /i ISBN /t TITLE /a AUTHOR /tag b [/g GENRE /s STATUS]`                     |
+| Add eBook             | `add /i ISBN /t TITLE /a AUTHOR /tag eb /l LINK [/g GENRE /s STATUS]`            |
+| Add CD                | `add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag cd [/s STATUS]`                   |
+| Add Magazine          | `add /i ISBN /t TITLE /b BRAND /is ISSUE /tag m [/s STATUS]`                     |
+| Add eMagazine         | `add /i ISBN /t TITLE /b BRAND /is ISSUE /tag em /l LINK [/s STATUS]`            |
+| Add Newspaper         | `add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag n [/s STATUS]`               |
+| Add eNewspaper        | `add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag en /l LINK [/s STATUS]`      |
+| Delete Listing        | `delete /id <id of listing>`                                                     |
+| Listing All Items     | `list [/tag <type of item> /g <genre of item> /s <status of item>]`              |
+| Find Specific Listing | `find [/t <title of listing> OR /i <ISBN of item> OR /a AUTHOR OR /id ID]`       |
+| Edit a Listing        | `edit /id ID /argument1 <ARGUMENT1> [/argument2 <ARGUMENT2>]...`                 |
+| Event Add             | `eventadd /t TITLE /date DATE [/desc DESCRIPTION]` (Format for date DD-MM-YYYY)  |
+| Event Delete          | `eventdelete /id INDEX`                                                          |
+| Event Listing         | `eventlist`                                                                      |
+| Event Edit            | `eventedit /id INDEX [/date DATE /desc DESCRIPTION]`(Format for date DD-MM-YYYY) |
+| Summary               | `summary`                                                                        |
+| View Help             | `help`                                                                           |
+| Exit                  | `exit`                                                                           |
 
 
 
