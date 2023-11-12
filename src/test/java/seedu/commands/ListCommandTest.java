@@ -90,11 +90,11 @@ public class ListCommandTest {
     }
 
     @Test
-    public void testInvalidStatusInput(){
+    public void testInvalidStatusInput() {
         executeAssertSysLibExceptionThrown("/s INVALIDSTATUS",STATUS_ERROR_MESSAGE);
     }
 
-    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage){
+    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage) {
         SysLibException exception = assertThrows(SysLibException.class, ()->listCommand.execute(
                 arguments, parser.container));
         assertEquals(expectedMessage, exception.getMessage());

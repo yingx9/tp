@@ -22,7 +22,7 @@ public class EventListCommandTest {
         System.setOut(new PrintStream(outputStream));
         eventListCommand.execute("", parser.container);
         String output = outputStream.toString();
-        String expectedOutput = "The event list is empty!" + System.lineSeparator() +
+        String expectedOutput = "There are currently no Events in Syslib!" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
         assertEquals(output, expectedOutput);
     }
