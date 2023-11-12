@@ -497,7 +497,7 @@ ____________________________________________________________
 > - INDEX starts from 0 and can be viewed by calling `eventlist`
 > - INDEX might change as those with earlier dates are sorted first
 
-Delete an event to the eventList
+Edit an event from the eventList
 
 Format: `eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION]`
 

@@ -27,15 +27,8 @@ public class Syslib {
         try{
             List<Resource> resourceListLoad = new ArrayList<>();
             List<Event> eventListLoad = new ArrayList<>();
-            if (storage.load(resourceListLoad, eventListLoad)){
-                if (!resourceListLoad.isEmpty() || !eventListLoad.isEmpty()){
-                    ui.showLoadMessage(filePath, resourceListLoad, eventListLoad);
-                } else {
-                    ui.showLoadMessageEmpty(filePath);
-                }
-            } else {
-                ui.showNoFileFoundMessage(filePath);
-            }
+            storage.load(resourceListLoad, eventListLoad);
+            ui.showLoadMessage(filePath, resourceListLoad, eventListLoad);
 
             parser.container.setResourceList(resourceListLoad);
             parser.container.setEventList(eventListLoad);
