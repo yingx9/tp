@@ -17,7 +17,7 @@ import seedu.ui.UI;
  * Command to print exit message
  */
 public class ExitCommand extends Command{
-    private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ExitCommand.class.getName());
     private static String feedbackToUser;
     static {
         // remove logs from showing in stdout

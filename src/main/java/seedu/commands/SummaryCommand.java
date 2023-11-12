@@ -26,6 +26,8 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
 
+import static seedu.ui.Messages.ASSERT_CONTAINER;
+import static seedu.ui.Messages.ASSERT_STATEMENT;
 import static seedu.ui.UI.LINEDIVIDER;
 
 
@@ -62,8 +64,12 @@ public class SummaryCommand extends Command {
     @Override
     public CommandResult execute(String statement, GenericList<Resource, Event> container)
             throws SysLibException {
+
+        assert statement != null : ASSERT_STATEMENT;
+        assert container != null : ASSERT_CONTAINER;
+
         LOGGER.info("Executing Summary Command.");
-        int totalResources = container.getResourceList().size();
+        int totalResources = container.getResourcesList().size();
         LOGGER.info("Retrieved resourcelist size.");
         int totalBooks = 0;
         int totalCDs = 0;
@@ -75,7 +81,7 @@ public class SummaryCommand extends Command {
         LOGGER.info("Initialized values.");
 
         LOGGER.info("Counting resources...");
-        for (Resource resource : container.getResourceList()) {
+        for (Resource resource : container.getResourcesList()) {
             if (resource instanceof EBook) {
                 totalEBooks++;
             } else if (resource instanceof CD) {
@@ -93,7 +99,7 @@ public class SummaryCommand extends Command {
             }
         }
 
-        List<Event> events = container.getEventList();
+        List<Event> events = container.getEventsList();
         List<Event> upcomingEvents = getUpcomingEvents(events, 3);
 
         LOGGER.info("Drawing graph");

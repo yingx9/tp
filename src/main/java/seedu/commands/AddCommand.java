@@ -105,7 +105,7 @@ public class AddCommand extends Command{
 
         String[] values = parseAddBook(statement);
         Book newBook = createBook(values, resourceID);
-        container.getResourceList().add(newBook);
+        container.getResourcesList().add(newBook);
         System.out.println("This book is added:"  + System.lineSeparator() + newBook.toString());
         resetBookArgs();
         ADDLOGGER.log(Level.INFO, "Added Book: " + newBook.toString());
@@ -117,7 +117,7 @@ public class AddCommand extends Command{
 
         String[] values = parseAddEBook(statement);
         EBook newEBook = createEBook(values, resourceID);
-        container.getResourceList().add(newEBook);
+        container.getResourcesList().add(newEBook);
         System.out.println("This e-book is added:" + System.lineSeparator() + newEBook.toString());
         resetEBookArgs();
         ADDLOGGER.log(Level.INFO, "Added E-Book: " + newEBook.toString());
@@ -129,7 +129,7 @@ public class AddCommand extends Command{
 
         String[] values = parseAddCD(statement);
         CD newCD = createCD(values, resourceID);
-        container.getResourceList().add(newCD);
+        container.getResourcesList().add(newCD);
         System.out.println("This CD is added:" + System.lineSeparator() + newCD.toString());
         resetCDArgs();
         ADDLOGGER.log(Level.INFO, "Added CD: " + newCD.toString());
@@ -141,7 +141,7 @@ public class AddCommand extends Command{
 
         String[] values = parseAddMagazine(statement);
         Magazine newMagazine = createMagazine(values, resourceID);
-        container.getResourceList().add(newMagazine);
+        container.getResourcesList().add(newMagazine);
         System.out.println("This magazine is added:" + System.lineSeparator() + newMagazine.toString());
         resetMagazineArgs();
         ADDLOGGER.log(Level.INFO, "Added Magazine: " + newMagazine.toString());
@@ -153,7 +153,7 @@ public class AddCommand extends Command{
 
         String[] values = parseAddEMagazine(statement);
         EMagazine newEMagazine = createEMagazine(values, resourceID);
-        container.getResourceList().add(newEMagazine);
+        container.getResourcesList().add(newEMagazine);
         System.out.println("This e-magazine is added:" + System.lineSeparator() + newEMagazine.toString());
         resetEMagazineArgs();
         ADDLOGGER.log(Level.INFO, "Added E-Magazine: " + newEMagazine.toString());
@@ -165,7 +165,7 @@ public class AddCommand extends Command{
 
         String[] values = parseAddNewspaper(statement);
         Newspaper newNewspaper = createNewspaper(values, resourceID);
-        container.getResourceList().add(newNewspaper);
+        container.getResourcesList().add(newNewspaper);
         System.out.println("This newspaper is added:" + System.lineSeparator() + newNewspaper.toString());
         resetNewspaperArgs();
         ADDLOGGER.log(Level.INFO, "Added Newspaper: " + newNewspaper.toString());
@@ -177,7 +177,7 @@ public class AddCommand extends Command{
 
         String[] values = parseAddENewspaper(statement);
         ENewspaper newENewspaper = createENewspaper(values, resourceID);
-        container.getResourceList().add(newENewspaper);
+        container.getResourcesList().add(newENewspaper);
         System.out.println("This e-newspaper is added:" + System.lineSeparator() + newENewspaper.toString());
         resetENewspaperArgs();
         ADDLOGGER.log(Level.INFO, "Added E-Newspaper: " + newENewspaper.toString());
@@ -191,7 +191,7 @@ public class AddCommand extends Command{
         ADDLOGGER.log(Level.INFO, "Executing Add. Input Arguments: " + statement);
         feedbackToUser = "";
 
-        resourceID = container.getResourceList().size() + RESOURCEID_INCREMENT;
+        resourceID = container.getResourcesList().size() + RESOURCEID_INCREMENT;
         String tag = parseAddCommand(statement);
 
         if (tag.equalsIgnoreCase(BOOK_TAG)) {

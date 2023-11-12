@@ -271,11 +271,11 @@ public class Storage {
     public void save() throws SysLibException {
         LOGGER.info("Starting to save data to storage file.");
         try (FileWriter fw = new FileWriter(this.filePath)) {
-            for (Resource resource : container.getResourceList()) {
+            for (Resource resource : container.getResourcesList()) {
                 String resourceSaveFormat = getResourceSaveFormat(resource);
                 fw.write(resourceSaveFormat);
             }
-            for (Event event : container.getEventList()) {
+            for (Event event : container.getEventsList()) {
                 String eventSaveFormat = getEventSaveFormat(event);
                 fw.write(eventSaveFormat);
             }
