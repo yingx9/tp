@@ -73,8 +73,8 @@ public class UI {
                 "(e.g. list /tag B /g Fiction /s AVAILABLE)");
         System.out.println("find: find a resource by title, author, ISBN or given id. (e.g. find /i" +
                 " 9780763630188 /a AUTHOR)");
-        System.out.println("edit: Edit a listing by entering its isbn to update its details. " +
-                "(e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)");
+        System.out.println("edit: Edit a listing by entering its id to update its details. " +
+                "(e.g. edit /id 123 /t NEW_TITLE /a NEW_AUTHOR)");
         System.out.println("eventadd: Add an event to the event list " +
                 "(e.g. eventadd /t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])");
         System.out.println("eventlist: List out all the event list (e.g. eventlist)");
