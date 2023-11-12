@@ -1,6 +1,7 @@
 ____________________________________________________________
 Storage file not found.
 Creating new data file @ .\storage.txt
+Loaded 0 resources and 0 events!
 ____________________________________________________________
              .....................                  
           -##@*+*@*++++++++++#@++##                 
@@ -30,14 +31,14 @@ Hello! What would you like to do?
 ____________________________________________________________
 > Attention: Status is not stated. Status set to default: AVAILABLE.
 This book is added:
-[B]  ID: 1 Title: Moby Dick ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 11 Nov 2023
+[B]  ID: 1 Title: Moby Dick ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 12 Nov 2023
 ____________________________________________________________
 > Attention: Status is not stated. Status set to default: AVAILABLE.
 This book is added:
-[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 11 Nov 2023
+[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 12 Nov 2023
 ____________________________________________________________
 > This book is added:
-[B]  ID: 3 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help Status: LOST Received Date: 11 Nov 2023
+[B]  ID: 3 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help Status: LOST Received Date: 12 Nov 2023
 ____________________________________________________________
 > Event inserted at: 0
 ____________________________________________________________
@@ -53,11 +54,12 @@ ____________________________________________________________
 add: adds a new resource to the library inventory.(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
 delete: deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
 list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction
-find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)
+find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188 /a AUTHOR)
 edit: Edit a listing by entering its isbn to update its details. (e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)
 eventadd: Add an event to the event list (e.g. eventadd /t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])
 eventlist: List out all the event list (e.g. eventlist)
 eventdelete: Delete an event in the event list based on the index (e.g. eventdelete /i INDEX)
+eventedit: Edit an event in the event list based on the index (e.g. eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION])
 exit: displays a farewell message and exits the program (e.g. exit)
 For more information, please refer to our user guide at:https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html
 ____________________________________________________________
@@ -78,23 +80,23 @@ Upcoming Events (Next 3):
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 11 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 12 Nov 2023
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: BORROWED Received Date: 11 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: BORROWED Received Date: 12 Nov 2023
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 11 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 12 Nov 2023
 ____________________________________________________________
 > Looking for ID: 1...
 This resource is removed:
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 11 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 12 Nov 2023
 ____________________________________________________________
 > Looking for ID: 2...
 This resource is removed:
-[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 11 Nov 2023
+[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 12 Nov 2023
 ____________________________________________________________
 > Index is out of range of the event list!
 > This event is removed:
