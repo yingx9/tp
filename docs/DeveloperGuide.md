@@ -239,7 +239,7 @@ Upon receiving the `find` command, the system will:
 
 The `add` feature is responsible for processing user commands to add a new resource to SysLib. It is facilitated by 
 the `AddCommand` component. It works with `Parser` and `Command` components to parse and validate the user input. 
-The new resource is stored internally in `resourceList` as a `Book`, `EBook`, `CD`, `Magazine`, `EMagazine`, `Newspaper`, 
+The new resource is stored internally in `resourcesList` as a `Book`, `EBook`, `CD`, `Magazine`, `EMagazine`, `Newspaper`, 
 or `ENewspaper` depending on the type of resources specified by `tag`. 
 
 There are seven types of `Resource`:
@@ -325,7 +325,7 @@ After that, all the arguments are forwarded to `AddCommand`.
 Step 9. `AddCommand` receives the arguments and calls `CreateResource#createBook(values: String[], resourceID: int` to 
 craft a new book with the validated arguments.
 
-Step 10. The newly created book is then added to the `resourceList`.
+Step 10. The newly created book is then added to the `resourcesList`.
 
 Step 11. Calls to `ParserResource#resetBookArgs()` prepares the arguments list for new processes.
 
@@ -368,15 +368,15 @@ The following sequence diagram shows how the show resources feature works in a s
 
 **ResourceDisplayFormatter class:** 
 
-1. A List< Resource > resourceList is passed in to `showResourcesDetails` method from the calling function. It can be the resourcesList retrieved from the GenericList in memory which contains the data of all resources, or a custom resourceList containing filtered resources.
+1. A List< Resource > resourcesList is passed in to `showResourcesDetails` method from the calling function. It can be the resourcesList retrieved from the GenericList in memory which contains the data of all resources, or a custom resourcesList containing filtered resources.
 2. A new `ResourceDisplayFormatter` is instantiated and the constructor calls `buildDisplayHeader()` to create a table header. 
-3. `buildDisplayHeader()` then calls `checkColumnsWidth()` for every resource in `resourceList`. It passes an integer array containing the current column width for each resource attribute (Title...Author..et cetera).
+3. `buildDisplayHeader()` then calls `checkColumnsWidth()` for every resource in `resourcesList`. It passes an integer array containing the current column width for each resource attribute (Title...Author..et cetera).
 4. `checkColumnsWidth()` adjusts the width as needed depending on the length of the resource attributes and returns to Formatter
 5. A format specifier is created with the columns' width. Example: `"%-5s %-20s ..."`
 6. Formatter objects are created for each resource type: Book, Newspapers, Magazine, CDs. 
 
 **UI Class:** 
-7. Now the UI loops through the resourceList and calls `setDisplayFormatter(Resource)` to add the formatted string to its respective display formatter. 
+7. Now the UI loops through the resourcesList and calls `setDisplayFormatter(Resource)` to add the formatted string to its respective display formatter. 
 8. A final call to `getFinalDisplayFormat()` returns the final formatted message of the table and all the resource details as `messageToDisplay`
 9. `messageToDisplay` is returned to the calling function to be printed to user or for testing. 
 
@@ -413,7 +413,7 @@ ListCommand then calls `parseArg` and `validate` from `Command`, which checks if
    the checks, `filterResources` is called to begin the filtering process. First it calls `hasFilters()` check if the user
    selected any filters `[tag/genre/status]` or none. 
 
-If hasFilters returns `true`, it filters the `resourceList` with the given keywords. Resources matching the filters are added to a temporary list called `matchedResources`. After all resources has been checked, `matchedResources` list is passed to `showResourcesDetails()`, a method called from `UI` to display the details 
+If hasFilters returns `true`, it filters the `resourcesList` with the given keywords. Resources matching the filters are added to a temporary list called `matchedResources`. After all resources has been checked, `matchedResources` list is passed to `showResourcesDetails()`, a method called from `UI` to display the details 
 of the resources. 
 
 If hasFilters returns `false`, it skips the filtering process and displays the details of all the resources.
@@ -429,7 +429,7 @@ The `edit` command is facilitated by `Parser` and `Data` component to update the
 
 EditCommand implements the following operations:
 - `EditCommand#execute(statement: String, container: GenericList<Resource, Event>)` — Executes and handles editing of a resource
-- `EditCommand#editResources(foundResource: Resource, givenParameters: String[], resourceList: List<Resource>)` — Validates parameters and updates a resource details
+- `EditCommand#editResources(foundResource: Resource, givenParameters: String[], resourcesList: List<Resource>)` — Validates parameters and updates a resource details
 
 #### Usage Scenario 
 
@@ -463,7 +463,7 @@ It implements the following operations:
 
 - `EVENTADDCOMMAND#parseArgument(statement: String)` -- Parses the input command to extract relevant information.
 - `EVENTADDCOMMAND#validate(statement: String, values: String[])` -- Validates the input statement to ensure that it is valid.
-- `EVENTADDCOMMAND#binarySearch(parser: Parser, date: Date)` -- Search for the correct index of event list to add the event.
+- `EVENTADDCOMMAND#binarySearch(container: GenericList<Resource, Event>, date: Date)` -- Search for the correct index of event list to add the event.
 
 #### Example Usage Scenario
 
@@ -482,7 +482,7 @@ Step 5. The `COMMAND` component processes the input command to ensure that it me
 It prepares the argument values for further processing.
 
 Step 6. The `EVENTADDCOMMMAND` also calls the component:
-- Calls `EVENTADDCOMMAND#binarySearch(parser: Parser, date: Date)` to find the correct index based on the date.
+- Calls `EVENTADDCOMMAND#binarySearch(container: GenericList<Resource, Event>, date: Date)` to find the correct index based on the date.
 The whole eventList is sorted by date order.
 
 Step 7. The newly created event is forwarded to the `PARSER` to be added to the `eventList`.
@@ -496,29 +496,6 @@ This feature is responsible for listing out the events in eventList.
 It is facilitated by the `EventListCommand` component. 
 
 `eventlist` has one option.
-
-### Event Edit Feature
-The `eventedit` command with the `Parser` and `Command` component to execute the correct action.
-This feature is responsible for editing the events in eventList as given by the user.
-It is facilitated by the `EventListCommand` component.
-
-`eventedit` has three option:
-- `eventedit /t [title] /date [date]`
-- `eventedit /t [title] /desc [description]`
-- `eventedit /t [title] /date [date] /desc [description]`
-
-Sequence Diagram:
-<img src="images/EventEditDiagram.png"/>
-
-### Summary Feature
-The `summary` command with the `Parser` and `UI` component to execute the correct action.
-This feature is responsible for showing a summary of the Resources with a visually helpful bar as well as the next 3 events.
-It is facilitated by the `SummaryCommand` component.
-
-`summary` has one option.
-
-Sequence Diagram:
-<img src="images/SummaryDiagram.png"/>
 
 #### Implementation
 
@@ -545,21 +522,22 @@ Step 5. The `EVENTLISTCOMMAND` then outputs the events in the eventList.
 The `eventdelete` feature is responsible for processing user commands to delete an event to SysLib. 
 It is facilitated by the `EventDeleteCommand` component. 
 It works with `Parser` and `Command` components to parse and validate the input.
-The `Event` is removed from `eventList`.
+The `Event` is removed from `eventsList`.
 
 `eventadd` has one options:
-- eventdelete /i [index]
+- eventdelete /id [index]
+
 #### Implementation
 
 It implements the following operations:
 
 - `EVENTDELETECOMMAND#parseArgument(statement: String)` -- Parses the input command to extract relevant information.
 - `EVENTDELETECOMMAND#validate(statement: String, values: String[])` -- Validates the input statement.
-- `EVENTDELETECOMMAND#parseCalendarInt(value: String, parser: Parser)` -- Validate the index given.
+- `EVENTDELETECOMMAND#parseCalendarInt(value: String, container: GenerticList)` -- Validate the index given.
 
 #### Example Usage Scenario
 
-Step 1. The user inputs the command: `eventdelete /i 0`
+Step 1. The user inputs the command: `eventdelete /id 0`
 
 Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
 
@@ -574,10 +552,104 @@ Step 5. The `COMMAND` component processes the input command to ensure that it me
 It prepares the argument values for further processing.
 
 Step 6. The `EVENTDELETECOMMAND` also calls the component:
-- Calls `EVENTDELETECOMMAND#parseCalendarInt(value: String, parser: Parser)` to see if the index is an integer and that
-it is within range of eventList
+- Calls `EVENTDELETECOMMAND#parseCalendarInt(value: String, container: GenerticList)` to see if the index is an integer and that
+it is within range of eventsList
 
-Step 7. The selected event at the index is then deleted from the eventList.
+Step 7. The selected event at the index is then deleted from the eventsList.
+
+### Event Edit Feature
+The `eventedit` command with the `Parser` and `Command` component to execute the correct action.
+This feature is responsible for editing the events in eventsList as given by the user.
+It is facilitated by the `EventsListCommand` component.
+
+`eventedit` has three option:
+- `eventedit /t [title] /date [date]`
+- `eventedit /t [title] /desc [description]`
+- `eventedit /t [title] /date [date] /desc [description]`
+
+#### Implementation
+
+It implements the following operations:
+
+- `EVENTEDITCOMMAND#parseArgument(statement: String)` -- Parses the input command to extract relevant information.
+- `EVENTEDITCOMMAND#validate(statement: String, values: String[])` -- Validates the input statement to ensure that it is valid.
+- `EVENTEDITCOMMAND#binarySearch(container: GenericList<Resource, Event>t, date: Date)` -- Search for the correct index of event list to add the event.
+
+#### Example Usage Scenario
+
+Step 1. The user inputs the command: `eventedit /i 0 /date 23 Dec 2023`
+
+Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
+
+Step 3. The `PARSER` processes the command and determines that it contains a valid key (`evenedit`). It then calls
+`EVENTEDITCOMMAND#execute(statement: String, container: GenerticList)` with the input command.
+
+Step 4. The `EVENTEDITCOMMMAND` component receives the command and performs the following operations:
+- Calls `EVENTEDITCOMMAND#parseArgument(statement: String)` to extract values for the attributes to edit.
+- Calls `EVENTEDITCOMMAND#validate(statement: String, values: String[])` to ensure the validity of the input command.
+
+Step 5. The `COMMAND` component processes the input command to ensure that it meets the required format and constraints.
+It prepares the argument values for further processing.
+
+Step 6. The `EVENTEDITCOMMMAND` also calls the component:
+- Calls `EVENTEDITCOMMAND#binarySearch(container: GenericList<Resource, Event>, date: Date)` to find the correct index based on the date.
+  The whole eventsList is sorted by date order.
+
+Step 7. The old event is removed from `eventsList`.
+
+Step 8. The edited event is forwarded to the `PARSER` to be inserted to the `eventsList` in accordance to the date.
+
+Sequence Diagram:
+<img src="images/EventEditDiagram.png"/>
+
+### Summary Feature
+The `summary` command with the `Parser` and `UI` component to execute the correct action.
+This feature is responsible for showing a summary of the Resources with a visually helpful bar as well as the next 3 events.
+It is facilitated by the `SummaryCommand` component.
+
+`summary` has one option.
+
+#### Implementation
+
+It implements the following operations:
+
+- `SUMMARYCOMMAND#isEmpty()` -- Check user input has only 'summary'
+
+#### Example Usage Scenario
+
+Step 1. The user inputs the command: `summary`
+
+Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
+
+Step 3. The `PARSER` processes the command and determines that it contains a valid key (`summary`). It then calls
+`EVENTLISTCOMMAND#execute(statement: String, container: GenerticList)` with the input command.
+
+Step 4. The `SUMMARYCOMMAND` component receives the command and performs the following operations:
+- Calls `SUMMARYCOMMAND#isEmpty()` to check if the user input any additional redundant arguments.
+
+Step 5. The `SUMMARYCOMMAND` then gets each Resource from the ResourcesList and checks to see if it is an `instanceof`:
+- Book
+- EBook
+- CD
+- Magazine
+- EMagazine
+- Newspaper
+- ENewspaper
+
+and counts as it does so.
+
+Step 5. It then gets all Events from the EventsList.
+
+Step 6. The `SUMMARYCOMMMAND` also calls the component:
+- Calls `SUMMARYCOMMAND#getUpcomingEvents(events: List<Event>, 3: int)` to get the 3 upcoming events.
+
+Step 7. The `SUMMARYCOMMMAND` also calls the component:
+- Calls `SUMMARYCOMMAND#generateBar(:int)` to get the size of the bar for each Resource. 
+
+Step 8. The SUMMARYCOMMAND then outputs the Resource with a bar to indicate count and the next 3 upcoming events.
+
+Sequence Diagram:
+<img src="images/SummaryDiagram.png"/>
 
 ## Product scope | [Return to contents](#table-of-contents)
 

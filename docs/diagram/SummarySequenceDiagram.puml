@@ -45,40 +45,12 @@ activate SummaryCommand COMMAND_COLOR
 SummaryCommand --> SummaryCommand : UpcomingEvents:List<Event>
 deactivate SummaryCommand
 
-SummaryCommand -> SummaryCommand : generateBar(bookBarLength)
+loop for each Resource type
+SummaryCommand -> SummaryCommand : generateBar(:int)
 activate SummaryCommand COMMAND_COLOR
 SummaryCommand --> SummaryCommand : :String
 deactivate SummaryCommand
-
-SummaryCommand -> SummaryCommand : generateBar(cdBarLength)
-activate SummaryCommand COMMAND_COLOR
-SummaryCommand --> SummaryCommand : :String
-deactivate SummaryCommand
-
-SummaryCommand -> SummaryCommand : generateBar(magazineBarLength)
-activate SummaryCommand COMMAND_COLOR
-SummaryCommand --> SummaryCommand : :String
-deactivate SummaryCommand
-
-SummaryCommand -> SummaryCommand : generateBar(eBookBarLength)
-activate SummaryCommand COMMAND_COLOR
-SummaryCommand --> SummaryCommand : :String
-deactivate SummaryCommand
-
-SummaryCommand -> SummaryCommand : generateBar(eMagazineBarLength)
-activate SummaryCommand COMMAND_COLOR
-SummaryCommand --> SummaryCommand : :String
-deactivate SummaryCommand
-
-SummaryCommand -> SummaryCommand : generateBar(newspaperBarLength)
-activate SummaryCommand COMMAND_COLOR
-SummaryCommand --> SummaryCommand : :String
-deactivate SummaryCommand
-
-SummaryCommand -> SummaryCommand : generateBar(eNewspaperBarLength)
-activate SummaryCommand COMMAND_COLOR
-SummaryCommand --> SummaryCommand : :String
-deactivate SummaryCommand
+end
 SummaryCommand --> PARSER : :String
 deactivate SummaryCommand
 destroy SummaryCommand
