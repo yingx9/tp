@@ -7,6 +7,7 @@ import seedu.parser.Parser;
 import seedu.storage.Storage;
 import seedu.ui.UI;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,15 +15,21 @@ public class Syslib {
     /**
      * Main entry-point for the java.syslib.Syslib application.
      */
-    public static final String FILEPATH = ".\\storage.txt";
+    public static final String FILEPATH = ".\\data\\storage.txt";
+    public static final String DIRECTORYPATH = ".\\data";
     private static UI ui;
     private static Parser parser;
     private static Storage storage;
 
 
-    public Syslib(String filePath) {
+    public Syslib(String filePath) throws SysLibException{
         ui = new UI();
         parser = new Parser();
+        File dir = new File(DIRECTORYPATH);
+        if (!dir.mkdirs()){
+            throw new SysLibException("Unable to create 'data' directory. Please run again " +
+                    "with administrative privileges.");
+        }
         storage = new Storage(filePath, parser.container);
         try{
             List<Resource> resourceListLoad = new ArrayList<>();
@@ -41,7 +48,11 @@ public class Syslib {
     }
 
     public static void main(String[] args) {
-        new Syslib(FILEPATH).run();
+        try{
+            new Syslib(FILEPATH).run();
+        } catch (SysLibException SLEx){
+            System.out.println(SLEx);
+        }
     }
 
     public void run() {
