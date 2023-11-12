@@ -85,11 +85,11 @@ public class EventEditCommand extends Command {
         validateStatement(statement, values);
 
         int index = parseInt(values[0]);
-        if (index < 0 || index >= container.getEventList().size()) {
+        if (index < 0 || index >= container.getEventsList().size()) {
             throw new IllegalArgumentException("Invalid event index" + SEPARATOR_LINEDIVIDER + "\n");
         }
         LOGGER.info("Getting old event");
-        Event oldEvent = container.getEventList().get(index);
+        Event oldEvent = container.getEventsList().get(index);
 
         String title = values[1] != null ? values[1] : oldEvent.getName();
         LOGGER.info("Processed title change.");
@@ -102,11 +102,11 @@ public class EventEditCommand extends Command {
 
         Event editedEvent = new Event(title, date, description);
 
-        container.getEventList().remove(index);
+        container.getEventsList().remove(index);
         LOGGER.info("Old event removed.");
 
         int idx = binarySearch(container, date);
-        container.getEventList().add(idx,editedEvent);
+        container.getEventsList().add(idx,editedEvent);
         LOGGER.info("New event added.");
 
         feedbackToUser = "";
@@ -134,15 +134,15 @@ public class EventEditCommand extends Command {
      */
     public static int binarySearch(GenericList<Resource, Event> container, LocalDate key) {
         LOGGER.info("binary search method activated.");
-        if(container.getEventList().isEmpty()){
+        if(container.getEventsList().isEmpty()){
             return 0;
         }
         int low = 0;
-        int high = container.getEventList().size() - 1;
+        int high = container.getEventsList().size() - 1;
 
         while (low <= high) {
             int mid = (low + high)/2;
-            LocalDate midVal = container.getEventList().get(mid).getDate();
+            LocalDate midVal = container.getEventsList().get(mid).getDate();
             int cmp = midVal.compareTo(key);
             if (cmp < 0) {
                 low = mid + 1;

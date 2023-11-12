@@ -69,7 +69,7 @@ public class SummaryCommand extends Command {
         assert container != null : ASSERT_CONTAINER;
 
         LOGGER.info("Executing Summary Command.");
-        int totalResources = container.getResourceList().size();
+        int totalResources = container.getResourcesList().size();
         LOGGER.info("Retrieved resourcelist size.");
         int totalBooks = 0;
         int totalCDs = 0;
@@ -81,7 +81,7 @@ public class SummaryCommand extends Command {
         LOGGER.info("Initialized values.");
 
         LOGGER.info("Counting resources...");
-        for (Resource resource : container.getResourceList()) {
+        for (Resource resource : container.getResourcesList()) {
             if (resource instanceof EBook) {
                 totalEBooks++;
             } else if (resource instanceof CD) {
@@ -99,7 +99,7 @@ public class SummaryCommand extends Command {
             }
         }
 
-        List<Event> events = container.getEventList();
+        List<Event> events = container.getEventsList();
         List<Event> upcomingEvents = getUpcomingEvents(events, 3);
 
         LOGGER.info("Drawing graph");

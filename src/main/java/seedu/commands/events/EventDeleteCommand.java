@@ -52,16 +52,16 @@ public class EventDeleteCommand extends Command {
         String[] values = parseArgument(statement);
         int index = parseCalendarInt(values[0], container);
         System.out.println("This event is removed:");
-        System.out.println(container.getEventList().get(index).toString());
+        System.out.println(container.getEventsList().get(index).toString());
         System.out.println(LINEDIVIDER);
-        container.getEventList().remove(index);
+        container.getEventsList().remove(index);
         LOGGER.info("Event removed");
         return new CommandResult(feedbackToUser);
     }
 
     public int parseCalendarInt(String value, GenericList<Resource, Event> container) {
         int index = parseInt(value);
-        int size = container.getEventList().size();
+        int size = container.getEventsList().size();
         if (index >= size || index < 0) {
             LOGGER.warning("Index is out of range");
             throw new IllegalArgumentException("Index is out of range of the event list!");

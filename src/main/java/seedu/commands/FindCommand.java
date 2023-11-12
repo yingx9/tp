@@ -133,7 +133,7 @@ public class FindCommand extends Command {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE);
         }
 
-        List<Resource> matchedResources = filterResources(container.getResourceList(), values);
+        List<Resource> matchedResources = filterResources(container.getResourcesList(), values);
         displayResults(matchedResources);
 
         return new CommandResult(feedbackToUser);
