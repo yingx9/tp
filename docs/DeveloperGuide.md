@@ -34,15 +34,18 @@ This technical document is meant for current and future developers of Syslib CLI
 
 ## Acknowledgements
 
-Reused [Style.puml](https://github.com/se-edu/addressbook-level3/blob/master/docs/diagrams/style.puml) and [CommandResult](https://github.com/se-edu/addressbook-level3/blob/master/src/main/java/seedu/address/logic/commands/CommandResult.java) class from [AddressBook](https://github.com/se-edu/addressbook-level3) with slight modifications.
+1. Reused [Style.puml](https://github.com/se-edu/addressbook-level3/blob/master/docs/diagrams/style.puml) and [CommandResult](https://github.com/se-edu/addressbook-level3/blob/master/src/main/java/seedu/address/logic/commands/CommandResult.java) class from [AddressBook](https://github.com/se-edu/addressbook-level3) with slight modifications.
+2. Adapted `Command` and `Parser` structure from teammate Wu Xingyu's [iP codebase](https://github.com/DavinciDelta/ip).
 
 ## Setting Up & Getting Started
 1. Fork the repo at https://github.com/AY2324S1-CS2113T-W11-1/tp.
 2. Clone the fork into your computer.
-3. Set up your local repo in your IDE.
-   - Ensure that the project in your IDE is configured to run on Java JDK version 11.
-   - A guide on setting your project to use JDK 11 in your IntelliJ IDEA IDE can be found here.
-4. Run Syslib.java. If you have set up your environment correctly, you should see the following output in your terminal:
+3. Using an IDE of your choice or `Intellij IDEA` (Recommended):
+   - Ensure your IDE is configured to use **JDK 11** as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk). 
+   - Import the project as a **Gradle project** as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
+   - **Verify** the setup: 
+     - Run `Syslib`. On IntelliJ, you can right-click Syslib class and `Run Syslib.main()` or `Shift F10`. 
+     - You should see the following greeting logo and message:
 
 ```
 ____________________________________________________________
@@ -79,7 +82,7 @@ ____________________________________________________________
 > 
 ```
 5. Type `exit` to exit the program.
-
+6. 
 You are now ready to begin developing!
 
 ## Design & Implementation
@@ -87,19 +90,32 @@ You are now ready to begin developing!
 
 <img src="images/ArchitectureDiagram.png" />
 
+The above diagram is a simplified overview of Syslib and its components. More details can be found in the following sections.  
 **Main components of SysLib Architecture**
 
 SysLib currently consists of five main components:
 
-- `UI`: User Interaction
-- `Parser`: Parsing User Response 
-- `Command`: Command Executor
-- `Data`: Holds the data of SysLib in memory such as the Resource List
+- `Syslib`: Initializes other components and acts as the "launching pad" by executing important methods
+- `UI`: Handles User Interaction such as getting user input
+- `Parser`: Parsing User Response  
+- `Command`: Command Executor 
 - `Storage`: Loads data from file in hard disk, and saves data to hard disk on program exit
 
 **How the architecture components interact with each other**
 
+The following shows an overview of how components in Syslib work and interact with each other. 
 
+<img src="images/ComponentDiagram.png" />
+
+1. After all components have been initialized, `Syslib` calls upon the `Storage` component to load any data from `storage.txt`.
+2. `Storage` fills two lists, ResourcesList and EventsList, with the read data. Both lists are returned to Syslib.
+3. Syslib sets the `Parser` to use the filled lists. 
+4. Afterwhich, `UI` is called to get and return user input.
+5. Syslib passes the returned user input to `Parser` for processing.
+6. `Parser` calls the appropriate command based on the user input, for example `AddCommand`.
+7. `Command` carries out necessary actions and returns a `CommandResult` object which holds the message to be displayed to user. `Parser` prints the feedback to user.
+8. Once the user input has been processed and executed, Syslib calls `Storage` to save the current state of the lists to `storage.txt`.
+9. `Storage` retrieves the lists in `Parser` and writes to `storage.txt`.
    
 ## Component Overview | [Return to contents](#table-of-contents)
 

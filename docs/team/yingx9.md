@@ -12,7 +12,6 @@ From viewing, adding, searching, editing, deleting and saving, SysLib provides a
 View the code I contributed via the tp Code Dashboard link [here](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=yingx9&breakdown=true).
 
 
-
 #### Enhancements implemented 
 
 **Enhancements**: 
@@ -89,8 +88,9 @@ Sections contributed:
 #### Contributions to the DG:
 
 Sections contributed:
-- Acknowledgement 
-- Overall architecture diagram 
+- Acknowledgement
+- Overall architecture diagram and Component Diagram
+- Architecture section (The section before UI Component)
 - List Command section and ListCommand sequence diagram
 - Edit Command section and Edit activity diagram
 - Show Resources feature section and Show Resources sequence diagram
