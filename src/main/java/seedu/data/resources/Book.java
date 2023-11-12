@@ -5,20 +5,18 @@ import seedu.data.Status;
 import java.util.Formatter;
 import java.util.List;
 
-
 public class Book extends Resource {
     public static final String BOOK_TAG = "B";
     private String author;
-    //private String synopsis;
     private String[] genres;
 
     public Book(String title, String isbn, String author, String[] genres, int id, Status status) {
         super(title, isbn, id, status);
         setTag(BOOK_TAG);
         setAuthor(author);
-        //setSynopsis(synopsis);
         setGenre(genres);
     }
+
     public String getAuthor() {
         return author;
     }
@@ -26,14 +24,6 @@ public class Book extends Resource {
     public void setAuthor(String author) {
         this.author = author;
     }
-
-    /*public String getSynopsis() {
-        return synopsis;
-    }
-
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }*/
 
     public String[] getGenre() {
         return genres;
@@ -53,7 +43,8 @@ public class Book extends Resource {
         if (getGenre()[0] == null) {
             genreString.append("-");
         } else {
-            genreString.append(java.util.Arrays.toString(getGenre()).replace("[", "").replace("]", ""));
+            genreString.append(java.util.Arrays.toString(getGenre()).replace("[", "").
+                    replace("]", ""));
         }
 
         return "[" + getTag() + "] " + " ID: " + getId() + " Title: " + getTitle() + " ISBN: " + getISBN() + " Author: "

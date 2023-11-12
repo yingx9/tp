@@ -472,19 +472,19 @@ With quick command-based actions, they can manage library's resources and events
 
 ## User Stories
 
-| Version | As a ...  | I want to ...                                                                              | So that I can ...                                                              |
-|---------|-----------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| v1.0    | librarian | view a list of books that the library has                                                  | have an overview of all the books                                              |
-| v1.0    | librarian | add new books to our inventory by entering their title, author, ISBN, and publication year | keep our collection up-to-date                                                 |
-| v1.0    | librarian | delete books from the database                                                             | let the patrons know our library no longer carries it                          |
-| v1.0    | librarian | tag a book as physical medium like newspapers, audio cds, books or online like eMagazines  | patrons can know what type are available                                       |
-| v1.0    | librarian | have a help function                                                                       | know the commands of this programme                                            |
-| v1.0    | librarian | quickly find out how many books we have of a particular author and the names of the books  | know how many books are related to the author                                  |
-| v2.0    | librarian | import/export our library's inventory data to a file format                                | easily share with other libraries to be used for backup and archival purposes. |
-| v2.0    | librarian | find a to-do item by name                                                                  | locate a to-do without having to go through the entire list                    |
-| v2.0    | librarian | get the status of an item                                                                  | know if it is available                                                        |
-| v2.0    | librarian | update the details of a resource                                                           | fix any mistakes and maintain consistency                                      |
-| v2.1    | librarian | add in different types of resources                                                        | differentiate between resources such as magazines, cds...                      |
+| Version | As a ...  | I want to ...                                                                              | So that I can ...                                                                                  |
+|---------|-----------|--------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| v1.0    | librarian | view a list of books that the library has                                                  | have an overview of all the books                                                                  |
+| v1.0    | librarian | add new books to our inventory by entering their title, author, ISBN, and publication year | keep our collection up-to-date                                                                     |
+| v1.0    | librarian | delete books from the database                                                             | let the patrons know our library no longer carries it                                              |
+| v1.0    | librarian | tag a book as physical medium like newspapers, audio cds, books or online like eMagazines  | patrons can know what type are available                                                           |
+| v1.0    | librarian | have a help function                                                                       | know the commands of this programme                                                                |
+| v1.0    | librarian | quickly find out how many books we have of a particular author and the names of the books  | know how many books are related to the author                                                      |
+| v2.0    | librarian | import/export our library's inventory data to a file format                                | easily share with other libraries to be used for backup and archival purposes.                     |
+| v2.0    | librarian | find a to-do item by name                                                                  | locate a to-do without having to go through the entire list                                        |
+| v2.0    | librarian | get the status of an item                                                                  | know if it is available                                                                            |
+| v2.0    | librarian | update the details of a resource                                                           | fix any mistakes and maintain consistency                                                          |
+| v2.1    | librarian | add in different types of resources                                                        | differentiate between resources such as books, cds, magazines, newspapers, and electronic versions |
 
 
 ## Use Cases

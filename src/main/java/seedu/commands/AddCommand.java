@@ -48,8 +48,10 @@ import static seedu.parser.resources.ParseMagazine.parseAddMagazine;
 import static seedu.parser.resources.ParseMagazine.resetMagazineArgs;
 import static seedu.parser.resources.ParseNewspaper.parseAddNewspaper;
 import static seedu.parser.resources.ParseNewspaper.resetNewspaperArgs;
+import static seedu.ui.Messages.ASSERT_STATEMENT;
+import static seedu.ui.Messages.ASSERT_CONTAINER;
+import static seedu.ui.Messages.ERROR_TAG;
 import static seedu.ui.UI.LINEDIVIDER;
-
 
 public class AddCommand extends Command{
     private static final String TITLE_OPTION = "t";
@@ -98,8 +100,8 @@ public class AddCommand extends Command{
     }
 
     private void addBook(String statement, GenericList<Resource, Event> container) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-        assert container != null : "Container should not be null";
+        assert statement != null : ASSERT_STATEMENT;
+        assert container != null : ASSERT_CONTAINER;
 
         String[] values = parseAddBook(statement);
         Book newBook = createBook(values, resourceID);
@@ -110,8 +112,8 @@ public class AddCommand extends Command{
     }
 
     private void addEBook(String statement, GenericList<Resource, Event> container) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-        assert container != null : "Container should not be null";
+        assert statement != null : ASSERT_STATEMENT;
+        assert container != null : ASSERT_CONTAINER;
 
         String[] values = parseAddEBook(statement);
         EBook newEBook = createEBook(values, resourceID);
@@ -122,8 +124,8 @@ public class AddCommand extends Command{
     }
 
     private void addCD(String statement, GenericList<Resource, Event> container) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-        assert container != null : "Container should not be null";
+        assert statement != null : ASSERT_STATEMENT;
+        assert container != null : ASSERT_CONTAINER;
 
         String[] values = parseAddCD(statement);
         CD newCD = createCD(values, resourceID);
@@ -134,8 +136,8 @@ public class AddCommand extends Command{
     }
 
     private void addMagazine(String statement, GenericList<Resource, Event> container) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-        assert container != null : "Container should not be null";
+        assert statement != null : ASSERT_STATEMENT;
+        assert container != null : ASSERT_CONTAINER;
 
         String[] values = parseAddMagazine(statement);
         Magazine newMagazine = createMagazine(values, resourceID);
@@ -146,11 +148,11 @@ public class AddCommand extends Command{
     }
 
     private void addEMagazine(String statement, GenericList<Resource, Event> container) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-        assert container != null : "Container should not be null";
+        assert statement != null : ASSERT_STATEMENT;
+        assert container != null : ASSERT_CONTAINER;
 
         String[] values = parseAddEMagazine(statement);
-        EMagazine newEMagazine = (EMagazine) createEMagazine(values, resourceID);
+        EMagazine newEMagazine = createEMagazine(values, resourceID);
         container.getResourceList().add(newEMagazine);
         System.out.println("This e-magazine is added:" + System.lineSeparator() + newEMagazine.toString());
         resetEMagazineArgs();
@@ -158,8 +160,8 @@ public class AddCommand extends Command{
     }
 
     private void addNewspaper(String statement, GenericList<Resource, Event> container) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-        assert container != null : "Container should not be null";
+        assert statement != null : ASSERT_STATEMENT;
+        assert container != null : ASSERT_CONTAINER;
 
         String[] values = parseAddNewspaper(statement);
         Newspaper newNewspaper = createNewspaper(values, resourceID);
@@ -170,8 +172,8 @@ public class AddCommand extends Command{
     }
 
     private void addENewspaper(String statement, GenericList<Resource, Event> container) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-        assert container != null : "Container should not be null";
+        assert statement != null : ASSERT_STATEMENT;
+        assert container != null : ASSERT_CONTAINER;
 
         String[] values = parseAddENewspaper(statement);
         ENewspaper newENewspaper = createENewspaper(values, resourceID);
@@ -184,11 +186,9 @@ public class AddCommand extends Command{
     @Override
     public CommandResult execute(String statement, GenericList<Resource, Event> container) throws
             IllegalStateException, NumberFormatException, SysLibException {
-        assert statement != null : "Statement should not be null";
-        assert container != null : "Container should not be null";
-
+        assert statement != null : ASSERT_STATEMENT;
+        assert container != null : ASSERT_CONTAINER;
         ADDLOGGER.log(Level.INFO, "Executing Add. Input Arguments: " + statement);
-
         feedbackToUser = "";
 
         resourceID = container.getResourceList().size() + RESOURCEID_INCREMENT;
@@ -209,7 +209,7 @@ public class AddCommand extends Command{
         } else if (tag.equalsIgnoreCase(ENEWSPAPER_TAG)) {
             addENewspaper(statement, container);
         } else {
-            throw new SysLibException("Please enter a valid tag." + System.lineSeparator() + LINEDIVIDER);
+            throw new SysLibException(ERROR_TAG);
         }
         System.out.println(LINEDIVIDER);
         return new CommandResult(feedbackToUser);

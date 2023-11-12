@@ -11,22 +11,25 @@ import static seedu.parser.resources.ParseResource.parseTitle;
 import static seedu.parser.resources.ParseResource.parseCreator;
 import static seedu.parser.resources.ParseResource.parseType;
 import static seedu.parser.resources.ParseResource.parseStatus;
-import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
+import static seedu.ui.Messages.ASSERT_STATEMENT;
+import static seedu.ui.Messages.ASSERT_ARGUMENTS;
+import static seedu.ui.Messages.ERROR_FORMAT_CD;
+import static seedu.ui.Messages.ERROR_EMPTY_CD;
 
 public class ParseCD {
     public static String[] args = new String[6];
     public static String[] parseAddCD(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
+        assert statement != null : ASSERT_STATEMENT;
 
         try {
             String inputPattern = "^(?=.*/i ([\\d]+))(?=.*/t ([^/]+))(?=.*/c ([^/]+))" +
                     "(?=.*/tag ([\\s\\w]+))(?=.*/ty ([^/]+))(?=.*/s ([\\w]+))?.*$";
             Matcher matcher = Pattern.compile(inputPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-            boolean isMatching = matcher.find();
+            boolean isInputMatching = matcher.find();
 
             Boolean isStatusMatching = parseCDArgs(statement);
 
-            if (isMatching) {
+            if (isInputMatching) {
                 args[0] = matcher.group(1).trim(); // isbn
                 args[1] = matcher.group(2).trim(); // title
                 args[2] = matcher.group(3).trim(); // creator
@@ -38,33 +41,31 @@ public class ParseCD {
 
                 checkEmptyCDArgs(args);
             } else {
-                throw new SysLibException("Please use the format " +
-                        "'add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag TAG [/s STATUS]'." + SEPARATOR_LINEDIVIDER);
+                throw new SysLibException(ERROR_FORMAT_CD);
             }
 
             return args;
         } catch (IllegalStateException e) {
-            throw new SysLibException("Please use the format " +
-                    "'add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag TAG [/s STATUS]'." + SEPARATOR_LINEDIVIDER);
+            throw new SysLibException(ERROR_FORMAT_CD);
         }
     }
 
     public static Boolean parseCDArgs(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
+        assert statement != null : ASSERT_STATEMENT;
 
         parseIsbn(statement);
         parseTitle(statement);
         parseCreator(statement);
         parseType(statement);
+
         return parseStatus(statement);
     }
 
     public static void checkEmptyCDArgs(String[] args) throws SysLibException {
-        assert args != null : "Arguments should not be null";
+        assert args != null : ASSERT_ARGUMENTS;
 
         if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[3].isEmpty() || args[5].isEmpty()) {
-            throw new SysLibException("Please enter the ISBN, title, creator, type, and tag." +
-                    SEPARATOR_LINEDIVIDER);
+            throw new SysLibException(ERROR_EMPTY_CD);
         }
     }
 

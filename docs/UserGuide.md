@@ -58,6 +58,7 @@ icons and formatting used)
 3. Copy the `Syslib.jar` file into a folder on its own.
 4. Open a command terminal, type `cd <FILE_DIRECTORY>`, where <FILE_DIRECTORY> refers to the directory to the `Syslib.jar` file.
 5. Run the following command: `java -jar Syslib.jar`. You should see the following welcome screen.
+
 ```
 ____________________________________________________________
              .....................                  

@@ -17,6 +17,9 @@ public class MessageFormatter {
     public static String formatLastLineDivider(String message){
         return LINESEPARATOR + message + SEPARATOR_LINEDIVIDER + LINESEPARATOR;
     }
+    public static String formatSeparatorLineDivider(String message) {
+        return message + SEPARATOR_LINEDIVIDER;
+    }
 
     /**
      * Formats a line dashed divider with provided length.

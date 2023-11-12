@@ -21,6 +21,8 @@ import seedu.commands.ExitCommand;
 import seedu.commands.EditCommand;
 import seedu.commands.SummaryCommand;
 
+import static seedu.ui.Messages.ASSERT_STATEMENT;
+import static seedu.ui.Messages.ERROR_TAG;
 import static seedu.ui.UI.LINEDIVIDER;
 
 import java.util.ArrayList;
@@ -88,7 +90,7 @@ public class Parser {
 
     // @@author JoanneJo
     public static String parseAddCommand(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
+        assert statement != null : ASSERT_STATEMENT;
 
         String inputPattern = "/tag ([^/]+)";
 
@@ -99,7 +101,7 @@ public class Parser {
         if (isMatching) {
             return matcher.group(1).trim();
         } else {
-            throw new SysLibException("Please enter a valid tag" + System.lineSeparator() + LINEDIVIDER);
+            throw new SysLibException(ERROR_TAG);
         }
     }
 
