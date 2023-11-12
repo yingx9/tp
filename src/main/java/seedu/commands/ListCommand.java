@@ -64,7 +64,7 @@ public class ListCommand extends Command {
         validateStatement(statement, givenParameters);
         if (container.getResourcesList().isEmpty()) {
             LIST_LOGGER.warning("ResourcesList is empty");
-            throw new IllegalArgumentException("There are currently no Resources in Syslib!" + SEPARATOR_LINEDIVIDER);
+            throw new SysLibException("There are currently no Resources in Syslib!" + SEPARATOR_LINEDIVIDER);
         }
         filterResources(givenParameters, container.getResourcesList());
         LIST_LOGGER.info("List Command ends");

@@ -34,10 +34,7 @@ public class ListCommandTest {
     }
     @Test
     public void testEmptyListMessage() throws SysLibException {
-        String outputMessage = testUtil.getOutputMessage(listCommand, "", emptyResourceList);
-        String expectedMessage = GENERIC_MESSAGE;
-        expectedMessage +=  ZERO_RESOURCES_MESSAGE;
-        assertEquals(expectedMessage, outputMessage);
+        assertThrows(SysLibException.class, ()->testUtil.getOutputMessage(listCommand, "", emptyResourceList));
     }
     @Test
     public void testNoTagArgBehavior() {
