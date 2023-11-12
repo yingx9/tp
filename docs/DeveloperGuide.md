@@ -9,15 +9,19 @@ Reused [Style.puml](https://github.com/se-edu/addressbook-level3/blob/master/doc
 1. Fork the repo at https://github.com/AY2324S1-CS2113T-W11-1/tp.
 2. Clone the fork into your computer.
 
-## Design & Implementation
-
-### Table of Contents
-* [Architecture Overview](#architecture-overview--return-to-contents)
-* [Component Overview](#component-overview--return-to-contents)
-* [Implementation Overview](#impl)
+## Table of Contents
+* [Design and Implementation](#design--implementation)
+  * [Architecture Overview](#architecture-overview--return-to-contents)
+  * [Component Overview](#component-overview--return-to-contents)
+  * [Implementation Overview](#implementation-overview--return-to-contents)
 * [Product Scope](#product-scope--return-to-contents)
+* [User Stories](#user-stories--return-to-contents)
+* [Use Cases](#use-cases--return-to-contents)
+* [Non-Functional Requirements](#non-functional-requirements--return-to-contents)
+* [Glossary](#glossary--return-to-contents)
+* [Manual Testing](#instructions-for-manual-testing--return-to-contents)
 
-
+## Design & Implementation
 ## Architecture Overview | [Return to contents](#table-of-contents)
 
 <img src="images/ArchitectureDiagram.png" />
