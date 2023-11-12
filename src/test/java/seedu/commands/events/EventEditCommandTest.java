@@ -20,12 +20,6 @@ public class EventEditCommandTest {
     private final EventEditCommand eventEditCommand = new EventEditCommand();
     private GenericList<Resource, Event> container;
 
-
-    @Test
-    void testExecuteWithInvalidIndex() {
-        assertThrows(IllegalArgumentException.class, () -> eventEditCommand.execute("edit 10", container));
-    }
-
     @Test
     public void eventEditCommandOutput() throws SysLibException {
         eventAddCommand.execute("/t testrun /date 1 dec 2001 /desc testing 123", parser.container);

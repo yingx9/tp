@@ -61,7 +61,7 @@ public class ListCommand extends Command {
 
         String[] givenParameters = parseArgument(statement);
         validateStatement(statement, givenParameters);
-        filterResources(givenParameters, container.getResourceList());
+        filterResources(givenParameters, container.getResourcesList());
         LIST_LOGGER.info("List Command ends");
         return new CommandResult(feedbackToUser);
 

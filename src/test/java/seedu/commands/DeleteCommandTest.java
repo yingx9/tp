@@ -21,7 +21,7 @@ public class DeleteCommandTest {
                 , parser.container);
 
         deleteCommand.execute("/id 1", parser.container);
-        assertEquals(parser.resourceList.size(), 0);
+        assertEquals(parser.resourcesList.size(), 0);
     }
 
     @Test
