@@ -9,7 +9,6 @@ import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.util.TestUtil;
 
-import static seedu.ui.ListCommandMessages.GENERIC_MESSAGE;
 import static seedu.ui.ListCommandMessages.FILTER_MESSAGE;
 import static seedu.ui.ListCommandMessages.STATUS_ERROR_MESSAGE;
 import static seedu.ui.ListCommandMessages.ZERO_RESOURCES_MESSAGE;
