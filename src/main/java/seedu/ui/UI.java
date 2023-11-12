@@ -71,7 +71,8 @@ public class UI {
                 "(e.g. delete /id 123456789)");
         System.out.println("list: list all resources OR filter by certain tags or genre." +
                 "(e.g. list /tag B /g Fiction");
-        System.out.println("find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)");
+        System.out.println("find: find a resource by title, author, ISBN or given id. (e.g. find /i" +
+                " 9780763630188 /a AUTHOR)");
         System.out.println("edit: Edit a listing by entering its isbn to update its details. " +
                 "(e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)");
         System.out.println("eventadd: Add an event to the event list " +
@@ -79,6 +80,8 @@ public class UI {
         System.out.println("eventlist: List out all the event list (e.g. eventlist)");
         System.out.println("eventdelete: Delete an event in the event list based on the index " +
                 "(e.g. eventdelete /i INDEX)");
+        System.out.println("eventedit: Edit an event in the event list based on the index " +
+                "(e.g. eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION])");
         System.out.println("exit: displays a farewell message and exits the program (e.g. exit)");
         System.out.println("For more information, please refer to our user guide at:" +
                 "https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html");
