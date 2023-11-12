@@ -7,8 +7,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.IllegalFormatException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import seedu.data.GenericList;
 import seedu.data.Status;
@@ -38,11 +43,16 @@ public class Storage {
     public static final int ELEVENTH_INDEX = 10;
     private static final String RESOURCE_PREFIX = "R";
     private static final String EVENT_PREFIX = "E";
+    private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
 
     private final File dataFile;
     private final String filePath;
     private final GenericList<Resource, Event> container;
     private final UI ui = new UI();
+
+    static {
+        setupLogger();
+    }
 
     /**
      * Constructs a Storage object for handling data persistence.
@@ -58,14 +68,37 @@ public class Storage {
     }
 
     /**
+     * Sets up the logger for this class.
+     */
+    private static void setupLogger() {
+        try {
+            // remove logs from showing in stdout
+            Logger rootLogger = Logger.getLogger("");
+            for (java.util.logging.Handler handler : rootLogger.getHandlers()) {
+                if (handler instanceof java.util.logging.ConsoleHandler) {
+                    rootLogger.removeHandler(handler);
+                }
+            }
+            FileHandler fileHandler = new FileHandler("logs/Storage.log", true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            LOGGER.addHandler(fileHandler);
+            LOGGER.setLevel(Level.INFO);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Failed to set up log file handler", e);
+        }
+    }
+
+    /**
      * Ensures the data file exists, creating it if necessary.
      */
     private void ensureFileExists() {
         try {
             if (!dataFile.exists()) {
+                LOGGER.info("Storage file not found, creating now.");
                 ui.showNoFileFoundMessage(filePath);
                 Files.createFile(Paths.get(filePath));
             } else {
+                LOGGER.info("Storage file found.");
                 ui.showFileFoundMessage(filePath);
             }
         } catch (IOException e) {
@@ -81,6 +114,7 @@ public class Storage {
      * @throws SysLibException If there is an issue reading from the file or parsing data.
      */
     public void load(List<Resource> resources, List<Event> events) throws SysLibException {
+        LOGGER.info("Starting load from storage file.");
         try (Scanner dataScanner = new Scanner(dataFile)) {
             int id = 0;
             while (dataScanner.hasNext()) {
@@ -106,8 +140,10 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
+            LOGGER.info("Unable to read storage file.");
             throw new SysLibException("Error reading file: " + filePath);
         }
+        LOGGER.info("Successfully loaded data.");
     }
 
     /**
@@ -198,10 +234,12 @@ public class Storage {
                 return cdToAdd;
 
             default:
+                LOGGER.info("Data corrupted, unable to load.");
                 throw new SysLibException("Unknown resource type found, data corrupted.");
             }
-        } catch (Exception e) {
-            throw new SysLibException("Error creating resource from data: " + e.getMessage());
+        } catch (ClassCastException CCEx) {
+            LOGGER.info("Unable to create resource.");
+            throw new SysLibException("Error creating resource from data: " + CCEx.getMessage());
         }
     }
 
@@ -220,6 +258,7 @@ public class Storage {
             Event eventToAdd = new Event(name, eventld, description);
             return eventToAdd;
         } catch (Exception e) {
+            LOGGER.info("Unable to create event from data.");
             throw new SysLibException("Error creating event from data: " + e.getMessage());
         }
     }
@@ -230,18 +269,21 @@ public class Storage {
      * @throws SysLibException If there is an issue writing to the file.
      */
     public void save() throws SysLibException {
+        LOGGER.info("Starting to save data to storage file.");
         try (FileWriter fw = new FileWriter(this.filePath)) {
-            for (Resource resource : container.getResourceList()) {
+            for (Resource resource : container.getResourcesList()) {
                 String resourceSaveFormat = getResourceSaveFormat(resource);
                 fw.write(resourceSaveFormat);
             }
-            for (Event event : container.getEventList()) {
+            for (Event event : container.getEventsList()) {
                 String eventSaveFormat = getEventSaveFormat(event);
                 fw.write(eventSaveFormat);
             }
         } catch (IOException e) {
+            LOGGER.info("Unable to write to storage file.");
             throw new SysLibException("Error writing to file: " + filePath);
         }
+        LOGGER.info("Successfully saved to storage file.");
     }
 
     /**
@@ -355,11 +397,13 @@ public class Storage {
                         enewspaper.getLink());
                 break;
             default:
+                LOGGER.info("Corrupted data in list. Can't save.");
                 throw new SysLibException("Unknown data type in list. Can't store it in file.");
             }
 
-        } catch (Exception e) {
-            throw new SysLibException("Error formatting resource for save: " + e.getMessage());
+        } catch (IllegalFormatException IFEx) {
+            LOGGER.info("Formatting error when trying to save..");
+            throw new SysLibException("Error formatting resource for save: " + IFEx.getMessage());
         }
         return resourceSaveFormat;
     }

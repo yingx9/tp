@@ -79,7 +79,7 @@ public class EditCommand extends Command{
         String[] givenParameters = parseArgument(statement);
         validateStatement(statement, givenParameters);
 
-        List<Resource> resourcesList =  container.getResourceList();
+        List<Resource> resourcesList =  container.getResourcesList();
         int givenArgsCount = countGivenArgs(givenParameters);
         int givenIDNumber = parseInt(givenParameters[0]);
 
@@ -93,7 +93,7 @@ public class EditCommand extends Command{
 
         Resource updatedResource = editResource(foundResource, givenParameters, givenArgsCount);
         assert updatedResource != null;
-        assert resourceIndex < container.getResourceList().size();
+        assert resourceIndex < container.getResourcesList().size();
 
         resourcesList.set(resourceIndex, updatedResource);
         feedbackToUser += EDIT_SUCCESS + formatLastLineDivider(updatedResource.toString());

@@ -33,9 +33,9 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-    public List<Resource> resourceList = new ArrayList<>();
-    public List<Event> eventList = new ArrayList<>();
-    public GenericList<Resource, Event> container = new GenericList<>(resourceList, eventList);
+    public List<Resource> resourcesList = new ArrayList<>();
+    public List<Event> eventsList = new ArrayList<>();
+    public GenericList<Resource, Event> container = new GenericList<>(resourcesList, eventsList);
 
     // @@author DavinciDelta
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
