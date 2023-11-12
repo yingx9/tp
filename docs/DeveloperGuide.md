@@ -280,11 +280,11 @@ The following sequence diagram shows how the show resources feature works in a s
 The `list` command is facilitated by `Parser` and `UI` component to show the details of all resources in `GenericList`. Furthermore, **filter** options can be provided to only list specific resources that match the given filters. 
 
 `list` has five possible options:
-- list
-- list _/tag [tag]_
-- list _/g [genre]_
-- list _/s [status]_
-- list _/tag [tag]_ _/g [genre]_ _/s [status]_
+- `list`
+- `list /tag [tag]`
+- `list /g [genre]`
+- `list /s [status]`
+- `list /tag [tag] /g [genre] /s [status]`
 
 Arguments in italics are filter options and are **optional**. 
 
@@ -349,8 +349,8 @@ the `EventAddCommand` component. It works with `Parser` and `Command` components
 The new book is stored internally in `eventList` as a `Event`.
 
 `eventadd` has two options:
-- eventadd /t [title] /date [date]
-- eventadd /t [title] /date [date] /desc [description]
+- `eventadd /t [title] /date [date]`
+- `eventadd /t [title] /date [date] /desc [description]`
 
 #### Implementation
 
@@ -390,8 +390,30 @@ The `eventlist` command works with the `Parser` and `Command` component to execu
 This feature is responsible for listing out the events in eventList. 
 It is facilitated by the `EventListCommand` component. 
 
-`eventlist` has one option:
-- eventlist
+`eventlist` has one option.
+
+### Event Edit Feature
+The `eventedit` command with the `Parser` and `Command` component to execute the correct action.
+This feature is responsible for editing the events in eventList as given by the user.
+It is facilitated by the `EventListCommand` component.
+
+`eventedit` has three option:
+- `eventedit /t [title] /date [date]`
+- `eventedit /t [title] /desc [description]`
+- `eventedit /t [title] /date [date] /desc [description]`
+
+Sequence Diagram:
+<img src="images/EventEditDiagram.png"/>
+
+### Summary Feature
+The `summary` command with the `Parser` and `UI` component to execute the correct action.
+This feature is responsible for showing a summary of the Resources with a visually helpful bar as well as the next 3 events.
+It is facilitated by the `SummaryCommand` component.
+
+`summary` has one option.
+
+Sequence Diagram:
+<img src="images/SummaryDiagram.png"/>
 
 #### Implementation
 
