@@ -12,10 +12,10 @@ import seedu.parser.Parser;
 import seedu.util.TestUtil;
 
 
-import static seedu.commands.ListCommand.GENERIC_MESSAGE;
-import static seedu.commands.ListCommand.FILTER_MESSAGE;
-import static seedu.commands.ListCommand.STATUS_ERROR_MESSAGE;
-import static seedu.commands.ListCommand.ZERO_RESOURCES_MESSAGE;
+import static seedu.ui.ListCommandMessages.GENERIC_MESSAGE;
+import static seedu.ui.ListCommandMessages.FILTER_MESSAGE;
+import static seedu.ui.ListCommandMessages.STATUS_ERROR_MESSAGE;
+import static seedu.ui.ListCommandMessages.ZERO_RESOURCES_MESSAGE;
 import static seedu.commands.ListCommand.matchedResources;
 import static seedu.ui.UI.showResourcesDetails;
 

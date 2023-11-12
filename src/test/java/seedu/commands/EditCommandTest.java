@@ -19,17 +19,17 @@ import seedu.parser.Parser;
 import seedu.util.TestUtil;
 
 
-import static seedu.commands.EditCommand.BOOK_ARGS_MESSAGE;
-import static seedu.commands.EditCommand.INVALID_EDIT_ARGS;
-import static seedu.commands.EditCommand.MAGAZINE_ARGS_MESSAGE;
-import static seedu.commands.EditCommand.MISSING_ARG_MESSAGE;
-import static seedu.commands.EditCommand.NEWSPAPERS_ARGS_MESSAGE;
-import static seedu.commands.EditCommand.RESOURCE_NOT_FOUND;
-import static seedu.commands.EditCommand.EDIT_SUCCESS;
+import static seedu.ui.EditCommandMessages.BOOK_ARGS_MESSAGE;
+import static seedu.ui.EditCommandMessages.INVALID_EDIT_ARGS;
+import static seedu.ui.EditCommandMessages.MAGAZINE_ARGS_MESSAGE;
+import static seedu.ui.EditCommandMessages.MISSING_ARG_MESSAGE;
+import static seedu.ui.EditCommandMessages.NEWSPAPERS_ARGS_MESSAGE;
+import static seedu.ui.EditCommandMessages.RESOURCE_NOT_FOUND;
+import static seedu.ui.EditCommandMessages.EDIT_SUCCESS;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.commands.ListCommand.STATUS_ERROR_MESSAGE;
+import static seedu.ui.ListCommandMessages.STATUS_ERROR_MESSAGE;
 import static seedu.ui.MessageFormatter.formatLastLineDivider;
 
 public class EditCommandTest {
