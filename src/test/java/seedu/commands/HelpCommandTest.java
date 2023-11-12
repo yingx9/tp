@@ -25,7 +25,8 @@ class HelpCommandTest {
                 "/tag TAG [/g GENRE /s STATUS])" + System.lineSeparator() +
                 "delete: deletes the resource with the specified ID from the library inventory. " +
                 "(e.g. delete /id 123456789)" + System.lineSeparator() +
-                "list: list all resources OR filter by certain tags or genre.(e.g. list /tag B /g Fiction" +
+                "list: list all resources OR filter by certain tags, genre, or status. " +
+                "(e.g. list /tag B /g Fiction /s AVAILABLE)" +
                  System.lineSeparator() +
                 "find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188 /a AUTHOR)" +
                 System.lineSeparator() + "edit: Edit a listing by entering its isbn to update its details. " +
