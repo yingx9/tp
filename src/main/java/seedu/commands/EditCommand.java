@@ -11,9 +11,8 @@ import seedu.data.resources.ENewspaper;
 import seedu.data.resources.Magazine;
 import seedu.data.resources.Newspaper;
 import seedu.data.resources.Resource;
-import seedu.data.Status;
 import seedu.exception.SysLibException;
-import seedu.ui.EditCommandMessages;
+import seedu.data.Status;
 
 import java.io.File;
 import java.io.IOException;
