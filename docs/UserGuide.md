@@ -595,7 +595,7 @@ icon in the **Dock**, type **Terminal** in the search field, then click **Termin
 
 Upon executing `list`, you  may encounter an issue where the table is out of alignment: 
 
-![img.png](images/List%20Screenshots/listimage.png)
+![ListProblem.png](images/List%20Screenshots/listproblemimg.png)
 
 This issue is due to the **window size** of your command line terminal and occurs when you have long details in your resources. 
 
@@ -604,7 +604,7 @@ This issue is due to the **window size** of your command line terminal and occur
 You can try any of the following solutions to fix this issue:
 - Make your terminal **full screen** by clicking the square on the top right.
 
-  ![ListProblem.png](images/List%20Screenshots/listproblemimg.png)
+  ![ListProblem.png](images/List%20Screenshots/listimage.png)
 
 - **Resize** your window by:
   1. Move your cursor to bottom right corner of your terminal window until you see an icon with double arrows like:   ![free-resize-1438243-1216204 (1).png](..%2F..%2Fpics%2Ffree-resize-1438243-1216204%20%281%29.png)
