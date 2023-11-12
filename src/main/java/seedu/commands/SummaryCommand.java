@@ -110,6 +110,7 @@ public class SummaryCommand extends Command {
         int newspaperBarLength = (int) (maxBarLength * ((double) totalNewspapers / maxCount));
         int eNewspaperBarLength = (int) (maxBarLength * ((double) totalENewspapers / maxCount));
 
+        graph.append("Summary of Resources:\n");
         graph.append("Total Resources: ").append(totalResources).append("\n");
         graph.append("Total Books: ").append(generateBar(bookBarLength)).append(" ")
                 .append(totalBooks).append("\n");
