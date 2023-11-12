@@ -49,6 +49,10 @@ public class FindCommand extends Command {
         setupLogger();
     }
 
+
+    /**
+     * Constructs a FindCommand object for handling find command instances.
+     */
     public FindCommand() {
         args = new String[]{"id", "i", "a", "t"};
         required = new boolean[]{false, false, false, false};
