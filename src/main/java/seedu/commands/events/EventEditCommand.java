@@ -86,7 +86,7 @@ public class EventEditCommand extends Command {
 
         int index = parseInt(values[0]);
         if (index < 0 || index >= container.getEventsList().size()) {
-            throw new IllegalArgumentException("Invalid event index" + SEPARATOR_LINEDIVIDER + "\n");
+            throw new IllegalArgumentException("Invalid event index" + SEPARATOR_LINEDIVIDER);
         }
         LOGGER.info("Getting old event");
         Event oldEvent = container.getEventsList().get(index);
@@ -128,7 +128,7 @@ public class EventEditCommand extends Command {
     }
 
     /**
-     * @param container Contains ResourceList and EventList.
+     * @param container Contains ResourcesList and EventsList.
      * @param key date to search for.
      * @return index to insert to.
      */
