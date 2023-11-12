@@ -385,7 +385,7 @@ ____________________________________________________________
 
 ## Edit a Listing: `edit` | [Return to Contents](#contents)
 
-We all know the horror of making a typo and having to delete and add a resource again—absolutely _dreadful_. 
+We all know the horror of making a typo and having to delete and add a resource again—it's absolutely _dreadful_. 
 
 Fear not! Update a resource's details using the `edit` command and fix your typos in a flash. 
 
