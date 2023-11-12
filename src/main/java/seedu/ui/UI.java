@@ -46,69 +46,72 @@ public class UI {
 
     protected Scanner myScanner;
 
-    public UI(){
+    public UI() {
         this.myScanner = new Scanner(System.in);
     }
 
-    public void showWelcomeMessage(){
+    public void showWelcomeMessage() {
         showLine();
         System.out.println(LOGO);
         System.out.println("Hello! What would you like to do?");
         showLine();
     }
 
-    public void showExitMessage(){
+    public void showExitMessage() {
         System.out.println("Thanks for using SysLib CLI! We have saved the current resources and events created.");
         System.out.println("Hope to see you again soon!");
         showLine();
     }
 
-    public void showHelpMessage(){
+    public void showHelpMessage() {
         System.out.println("Commands available:");
-        System.out.println("add: adds a new resource to the library inventory." +
+        System.out.println("[add] adds a new resource to the library inventory. " +
                 "(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])");
-        System.out.println("delete: deletes the resource with the specified ID from the library inventory. " +
+        System.out.println("[delete] deletes the resource with the specified ID from the library inventory. " +
                 "(e.g. delete /id 123456789)");
-        System.out.println("list: list all resources OR filter by certain tags or genre." +
-                "(e.g. list /tag B /g Fiction");
-        System.out.println("find: find a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188)");
-        System.out.println("edit: Edit a listing by entering its isbn to update its details. " +
-                "(e.g. edit /i 123 /t NEW_TITLE /a NEW_AUTHOR)");
-        System.out.println("eventadd: Add an event to the event list " +
+        System.out.println("[list] lists all resources OR filter by certain tags, genre, or status. " +
+                "(e.g. list /tag B /g Fiction /s AVAILABLE)");
+        System.out.println("[find] finds a resource by title, author, ISBN or given id. " +
+                "(e.g. find /i 9780763630188 /a AUTHOR)");
+        System.out.println("[edit] edits a listing by entering its id to update its details. " +
+                "(e.g. edit /id 123 /t NEW_TITLE /a NEW_AUTHOR)");
+        System.out.println("[eventadd] adds an event to the database. " +
                 "(e.g. eventadd /t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])");
-        System.out.println("eventlist: List out all the event list (e.g. eventlist)");
-        System.out.println("eventdelete: Delete an event in the event list based on the index " +
+        System.out.println("[eventlist] lists out all events in the database. " +
+                "(e.g. eventlist)");
+        System.out.println("[eventdelete] deletes an event from the database based on the index. " +
                 "(e.g. eventdelete /i INDEX)");
-        System.out.println("exit: displays a farewell message and exits the program (e.g. exit)");
-        System.out.println("For more information, please refer to our user guide at:" +
-                "https://ay2324s1-cs2113t-w11-1.github.io/tp/UserGuide.html");
+        System.out.println("[eventedit] edits an event in the event list based on the information given. " +
+                "(e.g. eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION])");
+        System.out.println("[summary] shows a summary of all resources and the next 3 events. " +
+                "(e.g. summary)");
+        System.out.println("[exit] displays a farewell message and exits the program. " +
+                "(e.g. exit)" + System.lineSeparator());
+        System.out.println("For more information, please refer to our user guide at: https://bit.ly/SyslibUserGuide");
         showLine();
     }
 
-    public String readCommand(){
+    public String readCommand() {
         System.out.print("> ");
         return myScanner.nextLine();
     }
 
-    public void showNoFileFoundMessage(String filePath){
+    public void showNoFileFoundMessage(String filePath) {
         showLine();
         System.out.println("Storage file not found.");
         System.out.println("Creating new data file @ " + filePath);
     }
 
-    public void showLoadMessage(String filepath, List<Resource> resourcelist, List<Event> eventlist){
+    public void showFileFoundMessage(String filePath) {
         showLine();
-        System.out.println("Storage file found @ " + filepath);
+        System.out.println("Storage file found @ " + filePath);
+    }
+
+    public void showLoadMessage(String filepath, List<Resource> resourcelist, List<Event> eventlist) {
         System.out.printf("Loaded %d resources and %d events!%n", resourcelist.size(), eventlist.size());
     }
 
-    public void showLoadMessageEmpty(String filepath){
-        showLine();
-        System.out.println("Storage file found @ " + filepath);
-        System.out.println("No Resources or Events found in storage.");
-    }
-
-    public void showLine(){
+    public void showLine() {
         System.out.println(LINEDIVIDER);
     }
 
@@ -116,26 +119,24 @@ public class UI {
 
         String messageToDisplay = "";
 
-        if (resourcesList.isEmpty()){
+        if (resourcesList.isEmpty()) {
             messageToDisplay += ZERO_RESOURCES_MESSAGE;
             return messageToDisplay;
-
         }
 
         ResourceDisplayFormatter resourceDisplayFormatter = new ResourceDisplayFormatter(resourcesList);
 
-
         for (Resource resource : resourcesList) {
 
-            if (resource instanceof Book){
+            if (resource instanceof Book) {
                 resourceDisplayFormatter.setBookDisplayFormatter(resource);
-            } else if (resource instanceof Magazine){
+            } else if (resource instanceof Magazine) {
                 resourceDisplayFormatter.setMagazineDisplayFormatter(resource);
-            } else if(resource instanceof CD ) {
+            } else if (resource instanceof CD ) {
                 resourceDisplayFormatter.setCDDisplayFormatter(resource);
-            } else if(resource instanceof Newspaper){
+            } else if (resource instanceof Newspaper) {
                 resourceDisplayFormatter.setNewspaperDisplayFormatter(resource);
-            } else{
+            } else {
                 throw new SysLibException("Invalid resource!");
             }
 

@@ -29,7 +29,8 @@ public class EBook extends Book{
         if (getGenre()[0] == null) {
             genreString.append("-");
         } else {
-            genreString.append(java.util.Arrays.toString(getGenre()).replace("[", "").replace("]", ""));
+            genreString.append(java.util.Arrays.toString(getGenre()).replace("[", "").
+                    replace("]", ""));
         }
 
         return "[" + getTag() + "] " + " ID: " + getId() + " Title: " + getTitle() + " ISBN: " + getISBN() + " Author: "
@@ -51,7 +52,7 @@ public class EBook extends Book{
 
         columnsWidth = super.checkColumnsWidths(columnsWidth);
 
-        if(linkLength > columnsWidth.get(6)){
+        if (linkLength > columnsWidth.get(6)) {
             columnsWidth.set(6,linkLength+1);
 
         }

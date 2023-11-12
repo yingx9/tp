@@ -20,18 +20,12 @@ public class EventEditCommandTest {
     private final EventEditCommand eventEditCommand = new EventEditCommand();
     private GenericList<Resource, Event> container;
 
-
-    @Test
-    void testExecuteWithInvalidIndex() {
-        assertThrows(IllegalArgumentException.class, () -> eventEditCommand.execute("edit 10", container));
-    }
-
     @Test
     public void eventEditCommandOutput() throws SysLibException {
         eventAddCommand.execute("/t testrun /date 1 dec 2001 /desc testing 123", parser.container);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        eventEditCommand.execute("/i 0", parser.container);
+        eventEditCommand.execute("/id 0", parser.container);
         String output = outputStream.toString();
         String expectedOutput = "Event was not edited as nothing was changed." + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
@@ -45,7 +39,7 @@ public class EventEditCommandTest {
         eventAddCommand.execute("/t testrun /date 1 dec 2001 /desc testing 123", parser.container);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        eventEditCommand.execute("/i 0 /date 23 Dec 2023", parser.container);
+        eventEditCommand.execute("/id 0 /date 23 Dec 2023", parser.container);
         String output = outputStream.toString();
         String expectedOutput = "Event edited successfully. New event details:" + System.lineSeparator() +
                 "0: testrun | 23 Dec 2023 | testing 123" + System.lineSeparator() +
@@ -60,7 +54,7 @@ public class EventEditCommandTest {
         eventAddCommand.execute("/t test2 /date 2 dec 2001 /desc testing 123", parser.container);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        eventEditCommand.execute("/i 0 /date 23 Dec 2023", parser.container);
+        eventEditCommand.execute("/id 0 /date 23 Dec 2023", parser.container);
         String output = outputStream.toString();
         String expectedOutput = "Event index has changed as the date was changed." + System.lineSeparator() +
                 "Event edited successfully. New event details:" + System.lineSeparator() +

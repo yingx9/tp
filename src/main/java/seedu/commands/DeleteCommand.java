@@ -22,17 +22,17 @@ public class DeleteCommand extends Command {
         feedbackToUser = "";
         ArrayList<Resource> removals = new ArrayList<>();
         System.out.println("Looking for ID: " + id + "...");
-        for (Resource r: container.getResourceList()){
-            if (r.getId() == id){
+        for (Resource r: container.getResourcesList()) {
+            if (r.getId() == id) {
                 System.out.println("This resource is removed:");
                 System.out.println(r + SEPARATOR_LINEDIVIDER);
                 removals.add(r);
             }
         }
-        if(removals.isEmpty()) {
+        if (removals.isEmpty()) {
             System.out.println("No resources with id matching " + id +SEPARATOR_LINEDIVIDER);
         } else {
-            container.getResourceList().removeAll(removals);
+            container.getResourcesList().removeAll(removals);
         }
         return new CommandResult(feedbackToUser);
     }

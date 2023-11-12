@@ -18,18 +18,17 @@ import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.util.TestUtil;
 
-
-import static seedu.commands.EditCommand.BOOK_ARGS_MESSAGE;
-import static seedu.commands.EditCommand.INVALID_EDIT_ARGS;
-import static seedu.commands.EditCommand.MAGAZINE_ARGS_MESSAGE;
-import static seedu.commands.EditCommand.MISSING_ARG_MESSAGE;
-import static seedu.commands.EditCommand.NEWSPAPERS_ARGS_MESSAGE;
-import static seedu.commands.EditCommand.RESOURCE_NOT_FOUND;
-import static seedu.commands.EditCommand.EDIT_SUCCESS;
+import static seedu.ui.EditCommandMessages.BOOK_ARGS_MESSAGE;
+import static seedu.ui.EditCommandMessages.INVALID_EDIT_ARGS;
+import static seedu.ui.EditCommandMessages.MAGAZINE_ARGS_MESSAGE;
+import static seedu.ui.EditCommandMessages.MISSING_ARG_MESSAGE;
+import static seedu.ui.EditCommandMessages.NEWSPAPERS_ARGS_MESSAGE;
+import static seedu.ui.EditCommandMessages.RESOURCE_NOT_FOUND;
+import static seedu.ui.EditCommandMessages.EDIT_SUCCESS;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.commands.ListCommand.STATUS_ERROR_MESSAGE;
+import static seedu.ui.ListCommandMessages.STATUS_ERROR_MESSAGE;
 import static seedu.ui.MessageFormatter.formatLastLineDivider;
 
 public class EditCommandTest {
@@ -40,7 +39,7 @@ public class EditCommandTest {
     private Command editCommand = new EditCommand();
 
     @BeforeAll
-    public static void setup()  {
+    public static void setup() {
         testResourceList = TestUtil.fillTestList();
         parser.container.setResourceList(testResourceList);
 
@@ -176,7 +175,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void testNoArgumentGiven()  {
+    public void testNoArgumentGiven() {
         executeAssertSysLibExceptionThrown("/id 123", MISSING_ARG_MESSAGE);
 
     }
@@ -190,48 +189,45 @@ public class EditCommandTest {
     }
 
     @Test
-    public void testEditStatusError(){
+    public void testEditStatusError() {
         executeAssertSysLibExceptionThrown("/id 2 /s INVALIDSTATUS",
                 STATUS_ERROR_MESSAGE);
     }
 
     @Test
-    public void testEditISBNError(){
+    public void testEditISBNError() {
         executeAssertSysLibExceptionThrown("/id 2 /i invalid",
                 "ISBN must be 13 characters!");
     }
 
     @Test
-    public void testEditBookLinkError(){
+    public void testEditBookLinkError() {
         executeAssertSysLibExceptionThrown("/id 2 /l dummyLink",
                 INVALID_EDIT_ARGS + BOOK_ARGS_MESSAGE);
     }
 
     @Test
-    public void testEditNewspaperLinkError(){
+    public void testEditNewspaperLinkError() {
         executeAssertSysLibExceptionThrown("/id 9 /l dummyLink",
                 INVALID_EDIT_ARGS + NEWSPAPERS_ARGS_MESSAGE);
     }
 
     @Test
-    public void testEditMagazineLinkError(){
+    public void testEditMagazineLinkError() {
         executeAssertSysLibExceptionThrown("/id 6 /l dummyLink",
                 INVALID_EDIT_ARGS + MAGAZINE_ARGS_MESSAGE);
     }
 
     @Test
-    public void testEditBookInvalidArgsGiven(){
+    public void testEditBookInvalidArgsGiven() {
         executeAssertSysLibExceptionThrown("/id 2 /t TITLE /s LOST /p PUBLISHER /g GENRES /ed EDITION " +
                 "/c CREATOR /ty TYPE /b BRAND /is ISSUE", INVALID_EDIT_ARGS+BOOK_ARGS_MESSAGE);
     }
 
-    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage){
+    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage) {
         SysLibException exception = assertThrows(SysLibException.class, ()->editCommand.execute(
                 arguments, parser.container));
         assertEquals(expectedMessage, exception.getMessage());
     }
-
-
-
 
 }

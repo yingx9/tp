@@ -1,9 +1,7 @@
 package seedu.commands;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import seedu.data.resources.Resource;
@@ -11,27 +9,21 @@ import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.util.TestUtil;
 
-
-import static seedu.commands.ListCommand.GENERIC_MESSAGE;
-import static seedu.commands.ListCommand.FILTER_MESSAGE;
-import static seedu.commands.ListCommand.STATUS_ERROR_MESSAGE;
-import static seedu.commands.ListCommand.ZERO_RESOURCES_MESSAGE;
+import static seedu.ui.ListCommandMessages.FILTER_MESSAGE;
+import static seedu.ui.ListCommandMessages.STATUS_ERROR_MESSAGE;
+import static seedu.ui.ListCommandMessages.ZERO_RESOURCES_MESSAGE;
 import static seedu.commands.ListCommand.matchedResources;
 import static seedu.ui.UI.showResourcesDetails;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 public class ListCommandTest {
 
     private static List<Resource> testResourceList = new ArrayList<>();
     private static Parser parser = new Parser();
     private List<Resource> emptyResourceList = new ArrayList<>();
     private TestUtil testUtil = new TestUtil();
-
     private Command listCommand = new ListCommand();
-
 
     @BeforeAll
     public static void setup() throws SysLibException {
@@ -39,16 +31,10 @@ public class ListCommandTest {
         parser.container.setResourceList(testResourceList);
 
     }
-
     @Test
     public void testEmptyListMessage() throws SysLibException {
-        String outputMessage = testUtil.getOutputMessage(listCommand, "", emptyResourceList);
-        String expectedMessage = GENERIC_MESSAGE;
-        expectedMessage +=  ZERO_RESOURCES_MESSAGE;
-        assertEquals(expectedMessage, outputMessage);
-
+        assertThrows(SysLibException.class, ()->testUtil.getOutputMessage(listCommand, "", emptyResourceList));
     }
-
     @Test
     public void testNoTagArgBehavior() {
         assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/tag", parser.container));
@@ -59,18 +45,15 @@ public class ListCommandTest {
         assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/g", parser.container));
 
     }
-
     @Test
     public void testNoStatusArgBehavior()  {
         assertThrows(IllegalArgumentException.class, ()->listCommand.execute("/s", parser.container));
 
     }
-
     @Test
     public void testListByTagFilterBehavior() throws SysLibException {
         executeListFilterBehavior("/tag B");
     }
-
     @Test
     public void testListByGenreFilterBehavior() throws SysLibException {
         executeListFilterBehavior("/g Horror");
@@ -103,11 +86,11 @@ public class ListCommandTest {
     }
 
     @Test
-    public void testInvalidStatusInput(){
+    public void testInvalidStatusInput() {
         executeAssertSysLibExceptionThrown("/s INVALIDSTATUS",STATUS_ERROR_MESSAGE);
     }
 
-    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage){
+    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage) {
         SysLibException exception = assertThrows(SysLibException.class, ()->listCommand.execute(
                 arguments, parser.container));
         assertEquals(expectedMessage, exception.getMessage());

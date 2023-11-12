@@ -17,7 +17,7 @@ public class EventAddCommandTest {
     @Test
     public void eventAddCommandValidData() throws SysLibException {
         eventAddCommand.execute("/t testrun /date 1 Dec 2001 /desc testing 123", parser.container);
-        String output = parser.eventList.get(0).toString();
+        String output = parser.eventsList.get(0).toString();
         String expectedOutput = "testrun | 01 Dec 2001 | testing 123";
         assertEquals(output, expectedOutput);
     }
@@ -29,6 +29,7 @@ public class EventAddCommandTest {
         eventAddCommand.execute("/t testrun /date 1 DEC 2001 /desc testing 123", parser.container);
         String output = outputStream.toString();
         String expectedOutput = "Event inserted at: 0" + System.lineSeparator() +
+                "0: testrun | 01 Dec 2001 | testing 123" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
 
         assertEquals(expectedOutput, output);

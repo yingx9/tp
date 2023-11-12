@@ -15,11 +15,9 @@ public class Resource {
     private String isbn;
     private int id;
     private Status status;
-
     private LocalDateTime dateReceived; //To keep track of when the resource was entered into the system
-    
 
-    public Resource(String title, String isbn, int id, Status status){
+    public Resource(String title, String isbn, int id, Status status) {
         setTitle(title);
         setBorrowed(false);
         setISBN(isbn);
@@ -78,20 +76,20 @@ public class Resource {
         this.id = id;
     }
 
-    public String getDateReceived(){
+    public String getDateReceived() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return dateReceived.format(formatter);
     }
 
-    public LocalDateTime getDateReceivedUnparsed(){
+    public LocalDateTime getDateReceivedUnparsed() {
         return dateReceived;
     }
 
-    public void setReceivedDate(){
+    public void setReceivedDate() {
         dateReceived = LocalDateTime.now();
     }
 
-    public void setReceivedDateCustom(LocalDateTime ldt){
+    public void setReceivedDateCustom(LocalDateTime ldt) {
         dateReceived = ldt;
     }
 
@@ -113,13 +111,13 @@ public class Resource {
                 getDateReceived());
         return tableFormatter;
     }
-    public static boolean hasGenre(Resource resource, String genre){
+    public static boolean hasGenre(Resource resource, String genre) {
         Book bookResource;
 
         if (resource instanceof Book) {
             bookResource = (Book) resource;
             String[] genres = bookResource.getGenre();
-            if (genres[0] == null ){
+            if (genres[0] == null ) {
                 return false;
             }
 
@@ -131,11 +129,11 @@ public class Resource {
         }
         return false;
     }
-    public void setStatus(Status status){
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public Status getStatus(){
+    public Status getStatus() {
         return status;
     }
 
@@ -145,9 +143,9 @@ public class Resource {
      *
      * @param columnsWidth List containing column width of each resource attribute.
      */
-    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
+    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth) {
         int titleLength = getTitle().length();
-        if (titleLength > columnsWidth.get(2)){
+        if (titleLength > columnsWidth.get(2)) {
             columnsWidth.set(2,titleLength+1);
         }
         return columnsWidth;

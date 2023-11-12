@@ -11,19 +11,19 @@ public class GenericList<R, E> {
         this.eventList = eventList;
     }
 
-    public List<R> getResourceList() {
+    public List<R> getResourcesList() {
         return resourceList;
     }
 
-    public List<E> getEventList() {
+    public List<E> getEventsList() {
         return eventList;
     }
 
-    public void setResourceList(List<R> resourceList){
+    public void setResourceList(List<R> resourceList) {
         this.resourceList = resourceList;
     }
 
-    public void setEventList(List<E> eventList){
+    public void setEventList(List<E> eventList) {
         this.eventList = eventList;
     }
 }

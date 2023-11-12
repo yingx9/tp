@@ -12,7 +12,6 @@ From viewing, adding, searching, editing, deleting and saving, SysLib provides a
 View the code I contributed via the tp Code Dashboard link [here](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=yingx9&breakdown=true).
 
 
-
 #### Enhancements implemented 
 
 **Enhancements**: 
@@ -84,25 +83,36 @@ Sections contributed:
 - Introduction (First part before How to use User Guide section)
 - List Command
 - Edit Command 
-
-
+- Known Issues: List issues section
 
 #### Contributions to the DG:
 
 Sections contributed:
-- Overall architecture diagram and description under Design and Implementation 
-- List Command section and ListCommmand sequence diagram
+- Acknowledgement
+- Overall architecture diagram and Component Diagram
+- Architecture section (The section before UI Component)
+- List Command section and ListCommand sequence diagram
+- Edit Command section and Edit activity diagram
+- Show Resources feature section and Show Resources sequence diagram
+- Instructions for manual testing: 
+  - List and Edit resource sections
+- Glossary: Resource definition
+- Use Case: Edit a resource
 
 
 #### Contributions to team-based tasks
 
-- Reviewed multiple peer pull request
-- Help troubleshoot when checks fail on GitHub 
-- 
+- Setup Team organization and repo 
+- Helped managed some issues by opening and closing when done
+- Add on to Value proposition and Target Audience in Developer's Guide
+- Bug test 2.0 jar file and create issues based on bugs found
 
 #### Review/mentoring contributions: 
 
-- Helped test other group's project during PE-D, creating 9 bug issues
-- 
+- Reviewed multiple peer pull request such as commenting on sequence diagram. Example: [#166](https://github.com/AY2324S1-CS2113T-W11-1/tp/pull/166)
+- Help troubleshoot when checks fail on GitHub  Example: [#22](https://github.com/AY2324S1-CS2113T-W11-1/tp/pull/22), [#38](https://github.com/AY2324S1-CS2113T-W11-1/tp/pull/38)
 
 #### Contributions beyond the project team:
+
+- Helped test other group's project during PE-D, creating 9 bug issues
+- Peer reviewed other team's developers guide in their [PR](https://github.com/nus-cs2113-AY2324S1/tp/pull/18/files)

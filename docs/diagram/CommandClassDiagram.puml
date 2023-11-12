@@ -1,0 +1,49 @@
+@startuml
+
+class Parser {
+    - resourceList: List<Resource>
+    - eventList: List<Event>
+    - container: GenericList<Resource, Event>
+    - commandProcessor: HashMap<String, Command>
+    - commands: ArrayList<String>
+
+    + processUserResponse(response: String): void
+    + removeFirstWord(response: String): String
+    + parseAddCommand(statement: String): String
+    + getStatusFromString(statusString: String): Status
+}
+
+abstract class Command {
+    - args: String[]
+    - required: boolean[]
+    {abstract} + execute(statement: String, container: GenericList<Resource, Event>): CommandResult
+    + validateStatement(statement: String, values: String[]): void
+    + checkDuplicate(statement: String, pointer: int): String
+    + parseArgument(statement: String): String[]
+    + getMatch(statement: String, pointer: int): String
+    + checkMatch(matched: String, pointer: int): void
+    + parseInt(value: String): int
+}
+
+class GenericList<R, E> {
+    - resourceList: List<R>
+    - eventList: List<E>
+
+    + GenericList(resourceList: List<R>, eventList: List<E>)
+    + getResourceList(): List<R>
+    + getEventList(): List<E>
+    + setResourceList(resourceList: List<R>): void
+    + setEventList(eventList: List<E>): void
+}
+
+class CommandResult {
+    + feedbackToUser: String
+
+    + CommandResult(feedbackToUser: String)
+}
+
+Parser "1" -down-> "*" Command : uses
+Command "*" -right-> "1" GenericList : uses
+Command "*" -down-> "1" CommandResult : produces
+
+@enduml

@@ -38,15 +38,14 @@ public class EMagazine extends Magazine {
         return tableFormatter;
     }
 
-    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
+    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth) {
 
         int linkLength = getLink().length();
 
         columnsWidth = super.checkColumnsWidths(columnsWidth);
 
-        if(linkLength > columnsWidth.get(6)){
+        if (linkLength > columnsWidth.get(6)) {
             columnsWidth.set(6,linkLength+1);
-
         }
         return columnsWidth;
     }

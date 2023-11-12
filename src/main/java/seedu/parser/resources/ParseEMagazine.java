@@ -11,21 +11,25 @@ import static seedu.parser.resources.ParseResource.parseBrand;
 import static seedu.parser.resources.ParseResource.parseIssue;
 import static seedu.parser.resources.ParseResource.parseLink;
 import static seedu.parser.resources.ParseResource.parseStatus;
-import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
+import static seedu.ui.Messages.ASSERT_STATEMENT;
+import static seedu.ui.Messages.ASSERT_ARGUMENTS;
+import static seedu.ui.Messages.ERROR_FORMAT_EMAGAZINE;
+import static seedu.ui.Messages.ERROR_EMPTY_EMAGAZINE;
 
 public class ParseEMagazine {
     public static String[] args = new String[7];
     public static String[] parseAddEMagazine(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
+        assert statement != null : ASSERT_STATEMENT;
 
         try {
             String inputPattern = "^(?=.*/i ([\\d]+))(?=.*/t ([^/]+))(?=.*/b ([^/]+))" +
                     "(?=.*/tag ([\\s\\w]+))(?=.*/is ([^/]+))(?=.*/s ([\\w]+))?(?=.*/l ([^\\s]+)).*$";
             Matcher matcher = Pattern.compile(inputPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-            boolean isMatching = matcher.find();
+            boolean isInputMatching = matcher.find();
 
             Boolean isStatusMatching = parseEMagazineArgs(statement);
-            if (isMatching) {
+
+            if (isInputMatching) {
                 args[0] = matcher.group(1).trim(); // isbn
                 args[1] = matcher.group(2).trim(); // title
                 args[2] = matcher.group(3).trim(); // brand
@@ -35,22 +39,20 @@ public class ParseEMagazine {
                 }
                 args[5] = matcher.group(4).trim(); // tag
                 args[6] = matcher.group(7).trim(); // link
+
                 checkEmptyEMagazineArgs(args);
             } else {
-                throw new SysLibException("Please use the format " +
-                        "'add /i ISBN /t TITLE /b BRAND /is ISSUE /tag TAG /l LINK [/s STATUS]'."
-                        + SEPARATOR_LINEDIVIDER);
+                throw new SysLibException(ERROR_FORMAT_EMAGAZINE);
             }
 
             return args;
         } catch (IllegalStateException e) {
-            throw new SysLibException("Please use the format " +
-                    "'add /i ISBN /t TITLE /b BRAND /is ISSUE /tag TAG /l LINK [/s STATUS]'." + SEPARATOR_LINEDIVIDER);
+            throw new SysLibException(ERROR_FORMAT_EMAGAZINE);
         }
     }
 
     public static Boolean parseEMagazineArgs(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
+        assert statement != null : ASSERT_STATEMENT;
 
         parseIsbn(statement);
         parseTitle(statement);
@@ -62,12 +64,11 @@ public class ParseEMagazine {
     }
 
     public static void checkEmptyEMagazineArgs(String[] args) throws SysLibException {
-        assert args != null : "Arguments should not be null";
+        assert args != null : ASSERT_ARGUMENTS;
 
         if (args[0].isEmpty() || args[1].isEmpty() || args[2].isEmpty() || args[3].isEmpty() || args[5].isEmpty()
                 || args[6].isEmpty()) {
-            throw new SysLibException("Please enter the ISBN, title, brand, issue, link, and tag." +
-                    SEPARATOR_LINEDIVIDER);
+            throw new SysLibException(ERROR_EMPTY_EMAGAZINE);
         }
     }
 
