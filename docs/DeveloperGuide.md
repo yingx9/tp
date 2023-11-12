@@ -524,7 +524,7 @@ It is facilitated by the `EventDeleteCommand` component.
 It works with `Parser` and `Command` components to parse and validate the input.
 The `Event` is removed from `eventsList`.
 
-`eventadd` has one options:
+`eventdelete` has one options:
 - eventdelete /id [index]
 
 #### Implementation
