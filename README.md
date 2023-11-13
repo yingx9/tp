@@ -1,4 +1,4 @@
-# SysLib project template
+<img src="images/SysLib Logo.png" />
 
 SysLib is a CLI Library Management software for system librarians especially those who are fast typists. Given below are instructions on how to use it.
 

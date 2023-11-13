@@ -53,7 +53,7 @@ public abstract class Command {
         }
         int secondIndex = statement.indexOf(arg, firstIndex + arg.length());
         if (secondIndex != -1) {
-            throw new IllegalArgumentException("Duplicate instances of " + arg);
+            throw new IllegalArgumentException("Duplicate instances of " + arg + SEPARATOR_LINEDIVIDER);
         }
         return arg;
     }

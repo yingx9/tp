@@ -24,6 +24,8 @@
 * [Known Issues](#known-issues--return-to-contents)
 * [Command Summary](#command-summary--return-to-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## Introduction | [Return to Contents](#contents)
 
 Welcome to the SysLib User Guide: your all-in-one document to learn how to use SysLib to manage your work and responsibilities as a librarian. 
@@ -57,7 +59,11 @@ work.
 | Apple macOS       | macOS 10.15 Catalina and above | Terminal ([User Guide](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac)) |
 | Ubuntu Linux      | Ubuntu 20.04.3 (LTS) and above | Bash Terminal ([User Guide](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))          |
 
-> If your operating system is not listed in the table above, it means our application has not been tested on it, and we cannot guarantee that the application will work as intended. We highly encourage you to use one of the recommended operating systems listed in the table above. We apologise for any inconvenience caused.
+> **⚠️ IMPORTANT:**
+> 
+>If your operating system is not listed in the table above, it means our application has not been tested on it. We therefore cannot guarantee that the application will work as intended. We highly encourage you to use one of the recommended operating systems in the table above. We apologise for any inconvenience caused.
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start | [Return to Contents](#contents)
 1. Make sure that you have Java 11 or above installed on your computer.
@@ -65,7 +71,7 @@ work.
     - [How do I check the version of my Java](https://www.java.com/en/download/help/version_manual.html)
 2. [Download the latest release](https://github.com/AY2324S1-CS2113T-W11-1/tp/releases/tag/v2.1) of `Syslib.jar`
 3. Copy the `Syslib.jar` file into a folder on its own.
-4. Open a command terminal, type `cd <FILE_DIRECTORY>`, where <FILE_DIRECTORY> refers to the directory to the `Syslib.jar` file.
+4. Open a command terminal, type `cd <FILE_DIRECTORY>`, where `<FILE_DIRECTORY>` refers to the directory to the `Syslib.jar` file.
 5. Run the following command: `java -jar Syslib.jar`. You should see the following welcome screen.
 
 ```
@@ -102,9 +108,10 @@ Hello! What would you like to do?
 ____________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
 
 ## Features | [Return to Contents](#contents)
-> Syslib CLI allows System Librarians to create Resources (Books, Magazines, NewsPapers, CD's, eBooks, eMagazines, eNewspapers) as well as Events.
+> Syslib CLI allows System Librarians to create Resources (Books, Magazines, Newspapers, CDs, eBooks, eMagazines, eNewspapers) as well as Events.
 
 ### Managing Your Resources and Events with Ease
 
@@ -114,9 +121,10 @@ Our intuitive system ensures that you never lose track of your valuable resource
 - **Peace of Mind:** Every resource and event you add to the current list is automatically saved when you exit the program. Rest easy knowing your data is secure.
 
 ```
-  > exit
-  Thanks for using SysLib CLI! We have saved the current resources and events created.
-  Hope to see you again soon!
+> exit
+Thanks for using SysLib! We have saved the current resources and events.
+See you next time!
+____________________________________________________________
 ```
 
 #### 🔄 Seamless Loading on Startup
@@ -124,7 +132,8 @@ Our intuitive system ensures that you never lose track of your valuable resource
 
 ```
 ____________________________________________________________
-Storage file found @ .\data\storage.txt
+Data directory exists.
+Storage file exists.
 Loaded 2 resources and 1 events!
 ____________________________________________________________
 ```
@@ -141,6 +150,7 @@ ____________________________________________________________
 Happy organizing!
 
 
+<div style="page-break-after: always;"></div>
 
 ## Resources
 ### Add a Listing: `add` | [Return to Contents](#contents)
@@ -221,6 +231,8 @@ ____________________________________________________________
 > e.g. Sci-Fi, Fantasy, Comedy
 > - '[' and ']' are not allowed in genres.
 
+<div style="page-break-after: always;"></div>
+
 ### Add eBook
 
 Format: `add /i ISBN /t TITLE /a AUTHOR /tag eb /l LINK [/g GENRE /s STATUS]`
@@ -233,8 +245,9 @@ add /i 9780763630187 /t Harry Squatter /a J.K. /tag eb /l www.jk.com/harrysquatt
 ```
 **Example output:**
 ```
+Attention: Status is not stated. Status set to default: AVAILABLE.
 This e-book is added:
-[EB]  ID: 6 Title: Harry Squatter ISBN: 9780763630187 Author: J.K. Genre: History Link: www.jk.com/harrysquatter
+[EB]  ID: 2 Title: Frankenstein ISBN: 9780763630189 Author: Mary Shelley Genre: - Link: frankenstein.com
 ____________________________________________________________
 ```
 
@@ -258,6 +271,8 @@ This CD is added:
 [CD]  ID: 8 Title: Mayday ISBN: 9770763630236 Creator: Kim Bondi Type: Video Recording Status: BORROWED
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Add Magazine
 Format: `add /i ISBN /t TITLE /b BRAND /is ISSUE /tag m [/s STATUS]`
@@ -290,6 +305,8 @@ This e-magazine is added:
 [EM]  ID: 15 Title: Market Movers ISBN: 9781234567951 Brand: Forbes Publications Issue: Quarterly Report, Q2 2023 Link: forbes.com
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Add Newspaper
 Format: `add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag n [/s STATUS]`
@@ -324,6 +341,8 @@ This e-newspaper is added:
 ____________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### Delete a Listing: `delete` | [Return to Contents](#contents)
 
 Deletes the resource with the specified ID from the library inventory. You can find the ID using the `list` command.
@@ -332,13 +351,13 @@ Format: `delete /id ID`
 
 **Example input:**
 ```
-delete /id 1234567890123
+delete /id 1
 ```
 **Example input:**
 ```
-Looking for ID: 1234567890123...
+Looking for ID: 1...
 This resource is removed: 
-[B]  ID: 1234567890123 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: LOST
+[B]  ID: 1 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: LOST
 ____________________________________________________________
 ```
 
@@ -362,6 +381,8 @@ Looking for a more specific list? `list` also offers you the capability to **fil
 
 You may face an issue where you are unable to see the list, or it's difficult to read the table due to the display alignment. Kindly click [here](#list-table-looks-messy-or-unable-to-see-the-full-details-return-to-list-feature) to jump to the Known Issues section to solve any issues regarding the list. 
 
+<div style="page-break-after: always;"></div>
+
 **Example input:**
 ```
 list
@@ -376,6 +397,8 @@ list /tag B /g Fiction /s Available
 
 ![ExampleOutput](images\List Screenshots\listexampleoutput.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Find Specific Listings: `find` | [Return to Contents](#contents)
 
 **Find What You Need, Fast!**
@@ -387,7 +410,7 @@ Our advanced search capabilities make it easy to locate the resources you need. 
     - **Author:** Search for books by their authors.
     - **ISBN:** Use this unique identifier for precise book searches.
     - **ID:** Every resource has an ID for quick identification.
-  
+
 
 - **Targeted Results:** Combine multiple filters in your search. We'll show you results that match **ALL** your specified criteria for pinpoint precision.
 
@@ -428,6 +451,8 @@ ID             Tag  Title               ISBN          Brand                    I
 There are currently 1 resource(s).
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Edit a Listing: `edit` | [Return to Contents](#contents)
 
@@ -473,11 +498,12 @@ Successfully updated! Your updated resource:
 [B]  ID: 3 Title: Mary ISBN: 123 Author: John Genre: Horror, Adventure Status: LOST
 ____________________________________________________________
 ```
+<div style="page-break-after: always;"></div>
 
 ## Events
 >**📚 Note:**
 > - Events are stored separately from resources
-> - They are stored in chronological order(events that are happening sooner are closer to index 0)
+> - They are stored in chronological order (events that are happening sooner are closer to index 0)
 
 ### Event Adding: `eventadd` | [Return to Contents](#contents)
 >**📚 Note:**
@@ -490,13 +516,14 @@ Format: `eventadd /t TITLE /date DATE [/desc DESCRIPTION]`
 
 **Example input:**
 ```
-eventadd /t Fan meetup for xxx /date 11-11-2001
-eventadd /t Meet and Greet for xxx /date 10-11-2010 /desc buffet style
+eventadd /t Fan meetup for xxx /date 11 Jan 2010
+eventadd /t Meet and Greet for xxx /date 10 Jan 2010 /desc buffet style
 ```
 
 **Example output:**
 ```
 Event inserted at: 0
+0: Fan meetup for xxx | 11 Jan 2010 | null
 ____________________________________________________________
 ```
 
@@ -514,15 +541,17 @@ eventlist
 **Example output:**
 ```
 This is the current event list:
-0: Fan meetup for xxx | 11-11-2001 | null
-1: Meet and Greet for xxx | 10-11-2010 | buffet style
+0: Meet and Greet for xxx | 10 Jan 2010 | buffet style
+1: Fan meetup for xxx | 11 Jan 2010 | null
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Event Delete: `eventdelete` | [Return to Contents](#contents)
 >**📚 Note:**
 > - INDEX starts from 0 and can be viewed by calling `eventlist`
-> - INDEX might change as those with earlier dates are sorted first
+> - INDEX might change as those with earlier dates are inserted first
 
 Deletes an event from the database based on the index provided.
 
@@ -536,7 +565,7 @@ eventdelete /id 0
 **Example output:**
 ```
 This event is removed:
-Fan meetup for xxx | 11-11-2001 | null
+Meet and Greet for xxx | 10 Jan 2010 | buffet style
 ____________________________________________________________
 ```
 
@@ -551,8 +580,8 @@ Format: `eventedit /id INDEX [/t TITLE /date DATE /desc DESCRIPTION]`
 
 **Example input:**
 ```
-eventedit /id 0 /t NEW TITLE
-eventedit /id 2 /t NEW TITLE /date 23 Jan 2024 /desc NEW DESCRIPTION
+eventedit /id 2 /t NEW TITLE
+eventedit /id 0 /t NEW TITLE /date 23 Jan 2024 /desc NEW DESCRIPTION
 ```
 
 **Example output:**
@@ -561,6 +590,8 @@ Event edited successfully. New event details:
 0: NEW TITLE | 23-01-2024 | NEW DESCRIPTION
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Summary: `summary` | [Return to Contents](#contents)
 Provide a summary of resources added and upcoming 3 events
@@ -600,9 +631,13 @@ Format: `exit`
 Example:
 ```
 > exit
-Thanks for using SysLib CLI! We have saved the current resources and events created.
-Hope to see you again soon!
+Thanks for using SysLib! We have saved the current resources and events.
+See you next time!
+____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
+
 
 ### Viewing Help : `help` | [Return to Contents](#contents)
 Displays a list of available commands with examples and their syntax format.
@@ -610,24 +645,8 @@ Displays a list of available commands with examples and their syntax format.
 Format: `help`
 
 Example:
-```
-Commands available:
-[add] adds a new resource to the library inventory. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
-[delete] deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
-[list] lists all resources OR filter by certain tags, genre, or status. (e.g. list /tag B /g Fiction /s AVAILABLE)
-[find] finds a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188 /a AUTHOR)
-[edit] edits a listing by entering its id to update its details. (e.g. edit /id 123 /t NEW_TITLE /a NEW_AUTHOR)
-[eventadd] adds an event to the database. (e.g. eventadd /t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])
-[eventlist] lists out all events in the database. (e.g. eventlist)
-[eventdelete] deletes an event from the database based on the index. (e.g. eventdelete /i INDEX)
-[eventedit] edits an event in the event list based on the information given. (e.g. eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION])
-[summary] shows a summary of all resources and the next 3 events. (e.g. summary)
-[exit] displays a farewell message and exits the program. (e.g. exit)
 
-For more information, please refer to our user guide at: https://bit.ly/SyslibUserGuide
-____________________________________________________________
-```
-
+![helpexampleoutput](/Users/bnjm2000/Desktop/4. Sem 3/CS2113T/Codes/tp/docs/images/helpexampleoutput.png)
 
 ## FAQ | [Return to Contents](#contents)
 
@@ -635,8 +654,8 @@ Q: How do I download Java 11 on my computer?
 A: Follow the guide [here](https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk#:~:text=Head%20to%20Java%20SE%20Development,download%20the%20file%20jdk%2D11.0.)!
 
 Q: How do I open command terminal?  
-A: For **Windows** users, click **Start** and search for **Command Prompt**. For **Mac** users, click the **Launchpad** 
-icon in the **Dock**, type **Terminal** in the search field, then click **Terminal**.
+A: For **Windows** users, click **Start** and search for **Command Prompt**. For **Mac** users, press `Command ⌘` + `Space` 
+on your keyboard to open Spotlight and type **Terminal** in the search field, then click **Terminal**.
 
 Q: What should I do if I encounter an error or bug?  
 A: Go to your [github issue page](https://github.com/AY2324S1-CS2113T-W11-1/tp/issues) and submit an issue
@@ -645,6 +664,9 @@ including the following:
  - logs or error messages.
 
 We will get back to you as quickly as possible!
+
+<div style="page-break-after: always;"></div>
+
 ## Known Issues | [Return to Contents](#contents)
 
 ### List Table looks messy or unable to see the full details: [[Return to list feature]](#list-all-items-list--return-to-contents)
@@ -677,6 +699,7 @@ You can try any of the following solutions to fix this issue:
   
     ![img_3.png](images/List%20Screenshots/fontsize.png)
 
+<div style="page-break-after: always;"></div>
 
 ## Command summary | [Return to Contents](#contents)
 
