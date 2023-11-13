@@ -68,7 +68,8 @@ ____________________________________________________________
 
 For more information, please refer to our user guide at: https://bit.ly/SyslibUserGuide
 ____________________________________________________________
-> Total Resources: 3
+> Summary of Resources:
+Total Resources: 3
 Total Books: [████] 3
 Total CDs: [] 0
 Total Magazines: [] 0
@@ -111,6 +112,6 @@ ____________________________________________________________
 ____________________________________________________________
 > id is missing in the argument!
 ____________________________________________________________
-> Thanks for using SysLib CLI! We have saved the current resources and events created.
-Hope to see you again soon!
+> Thanks for using SysLib CLI! We have saved the current resources and events.
+See you next time!
 ____________________________________________________________
