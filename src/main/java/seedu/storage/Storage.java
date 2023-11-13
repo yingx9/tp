@@ -3,8 +3,6 @@ package seedu.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.IllegalFormatException;
@@ -89,22 +87,57 @@ public class Storage {
     }
 
     /**
-     * Ensures the data file exists, creating it if necessary.
+     * Ensures the data folder and storage file exists, creating it if necessary.
      */
-    private void ensureFileExists() {
+    private void ensureFileExists(){
+        ui.showLine();
+
         try {
-            if (!dataFile.exists()) {
-                LOGGER.info("Storage file not found, creating now.");
-                ui.showNoFileFoundMessage(filePath);
-                Files.createFile(Paths.get(filePath));
+            // Constructing file paths
+            String dataPath = System.getProperty("user.dir") + File.separator + "data";
+            String storagePath = dataPath + File.separator + "storage.txt";
+
+            // Creating the directory if it doesn't exist
+            File directory = new File(dataPath);
+            if (!directory.exists()) {
+                boolean isDirCreated = directory.mkdir();
+                if (isDirCreated) {
+                    System.out.println("Data directory does not exist. Creating now...");
+                    LOGGER.info("Data directory created.");
+                } else {
+                    LOGGER.log(Level.SEVERE, "Failed to create data directory.");
+                    throw new SysLibException("Failed to create data directory.");
+                }
             } else {
-                LOGGER.info("Storage file found.");
-                ui.showFileFoundMessage(filePath);
+                System.out.println("Data directory exists.");
+                LOGGER.info("Data directory already exists.");
             }
-        } catch (IOException e) {
-            System.out.println("Error creating file: " + filePath);
+
+            // Creating the file if it doesn't exist
+            File storageFile = new File(storagePath);
+            if (!storageFile.exists()) {
+                try {
+                    boolean isFileCreated = storageFile.createNewFile();
+                    if (isFileCreated) {
+                        System.out.println("Storage file does not exist. Creating now...");
+                        LOGGER.info("Storage file created.");
+                    } else {
+                        LOGGER.log(Level.SEVERE, "Failed to create storage file.");
+                        throw new SysLibException("Failed to create storage file.");
+                    }
+                } catch (IOException e) {
+                    LOGGER.log(Level.SEVERE, "Error creating storage file: " + e.getMessage(), e);
+                    throw new SysLibException("Error creating storage file: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Storage file exists.");
+                LOGGER.info("Storage file found.");
+            }
+        } catch (SysLibException SLEx){
+            System.out.println(SLEx);
         }
     }
+
 
     /**
      * Loads resources and events from the data file.
