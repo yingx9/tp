@@ -112,26 +112,29 @@ public class Resource {
         return tableFormatter;
     }
     public static boolean hasGenre(Resource resource, String genreKeyword) {
-        Book bookResource;
+
+        boolean isBook = (resource instanceof Book);
+        if (!isBook){
+            return false;
+        }
+
+        Book bookResource = (Book) resource;
+        String[] genres = bookResource.getGenre();
         genreKeyword = genreKeyword.toLowerCase();
 
-        if (resource instanceof Book) {
-            bookResource = (Book) resource;
-            String[] genres = bookResource.getGenre();
+        if (genres[0] == null && genreKeyword == "null") {
+            return true;
+        } else if (genres[0] == null) {
+            return false;
+        }
 
-            if (genres[0] == null && genreKeyword == "null") {
+        for (int i =0;i< genres.length;i++) {
+            String genreName = genres[i].toLowerCase();
+            if (genreName.equals(genreKeyword)) {
                 return true;
-            } else if (genres[0] == null){
-                return false;
-            }
-
-            for (int i =0;i< genres.length;i++) {
-                String genreName = genres[i].toLowerCase();
-                if (genreName.equals(genreKeyword)) {
-                    return true;
-                }
             }
         }
+
         return false;
     }
     public void setStatus(Status status) {
