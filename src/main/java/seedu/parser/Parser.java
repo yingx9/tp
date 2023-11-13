@@ -23,6 +23,7 @@ import seedu.commands.SummaryCommand;
 
 import static seedu.ui.Messages.ASSERT_STATEMENT;
 import static seedu.ui.Messages.ERROR_TAG;
+import static seedu.ui.Messages.ERROR_INVALID_START;
 import static seedu.ui.UI.LINEDIVIDER;
 
 import java.util.ArrayList;
@@ -92,7 +93,9 @@ public class Parser {
     public static String parseAddCommand(String statement) throws SysLibException {
         assert statement != null : ASSERT_STATEMENT;
 
-        String inputPattern = "/tag ([^/]+)";
+        checkFirstItem(statement);
+
+        String inputPattern = "/tag (.+?)(?=\\s/|$)";
 
         Pattern pattern = Pattern.compile(inputPattern);
         Matcher matcher = pattern.matcher(statement);
@@ -105,6 +108,16 @@ public class Parser {
         }
     }
 
+    // @@author JoanneJo
+    public static void checkFirstItem(String statement) throws SysLibException {
+        String wordPattern = "\\s/(.+?)";
+        Matcher wordMatcher = Pattern.compile(wordPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
+        boolean isWordMatching = wordMatcher.matches();
+
+        if (!isWordMatching) {
+            throw new SysLibException(ERROR_INVALID_START);
+        }
+    }
 
     // @@author bnjm2000
     /**
