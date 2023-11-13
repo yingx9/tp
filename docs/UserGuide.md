@@ -144,6 +144,21 @@ Adds a new resource to the library inventory.
 > **Note**:
 > ISBN should be 13 digits.
 
+#### Use of Slash ('/'):
+
+> **Note**:  
+> - Slash ('/') can only be used in two situations.
+>  1. To indicate the type of information you are entering. 
+>     The required indications are in the 'Format' part of the commands.  
+>     e.g. /i for ISBN, /t for Title, /tag for Tag, etc.
+>  2. When it is wrapped with words.  
+>     e.g. www.abc.com/def, Frankenstein/the Modern Prometheus 
+> - Examples of invalid use of slash ('/'): 
+>   - /isbn
+>   - www.abc.com/
+>   - Frankenstein/ the Modern Prometheus
+>   - Frankenstein /the Modern Prometheus
+>   - Frankenstein / the Modern Prometheus
 
 ### Add Book
 
@@ -163,8 +178,9 @@ ____________________________________________________________
 ```
 
 > **Note**:
-> - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.  
+> - Multiple genres are allowed for a single resource. You can separate the different genres using comma `,`.  
 > e.g. Sci-Fi, Fantasy, Comedy
+> - '[' and ']' are not allowed in genres.
 
 ### Add eBook
 
@@ -184,8 +200,9 @@ ____________________________________________________________
 ```
 
 > **Note**:
-> - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
+> - Multiple genres are allowed for a single resource. You can separate the different genres using comma `,`.
 > - e.g. Sci-Fi, Fantasy, Comedy
+> - '[' and ']' are not allowed in genres.
 
 ### Add CD
 Format: `add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag cd [/s STATUS]`
