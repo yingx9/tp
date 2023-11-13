@@ -54,19 +54,19 @@ import static seedu.ui.Messages.ERROR_TAG;
 import static seedu.ui.UI.LINEDIVIDER;
 
 public class AddCommand extends Command{
-    private static final String TITLE_OPTION = "t";
-    private static final String AUTHOR_OPTION = "a";
-    private static final String TAG_OPTION = "tag";
-    private static final String ISBN_OPTION = "i";
-    private static final String GENRE_OPTION = "g";
-    private static final String STATUS_OPTION = "s";
-    private static final String LINK_OPTION = "l";
-    private static final String CREATOR_OPTION = "c";
-    private static final String BRAND_OPTION = "b";
-    private static final String PUBLISHER_OPTION = "p";
-    private static final String TYPE_OPTION = "ty";
-    private static final String ISSUE_OPTION = "is";
-    private static final String EDITION_OPTION = "ed";
+    public static final String TITLE_OPTION = "t";
+    public static final String AUTHOR_OPTION = "a";
+    public static final String TAG_OPTION = "tag";
+    public static final String ISBN_OPTION = "i";
+    public static final String GENRE_OPTION = "g";
+    public static final String STATUS_OPTION = "s";
+    public static final String LINK_OPTION = "l";
+    public static final String CREATOR_OPTION = "c";
+    public static final String BRAND_OPTION = "b";
+    public static final String PUBLISHER_OPTION = "p";
+    public static final String TYPE_OPTION = "ty";
+    public static final String ISSUE_OPTION = "is";
+    public static final String EDITION_OPTION = "ed";
     private static final int RESOURCEID_INCREMENT = 1;
     private static final Logger ADDLOGGER = Logger.getLogger(AddCommand.class.getName());
     private static String feedbackToUser;
@@ -190,6 +190,9 @@ public class AddCommand extends Command{
         assert container != null : ASSERT_CONTAINER;
         ADDLOGGER.log(Level.INFO, "Executing Add. Input Arguments: " + statement);
         feedbackToUser = "";
+
+        //String[] values = parseArgument(statement);
+        //validateStatement(statement, values);
 
         resourceID = container.getResourcesList().size() + RESOURCEID_INCREMENT;
         String tag = parseAddCommand(statement);

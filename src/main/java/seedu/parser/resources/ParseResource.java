@@ -1,194 +1,51 @@
 package seedu.parser.resources;
 
-import seedu.data.Status;
-import seedu.exception.SysLibException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.ui.Messages.ASSERT_STATEMENT;
-import static seedu.ui.Messages.ERROR_ISBN;
-import static seedu.ui.Messages.ERROR_TITLE;
-import static seedu.ui.Messages.ERROR_AUTHOR;
-import static seedu.ui.Messages.ERROR_TAG;
-import static seedu.ui.Messages.ERROR_CREATOR;
-import static seedu.ui.Messages.ERROR_TYPE;
-import static seedu.ui.Messages.ERROR_BRAND;
-import static seedu.ui.Messages.ERROR_ISSUE;
-import static seedu.ui.Messages.ERROR_PUBLISHER;
-import static seedu.ui.Messages.ERROR_EDITION;
-import static seedu.ui.Messages.ERROR_LINK;
-import static seedu.ui.Messages.ERROR_STATUS;
-import static seedu.ui.Messages.ATTENTION_STATUS;
-
 public class ParseResource {
-    private static final int ISBN_LENGTH = 13;
-    public static void parseIsbn(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
+    public static final String TITLE_ARG = "/t ";
+    public static final String AUTHOR_ARG = "/a ";
+    public static final String TAG_ARG = "/tag ";
+    public static final String ISBN_ARG = "/i ";
+    public static final String GENRE_ARG = "/g ";
+    public static final String STATUS_ARG = "/s ";
+    public static final String LINK_ARG = "/l ";
+    public static final String CREATOR_ARG = "/c ";
+    public static final String BRAND_ARG = "/b ";
+    public static final String PUBLISHER_ARG = "/p ";
+    public static final String TYPE_ARG = "/ty ";
+    public static final String ISSUE_ARG = "/is ";
+    public static final String EDITION_ARG = "/ed ";
 
-        String pattern = "(?=.*/i ([\\d]+))";
+    public static int countDuplicate(String statement, String pattern) {
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
 
-        if (!isMatching) {
-            throw new SysLibException(ERROR_ISBN);
+        int count = 0;
+        while(matcher.find()) {
+            count++;
         }
 
-        if (matcher.group(1).trim().length() != ISBN_LENGTH) {
-            throw new SysLibException(ERROR_ISBN);
-        }
+        return count;
     }
 
-    public static void parseTitle(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
+    public static boolean hasUnusedSlash(String statement) {
+        String begPattern = "^/\\s";
+        Matcher begMatcher = Pattern.compile(begPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
+        boolean hasBegSlash = begMatcher.find();
 
-        String pattern = "(?=.*/t ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
+        String midPattern = "\\s/\\s";
+        Matcher midMatcher = Pattern.compile(midPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
+        boolean hasMidSlash = midMatcher.find();
 
-        if (!isMatching) {
-            throw new SysLibException(ERROR_TITLE);
-        }
-    }
+        String etyPattern = "/\\s";
+        Matcher etyMatcher = Pattern.compile(etyPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
+        boolean hasEtySlash = etyMatcher.find();
 
-    public static void parseAuthor(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
+        String endPattern = "/$";
+        Matcher endMatcher = Pattern.compile(endPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
+        boolean hasEndSlash = endMatcher.find();
 
-        String pattern = "(?=.*/a ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException(ERROR_AUTHOR);
-        }
-    }
-
-    public static void parseTag(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
-
-        String pattern = "(?=.*/tag ([\\s\\w]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException(ERROR_TAG);
-        }
-    }
-
-    public static boolean parseGenre(String statement) {
-        assert statement != null : ASSERT_STATEMENT;
-
-        String pattern = "(?=.*/g ([\\w-]+(,\\s[\\w-]+)*))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        return matcher.find();
-    }
-
-    public static void parseCreator(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
-
-        String pattern = "(?=.*/c ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException(ERROR_CREATOR);
-        }
-    }
-
-    public static void parseType(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
-
-        String pattern = "(?=.*/ty ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException(ERROR_TYPE);
-        }
-    }
-
-    public static void parseBrand(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
-
-        String pattern = "(?=.*/b ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException(ERROR_BRAND);
-        }
-    }
-
-    public static void parseIssue(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
-
-        String pattern = "(?=.*/is ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException(ERROR_ISSUE);
-        }
-    }
-
-    public static void parsePublisher(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
-
-        String pattern = "(?=.*/p ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException(ERROR_PUBLISHER);
-        }
-    }
-
-    public static void parseEdition(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
-
-        String pattern = "(?=.*/ed ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException(ERROR_EDITION);
-        }
-    }
-
-    public static void parseLink(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
-
-        String pattern = "(?=.*/l ([^\\s]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException(ERROR_LINK);
-        }
-    }
-
-    public static boolean parseStatus(String statement) throws SysLibException {
-        assert statement != null : ASSERT_STATEMENT;
-
-        String pattern = "(?=.*/s ([\\w]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (isMatching) {
-            boolean isValidAvailableStatus = matcher.group(1).trim().
-                    equalsIgnoreCase(String.valueOf(Status.AVAILABLE));
-            boolean isValidBorrowedStatus = matcher.group(1).trim().equalsIgnoreCase(String.valueOf(Status.BORROWED));
-            boolean isValidLostStatus = matcher.group(1).trim().equalsIgnoreCase(String.valueOf(Status.LOST));
-
-            if (isValidAvailableStatus || isValidBorrowedStatus || isValidLostStatus) {
-                return isMatching;
-            } else {
-                throw new SysLibException(ERROR_STATUS);
-            }
-        } else {
-            System.out.println(ATTENTION_STATUS);
-        }
-
-        return isMatching;
+        return hasBegSlash | hasMidSlash | hasEtySlash | hasEndSlash;
     }
 }

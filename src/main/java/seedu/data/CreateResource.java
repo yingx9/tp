@@ -7,14 +7,19 @@ import seedu.data.resources.EBook;
 import seedu.data.resources.EMagazine;
 import seedu.data.resources.ENewspaper;
 import seedu.data.resources.CD;
+import seedu.exception.SysLibException;
+
+import java.util.ArrayList;
 
 import static seedu.parser.Parser.getStatusFromString;
 import static seedu.ui.Messages.ASSERT_ARGUMENTS;
 import static seedu.ui.Messages.ASSERT_ID;
 import static seedu.ui.Messages.ATTENTION_GENRE;
+import static seedu.ui.Messages.ERROR_INVALID_GENRE_CHARACTER;
 
 public class CreateResource {
-    public static Book createBook(String[] args, int id) throws IllegalStateException, NumberFormatException {
+    public static Book createBook(String[] args, int id) throws IllegalStateException, NumberFormatException,
+            SysLibException {
         assert args != null : ASSERT_ARGUMENTS;
         assert id > 0 : ASSERT_ID;
 
@@ -23,17 +28,33 @@ public class CreateResource {
         String author = args[2];
         Status status = getStatusFromString(args[4]);
 
-        String genre;
+        String genreString;
         String[] genres = new String[1];
+        ArrayList<String> parsedGenresList = new ArrayList<String>();
+        String[] parsedGenres = new String[1];
+
         if (args[3] != null) {
-            genre = args[3];
-            genres = genre.split(", ");
+            genreString = args[3];
+            genres = genreString.split(",\\s*");
+
+            for (String genre : genres) {
+                if (genre.contains("[") | genre.contains("]")) {
+                    throw new SysLibException(ERROR_INVALID_GENRE_CHARACTER);
+                }
+
+                if (!genre.isEmpty()) {
+                    parsedGenresList.add(genre);
+                }
+            }
+
+            parsedGenres = new String[parsedGenresList.size()];
+            parsedGenres = parsedGenresList.toArray(parsedGenres);
         }
         if (genres[0] == null) {
             System.out.println(ATTENTION_GENRE);
         }
 
-        return new Book(title, isbn, author, genres, id, status);
+        return new Book(title, isbn, author, parsedGenres, id, status);
     }
 
     public static EBook createEBook(String[] args, int id) throws IllegalStateException, NumberFormatException {

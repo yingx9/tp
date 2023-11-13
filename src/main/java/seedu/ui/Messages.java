@@ -27,6 +27,7 @@ public class Messages {
     public static final String ERROR_TITLE = formatSeparatorLineDivider("Please enter a valid title.");
     public static final String ERROR_AUTHOR = formatSeparatorLineDivider("Please enter a valid author.");
     public static final String ERROR_TAG = formatSeparatorLineDivider("Please enter a valid tag.");
+    public static final String ERROR_GENRE = formatSeparatorLineDivider("Please enter a valid genre.");
     public static final String ERROR_CREATOR = formatSeparatorLineDivider("Please enter a valid creator.");
     public static final String ERROR_TYPE = formatSeparatorLineDivider("Please enter a valid type.");
     public static final String ERROR_BRAND = formatSeparatorLineDivider("Please enter a valid brand.");
@@ -53,4 +54,24 @@ public class Messages {
             "publisher, edition, and tag.");
     public static final String ERROR_EMPTY_ENEWSPAPER = formatSeparatorLineDivider("Please enter the ISBN, title, " +
             "publisher, edition, link, and tag.");
+
+    public static final String ERROR_DUPLICATE_ISBN = formatSeparatorLineDivider("Please enter only 1 ISBN.");
+    public static final String ERROR_DUPLICATE_TITLE = formatSeparatorLineDivider("Please enter only 1 title.");
+    public static final String ERROR_DUPLICATE_AUTHOR = formatSeparatorLineDivider("Please enter only 1 author.");
+    public static final String ERROR_DUPLICATE_TAG = formatSeparatorLineDivider("Please enter only 1 tag.");
+    public static final String ERROR_DUPLICATE_GENRE = formatSeparatorLineDivider("Please enter only 1 genre.");
+    public static final String ERROR_DUPLICATE_CREATOR = formatSeparatorLineDivider("Please enter only 1 creator.");
+    public static final String ERROR_DUPLICATE_TYPE = formatSeparatorLineDivider("Please enter only 1 type.");
+    public static final String ERROR_DUPLICATE_BRAND = formatSeparatorLineDivider("Please enter only 1 brand.");
+    public static final String ERROR_DUPLICATE_ISSUE = formatSeparatorLineDivider("Please enter only 1 issue.");
+    public static final String ERROR_DUPLICATE_PUBLISHER = formatSeparatorLineDivider("Please enter only 1 publisher.");
+    public static final String ERROR_DUPLICATE_EDITION = formatSeparatorLineDivider("Please enter only 1 edition.");
+    public static final String ERROR_DUPLICATE_LINK = formatSeparatorLineDivider("Please enter only 1 link.");
+    public static final String ERROR_DUPLICATE_STATUS = formatSeparatorLineDivider("Please enter only 1 status.");
+
+    public static final String ERROR_UNUSED_SLASH = formatSeparatorLineDivider("Please avoid unused '/'.");
+    public static final String ERROR_INVALID_ARGUMENT = formatSeparatorLineDivider(
+            "Please enter only valid arguments.");
+    public static final String ERROR_INVALID_GENRE_CHARACTER = formatSeparatorLineDivider(
+            "'[' and ']' are not allowed in genres.");
 }
