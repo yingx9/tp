@@ -120,7 +120,25 @@ The following diagram shows an overview of how components in Syslib work and int
 
 ### UI Component
 
-The UI Component consists of methods to print messages to the user as output. 
+UI component consists of a single UI Class.
+which manages interaction (prompting for user input and displaying results
+of commands/methods being called) between the user and the application.
+
+How the UI class works:
+* Upon the initialization of `SysLib`, the `UI` class will call the `showWelcomeMessage` method to display the greeting messages to
+  the user.
+* Additionally, local files storing the data of previously saved work of `SysLib` will also be loaded into the program through the initialization of the Storage Class. Thereafter,
+  the loading statuses of these files are also displayed by calling the `showLoadMessage()` method.
+    * If `storage.txt` does not exist, it will also call the `showNoFileFoundMessage()` to let the user know a new `storage.txt` file will be created.
+    * However, if `storage.txt` already exists, `showFileFoundMessage()` will be called instead.
+* `UI` class is also responsible for getting the user input by calling the `readCommand()`
+  method, which will then parse the input by sending it to the `Parser` class. The `Parser` class will process
+  the input and make use of the `Command` class to execute the command.
+* UI also prints Resource details in a formatted table using the `showResourcesDetails` method.
+* Help messages are also printed in the `UI` class by calling `showHelpMessage()` method.
+* Lastly, when the user exits the program, the `showExitMessage()` method will be called to indicate that the
+  user has successfully exited the program.
+
 
 ### Parser Component
 
