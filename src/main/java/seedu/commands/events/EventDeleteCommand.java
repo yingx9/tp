@@ -60,12 +60,12 @@ public class EventDeleteCommand extends Command {
         return new CommandResult(feedbackToUser);
     }
 
-    public int parseCalendarInt(String value, GenericList<Resource, Event> container) {
+    public int parseCalendarInt(String value, GenericList<Resource, Event> container) throws SysLibException {
         int index = parseInt(value);
         int size = container.getEventsList().size();
         if (size == 0) {
             LOGGER.warning("EventsList is empty");
-            throw new IllegalArgumentException("There are currently no Events in Syslib!" + SEPARATOR_LINEDIVIDER);
+            throw new SysLibException("There are currently no Events in Syslib!" + SEPARATOR_LINEDIVIDER);
         }
         if (index >= size || index < 0) {
             LOGGER.warning("Index is out of range");

@@ -39,4 +39,15 @@ public class EventDeleteCommandTest {
     public void eventDeleteCommandInsufficientData() {
         assertThrows(IllegalArgumentException.class, ()->eventDeleteCommand.execute("/id ", parser.container));
     }
+
+    @Test
+    public void eventDeleteCommandOutOfBounds() throws SysLibException {
+        eventAddCommand.execute("/t testrun /date 1 dec 2001 /desc testing 123", parser.container);
+        assertThrows(IllegalArgumentException.class, ()->eventDeleteCommand.execute("/id 1", parser.container));
+    }
+
+    @Test
+    public void eventDeleteCommandEmpty() throws SysLibException{
+        assertThrows(SysLibException.class, ()->eventDeleteCommand.execute("/id 0", parser.container));
+    }
 }

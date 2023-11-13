@@ -1,19 +1,78 @@
 package seedu.commands;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import seedu.commands.events.EventAddCommand;
+import seedu.data.GenericList;
+import seedu.data.Status;
 import seedu.data.events.Event;
+import seedu.data.resources.*;
+import seedu.exception.SysLibException;
+import seedu.parser.Parser;
+import seedu.util.TestUtil;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.commands.ListCommand.matchedResources;
+import static seedu.ui.ListCommandMessages.FILTER_MESSAGE;
+import static seedu.ui.UI.showResourcesDetails;
 
 
 public class SummaryCommandTest {
 
-    
+    private static List<Resource> testResourcesList = new ArrayList<>();
+    private static List<Event> testEventsList = new ArrayList<>();
+    private TestUtil testUtil = new TestUtil();
 
+    private static Parser parser = new Parser();
+    private Command summaryCommand = new SummaryCommand();
+    private final AddCommand addCommand = new AddCommand();
+    private final EventAddCommand eventAddCommand = new EventAddCommand();
+    @BeforeAll
+    public static void setup() throws SysLibException {
+        testResourcesList = TestUtil.fillTestResourcesList();
+        testEventsList = TestUtil.fillTestEventsList();
+        parser.container.setResourcesList(testResourcesList);
+        parser.container.setEventsList(testEventsList);
+    }
+
+    @Test
+    public void testExcecute() throws SysLibException {
+        executeSummaryBehaviour("");
+    }
+
+    public void executeSummaryBehaviour(String argument) throws SysLibException {
+        String outputMessage = testUtil.getSummaryOutputMessage(summaryCommand, argument, parser.container);
+        String expectedMessage = "Summary of Resources:" + System.lineSeparator() +
+                "Total Resources: 9" + System.lineSeparator() +
+                "Total Books: [████] 3" + System.lineSeparator() +
+                "Total CDs: [█] 1" + System.lineSeparator() +
+                "Total Magazines: [█] 1" + System.lineSeparator() +
+                "Total E-Books: [█] 1" + System.lineSeparator() +
+                "Total E-Magazines: [█] 1" + System.lineSeparator() +
+                "Total Newspapers: [█] 1" + System.lineSeparator() +
+                "Total E-Newspapers: [█] 1" + System.lineSeparator() + System.lineSeparator() +
+                "Summary of Events:" + System.lineSeparator() +
+                "Total Events: 5" + System.lineSeparator() +
+                "Upcoming Events (Next 3):" + System.lineSeparator() +
+                "1. New Year 2024 | 01 Jan 2024 | Happy New Year" + System.lineSeparator() +
+                "2. April Fools | 01 Apr 2024 | Time for mischief" + System.lineSeparator() +
+                "3. Children's Day | 01 Oct 2024 | null" + System.lineSeparator() +
+                "____________________________________________________________" + System.lineSeparator();
+        assertEquals(expectedMessage, outputMessage);
+
+    }
+    @Test
+    public void testExcecutewithArguments() throws IllegalArgumentException {
+        Parser parser2 = new Parser();
+        assertThrows(IllegalArgumentException.class, () -> summaryCommand.execute("/t hi", parser2.container));
+    }
     @Test
     public void testGenerateBar() {
         SummaryCommand summaryCommand = new SummaryCommand();

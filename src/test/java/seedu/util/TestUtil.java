@@ -1,6 +1,8 @@
 package seedu.util;
 
 import seedu.commands.Command;
+import seedu.data.GenericList;
+import seedu.data.events.Event;
 import seedu.data.resources.Book;
 import seedu.data.resources.CD;
 import seedu.data.resources.EBook;
@@ -14,18 +16,32 @@ import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.commands.CommandResult;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import static seedu.commands.Command.parseInt;
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 public class TestUtil {
 
 
     public String getOutputMessage(Command c, String m, List<Resource> resourceList) throws SysLibException {
         Parser parser = new Parser();
-        parser.container.setResourceList(resourceList);
+        parser.container.setResourcesList(resourceList);
         CommandResult commandResult = c.execute(m, parser.container);
+        return commandResult.feedbackToUser;
+    }
+
+    public String getSummaryOutputMessage(Command c, String m, GenericList<Resource, Event> container)
+            throws SysLibException {
+        CommandResult commandResult = c.execute(m, container);
         return commandResult.feedbackToUser;
     }
 
@@ -36,7 +52,7 @@ public class TestUtil {
         return formattedDate;
     }
 
-    public static List<Resource> fillTestList() {
+    public static List<Resource> fillTestResourcesList() {
         List<Resource> testResourceList = new ArrayList<>();
         String[] genres = {"Horror", "Fiction"};
         String[] genresAdventure = {"Adventure"};
@@ -82,11 +98,71 @@ public class TestUtil {
         return testResourceList;
     }
 
+    public static List<Event> fillTestEventsList() {
+        List<Event> testEventsList = new ArrayList<>();
+
+        Event event1 = new Event("New Year 2024", parseDate("1 Jan 2024"), "Happy New Year");
+        Event event2 = new Event("April Fools", parseDate("1 Apr 2024"), "Time for mischief");
+        Event event3 = new Event("Children's Day", parseDate("1 Oct 2024"), null);
+        Event event4 = new Event("Meeting", parseDate("23 Oct 2024"), "Board Meeting w CEO");
+        Event event5 = new Event("New Year 2025", parseDate("1 Jan 2025"), "Happy New Year");
+
+        testEventsList.add(event1);
+        testEventsList.add(event2);
+        testEventsList.add(event3);
+        testEventsList.add(event4);
+        testEventsList.add(event5);
+
+        return testEventsList;
+    }
+
     public List<Resource> addDummyResource(List<Resource> resourceList){
         Resource dummyResource = new Resource("title", "TMOBM00000001",1, Status.AVAILABLE);
         resourceList.add(dummyResource);
         List<Resource> dummyList = resourceList;
         return dummyList;
+    }
+
+    /**
+     * Parses a date string into a LocalDate object with a specific format.
+     *
+     * @param dateStr   The date string to be parsed.
+     * @return          The parsed LocalDate object.
+     * @throws IllegalArgumentException  If the date string is in an invalid format.
+     */
+    public static LocalDate parseDate(String dateStr) throws IllegalArgumentException {
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .appendPattern("dd MMM yyyy")
+                .toFormatter(Locale.ENGLISH)
+                .withResolverStyle(ResolverStyle.SMART);
+        try {
+            dateStr = checkDate(dateStr);
+            return LocalDate.parse(dateStr, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Please enter a valid date in the format 'dd MMM yyyy'"
+                    + SEPARATOR_LINEDIVIDER);
+        }
+    }
+
+    /**
+     * Checks and formats a date string to ensure it is in the correct format.
+     *
+     * @param dateStr   The date string to be checked.
+     * @return          The formatted date string.
+     * @throws IllegalArgumentException  If the date string is in an invalid format.
+     */
+    public static String checkDate(String dateStr) throws IllegalArgumentException {
+        String[] temp = dateStr.split(" ");
+        if (temp.length != 3) {
+            throw new IllegalArgumentException("Please enter a valid date in the format 'dd MMM yyyy'"
+                    + SEPARATOR_LINEDIVIDER);
+        }
+        int first = parseInt(temp[0]);
+        if (first < 10) {
+            return "0" + dateStr;
+        }
+        return dateStr;
     }
 
 }
