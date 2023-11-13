@@ -24,6 +24,8 @@
 * [Known Issues](#known-issues--return-to-contents)
 * [Command Summary](#command-summary--return-to-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## Introduction | [Return to Contents](#contents)
 
 Welcome to the SysLib User Guide: your all-in-one document to learn how to use SysLib to manage your work and responsibilities as a librarian. 
@@ -60,6 +62,8 @@ work.
 > **⚠️ IMPORTANT:**
 > 
 >If your operating system is not listed in the table above, it means our application has not been tested on it. We therefore cannot guarantee that the application will work as intended. We highly encourage you to use one of the recommended operating systems in the table above. We apologise for any inconvenience caused.
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start | [Return to Contents](#contents)
 1. Make sure that you have Java 11 or above installed on your computer.
@@ -104,6 +108,7 @@ Hello! What would you like to do?
 ____________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
 
 ## Features | [Return to Contents](#contents)
 > Syslib CLI allows System Librarians to create Resources (Books, Magazines, Newspapers, CDs, eBooks, eMagazines, eNewspapers) as well as Events.
@@ -145,6 +150,7 @@ ____________________________________________________________
 Happy organizing!
 
 
+<div style="page-break-after: always;"></div>
 
 ## Resources
 ### Add a Listing: `add` | [Return to Contents](#contents)
@@ -225,6 +231,8 @@ ____________________________________________________________
 > e.g. Sci-Fi, Fantasy, Comedy
 > - '[' and ']' are not allowed in genres.
 
+<div style="page-break-after: always;"></div>
+
 ### Add eBook
 
 Format: `add /i ISBN /t TITLE /a AUTHOR /tag eb /l LINK [/g GENRE /s STATUS]`
@@ -264,6 +272,8 @@ This CD is added:
 ____________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### Add Magazine
 Format: `add /i ISBN /t TITLE /b BRAND /is ISSUE /tag m [/s STATUS]`
 
@@ -295,6 +305,8 @@ This e-magazine is added:
 [EM]  ID: 15 Title: Market Movers ISBN: 9781234567951 Brand: Forbes Publications Issue: Quarterly Report, Q2 2023 Link: forbes.com
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Add Newspaper
 Format: `add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag n [/s STATUS]`
@@ -328,6 +340,8 @@ This e-newspaper is added:
 [EN]  ID: 20 Title: Sports Daily ISBN: 9730763630277 Publisher: Sports Press International Edition: Daily Sports Wrap, March 15 2023 Link: dailysports.com
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Delete a Listing: `delete` | [Return to Contents](#contents)
 
@@ -367,6 +381,8 @@ Looking for a more specific list? `list` also offers you the capability to **fil
 
 You may face an issue where you are unable to see the list, or it's difficult to read the table due to the display alignment. Kindly click [here](#list-table-looks-messy-or-unable-to-see-the-full-details-return-to-list-feature) to jump to the Known Issues section to solve any issues regarding the list. 
 
+<div style="page-break-after: always;"></div>
+
 **Example input:**
 ```
 list
@@ -381,6 +397,8 @@ list /tag B /g Fiction /s Available
 
 ![ExampleOutput](images\List Screenshots\listexampleoutput.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Find Specific Listings: `find` | [Return to Contents](#contents)
 
 **Find What You Need, Fast!**
@@ -392,7 +410,7 @@ Our advanced search capabilities make it easy to locate the resources you need. 
     - **Author:** Search for books by their authors.
     - **ISBN:** Use this unique identifier for precise book searches.
     - **ID:** Every resource has an ID for quick identification.
-  
+
 
 - **Targeted Results:** Combine multiple filters in your search. We'll show you results that match **ALL** your specified criteria for pinpoint precision.
 
@@ -433,6 +451,8 @@ ID             Tag  Title               ISBN          Brand                    I
 There are currently 1 resource(s).
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Edit a Listing: `edit` | [Return to Contents](#contents)
 
@@ -478,6 +498,7 @@ Successfully updated! Your updated resource:
 [B]  ID: 3 Title: Mary ISBN: 123 Author: John Genre: Horror, Adventure Status: LOST
 ____________________________________________________________
 ```
+<div style="page-break-after: always;"></div>
 
 ## Events
 >**📚 Note:**
@@ -525,6 +546,8 @@ This is the current event list:
 ____________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### Event Delete: `eventdelete` | [Return to Contents](#contents)
 >**📚 Note:**
 > - INDEX starts from 0 and can be viewed by calling `eventlist`
@@ -567,6 +590,8 @@ Event edited successfully. New event details:
 0: NEW TITLE | 23-01-2024 | NEW DESCRIPTION
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Summary: `summary` | [Return to Contents](#contents)
 Provide a summary of resources added and upcoming 3 events
@@ -611,36 +636,17 @@ See you next time!
 ____________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
+
 ### Viewing Help : `help` | [Return to Contents](#contents)
 Displays a list of available commands with examples and their syntax format.
 
 Format: `help`
 
 Example:
-```
-Commands available:
-[add] (Book) Adds a new book. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
-[add] (eBook) Adds a new eBook. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag eb /l LINK [/g GENRE /s STATUS])
-[add] (CD) Adds a new CD. (e.g. add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag cd [/s STATUS])
-[add] (Magazine) Adds a new magazine. (e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag m [/s STATUS])
-[add] (eMagazine) Adds a new eMagazine. (e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag em /l LINK [/s STATUS])
-[add] (Newspaper) Adds a new newspaper. (e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag n [/s STATUS])
-[add] (eNewspaper) Adds a new eNewspaper. (e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag en /l LINK [/s STATUS])
-[delete] deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
-[list] lists all resources OR filter by certain tags, genre, or status. (e.g. list /tag B /g Fiction /s AVAILABLE)
-[find] finds a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188 /a AUTHOR)
-[edit] edits a listing by entering its id to update its details. (e.g. edit /id 123 /t NEW_TITLE /a NEW_AUTHOR)
-[eventadd] adds an event to the database. (e.g. eventadd /t TITLE /date 23 Dec 2023 [/desc DESCRIPTION])
-[eventlist] lists out all events in the database. (e.g. eventlist)
-[eventdelete] deletes an event from the database based on the index. (e.g. eventdelete /i INDEX)
-[eventedit] edits an event in the event list based on the information given. (e.g. eventedit /i INDEX [/t TITLE /date DATE /desc DESCRIPTION])
-[summary] shows a summary of all resources and the next 3 events. (e.g. summary)
-[exit] displays a farewell message and exits the program. (e.g. exit)
 
-For more information, please refer to our user guide at: https://bit.ly/SyslibUserGuide
-____________________________________________________________
-```
-
+![helpexampleoutput](/Users/bnjm2000/Desktop/4. Sem 3/CS2113T/Codes/tp/docs/images/helpexampleoutput.png)
 
 ## FAQ | [Return to Contents](#contents)
 
@@ -658,6 +664,9 @@ including the following:
  - logs or error messages.
 
 We will get back to you as quickly as possible!
+
+<div style="page-break-after: always;"></div>
+
 ## Known Issues | [Return to Contents](#contents)
 
 ### List Table looks messy or unable to see the full details: [[Return to list feature]](#list-all-items-list--return-to-contents)
@@ -690,6 +699,7 @@ You can try any of the following solutions to fix this issue:
   
     ![img_3.png](images/List%20Screenshots/fontsize.png)
 
+<div style="page-break-after: always;"></div>
 
 ## Command summary | [Return to Contents](#contents)
 
