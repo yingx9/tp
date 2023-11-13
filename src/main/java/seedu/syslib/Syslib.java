@@ -7,7 +7,6 @@ import seedu.parser.Parser;
 import seedu.storage.Storage;
 import seedu.ui.UI;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,6 @@ public class Syslib {
      * Main entry-point for the java.syslib.Syslib application.
      */
     public static final String FILEPATH = ".\\data\\storage.txt";
-    public static final String DIRECTORYPATH = ".\\data";
     private static UI ui;
     private static Parser parser;
     private static Storage storage;
@@ -25,8 +23,7 @@ public class Syslib {
     public Syslib(String filePath) throws SysLibException {
         ui = new UI();
         parser = new Parser();
-        File dir = new File(DIRECTORYPATH);
-        dir.mkdirs();
+
         storage = new Storage(filePath, parser.container);
         try {
             List<Resource> resourceListLoad = new ArrayList<>();
