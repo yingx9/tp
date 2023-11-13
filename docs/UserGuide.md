@@ -117,7 +117,7 @@ Our intuitive system ensures that you never lose track of your valuable resource
 
 ```
 > exit
-Thanks for using SysLib CLI! We have saved the current resources and events.
+Thanks for using SysLib! We have saved the current resources and events.
 See you next time!
 ____________________________________________________________
 ```
@@ -606,7 +606,7 @@ Format: `exit`
 Example:
 ```
 > exit
-Thanks for using SysLib CLI! We have saved the current resources and events.
+Thanks for using SysLib! We have saved the current resources and events.
 See you next time!
 ____________________________________________________________
 ```
