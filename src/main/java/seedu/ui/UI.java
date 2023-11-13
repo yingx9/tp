@@ -57,9 +57,9 @@ public class UI {
         showLine();
     }
 
-    public void showExitMessage() {
-        System.out.println("Thanks for using SysLib CLI! We have saved the current resources and events created.");
-        System.out.println("Hope to see you again soon!");
+    public void showExitMessage(){
+        System.out.println("Thanks for using SysLib CLI! We have saved the current resources and events.");
+        System.out.println("See you next time!");
         showLine();
     }
 
@@ -144,8 +144,7 @@ public class UI {
 
         messageToDisplay += resourceDisplayFormatter.getFinalDisplayFormat();
 
-        messageToDisplay += formatLastLineDivider("There are currently " + resourcesList.size() +
-                " resource(s).");
+        messageToDisplay += formatLastLineDivider("There are currently " + resourcesList.size() + " resource(s).");
 
         return messageToDisplay;
     }

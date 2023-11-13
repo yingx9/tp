@@ -1,0 +1,81 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+actor User
+participant "UI" as UI UI_COLOR
+participant ":Parser" as Parser PARSER_COLOR
+participant ":EventEditCommand" as EditCommand COMMAND_COLOR
+participant ":Command" as Command COMMAND_COLOR_T2
+participant ":EventList" as EventList DATA_COLOR
+
+User -> UI : statement
+activate UI UI_COLOR
+UI -> Parser : process(statement)
+activate Parser PARSER_COLOR
+Parser -> EditCommand : execute(statement, container)
+activate EditCommand COMMAND_COLOR
+
+EditCommand -> Command : parseArgument(statement)
+activate Command COMMAND_COLOR_T2
+Command --> EditCommand : String[]
+deactivate Command
+
+EditCommand -> Command : validateStatement(statement, values)
+activate Command COMMAND_COLOR_T2
+Command --> EditCommand : return
+deactivate Command
+destroy Command
+
+EditCommand -> EditCommand : parseInt(values[0])
+activate EditCommand COMMAND_COLOR
+EditCommand --> EditCommand : index:int
+deactivate EditCommand
+
+EditCommand -> EventList : getEventList()
+activate EventList DATA_COLOR
+EventList -> EventList : get(index)
+activate EventList DATA_COLOR
+EventList --> EventList : :Event
+deactivate EventList DATA_COLOR
+EventList --> EditCommand : oldEvent:Event
+deactivate EventList DATA_COLOR
+
+EditCommand -> EventList : getEventList()
+activate EventList DATA_COLOR
+EventList -> EventList : remove(index)
+activate EventList DATA_COLOR
+EventList --> EventList : return
+deactivate EventList DATA_COLOR
+EventList --> EditCommand : return
+deactivate EventList DATA_COLOR
+
+EditCommand -> EditCommand : binarySearch(container, date)
+activate EditCommand COMMAND_COLOR
+EditCommand --> EditCommand : idx:int
+deactivate EditCommand
+
+EditCommand -> EventList : getEventList()
+activate EventList DATA_COLOR
+EventList -> EventList : add(idx,editedEvent)
+activate EventList DATA_COLOR
+EventList --> EventList : return
+deactivate EventList DATA_COLOR
+EventList --> EditCommand : return
+deactivate EventList DATA_COLOR
+destroy EventList
+
+EditCommand --> UI : showline()
+deactivate EditCommand
+destroy EditCommand
+
+deactivate Parser
+destroy Parser
+deactivate UI
+destroy UI
+
+
+@enduml
