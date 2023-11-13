@@ -887,21 +887,43 @@ ____________________________________________________________
     2. Test case: `list`
 
     Expected: A table showing details of current resources, in order of BOOKS, MAGAZINE, CDs, and NEWSPAPERS.
-    
+
     ```
-    Listing resources matching given filters: 
-
-                                                                 [BOOKS]
-    -----------------------------------------------------------------------------------------------------------------------------------
-    ID     Tag  Title               ISBN          Author                   Genre               Link           Status    Received Date
-    -----------------------------------------------------------------------------------------------------------------------------------
-    1      B    Crime and Punishment9783161484100 Dostoevsky               null                null           AVAILABLE 13 Nov 2023    
-    2      B    Crime and Punishment9783161484100 Dostoevsky               Fiction             null           LOST      13 Nov 2023
-
-
-    There are currently 2 resource(s).
+    Listing all resources in the Library:
+    
+                                                                           [BOOKS]
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+    ID     Tag  Title                   ISBN          Author                   Genre                        Link           Status    Received Date  
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+    1      B    Moby Dick               9780763630188 Herman Melville          Adventure, Fiction           null           AVAILABLE 08 Nov 2023    
+    2      B    Harry Squatter          9780763630187 J.K.                     History                      null           LOST      08 Nov 2023    
+    3      EB   Moby Dick               9780763630188 Herman Melville          Adventure, Fiction           www.abc.com    AVAILABLE 08 Nov 2023    
+    
+                                                                           [MAGAZINES]
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+    ID     Tag  Title                   ISBN          Brand                    Issue                        Link           Status    Received Date  
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+    5      M    2023 Hottest Trends     9780763630188 Vogue                    Volume 32, Issue 5, May 2023 null           AVAILABLE 08 Nov 2023    
+    6      EM   2023 Hottest Trends     9780763630188 Vogue                    Volume 32, Issue 5, May 2023 www.abc.com    AVAILABLE 08 Nov 2023    
+    
+                                                                            [CDS]
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+    ID     Tag  Title                   ISBN          Creator                  Type                         Link           Status    Received Date  
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+    4      CD   Moby Dick               9780763630188 Herman Melville          Audio Book                   null           AVAILABLE 08 Nov 2023    
+    
+                                                                          [NEWSPAPERS]
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+    ID     Tag  Title                   ISBN          Publisher                Edition                      Link           Status    Received Date  
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+    7      N    Forbes 30 Under 30 2023 9780763630188 The Straits Times        Entrepreneurs                null           AVAILABLE 08 Nov 2023    
+    8      EN   Forbes 30 Under 30 2023 9780763630188 The Straits Times        Entrepreneurs                www.abc.com    AVAILABLE 08 Nov 2023    
+    
+    
+    There are currently 8 resource(s).
     ____________________________________________________________
     ```
+
    
 2. List when no resources are in list
     1. Prerequisites: No resources currently in SysLib
@@ -921,12 +943,47 @@ ____________________________________________________________
 
        Expected: A table showing details of `Book` resources with tag `B`, or a message stating no resources found or empty list if applicable. 
 
+    ```
+    Listing resources matching given filters: 
+    
+                                                                 [BOOKS]
+    -----------------------------------------------------------------------------------------------------------------------------------
+    ID     Tag  Title               ISBN          Author                   Genre               Link           Status    Received Date
+    -----------------------------------------------------------------------------------------------------------------------------------
+    1      B    Crime and Punishment9783161484100 Dostoevsky               null                null           AVAILABLE 13 Nov 2023    
+    2      B    Crime and Punishment9783161484100 Dostoevsky               Fiction             null           LOST      13 Nov 2023
+    
+    
+    There are currently 2 resource(s).
+    ____________________________________________________________
+    ```
+
    2. Test case: `list /tag B /s AVAILABLE`
 
       Expected: A table showing details of `Book` resources with tag `B` and status `AVAILABLE`, or a message stating no resources found or empty list if applicable.
 
+    ```
+    Listing resources matching given filters: 
+    
+                                                                 [BOOKS]
+    -----------------------------------------------------------------------------------------------------------------------------------
+    ID     Tag  Title               ISBN          Author                   Genre               Link           Status    Received Date
+    -----------------------------------------------------------------------------------------------------------------------------------
+    1      B    Crime and Punishment9783161484100 Dostoevsky               null                null           AVAILABLE 13 Nov 2023    
+    
+    
+    There are currently 1 resource(s).
+    ____________________________________________________________
+    ```
+
 4. Other incorrect commands to try: list X, list /tag , ... 
+
    Expected: Invalid argument message. 
+
+    ```
+    Unknown variable/command: x, avoid using '/' in names/variables
+    ____________________________________________________________
+    ```
 
 ### Editing a Resource
 
@@ -948,8 +1005,24 @@ ____________________________________________________________
 
       Expected: An edit success message displaying the new details of the edited resource, IF resource with `id 1` is a CD (Creator is a CD argument). Else, error message saying wrong arguments and showing the right arguments.
 
-2. Other incorrect commands to try: edit X, edit /t , ...
+2. Other incorrect commands to try: `edit /id 0 X`, `edit /t` , ...
+
    Expected: Invalid argument message.
+
+    ```
+    Please provide at least one detail to edit!
+    For Books: /t TITLE /a AUTHOR /g GENRES /s STATUS /i ISBN
+    For EBooks: /t TITLE /a AUTHOR /g GENRES /s STATUS /l LINK /i ISBN
+    ____________________________________________________________
+    For Magazines: /t TITLE /b BRAND /is ISSUE /s STATUS /i ISBN
+    For EMagazines: /t TITLE /b BRAND /is ISSUE /s STATUS /l LINK /i ISBN
+    ____________________________________________________________
+    For CDs: /t TITLE /c CREATOR /ty TYPE /s STATUS /i ISBN
+    ____________________________________________________________
+    For Newspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS /i ISBN
+    For ENewspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS /l LINK /i ISBN
+    ____________________________________________________________
+    ```
 
 ### Deleting Resources
 1. Delete a resource
@@ -1044,7 +1117,7 @@ ____________________________________________________________
    Expected: An error message saying "There event list is empty."
 
     ```
-    The event list is empty!
+    There are currently no Events in Syslib!
     ____________________________________________________________
     ```
 

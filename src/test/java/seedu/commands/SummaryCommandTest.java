@@ -40,13 +40,13 @@ public class SummaryCommandTest {
         String outputMessage = testUtil.getSummaryOutputMessage(summaryCommand, argument, parser.container);
         String expectedMessage = "Summary of Resources:" + System.lineSeparator() +
                 "Total Resources: 9" + System.lineSeparator() +
-                "Total Books: [████] 3" + System.lineSeparator() +
-                "Total CDs: [█] 1" + System.lineSeparator() +
-                "Total Magazines: [█] 1" + System.lineSeparator() +
-                "Total E-Books: [█] 1" + System.lineSeparator() +
-                "Total E-Magazines: [█] 1" + System.lineSeparator() +
-                "Total Newspapers: [█] 1" + System.lineSeparator() +
-                "Total E-Newspapers: [█] 1" + System.lineSeparator()
+                "Total Books: [▓▓▓▓] 3" + System.lineSeparator() +
+                "Total CDs: [▓] 1" + System.lineSeparator() +
+                "Total Magazines: [▓] 1" + System.lineSeparator() +
+                "Total E-Books: [▓] 1" + System.lineSeparator() +
+                "Total E-Magazines: [▓] 1" + System.lineSeparator() +
+                "Total Newspapers: [▓] 1" + System.lineSeparator() +
+                "Total E-Newspapers: [▓] 1" + System.lineSeparator()
                 + System.lineSeparator() +
                 "Summary of Events:" + System.lineSeparator() +
                 "Total Events: 5" + System.lineSeparator() +
@@ -67,16 +67,16 @@ public class SummaryCommandTest {
     public void testGenerateBar() {
         SummaryCommand summaryCommand = new SummaryCommand();
         String bar = summaryCommand.generateBar(50);
-        assertEquals("[██████████]", bar);
+        assertEquals("[▓▓▓▓▓▓▓▓▓▓]", bar);
 
         String bar0 = summaryCommand.generateBar(0);
         assertEquals("[]", bar0);
 
         String bar100 = summaryCommand.generateBar(100);
-        assertEquals("[████████████████████]", bar100);
+        assertEquals("[▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓]", bar100);
 
         String bar25 = summaryCommand.generateBar(25);
-        assertEquals("[█████]", bar25);
+        assertEquals("[▓▓▓▓▓]", bar25);
     }
 
     @Test
