@@ -5,7 +5,7 @@
 * [Introduction](#introduction--return-to-contents)
 * [Quick Start](#quick-start--return-to-contents)
 * [Features](#features--return-to-contents)
-    * [Save Your Work](#save-your-work--return-to-contents)
+    * [Save your work](#managing-your-resources-and-events-with-ease)
     * [Resources](#resources)
       * [Add a Listing: `add`](#add-a-listing-add--return-to-contents)
       * [Delete a Listing: `delete`](#delete-a-listing-delete--return-to-contents)
@@ -102,56 +102,82 @@ ____________________________________________________________
 ## Features | [Return to Contents](#contents)
 > Syslib CLI allows System Librarians to create Resources (Books, Magazines, NewsPapers, CD's, eBooks, eMagazines, eNewspapers) as well as Events.
 
+### Managing Your Resources and Events with Ease
 
-### Save Your Work | [Return to Contents](#contents)
-> - All resources and events in the current list will automatically be saved into an offline file `storage.txt` on exit.
-> - Resources and events from `storage.txt` will be loaded into the program at every start.
-> - The `storage.txt` file will be located in the same directory as the jar file.
-> - On start:
-> ```
-> ____________________________________________________________
-> Storage file found @ .\storage.txt
-> Loaded 2 resources and 1 events!
-> ____________________________________________________________
-> ```
-> - On exit: 
-> ```
-> > exit
-> Thanks for using SysLib CLI! We have saved the current resources and events created.
-> Hope to see you again soon!
-> ```
+Our intuitive system ensures that you never lose track of your valuable resources and events. Here's how it works:
+
+#### 📁 Automatic Saving on Exit
+- **Peace of Mind:** Every resource and event you add to the current list is automatically saved when you exit the program. Rest easy knowing your data is secure.
+```
+  > exit
+  Thanks for using SysLib CLI! We have saved the current resources and events created.
+  Hope to see you again soon!
+```
+
+#### 🔄 Seamless Loading on Startup
+- **Instant Access:** Each time you start the program, we automatically load your resources and events from the last session. Your information is always at your fingertips.
+```
+____________________________________________________________
+Storage file found @ .\data\storage.txt
+Loaded 2 resources and 1 events!
+____________________________________________________________
+```
+
+
+#### 📍 File Location
+- **Find Your Data Easily:** Your saved data resides in a file named `storage.txt`, conveniently located in the `data` directory.
+    - Path to your file: `data/storage.txt`
+```
+>   Syslib.jar
+>   data/                              // Primary folder for storage
+>   └── storage.txt                    // Text file containing a list of resources and events saved.
+```
+Happy organizing!
+
+
 
 ## Resources
 ### Add a Listing: `add` | [Return to Contents](#contents)
 
-Adds a new resource to the library inventory.
+Adding New Resources to Your Library Inventory
 
-#### Types of Tags:
-`[B]` - Books
-`[EB]` - eBooks
-`[CD]` - CDs
-`[EB]` - Magazines
-`[M]` - eMagazines
-`[N]` - Newspapers
-`[EN]` - eNewspapers
+Easily expand your library's collection with our streamlined process for adding new resources. Here's everything you need to know:
 
-> **Note**:
-> - Anything with `E` prior is an electronic version  
-> i.e. `[EB]` is an eBook, `[EM]` is an eMagazine, `[EN]` is an eNewspaper
+**Resource Tags - Identify Your Resources**
 
-#### Types of Status:
-- `AVAILABLE`
-- `BORROWED`
-- `LOST`
+Choose the right tag to classify each new addition:
+- `[B]` for **Books**
+- `[EB]` for **eBooks**
+- `[CD]` for **CDs**
+- `[M]` for **Magazines**
+- `[EM]` for **eMagazines**
+- `[N]` for **Newspapers**
+- `[EN]` for **eNewspapers**
 
-> **Note**:
-> - Resource will default to `AVAILABLE` if no status is given
 
-#### ISBN:
+**Electronic Versions**
+- Easy Identification: Anything with an `E` is an electronic version.
+- For example, `[EB]` is an eBook, `[EM]` is an eMagazine, and `[EN]` is an eNewspaper.
 
-> **Note**:
-> ISBN should be 13 digits.
+**Status Types - Keep Track of Availability**
+Set the status to keep your inventory organized:
+- `AVAILABLE` for items ready to be checked out.
+- `BORROWED` for items currently with users.
+- `LOST` for items that are missing.
 
+> **📚 Note:**
+> 
+> Default Status
+> - **Automatic Setting:** If you don't specify a status, we'll automatically set it to `AVAILABLE`.
+> 
+> ISBN requirements
+> - **13-Digit Requirement:** Ensure the ISBN is exactly 13 digits for proper cataloging
+
+**Quick Tips**
+- 🌟 **Double-check your tags and ISBN** for accurate categorization.
+- 💡 **Regularly update the status** of your resources to reflect their current state.
+
+The specific commands for each resource types can be seen below: 
 
 ### Add Book
 
@@ -170,7 +196,7 @@ This book is added:
 ____________________________________________________________
 ```
 
-> **Note**:
+> **📚 Note:**
 > - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.  
 > e.g. Sci-Fi, Fantasy, Comedy
 
@@ -191,7 +217,7 @@ This e-book is added:
 ____________________________________________________________
 ```
 
-> **Note**:
+> **📚 Note:**
 > - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
 > - e.g. Sci-Fi, Fantasy, Comedy
 
@@ -303,9 +329,9 @@ Looking for a more specific list? `list` also offers you the capability to **fil
 
 **Format:** `list [/tag TAG /g GENRE /s STATUS]`
 
-**Notes:**
-- Including more than one filter will list resources that satisfy **ALL** given filters. 
-- For example, `list /tag B /g Horror` will list Books with Horror genre.
+> **📚 Note:**
+>- Including more than one filter will list resources that satisfy **ALL** given filters. 
+>- For example, `list /tag B /g Horror` will list Books with Horror genre.
 
 **Potential Issues:**
 
@@ -358,14 +384,33 @@ ____________________________________________________________
 ```
 
 ### Find Specific Listings: `find` | [Return to Contents](#contents)
-Find a resource by title, author, ISBN or given id.
 
-You can use multiple filters, and only results that match ALL the given criteria will be returned.
+**Find What You Need, Fast!**
 
-> For non-book resources, `author` refers to `publisher`,`creator` and `brand` for Newspapers, CD's and Magazines 
-> respectively.
+Our advanced search capabilities make it easy to locate the resources you need. Here's how you can make the most out of our search tool:
 
-Format: `find [/t TITLE OR /i ISBN OR /a AUTHOR/PUBLISHER/BRAND/CREATOR OR /id ID]`
+- **Flexible Options:** Find resources using a variety of identifiers:
+    - **Title:** Pinpoint resources by their titles.
+    - **Author:** Search for books by their authors.
+    - **ISBN:** Use this unique identifier for precise book searches.
+    - **ID:** Every resource has an ID for quick identification.
+  
+
+- **Targeted Results:** Combine multiple filters in your search. We'll show you results that match **ALL** your specified criteria for pinpoint precision.
+
+> **📚 Note:**
+> - `AUTHOR` also refers to the following:
+>     - For **Newspapers**, `publisher` will be used.
+>     - For **CDs**, `creator` will be used.
+>     - For **Magazines**, `brand` will be used.
+
+**Quick Tips**
+- 💡 **Familiarize yourself with the search terms** for different resource types for efficient searching.
+
+
+Discover exactly what you're looking for, effortlessly!
+
+**Format:** `find [/t TITLE OR /i ISBN OR /a AUTHOR/PUBLISHER/BRAND/CREATOR OR /id ID]`
 
 **Example input:**
 ```
@@ -399,11 +444,11 @@ Fear not! Update a resource's details using the `edit` command and fix your typo
 
 **Format:** `edit /id ID /argumentname ARGUMENT [/argumentname2 ARGUMENT2..]`
 
-**Notes:**
-
-- If you have forgotten the **ID**, execute `list` to locate your target resource and ID.
-- At least **one** argument to edit must be given. 
-- You can edit multiple details in one go by specifying multiple arguments. E.g `edit /id 1 /t NEWTITLE /a NEWAUTHOR` updates title and author. 
+> **📚 Note:**
+> 
+> - If you have forgotten the **ID**, execute `list` to locate your target resource and ID.
+> - At least **one** argument to edit must be given. 
+> - You can edit multiple details in one go by specifying multiple arguments. E.g `edit /id 1 /t NEWTITLE /a NEWAUTHOR` updates title and author. 
 
 **Argument Names:**
 
@@ -435,12 +480,12 @@ ____________________________________________________________
 ```
 
 ## Events
->Note:
+>**📚 Note:**
 > - Events are stored separately from resources
 > - They are stored in chronological order(events that are happening sooner are closer to index 0)
 
 ### Event Adding: `eventadd` | [Return to Contents](#contents)
->Notes about description:
+>**📚 Note:**
 > - `desc` is optional for all events
 > - Any event without description will be shown as `null`
 
@@ -480,7 +525,7 @@ ____________________________________________________________
 ```
 
 ### Event Delete: `eventdelete` | [Return to Contents](#contents)
->Notes about INDEX:
+>**📚 Note:**
 > - INDEX starts from 0 and can be viewed by calling `eventlist`
 > - INDEX might change as those with earlier dates are sorted first
 
@@ -501,11 +546,11 @@ ____________________________________________________________
 ```
 
 ### Event Edit: `eventedit` | [Return to Contents](#contents)
->Notes about INDEX:
+>**📚 Note:**
 > - INDEX starts from 0 and can be viewed by calling `eventlist`
 > - INDEX might change as those with earlier dates are sorted first
 
-edits attributes of an event based on information provided.
+Edits attributes of an event based on information provided.
 
 Format: `eventedit /id INDEX [/t TITLE /date DATE /desc DESCRIPTION]`
 
