@@ -15,3 +15,9 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+logs/exitCommandLogs.log
+logs/findCommandLogs.log
+logs/helpCommandLogs.log
+logs/listCommandLogs.log
+logs/*
+*.log

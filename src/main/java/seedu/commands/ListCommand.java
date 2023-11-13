@@ -1,151 +1,139 @@
 package seedu.commands;
 
-import seedu.data.Book;
-import seedu.data.Resource;
-import seedu.data.SysLibException;
-import seedu.parser.Parser;
-import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
+import seedu.data.GenericList;
+import seedu.data.Status;
+import seedu.data.events.Event;
+import seedu.data.resources.Resource;
 
+import seedu.exception.SysLibException;
+import seedu.ui.ListCommandMessages;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
+import static seedu.ui.UI.showResourcesDetails;
 
 public class ListCommand extends Command {
 
-
-    private static boolean isFilteredByTag;
-    private static boolean isFilteredByGenre;
+    public static List<Resource> matchedResources;
+    private static final Logger LIST_LOGGER = Logger.getLogger(ListCommand.class.getName());
     private static String tagKeyword;
     private static String genreKeyword;
+    private static String statusKeyword;
+    private static String feedbackToUser;
 
-    private static String messageToPrint;
+    static {
 
-    public ListCommand(){
-        args = new String[]{"tag", "g"};
-        aliasArgs = new String[]{"tag", "genre"};
-        required = new boolean[]{false, false};
+        FileHandler listFileHandler;
+        try {
+            String loggingDirectoryPath = System.getProperty("user.dir") + "/logs";
+            String logFilePath = loggingDirectoryPath + "/listCommandLogs.log";
+            File directory = new File(loggingDirectoryPath);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            listFileHandler = new FileHandler(logFilePath, true);
+
+        } catch (IOException e) {
+            LIST_LOGGER.log(Level.SEVERE, "Failed to initialize list logging handler.");
+            throw new RuntimeException(e);
+        }
+        listFileHandler.setFormatter(new SimpleFormatter());
+        LIST_LOGGER.addHandler(listFileHandler);
     }
 
-    public void resetVariables(){
-        isFilteredByTag = false;
-        isFilteredByGenre = false;
-        tagKeyword = "";
-        genreKeyword ="";
-        messageToPrint = "Listing all resources in the Library:";
+    public ListCommand() {
+        args = new String[]{"tag", "g", "s"};
+        required = new boolean[]{false, false, false};
     }
 
     @Override
-    public void execute(String statement, Parser parser) throws SysLibException, IllegalArgumentException {
-        resetVariables();
-        String[] values = parseArgument(statement);
-        validate(statement, values);
-        setListFilters(statement);
+    public CommandResult execute(String statement, GenericList<Resource, Event> container)
+            throws SysLibException, IllegalArgumentException {
+        feedbackToUser = "";
+        LIST_LOGGER.info("List Command execute with " + statement);
 
-        filterResources(parser.resourceList);
+        String[] givenParameters = parseArgument(statement);
+        validateStatement(statement, givenParameters);
+        if (container.getResourcesList().isEmpty()) {
+            LIST_LOGGER.warning("ResourcesList is empty");
+            throw new SysLibException("There are currently no Resources in Syslib!" + SEPARATOR_LINEDIVIDER);
+        }
+        filterResources(givenParameters, container.getResourcesList());
+        LIST_LOGGER.info("List Command ends");
+        return new CommandResult(feedbackToUser);
 
     }
 
+    private void filterResources(String[] givenParameters, List<Resource> resourcesList) throws SysLibException {
 
-    public void filterResources(List<Resource> resourceList) throws SysLibException{
+        boolean hasFilters = hasFilters((givenParameters));
+        boolean isTagEqualToKeyword = true;
+        boolean isGenreEqualToKeyword = true;
+        boolean isStatusEqualToKeyword = true;
 
-        if (isFilteredByGenre || isFilteredByTag){
-            List<Resource> matchedResources = new ArrayList<>();
-            boolean isTagEqualToKeyword = true;
-            boolean isGenreEqualToKeyword = true;
+        matchedResources = new ArrayList<>();
 
+        if (!hasFilters) {
+            feedbackToUser += ListCommandMessages.GENERIC_MESSAGE;
+            feedbackToUser += showResourcesDetails(resourcesList);
+        } else {
 
-            for (int i=0; i <resourceList.size(); i++){
+            for (Resource resource : resourcesList) {
 
-                Resource resource = resourceList.get(i);
-
-                if(isFilteredByTag){
+                if (tagKeyword != null) {
                     String resourceTag = resource.getTag();
+                    resourceTag = resourceTag.toLowerCase();
                     isTagEqualToKeyword = resourceTag.equals(tagKeyword);
                 }
 
-                if(isFilteredByGenre){
-                    isGenreEqualToKeyword = hasGenre(resource, genreKeyword);
+                if (genreKeyword != null) {
+                    isGenreEqualToKeyword = Resource.hasGenre(resource, genreKeyword);
                 }
 
-                if (isTagEqualToKeyword && isGenreEqualToKeyword){
+                if (statusKeyword != null) {
+                    Status resourceStatus = resource.getStatus();
+                    isStatusEqualToKeyword = statusKeyword.equals(resourceStatus.name());
+
+                }
+
+                if (isTagEqualToKeyword && isGenreEqualToKeyword && isStatusEqualToKeyword) {
                     matchedResources.add(resource);
                 }
-
             }
-            displayResourcesDetails(matchedResources, messageToPrint);
-        } else{
-            displayResourcesDetails(resourceList, messageToPrint);
+            feedbackToUser +=  ListCommandMessages.FILTER_MESSAGE;
+            feedbackToUser += showResourcesDetails(matchedResources);
         }
-
 
     }
 
-    public boolean hasGenre(Resource resource, String genre){
-        Book bookResource;
+    private static boolean hasFilters(String[] givenParameters) throws SysLibException {
+        tagKeyword = null;
+        genreKeyword = null;
+        statusKeyword = null;
 
-        if (resource instanceof Book) {
-            bookResource = (Book) resource;
-            String[] genres = bookResource.getGenre();
-            if (genres[0] == null ){
-                return false;
-            }
+        boolean hasFilters = true;
 
-            for(int j =0; j < genres.length; j ++){
-                if (genres[j].equals(genre)){
-                    return true;
-                }
-            }
-        }
-        return false;
-
-
-    }
-
-
-
-    public void displayResourcesDetails(List<Resource> resourcesList, String message) {
-
-        System.out.println(message + System.lineSeparator());
-        if (resourcesList.isEmpty()){
-            System.out.println("There are currently 0 resources." +
-                    SEPARATOR_LINEDIVIDER);
-        } else {
-
-            for (int i = 0; i < resourcesList.size(); i += 1) {
-                String resourceDetails = resourcesList.get(i).toString();
-                System.out.println(i+1 + ". " + resourceDetails);
-            }
-            System.out.println(System.lineSeparator() + "There are currently " + resourcesList.size() +
-                    " resource(s)." + SEPARATOR_LINEDIVIDER);
-        }
-    }
-
-
-    public static void setListFilters(String statement) throws SysLibException {
-
-        Pattern pattern = Pattern.compile("/(tag|g)\\s+([^/]+)");
-        Matcher matcher = pattern.matcher(statement);
-
-        while(matcher.find()){
-
-            String flag = matcher.group(1);
-            String keyword = matcher.group(2).trim();
-            switch(flag){
-            case "tag":
-                isFilteredByTag = true;
-                tagKeyword = keyword;
-                break;
-            case "g":
-                isFilteredByGenre = true;
-                genreKeyword = keyword;
-                break;
-            default:
-                throw new SysLibException("Please enter a valid filter /tag or /g");
-            }
-            messageToPrint = "Listing resources matching given filters: ";
+        if (givenParameters[0] != null) {
+            tagKeyword = givenParameters[0].toLowerCase();
         }
 
+        if (givenParameters[1] != null) {
+            genreKeyword = givenParameters[1].toLowerCase();
+        }
+
+        if (givenParameters[2] != null) {
+            Status status = EditCommand.getStatusFromString(givenParameters[2]);
+            statusKeyword = status.name();
+        }
+        return hasFilters;
     }
 
 }

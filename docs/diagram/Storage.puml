@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Storage {
+    - filePath : String
+    - container : GenericList<Resource, Event>
+    __
+    + Storage(filePath : String, container : GenericList<Resource, Event>)
+    + load(resources : List<Resource>, events : List<Event>) : void
+    + save() : void
+    - ensureFileExists() : void
+    - createResource(data : String[], id : int) : Resource
+    - createEvent(data : String[]) : Event
+    - getResourceSaveFormat(resourceToSave : Resource) : String
+    - getEventSaveFormat(eventToSave : Event) : String
+    {static} - setupLogger() : void
+}
+
+class GenericList<R, E> {
+    - resourcesList : List<R>
+    - eventsList : List<E>
+    --
+    + GenericList(resourcesList: List<R>, eventsList: List<E>)
+    + getResourcesList() : List<R>
+    + getEventsList() : List<e>
+    + setResourcesList(resourcesList: List<R>): void
+    + setEventsList(eventsList: List<E>): void
+}
+
+class Resource {
+}
+
+class Event {
+
+}
+
+' Relationships
+Storage "1" -- "1" GenericList : contains
+GenericList "1" - "*" Resource : contains
+GenericList "1" - "*" Event : contains
+
+
+@enduml

@@ -1,8 +1,9 @@
 package seedu.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.data.Book;
-import seedu.data.SysLibException;
+import seedu.data.resources.Book;
+import seedu.data.Status;
+import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 
 import java.io.ByteArrayOutputStream;
@@ -10,6 +11,8 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
+import static seedu.util.TestUtil.getCurrentDate;
 
 public class AddCommandTest {
     private final Parser parser = new Parser();
@@ -17,42 +20,47 @@ public class AddCommandTest {
 
     @Test
     public void addCommandValidData() throws SysLibException {
-        addCommand.execute("/id 123456789 /t The Minds of Billy Milligan /a Daniel Keyes /tag B /i 987654321 " +
-                "/g Non-Fiction, Biography", parser);
+        addCommand.execute("/i 9783161484100 /t The Minds of Billy Milligan /a Daniel Keyes /tag B " +
+                "/g Non-Fiction, Biography /s LOST", parser.container);
 
-        Book newBook = (Book) parser.getResourceList().get(0);
+        Book newBook = (Book) parser.container.getResourcesList().get(0);
 
-        assertEquals(newBook.getId(), 123456789);
+        assertEquals(newBook.getId(), 1);
         assertEquals(newBook.getTitle(), "The Minds of Billy Milligan");
         assertEquals(newBook.getAuthor(), "Daniel Keyes");
         assertEquals(newBook.getTag(), "B");
-        assertEquals(newBook.getISBN(), "987654321");
+        assertEquals(newBook.getISBN(), "9783161484100");
         assertEquals(newBook.getGenreString(), "Non-Fiction, Biography");
+        assertEquals(newBook.getStatus(), Status.LOST);
     }
 
     @Test
     public void addCommandOutput() throws SysLibException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        addCommand.execute("/id 123456789 /t The Minds of Billy Milligan /a Daniel Keyes /tag B /i 987654321 " +
-                "/g Non-Fiction, Biography", parser);
+        addCommand.execute("/i 9783161484100 /t The Minds of Billy Milligan /a Daniel Keyes /tag B " +
+                "/g Non-Fiction, Biography", parser.container);
 
         String output = outputStream.toString();
 
-        String expectedOutput = "This book is added: The Minds of Billy Milligan" + System.lineSeparator() +
-                "____________________________________________________________" + System.lineSeparator();
+        String expectedOutput = "Attention: Status is not stated. Status set to default: AVAILABLE." +
+                System.lineSeparator() + "This book is added:" + System.lineSeparator() +
+                "[B]  ID: 1 Title: The Minds of Billy Milligan ISBN: 9783161484100 Author: Daniel Keyes Genre: " +
+                "Non-Fiction, Biography Status: AVAILABLE Received Date: " + getCurrentDate() +
+                SEPARATOR_LINEDIVIDER + System.lineSeparator();
 
         assertEquals(expectedOutput, output);
     }
 
     @Test
-    public void addCommandInvalidId() {
-        assertThrows(IllegalArgumentException.class, ()->addCommand.execute("/id abcd " +
-                "/t The Minds of Billy Milligan /a Daniel Keyes /tag B /i 987654321", parser));
+    public void addCommandInvalidIsbn() {
+        assertThrows(SysLibException.class, ()->addCommand.execute("/i TMOBM " +
+                "/t The Minds of Billy Milligan /a Daniel Keyes /tag B", parser.container));
+
     }
 
     @Test
     public void addCommandInsufficientData() {
-        assertThrows(IllegalArgumentException.class, ()->addCommand.execute("/id ", parser));
+        assertThrows(SysLibException.class, ()->addCommand.execute("/i ", parser.container));
     }
 }

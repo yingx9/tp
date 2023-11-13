@@ -1,0 +1,61 @@
+@startuml
+!include Style.puml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+skinparam ArrowFontStyle plain
+
+participant ":Parser" as PARSER PARSER_COLOR
+
+box Command
+participant ":CommandResult" as COMMANDRESULT COMMAND_COLOR
+participant ":ListCommand" as LISTCOMMAND COMMAND_COLOR
+participant ":Command" as COMMAND COMMAND_COLOR
+
+end box
+
+participant ":UI" as UI UI_COLOR
+
+PARSER -[PARSER_COLOR]> LISTCOMMAND: execute("/tag B")
+activate PARSER PARSER_COLOR
+
+activate LISTCOMMAND COMMAND_COLOR
+
+
+LISTCOMMAND -[COMMAND_COLOR]> COMMAND : parseArg("/tag B)
+activate COMMAND COMMAND_COLOR
+COMMAND --[COMMAND_COLOR]> LISTCOMMAND : String[] values
+
+LISTCOMMAND -[COMMAND_COLOR]> COMMAND : validate("/tag B", values)
+
+COMMAND --[COMMAND_COLOR]> LISTCOMMAND :
+deactivate COMMAND COMMAND_COLOR
+
+
+LISTCOMMAND -[COMMAND_COLOR]> LISTCOMMAND : filterResources()
+activate LISTCOMMAND COMMAND_COLOR
+
+LISTCOMMAND -[COMMAND_COLOR]> LISTCOMMAND : hasFilters()
+activate LISTCOMMAND COMMAND_COLOR
+LISTCOMMAND --[COMMAND_COLOR]> LISTCOMMAND
+deactivate LISTCOMMAND COMMAND_COLOR
+
+
+LISTCOMMAND -[COMMAND_COLOR]> UI : showResourcesDetails(matchedResources)
+activate UI UI_COLOR
+UI --[UI_COLOR]> LISTCOMMAND : messageToDisplay
+deactivate UI
+deactivate LISTCOMMAND
+create COMMANDRESULT
+LISTCOMMAND -[COMMAND_COLOR]> COMMANDRESULT : feedbackToUser
+deactivate LISTCOMMAND COMMAND_COLOR
+activate COMMANDRESULT COMMAND_COLOR
+COMMANDRESULT --[COMMAND_COLOR]> PARSER
+deactivate COMMANDRESULT
+
+
+
+
+
+@enduml
