@@ -23,7 +23,7 @@ public class GenericList<R, E> {
         this.resourcesList = resourcesList;
     }
 
-    public void setEventList(List<E> eventList) {
+    public void setEventsList(List<E> eventList) {
         this.eventList = eventList;
     }
 }

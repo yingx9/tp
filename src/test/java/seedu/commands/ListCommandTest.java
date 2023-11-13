@@ -27,7 +27,7 @@ public class ListCommandTest {
 
     @BeforeAll
     public static void setup() throws SysLibException {
-        testResourcesList = TestUtil.fillTestList();
+        testResourcesList = TestUtil.fillTestResourcesList();
         parser.container.setResourcesList(testResourcesList);
 
     }

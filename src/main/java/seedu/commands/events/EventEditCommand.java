@@ -83,7 +83,11 @@ public class EventEditCommand extends Command {
         feedbackToUser = "";
         String[] values = parseArgument(statement);
         validateStatement(statement, values);
-
+        int size = container.getEventsList().size();
+        if (size == 0) {
+            LOGGER.warning("EventsList is empty");
+            throw new SysLibException("There are currently no Events in Syslib!" + SEPARATOR_LINEDIVIDER);
+        }
         int index = parseInt(values[0]);
         if (index < 0 || index >= container.getEventsList().size()) {
             throw new IllegalArgumentException("Invalid event index" + SEPARATOR_LINEDIVIDER);

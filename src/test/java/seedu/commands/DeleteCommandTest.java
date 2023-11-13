@@ -42,7 +42,26 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void deleteCommandInvalidId() {
+    public void testdeleteCommandInvalidId() {
         assertThrows(IllegalArgumentException.class, () -> deleteCommand.execute("", parser.container));
+    }
+
+    @Test
+    public void testDeleteCommandEmptyList() {
+        assertThrows(SysLibException.class, () -> deleteCommand.execute("/id 1", parser.container));
+    }
+
+    @Test
+    public void testDeleteCommandOutOfBound() throws SysLibException {
+        addCommand.execute("/i 9783161484100 /t The Minds of Billy Milligan /a Daniel Keyes /tag B"
+                , parser.container);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        deleteCommand.execute("/id 10", parser.container);
+        String output = outputStream.toString();
+        String expectedOutput = "Looking for ID: 10..." + System.lineSeparator() +
+                "No resources with id matching 10" + System.lineSeparator() +
+                "____________________________________________________________" + System.lineSeparator();
+        assertEquals(expectedOutput, output);
     }
 }

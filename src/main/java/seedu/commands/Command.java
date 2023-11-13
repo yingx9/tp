@@ -109,9 +109,11 @@ public abstract class Command {
             if (0 <= tempNum) {
                 return tempNum;
             }
-            throw new IllegalArgumentException ("The integer argument(s) given is not a valid number!");
+            throw new IllegalArgumentException ("The integer argument(s) given is not a valid number!"
+                    + SEPARATOR_LINEDIVIDER);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException ("The integer argument(s) given is not a number!");
+            throw new IllegalArgumentException ("The integer argument(s) given is not a number!"
+                    + SEPARATOR_LINEDIVIDER);
         }
     }
 }

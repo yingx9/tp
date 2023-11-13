@@ -40,7 +40,7 @@ public class EditCommandTest {
 
     @BeforeAll
     public static void setup() {
-        testResourceList = TestUtil.fillTestList();
+        testResourceList = TestUtil.fillTestResourcesList();
         parser.container.setResourcesList(testResourceList);
 
     }
@@ -222,6 +222,12 @@ public class EditCommandTest {
     public void testEditBookInvalidArgsGiven() {
         executeAssertSysLibExceptionThrown("/id 2 /t TITLE /s LOST /p PUBLISHER /g GENRES /ed EDITION " +
                 "/c CREATOR /ty TYPE /b BRAND /is ISSUE", INVALID_EDIT_ARGS+BOOK_ARGS_MESSAGE);
+    }
+
+    @Test
+    public void testEditBookInvalidIDGiven() {
+        assertThrows(IllegalArgumentException.class, () ->
+                editCommand.execute("/id -1 /t hello", parser.container));
     }
 
     private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage) {
