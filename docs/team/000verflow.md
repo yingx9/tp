@@ -57,6 +57,7 @@ GenericList currently is just used as a container for both types of lists.
 
 Sections contributed:
 - Overall structure including Contents, Quick start, Features.
+- Add command
 - Find Command
 - Command Summary
 - Save your work section
