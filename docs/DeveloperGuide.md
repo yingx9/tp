@@ -150,6 +150,9 @@ The parsing for a generic command can be seen here:
 For some commands that does not require arguments (etc: help, exit), parseArgument
 and validateStatement will not be called
 
+If an invalid command is given, the nearest command will be searched for via the `suggest` function in `suggestParser`.
+If the nearest command is similar to what the user typed, it will be suggested
+
 For more details on each Command check them out below
 ### Command Component
 The `Command` component is linked to the `Parser` component. 
