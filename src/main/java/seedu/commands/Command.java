@@ -34,7 +34,7 @@ public abstract class Command {
             }
         }
         if (!statement.isBlank()) {
-            String message = InvalidVariableHandler(statement);
+            String message = getReason(statement);
             throw new IllegalArgumentException(message + SEPARATOR_LINEDIVIDER);
         }
     }
@@ -107,7 +107,7 @@ public abstract class Command {
         }
     }
 
-    public String InvalidVariableHandler(String message) {
+    public String getReason(String message) {
         message = message.stripLeading();
         if (!message.startsWith("/")){
             return "Unknown variable/command:" + message;
