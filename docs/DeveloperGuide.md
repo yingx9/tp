@@ -27,6 +27,8 @@
 * [Glossary](#glossary--return-to-contents)
 * [Manual Testing](#instructions-for-manual-testing--return-to-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## About this guide
 This developer guide serves as a documentation of the development of Syslib, an application that was created to help librarians to manage their work.
 
@@ -46,6 +48,8 @@ This technical document is meant for current and future developers of Syslib as 
    - **Verify** the setup: 
      - Run `Syslib`. On IntelliJ, you can right-click Syslib class and `Run Syslib.main()` or `Shift` + `F10`. 
      - You should see the following greeting logo and message:
+
+<div style="page-break-after: always;"></div>
 
 ```
 ____________________________________________________________
@@ -84,6 +88,8 @@ ____________________________________________________________
 
 You are now ready to begin developing! If you would like to exit Syslib, type `exit` to exit the program.
 
+<div style="page-break-after: always;"></div>
+
 ## Design & Implementation
 ## Architecture Overview | [Return to contents](#table-of-contents)
 
@@ -101,6 +107,8 @@ SysLib currently consists of five main components:
 - `Command`: Command Executor 
 - `Storage`: Loads data from file in hard disk, and saves data to hard disk on program exit
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The following diagram shows an overview of how components in Syslib work and interact with each other. 
@@ -116,7 +124,9 @@ The following diagram shows an overview of how components in Syslib work and int
 7. `Command` carries out necessary actions and returns a `CommandResult` object which holds the message to be displayed to user. `Parser` prints the feedback to user.
 8. Once the user input has been processed and executed, Syslib calls `Storage` to save the current state of the lists to `storage.txt`.
 9. `Storage` retrieves the lists in `Parser` and writes to `storage.txt`.
-   
+
+<div style="page-break-after: always;"></div>
+
 ## Component Overview | [Return to contents](#table-of-contents)
 
 ### UI Component
@@ -134,12 +144,13 @@ How the UI class works:
     * However, if `storage.txt` already exists, `showFileFoundMessage()` will be called instead.
 * `UI` class is also responsible for getting the user input by calling the `readCommand()`
   method, which will then parse the input by sending it to the `Parser` class. The `Parser` class will process 
-the input and make use of the `Command` class to execute the command.
+  the input and make use of the `Command` class to execute the command.
 * UI also prints Resource details in a formatted table using the `showResourcesDetails` method.
 * Help messages are also printed in the `UI` class by calling `showHelpMessage()` method.
 * Lastly, when the user exits the program, the `showExitMessage()` method will be called to indicate that the
   user has successfully exited the program.
 
+<div style="page-break-after: always;"></div>
 
 ### Parser Component
 
@@ -154,6 +165,9 @@ If an invalid command is given, the nearest command will be searched for via the
 If the nearest command is similar to what the user typed, it will be suggested
 
 For more details on each Command, check them out [below](#implementation--return-to-contents)
+
+<div style="page-break-after: always;"></div>
+
 ### Command Component
 The `Command` component is linked to the `Parser` component. 
 After the `Parser` filters out the correct command, that particular command will be executed.
@@ -163,13 +177,15 @@ Then the commands will generate a `CommandResult` to give informative feedback t
 
 <img src="images/CommandClassDiagram.png" />
 
+<div style="page-break-after: always;"></div>
+
 ### Storage Component
 
 This component of Syslib is mainly responsible for reading and writing application data from and to files stored on the user’s filesystem. This is to allow the user to retain the data he/she has entered into Syslib and be able to continue using the data when he/she starts Syslib the next time.
 
 The following class diagram shows how the storage component’s classes and how it interacts with some other components and classes in Syslib:
 
-<img src="images/StorageDiagram.png" />
+<img src="images/StorageDiagram.png" height="350"/>
 
 On the user’s local filesystem, the organisation of the application files are as follows:
 
@@ -185,6 +201,8 @@ On the user’s local filesystem, the organisation of the application files are 
  ├── Storage.log                    // Log file containing logs created by the Storage uses
  └── summaryCommandLogs.log         // Log file containing logs created by the Summary Command
 ```
+
+<div style="page-break-after: always;"></div>
 
 ## Implementation | [Return to contents](#table-of-contents)
 This section provides details on how certain features are implemented.
@@ -339,6 +357,8 @@ Step 10. Lastly, an information is added to the log to record the resource that 
 - The word "Attribute*" can be replaced by any of the attributes
   - For example, parseAttribute* can be interpreted as parseTag or parseIsbn or parseTitle, etc
 
+<div style="page-break-after: always;"></div>
+
 ### Show Resources Feature | [Return to contents](#table-of-contents)
 
 Show resources feature is facilitated by the `UI`  component. It makes use of a class `ResourceDisplayFormatter` in `UI` to show the details of all resources stored in `ResourcesList` of the `Parser` component, sorted by resource type. 
@@ -354,7 +374,9 @@ Show Resources feature can be used when the user wants a list of resources and t
 
 The following sequence diagram shows how the show resources feature works in a scenario where the ListCommand calls showResourcesDetails() method.
 
-<img src="images/ShowResourcesSequenceDiagram.png" />
+<img src="images/ShowResourcesSequenceDiagram.png" height="450"/>
+
+<div style="page-break-after: always;"></div>
 
 **ResourceDisplayFormatter class:** 
 
@@ -369,6 +391,8 @@ The following sequence diagram shows how the show resources feature works in a s
 7. Now the UI loops through the resourcesList and calls `setDisplayFormatter(Resource)` to add the formatted string to its respective display formatter. 
 8. A final call to `getFinalDisplayFormat()` returns the final formatted message of the table and all the resource details as `messageToDisplay`
 9. `messageToDisplay` is returned to the calling function to be printed to user or for testing. 
+
+<div style="page-break-after: always;"></div>
 
 ### Find Resource Feature | [Return to contents](#table-of-contents)
 
@@ -405,9 +429,13 @@ Upon receiving the `find` command, the system will:
 
 **Step 4.** The matching resources are displayed to the user.
 
+<div style="page-break-after: always;"></div>
+
 #### Sequence Diagram
 
-<img src="images/FindSequenceDiagram.png" />
+<img src="images/FindSequenceDiagram.png"/>
+
+<div style="page-break-after: always;"></div>
 
 ### Examples for Testing
 
@@ -435,6 +463,8 @@ Upon receiving the `find` command, the system will:
     - Test case: `find /a "F. Scott Fitzgerald" /t "The Great Gatsby"`
 
       Expected: Resources that match both the title "The Great Gatsby" and the author "F. Scott Fitzgerald" are displayed.
+
+<div style="page-break-after: always;"></div>
 
 ### Listing Resources Feature | [Return to contents](#table-of-contents)
 
@@ -476,6 +506,8 @@ If hasFilters returns `false`, it skips the filtering process and displays the d
 
 Finally, `ListCommand` instantiates the `CommandResult` class with a string `feedbackToUser`, which is returned to the `Parser` which will `print(commandResult.feedbackToUser)` to show the resource details.
 
+<div style="page-break-after: always;"></div>
+
 ### Edit Command Feature | [Return to contents](#table-of-contents)
 
 The `edit` command is facilitated by `Parser` component to update the attributes of any resource type. Users can edit all attributes except ID, Tag, and Received Date, and must provide at least one argument to edit when calling the `edit` command. 
@@ -501,7 +533,7 @@ The edit methods updates the resource with all the details the user has provided
 
 Finally, the resource list currently in memory is updated with the new resource details by calling `resourcesList.set(resourceIndex, updatedResource)`.
 
-
+<div style="page-break-after: always;"></div>
 
 ### Event Add Feature | [Return to contents](#table-of-contents)
 
@@ -545,6 +577,9 @@ Step 7. The newly created event is forwarded to the `PARSER` to be added to the 
 
 Sequence Diagram:
 <img src="images/EventAdd.png"/>
+
+<div style="page-break-after: always;"></div>
+
 ### Event List Feature | [Return to contents](#table-of-contents)
 
 The `eventlist` command works with the `Parser` and `Command` component to execute the correct action. 
@@ -572,6 +607,10 @@ Step 4. The `EVENTLISTCOMMMAND` component receives the command and performs the 
 - Calls `EVENTLISTCOMMAND#isEmpty()` to check if the user input any additional redundant arguments.
 
 Step 5. The `EVENTLISTCOMMAND` then outputs the events in the eventList.
+
+<div style="page-break-after: always;"></div>
+
+<div style="page-break-after: always;"></div>
 
 ### Event Delete Feature | [Return to contents](#table-of-contents)
 
@@ -612,6 +651,10 @@ Step 6. The `EVENTDELETECOMMAND` also calls the component:
 it is within range of eventsList
 
 Step 7. The selected event at the index is then deleted from the eventsList.
+
+<div style="page-break-after: always;"></div>
+
+<div style="page-break-after: always;"></div>
 
 ### Event Edit Feature
 The `eventedit` command with the `Parser` and `Command` component to execute the correct action.
@@ -657,6 +700,8 @@ Step 8. The edited event is forwarded to the `PARSER` to be inserted to the `eve
 
 Sequence Diagram:
 <img src="images/EventEditDiagram.png"/>
+
+<div style="page-break-after: always;"></div>
 
 ### Summary Feature
 The `summary` command with the `Parser` and `UI` component to execute the correct action.
@@ -707,6 +752,8 @@ Step 8. The SUMMARYCOMMAND then outputs the Resource with a bar to indicate coun
 Sequence Diagram:
 <img src="images/SummaryDiagram.png"/>
 
+<div style="page-break-after: always;"></div>
+
 ## Product scope | [Return to contents](#table-of-contents)
 
 ### Target user profile
@@ -724,6 +771,7 @@ SysLib CLI is a robust command-line tool designed for fast typists librarians to
 
 With quick command-based actions, they can manage library's resources and events seamlessly. Administrative tasks are simplified, so they can focus on serving patrons better.
 
+<div style="page-break-after: always;"></div>
 
 ## User Stories | [Return to contents](#table-of-contents)
 
@@ -741,6 +789,7 @@ With quick command-based actions, they can manage library's resources and events
 | v2.0    | librarian | update the details of a resource                                                           | fix any mistakes and maintain consistency                                                          |
 | v2.1    | librarian | add in different types of resources                                                        | differentiate between resources such as books, cds, magazines, newspapers, and electronic versions |
 
+<div style="page-break-after: always;"></div>
 
 ## Use Cases | [Return to contents](#table-of-contents)
 
@@ -764,6 +813,8 @@ With quick command-based actions, they can manage library's resources and events
   - 1bi. SysLib displays an error message.
 
     Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 ### Use case: Edit a resource
 
@@ -794,6 +845,7 @@ With quick command-based actions, they can manage library's resources and events
   - SysLib shows an invalid argument message and displays the right arguments for the resource type
   - Use case ends.
 
+<div style="page-break-after: always;"></div>
 
 ## Non-Functional Requirements | [Return to contents](#table-of-contents)
 
@@ -808,6 +860,8 @@ should be able to accomplish most of the tasks faster using commands than using 
 
 * *Resource* - A generic term for items in library inventory.
   * Further divided into: Book, EBook, Magazines, EMagazines, Newspapers, ENewspapers, and CDs. 
+  * 
+<div style="page-break-after: always;"></div>
 
 ## Instructions for Manual Testing | [Return to contents](#table-of-contents)
 
@@ -857,8 +911,9 @@ ____________________________________________________________
    1. Enter the command `exit` into the program.
    2. Close the command prompt / terminal.
    
+
 Example response:
-   
+
 ```
 Thanks for using SysLib! We have saved the current resources and events.
 See you next time!
@@ -894,9 +949,9 @@ ____________________________________________________________
     ```
    
    3. Test case: `add /i CAP123 /t Crime and Punishment /a Dostoevsky /tag B`
-        
+      
        Expected: No book is added. An error message is displayed to indicate that the ISBN is invalid.
-    
+   
     ```
     Please enter a valid ISBN with 13 digits.
     ____________________________________________________________
@@ -904,7 +959,7 @@ ____________________________________________________________
    4. Test case: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag A`
 
       Expected: No book is added. An error message is displayed to indicate that the tag is invalid.
-    
+   
     ```
     Please enter a valid tag.
     ____________________________________________________________
@@ -912,7 +967,7 @@ ____________________________________________________________
    5. Test case: `add /tag B`
    
       Expected: No book is added. An error message displayed to indicate that the input is incomplete.
-    
+   
     ```
     Please enter a valid ISBN with 13 digits.
     ____________________________________________________________
@@ -930,12 +985,12 @@ ____________________________________________________________
 
 1. List all resources
     1. Prerequisites: At least one resource present in list   
-   
+      
     2. Test case: `list`
 
     Expected: A table showing details of current resources, in order of BOOKS, MAGAZINE, CDs, and NEWSPAPERS.
 
-   
+
 2. List when no resources are in list
     1. Prerequisites: No resources currently in SysLib
 
@@ -976,13 +1031,13 @@ ____________________________________________________________
    2. Test case: `edit /id 1 /t NEWTILE /a AUTHOR`
 
       Expected: An edit success message displaying the new details of the edited resource, IF resource with `id 1` is a Book (Author is a Book argument). Else, error message saying wrong arguments and showing the right arguments.
-        
+      
         ```
         Successfully updated! Your updated resource:
-
+      
         [B]  ID: 1 Title: NEWTILE ISBN: 9783161484100 Author: AUTHOR Genre: - Status: AVAILABLE Received Date: 13 Nov 2023
         ____________________________________________________________
-
+      
         ```
       
    3. Test case: `edit /id 1 /c NEWCREATOR`
@@ -1014,7 +1069,7 @@ ____________________________________________________________
     2. Test case: `delete /id 1`
 
    Expected: Resource with ID 1 is removed
-    
+   
     ```
     Looking for ID: 1...
     This resource is removed:
@@ -1053,7 +1108,7 @@ ____________________________________________________________
        Expected: An Event with Title: Meeting, Date: 23 Dec 2023, Description: Board Meeting is
        created and added into the list. A message with details of the added event is displayed to acknowledge that the
        event has been added successfully.
-   
+    
     ```
     Event inserted at: 0
     0: Meeting | 23 Dec 2023 | Board Meeting
@@ -1063,7 +1118,7 @@ ____________________________________________________________
     3. Test case: `eventadd /date 23 Dec 2023`
 
        Expected: No event is added. An error message is displayed to indicate that the Title is missing.
-   
+    
     ```
     t is missing in the argument!
     ____________________________________________________________
@@ -1071,7 +1126,7 @@ ____________________________________________________________
     4. Test case: `eventadd /t Meeting`
 
        Expected: No event is added. An error message is displayed to indicate that the date is missing.
-   
+    
     ```
     date is missing in the argument!
     ____________________________________________________________
@@ -1122,7 +1177,7 @@ ____________________________________________________________
     2. Test case: `eventedit /id 0 /t Board Meeting`
 
        Expected: An edit success message displaying the new details of the edited event.
-   
+    
     ```
     Event edited successfully. New event details:
     0: Board Meeting | 23 Dec 2023 | Board Meeting
@@ -1153,7 +1208,7 @@ ____________________________________________________________
     1. Test case: `eventedit /id 0`
 
        Expected: An error message saying "Event was not edited as nothing was changed."
-   
+    
     ```
     Invalid event index
     ____________________________________________________________
