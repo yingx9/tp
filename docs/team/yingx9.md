@@ -2,7 +2,7 @@
 
 ## Overview
 
-SysLib is a CLI Library Management software for librarians especially those who are fast typists. 
+SysLib is a CLI Library Management software for system librarians especially those who are fast typists. 
 
 From viewing, adding, searching, editing, deleting and saving, SysLib provides all the features needed to manage library resources and events.
 ### Summary of Contributions
@@ -11,7 +11,6 @@ From viewing, adding, searching, editing, deleting and saving, SysLib provides a
 
 View the code I contributed via the tp Code Dashboard link [here](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=yingx9&breakdown=true).
 
-
 #### Enhancements implemented 
 
 **Enhancements**: 
@@ -19,7 +18,6 @@ View the code I contributed via the tp Code Dashboard link [here](https://nus-cs
 2. List feature for resources
 3. Edit feature for resources
 4. Received Date attribute for resources
-
 
 **Details:** 
 
@@ -32,26 +30,12 @@ Main classes and methods implemented:
 
 **2. List feature for resources**
 
-Main implementation: `ListCommand` class
-
-Implemented the **list** feature to show a list of all the resources in the library.
-Further enhanced by implementing `filter` options to filter by `tag`, `genre`, and `status`, which shows resources that fit all given filters, to help librarians get a specific overview of resources in the library. 
-
+Main implementation: `ListCommand` class. Implemented the **list** feature to show a list of all the resources in the library.
+Further enhanced by implementing `filter` options to filter by `tag`, `genre`, and `status`, which shows resources that fit all given filters, to help librarians get a specific overview of resources in the library.
 
 **3. Edit feature for resources**
 
-Main implementation: `EditCommand` class
-
-Implemented the **edit** feature for all resource type: Book, Magazine, Newspaper, CD, and their electronic versions.
-
-Edit feature supports editing:
-- **For all resources:** Title, ISBN, Status 
-- In addition, Specific Attributes for: 
-  - **Books/EBooks:** Author, Genres, Link
-  - **Magazines/EMagazines:** Brand, Issue, Link
-  - **Newspaper/ENewspaper:** Publisher, Edition, Link 
-  - **CD:** Creator, Type
-
+Main implementation: `EditCommand` class. Implemented the **edit** feature for all resource type: Book, Magazine, Newspaper, CD, and their electronic versions.
 
 **4. Received Date attribute for resources**
 
@@ -76,11 +60,9 @@ Sections contributed:
 - List Command section and ListCommand sequence diagram
 - Edit Command section and Edit activity diagram
 - Show Resources feature section and Show Resources sequence diagram
-- Instructions for manual testing: 
-  - List and Edit resource sections
+- Instructions for manual testing: List and Edit resource sections
 - Glossary: Resource definition
 - Use Case: Edit a resource
-
 
 #### Contributions to team-based tasks
 

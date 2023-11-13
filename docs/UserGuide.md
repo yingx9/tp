@@ -54,7 +54,7 @@ icons and formatting used)
 1. Make sure that you have Java 11 or above installed on your computer.
     - Open terminal and type `java --version`
     - [How do I check the version of my Java](https://www.java.com/en/download/help/version_manual.html)
-2. [Download the latest release](https://github.com/AY2324S1-CS2113T-W11-1/tp/releases/tag/v1.0) of `Syslib.jar`
+2. [Download the latest release](https://github.com/AY2324S1-CS2113T-W11-1/tp/releases/tag/v2.1) of `Syslib.jar`
 3. Copy the `Syslib.jar` file into a folder on its own.
 4. Open a command terminal, type `cd <FILE_DIRECTORY>`, where <FILE_DIRECTORY> refers to the directory to the `Syslib.jar` file.
 5. Run the following command: `java -jar Syslib.jar`. You should see the following welcome screen.
