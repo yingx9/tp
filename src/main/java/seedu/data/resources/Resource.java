@@ -111,18 +111,23 @@ public class Resource {
                 getDateReceived());
         return tableFormatter;
     }
-    public static boolean hasGenre(Resource resource, String genre) {
+    public static boolean hasGenre(Resource resource, String genreKeyword) {
         Book bookResource;
+        genreKeyword = genreKeyword.toLowerCase();
 
         if (resource instanceof Book) {
             bookResource = (Book) resource;
             String[] genres = bookResource.getGenre();
-            if (genres[0] == null ) {
+
+            if (genres[0] == null && genreKeyword == "null") {
+                return true;
+            } else if (genres[0] == null){
                 return false;
             }
 
-            for (String s : genres) {
-                if (s.equals(genre)) {
+            for (int i =0;i< genres.length;i++) {
+                String genreName = genres[i].toLowerCase();
+                if (genreName.equals(genreKeyword)) {
                     return true;
                 }
             }
