@@ -6,6 +6,7 @@ box Parser
 participant ":Parser" as PARSER PARSER_COLOR
 participant ":ParseResource*" as PARSERESOURCE PARSER_COLOR
 participant ":ParseResource" as PARSE PARSER_COLOR
+participant ":ParseAttribute" as PARSEATTRIBUTE PARSER_COLOR
 end box
 
 box Command
@@ -16,47 +17,60 @@ end box
 participant ":CreateResource*" as CREATE CREATE_COLOR
 
 activate PARSER PARSER_COLOR
-PARSER -[PARSER_COLOR]> ADDCOMMAND : execute(UserInput)
+PARSER -[PARSER_COLOR]> ADDCOMMAND : execute(input, container)
 activate ADDCOMMAND COMMAND_COLOR
 
-ADDCOMMAND -[COMMAND_COLOR]> PARSER : parseAddCommand(UserInput)
+ADDCOMMAND -[COMMAND_COLOR]> PARSER : parseAddCommand(input)
+
+PARSER -[PARSER_COLOR]> PARSER : checkFirstItem(input)
+activate PARSER PARSER_COLOR
+PARSER --[PARSER_COLOR]> PARSER : tag: String
+deactivate PARSER
+
 PARSER --[PARSER_COLOR]> ADDCOMMAND : tag: String
 
 alt resource*
-    ADDCOMMAND -[COMMAND_COLOR]> ADDCOMMAND : addResource*(UserInput, container)
+    ADDCOMMAND -[COMMAND_COLOR]> ADDCOMMAND : addResource*(input, container)
     activate ADDCOMMAND COMMAND_COLOR
 
-    ADDCOMMAND -[COMMAND_COLOR]> PARSERESOURCE : parseAddResource*(UserInput)
+    ADDCOMMAND -[COMMAND_COLOR]> PARSERESOURCE : parseAddResource*(input)
     activate PARSERESOURCE PARSER_COLOR
 
-    PARSERESOURCE -[PARSER_COLOR]> PARSERESOURCE : parseResource*Args(UserInput)
+    PARSERESOURCE -[PARSER_COLOR]> PARSERESOURCE : parseResource*Args(input)
     activate PARSERESOURCE PARSER_COLOR
 
-    PARSERESOURCE -[PARSER_COLOR]> PARSE : parseIsbn(UserInput)
+    PARSERESOURCE -[PARSER_COLOR]> PARSE : hasUnusedSlash(input)
     activate PARSE PARSER_COLOR
-    PARSE --[PARSER_COLOR]> PARSERESOURCE
+    PARSE --[PARSER_COLOR]> PARSERESOURCE : hasUnusedSlash: boolean
     deactivate PARSE
 
-    PARSERESOURCE -[PARSER_COLOR]> PARSE : parseTitle(UserInput)
-    activate PARSE PARSER_COLOR
-    PARSE --[PARSER_COLOR]> PARSERESOURCE
-    deactivate PARSE
+    PARSERESOURCE -[PARSER_COLOR]> PARSERESOURCE : hasInvalidArgurment(input)
+    activate PARSERESOURCE PARSER_COLOR
+    PARSERESOURCE --[PARSER_COLOR]> PARSERESOURCE : hasInvalidArgurment: boolean
+    deactivate PARSERESOURCE
 
-    PARSERESOURCE -[PARSER_COLOR]> PARSE : parseTag(UserInput)
-    activate PARSE PARSER_COLOR
-    PARSE --[PARSER_COLOR]> PARSERESOURCE
-    deactivate PARSE
+    PARSERESOURCE -[PARSER_COLOR]> PARSEATTRIBUTE : parseAttribute*(input)
+    activate PARSEATTRIBUTE PARSER_COLOR
 
-    PARSERESOURCE -[PARSER_COLOR]> PARSE : parseStatus(UserInput)
-    activate PARSE PARSER_COLOR
-    PARSE --[PARSER_COLOR]> PARSERESOURCE : isStatusPresent: Boolean
-    deactivate PARSE
+    PARSEATTRIBUTE -[PARSER_COLOR]> PARSERESOURCE : countDuplicate(input, pattern)
+    activate PARSEATTRIBUTE PARSER_COLOR
+    PARSERESOURCE --[PARSER_COLOR]> PARSEATTRIBUTE : hasDuplicate: int
+    deactivate PARSEATTRIBUTE
+
+    PARSEATTRIBUTE --[PARSER_COLOR]> PARSERESOURCE
+    deactivate PARSEATTRIBUTE
 
     PARSERESOURCE --[PARSER_COLOR]> PARSERESOURCE : isOptionalMatching: Boolean[]
     deactivate PARSERESOURCE
 
-    PARSERESOURCE -[PARSER_COLOR]> PARSERESOURCE : checkEmptyResource*Args(UserInput)
+    PARSERESOURCE -[PARSER_COLOR]> PARSERESOURCE : checkEmptyResource*Args(args)
     activate PARSERESOURCE PARSER_COLOR
+
+    PARSERESOURCE -[PARSER_COLOR]> PARSERESOURCE : checkEmptyArg(args)
+    activate PARSERESOURCE PARSER_COLOR
+    PARSERESOURCE --[PARSER_COLOR]> PARSERESOURCE
+    deactivate PARSERESOURCE
+
     PARSERESOURCE --[PARSER_COLOR]> PARSERESOURCE
     deactivate PARSERESOURCE
 
