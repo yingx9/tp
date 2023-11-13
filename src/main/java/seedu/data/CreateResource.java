@@ -18,7 +18,8 @@ import static seedu.ui.Messages.ATTENTION_GENRE;
 import static seedu.ui.Messages.ERROR_INVALID_GENRE_CHARACTER;
 
 public class CreateResource {
-    public static Book createBook(String[] args, int id) throws IllegalStateException, NumberFormatException, SysLibException {
+    public static Book createBook(String[] args, int id) throws IllegalStateException, NumberFormatException,
+            SysLibException {
         assert args != null : ASSERT_ARGUMENTS;
         assert id > 0 : ASSERT_ID;
 
@@ -27,22 +28,22 @@ public class CreateResource {
         String author = args[2];
         Status status = getStatusFromString(args[4]);
 
-        String genre;
+        String genreString;
         String[] genres = new String[1];
         ArrayList<String> parsedGenresList = new ArrayList<String>();
         String[] parsedGenres = new String[1];
 
         if (args[3] != null) {
-            genre = args[3];
-            genres = genre.split(",\\s*");
+            genreString = args[3];
+            genres = genreString.split(",\\s*");
 
-            for (String g : genres) {
-                if (g.contains("[") | g.contains("]")) {
+            for (String genre : genres) {
+                if (genre.contains("[") | genre.contains("]")) {
                     throw new SysLibException(ERROR_INVALID_GENRE_CHARACTER);
                 }
 
-                if (!g.isEmpty()) {
-                    parsedGenresList.add(g);
+                if (!genre.isEmpty()) {
+                    parsedGenresList.add(genre);
                 }
             }
 
