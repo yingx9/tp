@@ -303,13 +303,34 @@ It implements the following operations:
 
 - `AddCommand#execute(statement: String, container: GenericList<Resource, Event>)` -- Validates and adds the new resource into the resource list.
 - `Parser#parseAddCommand(statement: String)` -- Parses the input command to extract the tag indicating the type of resource.
+- `Parser#checkFirstItem(statement: String)` -- Parses the input command to ensure that the first item in the input command is valid.
 - `AddCommand#addResource*(statement: String, container: GenericList<Resource, Event>)` -- Adds a new resource to the resource list after validation.
-- `ParserResource*#parseAddResource*(statement: String)` -- Parses the input command to ensure that it follows the right format for the particular resource.
+- `ParseResource*#parseAddResource*(statement: String)` -- Parses the input command to ensure that it follows the right format for the particular resource.
+- `ParseResource*#parseResource*Args(statement: String)` -- Parses the input command to ensure that all attributes required by the particular resource are parsed.
+- `ParseResource#hasUnusedSlash(statement: String)` -- Parses the input command to ensure that there are no extra slashes.
+- `ParseResource*#hasInvalidArgument(statement: String)` -- Parses the input command to ensure that there are no invalid arguments.
+- `ParseAttribute#parseAttribute*(statement: String)`-- Parses the input command to ensure that each attribute follows the right format.
+- `ParseResource#countDuplicate(statement: String, pattern: String)` -- Counts the number of matches found for the same argument. 
+- `ParseResource*#checkEmptyResource*Args(args: String[])` -- Parses the attribute to ensure that all attributes are not empty.
+- `ParseResource*#checkEmptyArg(args: String[])` -- Parses the arguments to ensure that every argument is valid.
 - `CreateResource#createResource*(values: String[], resourceID: int)` -- Creates a new resource with the given information.
-- `ParserResource*#parseResource*Args(statement: String)` -- Parses the input command to ensure that all attributes required by the particular resource are parsed.
-- `ParserResource#parseAttribute*(statement: String)`-- Parses the input command to ensure that each attribute follows the right format.
-- `ParserResource*#checkEmptyResource*Args(args: String[])` -- Parses the arguments to ensure that they are not empty.
-- `ParserResource*#resetResource*Args()` - Clears the previous arguments to receive new arguments for new resource.
+- `ParseResource*#resetResource*Args()` - Clears the previous attributes to receive new attributes for new resource.
+
+#### Sequence Diagram
+The following sequence diagram shows the interactions between objects for the add feature:
+
+<img src="images/AddSequenceDiagram.png"/>
+
+It shows the interaction between seven main classes
+- Parser
+  - Parser
+  - ParseResource* (ParseBook / ParseEBook / ParseCD / ParseMagazine / ParseEMagazine / ParseNewspaper / ParseENewspaper)
+  - ParseResource
+  - ParseAttribute
+- Command 
+  - CommandResult
+  - AddCommand
+- CreateResource
 
 #### Example Usage Scenario
 
@@ -320,46 +341,61 @@ with `/i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B /g Fiction /
 
 Step 3. `AddCommand` receives the command and calls `Parser#parseAddCommand(statement: String)` to extract the tag.
 
-Step 4. Since the `tag` argument in the input command indicates that it is a book, the `AddCommand` calls
+Step 4. The first thing `Parser` does is to call `Parser#checkFirstItem(statement: String)` to ensure that there are no 
+unaccepted components in the input.
+
+Step 5. Since the `tag` argument in the input command indicates that it is a book, the `AddCommand` calls
 `AddCommand#addBook(statement: String, container: GenericList<Resource, Event>)`.
 
-Step 5. Before adding the book, validation needs to be done so `ParseBook#parseAddBook(statement: String)` was called 
-to ensure that the overall input is in the correct format and the required arguments are provided.
+Step 6. Before adding the book, validation needs to be done so `ParseBook#parseAddBook(statement: String)` was called 
+to ensure that the overall input is in the correct format and the required data is provided.
 
-Step 6. After `ParseBook` receives the command, it calls `ParserBook#parseBookArgs(statement: String)` to start
+Step 7. After `ParseBook` receives the command, it calls `ParseBook#parseBookArgs(statement: String)` to start
 the process of parsing every attribute of the resource.
 
-Step 7. `ParseBook` performs the following operations:
-- Calls `ParserResource#parseIsbn(statement: String)` to validate and extract ISBN.
-- Calls `ParserResource#parseTitle(statement: String)` to validate and extract title.
-- Calls `ParserResource#parseAuthor(statement: String)` to validate and extract author.
-- Calls `ParserResource#parseTag(statement: String)` to validate and extract tag.
-- Calls `ParserResource#parseGenre(statement: String)` to validate and extract genres.
-- Calls `ParserResource#parseStatus(statement: String)` to validate and extract status.
+Step 8. `ParseBook` performs the following operations to validate the overall input:
+- Calls `ParseResource#hasUnusedSlash(statement: String)` to ensure that there are no slashes that should not appear.
+- Calls `ParseResource*#hasInvalidArgument(statement: String)` to ensure that all arguments given are valid.
 
-Step 8. `ParseBook` proceeds to check if optional arguments were provided by the user and whether there were empty arguments. 
-After that, all the arguments are forwarded to `AddCommand`.
+Step 9. `ParseBook` performs the following operations to validate each data in the input:
+- Calls `ParseAttribute#parseIsbn(statement: String)` to validate and extract ISBN.
+- Calls `ParseAttribute#parseTitle(statement: String)` to validate and extract title.
+- Calls `ParseAttribute#parseAuthor(statement: String)` to validate and extract author.
+- Calls `ParseAttribute#parseTag(statement: String)` to validate and extract tag.
+- Calls `ParseAttribute#parseGenre(statement: String)` to validate and extract genres.
+- Calls `ParseAttribute#parseStatus(statement: String)` to validate and extract status.
+The above calls will each call `ParseResource#countDuplicate(statement: String, pattern: String)` to ensure that the 
+same argument does not appear more than once. These extracted attributes form `args: String[]`.
 
-Step 9. `AddCommand` receives the arguments and calls `CreateResource#createBook(values: String[], resourceID: int` to 
-craft a new book with the validated arguments.
+Step 10. After `ParseBook` checked if optional attributes were provided by the user, it checks whether there were empty 
+attributes by calling `ParseResource*#checkEmptyResource*Args(args: String[])`. `ParseResource*#checkEmptyArg(args: String[])`
+will then be called to check if every argument is valid. After that, all the data are forwarded to `AddCommand`.
 
-Step 10. The newly created book is then added to the `resourcesList`.
+Step 11. `AddCommand` receives the arguments and calls `CreateResource#createBook(values: String[], resourceID: int` to 
+craft a new book with the validated data.
 
-Step 11. Calls to `ParserResource#resetBookArgs()` prepares the arguments list for new processes.
+Step 12. The newly created book is then added to the `resourcesList`.
 
-Step 12. Feedback to users are then sent to `CommandResult` to be displayed to the users.
+Step 13. Calls to `ParserResource#resetBookArgs()` prepares the arguments list for new processes.
 
+Step 14. Feedback to users are then sent to `CommandResult` to be displayed to the users.
 
-#### Sequence Diagram 
-The following sequence diagram shows how the add function works:
+#### Activity Diagram
+The following activity diagram shows an overview of how the activities flow when a user executes the add command:
 
-<img src="images/AddSequenceDiagram.png"/>
+<img src="images/AddActivityDiagram.png"/>
 
-Note: 
-- UserInput is a placeholder in the sequence diagram for the actual user input without the first word "add"
-  - An example UserInput could be: "/i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B /g Fiction /s lost"
-- parseIsbn(UserInput), parseTitle(UserInput), parseTag(UserInput), parseStatus(UserInput) are common methods called by all resources from ParseResource* to ParseResource.
-  Every resource will call more methods specific to the attributes of the resource.
+Step 1. First, it goes into `execute()` where all the functions for adding a resource occur.  
+Step 2. An information is added to the log to record the start of execution.  
+Step 3. Next, `parseAddCommand()` will identify the type of resource to add.
+Step 4. If it is a book, it will call `addBook()` where validation and addition of book occurs. 
+If it is none of the listed resources, the add function will stop.  
+Step 5. `parseAddBook()` and `parseBookArgs()` will validate every part of the input.  
+Step 6. If it manages to pass all the validation, it will proceed to the next step. Else, the add function will stop.
+Step 7. A resource is created by passing the parsed data to `createBook()`.
+Step 8. Finally, this newly created book will be added to the `resourceList`.
+Step 9. A message will be displayed to indicate the successful addition of resource.
+Step 10. Lastly, an information is added to the log to record the resource that has been added.
 
 #### Note
 - The word "Resource*" can be replaced by any of the resources 
