@@ -38,13 +38,13 @@ public class ENewspaper extends Newspaper{
         return tableFormatter;
     }
 
-    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth){
+    public List<Integer> checkColumnsWidths(List<Integer> columnsWidth) {
 
         int linkLength = getLink().length();
 
         columnsWidth = super.checkColumnsWidths(columnsWidth);
 
-        if(linkLength > columnsWidth.get(6)){
+        if (linkLength > columnsWidth.get(6)) {
             columnsWidth.set(6,linkLength+1);
 
         }

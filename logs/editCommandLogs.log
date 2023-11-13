@@ -813,3 +813,157 @@ Nov 09, 2023 9:57:08 PM seedu.commands.EditCommand execute
 INFO: Edit Command execute with /id 1 /a Thomas
 Nov 09, 2023 9:57:08 PM seedu.commands.EditCommand execute
 INFO: Edit Command execute with /id 1 /s lost
+Nov 13, 2023 4:24:15 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 1 /a Thomas
+Nov 13, 2023 4:24:15 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 1 /s lost
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 9 /ed NEW EDITION
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /i 1234567891234
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 7 /l NEW LINK
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 6 /l dummyLink
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 123
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand countGivenArgs
+WARNING: Please provide at least one detail to edit!
+For Books: /t TITLE /a AUTHOR /g GENRES /s STATUS /i ISBN
+For EBooks: /t TITLE /a AUTHOR /g GENRES /s STATUS /l LINK /i ISBN
+____________________________________________________________
+For Magazines: /t TITLE /b BRAND /is ISSUE /s STATUS /i ISBN
+For EMagazines: /t TITLE /b BRAND /is ISSUE /s STATUS /l LINK /i ISBN
+____________________________________________________________
+
+For CDs: /t TITLE /c CREATOR /ty TYPE /s STATUS /i ISBN
+____________________________________________________________
+For Newspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS /i ISBN
+For ENewspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS /l LINK /i ISBN
+____________________________________________________________
+
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /g Horror, Action, Fantasy
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 6 /b NEW BRAND
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 8 /c NEW CREATOR
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /a NEW AUTHOR
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 8 /ty NEW TYPE
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 5 /l NEW LINK
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 6 /is NEW ISSUE
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /s INVALIDSTATUS
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /l dummyLink
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /s LOST
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /s AVAILABLE
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /s BORROWED
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /t TITLE /s LOST /p PUBLISHER /g GENRES /ed EDITION /c CREATOR /ty TYPE /b BRAND /is ISSUE
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 123 /t NEWTITLE
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+WARNING: 
+No such resource with given ID
+____________________________________________________________
+
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 9 /l dummyLink
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 10 /l NEW LINK
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 1 /t dummyTitle
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /t NEW TITLE
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 9 /p NEW PUBLISHER
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /i invalid
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 1 /a Thomas
+Nov 13, 2023 4:25:37 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 1 /s lost
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 9 /ed NEW EDITION
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /i 1234567891234
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 7 /l NEW LINK
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 6 /l dummyLink
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 123
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand countGivenArgs
+WARNING: Please provide at least one detail to edit!
+For Books: /t TITLE /a AUTHOR /g GENRES /s STATUS /i ISBN
+For EBooks: /t TITLE /a AUTHOR /g GENRES /s STATUS /l LINK /i ISBN
+____________________________________________________________
+For Magazines: /t TITLE /b BRAND /is ISSUE /s STATUS /i ISBN
+For EMagazines: /t TITLE /b BRAND /is ISSUE /s STATUS /l LINK /i ISBN
+____________________________________________________________
+
+For CDs: /t TITLE /c CREATOR /ty TYPE /s STATUS /i ISBN
+____________________________________________________________
+For Newspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS /i ISBN
+For ENewspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS /l LINK /i ISBN
+____________________________________________________________
+
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /g Horror, Action, Fantasy
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 6 /b NEW BRAND
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 8 /c NEW CREATOR
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /a NEW AUTHOR
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 8 /ty NEW TYPE
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 5 /l NEW LINK
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id -1 /t hello
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 6 /is NEW ISSUE
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /s INVALIDSTATUS
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /l dummyLink
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /s LOST
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /s AVAILABLE
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /s BORROWED
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /t TITLE /s LOST /p PUBLISHER /g GENRES /ed EDITION /c CREATOR /ty TYPE /b BRAND /is ISSUE
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 123 /t NEWTITLE
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+WARNING: 
+No such resource with given ID
+____________________________________________________________
+
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 9 /l dummyLink
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 10 /l NEW LINK
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 1 /t dummyTitle
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /t NEW TITLE
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 9 /p NEW PUBLISHER
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 2 /i invalid
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 1 /a Thomas
+Nov 13, 2023 8:34:55 PM seedu.commands.EditCommand execute
+INFO: Edit Command execute with /id 1 /s lost

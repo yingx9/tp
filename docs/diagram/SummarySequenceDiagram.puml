@@ -1,0 +1,58 @@
+@startuml
+!include Style.puml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+participant ":UI" as UI UI_COLOR
+participant ":Parser" as PARSER PARSER_COLOR
+participant ":SummaryCommand" as SummaryCommand COMMAND_COLOR
+participant ":ResourceList" as Resource COMMAND_COLOR_T2
+participant ":EventList" as Event COMMAND_COLOR_T3
+
+user -[USER_COLOR]> UI : "summary"
+activate UI UI_COLOR
+UI -> PARSER : process("summary")
+deactivate
+destroy UI
+activate PARSER PARSER_COLOR
+PARSER -> SummaryCommand : execute(statement, container)
+activate SummaryCommand COMMAND_COLOR
+
+loop for each Resource in resourcesList
+    SummaryCommand -> Resource : getResourcesList()
+    activate Resource COMMAND_COLOR_T2
+    Resource -> Resource : isinstanceof
+    activate Resource COMMAND_COLOR_T2
+    Resource --> Resource
+    deactivate Resource
+    Resource --> SummaryCommand
+    deactivate Resource
+    destroy Resource
+end
+
+SummaryCommand -> Event : getEventsList()
+activate Event COMMAND_COLOR_T3
+Event --> SummaryCommand : events:List<Event>
+deactivate Event
+destroy Event
+
+SummaryCommand -> SummaryCommand : getUpcomingEvents(events, 3);
+activate SummaryCommand COMMAND_COLOR
+SummaryCommand --> SummaryCommand : UpcomingEvents:List<Event>
+deactivate SummaryCommand
+
+loop for each Resource type
+SummaryCommand -> SummaryCommand : generateBar(:int)
+activate SummaryCommand COMMAND_COLOR
+SummaryCommand --> SummaryCommand : :String
+deactivate SummaryCommand
+end
+SummaryCommand --> PARSER : :String
+deactivate SummaryCommand
+destroy SummaryCommand
+destroy PARSER
+@enduml

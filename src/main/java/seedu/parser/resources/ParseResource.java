@@ -1,180 +1,51 @@
 package seedu.parser.resources;
 
-import seedu.data.Status;
-import seedu.exception.SysLibException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
-
 public class ParseResource {
-    public static void parseIsbn(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
+    public static final String TITLE_ARG = "/t ";
+    public static final String AUTHOR_ARG = "/a ";
+    public static final String TAG_ARG = "/tag ";
+    public static final String ISBN_ARG = "/i ";
+    public static final String GENRE_ARG = "/g ";
+    public static final String STATUS_ARG = "/s ";
+    public static final String LINK_ARG = "/l ";
+    public static final String CREATOR_ARG = "/c ";
+    public static final String BRAND_ARG = "/b ";
+    public static final String PUBLISHER_ARG = "/p ";
+    public static final String TYPE_ARG = "/ty ";
+    public static final String ISSUE_ARG = "/is ";
+    public static final String EDITION_ARG = "/ed ";
 
-        String pattern = "(?=.*/i ([\\d]+))";
+    public static int countDuplicate(String statement, String pattern) {
         Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
 
-        if (!isMatching) {
-            throw new SysLibException("Please enter a valid ISBN." + SEPARATOR_LINEDIVIDER);
+        int count = 0;
+        while(matcher.find()) {
+            count++;
         }
 
-        if (matcher.group(1).trim().length() != 13) {
-            throw new SysLibException("Please enter a valid ISBN with 13 digits." + SEPARATOR_LINEDIVIDER);
-        }
+        return count;
     }
 
-    public static void parseTitle(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
+    public static boolean hasUnusedSlash(String statement) {
+        String begPattern = "^/\\s";
+        Matcher begMatcher = Pattern.compile(begPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
+        boolean hasBegSlash = begMatcher.find();
 
-        String pattern = "(?=.*/t ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
+        String midPattern = "\\s/\\s";
+        Matcher midMatcher = Pattern.compile(midPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
+        boolean hasMidSlash = midMatcher.find();
 
-        if (!isMatching) {
-            throw new SysLibException("Please enter a valid title." + SEPARATOR_LINEDIVIDER);
-        }
-    }
+        String etyPattern = "/\\s";
+        Matcher etyMatcher = Pattern.compile(etyPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
+        boolean hasEtySlash = etyMatcher.find();
 
-    public static void parseAuthor(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
+        String endPattern = "/$";
+        Matcher endMatcher = Pattern.compile(endPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
+        boolean hasEndSlash = endMatcher.find();
 
-        String pattern = "(?=.*/a ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException("Please enter a valid author." + SEPARATOR_LINEDIVIDER);
-        }
-    }
-
-    public static void parseTag(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-
-        String pattern = "(?=.*/tag ([\\s\\w]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException("Please enter a valid tag." + SEPARATOR_LINEDIVIDER);
-        }
-    }
-
-    public static boolean parseGenre(String statement) {
-        assert statement != null : "Statement should not be null";
-
-        String pattern = "(?=.*/g ([\\w-]+(,\\s[\\w-]+)*))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        return matcher.find();
-    }
-
-    public static void parseCreator(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-
-        String pattern = "(?=.*/c ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException("Please enter a valid creator." + SEPARATOR_LINEDIVIDER);
-        }
-    }
-
-    public static void parseType(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-
-        String pattern = "(?=.*/ty ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException("Please enter a valid type." + SEPARATOR_LINEDIVIDER);
-        }
-    }
-
-    public static void parseBrand(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-
-        String pattern = "(?=.*/b ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException("Please enter a valid brand." + SEPARATOR_LINEDIVIDER);
-        }
-    }
-
-    public static void parseIssue(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-
-        String pattern = "(?=.*/is ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException("Please enter a valid issue." + SEPARATOR_LINEDIVIDER);
-        }
-    }
-
-    public static void parsePublisher(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-
-        String pattern = "(?=.*/p ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException("Please enter a valid publisher." + SEPARATOR_LINEDIVIDER);
-        }
-    }
-
-    public static void parseEdition(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-
-        String pattern = "(?=.*/ed ([^/]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException("Please enter a valid edition." + SEPARATOR_LINEDIVIDER);
-        }
-    }
-
-    public static void parseLink(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-
-        String pattern = "(?=.*/l ([^\\s]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (!isMatching) {
-            throw new SysLibException("Please enter a valid link." + SEPARATOR_LINEDIVIDER);
-        }
-    }
-
-    public static boolean parseStatus(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
-
-        String pattern = "(?=.*/s ([\\w]+))";
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(statement);
-        boolean isMatching = matcher.find();
-
-        if (isMatching) {
-            boolean isValidAvailableStatus = matcher.group(1).trim().
-                    equalsIgnoreCase(String.valueOf(Status.AVAILABLE));
-            boolean isValidBorrowedStatus = matcher.group(1).trim().equalsIgnoreCase(String.valueOf(Status.BORROWED));
-            boolean isValidLostStatus = matcher.group(1).trim().equalsIgnoreCase(String.valueOf(Status.LOST));
-
-            if (isValidAvailableStatus || isValidBorrowedStatus || isValidLostStatus) {
-                return isMatching;
-            } else {
-                throw new SysLibException("Please enter a valid status." + SEPARATOR_LINEDIVIDER);
-            }
-        } else {
-            System.out.println("Attention: Status is not stated. Status set to default: AVAILABLE.");
-        }
-
-        return isMatching;
+        return hasBegSlash | hasMidSlash | hasEtySlash | hasEndSlash;
     }
 }

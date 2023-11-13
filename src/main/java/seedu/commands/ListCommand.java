@@ -1,14 +1,12 @@
 package seedu.commands;
 
-
 import seedu.data.GenericList;
 import seedu.data.Status;
 import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 
-
 import seedu.exception.SysLibException;
-
+import seedu.ui.ListCommandMessages;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,22 +17,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import static seedu.ui.MessageFormatter.formatLastLineDivider;
-import static seedu.ui.MessageFormatter.formatFirstLine;
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 import static seedu.ui.UI.showResourcesDetails;
-
 
 public class ListCommand extends Command {
 
-    public static final String FILTER_MESSAGE  = formatFirstLine("Listing resources matching given filters: ");
-    public static final String GENERIC_MESSAGE =  formatFirstLine("Listing all resources in the Library:");
-    public static final String ZERO_RESOURCES_MESSAGE =  formatLastLineDivider("There are currently 0 resources.");
-
-    public static final String STATUS_ERROR_MESSAGE =  formatLastLineDivider("Invalid Status! Status must be: " +
-            "AVAILABLE, BORROWED, OR LOST");
     public static List<Resource> matchedResources;
     private static final Logger LIST_LOGGER = Logger.getLogger(ListCommand.class.getName());
-
     private static String tagKeyword;
     private static String genreKeyword;
     private static String statusKeyword;
@@ -42,7 +31,7 @@ public class ListCommand extends Command {
 
     static {
 
-        FileHandler listFileHandler = null;
+        FileHandler listFileHandler;
         try {
             String loggingDirectoryPath = System.getProperty("user.dir") + "/logs";
             String logFilePath = loggingDirectoryPath + "/listCommandLogs.log";
@@ -60,11 +49,10 @@ public class ListCommand extends Command {
         LIST_LOGGER.addHandler(listFileHandler);
     }
 
-    public ListCommand(){
+    public ListCommand() {
         args = new String[]{"tag", "g", "s"};
         required = new boolean[]{false, false, false};
     }
-
 
     @Override
     public CommandResult execute(String statement, GenericList<Resource, Event> container)
@@ -72,33 +60,37 @@ public class ListCommand extends Command {
         feedbackToUser = "";
         LIST_LOGGER.info("List Command execute with " + statement);
 
-        String[] values = parseArgument(statement);
-        validateStatement(statement, values);
-        filterResources(values, container.getResourceList());
+        String[] givenParameters = parseArgument(statement);
+        validateStatement(statement, givenParameters);
+        if (container.getResourcesList().isEmpty()) {
+            LIST_LOGGER.warning("ResourcesList is empty");
+            throw new SysLibException("There are currently no Resources in Syslib!" + SEPARATOR_LINEDIVIDER);
+        }
+        filterResources(givenParameters, container.getResourcesList());
         LIST_LOGGER.info("List Command ends");
         return new CommandResult(feedbackToUser);
 
     }
 
+    private void filterResources(String[] givenParameters, List<Resource> resourcesList) throws SysLibException {
 
-    public void filterResources(String[] values, List<Resource> resourceList) throws SysLibException{
-
-        boolean hasFilters = hasFilters((values));
+        boolean hasFilters = hasFilters((givenParameters));
         boolean isTagEqualToKeyword = true;
         boolean isGenreEqualToKeyword = true;
         boolean isStatusEqualToKeyword = true;
 
         matchedResources = new ArrayList<>();
 
-        if(!hasFilters){
-            feedbackToUser += GENERIC_MESSAGE;
-            feedbackToUser += showResourcesDetails(resourceList);
-        } else{
+        if (!hasFilters) {
+            feedbackToUser += ListCommandMessages.GENERIC_MESSAGE;
+            feedbackToUser += showResourcesDetails(resourcesList);
+        } else {
 
-            for (Resource resource : resourceList) {
+            for (Resource resource : resourcesList) {
 
                 if (tagKeyword != null) {
                     String resourceTag = resource.getTag();
+                    resourceTag = resourceTag.toLowerCase();
                     isTagEqualToKeyword = resourceTag.equals(tagKeyword);
                 }
 
@@ -112,61 +104,36 @@ public class ListCommand extends Command {
 
                 }
 
-
                 if (isTagEqualToKeyword && isGenreEqualToKeyword && isStatusEqualToKeyword) {
                     matchedResources.add(resource);
                 }
-
             }
-            feedbackToUser += FILTER_MESSAGE;
+            feedbackToUser +=  ListCommandMessages.FILTER_MESSAGE;
             feedbackToUser += showResourcesDetails(matchedResources);
         }
 
-
     }
 
-
-    public static boolean hasFilters(String[] values) throws SysLibException {
+    private static boolean hasFilters(String[] givenParameters) throws SysLibException {
         tagKeyword = null;
         genreKeyword = null;
         statusKeyword = null;
 
         boolean hasFilters = true;
-        if (values[0] == null && values[1] == null && values[2] == null) {
-            return false;
+
+        if (givenParameters[0] != null) {
+            tagKeyword = givenParameters[0].toLowerCase();
         }
 
-        if (values[0] != null) {
-            tagKeyword = values[0];
+        if (givenParameters[1] != null) {
+            genreKeyword = givenParameters[1].toLowerCase();
         }
 
-        if (values[1] != null) {
-            genreKeyword = values[1];
-        }
-
-        if (values[2] != null){
-            statusKeyword = values[2].toUpperCase();
-            validateStatus();
+        if (givenParameters[2] != null) {
+            Status status = EditCommand.getStatusFromString(givenParameters[2]);
+            statusKeyword = status.name();
         }
         return hasFilters;
     }
-
-    public static void validateStatus() throws SysLibException {
-
-        switch(statusKeyword){
-        case "AVAILABLE":
-            //fallthrough
-        case "BORROWED":
-            //fallthrough
-        case "LOST":
-            break;
-        default:
-            throw new SysLibException(STATUS_ERROR_MESSAGE);
-
-        }
-    }
-
-
-
 
 }

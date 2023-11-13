@@ -59,24 +59,30 @@ public class EventAddCommand extends Command {
         validateStatement(statement, values);
         LocalDate currentDate = parseDate(values[1]);
         int index = binarySearch(container, currentDate);
-        container.getEventList().add(index, new Event(values[0], currentDate, values[2]));
+        container.getEventsList().add(index, new Event(values[0], currentDate, values[2]));
         System.out.println("Event inserted at: " + index);
+        System.out.println(index + ": " + container.getEventsList().get(index).toString());
         System.out.println(LINEDIVIDER);
         LOGGER.info("Successfully added an event");
 
         return new CommandResult(feedbackToUser);
     }
 
+    /**
+     * @param container Contains ResourceList and EventList.
+     * @param key date to search for.
+     * @return index to insert to.
+     */
     public static int binarySearch(GenericList<Resource, Event> container, LocalDate key) {
-        if(container.getEventList().isEmpty()){
+        if (container.getEventsList().isEmpty()) {
             return 0;
         }
         int low = 0;
-        int high = container.getEventList().size() - 1;
+        int high = container.getEventsList().size() - 1;
 
         while (low <= high) {
             int mid = (low + high)/2;
-            LocalDate midVal = container.getEventList().get(mid).getDate();
+            LocalDate midVal = container.getEventsList().get(mid).getDate();
             int cmp = midVal.compareTo(key);
             if (cmp < 0) {
                 low = mid + 1;
@@ -121,13 +127,13 @@ public class EventAddCommand extends Command {
      */
     public static String checkDate(String dateStr) throws IllegalArgumentException {
         String[] temp = dateStr.split(" ");
-        if(temp.length != 3){
+        if (temp.length != 3) {
             LOGGER.info("failed checkDate function");
             throw new IllegalArgumentException("Please enter a valid date in the format 'dd MMM yyyy'"
                     + SEPARATOR_LINEDIVIDER);
         }
         int first = parseInt(temp[0]);
-        if(first < 10){
+        if (first < 10) {
             return "0" + dateStr;
         }
         return dateStr;

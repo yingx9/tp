@@ -21,6 +21,9 @@ import seedu.commands.ExitCommand;
 import seedu.commands.EditCommand;
 import seedu.commands.SummaryCommand;
 
+import static seedu.ui.Messages.ASSERT_STATEMENT;
+import static seedu.ui.Messages.ERROR_TAG;
+import static seedu.ui.Messages.ERROR_INVALID_START;
 import static seedu.ui.UI.LINEDIVIDER;
 
 import java.util.ArrayList;
@@ -31,9 +34,9 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-    public List<Resource> resourceList = new ArrayList<>();
-    public List<Event> eventList = new ArrayList<>();
-    public GenericList<Resource, Event> container = new GenericList<>(resourceList, eventList);
+    public List<Resource> resourcesList = new ArrayList<>();
+    public List<Event> eventsList = new ArrayList<>();
+    public GenericList<Resource, Event> container = new GenericList<>(resourcesList, eventsList);
 
     // @@author DavinciDelta
     public HashMap<String, Command> commandProcessor = new HashMap<>() {
@@ -69,7 +72,7 @@ public class Parser {
         } else {
             String suggestion = SuggestParser.suggest(command, commands);
             System.out.println("no commands found. Enter \"help\" for a list of commands.");
-            if (suggestion != null){
+            if (suggestion != null) {
                 System.out.println("Did you mean: '" + suggestion + "'");
             }
             System.out.println(LINEDIVIDER);
@@ -88,9 +91,11 @@ public class Parser {
 
     // @@author JoanneJo
     public static String parseAddCommand(String statement) throws SysLibException {
-        assert statement != null : "Statement should not be null";
+        assert statement != null : ASSERT_STATEMENT;
 
-        String inputPattern = "/tag ([^/]+)";
+        checkFirstItem(statement);
+
+        String inputPattern = "/tag (.+?)(?=\\s/|$)";
 
         Pattern pattern = Pattern.compile(inputPattern);
         Matcher matcher = pattern.matcher(statement);
@@ -99,10 +104,20 @@ public class Parser {
         if (isMatching) {
             return matcher.group(1).trim();
         } else {
-            throw new SysLibException("Please enter a valid tag" + System.lineSeparator() + LINEDIVIDER);
+            throw new SysLibException(ERROR_TAG);
         }
     }
 
+    // @@author JoanneJo
+    public static void checkFirstItem(String statement) throws SysLibException {
+        String wordPattern = "\\s/(.+?)";
+        Matcher wordMatcher = Pattern.compile(wordPattern, Pattern.CASE_INSENSITIVE).matcher(statement);
+        boolean isWordMatching = wordMatcher.matches();
+
+        if (!isWordMatching) {
+            throw new SysLibException(ERROR_INVALID_START);
+        }
+    }
 
     // @@author bnjm2000
     /**
