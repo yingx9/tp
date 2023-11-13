@@ -812,9 +812,11 @@ ____________________________________________________________
 
        Expected: A book with ISBN: 9783161484100, Title: Crime and Punishment, Author: Dostoevsky, and Status: AVAILABLE 
        is created and added into the list. A message with details of the added book is displayed to acknowledge that the 
-       book has been added successfully.
+       book has been added successfully. A warning is given to tell the user that the Status and Genre was not given.
 
     ```
+    Attention: Status is not stated. Status set to default: AVAILABLE.
+    Attention: Genre is not stated. Genre not set.
     This book is added:
     [B]  ID: 1 Title: Crime and Punishment ISBN: 9783161484100 Author: Dostoevsky Genre: - Status: AVAILABLE Received Date: 12 Nov 2023
     ____________________________________________________________
@@ -862,15 +864,16 @@ ____________________________________________________________
 
     Expected: A table showing details of current resources, in order of BOOKS, MAGAZINE, CDs, and NEWSPAPERS.
     ```
-   Listing all resources in the Library:
+    Listing resources matching given filters: 
 
                                                                  [BOOKS]
     -----------------------------------------------------------------------------------------------------------------------------------
     ID     Tag  Title               ISBN          Author                   Genre               Link           Status    Received Date
     -----------------------------------------------------------------------------------------------------------------------------------
-    1      B    Crime and Punishment9783161484100 Dostoevsky               null                null           AVAILABLE 12 Nov 2023    
+    1      B    Crime and Punishment9783161484100 Dostoevsky               null                null           AVAILABLE 13 Nov 2023    
+    2      B    Crime and Punishment9783161484100 Dostoevsky               Fiction             null           LOST      13 Nov 2023
 
-   
+
     There are currently 2 resource(s).
     ____________________________________________________________
     ```
@@ -881,10 +884,7 @@ ____________________________________________________________
 
     Expected: An error message saying "There are currently 0 resources."
     ```
-    Listing all resources in the Library:
-
-
-    There are currently 0 resources.
+    There are currently no Resources in Syslib!
     ____________________________________________________________
     ```
 3. List resources with filter options
@@ -907,6 +907,13 @@ ____________________________________________________________
    2. Test case: `edit /id 1 /t NEWTILE /a AUTHOR`
 
       Expected: An edit success message displaying the new details of the edited resource, IF resource with `id 1` is a Book (Author is a Book argument). Else, error message saying wrong arguments and showing the right arguments.
+        ```
+        Successfully updated! Your updated resource:
+
+        [B]  ID: 1 Title: NEWTILE ISBN: 9783161484100 Author: AUTHOR Genre: - Status: AVAILABLE Received Date: 13 Nov 2023
+        ____________________________________________________________
+
+        ```
    3. Test case: `edit /id 1 /c NEWCREATOR`
 
       Expected: An edit success message displaying the new details of the edited resource, IF resource with `id 1` is a CD (Creator is a CD argument). Else, error message saying wrong arguments and showing the right arguments.
