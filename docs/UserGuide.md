@@ -108,6 +108,7 @@ Our intuitive system ensures that you never lose track of your valuable resource
 
 #### 📁 Automatic Saving on Exit
 - **Peace of Mind:** Every resource and event you add to the current list is automatically saved when you exit the program. Rest easy knowing your data is secure.
+
 ```
   > exit
   Thanks for using SysLib CLI! We have saved the current resources and events created.
@@ -116,6 +117,7 @@ Our intuitive system ensures that you never lose track of your valuable resource
 
 #### 🔄 Seamless Loading on Startup
 - **Instant Access:** Each time you start the program, we automatically load your resources and events from the last session. Your information is always at your fingertips.
+
 ```
 ____________________________________________________________
 Storage file found @ .\data\storage.txt
