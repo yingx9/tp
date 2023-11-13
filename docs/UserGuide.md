@@ -57,7 +57,9 @@ work.
 | Apple macOS       | macOS 10.15 Catalina and above | Terminal ([User Guide](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac)) |
 | Ubuntu Linux      | Ubuntu 20.04.3 (LTS) and above | Bash Terminal ([User Guide](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))          |
 
-> If your operating system is not listed in the table above, it means our application has not been tested on it, and we cannot guarantee that the application will work as intended. We highly encourage you to use one of the recommended operating systems listed in the table above. We apologise for any inconvenience caused.
+> **⚠️ IMPORTANT:**
+> 
+>If your operating system is not listed in the table above, it means our application has not been tested on it. We therefore cannot guarantee that the application will work as intended. We highly encourage you to use one of the recommended operating systems in the table above. We apologise for any inconvenience caused.
 
 ## Quick Start | [Return to Contents](#contents)
 1. Make sure that you have Java 11 or above installed on your computer.
@@ -65,7 +67,7 @@ work.
     - [How do I check the version of my Java](https://www.java.com/en/download/help/version_manual.html)
 2. [Download the latest release](https://github.com/AY2324S1-CS2113T-W11-1/tp/releases/tag/v2.1) of `Syslib.jar`
 3. Copy the `Syslib.jar` file into a folder on its own.
-4. Open a command terminal, type `cd <FILE_DIRECTORY>`, where <FILE_DIRECTORY> refers to the directory to the `Syslib.jar` file.
+4. Open a command terminal, type `cd <FILE_DIRECTORY>`, where `<FILE_DIRECTORY>` refers to the directory to the `Syslib.jar` file.
 5. Run the following command: `java -jar Syslib.jar`. You should see the following welcome screen.
 
 ```
@@ -104,7 +106,7 @@ ____________________________________________________________
 
 
 ## Features | [Return to Contents](#contents)
-> Syslib CLI allows System Librarians to create Resources (Books, Magazines, NewsPapers, CD's, eBooks, eMagazines, eNewspapers) as well as Events.
+> Syslib CLI allows System Librarians to create Resources (Books, Magazines, Newspapers, CDs, eBooks, eMagazines, eNewspapers) as well as Events.
 
 ### Managing Your Resources and Events with Ease
 
@@ -114,9 +116,10 @@ Our intuitive system ensures that you never lose track of your valuable resource
 - **Peace of Mind:** Every resource and event you add to the current list is automatically saved when you exit the program. Rest easy knowing your data is secure.
 
 ```
-  > exit
-  Thanks for using SysLib CLI! We have saved the current resources and events created.
-  Hope to see you again soon!
+> exit
+Thanks for using SysLib CLI! We have saved the current resources and events.
+See you next time!
+____________________________________________________________
 ```
 
 #### 🔄 Seamless Loading on Startup
@@ -124,7 +127,8 @@ Our intuitive system ensures that you never lose track of your valuable resource
 
 ```
 ____________________________________________________________
-Storage file found @ .\data\storage.txt
+Data directory exists.
+Storage file exists.
 Loaded 2 resources and 1 events!
 ____________________________________________________________
 ```
@@ -233,8 +237,9 @@ add /i 9780763630187 /t Harry Squatter /a J.K. /tag eb /l www.jk.com/harrysquatt
 ```
 **Example output:**
 ```
+Attention: Status is not stated. Status set to default: AVAILABLE.
 This e-book is added:
-[EB]  ID: 6 Title: Harry Squatter ISBN: 9780763630187 Author: J.K. Genre: History Link: www.jk.com/harrysquatter
+[EB]  ID: 2 Title: Frankenstein ISBN: 9780763630189 Author: Mary Shelley Genre: - Link: frankenstein.com
 ____________________________________________________________
 ```
 
@@ -332,13 +337,13 @@ Format: `delete /id ID`
 
 **Example input:**
 ```
-delete /id 1234567890123
+delete /id 1
 ```
 **Example input:**
 ```
-Looking for ID: 1234567890123...
+Looking for ID: 1...
 This resource is removed: 
-[B]  ID: 1234567890123 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: LOST
+[B]  ID: 1 Title: Moby Dick ISBN: 9780763630188 Author: Herman Melville Genre: Adventure, Fiction Status: LOST
 ____________________________________________________________
 ```
 
@@ -477,7 +482,7 @@ ____________________________________________________________
 ## Events
 >**📚 Note:**
 > - Events are stored separately from resources
-> - They are stored in chronological order(events that are happening sooner are closer to index 0)
+> - They are stored in chronological order (events that are happening sooner are closer to index 0)
 
 ### Event Adding: `eventadd` | [Return to Contents](#contents)
 >**📚 Note:**
@@ -490,13 +495,14 @@ Format: `eventadd /t TITLE /date DATE [/desc DESCRIPTION]`
 
 **Example input:**
 ```
-eventadd /t Fan meetup for xxx /date 11-11-2001
-eventadd /t Meet and Greet for xxx /date 10-11-2010 /desc buffet style
+eventadd /t Fan meetup for xxx /date 11 Jan 2010
+eventadd /t Meet and Greet for xxx /date 10 Jan 2010 /desc buffet style
 ```
 
 **Example output:**
 ```
 Event inserted at: 0
+0: Fan meetup for xxx | 11 Jan 2010 | null
 ____________________________________________________________
 ```
 
@@ -514,15 +520,15 @@ eventlist
 **Example output:**
 ```
 This is the current event list:
-0: Fan meetup for xxx | 11-11-2001 | null
-1: Meet and Greet for xxx | 10-11-2010 | buffet style
+0: Meet and Greet for xxx | 10 Jan 2010 | buffet style
+1: Fan meetup for xxx | 11 Jan 2010 | null
 ____________________________________________________________
 ```
 
 ### Event Delete: `eventdelete` | [Return to Contents](#contents)
 >**📚 Note:**
 > - INDEX starts from 0 and can be viewed by calling `eventlist`
-> - INDEX might change as those with earlier dates are sorted first
+> - INDEX might change as those with earlier dates are inserted first
 
 Deletes an event from the database based on the index provided.
 
@@ -536,7 +542,7 @@ eventdelete /id 0
 **Example output:**
 ```
 This event is removed:
-Fan meetup for xxx | 11-11-2001 | null
+Meet and Greet for xxx | 10 Jan 2010 | buffet style
 ____________________________________________________________
 ```
 
@@ -551,8 +557,8 @@ Format: `eventedit /id INDEX [/t TITLE /date DATE /desc DESCRIPTION]`
 
 **Example input:**
 ```
-eventedit /id 0 /t NEW TITLE
-eventedit /id 2 /t NEW TITLE /date 23 Jan 2024 /desc NEW DESCRIPTION
+eventedit /id 2 /t NEW TITLE
+eventedit /id 0 /t NEW TITLE /date 23 Jan 2024 /desc NEW DESCRIPTION
 ```
 
 **Example output:**
@@ -600,8 +606,9 @@ Format: `exit`
 Example:
 ```
 > exit
-Thanks for using SysLib CLI! We have saved the current resources and events created.
-Hope to see you again soon!
+Thanks for using SysLib CLI! We have saved the current resources and events.
+See you next time!
+____________________________________________________________
 ```
 
 ### Viewing Help : `help` | [Return to Contents](#contents)
@@ -612,7 +619,13 @@ Format: `help`
 Example:
 ```
 Commands available:
-[add] adds a new resource to the library inventory. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
+[add] (Book) Adds a new book. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
+[add] (eBook) Adds a new eBook. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag eb /l LINK [/g GENRE /s STATUS])
+[add] (CD) Adds a new CD. (e.g. add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag cd [/s STATUS])
+[add] (Magazine) Adds a new magazine. (e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag m [/s STATUS])
+[add] (eMagazine) Adds a new eMagazine. (e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag em /l LINK [/s STATUS])
+[add] (Newspaper) Adds a new newspaper. (e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag n [/s STATUS])
+[add] (eNewspaper) Adds a new eNewspaper. (e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag en /l LINK [/s STATUS])
 [delete] deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
 [list] lists all resources OR filter by certain tags, genre, or status. (e.g. list /tag B /g Fiction /s AVAILABLE)
 [find] finds a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188 /a AUTHOR)
@@ -635,8 +648,8 @@ Q: How do I download Java 11 on my computer?
 A: Follow the guide [here](https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk#:~:text=Head%20to%20Java%20SE%20Development,download%20the%20file%20jdk%2D11.0.)!
 
 Q: How do I open command terminal?  
-A: For **Windows** users, click **Start** and search for **Command Prompt**. For **Mac** users, click the **Launchpad** 
-icon in the **Dock**, type **Terminal** in the search field, then click **Terminal**.
+A: For **Windows** users, click **Start** and search for **Command Prompt**. For **Mac** users, press `Command ⌘` + `Space` 
+on your keyboard to open Spotlight and type **Terminal** in the search field, then click **Terminal**.
 
 ## Known Issues | [Return to Contents](#contents)
 
