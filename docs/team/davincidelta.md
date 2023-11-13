@@ -2,7 +2,7 @@
 
 ## Overview
 
-SysLib is a CLI Library Management software for librarians.
+SysLib is a CLI Library Management software for system librarians.
 
 From viewing, adding, searching, editing, deleting and saving, SysLib provides all the features needed to manage library resources and events.
 ### Summary of Contributions
@@ -86,7 +86,6 @@ This event is then stored at the index where it fits chronologically(earlier dat
 
 #### Contributions to the UG:
 
-
 - Delete Command
 - EventAdd Command
 - EventList Command
@@ -94,6 +93,7 @@ This event is then stored at the index where it fits chronologically(earlier dat
 
 #### Contributions to the DG:
 
+- Command components and diagram
 - Events, including EventAdd, EventList and EventDelete
 - Parsing and EventAdd sequence diagram
 

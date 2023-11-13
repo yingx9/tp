@@ -2,7 +2,7 @@
 
 ## Overview
 
-SysLib is a command-line (CLI) library management software tailored for librarians, especially those who are fast typists. 
+SysLib is a command-line (CLI) library management software tailored for system librarians, especially those who are fast typists. 
 It offers a wide range of features to manage library resources and events, from adding, editing, viewing, searching, deleting, to saving data file. 
 
 

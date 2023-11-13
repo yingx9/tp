@@ -30,13 +30,13 @@ public class FindCommandTest {
         findCommand = new FindCommand();
         parser = new Parser();
 
-        parser.container.getResourceList().add(new Book("Title1", "ISBN1", "Author1",
+        parser.container.getResourcesList().add(new Book("Title1", "ISBN1", "Author1",
                 new String[]{"horror"}, 1234, Status.AVAILABLE));
-        parser.container.getResourceList().add(new Magazine("Title2", "ISBN2", "VOGUE2",
+        parser.container.getResourcesList().add(new Magazine("Title2", "ISBN2", "VOGUE2",
                 "1234", 5678, Status.AVAILABLE));
-        parser.container.getResourceList().add(new Newspaper("Title3", "ISBN3", "Publisher3",
+        parser.container.getResourcesList().add(new Newspaper("Title3", "ISBN3", "Publisher3",
                 "1234", 9101, Status.AVAILABLE));
-        parser.container.getResourceList().add(new CD("Title4", "Creator4", "Creator4",
+        parser.container.getResourcesList().add(new CD("Title4", "Creator4", "Creator4",
                 "1234", 1121, Status.AVAILABLE));
 
         outContent.reset();

@@ -17,9 +17,8 @@ import seedu.ui.UI;
  * Command to print help message
  */
 public class HelpCommand extends Command {
-    private static final Logger logger = Logger.getLogger(HelpCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HelpCommand.class.getName());
 
-    private static final Logger LOGGER = Logger.getLogger(FindCommand.class.getName());
     private static String feedbackToUser;
 
     static {
@@ -56,7 +55,7 @@ public class HelpCommand extends Command {
         assert statement != null : "Statement to execute cannot be null";
         assert container != null : "Parser must not be null";
         UI ui = new UI();
-        logger.log(Level.INFO, "Executing HelpCommand");
+        LOGGER.log(Level.INFO, "Executing HelpCommand");
         ui.showHelpMessage();
 
         return new CommandResult(feedbackToUser);
