@@ -90,6 +90,7 @@ public class ListCommand extends Command {
 
                 if (tagKeyword != null) {
                     String resourceTag = resource.getTag();
+                    resourceTag = resourceTag.toLowerCase();
                     isTagEqualToKeyword = resourceTag.equals(tagKeyword);
                 }
 
@@ -119,16 +120,13 @@ public class ListCommand extends Command {
         statusKeyword = null;
 
         boolean hasFilters = true;
-        if (givenParameters[0] == null && givenParameters[1] == null && givenParameters[2] == null) {
-            return false;
-        }
 
         if (givenParameters[0] != null) {
-            tagKeyword = givenParameters[0];
+            tagKeyword = givenParameters[0].toLowerCase();
         }
 
         if (givenParameters[1] != null) {
-            genreKeyword = givenParameters[1];
+            genreKeyword = givenParameters[1].toLowerCase();
         }
 
         if (givenParameters[2] != null) {

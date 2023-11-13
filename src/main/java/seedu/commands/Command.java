@@ -4,7 +4,10 @@ import seedu.data.GenericList;
 import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
+import seedu.parser.SuggestParser;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,8 +34,8 @@ public abstract class Command {
             }
         }
         if (!statement.isBlank()) {
-            throw new IllegalArgumentException("Unknown variable/command: " + statement +
-                    ", avoid using '/' in names/variables" + SEPARATOR_LINEDIVIDER);
+            String message = getReason(statement);
+            throw new IllegalArgumentException(message + SEPARATOR_LINEDIVIDER);
         }
     }
 
@@ -103,15 +106,50 @@ public abstract class Command {
                     " may have been empty to give this error" + SEPARATOR_LINEDIVIDER);
         }
     }
+
+    public String getReason(String message) {
+        message = message.stripLeading();
+        if (!message.startsWith("/")){
+            return "Unknown variable/command:" + message;
+        } else {
+            message = message.substring(1);
+            List<String> variables = List.of(message.split("/"));
+            if (variables.size() > 1){
+                if(parseInt(variables.get(0)) != -1){
+                    return "Unknown variable: " + message +  ", avoid using '/' in arguments. " + "\n" +
+                            "Dates are in the format of DD MMM YYYY, e.g. 25 Dec 2023";
+                }
+                else{
+                    return "You need spacing in between arguments";
+                }
+            } else {
+                List<String> values = List.of(message.split(" "));
+                String output = "";
+                if (values.size() > 1){
+                    output += "Invalid command and argument: /" + message;
+                } else {
+                    output += "Invalid command: /" + message;
+                }
+                String probCommand = SuggestParser.suggest(values.get(0), Arrays.asList(args));
+                if (probCommand != null){
+                    return output + "\n" + "Did you mean: /" + probCommand + "?";
+                }
+                return output;
+            }
+        }
+
+    }
     public static int parseInt(String value) {
         try {
             int tempNum = Integer.parseInt(value);
             if (0 <= tempNum) {
                 return tempNum;
             }
-            throw new IllegalArgumentException ("The integer argument(s) given is not a valid number!");
+            throw new IllegalArgumentException ("The integer argument(s) given is not a valid number!"
+                    + SEPARATOR_LINEDIVIDER);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException ("The integer argument(s) given is not a number!");
+            throw new IllegalArgumentException ("The integer argument(s) given is not a number!"
+                    + SEPARATOR_LINEDIVIDER);
         }
     }
 }
