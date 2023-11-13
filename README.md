@@ -12,8 +12,8 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 
 ```
 ____________________________________________________________
-Storage file not found.
-Creating new data file @ .\data\storage.txt
+Data directory does not exist. Creating now...
+Storage file does not exist. Creating now...
 Loaded 0 resources and 0 events!
 ____________________________________________________________
              .....................                  
