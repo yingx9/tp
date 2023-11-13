@@ -1,6 +1,6 @@
 ____________________________________________________________
-Storage file not found.
-Creating new data file @ .\data\storage.txt
+Data directory does not exist. Creating now...
+Storage file does not exist. Creating now...
 Loaded 0 resources and 0 events!
 ____________________________________________________________
              .....................                  
@@ -31,14 +31,14 @@ Hello! What would you like to do?
 ____________________________________________________________
 > Attention: Status is not stated. Status set to default: AVAILABLE.
 This book is added:
-[B]  ID: 1 Title: Moby Dick ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 12 Nov 2023
+[B]  ID: 1 Title: Moby Dick ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 13 Nov 2023
 ____________________________________________________________
 > Attention: Status is not stated. Status set to default: AVAILABLE.
 This book is added:
-[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 12 Nov 2023
+[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 13 Nov 2023
 ____________________________________________________________
 > This book is added:
-[B]  ID: 3 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help Status: LOST Received Date: 12 Nov 2023
+[B]  ID: 3 Title: Surrounded by Idiots ISBN: 9781250255174 Author: Thomas Erikson Genre: Self-help Status: LOST Received Date: 13 Nov 2023
 ____________________________________________________________
 > Event inserted at: 0
 0: event1 | 18 Dec 2023 | null
@@ -54,7 +54,13 @@ ____________________________________________________________
 > Please enter a valid ISBN with 13 digits.
 ____________________________________________________________
 > Commands available:
-[add] adds a new resource to the library inventory. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
+[add] (Book) Adds a new book. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
+[add] (eBook) Adds a new eBook. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag eb /l LINK [/g GENRE /s STATUS])
+[add] (CD) Adds a new CD. (e.g. add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag cd [/s STATUS])
+[add] (Magazine) Adds a new magazine. (e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag m [/s STATUS])
+[add] (eMagazine) Adds a new eMagazine. (e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag em /l LINK [/s STATUS])
+[add] (Newspaper) Adds a new newspaper. (e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag n [/s STATUS])
+[add] (eNewspaper) Adds a new eNewspaper. (e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag en /l LINK [/s STATUS])
 [delete] deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
 [list] lists all resources OR filter by certain tags, genre, or status. (e.g. list /tag B /g Fiction /s AVAILABLE)
 [find] finds a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188 /a AUTHOR)
@@ -68,8 +74,9 @@ ____________________________________________________________
 
 For more information, please refer to our user guide at: https://bit.ly/SyslibUserGuide
 ____________________________________________________________
-> Total Resources: 3
-Total Books: [████] 3
+> Summary of Resources:
+Total Resources: 3
+Total Books: [▓▓▓▓] 3
 Total CDs: [] 0
 Total Magazines: [] 0
 Total E-Books: [] 0
@@ -85,23 +92,23 @@ Upcoming Events (Next 3):
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 12 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: AVAILABLE Received Date: 13 Nov 2023
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: BORROWED Received Date: 12 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: BORROWED Received Date: 13 Nov 2023
 ____________________________________________________________
 > Successfully updated! Your updated resource:
 
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 12 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 13 Nov 2023
 ____________________________________________________________
 > Looking for ID: 1...
 This resource is removed:
-[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 12 Nov 2023
+[B]  ID: 1 Title: NEWTITLE ISBN: 1234567890123 Author: Herman Melville Genre: Adventure, Fiction Status: LOST Received Date: 13 Nov 2023
 ____________________________________________________________
 > Looking for ID: 2...
 This resource is removed:
-[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 12 Nov 2023
+[B]  ID: 2 Title: The Subtle Art of Not Giving a F*ck ISBN: 9780062457714 Author: Mark Manson Genre: Self-help Status: AVAILABLE Received Date: 13 Nov 2023
 ____________________________________________________________
 > id is missing in the argument!
 ____________________________________________________________
@@ -111,6 +118,6 @@ ____________________________________________________________
 ____________________________________________________________
 > id is missing in the argument!
 ____________________________________________________________
-> Thanks for using SysLib CLI! We have saved the current resources and events created.
-Hope to see you again soon!
+> Thanks for using SysLib CLI! We have saved the current resources and events.
+See you next time!
 ____________________________________________________________

@@ -40,8 +40,8 @@ public class EditCommandTest {
 
     @BeforeAll
     public static void setup() {
-        testResourceList = TestUtil.fillTestList();
-        parser.container.setResourceList(testResourceList);
+        testResourceList = TestUtil.fillTestResourcesList();
+        parser.container.setResourcesList(testResourceList);
 
     }
 
@@ -183,7 +183,7 @@ public class EditCommandTest {
     @Test
     public void testNotCorrectResourceTypeError() {
         List<Resource> dummyList = testUtil.addDummyResource(testResourceList);
-        parser.container.setResourceList(dummyList);
+        parser.container.setResourcesList(dummyList);
         executeAssertSysLibExceptionThrown("/id 1 /t dummyTitle", "Invalid Resource!");
 
     }
@@ -222,6 +222,12 @@ public class EditCommandTest {
     public void testEditBookInvalidArgsGiven() {
         executeAssertSysLibExceptionThrown("/id 2 /t TITLE /s LOST /p PUBLISHER /g GENRES /ed EDITION " +
                 "/c CREATOR /ty TYPE /b BRAND /is ISSUE", INVALID_EDIT_ARGS+BOOK_ARGS_MESSAGE);
+    }
+
+    @Test
+    public void testEditBookInvalidIDGiven() {
+        assertThrows(IllegalArgumentException.class, () ->
+                editCommand.execute("/id -1 /t hello", parser.container));
     }
 
     private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage) {

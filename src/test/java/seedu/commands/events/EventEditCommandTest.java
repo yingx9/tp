@@ -21,7 +21,14 @@ public class EventEditCommandTest {
     private GenericList<Resource, Event> container;
 
     @Test
-    public void eventEditCommandOutput() throws SysLibException {
+    public void testInvalidIndex() throws SysLibException {
+        eventAddCommand.execute("/t testrun /date 1 dec 2001 /desc testing 123", parser.container);
+        assertThrows(IllegalArgumentException.class,
+                () -> eventEditCommand.execute("/id 10", parser.container));
+    }
+
+    @Test
+    public void testeventEditCommandOutputNothingChanged() throws SysLibException {
         eventAddCommand.execute("/t testrun /date 1 dec 2001 /desc testing 123", parser.container);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
@@ -35,14 +42,14 @@ public class EventEditCommandTest {
 
 
     @Test
-    void testExecuteWithChanges() throws SysLibException {
+    void testExecuteWithDateChanges() throws SysLibException {
         eventAddCommand.execute("/t testrun /date 1 dec 2001 /desc testing 123", parser.container);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        eventEditCommand.execute("/id 0 /date 23 Dec 2023", parser.container);
+        eventEditCommand.execute("/id 0 /t newtest /date 23 Dec 2023 /desc test456", parser.container);
         String output = outputStream.toString();
         String expectedOutput = "Event edited successfully. New event details:" + System.lineSeparator() +
-                "0: testrun | 23 Dec 2023 | testing 123" + System.lineSeparator() +
+                "0: newtest | 23 Dec 2023 | test456" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
 
         assertEquals(expectedOutput, output);
@@ -60,8 +67,19 @@ public class EventEditCommandTest {
                 "Event edited successfully. New event details:" + System.lineSeparator() +
                 "1: test1 | 23 Dec 2023 | testing 123" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
-
+        eventEditCommand.execute("/id 1 /date 23 Nov 2001", parser.container);
+        output = outputStream.toString();
+        expectedOutput += "Event index has changed as the date was changed." + System.lineSeparator() +
+                "Event edited successfully. New event details:" + System.lineSeparator() +
+                "0: test1 | 23 Nov 2001 | testing 123" + System.lineSeparator() +
+                "____________________________________________________________" + System.lineSeparator();
         assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    void testExecuteWithEmptyList() throws SysLibException {
+        assertThrows(SysLibException.class, () ->
+                eventEditCommand.execute("/id 0", parser.container));
     }
 
     @Test
