@@ -13,7 +13,6 @@ From viewing, adding, searching, editing, deleting and saving, SysLib provides a
 View the code I contributed via the tp Code Dashboard link [here](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=000verflow&breakdown=true).
 
 
-
 #### Enhancements implemented
 
 **Enhancements**:
@@ -61,7 +60,7 @@ Sections contributed:
 - Find Command
 - Command Summary
 - Save your work section
-
+- Finding bugs in peer's sections
 
 #### Contributions to the DG:
 
@@ -69,18 +68,17 @@ Sections contributed:
 - Storage Class section and Storage class diagram
 - Find Command section and FindCommand sequence diagram
 - Manual testing for data saving
-- structural changes
-
+- Structural changes
+- Introduction and getting started
 
 #### Contributions to team-based tasks
 
 - Reviewed multiple peer pull request
 - Help troubleshoot when checks fail on GitHub
-
+- Bug tested 2.0 and 2.1 Jar's
 
 #### Review/mentoring contributions:
 
 - Helped test other group's project during PE-D, creating 5 bug issues
+- Peer reviewed other team's developers guide in their [PR]("https://github.com/nus-cs2113-AY2324S1/tp/pull/8")
 
-
-#### Contributions beyond the project team:
