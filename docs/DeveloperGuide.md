@@ -38,7 +38,7 @@ This technical document is meant for current and future developers of Syslib CLI
 2. Adapted `Command` and `Parser` structure from teammate Wu Xingyu's [iP codebase](https://github.com/DavinciDelta/ip).
 
 ## Setting Up & Getting Started
-1. Fork the repo at https://github.com/AY2324S1-CS2113T-W11-1/tp.
+1. Fork the repo at [GitHub](https://github.com/AY2324S1-CS2113T-W11-1/tp).
 2. Clone the fork into your computer.
 3. Using an IDE of your choice or `Intellij IDEA` (Recommended):
    - Ensure your IDE is configured to use **JDK 11** as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk). 
@@ -81,9 +81,8 @@ Hello! What would you like to do?
 ____________________________________________________________
 > 
 ```
-4. Type `exit` to exit the program.
 
-You are now ready to begin developing!
+You are now ready to begin developing! If you would like to end Syslib, type `exit` to exit the program.
 
 ## Design & Implementation
 ## Architecture Overview | [Return to contents](#table-of-contents)
@@ -103,7 +102,7 @@ SysLib currently consists of five main components:
 
 **How the architecture components interact with each other**
 
-The following shows an overview of how components in Syslib work and interact with each other. 
+The following diagram shows an overview of how components in Syslib work and interact with each other. 
 
 <img src="images/ComponentDiagram.png" />
 
@@ -351,7 +350,7 @@ Note:
 
 ### Show Resources Feature | [Return to contents](#table-of-contents)
 
-Show resources feature is facilitated by the `UI` and `Data` component. It makes use of a class `ResourceDisplayFormatter` in `UI` to show the details of all resources stored in `GenericList` of the `Data` component, sorted by resource type. 
+Show resources feature is facilitated by the `UI`  component. It makes use of a class `ResourceDisplayFormatter` in `UI` to show the details of all resources stored in `ResourcesList` of the `Parser` component, sorted by resource type. 
 
 #### Implementation
 
@@ -376,13 +375,13 @@ The following sequence diagram shows how the show resources feature works in a s
 6. Formatter objects are created for each resource type: Book, Newspapers, Magazine, CDs. 
 
 **UI Class:** 
-7. Now the UI loops through the resourceList and calls `setDisplayFormatter(Resource)` to add the formatted string to its respective display formatter. 
+7. Now the UI loops through the resourcesList and calls `setDisplayFormatter(Resource)` to add the formatted string to its respective display formatter. 
 8. A final call to `getFinalDisplayFormat()` returns the final formatted message of the table and all the resource details as `messageToDisplay`
 9. `messageToDisplay` is returned to the calling function to be printed to user or for testing. 
 
 ### Listing Resources Feature | [Return to contents](#table-of-contents)
 
-The `list` command is facilitated by `Parser` and `UI` component to show the details of all resources in `GenericList`. Furthermore, **filter** options can be provided to only list specific resources that match the given filters. 
+The `list` command is facilitated by `Parser` and `UI` component to show the details of all resources in `resourcesList`. Furthermore, **filter** options can be provided to only list specific resources that match the given filters. 
 
 `list` has five possible options:
 - list
@@ -410,7 +409,7 @@ When a user enters `list /tag B`, the Parser retrieves the parameters from the i
 calls the `execute` function of ListCommand, passing the argument given: `/tag B`.
 
 ListCommand then calls `parseArg` and `validate` from `Command`, which checks if the parameters are valid. If it passes
-   the checks, `filterResources` is called to begin the filtering process. First it calls `hasFilters()` check if the user
+   the checks, `filterResources` is called to begin the filtering process. First it calls `hasFilters()` to check if the user
    selected any filters `[tag/genre/status]` or none. 
 
 If hasFilters returns `true`, it filters the `resourceList` with the given keywords. Resources matching the filters are added to a temporary list called `matchedResources`. After all resources has been checked, `matchedResources` list is passed to `showResourcesDetails()`, a method called from `UI` to display the details 
@@ -422,7 +421,7 @@ Finally, `ListCommand` instantiates the `CommandResult` class with a string `fee
 
 ### Edit Command Feature | [Return to contents](#table-of-contents)
 
-The `edit` command is facilitated by `Parser` and `Data` component to update the attributes of any resource type. Users can edit all attributes except ID, Tag, and Received Date, and must provide at least one argument to edit when calling the `edit` command. 
+The `edit` command is facilitated by `Parser` component to update the attributes of any resource type. Users can edit all attributes except ID, Tag, and Received Date, and must provide at least one argument to edit when calling the `edit` command. 
 
 
 #### Implementation
@@ -561,14 +560,14 @@ Step 7. The selected event at the index is then deleted from the eventList.
 
 ### Target user profile
 
-All librarians, not just system librarian!
+System librarians who prefer CLI over GUI and are responsible for inventory and event management.
 
 - Needs to manage events and inventory with significant number of resources e.g. books
 - Is a fast typist
 
 ### Value Proposition
 
-To provide a platform to help librarians to quickly find the information they need to assist patrons.
+To provide a platform to help system librarians to quickly find the information they need to assist patrons.
 
 SysLib CLI is a robust command-line tool designed for fast typists librarians to efficiently handle inventory and events. 
 

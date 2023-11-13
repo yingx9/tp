@@ -24,7 +24,7 @@ public class TestUtil {
 
     public String getOutputMessage(Command c, String m, List<Resource> resourceList) throws SysLibException {
         Parser parser = new Parser();
-        parser.container.setResourceList(resourceList);
+        parser.container.setResourcesList(resourceList);
         CommandResult commandResult = c.execute(m, parser.container);
         return commandResult.feedbackToUser;
     }
@@ -37,7 +37,7 @@ public class TestUtil {
     }
 
     public static List<Resource> fillTestList() {
-        List<Resource> testResourceList = new ArrayList<>();
+        List<Resource> testResourcesList = new ArrayList<>();
         String[] genres = {"Horror", "Fiction"};
         String[] genresAdventure = {"Adventure"};
         String[] genresNull = {null};
@@ -69,17 +69,17 @@ public class TestUtil {
 
 
 
-        testResourceList.add(testBook);
-        testResourceList.add(testBook2);
-        testResourceList.add(testBook3);
-        testResourceList.add(testEBook);
-        testResourceList.add(testMagazine);
-        testResourceList.add(testEMagazine);
-        testResourceList.add(testCD);
-        testResourceList.add(testNewspaper);
-        testResourceList.add(testENewspaper);
+        testResourcesList.add(testBook);
+        testResourcesList.add(testBook2);
+        testResourcesList.add(testBook3);
+        testResourcesList.add(testEBook);
+        testResourcesList.add(testMagazine);
+        testResourcesList.add(testEMagazine);
+        testResourcesList.add(testCD);
+        testResourcesList.add(testNewspaper);
+        testResourcesList.add(testENewspaper);
 
-        return testResourceList;
+        return testResourcesList;
     }
 
     public List<Resource> addDummyResource(List<Resource> resourceList){

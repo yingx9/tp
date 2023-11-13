@@ -27,7 +27,7 @@
 
 Welcome to the SysLib User Guide: your all-in-one document to learn how to use SysLib to manage your work and responsibilities as a librarian. 
 
-Our user guide is for every librarian whether you're a beginner, novice, or expert in using a CLI library management software. 
+Our user guide is for every system librarian whether you're a beginner, novice, or expert in using a CLI library management software. 
 
 From viewing, adding, searching, and many more, SysLib provides all the features you need to optimize your work from hours to seconds. In no time, you will be typing intuitive commands to manage your library resources and upcoming events!
 

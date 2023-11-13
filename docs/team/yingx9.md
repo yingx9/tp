@@ -30,25 +30,11 @@ Main classes and methods implemented:
 `showResouces()` in `UI` class.
 `checkColumnWidths()`, `toTableFormat()` in all resource class. 
 
-Implemented a class `ResourceDisplayFormatter` which formats a table to neatly display all the resources and their details. 
-
-SysLib contains several types of resources (Books, EBooks, Magazines, EMagazines, CD...et. cetera) and each type has their own attributes to display. 
-
-The approach taken was to list the resources by type so users easily follow and understand the table. If the library does not contain any resource for a resource type, e.g No CDs, its headers are omitted from the table to reduce useless clutter. 
-
-`ResourceDisplayFormatter` also dynamically checks the length of each variable and adjust the width and length of the headers automatically. Hence, even if the user enters a long input, the alignment stays neat and does not cut off any information. 
-
-This is implemented by creating methods in the `Resource` class, which all subclasses (resource types) inherit and override to check the length of their own attributes.
-
-`showResources()` was implemented in the UI class to easily display the resources and make it accessible for use in other classes, for example in `ListCommand`. 
-
-
 **2. List feature for resources**
 
 Main implementation: `ListCommand` class
 
-Implemented the **list** feature to show a list of all the resources in the library, sorted by the type of Resource : Book, Magazine, CD, Newspapers and their electronic versions. All details are shown in the list and formatted neatly using `ResourceDisplayFormatter`.
-
+Implemented the **list** feature to show a list of all the resources in the library.
 Further enhanced by implementing `filter` options to filter by `tag`, `genre`, and `status`, which shows resources that fit all given filters, to help librarians get a specific overview of resources in the library. 
 
 
@@ -66,16 +52,12 @@ Edit feature supports editing:
   - **Newspaper/ENewspaper:** Publisher, Edition, Link 
   - **CD:** Creator, Type
 
-Implemented validation and error checking for EditCommand, which prevents the user from entering wrong arguments for the resource type they would like to edit and error messages that remind users the correct arguments. 
-
 
 **4. Received Date attribute for resources**
 
 Main implementation: `getReceivedDate()`, `setReceivedDate()` in `Resource` class
 
 Implemented methods in Resource class which sets the date received to the current system time when executing `addCommand`. This attribute indicates the date entered the resource was entered into the system, hence it is not set by the user and instead takes the current system time. 
-
-
 
 #### Contributions to the UG: 
 
