@@ -70,6 +70,10 @@ work.
 
 ```
 ____________________________________________________________
+Data directory does not exist. Creating now...
+Storage file does not exist. Creating now...
+Loaded 0 resources and 0 events!
+____________________________________________________________
              .....................                  
           -##@*+*@*++++++++++#@++##                 
          .@. @-=%=            *#-+%                 

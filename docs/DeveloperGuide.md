@@ -783,8 +783,8 @@ should be able to accomplish most of the tasks faster using commands than using 
 
 ```
 ____________________________________________________________
-Storage file not found.
-Creating new data file @ .\data\storage.txt
+Data directory does not exist. Creating now...
+Storage file does not exist. Creating now...
 Loaded 0 resources and 0 events!
 ____________________________________________________________
              .....................                  
