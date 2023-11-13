@@ -373,41 +373,8 @@ list /tag B /g Fiction /s Available
 ```
 
 **Example output:**
-```
-Listing all resources in the Library:
 
-                                                                       [BOOKS]
-------------------------------------------------------------------------------------------------------------------------------------------------
-ID     Tag  Title                   ISBN          Author                   Genre                        Link           Status    Received Date  
-------------------------------------------------------------------------------------------------------------------------------------------------
-1      B    Moby Dick               9780763630188 Herman Melville          Adventure, Fiction           null           AVAILABLE 08 Nov 2023    
-2      B    Harry Squatter          9780763630187 J.K.                     History                      null           LOST      08 Nov 2023    
-3      EB   Moby Dick               9780763630188 Herman Melville          Adventure, Fiction           www.abc.com    AVAILABLE 08 Nov 2023    
-
-                                                                       [MAGAZINES]
-------------------------------------------------------------------------------------------------------------------------------------------------
-ID     Tag  Title                   ISBN          Brand                    Issue                        Link           Status    Received Date  
-------------------------------------------------------------------------------------------------------------------------------------------------
-5      M    2023 Hottest Trends     9780763630188 Vogue                    Volume 32, Issue 5, May 2023 null           AVAILABLE 08 Nov 2023    
-6      EM   2023 Hottest Trends     9780763630188 Vogue                    Volume 32, Issue 5, May 2023 www.abc.com    AVAILABLE 08 Nov 2023    
-
-                                                                        [CDS]
-------------------------------------------------------------------------------------------------------------------------------------------------
-ID     Tag  Title                   ISBN          Creator                  Type                         Link           Status    Received Date  
-------------------------------------------------------------------------------------------------------------------------------------------------
-4      CD   Moby Dick               9780763630188 Herman Melville          Audio Book                   null           AVAILABLE 08 Nov 2023    
-
-                                                                      [NEWSPAPERS]
-------------------------------------------------------------------------------------------------------------------------------------------------
-ID     Tag  Title                   ISBN          Publisher                Edition                      Link           Status    Received Date  
-------------------------------------------------------------------------------------------------------------------------------------------------
-7      N    Forbes 30 Under 30 2023 9780763630188 The Straits Times        Entrepreneurs                null           AVAILABLE 08 Nov 2023    
-8      EN   Forbes 30 Under 30 2023 9780763630188 The Straits Times        Entrepreneurs                www.abc.com    AVAILABLE 08 Nov 2023    
-
-
-There are currently 8 resource(s).
-____________________________________________________________
-```
+![ExampleOutput](images\List Screenshots\listexampleoutput.png)
 
 ### Find Specific Listings: `find` | [Return to Contents](#contents)
 
