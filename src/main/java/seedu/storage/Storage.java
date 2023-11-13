@@ -3,6 +3,9 @@ package seedu.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.IllegalFormatException;
@@ -93,47 +96,33 @@ public class Storage {
     /**
      * Ensures the data folder and storage file exists, creating it if necessary.
      */
-    private void ensureFileExists(){
+    private void ensureFileExists() {
         ui.showLine();
-        // to make sure it works for both windows/mac file paths
-        String directoryPath = "." + File.separator + "data";
-        String filePath = directoryPath + File.separator + "storage.txt";
+        Path directoryPath = Paths.get(".", "data");
+        Path filePath = directoryPath.resolve("storage.txt");
 
         try {
-            // Create the directory if it does not exist
-            File dir = new File(directoryPath);
-            if (!dir.exists()) {
-                boolean isDirCreated = dir.mkdirs();
-                if (isDirCreated) {
-                    System.out.println("Data directory created.");
-                } else {
-                    LOGGER.log(Level.SEVERE, "Failed to create data directory.");
-                    throw new SysLibException("Failed to create data directory.");
-                }
+            if (Files.notExists(directoryPath)) {
+                Files.createDirectories(directoryPath);
+                System.out.println("Data directory doesn't exist. Creating now.");
+                LOGGER.info("Data directory created.");
             } else {
-                System.out.println("Data directory already exists.");
+                System.out.println("Data directory found.");
+                LOGGER.info("Data directory already exists.");
             }
 
-            // Create the file if it does not exist
-            File dataFile = new File(filePath);
-            if (!dataFile.exists()) {
+            if (Files.notExists(filePath)) {
                 LOGGER.info("Storage file not found, creating now.");
-                ui.showNoFileFoundMessage(filePath);
-                boolean isFileCreated = dataFile.createNewFile();
-                if (isFileCreated) {
-                    System.out.println("Storage file created.");
-                } else {
-                    LOGGER.log(Level.SEVERE, "Failed to create storage file.");
-                    throw new SysLibException("Failed to create storage file.");
-                }
+                ui.showNoFileFoundMessage(filePath.toString());
+                Files.createFile(filePath);
+                LOGGER.info("Storage file created.");
             } else {
                 LOGGER.info("Storage file found.");
-                ui.showFileFoundMessage(filePath);
+                ui.showFileFoundMessage(filePath.toString());
             }
         } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Error creating file or folder: " + e.getMessage(), e);
             System.out.println("Error creating file or folder: " + e.getMessage());
-        } catch (SysLibException SLEx){
-            System.out.println(SLEx);
             exit(0); // exit gracefully
         }
     }
