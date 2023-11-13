@@ -68,6 +68,7 @@ public class AddCommand extends Command{
     public static final String ISSUE_OPTION = "is";
     public static final String EDITION_OPTION = "ed";
     private static final int RESOURCEID_INCREMENT = 1;
+    private static final String WHITESPACE = " ";
     private static final Logger ADDLOGGER = Logger.getLogger(AddCommand.class.getName());
     private static String feedbackToUser;
     private int resourceID;
@@ -191,26 +192,27 @@ public class AddCommand extends Command{
         ADDLOGGER.log(Level.INFO, "Executing Add. Input Arguments: " + statement);
         feedbackToUser = "";
 
-        //String[] values = parseArgument(statement);
-        //validateStatement(statement, values);
+        StringBuilder spaceStatement = new StringBuilder();
+        spaceStatement.append(WHITESPACE);
+        spaceStatement.append(statement);
 
         resourceID = container.getResourcesList().size() + RESOURCEID_INCREMENT;
-        String tag = parseAddCommand(statement);
+        String tag = parseAddCommand(String.valueOf(spaceStatement));
 
         if (tag.equalsIgnoreCase(BOOK_TAG)) {
-            addBook(statement, container);
+            addBook(String.valueOf(spaceStatement), container);
         } else if (tag.equalsIgnoreCase(EBOOK_TAG)) {
-            addEBook(statement, container);
+            addEBook(String.valueOf(spaceStatement), container);
         } else if (tag.equalsIgnoreCase(CD_TAG)) {
-            addCD(statement, container);
+            addCD(String.valueOf(spaceStatement), container);
         } else if (tag.equalsIgnoreCase(MAGAZINE_TAG)) {
-            addMagazine(statement, container);
+            addMagazine(String.valueOf(spaceStatement), container);
         } else if (tag.equalsIgnoreCase(EMAGAZINE_TAG)) {
-            addEMagazine(statement, container);
+            addEMagazine(String.valueOf(spaceStatement), container);
         } else if (tag.equalsIgnoreCase(NEWSPAPER_TAG)) {
-            addNewspaper(statement, container);
+            addNewspaper(String.valueOf(spaceStatement), container);
         } else if (tag.equalsIgnoreCase(ENEWSPAPER_TAG)) {
-            addENewspaper(statement, container);
+            addENewspaper(String.valueOf(spaceStatement), container);
         } else {
             throw new SysLibException(ERROR_TAG);
         }

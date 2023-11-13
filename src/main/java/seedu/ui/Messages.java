@@ -74,4 +74,6 @@ public class Messages {
             "Please enter only valid arguments.");
     public static final String ERROR_INVALID_GENRE_CHARACTER = formatSeparatorLineDivider(
             "'[' and ']' are not allowed in genres.");
+    public static final String ERROR_INVALID_START = formatSeparatorLineDivider(
+            "Please use '/' to indicate the type of data entered.");
 }
