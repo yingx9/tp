@@ -28,9 +28,9 @@
 * [Manual Testing](#instructions-for-manual-testing--return-to-contents)
 
 ## About this guide
-This developer guide serves as a documentation of the development of Syslib CLI!, an application that was created to help librarians to manage their work.
+This developer guide serves as a documentation of the development of Syslib, an application that was created to help librarians to manage their work.
 
-This technical document is meant for current and future developers of Syslib CLI! as a reference point on the design, implementation, and other technical and non-technical aspects of the application.
+This technical document is meant for current and future developers of Syslib as a reference point on the design, implementation, and other technical and non-technical aspects of the application.
 
 ## Acknowledgements
 
@@ -39,18 +39,18 @@ This technical document is meant for current and future developers of Syslib CLI
 
 ## Setting Up & Getting Started
 1. Fork the repo at [GitHub](https://github.com/AY2324S1-CS2113T-W11-1/tp).
-2. Clone the fork into your computer.
-3. Using an IDE of your choice or `Intellij IDEA` (Recommended):
+2. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) the fork onto your computer.
+3. Using [Intellij IDEA](https://www.jetbrains.com/idea/download/) (Recommended) or an IDE of your choice:
    - Ensure your IDE is configured to use **JDK 11** as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk). 
    - Import the project as a **Gradle project** as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
    - **Verify** the setup: 
-     - Run `Syslib`. On IntelliJ, you can right-click Syslib class and `Run Syslib.main()` or `Shift F10`. 
+     - Run `Syslib`. On IntelliJ, you can right-click Syslib class and `Run Syslib.main()` or `Shift` + `F10`. 
      - You should see the following greeting logo and message:
 
 ```
 ____________________________________________________________
-Storage file not found.
-Creating new data file @ .\data\storage.txt
+Data directory does not exist. Creating now...
+Storage file does not exist. Creating now...
 Loaded 0 resources and 0 events!
 ____________________________________________________________
              .....................                  
@@ -82,7 +82,7 @@ ____________________________________________________________
 > 
 ```
 
-You are now ready to begin developing! If you would like to end Syslib, type `exit` to exit the program.
+You are now ready to begin developing! If you would like to exit Syslib, type `exit` to exit the program.
 
 ## Design & Implementation
 ## Architecture Overview | [Return to contents](#table-of-contents)
@@ -97,7 +97,7 @@ SysLib currently consists of five main components:
 
 - `Syslib`: Initializes other components and acts as the "launching pad" by executing important methods
 - `UI`: Handles User Interaction such as getting user input
-- `Parser`: Parsing User Response  
+- `Parser`: Parsing User Input  
 - `Command`: Command Executor 
 - `Storage`: Loads data from file in hard disk, and saves data to hard disk on program exit
 
@@ -109,7 +109,7 @@ The following diagram shows an overview of how components in Syslib work and int
 
 1. After all components have been initialized, `Syslib` calls upon the `Storage` component to load any data from `storage.txt`.
 2. `Storage` fills two lists, ResourcesList and EventsList, with the read data. Both lists are returned to Syslib.
-3. Syslib sets the `Parser` to use the filled lists. 
+3. Syslib creates a GenericList containing of these filled lists. 
 4. Afterwhich, `UI` is called to get and return user input.
 5. Syslib passes the returned user input to `Parser` for processing.
 6. `Parser` calls the appropriate command based on the user input, for example `AddCommand`.
@@ -121,20 +121,20 @@ The following diagram shows an overview of how components in Syslib work and int
 
 ### UI Component
 
-UI component consists of a single UI Class.
+`UI` component consists of a single `UI` Class.
 which manages interaction (prompting for user input and displaying results
 of commands/methods being called) between the user and the application.
 
 How the UI class works:
 * Upon the initialization of `SysLib`, the `UI` class will call the `showWelcomeMessage` method to display the greeting messages to
   the user.
-* Additionally, local files storing the data of previously saved work of `SysLib` will also be loaded into the program through the initialization of the Storage Class. Thereafter,
+* Additionally, local files storing the data of previously saved work of `SysLib` will also be loaded into the program through the initialization of the `Storage` Class. Thereafter,
   the loading statuses of these files are also displayed by calling the `showLoadMessage()` method.
     * If `storage.txt` does not exist, it will also call the `showNoFileFoundMessage()` to let the user know a new `storage.txt` file will be created.
     * However, if `storage.txt` already exists, `showFileFoundMessage()` will be called instead.
 * `UI` class is also responsible for getting the user input by calling the `readCommand()`
-  method, which will then parse the input by sending it to the `Parser` class. The `Parser` class will process
-  the input and make use of the `Command` class to execute the command.
+  method, which will then parse the input by sending it to the `Parser` class. The `Parser` class will process 
+the input and make use of the `Command` class to execute the command.
 * UI also prints Resource details in a formatted table using the `showResourcesDetails` method.
 * Help messages are also printed in the `UI` class by calling `showHelpMessage()` method.
 * Lastly, when the user exits the program, the `showExitMessage()` method will be called to indicate that the
@@ -147,27 +147,27 @@ The parsing for a generic command can be seen here:
 
 <img src="images/Parsing.png" />
 
-For some commands that does not require arguments (etc: help, exit), parseArgument
-and validateStatement will not be called
+For some commands that does not require arguments (etc: `help`, `exit`), `parseArgument()`
+and `validateStatement()` will not be called
 
 If an invalid command is given, the nearest command will be searched for via the `suggest` function in `suggestParser`.
 If the nearest command is similar to what the user typed, it will be suggested
 
-For more details on each Command check them out below
+For more details on each Command, check them out [below](#implementation--return-to-contents)
 ### Command Component
 The `Command` component is linked to the `Parser` component. 
 After the `Parser` filters out the correct command, that particular command will be executed.
 
-Each `Command` uses a `GenericList` to get events or resources to manipulate. 
+Each `Command` uses a `GenericList` to get Events or Resources to manipulate. 
 Then the commands will generate a `CommandResult` to give informative feedback to the user.
 
 <img src="images/CommandClassDiagram.png" />
 
 ### Storage Component
 
-This component of Syslib CLI is mainly responsible for reading and writing application data from and to files stored on the user’s filesystem. This is to allow the user to retain the data he/she has entered into Syslib CLI and be able to continue using the data when he/she starts Syslib CLI the next time.
+This component of Syslib is mainly responsible for reading and writing application data from and to files stored on the user’s filesystem. This is to allow the user to retain the data he/she has entered into Syslib and be able to continue using the data when he/she starts Syslib the next time.
 
-The following class diagram shows how the storage component’s classes and how it interacts with some other components and classes in Syslib CLI:
+The following class diagram shows how the storage component’s classes and how it interacts with some other components and classes in Syslib:
 
 <img src="images/StorageDiagram.png" />
 
@@ -187,74 +187,7 @@ On the user’s local filesystem, the organisation of the application files are 
 ```
 
 ## Implementation | [Return to contents](#table-of-contents)
-This section provides details on how certain features are implemented. 
-
-### Find Resource Feature | [Return to contents](#table-of-contents)
-
-The `find` command allows users to search for resources based on specified filters such as author (`/a`), ISBN (`/i`), ID (`/id`), and title (`/t`). The results will show all resources that match any of the given filters.
-
-> For non-book resources, `author` refers to `publisher`,`creator` and `brand` for Newspapers, CD's and Magazines
-> respectively.
-
-`find` has the following options:
-- `find /id [ID]`
-- `find /t [TITLE]`
-- `find /a [AUTHOR/PUBLISHER/BRAND/CREATOR]`
-- `find /i [ISBN]`
-
-Multiple filters can also be combined:
-
-- `find /t [TITLE] /a [AUTHOR/PUBLISHER/BRAND/CREATOR]`
-
-#### Implementation
-
-Upon receiving the `find` command, the system will:
-
-1. Parse the filters and their associated values.
-2. Filter the resources based on the given filters.
-3. Display the matching resources.
-
-#### Example Usage Scenario
-
-**Step 1.** The user inputs the command: `find /a "F. Scott Fitzgerald"`
-
-**Step 2.** The `UI` component forwards the input to `SYSLIB`, which then sends it to the `PARSER`.
-
-**Step 3.** The `PARSER` processes the command, extracts the `author` filter, and retrieves all resources written by "F. Scott Fitzgerald".
-
-**Step 4.** The matching resources are displayed to the user.
-
-#### Sequence Diagram
-
-<img src="images/FindSequenceDiagram.png" />
-
-### Examples for Testing
-
-1. **Find by Author**
-    - Test case: `find /a "F. Scott Fitzgerald"`
-
-      Expected: All resources written by F. Scott Fitzgerald are displayed.
-
-2. **Find by ISBN**
-    - Test case: `find /i "9780061120084"`
-
-      Expected: The resource with ISBN "9780061120084" is displayed, which should be "To Kill a Mockingbird" by Harper Lee.
-
-3. **Find by ID**
-    - Test case: `find /id 2`
-
-      Expected: The resource with ID "2" is displayed, which should be "To Kill a Mockingbird" by Harper Lee.
-
-4. **Find by Title**
-    - Test case: `find /t "The Great Gatsby"`
-
-      Expected: The resource titled "The Great Gatsby" is displayed.
-
-5. **Combining Filters**
-    - Test case: `find /a "F. Scott Fitzgerald" /t "The Great Gatsby"`
-
-      Expected: Resources that match both the title "The Great Gatsby" and the author "F. Scott Fitzgerald" are displayed.
-
+This section provides details on how certain features are implemented.
 
 ### Add Resource Feature | [Return to contents](#table-of-contents)
 
@@ -401,6 +334,72 @@ The following sequence diagram shows how the show resources feature works in a s
 8. A final call to `getFinalDisplayFormat()` returns the final formatted message of the table and all the resource details as `messageToDisplay`
 9. `messageToDisplay` is returned to the calling function to be printed to user or for testing. 
 
+### Find Resource Feature | [Return to contents](#table-of-contents)
+
+The `find` command allows users to search for resources based on specified filters such as author (`/a`), ISBN (`/i`), ID (`/id`), and title (`/t`). The results will show all resources that match any of the given filters.
+
+> For non-book resources, `author` refers to `publisher`,`creator` and `brand` for Newspapers, CD's and Magazines
+> respectively.
+
+`find` has the following options:
+- `find /id [ID]`
+- `find /t [TITLE]`
+- `find /a [AUTHOR/PUBLISHER/BRAND/CREATOR]`
+- `find /i [ISBN]`
+
+Multiple filters can also be combined:
+
+- `find /t [TITLE] /a [AUTHOR/PUBLISHER/BRAND/CREATOR]`
+
+#### Implementation
+
+Upon receiving the `find` command, the system will:
+
+1. Parse the filters and their associated values.
+2. Filter the resources based on the given filters.
+3. Display the matching resources.
+
+#### Example Usage Scenario
+
+**Step 1.** The user inputs the command: `find /a "F. Scott Fitzgerald"`
+
+**Step 2.** The `UI` component forwards the input to `SYSLIB`, which then sends it to the `PARSER`.
+
+**Step 3.** The `PARSER` processes the command, extracts the `author` filter, and retrieves all resources written by "F. Scott Fitzgerald".
+
+**Step 4.** The matching resources are displayed to the user.
+
+#### Sequence Diagram
+
+<img src="images/FindSequenceDiagram.png" />
+
+### Examples for Testing
+
+1. **Find by Author**
+    - Test case: `find /a "F. Scott Fitzgerald"`
+
+      Expected: All resources written by F. Scott Fitzgerald are displayed.
+
+2. **Find by ISBN**
+    - Test case: `find /i "9780061120084"`
+
+      Expected: The resource with ISBN "9780061120084" is displayed, which should be "To Kill a Mockingbird" by Harper Lee.
+
+3. **Find by ID**
+    - Test case: `find /id 2`
+
+      Expected: The resource with ID "2" is displayed, which should be "To Kill a Mockingbird" by Harper Lee.
+
+4. **Find by Title**
+    - Test case: `find /t "The Great Gatsby"`
+
+      Expected: The resource titled "The Great Gatsby" is displayed.
+
+5. **Combining Filters**
+    - Test case: `find /a "F. Scott Fitzgerald" /t "The Great Gatsby"`
+
+      Expected: Resources that match both the title "The Great Gatsby" and the author "F. Scott Fitzgerald" are displayed.
+
 ### Listing Resources Feature | [Return to contents](#table-of-contents)
 
 The `list` command is facilitated by `Parser` and `UI` component to show the details of all resources in `resourcesList`. Furthermore, **filter** options can be provided to only list specific resources that match the given filters. 
@@ -470,7 +469,7 @@ Finally, the resource list currently in memory is updated with the new resource 
 
 ### Event Add Feature | [Return to contents](#table-of-contents)
 
-The `eventadd` feature is responsible for processing user commands to add an event to SysLib. It is facilitated by
+The `eventadd` feature is responsible for processing user commands to add an `Event` to SysLib. It is facilitated by
 the `EventAddCommand` component. It works with `Parser` and `Command` components to parse and validate the user input.
 The new book is stored internally in `eventList` as a `Event`.
 
@@ -488,7 +487,7 @@ It implements the following operations:
 
 #### Example Usage Scenario
 
-Step 1. The user inputs the command: `eventadd /t birthday /date 10-12-2001`
+Step 1. The user inputs the command: `eventadd /t birthday /date 10 Dec 2001`
 
 Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
 
@@ -683,7 +682,7 @@ System librarians who prefer CLI over GUI and are responsible for inventory and 
 
 ### Value Proposition
 
-To provide a platform to help system librarians to quickly find the information they need to assist patrons.
+To provide a platform to help system librarians to quickly find the information they need in their everyday job.
 
 SysLib CLI is a robust command-line tool designed for fast typists librarians to efficiently handle inventory and events. 
 
@@ -720,13 +719,13 @@ With quick command-based actions, they can manage library's resources and events
     Use case ends.
 
 #### Extensions
-- 1a. The given ISBN is invalid.
-  - 1a1. SysLib displays an error message.
+- 1a. The given `ISBN` is invalid.
+  - 1ai. SysLib displays an error message.
     
     Use case ends.
   
 - 1b. Insufficient data given.
-  - 1b1. SysLib displays an error message.
+  - 1bi. SysLib displays an error message.
 
     Use case ends.
 
@@ -767,7 +766,7 @@ With quick command-based actions, they can manage library's resources and events
 - The system should respond to user input within 3 seconds under normal operating conditions.
 - A user with above-average typing speed for regular English text (i.e., not code, not system admin commands) 
 should be able to accomplish most of the tasks faster using commands than using the mouse.
-- All user data relating to resources and events will be stored in a txt file in the same folder as this jar file.
+- All user data relating to resources and events will be stored in a .txt file in the same folder as this jar file.
 
 ## Glossary | [Return to contents](#table-of-contents)
 
@@ -825,7 +824,8 @@ ____________________________________________________________
 Example response:
    
 ```
-Bye, hope to see you again soon!
+Thanks for using SysLib CLI! We have saved the current resources and events.
+See you next time!
 ____________________________________________________________
 ```
 
@@ -833,9 +833,9 @@ ____________________________________________________________
 1. Add a book
    1. Test case: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B`
 
-       Expected: A book with ISBN: 9783161484100, Title: Crime and Punishment, Author: Dostoevsky, and Status: AVAILABLE 
-       is created and added into the list. A message with details of the added book is displayed to acknowledge that the 
-       book has been added successfully. A warning is given to tell the user that the Status and Genre was not given.
+        Expected: A book with ISBN: 9783161484100, Title: Crime and Punishment, Author: Dostoevsky, and Status: AVAILABLE 
+   is created and added into the list. A message with details of the added book is displayed to acknowledge that the 
+   book has been added successfully. A warning is given to tell the user that the Status and Genre was not given.
 
     ```
     Attention: Status is not stated. Status set to default: AVAILABLE.
@@ -848,8 +848,8 @@ ____________________________________________________________
    2. Test case: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B /g Fiction /s lost`
 
        Expected: A book with ISBN: 9783161484100, Title: Crime and Punishment, Author: Dostoevsky, Genre: Fiction, and 
-       Status: LOST is created and added into the list. A message with details of the added book is displayed to 
-       acknowledge that the book has been added successfully.
+   Status: LOST is created and added into the list. A message with details of the added book is displayed to 
+   acknowledge that the book has been added successfully.
    
     ```
     This book is added:
@@ -881,6 +881,14 @@ ____________________________________________________________
     Please enter a valid ISBN with 13 digits.
     ____________________________________________________________
     ```
+   6. Test case: `add /i 9783161484100 /t Crime and Punishment /t Crime and Punishment2 /a Dostoevsky /tag B`
+
+      Expected: No book is added. An error message displayed to indicate that there are multiple titles.
+
+    ```
+    Please enter only 1 title.
+    ____________________________________________________________
+    ```
 
 ### Listing Resources
 
@@ -909,6 +917,7 @@ ____________________________________________________________
    1. Test case: `list /tag B `
 
        Expected: A table showing details of `Book` resources with tag `B`, or a message stating no resources found or empty list if applicable.
+   
    2. Test case: `list /tag B /s AVAILABLE`
 
       Expected: A table showing details of `Book` resources with tag `B` and status `AVAILABLE`, or a message stating no resources found or empty list if applicable.
@@ -968,7 +977,7 @@ ____________________________________________________________
     1. Prerequisites: At least one resource present.
     2. Test case: `delete /id 1`
 
-   Expected: Resoruce with ID 1 is removed
+   Expected: Resource with ID 1 is removed
     
     ```
     Looking for ID: 1...
@@ -1145,13 +1154,13 @@ The following are some test cases for you to try:
 > **Important!** These test cases are done on the assumption that storage.txt file is empty.
 > If you have some data written into these files or modified storage.txt, please do the following prior to conducting the test cases mentioned below:
 > 
->(1) If Syslib CLI is running, exit the application.
+>(1) If Syslib is running, exit the application.
 > 
 >(2) Backup your existing `storage.txt` file in the `data` directory.
 > 
 >(3) Delete the `data` directory (not your backup!)
 > 
->(4) Start Syslib CLI to generate a fresh `storage.txt` in `data` directory.
+>(4) Start Syslib to generate a fresh `storage.txt` in `data` directory.
 
 | Test Case                             | Command                                                                                                                                                                                                                                                          | Expected result                                                                                                                                                                                    |
 |:--------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
