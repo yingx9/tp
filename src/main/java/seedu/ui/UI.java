@@ -97,11 +97,13 @@ public class UI {
     }
 
     public void showNoFileFoundMessage(String filePath) {
+        showLine();
         System.out.println("Storage file not found.");
         System.out.println("Creating new data file @ " + filePath);
     }
 
     public void showFileFoundMessage(String filePath) {
+        showLine();
         System.out.println("Storage file found @ " + filePath);
     }
 
