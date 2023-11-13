@@ -634,3 +634,55 @@ Nov 09, 2023 9:57:07 PM seedu.commands.ListCommand execute
 INFO: List Command execute with 
 Nov 09, 2023 9:57:07 PM seedu.commands.ListCommand execute
 INFO: List Command ends
+Nov 13, 2023 3:38:53 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 13, 2023 3:38:54 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s AVAILABLE
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s BORROWED
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s LOST
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Thriller
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Horror
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Adventure
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g Fiction
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /g null
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /tag B
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command ends
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with /s INVALIDSTATUS
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+INFO: List Command execute with 
+Nov 13, 2023 4:25:37 PM seedu.commands.ListCommand execute
+WARNING: ResourcesList is empty
