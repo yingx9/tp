@@ -736,3 +736,19 @@ Nov 13, 2023 8:34:55 PM seedu.commands.FindCommand displayResults
 INFO: No resources matched the given filters.
 Nov 13, 2023 8:34:55 PM seedu.commands.FindCommand <init>
 INFO: FindCommand instance created.
+Nov 13, 2023 9:30:38 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 13, 2023 9:31:21 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 13, 2023 9:42:22 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 13, 2023 9:42:37 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 13, 2023 9:53:34 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 13, 2023 9:53:34 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 13, 2023 9:53:34 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
+Nov 13, 2023 9:53:34 PM seedu.commands.FindCommand <init>
+INFO: FindCommand instance created.
