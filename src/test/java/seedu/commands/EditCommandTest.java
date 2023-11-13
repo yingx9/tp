@@ -41,7 +41,7 @@ public class EditCommandTest {
     @BeforeAll
     public static void setup() {
         testResourceList = TestUtil.fillTestList();
-        parser.container.setResourceList(testResourceList);
+        parser.container.setResourcesList(testResourceList);
 
     }
 
@@ -183,7 +183,7 @@ public class EditCommandTest {
     @Test
     public void testNotCorrectResourceTypeError() {
         List<Resource> dummyList = testUtil.addDummyResource(testResourceList);
-        parser.container.setResourceList(dummyList);
+        parser.container.setResourcesList(dummyList);
         executeAssertSysLibExceptionThrown("/id 1 /t dummyTitle", "Invalid Resource!");
 
     }

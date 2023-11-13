@@ -34,7 +34,7 @@ public class Syslib {
             storage.load(resourceListLoad, eventListLoad);
             ui.showLoadMessage(filePath, resourceListLoad, eventListLoad);
 
-            parser.container.setResourceList(resourceListLoad);
+            parser.container.setResourcesList(resourceListLoad);
             parser.container.setEventList(eventListLoad);
 
 

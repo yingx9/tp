@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ListCommandTest {
 
-    private static List<Resource> testResourceList = new ArrayList<>();
+    private static List<Resource> testResourcesList = new ArrayList<>();
     private static Parser parser = new Parser();
     private List<Resource> emptyResourceList = new ArrayList<>();
     private TestUtil testUtil = new TestUtil();
@@ -27,8 +27,8 @@ public class ListCommandTest {
 
     @BeforeAll
     public static void setup() throws SysLibException {
-        testResourceList = TestUtil.fillTestList();
-        parser.container.setResourceList(testResourceList);
+        testResourcesList = TestUtil.fillTestList();
+        parser.container.setResourcesList(testResourcesList);
 
     }
     @Test
@@ -70,7 +70,7 @@ public class ListCommandTest {
     }
 
     public void executeListFilterBehavior(String argument) throws SysLibException {
-        String outputMessage = testUtil.getOutputMessage(listCommand, argument, testResourceList);
+        String outputMessage = testUtil.getOutputMessage(listCommand, argument, testResourcesList);
         String expectedMessage = FILTER_MESSAGE + showResourcesDetails(matchedResources);
         assertEquals(expectedMessage, outputMessage);
 
@@ -78,7 +78,7 @@ public class ListCommandTest {
 
     @Test
     public void testNoFilteredListDisplay() throws SysLibException {
-        String outputMessage = testUtil.getOutputMessage(listCommand, "/g Thriller", testResourceList);
+        String outputMessage = testUtil.getOutputMessage(listCommand, "/g Thriller", testResourcesList);
         String expectedMessage = FILTER_MESSAGE;
         expectedMessage += ZERO_RESOURCES_MESSAGE;
         assertEquals(expectedMessage, outputMessage);
