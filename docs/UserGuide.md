@@ -638,6 +638,13 @@ Q: How do I open command terminal?
 A: For **Windows** users, click **Start** and search for **Command Prompt**. For **Mac** users, click the **Launchpad** 
 icon in the **Dock**, type **Terminal** in the search field, then click **Terminal**.
 
+Q: What should I do if I encounter an error or bug?  
+A: Go to your [github issue page](https://github.com/AY2324S1-CS2113T-W11-1/tp/issues) and submit an issue
+including the following:
+ - Steps to report bugs
+ - logs or error messages.
+
+We will get back to you as quickly as possible!
 ## Known Issues | [Return to Contents](#contents)
 
 ### List Table looks messy or unable to see the full details: [[Return to list feature]](#list-all-items-list--return-to-contents)
