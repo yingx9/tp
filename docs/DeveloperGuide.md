@@ -824,7 +824,7 @@ ____________________________________________________________
 Example response:
    
 ```
-Thanks for using SysLib CLI! We have saved the current resources and events.
+Thanks for using SysLib! We have saved the current resources and events.
 See you next time!
 ____________________________________________________________
 ```
