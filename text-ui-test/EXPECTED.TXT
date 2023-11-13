@@ -1,6 +1,8 @@
 ____________________________________________________________
+Data directory created.
 Storage file not found.
 Creating new data file @ .\data\storage.txt
+Storage file created.
 Loaded 0 resources and 0 events!
 ____________________________________________________________
              .....................                  
