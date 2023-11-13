@@ -332,6 +332,9 @@ Looking for a more specific list? `list` also offers you the capability to **fil
 > **📚 Note:**
 >- Including more than one filter will list resources that satisfy **ALL** given filters. 
 >- For example, `list /tag B /g Horror` will list Books with Horror genre.
+>- You can only specify one keyword per filter. 
+>  - **ALLOWED:** /g Horror 
+>  - **NOT ALLOWED:** /g Horror, Fiction
 
 **Potential Issues:**
 
