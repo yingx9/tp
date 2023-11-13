@@ -76,12 +76,12 @@ ____________________________________________________________
 > Summary of Resources:
 Total Resources: 2
 Total Books: [▓▓▓▓] 2
-Total CDs: [] 0
-Total Magazines: [] 0
 Total E-Books: [] 0
+Total Magazines: [] 0
 Total E-Magazines: [] 0
 Total Newspapers: [] 0
 Total E-Newspapers: [] 0
+Total CDs: [] 0
 
 Summary of Events:
 Total Events: 3
