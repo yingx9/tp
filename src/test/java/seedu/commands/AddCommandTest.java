@@ -1,7 +1,13 @@
 package seedu.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.data.resources.*;
+import seedu.data.resources.Book;
+import seedu.data.resources.EBook;
+import seedu.data.resources.CD;
+import seedu.data.resources.Magazine;
+import seedu.data.resources.EMagazine;
+import seedu.data.resources.Newspaper;
+import seedu.data.resources.ENewspaper;
 import seedu.data.Status;
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
