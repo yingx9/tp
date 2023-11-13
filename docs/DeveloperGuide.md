@@ -254,31 +254,31 @@ There are seven types of `Resource`:
 `add` has eighteen possible options:  
 
 - **Book** has four options:
-  - add /i [isbn] /t [title] /a [author] /tag [tag] 
-  - add /i [isbn] /t [title] /a [author] /tag [tag] _/g [genre]_
-  - add /i [isbn] /t [title] /a [author] /tag [tag] _/s [status]_
-  - add /i [isbn] /t [title] /a [author] /tag [tag] _/g [genre] /s [status]_
+  - `add /i [isbn] /t [title] /a [author] /tag [tag] `
+  - `add /i [isbn] /t [title] /a [author] /tag [tag] /g [genre]`
+  - `add /i [isbn] /t [title] /a [author] /tag [tag] /s [status]`
+  - `add /i [isbn] /t [title] /a [author] /tag [tag] /g [genre] /s [status]`
 - **EBook** has four options:
-    - add /i [isbn] /t [title] /a [author] /tag [tag] /l [link]
-    - add /i [isbn] /t [title] /a [author] /tag [tag] /l [link] _/g [genre]_
-    - add /i [isbn] /t [title] /a [author] /tag [tag] /l [link] _/s [status]_
-    - add /i [isbn] /t [title] /a [author] /tag [tag] /l [link] _/g [genre] /s [status]_
+    - `add /i [isbn] /t [title] /a [author] /tag [tag] /l [link]`
+    - `add /i [isbn] /t [title] /a [author] /tag [tag] /l [link] /g [genre]`
+    - `add /i [isbn] /t [title] /a [author] /tag [tag] /l [link] /s [status]`
+    - `add /i [isbn] /t [title] /a [author] /tag [tag] /l [link] /g [genre] /s [status]`
 - **CD** has two options:
-    - add /i [isbn] /t [title] /c [creator] /ty [type] /tag [tag]
-    - add /i [isbn] /t [title] /c [creator] /ty [type] /tag [tag] _/s [status]_
+    - `add /i [isbn] /t [title] /c [creator] /ty [type] /tag [tag]`
+    - `add /i [isbn] /t [title] /c [creator] /ty [type] /tag [tag] /s [status]`
 - **Magazine** has two options:
-    - add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag]
-    - add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag] _/s [status]_
+    - `add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag]`
+    - `add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag] /s [status]`
 - **EMagazine** has two options:
-    - add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag] /l [link]
-    - add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag] /l [link] _/s [status]_
+    - `add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag] /l [link]`
+    - `add /i [isbn] /t [title] /b [brand] /is [issue] /tag [tag] /l [link] /s [status]`
 - **Newspaper** has two options:
-    - add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag]
-    - add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] _/s [status]_
+    - `add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag]`
+    - `add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] /s [status]`
 - **ENewspaper** has two options:
-    - add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] /l [link]
-    - add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] /l [link] _/s [status]_
-
+    - `add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] /l [link]`
+    - `add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] /l [link] /s [status]`
+    - 
 #### Implementation
 
 It implements the following operations:
@@ -762,6 +762,7 @@ should be able to accomplish most of the tasks faster using commands than using 
 1. Initial launch
    1. Download the jar file and copy it into an empty folder.
    2. Open the command prompt / terminal and run `java -jar SysLib.jar`. You should see the following welcome message:
+
 ```
 ____________________________________________________________
 Storage file not found.
@@ -795,6 +796,7 @@ ____________________________________________________________
 Hello! What would you like to do?
 ____________________________________________________________
 ```
+
 2. Shutdown
    1. Enter the command `exit` into the program.
    2. Close the command prompt / terminal.
@@ -827,6 +829,7 @@ ____________________________________________________________
        Expected: A book with ISBN: 9783161484100, Title: Crime and Punishment, Author: Dostoevsky, Genre: Fiction, and 
        Status: LOST is created and added into the list. A message with details of the added book is displayed to 
        acknowledge that the book has been added successfully.
+   
     ```
     This book is added:
     [B]  ID: 2 Title: Crime and Punishment ISBN: 9783161484100 Author: Dostoevsky Genre: Fiction Status: LOST Received Date: 12 Nov 2023
@@ -836,6 +839,7 @@ ____________________________________________________________
    3. Test case: `add /i CAP123 /t Crime and Punishment /a Dostoevsky /tag B`
         
        Expected: No book is added. An error message is displayed to indicate that the ISBN is invalid.
+    
     ```
     Please enter a valid ISBN with 13 digits.
     ____________________________________________________________
@@ -843,6 +847,7 @@ ____________________________________________________________
    4. Test case: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag A`
 
       Expected: No book is added. An error message is displayed to indicate that the tag is invalid.
+    
     ```
     Please enter a valid tag.
     ____________________________________________________________
@@ -850,6 +855,7 @@ ____________________________________________________________
    5. Test case: `add /tag B`
    
       Expected: No book is added. An error message displayed to indicate that the input is incomplete.
+    
     ```
     Please enter a valid ISBN with 13 digits.
     ____________________________________________________________
@@ -863,6 +869,7 @@ ____________________________________________________________
     2. Test case: `list`
 
     Expected: A table showing details of current resources, in order of BOOKS, MAGAZINE, CDs, and NEWSPAPERS.
+    
     ```
     Listing resources matching given filters: 
 
@@ -877,16 +884,19 @@ ____________________________________________________________
     There are currently 2 resource(s).
     ____________________________________________________________
     ```
+   
 2. List when no resources are in list
     1. Prerequisites: No resources currently in SysLib
 
     2. Test case: `list`
 
     Expected: An error message saying "There are currently 0 resources."
+    
     ```
     There are currently no Resources in Syslib!
     ____________________________________________________________
     ```
+   
 3. List resources with filter options
 
    1. Test case: `list /tag B `
@@ -907,6 +917,7 @@ ____________________________________________________________
    2. Test case: `edit /id 1 /t NEWTILE /a AUTHOR`
 
       Expected: An edit success message displaying the new details of the edited resource, IF resource with `id 1` is a Book (Author is a Book argument). Else, error message saying wrong arguments and showing the right arguments.
+        
         ```
         Successfully updated! Your updated resource:
 
@@ -914,6 +925,7 @@ ____________________________________________________________
         ____________________________________________________________
 
         ```
+      
    3. Test case: `edit /id 1 /c NEWCREATOR`
 
       Expected: An edit success message displaying the new details of the edited resource, IF resource with `id 1` is a CD (Creator is a CD argument). Else, error message saying wrong arguments and showing the right arguments.
@@ -927,18 +939,21 @@ ____________________________________________________________
     2. Test case: `delete /id 1`
 
    Expected: Resoruce with ID 1 is removed
+    
     ```
     Looking for ID: 1...
     This resource is removed:
     [B]  ID: 1 Title: Crime and Punishment ISBN: 9783161484100 Author: Dostoevsky Genre: null Status: AVAILABLE Received Date: 13 Nov 2023
     ____________________________________________________________
     ```
+   
 2. Delete a resource that is not there
     1. Prerequisites: Resource is non-existent
     2. Test case: `delete /id 10`
 
    Expected: Error message saying the resource with given ID is not found.
-   ```
+
+    ```
     Looking for ID: 10...
     No resources with id matching 10
     ____________________________________________________________
@@ -963,6 +978,7 @@ ____________________________________________________________
        Expected: An Event with Title: Meeting, Date: 23 Dec 2023, Description: Board Meeting is
        created and added into the list. A message with details of the added event is displayed to acknowledge that the
        event has been added successfully.
+   
     ```
     Event inserted at: 0
     0: Meeting | 23 Dec 2023 | Board Meeting
@@ -972,6 +988,7 @@ ____________________________________________________________
     3. Test case: `eventadd /date 23 Dec 2023`
 
        Expected: No event is added. An error message is displayed to indicate that the Title is missing.
+   
     ```
     t is missing in the argument!
     ____________________________________________________________
@@ -979,6 +996,7 @@ ____________________________________________________________
     4. Test case: `eventadd /t Meeting`
 
        Expected: No event is added. An error message is displayed to indicate that the date is missing.
+   
     ```
     date is missing in the argument!
     ____________________________________________________________
@@ -992,26 +1010,31 @@ ____________________________________________________________
     2. Test case: `eventlist`
 
    Expected: A list showing details of current events, in order of its date.
+
     ```
     This is the current event list:
     0: Meeting | 23 Dec 2023 | Board Meeting
     1: New Year | 01 Jan 2024 | null
     ____________________________________________________________
     ```
+
 2. List when no resources are in list
     1. Prerequisites: No events currently in SysLib
 
     2. Test case: `eventlist`
 
    Expected: An error message saying "There event list is empty."
+
     ```
     The event list is empty!
     ____________________________________________________________
     ```
+
 3. List with unexpected arguments
    1. Test case: `eventlist /t title`
 
    Expected: An error message saying "'eventlist' command does not require arguments!"
+
     ```
     'eventlist' command does not require arguments!
     ____________________________________________________________
@@ -1024,6 +1047,7 @@ ____________________________________________________________
     2. Test case: `eventedit /id 0 /t Board Meeting`
 
        Expected: An edit success message displaying the new details of the edited event.
+   
     ```
     Event edited successfully. New event details:
     0: Board Meeting | 23 Dec 2023 | Board Meeting
@@ -1033,43 +1057,52 @@ ____________________________________________________________
    2. Test case: `eventedit /id 0 /t Meeting /date 22 Dec 2023 /desc Board Meeting with CEO`
 
        Expected: An edit success message displaying the new details of the edited event.
+   
     ```
     Event edited successfully. New event details:
     0: Meeting | 22 Dec 2023 | Board Meeting with CEO
     ____________________________________________________________
     ```
+
 2. Edit id given but no parameters were given
    1. Test case: `eventedit /id 0`
    
        Expected: An error message saying "Event was not edited as nothing was changed."
+   
     ```
     Event was not edited as nothing was changed.
     ____________________________________________________________
     ```
+
 3. Invalid id was given
     1. Test case: `eventedit /id 0`
 
        Expected: An error message saying "Event was not edited as nothing was changed."
+   
     ```
     Invalid event index
     ____________________________________________________________
     ```
+
 ### Deleting Event
 1. Delete an event
     1. Prerequisites: At least one resource present.
     2. Test case: `eventdelete /id 0`
 
    Expected: Event with ID 0 is removed
+
     ```
     This event is removed:
     Meeting | 22 Dec 2023 | Board Meeting with CEO
     ____________________________________________________________
     ```
+
 2. Delete an event that is not there
     1. Prerequisites: Event is non-existent
     2. Test case: `eventdelete /id 10`
 
    Expected: Error message saying the event with given ID is not found.
+
     ```
     Index is out of range of the event list!
     ____________________________________________________________
