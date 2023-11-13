@@ -1,12 +1,10 @@
 package seedu.commands;
 
-import seedu.commands.events.EventEditCommand;
 import seedu.data.GenericList;
 import seedu.data.events.Event;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.FileHandler;

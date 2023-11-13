@@ -2,11 +2,8 @@ package seedu.commands;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import seedu.commands.events.EventAddCommand;
-import seedu.data.GenericList;
-import seedu.data.Status;
 import seedu.data.events.Event;
-import seedu.data.resources.*;
+import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.util.TestUtil;
@@ -23,12 +20,9 @@ public class SummaryCommandTest {
 
     private static List<Resource> testResourcesList = new ArrayList<>();
     private static List<Event> testEventsList = new ArrayList<>();
-    private TestUtil testUtil = new TestUtil();
-
-    private static Parser parser = new Parser();
-    private Command summaryCommand = new SummaryCommand();
-    private final AddCommand addCommand = new AddCommand();
-    private final EventAddCommand eventAddCommand = new EventAddCommand();
+    private static final Parser parser = new Parser();
+    private final TestUtil testUtil = new TestUtil();
+    private final Command summaryCommand = new SummaryCommand();
     @BeforeAll
     public static void setup() throws SysLibException {
         testResourcesList = TestUtil.fillTestResourcesList();
@@ -52,7 +46,8 @@ public class SummaryCommandTest {
                 "Total E-Books: [█] 1" + System.lineSeparator() +
                 "Total E-Magazines: [█] 1" + System.lineSeparator() +
                 "Total Newspapers: [█] 1" + System.lineSeparator() +
-                "Total E-Newspapers: [█] 1" + System.lineSeparator() + System.lineSeparator() +
+                "Total E-Newspapers: [█] 1" + System.lineSeparator()
+                + System.lineSeparator() +
                 "Summary of Events:" + System.lineSeparator() +
                 "Total Events: 5" + System.lineSeparator() +
                 "Upcoming Events (Next 3):" + System.lineSeparator() +
