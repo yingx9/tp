@@ -8,7 +8,6 @@ import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.util.TestUtil;
 
-import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
