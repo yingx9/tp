@@ -3,9 +3,6 @@ package seedu.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.IllegalFormatException;
@@ -29,8 +26,6 @@ import seedu.data.resources.CD;
 import seedu.data.resources.Resource;
 import seedu.exception.SysLibException;
 import seedu.ui.UI;
-
-import static java.lang.System.exit;
 
 public class Storage {
     public static final int FIRST_INDEX = 0;
