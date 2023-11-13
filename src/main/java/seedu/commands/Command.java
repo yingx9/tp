@@ -100,6 +100,11 @@ public abstract class Command {
 
     }
 
+    /**
+     * Check the matched strings is empty and considered the next argument it's variable
+     * @param matched The matched string
+     * @param pointer The argument
+     */
     public void checkMatch (String matched, int pointer){
         if (matched.contains("/")) {
             throw new IllegalArgumentException("Avoid using '/' as names, your " + args[pointer] +
@@ -107,6 +112,11 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Get the reason for a failed command
+     * @param message the leftover variables/commands
+     * @return reason for failure
+     */
     public String getReason(String message) {
         message = message.stripLeading();
         if (!message.startsWith("/")){
