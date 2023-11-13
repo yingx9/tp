@@ -86,9 +86,10 @@ Checks the user input for all attributes in all resources. Returns error message
 - **Reduce limitations of input**
   - Allow almost all characters in input 
 - **Limitations**
+  - ISBN has to be 13 digits
+  - "[" and "]" are not allowed in genres
   - Allow the use of slashes in data under certain conditions
     - To specify argument and when it is wrapped with words
-  - "[" and "]" not allowed in genres.
 - **Keywords**
   - Types of data are checked with arguments 
     - Arguments are in the format: "/ARGUMENT"
