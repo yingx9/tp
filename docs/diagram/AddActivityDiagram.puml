@@ -1,0 +1,88 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:execute();
+:Add Info to Log;
+:parseAddCommand();
+if (isBook?) then (yes)
+    :addBook();
+    :parseAddBook();
+    :parseBookArgs();
+    if (isValid?) then (yes)
+        :createBook();
+    else (no)
+        stop
+    endif
+
+else if (isEBook?) then (yes)
+    :addEBook();
+    :parseAddEBook();
+    :parseEBookArgs();
+    if (isValid?) then (yes)
+        :createEBook();
+    else (no)
+        stop
+    endif
+
+else if (isCD?) then (yes)
+    :addCD();
+    :parseAddCD();
+    :parseCDArgs();
+    if (isValid?) then (yes)
+        :createCD();
+    else (no)
+        stop
+    endif
+
+else if (isMagazine?) then (yes)
+    :addMagazine();
+    :parseAddMagazine();
+    :parseMagazineArgs();
+    if (isValid?) then (yes)
+        :createMagazine();
+    else (no)
+        stop
+    endif
+
+else if (isEMagazine?) then (yes)
+    :addEMagazine();
+    :parseAddEMagazine();
+    :parseEMagazineArgs();
+    if (isValid?) then (yes)
+        :createEMagazine();
+    else (no)
+        stop
+    endif
+
+else if (isNewspaper?) then (yes)
+    :addNewspaper();
+    :parseAddNewspaper();
+    :parseNewspaperArgs();
+    if (isValid?) then (yes)
+        :createNewspaper();
+    else (no)
+        stop
+    endif
+
+else if (isENewspaper?) then (yes)
+    :addENewspaper();
+    :parseAddENewspaper();
+    :parseENewspaperArgs();
+    if (isValid?) then (yes)
+        :createENewspaper();
+    else (no)
+        stop
+    endif
+
+else (no)
+    stop
+endif
+
+:Add to Resource List;
+:Display Add Message;
+:Add Info to Log;
+
+stop
+
+@enduml
