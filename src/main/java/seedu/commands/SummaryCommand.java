@@ -119,31 +119,31 @@ public class SummaryCommand extends Command {
         int newspaperBarLength = (int) (maxBarLength * ((double) totalNewspapers / maxCount));
         int eNewspaperBarLength = (int) (maxBarLength * ((double) totalENewspapers / maxCount));
 
-        graph.append("Summary of Resources:\n");
-        graph.append("Total Resources: ").append(totalResources).append("\n");
+        graph.append("Summary of Resources:" + System.lineSeparator());
+        graph.append("Total Resources: ").append(totalResources).append(System.lineSeparator());
         graph.append("Total Books: ").append(generateBar(bookBarLength)).append(" ")
-                .append(totalBooks).append("\n");
+                .append(totalBooks).append(System.lineSeparator());
         graph.append("Total CDs: ").append(generateBar(cdBarLength)).append(" ")
-                .append(totalCDs).append("\n");
+                .append(totalCDs).append(System.lineSeparator());
         graph.append("Total Magazines: ").append(generateBar(magazineBarLength)).append(" ")
-                .append(totalMagazines).append("\n");
+                .append(totalMagazines).append(System.lineSeparator());
         graph.append("Total E-Books: ").append(generateBar(eBookBarLength)).append(" ")
-                .append(totalEBooks).append("\n");
+                .append(totalEBooks).append(System.lineSeparator());
         graph.append("Total E-Magazines: ").append(generateBar(eMagazineBarLength)).append(" ")
-                .append(totalEMagazines).append("\n");
+                .append(totalEMagazines).append(System.lineSeparator());
         graph.append("Total Newspapers: ").append(generateBar(newspaperBarLength)).append(" ")
-                .append(totalNewspapers).append("\n");
+                .append(totalNewspapers).append(System.lineSeparator());
         graph.append("Total E-Newspapers: ").append(generateBar(eNewspaperBarLength)).append(" ")
-                .append(totalENewspapers).append("\n");;
+                .append(totalENewspapers).append(System.lineSeparator());;
 
         LOGGER.info("Summarizing events");
 
-        graph.append("\nSummary of Events:\n");
+        graph.append(System.lineSeparator() + "Summary of Events:" + System.lineSeparator());
 
-        graph.append("Total Events: ").append(events.size()).append("\n");
+        graph.append("Total Events: ").append(events.size()).append(System.lineSeparator());
 
         if (!events.isEmpty()) {
-            graph.append("Upcoming Events (Next 3):\n");
+            graph.append("Upcoming Events (Next 3):" + System.lineSeparator());
             for (int i = 0; i < upcomingEvents.size(); i++) {
                 Event event = upcomingEvents.get(i);
                 graph.append(i + 1)
@@ -153,10 +153,10 @@ public class SummaryCommand extends Command {
                         .append(event.getDate().format(formatter))
                         .append(" | ")
                         .append(event.getDescription())
-                        .append("\n");
+                        .append(System.lineSeparator());
             }
         }
-        graph.append(LINEDIVIDER+"\n");
+        graph.append(LINEDIVIDER + System.lineSeparator());
 
         return new CommandResult(graph.toString());
     }
