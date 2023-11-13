@@ -11,7 +11,7 @@ From viewing, adding, searching, editing, deleting and saving, SysLib provides a
 
 View the code I contributed via the tp Code Dashboard link [here](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=DavinciDelta&breakdown=true).
 
-#### Features implemented
+#### Enhancements implemented
 1. Command and Delete Command for resources
 2. Parser and suggestParser Class
 3. EventAdd, EventList, EventDelete Command for events

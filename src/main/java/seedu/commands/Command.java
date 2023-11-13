@@ -128,8 +128,7 @@ public abstract class Command {
                 if(parseInt(variables.get(0)) != -1){
                     return "Unknown variable: " + message +  ", avoid using '/' in arguments. " + "\n" +
                             "Dates are in the format of DD MMM YYYY, e.g. 25 Dec 2023";
-                }
-                else{
+                } else {
                     return "You need spacing in between arguments";
                 }
             } else {
