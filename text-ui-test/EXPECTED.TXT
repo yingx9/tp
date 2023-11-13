@@ -54,7 +54,13 @@ ____________________________________________________________
 > Please enter a valid ISBN with 13 digits.
 ____________________________________________________________
 > Commands available:
-[add] adds a new resource to the library inventory. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
+[add] (Book) Adds a new book. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])
+[add] (eBook) Adds a new eBook. (e.g. add /i ISBN /t TITLE /a AUTHOR /tag eb /l LINK [/g GENRE /s STATUS])
+[add] (CD) Adds a new CD. (e.g. add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag cd [/s STATUS])
+[add] (Magazine) Adds a new magazine. (e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag m [/s STATUS])
+[add] (eMagazine) Adds a new eMagazine. (e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag em /l LINK [/s STATUS])
+[add] (Newspaper) Adds a new newspaper. (e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag n [/s STATUS])
+[add] (eNewspaper) Adds a new eNewspaper. (e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag en /l LINK [/s STATUS])
 [delete] deletes the resource with the specified ID from the library inventory. (e.g. delete /id 123456789)
 [list] lists all resources OR filter by certain tags, genre, or status. (e.g. list /tag B /g Fiction /s AVAILABLE)
 [find] finds a resource by title, author, ISBN or given id. (e.g. find /i 9780763630188 /a AUTHOR)

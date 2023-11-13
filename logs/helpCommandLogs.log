@@ -1096,3 +1096,17 @@ Nov 09, 2023 9:57:08 PM seedu.commands.FindCommand execute
 INFO: No resources matched the given filters.
 Nov 09, 2023 9:57:08 PM seedu.commands.FindCommand <init>
 INFO: FindCommand instance created.
+Nov 13, 2023 3:37:38 PM seedu.commands.HelpCommand execute
+INFO: Executing HelpCommand
+Nov 13, 2023 3:37:41 PM seedu.commands.HelpCommand execute
+INFO: Executing HelpCommand
+Nov 13, 2023 4:19:47 PM seedu.commands.HelpCommand execute
+INFO: Executing HelpCommand
+Nov 13, 2023 4:24:15 PM seedu.commands.HelpCommand execute
+INFO: Executing HelpCommand
+Nov 13, 2023 4:24:34 PM seedu.commands.HelpCommand execute
+INFO: Executing HelpCommand
+Nov 13, 2023 4:25:37 PM seedu.commands.HelpCommand execute
+INFO: Executing HelpCommand
+Nov 13, 2023 4:25:37 PM seedu.commands.HelpCommand execute
+INFO: Executing HelpCommand

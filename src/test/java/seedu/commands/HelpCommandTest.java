@@ -18,11 +18,39 @@ class HelpCommandTest {
         System.setOut(new PrintStream(outputStream));
         HelpCommand helpCommand = new HelpCommand();
         helpCommand.execute("", parser.container);
-
+/*
+        System.lineSeparator() + "[add] (Book) Adds a new book. " +
+                "(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])"+
+        System.lineSeparator() + "[add] (eBook) Adds a new eBook. " +
+                "(e.g. add /i ISBN /t TITLE /a AUTHOR /tag eb /l LINK [/g GENRE /s STATUS])"+
+        System.lineSeparator() + "[add] (CD) Adds a new CD. " +
+                "(e.g. add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag cd [/s STATUS])"+
+        System.lineSeparator() + "[add] (Magazine) Adds a new magazine. " +
+                "(e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag m [/s STATUS])"+
+        System.lineSeparator() + "[add] (eMagazine) Adds a new eMagazine. " +
+                "(e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag em /l LINK [/s STATUS])"+
+        System.lineSeparator() + "[add] (Newspaper) Adds a new newspaper. " +
+                "(e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag n [/s STATUS])"+
+        System.lineSeparator() + "[add] (eNewspaper) Adds a new eNewspaper. " +
+                "(e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag en /l LINK [/s STATUS])"+
+ */
         String output = outputStream.toString();
-        String expectedOutput = "Commands available:" + System.lineSeparator() +
-                "[add] adds a new resource to the library inventory. " +
-                "(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])" + System.lineSeparator() +
+        String expectedOutput = "Commands available:" +
+        System.lineSeparator() + "[add] (Book) Adds a new book. " +
+                "(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])" +
+                System.lineSeparator() + "[add] (eBook) Adds a new eBook. " +
+                "(e.g. add /i ISBN /t TITLE /a AUTHOR /tag eb /l LINK [/g GENRE /s STATUS])" +
+                System.lineSeparator() + "[add] (CD) Adds a new CD. " +
+                "(e.g. add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag cd [/s STATUS])" +
+                System.lineSeparator() + "[add] (Magazine) Adds a new magazine. " +
+                "(e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag m [/s STATUS])" +
+                System.lineSeparator() + "[add] (eMagazine) Adds a new eMagazine. " +
+                "(e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag em /l LINK [/s STATUS])" +
+                System.lineSeparator() + "[add] (Newspaper) Adds a new newspaper. " +
+                "(e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag n [/s STATUS])" +
+                System.lineSeparator() + "[add] (eNewspaper) Adds a new eNewspaper. " +
+                "(e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag en /l LINK [/s STATUS])"+
+                System.lineSeparator() +
                 "[delete] deletes the resource with the specified ID from the library inventory. " +
                 "(e.g. delete /id 123456789)" + System.lineSeparator() +
                 "[list] lists all resources OR filter by certain tags, genre, or status. " +

@@ -65,8 +65,20 @@ public class UI {
 
     public void showHelpMessage() {
         System.out.println("Commands available:");
-        System.out.println("[add] adds a new resource to the library inventory. " +
+        System.out.println("[add] (Book) Adds a new book. " +
                 "(e.g. add /i ISBN /t TITLE /a AUTHOR /tag TAG [/g GENRE /s STATUS])");
+        System.out.println("[add] (eBook) Adds a new eBook. " +
+                "(e.g. add /i ISBN /t TITLE /a AUTHOR /tag eb /l LINK [/g GENRE /s STATUS])");
+        System.out.println("[add] (CD) Adds a new CD. " +
+                "(e.g. add /i ISBN /t TITLE /c CREATOR /ty TYPE /tag cd [/s STATUS])");
+        System.out.println("[add] (Magazine) Adds a new magazine. " +
+                "(e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag m [/s STATUS])");
+        System.out.println("[add] (eMagazine) Adds a new eMagazine. " +
+                "(e.g. add /i ISBN /t TITLE /b BRAND /is ISSUE /tag em /l LINK [/s STATUS])");
+        System.out.println("[add] (Newspaper) Adds a new newspaper. " +
+                "(e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag n [/s STATUS])");
+        System.out.println("[add] (eNewspaper) Adds a new eNewspaper. " +
+                "(e.g. add /i ISBN /t TITLE /p PUBLISHER /ed EDITION /tag en /l LINK [/s STATUS])");
         System.out.println("[delete] deletes the resource with the specified ID from the library inventory. " +
                 "(e.g. delete /id 123456789)");
         System.out.println("[list] lists all resources OR filter by certain tags, genre, or status. " +
