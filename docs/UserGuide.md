@@ -468,11 +468,13 @@ Argument names differ based on resource type. The table below shows the argument
 For example, if you would like to update a eBook, you can edit the attributes given under the **Argument Names** column, that is the title, author, genre, status, link, and isbn.
 
 **Example input:**
+
 ```
 edit /id 1 /t NEW_TITLE
-edit /id 2 /t NEW_TITLE /a NEW_AUTHOR
-edit /id 2 /g Horror, Adventure
-edit /id 3 /s lost
+edit /id 1 /t NEW TITLE /a NEW AUTHOR /g Horror, Fiction /s LOST /i 1231231231234
+edit /id 2 /c NEW CREATOR /ty NEW TYPE
+edit /id 3 /b NEW BRAND /is NEW ISSUE
+edit /id 4 /p NEW PUSBLISHER /ed NEW EDITION
 ```
 
 **Example output:**
