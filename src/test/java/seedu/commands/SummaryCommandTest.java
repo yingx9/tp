@@ -11,17 +11,12 @@ import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.util.TestUtil;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.commands.ListCommand.matchedResources;
-import static seedu.ui.ListCommandMessages.FILTER_MESSAGE;
-import static seedu.ui.UI.showResourcesDetails;
 
 
 public class SummaryCommandTest {
