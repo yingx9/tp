@@ -63,7 +63,7 @@ work.
 1. Make sure that you have Java 11 or above installed on your computer.
     - Open terminal and type `java --version`
     - [How do I check the version of my Java](https://www.java.com/en/download/help/version_manual.html)
-2. [Download the latest release](https://github.com/AY2324S1-CS2113T-W11-1/tp/releases/tag/v1.0) of `Syslib.jar`
+2. [Download the latest release](https://github.com/AY2324S1-CS2113T-W11-1/tp/releases/tag/v2.1) of `Syslib.jar`
 3. Copy the `Syslib.jar` file into a folder on its own.
 4. Open a command terminal, type `cd <FILE_DIRECTORY>`, where <FILE_DIRECTORY> refers to the directory to the `Syslib.jar` file.
 5. Run the following command: `java -jar Syslib.jar`. You should see the following welcome screen.
@@ -332,6 +332,9 @@ Looking for a more specific list? `list` also offers you the capability to **fil
 > **📚 Note:**
 >- Including more than one filter will list resources that satisfy **ALL** given filters. 
 >- For example, `list /tag B /g Horror` will list Books with Horror genre.
+>- You can only specify one keyword per filter. 
+>  - **ALLOWED:** /g Horror 
+>  - **NOT ALLOWED:** /g Horror, Fiction
 
 **Potential Issues:**
 
@@ -341,9 +344,10 @@ You may face an issue where you are unable to see the list, or it's difficult to
 ```
 list
 list /tag B
-list /tag B /g Fiction
 list /g Thrill
 list /s Available
+list /tag B /g Fiction
+list /tag B /g Fiction /s Available
 ```
 
 **Example output:**
@@ -464,11 +468,13 @@ Argument names differ based on resource type. The table below shows the argument
 For example, if you would like to update a eBook, you can edit the attributes given under the **Argument Names** column, that is the title, author, genre, status, link, and isbn.
 
 **Example input:**
+
 ```
 edit /id 1 /t NEW_TITLE
-edit /id 2 /t NEW_TITLE /a NEW_AUTHOR
-edit /id 2 /g Horror, Adventure
-edit /id 3 /s lost
+edit /id 1 /t NEW TITLE /a NEW AUTHOR /g Horror, Fiction /s LOST /i 1231231231234
+edit /id 2 /c NEW CREATOR /ty NEW TYPE
+edit /id 3 /b NEW BRAND /is NEW ISSUE
+edit /id 4 /p NEW PUSBLISHER /ed NEW EDITION
 ```
 
 **Example output:**

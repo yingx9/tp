@@ -90,6 +90,7 @@ You are now ready to begin developing! If you would like to end Syslib, type `ex
 <img src="images/ArchitectureDiagram.png" />
 
 The above diagram is a simplified overview of Syslib and its components. More details can be found in the following sections.  
+
 **Main components of SysLib Architecture**
 
 SysLib currently consists of five main components:
@@ -755,7 +756,7 @@ should be able to accomplish most of the tasks faster using commands than using 
 ## Instructions for Manual Testing | [Return to contents](#table-of-contents)
 
 > Note: These instructions only provide a starting point for testers to work on; Testers are expected to do more _exploratory_ testing.
-> 
+
 ### Launch & Shutdown
 
 1. Initial launch
@@ -797,7 +798,9 @@ ____________________________________________________________
 2. Shutdown
    1. Enter the command `exit` into the program.
    2. Close the command prompt / terminal.
+   
 Example response:
+   
 ```
 Bye, hope to see you again soon!
 ____________________________________________________________
