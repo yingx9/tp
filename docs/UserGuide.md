@@ -344,9 +344,10 @@ You may face an issue where you are unable to see the list, or it's difficult to
 ```
 list
 list /tag B
-list /tag B /g Fiction
 list /g Thrill
 list /s Available
+list /tag B /g Fiction
+list /tag B /g Fiction /s Available
 ```
 
 **Example output:**
