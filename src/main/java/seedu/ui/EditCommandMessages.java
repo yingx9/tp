@@ -8,7 +8,7 @@ public class EditCommandMessages {
     public static final String INVALID_EDIT_ARGS =  formatLineSeparator("Invalid edit arguments!");
     public static final String NEWSPAPERS_ARGS_MESSAGE =
             "For Newspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS /i ISBN" + formatLastLineDivider("For " +
-                    "ENewspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS " + "/l LINK /i ISBN");
+                    "ENewspapers: /t TITLE /p PUBLISHER /ed EDITION /s STATUS /l LINK /i ISBN");
     public static final String BOOK_ARGS_MESSAGE = "For Books: /t TITLE /a AUTHOR /g GENRES /s STATUS /i ISBN" +
             formatLastLineDivider("For EBooks: /t TITLE /a AUTHOR /g GENRES /s STATUS /l LINK /i ISBN");
     public static final String CD_ARGS_MESSAGE = formatLastLineDivider("For CDs: /t TITLE /c CREATOR" +
