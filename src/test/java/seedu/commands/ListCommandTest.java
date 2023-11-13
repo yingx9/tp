@@ -59,6 +59,7 @@ public class ListCommandTest {
         executeListFilterBehavior("/g Horror");
         executeListFilterBehavior("/g Adventure");
         executeListFilterBehavior("/g Fiction");
+        executeListFilterBehavior("/g null");
     }
 
     @Test

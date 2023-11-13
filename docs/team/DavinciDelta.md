@@ -2,7 +2,7 @@
 
 ## Overview
 
-SysLib is a CLI Library Management software for librarians.
+SysLib is a CLI Library Management software for system librarians.
 
 From viewing, adding, searching, editing, deleting and saving, SysLib provides all the features needed to manage library resources and events.
 ### Summary of Contributions
