@@ -87,4 +87,22 @@ public class EventAddCommandTest {
     public void eventAddCommandInsufficientData2() {
         assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute("/t Hello", parser.container));
     }
+
+    @Test
+    public void eventAddCommandDuplicateTitle() {
+        assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute(
+                "/t Hello /t Hello2 /date 20 Jan 2023", parser.container));
+    }
+
+    @Test
+    public void eventAddCommandDuplicateDate() {
+        assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute(
+                "/t Hello /date 17 Jan 2023 /date 20 Jan 2023", parser.container));
+    }
+
+    @Test
+    public void eventAddCommandInvalidArguments() {
+        assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute(
+                "Invalid /t Hello /date 20 Jan 2023", parser.container));
+    }
 }
