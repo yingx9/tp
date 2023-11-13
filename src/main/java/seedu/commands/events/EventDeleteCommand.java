@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import static seedu.ui.UI.LINEDIVIDER;
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 public class EventDeleteCommand extends Command {
 
@@ -40,7 +41,7 @@ public class EventDeleteCommand extends Command {
     }
 
     public EventDeleteCommand() {
-        args = new String[]{"i"};
+        args = new String[]{"id"};
         required = new boolean[]{true};
         LOGGER.info("EventDelete Command created.");
     }
@@ -62,9 +63,13 @@ public class EventDeleteCommand extends Command {
     public int parseCalendarInt(String value, GenericList<Resource, Event> container) {
         int index = parseInt(value);
         int size = container.getEventsList().size();
+        if (size == 0) {
+            LOGGER.warning("EventsList is empty");
+            throw new IllegalArgumentException("There are currently no Events in Syslib!" + SEPARATOR_LINEDIVIDER);
+        }
         if (index >= size || index < 0) {
             LOGGER.warning("Index is out of range");
-            throw new IllegalArgumentException("Index is out of range of the event list!");
+            throw new IllegalArgumentException("Index is out of range of the event list!" + SEPARATOR_LINEDIVIDER);
         }
         LOGGER.warning("Index found");
         return index;

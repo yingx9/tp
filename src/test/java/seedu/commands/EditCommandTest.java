@@ -32,22 +32,22 @@ import static seedu.ui.ListCommandMessages.STATUS_ERROR_MESSAGE;
 import static seedu.ui.MessageFormatter.formatLastLineDivider;
 
 public class EditCommandTest {
-    private static List<Resource> testResourcesList = new ArrayList<>();
+    private static List<Resource> testResourceList = new ArrayList<>();
     private static Parser parser = new Parser();
     private List<Resource> emptyResourceList = new ArrayList<>();
     private TestUtil testUtil = new TestUtil();
     private Command editCommand = new EditCommand();
 
     @BeforeAll
-    public static void setup()  {
-        testResourcesList = TestUtil.fillTestList();
-        parser.container.setResourcesList(testResourcesList);
+    public static void setup() {
+        testResourceList = TestUtil.fillTestList();
+        parser.container.setResourceList(testResourceList);
 
     }
 
     @Test
     public void testEditTitleBehavior() throws SysLibException {
-        Resource targetResource = testResourcesList.get(0);
+        Resource targetResource = testResourceList.get(0);
         String expectedMessage = targetResource.toString();
         expectedMessage = expectedMessage.replace(targetResource.getTitle(), "NEW TITLE");
         executeEditSuccessBehavior("/id 2 /t NEW TITLE", expectedMessage );
@@ -55,7 +55,7 @@ public class EditCommandTest {
 
     @Test
     public void testEditStatusBehavior() throws SysLibException {
-        Resource targetResource = testResourcesList.get(0);
+        Resource targetResource = testResourceList.get(0);
         String expectedMessage = targetResource.toString();
         expectedMessage = expectedMessage.replace(targetResource.getStatus().name(), "LOST");
         executeEditSuccessBehavior("/id 2 /s LOST", expectedMessage );
@@ -67,7 +67,7 @@ public class EditCommandTest {
 
     @Test
     public void testEditISBNBehavior() throws SysLibException {
-        Resource targetResource = testResourcesList.get(0);
+        Resource targetResource = testResourceList.get(0);
         String expectedMessage = targetResource.toString();
         expectedMessage = expectedMessage.replace(targetResource.getISBN(), "1234567891234");
         executeEditSuccessBehavior("/id 2 /i 1234567891234", expectedMessage );
@@ -75,7 +75,7 @@ public class EditCommandTest {
 
     @Test
     public void testEditBookAuthorBehavior() throws SysLibException {
-        Book targetBook = (Book) testResourcesList.get(0);
+        Book targetBook = (Book) testResourceList.get(0);
         String expectedMessage = targetBook.toString();
         expectedMessage = expectedMessage.replace(targetBook.getAuthor(), "NEW AUTHOR");
         executeEditSuccessBehavior("/id 2 /a NEW AUTHOR", expectedMessage);
@@ -83,7 +83,7 @@ public class EditCommandTest {
 
     @Test
     public void testEditBookGenreBehavior() throws SysLibException {
-        Book targetBook = (Book) testResourcesList.get(0);
+        Book targetBook = (Book) testResourceList.get(0);
         String expectedMessage = targetBook.toString();
         expectedMessage = expectedMessage.replace(targetBook.getGenreString(), "Horror, Action, Fantasy");
         executeEditSuccessBehavior("/id 2 /g Horror, Action, Fantasy",expectedMessage);
@@ -91,7 +91,7 @@ public class EditCommandTest {
 
     @Test
     public void testEditMagazineBrandBehavior() throws SysLibException {
-        Magazine targetMagazine = (Magazine) testResourcesList.get(4);
+        Magazine targetMagazine = (Magazine) testResourceList.get(4);
         String expectedMessage = targetMagazine.toString();
         expectedMessage = expectedMessage.replace(targetMagazine.getBrand(), "NEW BRAND");
         executeEditSuccessBehavior("/id 6 /b NEW BRAND",expectedMessage);
@@ -99,7 +99,7 @@ public class EditCommandTest {
 
     @Test
     public void testEditMagazineIssueBehavior() throws SysLibException {
-        Magazine targetMagazine = (Magazine) testResourcesList.get(4);
+        Magazine targetMagazine = (Magazine) testResourceList.get(4);
         String expectedMessage = targetMagazine.toString();
         expectedMessage = expectedMessage.replace(targetMagazine.getIssue(), "NEW ISSUE");
         executeEditSuccessBehavior("/id 6 /is NEW ISSUE",expectedMessage);
@@ -108,7 +108,7 @@ public class EditCommandTest {
 
     @Test
     public void testEditCDCreatorBehavior() throws SysLibException {
-        CD targetCD = (CD) testResourcesList.get(6);
+        CD targetCD = (CD) testResourceList.get(6);
         String expectedMessage = targetCD.toString();
         expectedMessage = expectedMessage.replace(targetCD.getCreator(), "NEW CREATOR");
         executeEditSuccessBehavior("/id 8 /c NEW CREATOR",expectedMessage);
@@ -116,7 +116,7 @@ public class EditCommandTest {
 
     @Test
     public void testEditCDTypeBehavior() throws SysLibException {
-        CD targetCD = (CD) testResourcesList.get(6);
+        CD targetCD = (CD) testResourceList.get(6);
         String expectedMessage = targetCD.toString();
         expectedMessage = expectedMessage.replace(targetCD.getType(), "NEW TYPE");
         executeEditSuccessBehavior("/id 8 /ty NEW TYPE",expectedMessage);
@@ -124,7 +124,7 @@ public class EditCommandTest {
 
     @Test
     public void testEditNewspaperPublisherBehavior() throws SysLibException {
-        Newspaper targetNewspaper = (Newspaper) testResourcesList.get(7);
+        Newspaper targetNewspaper = (Newspaper) testResourceList.get(7);
         String expectedMessage = targetNewspaper.toString();
         expectedMessage = expectedMessage.replace(targetNewspaper.getPublisher(), "NEW PUBLISHER");
         executeEditSuccessBehavior("/id 9 /p NEW PUBLISHER",expectedMessage);
@@ -132,21 +132,21 @@ public class EditCommandTest {
 
     @Test
     public void testEditNewspaperEditionBehavior() throws SysLibException {
-        Newspaper targetNewspaper = (Newspaper) testResourcesList.get(7);
+        Newspaper targetNewspaper = (Newspaper) testResourceList.get(7);
         String expectedMessage = targetNewspaper.toString();
         expectedMessage = expectedMessage.replace(targetNewspaper.getEdition(), "NEW EDITION");
         executeEditSuccessBehavior("/id 9 /ed NEW EDITION",expectedMessage);
     }
     @Test
     public void testEditEBookLinkBehavior() throws SysLibException {
-        EBook targetEBook = (EBook) testResourcesList.get(3);
+        EBook targetEBook = (EBook) testResourceList.get(3);
         String expectedMessage = targetEBook.toString();
         expectedMessage = expectedMessage.replace(targetEBook.getLink(), "NEW LINK");
         executeEditSuccessBehavior("/id 5 /l NEW LINK",expectedMessage);
     }
     @Test
     public void testEditEMagazineLinkBehavior() throws SysLibException {
-        EMagazine targetEMagazine = (EMagazine) testResourcesList.get(5);
+        EMagazine targetEMagazine = (EMagazine) testResourceList.get(5);
         String expectedMessage = targetEMagazine.toString();
         expectedMessage = expectedMessage.replace(targetEMagazine.getLink(), "NEW LINK");
         executeEditSuccessBehavior("/id 7 /l NEW LINK",expectedMessage);
@@ -154,14 +154,14 @@ public class EditCommandTest {
 
     @Test
     public void testEditENewspaperLinkBehavior() throws SysLibException {
-        ENewspaper targetENewspaper = (ENewspaper) testResourcesList.get(8);
+        ENewspaper targetENewspaper = (ENewspaper) testResourceList.get(8);
         String expectedMessage = targetENewspaper.toString();
         expectedMessage = expectedMessage.replace(targetENewspaper.getLink(), "NEW LINK");
         executeEditSuccessBehavior("/id 10 /l NEW LINK",expectedMessage);
     }
 
     private void executeEditSuccessBehavior(String argument, String expectedMessage) throws SysLibException {
-        String outputMessage = testUtil.getOutputMessage(editCommand, argument, testResourcesList);
+        String outputMessage = testUtil.getOutputMessage(editCommand, argument, testResourceList);
         expectedMessage = EDIT_SUCCESS + formatLastLineDivider(expectedMessage);
         assertEquals(expectedMessage, outputMessage);
     }
@@ -175,56 +175,56 @@ public class EditCommandTest {
     }
 
     @Test
-    public void testNoArgumentGiven()  {
+    public void testNoArgumentGiven() {
         executeAssertSysLibExceptionThrown("/id 123", MISSING_ARG_MESSAGE);
 
     }
 
     @Test
     public void testNotCorrectResourceTypeError() {
-        List<Resource> dummyList = testUtil.addDummyResource(testResourcesList);
-        parser.container.setResourcesList(dummyList);
+        List<Resource> dummyList = testUtil.addDummyResource(testResourceList);
+        parser.container.setResourceList(dummyList);
         executeAssertSysLibExceptionThrown("/id 1 /t dummyTitle", "Invalid Resource!");
 
     }
 
     @Test
-    public void testEditStatusError(){
+    public void testEditStatusError() {
         executeAssertSysLibExceptionThrown("/id 2 /s INVALIDSTATUS",
                 STATUS_ERROR_MESSAGE);
     }
 
     @Test
-    public void testEditISBNError(){
+    public void testEditISBNError() {
         executeAssertSysLibExceptionThrown("/id 2 /i invalid",
                 "ISBN must be 13 characters!");
     }
 
     @Test
-    public void testEditBookLinkError(){
+    public void testEditBookLinkError() {
         executeAssertSysLibExceptionThrown("/id 2 /l dummyLink",
                 INVALID_EDIT_ARGS + BOOK_ARGS_MESSAGE);
     }
 
     @Test
-    public void testEditNewspaperLinkError(){
+    public void testEditNewspaperLinkError() {
         executeAssertSysLibExceptionThrown("/id 9 /l dummyLink",
                 INVALID_EDIT_ARGS + NEWSPAPERS_ARGS_MESSAGE);
     }
 
     @Test
-    public void testEditMagazineLinkError(){
+    public void testEditMagazineLinkError() {
         executeAssertSysLibExceptionThrown("/id 6 /l dummyLink",
                 INVALID_EDIT_ARGS + MAGAZINE_ARGS_MESSAGE);
     }
 
     @Test
-    public void testEditBookInvalidArgsGiven(){
+    public void testEditBookInvalidArgsGiven() {
         executeAssertSysLibExceptionThrown("/id 2 /t TITLE /s LOST /p PUBLISHER /g GENRES /ed EDITION " +
                 "/c CREATOR /ty TYPE /b BRAND /is ISSUE", INVALID_EDIT_ARGS+BOOK_ARGS_MESSAGE);
     }
 
-    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage){
+    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage) {
         SysLibException exception = assertThrows(SysLibException.class, ()->editCommand.execute(
                 arguments, parser.container));
         assertEquals(expectedMessage, exception.getMessage());

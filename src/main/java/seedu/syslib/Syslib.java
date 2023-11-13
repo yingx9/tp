@@ -22,13 +22,13 @@ public class Syslib {
     private static Storage storage;
 
 
-    public Syslib(String filePath) throws SysLibException{
+    public Syslib(String filePath) throws SysLibException {
         ui = new UI();
         parser = new Parser();
         File dir = new File(DIRECTORYPATH);
         dir.mkdirs();
         storage = new Storage(filePath, parser.container);
-        try{
+        try {
             List<Resource> resourceListLoad = new ArrayList<>();
             List<Event> eventListLoad = new ArrayList<>();
             storage.load(resourceListLoad, eventListLoad);
@@ -38,16 +38,16 @@ public class Syslib {
             parser.container.setEventList(eventListLoad);
 
 
-        } catch (SysLibException SysLibEx){
+        } catch (SysLibException SysLibEx) {
             System.out.println(SysLibEx);
         }
 
     }
 
     public static void main(String[] args) {
-        try{
+        try {
             new Syslib(FILEPATH).run();
-        } catch (SysLibException SLEx){
+        } catch (SysLibException SLEx) {
             System.out.println(SLEx);
         }
     }
@@ -59,7 +59,7 @@ public class Syslib {
             parser.processUserResponse(response);
             try {
                 storage.save();
-            } catch (SysLibException SysLibEx){
+            } catch (SysLibException SysLibEx) {
                 System.out.println(SysLibEx);
             }
 

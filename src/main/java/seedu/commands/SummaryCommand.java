@@ -27,8 +27,8 @@ import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
 
 import static seedu.ui.Messages.ASSERT_CONTAINER;
-import static seedu.ui.Messages.ASSERT_STATEMENT;
 import static seedu.ui.UI.LINEDIVIDER;
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 
 
 public class SummaryCommand extends Command {
@@ -65,9 +65,12 @@ public class SummaryCommand extends Command {
     public CommandResult execute(String statement, GenericList<Resource, Event> container)
             throws SysLibException {
 
-        assert statement != null : ASSERT_STATEMENT;
         assert container != null : ASSERT_CONTAINER;
-
+        if (!statement.isEmpty()){
+            LOGGER.warning("SummaryCommand was given arguments when none was expected");
+            throw new IllegalArgumentException("'summary' command does not require arguments!"
+                    + SEPARATOR_LINEDIVIDER);
+        }
         LOGGER.info("Executing Summary Command.");
         int totalResources = container.getResourcesList().size();
         LOGGER.info("Retrieved resourcelist size.");
@@ -116,6 +119,7 @@ public class SummaryCommand extends Command {
         int newspaperBarLength = (int) (maxBarLength * ((double) totalNewspapers / maxCount));
         int eNewspaperBarLength = (int) (maxBarLength * ((double) totalENewspapers / maxCount));
 
+        graph.append("Summary of Resources:\n");
         graph.append("Total Resources: ").append(totalResources).append("\n");
         graph.append("Total Books: ").append(generateBar(bookBarLength)).append(" ")
                 .append(totalBooks).append("\n");

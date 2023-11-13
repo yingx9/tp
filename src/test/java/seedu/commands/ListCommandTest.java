@@ -9,7 +9,6 @@ import seedu.exception.SysLibException;
 import seedu.parser.Parser;
 import seedu.util.TestUtil;
 
-import static seedu.ui.ListCommandMessages.GENERIC_MESSAGE;
 import static seedu.ui.ListCommandMessages.FILTER_MESSAGE;
 import static seedu.ui.ListCommandMessages.STATUS_ERROR_MESSAGE;
 import static seedu.ui.ListCommandMessages.ZERO_RESOURCES_MESSAGE;
@@ -34,10 +33,7 @@ public class ListCommandTest {
     }
     @Test
     public void testEmptyListMessage() throws SysLibException {
-        String outputMessage = testUtil.getOutputMessage(listCommand, "", emptyResourceList);
-        String expectedMessage = GENERIC_MESSAGE;
-        expectedMessage +=  ZERO_RESOURCES_MESSAGE;
-        assertEquals(expectedMessage, outputMessage);
+        assertThrows(SysLibException.class, ()->testUtil.getOutputMessage(listCommand, "", emptyResourceList));
     }
     @Test
     public void testNoTagArgBehavior() {
@@ -90,11 +86,11 @@ public class ListCommandTest {
     }
 
     @Test
-    public void testInvalidStatusInput(){
+    public void testInvalidStatusInput() {
         executeAssertSysLibExceptionThrown("/s INVALIDSTATUS",STATUS_ERROR_MESSAGE);
     }
 
-    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage){
+    private void executeAssertSysLibExceptionThrown(String arguments, String expectedMessage) {
         SysLibException exception = assertThrows(SysLibException.class, ()->listCommand.execute(
                 arguments, parser.container));
         assertEquals(expectedMessage, exception.getMessage());

@@ -3,27 +3,27 @@ package seedu.data;
 import java.util.List;
 
 public class GenericList<R, E> {
-    private List<R> resourcesList;
+    private List<R> resourceList;
     private List<E> eventList;
 
-    public GenericList(List<R> resourcesList, List<E> eventList) {
-        this.resourcesList = resourcesList;
+    public GenericList(List<R> resourceList, List<E> eventList) {
+        this.resourceList = resourceList;
         this.eventList = eventList;
     }
 
     public List<R> getResourcesList() {
-        return resourcesList;
+        return resourceList;
     }
 
     public List<E> getEventsList() {
         return eventList;
     }
 
-    public void setResourcesList(List<R> resourcesList){
-        this.resourcesList = resourcesList;
+    public void setResourceList(List<R> resourceList) {
+        this.resourceList = resourceList;
     }
 
-    public void setEventList(List<E> eventList){
+    public void setEventList(List<E> eventList) {
         this.eventList = eventList;
     }
 }

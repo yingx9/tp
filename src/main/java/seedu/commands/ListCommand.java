@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import static seedu.ui.UI.SEPARATOR_LINEDIVIDER;
 import static seedu.ui.UI.showResourcesDetails;
 
 public class ListCommand extends Command {
@@ -48,7 +49,7 @@ public class ListCommand extends Command {
         LIST_LOGGER.addHandler(listFileHandler);
     }
 
-    public ListCommand(){
+    public ListCommand() {
         args = new String[]{"tag", "g", "s"};
         required = new boolean[]{false, false, false};
     }
@@ -61,13 +62,17 @@ public class ListCommand extends Command {
 
         String[] givenParameters = parseArgument(statement);
         validateStatement(statement, givenParameters);
+        if (container.getResourcesList().isEmpty()) {
+            LIST_LOGGER.warning("ResourcesList is empty");
+            throw new SysLibException("There are currently no Resources in Syslib!" + SEPARATOR_LINEDIVIDER);
+        }
         filterResources(givenParameters, container.getResourcesList());
         LIST_LOGGER.info("List Command ends");
         return new CommandResult(feedbackToUser);
 
     }
 
-    private void filterResources(String[] givenParameters, List<Resource> resourcesList) throws SysLibException{
+    private void filterResources(String[] givenParameters, List<Resource> resourcesList) throws SysLibException {
 
         boolean hasFilters = hasFilters((givenParameters));
         boolean isTagEqualToKeyword = true;
@@ -76,10 +81,10 @@ public class ListCommand extends Command {
 
         matchedResources = new ArrayList<>();
 
-        if(!hasFilters){
+        if (!hasFilters) {
             feedbackToUser += ListCommandMessages.GENERIC_MESSAGE;
             feedbackToUser += showResourcesDetails(resourcesList);
-        } else{
+        } else {
 
             for (Resource resource : resourcesList) {
 
@@ -126,7 +131,7 @@ public class ListCommand extends Command {
             genreKeyword = givenParameters[1];
         }
 
-        if (givenParameters[2] != null){
+        if (givenParameters[2] != null) {
             Status status = EditCommand.getStatusFromString(givenParameters[2]);
             statusKeyword = status.name();
         }

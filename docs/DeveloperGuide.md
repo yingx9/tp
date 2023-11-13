@@ -238,7 +238,7 @@ Upon receiving the `find` command, the system will:
 
 The `add` feature is responsible for processing user commands to add a new resource to SysLib. It is facilitated by 
 the `AddCommand` component. It works with `Parser` and `Command` components to parse and validate the user input. 
-The new resource is stored internally in `resourceList` as a `Book`, `EBook`, `CD`, `Magazine`, `EMagazine`, `Newspaper`, 
+The new resource is stored internally in `resourcesList` as a `Book`, `EBook`, `CD`, `Magazine`, `EMagazine`, `Newspaper`, 
 or `ENewspaper` depending on the type of resources specified by `tag`. 
 
 There are seven types of `Resource`:
@@ -324,7 +324,7 @@ After that, all the arguments are forwarded to `AddCommand`.
 Step 9. `AddCommand` receives the arguments and calls `CreateResource#createBook(values: String[], resourceID: int` to 
 craft a new book with the validated arguments.
 
-Step 10. The newly created book is then added to the `resourceList`.
+Step 10. The newly created book is then added to the `resourcesList`.
 
 Step 11. Calls to `ParserResource#resetBookArgs()` prepares the arguments list for new processes.
 
@@ -367,9 +367,9 @@ The following sequence diagram shows how the show resources feature works in a s
 
 **ResourceDisplayFormatter class:** 
 
-1. A List< Resource > resourceList is passed in to `showResourcesDetails` method from the calling function. It can be the resourcesList retrieved from the GenericList in memory which contains the data of all resources, or a custom resourceList containing filtered resources.
+1. A List< Resource > resourcesList is passed in to `showResourcesDetails` method from the calling function. It can be the resourcesList retrieved from the GenericList in memory which contains the data of all resources, or a custom resourcesList containing filtered resources.
 2. A new `ResourceDisplayFormatter` is instantiated and the constructor calls `buildDisplayHeader()` to create a table header. 
-3. `buildDisplayHeader()` then calls `checkColumnsWidth()` for every resource in `resourceList`. It passes an integer array containing the current column width for each resource attribute (Title...Author..et cetera).
+3. `buildDisplayHeader()` then calls `checkColumnsWidth()` for every resource in `resourcesList`. It passes an integer array containing the current column width for each resource attribute (Title...Author..et cetera).
 4. `checkColumnsWidth()` adjusts the width as needed depending on the length of the resource attributes and returns to Formatter
 5. A format specifier is created with the columns' width. Example: `"%-5s %-20s ..."`
 6. Formatter objects are created for each resource type: Book, Newspapers, Magazine, CDs. 
@@ -384,11 +384,11 @@ The following sequence diagram shows how the show resources feature works in a s
 The `list` command is facilitated by `Parser` and `UI` component to show the details of all resources in `resourcesList`. Furthermore, **filter** options can be provided to only list specific resources that match the given filters. 
 
 `list` has five possible options:
-- list
-- list _/tag [tag]_
-- list _/g [genre]_
-- list _/s [status]_
-- list _/tag [tag]_ _/g [genre]_ _/s [status]_
+- `list`
+- `list /tag [tag]`
+- `list /g [genre]`
+- `list /s [status]`
+- `list /tag [tag] /g [genre] /s [status]`
 
 Arguments in italics are filter options and are **optional**. 
 
@@ -412,7 +412,7 @@ ListCommand then calls `parseArg` and `validate` from `Command`, which checks if
    the checks, `filterResources` is called to begin the filtering process. First it calls `hasFilters()` to check if the user
    selected any filters `[tag/genre/status]` or none. 
 
-If hasFilters returns `true`, it filters the `resourceList` with the given keywords. Resources matching the filters are added to a temporary list called `matchedResources`. After all resources has been checked, `matchedResources` list is passed to `showResourcesDetails()`, a method called from `UI` to display the details 
+If hasFilters returns `true`, it filters the `resourcesList` with the given keywords. Resources matching the filters are added to a temporary list called `matchedResources`. After all resources has been checked, `matchedResources` list is passed to `showResourcesDetails()`, a method called from `UI` to display the details 
 of the resources. 
 
 If hasFilters returns `false`, it skips the filtering process and displays the details of all the resources.
@@ -428,7 +428,7 @@ The `edit` command is facilitated by `Parser` component to update the attributes
 
 EditCommand implements the following operations:
 - `EditCommand#execute(statement: String, container: GenericList<Resource, Event>)` — Executes and handles editing of a resource
-- `EditCommand#editResources(foundResource: Resource, givenParameters: String[], resourceList: List<Resource>)` — Validates parameters and updates a resource details
+- `EditCommand#editResources(foundResource: Resource, givenParameters: String[], resourcesList: List<Resource>)` — Validates parameters and updates a resource details
 
 #### Usage Scenario 
 
@@ -453,8 +453,8 @@ the `EventAddCommand` component. It works with `Parser` and `Command` components
 The new book is stored internally in `eventList` as a `Event`.
 
 `eventadd` has two options:
-- eventadd /t [title] /date [date]
-- eventadd /t [title] /date [date] /desc [description]
+- `eventadd /t [title] /date [date]`
+- `eventadd /t [title] /date [date] /desc [description]`
 
 #### Implementation
 
@@ -462,7 +462,7 @@ It implements the following operations:
 
 - `EVENTADDCOMMAND#parseArgument(statement: String)` -- Parses the input command to extract relevant information.
 - `EVENTADDCOMMAND#validate(statement: String, values: String[])` -- Validates the input statement to ensure that it is valid.
-- `EVENTADDCOMMAND#binarySearch(parser: Parser, date: Date)` -- Search for the correct index of event list to add the event.
+- `EVENTADDCOMMAND#binarySearch(container: GenericList<Resource, Event>, date: Date)` -- Search for the correct index of event list to add the event.
 
 #### Example Usage Scenario
 
@@ -481,7 +481,7 @@ Step 5. The `COMMAND` component processes the input command to ensure that it me
 It prepares the argument values for further processing.
 
 Step 6. The `EVENTADDCOMMMAND` also calls the component:
-- Calls `EVENTADDCOMMAND#binarySearch(parser: Parser, date: Date)` to find the correct index based on the date.
+- Calls `EVENTADDCOMMAND#binarySearch(container: GenericList<Resource, Event>, date: Date)` to find the correct index based on the date.
 The whole eventList is sorted by date order.
 
 Step 7. The newly created event is forwarded to the `PARSER` to be added to the `eventList`.
@@ -494,8 +494,7 @@ The `eventlist` command works with the `Parser` and `Command` component to execu
 This feature is responsible for listing out the events in eventList. 
 It is facilitated by the `EventListCommand` component. 
 
-`eventlist` has one option:
-- eventlist
+`eventlist` has one option.
 
 #### Implementation
 
@@ -522,21 +521,22 @@ Step 5. The `EVENTLISTCOMMAND` then outputs the events in the eventList.
 The `eventdelete` feature is responsible for processing user commands to delete an event to SysLib. 
 It is facilitated by the `EventDeleteCommand` component. 
 It works with `Parser` and `Command` components to parse and validate the input.
-The `Event` is removed from `eventList`.
+The `Event` is removed from `eventsList`.
 
-`eventadd` has one options:
-- eventdelete /i [index]
+`eventdelete` has one options:
+- eventdelete /id [index]
+
 #### Implementation
 
 It implements the following operations:
 
 - `EVENTDELETECOMMAND#parseArgument(statement: String)` -- Parses the input command to extract relevant information.
 - `EVENTDELETECOMMAND#validate(statement: String, values: String[])` -- Validates the input statement.
-- `EVENTDELETECOMMAND#parseCalendarInt(value: String, parser: Parser)` -- Validate the index given.
+- `EVENTDELETECOMMAND#parseCalendarInt(value: String, container: GenerticList)` -- Validate the index given.
 
 #### Example Usage Scenario
 
-Step 1. The user inputs the command: `eventdelete /i 0`
+Step 1. The user inputs the command: `eventdelete /id 0`
 
 Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
 
@@ -551,10 +551,104 @@ Step 5. The `COMMAND` component processes the input command to ensure that it me
 It prepares the argument values for further processing.
 
 Step 6. The `EVENTDELETECOMMAND` also calls the component:
-- Calls `EVENTDELETECOMMAND#parseCalendarInt(value: String, parser: Parser)` to see if the index is an integer and that
-it is within range of eventList
+- Calls `EVENTDELETECOMMAND#parseCalendarInt(value: String, container: GenerticList)` to see if the index is an integer and that
+it is within range of eventsList
 
-Step 7. The selected event at the index is then deleted from the eventList.
+Step 7. The selected event at the index is then deleted from the eventsList.
+
+### Event Edit Feature
+The `eventedit` command with the `Parser` and `Command` component to execute the correct action.
+This feature is responsible for editing the events in eventsList as given by the user.
+It is facilitated by the `EventsListCommand` component.
+
+`eventedit` has three option:
+- `eventedit /t [title] /date [date]`
+- `eventedit /t [title] /desc [description]`
+- `eventedit /t [title] /date [date] /desc [description]`
+
+#### Implementation
+
+It implements the following operations:
+
+- `EVENTEDITCOMMAND#parseArgument(statement: String)` -- Parses the input command to extract relevant information.
+- `EVENTEDITCOMMAND#validate(statement: String, values: String[])` -- Validates the input statement to ensure that it is valid.
+- `EVENTEDITCOMMAND#binarySearch(container: GenericList<Resource, Event>t, date: Date)` -- Search for the correct index of event list to add the event.
+
+#### Example Usage Scenario
+
+Step 1. The user inputs the command: `eventedit /i 0 /date 23 Dec 2023`
+
+Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
+
+Step 3. The `PARSER` processes the command and determines that it contains a valid key (`evenedit`). It then calls
+`EVENTEDITCOMMAND#execute(statement: String, container: GenerticList)` with the input command.
+
+Step 4. The `EVENTEDITCOMMMAND` component receives the command and performs the following operations:
+- Calls `EVENTEDITCOMMAND#parseArgument(statement: String)` to extract values for the attributes to edit.
+- Calls `EVENTEDITCOMMAND#validate(statement: String, values: String[])` to ensure the validity of the input command.
+
+Step 5. The `COMMAND` component processes the input command to ensure that it meets the required format and constraints.
+It prepares the argument values for further processing.
+
+Step 6. The `EVENTEDITCOMMMAND` also calls the component:
+- Calls `EVENTEDITCOMMAND#binarySearch(container: GenericList<Resource, Event>, date: Date)` to find the correct index based on the date.
+  The whole eventsList is sorted by date order.
+
+Step 7. The old event is removed from `eventsList`.
+
+Step 8. The edited event is forwarded to the `PARSER` to be inserted to the `eventsList` in accordance to the date.
+
+Sequence Diagram:
+<img src="images/EventEditDiagram.png"/>
+
+### Summary Feature
+The `summary` command with the `Parser` and `UI` component to execute the correct action.
+This feature is responsible for showing a summary of the Resources with a visually helpful bar as well as the next 3 events.
+It is facilitated by the `SummaryCommand` component.
+
+`summary` has one option.
+
+#### Implementation
+
+It implements the following operations:
+
+- `SUMMARYCOMMAND#isEmpty()` -- Check user input has only 'summary'
+
+#### Example Usage Scenario
+
+Step 1. The user inputs the command: `summary`
+
+Step 2. The `UI` component forwards the input to `SYSLIB`, which in turn passes it to the `PARSER`.
+
+Step 3. The `PARSER` processes the command and determines that it contains a valid key (`summary`). It then calls
+`EVENTLISTCOMMAND#execute(statement: String, container: GenerticList)` with the input command.
+
+Step 4. The `SUMMARYCOMMAND` component receives the command and performs the following operations:
+- Calls `SUMMARYCOMMAND#isEmpty()` to check if the user input any additional redundant arguments.
+
+Step 5. The `SUMMARYCOMMAND` then gets each Resource from the ResourcesList and checks to see if it is an `instanceof`:
+- Book
+- EBook
+- CD
+- Magazine
+- EMagazine
+- Newspaper
+- ENewspaper
+
+and counts as it does so.
+
+Step 5. It then gets all Events from the EventsList.
+
+Step 6. The `SUMMARYCOMMMAND` also calls the component:
+- Calls `SUMMARYCOMMAND#getUpcomingEvents(events: List<Event>, 3: int)` to get the 3 upcoming events.
+
+Step 7. The `SUMMARYCOMMMAND` also calls the component:
+- Calls `SUMMARYCOMMAND#generateBar(:int)` to get the size of the bar for each Resource. 
+
+Step 8. The SUMMARYCOMMAND then outputs the Resource with a bar to indicate count and the next 3 upcoming events.
+
+Sequence Diagram:
+<img src="images/SummaryDiagram.png"/>
 
 ## Product scope | [Return to contents](#table-of-contents)
 
@@ -666,11 +760,48 @@ should be able to accomplish most of the tasks faster using commands than using 
 
 1. Initial launch
    1. Download the jar file and copy it into an empty folder.
-   2. Open the command prompt / terminal and run `java -jar SysLib.jar`.
-2. Shutdown
-   1. Enter the command "exit" into the program.
-   2. Close the command prompt / terminal.
+   2. Open the command prompt / terminal and run `java -jar SysLib.jar`. You should see the following welcome message:
+```
+____________________________________________________________
+Storage file not found.
+Creating new data file @ .\data\storage.txt
+Loaded 0 resources and 0 events!
+____________________________________________________________
+             .....................                  
+          -##@*+*@*++++++++++#@++##                 
+         .@. @-=%=            *#-+%                 
+         :@  @+-  :----------. .=#%                 
+         :@  @.  *%----------@-  =%                 
+         :@  @.  #*          @=  =%                 
+         :@  @.  #*          *:  :+                 
+         :@  @.  *%-----.  .=+****+-.               
+         :@  @.   :-----.-#*-.   .:-*#-             
+         :@  @.        .%+.     .@*#+.*%.           
+         :@  @:        %=       %*  +@.=%           
+         :@  @*#*.    -@      *###***+. @-          
+         :@ .@:.=@... -@ .+*#*####      @-          
+         :@#*++++++++. %=.%+  +#       +%           
+         :@. =++++++++-.%*.+%*@.      *%.           
+          %+  ........   =#*-::   .-*%=             
+           =*************. .=+****+-.               
+ ____            _     _ _        ____ _     ___    
+/ ___| _   _ ___| |   (_) |__    / ___| |   |_ _|   
+\___ \| | | / __| |   | | '_ \  | |   | |    | | 
+ ___) | |_| \__ \ |___| | |_) | | |___| |___ | |  
+|____/ \__, |___/_____|_|_.__/   \____|_____|___| 
+       |___/                                        
 
+Hello! What would you like to do?
+____________________________________________________________
+```
+2. Shutdown
+   1. Enter the command `exit` into the program.
+   2. Close the command prompt / terminal.
+Example response:
+```
+Bye, hope to see you again soon!
+____________________________________________________________
+```
 
 ### Adding a Book
 1. Add a book
@@ -679,24 +810,45 @@ should be able to accomplish most of the tasks faster using commands than using 
        Expected: A book with ISBN: 9783161484100, Title: Crime and Punishment, Author: Dostoevsky, and Status: AVAILABLE 
        is created and added into the list. A message with details of the added book is displayed to acknowledge that the 
        book has been added successfully.
+
+    ```
+    This book is added:
+    [B]  ID: 1 Title: Crime and Punishment ISBN: 9783161484100 Author: Dostoevsky Genre: - Status: AVAILABLE Received Date: 12 Nov 2023
+    ____________________________________________________________
+    ```
    
    2. Test case: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag B /g Fiction /s lost`
 
        Expected: A book with ISBN: 9783161484100, Title: Crime and Punishment, Author: Dostoevsky, Genre: Fiction, and 
        Status: LOST is created and added into the list. A message with details of the added book is displayed to 
        acknowledge that the book has been added successfully.
+    ```
+    This book is added:
+    [B]  ID: 2 Title: Crime and Punishment ISBN: 9783161484100 Author: Dostoevsky Genre: Fiction Status: LOST Received Date: 12 Nov 2023
+    ____________________________________________________________
+    ```
    
    3. Test case: `add /i CAP123 /t Crime and Punishment /a Dostoevsky /tag B`
         
        Expected: No book is added. An error message is displayed to indicate that the ISBN is invalid.
-
+    ```
+    Please enter a valid ISBN with 13 digits.
+    ____________________________________________________________
+    ```
    4. Test case: `add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /tag A`
 
       Expected: No book is added. An error message is displayed to indicate that the tag is invalid.
-
+    ```
+    Please enter a valid tag.
+    ____________________________________________________________
+    ```
    5. Test case: `add /tag B`
    
       Expected: No book is added. An error message displayed to indicate that the input is incomplete.
+    ```
+    Please enter a valid ISBN with 13 digits.
+    ____________________________________________________________
+    ```
 
 ### Listing Resources
 
@@ -705,15 +857,33 @@ should be able to accomplish most of the tasks faster using commands than using 
    
     2. Test case: `list`
 
-       Expected: A table showing details of current resources, in order of BOOKS, MAGAZINE, CDs, and NEWSPAPERS.
+    Expected: A table showing details of current resources, in order of BOOKS, MAGAZINE, CDs, and NEWSPAPERS.
+    ```
+   Listing all resources in the Library:
 
-   2. List when no resources are in list
-       1. Prerequisites: No resources currently in SysLib
+                                                                 [BOOKS]
+    -----------------------------------------------------------------------------------------------------------------------------------
+    ID     Tag  Title               ISBN          Author                   Genre               Link           Status    Received Date
+    -----------------------------------------------------------------------------------------------------------------------------------
+    1      B    Crime and Punishment9783161484100 Dostoevsky               null                null           AVAILABLE 12 Nov 2023    
 
-       2. Test case: `list`
+   
+    There are currently 2 resource(s).
+    ____________________________________________________________
+    ```
+2. List when no resources are in list
+    1. Prerequisites: No resources currently in SysLib
 
-       Expected: An error message saying "There are currently 0 resources."
+    2. Test case: `list`
 
+    Expected: An error message saying "There are currently 0 resources."
+    ```
+    Listing all resources in the Library:
+
+
+    There are currently 0 resources.
+    ____________________________________________________________
+    ```
 3. List resources with filter options
 
    1. Test case: `list /tag B `
@@ -739,8 +909,162 @@ should be able to accomplish most of the tasks faster using commands than using 
       Expected: An edit success message displaying the new details of the edited resource, IF resource with `id 1` is a CD (Creator is a CD argument). Else, error message saying wrong arguments and showing the right arguments.
 
 2. Other incorrect commands to try: edit X, edit /t , ...
-   Expected: Invalid argument message. 
+   Expected: Invalid argument message.
 
+### Deleting Resources
+1. Delete a resource
+    1. Prerequisites: At least one resource present.
+    2. Test case: `delete /id 1`
+
+   Expected: Resoruce with ID 1 is removed
+    ```
+    Looking for ID: 1...
+    This resource is removed:
+    [B]  ID: 1 Title: Crime and Punishment ISBN: 9783161484100 Author: Dostoevsky Genre: null Status: AVAILABLE Received Date: 13 Nov 2023
+    ____________________________________________________________
+    ```
+2. Delete a resource that is not there
+    1. Prerequisites: Resource is non-existent
+    2. Test case: `delete /id 10`
+
+   Expected: Error message saying the resource with given ID is not found.
+   ```
+    Looking for ID: 10...
+    No resources with id matching 10
+    ____________________________________________________________
+    ```
+
+### Adding an Event
+1. Add an Event
+    1. Test case: `eventadd /t New Year /date 1 Jan 2024`
+
+       Expected: An Event with Title: New Year, Date: 1 Jan 2024, Description: null is 
+       created and added into the list. A message with details of the added event is displayed to acknowledge that the
+       event has been added successfully.
+
+    ```
+    Event inserted at: 0
+    0: New Year | 01 Jan 2024 | null
+    ____________________________________________________________
+    ```
+
+    2. Test case: `eventadd /t Meeting /date 23 Dec 2023 /desc Board Meeting`
+
+       Expected: An Event with Title: Meeting, Date: 23 Dec 2023, Description: Board Meeting is
+       created and added into the list. A message with details of the added event is displayed to acknowledge that the
+       event has been added successfully.
+    ```
+    Event inserted at: 0
+    0: Meeting | 23 Dec 2023 | Board Meeting
+    ____________________________________________________________
+    ```
+
+    3. Test case: `eventadd /date 23 Dec 2023`
+
+       Expected: No event is added. An error message is displayed to indicate that the Title is missing.
+    ```
+    t is missing in the argument!
+    ____________________________________________________________
+    ```
+    4. Test case: `eventadd /t Meeting`
+
+       Expected: No event is added. An error message is displayed to indicate that the date is missing.
+    ```
+    date is missing in the argument!
+    ____________________________________________________________
+    ```
+
+### Listing Events
+
+1. List all events
+    1. Prerequisites: At least one event present in list
+
+    2. Test case: `eventlist`
+
+   Expected: A list showing details of current events, in order of its date.
+    ```
+    This is the current event list:
+    0: Meeting | 23 Dec 2023 | Board Meeting
+    1: New Year | 01 Jan 2024 | null
+    ____________________________________________________________
+    ```
+2. List when no resources are in list
+    1. Prerequisites: No events currently in SysLib
+
+    2. Test case: `eventlist`
+
+   Expected: An error message saying "There event list is empty."
+    ```
+    The event list is empty!
+    ____________________________________________________________
+    ```
+3. List with unexpected arguments
+   1. Test case: `eventlist /t title`
+
+   Expected: An error message saying "'eventlist' command does not require arguments!"
+    ```
+    'eventlist' command does not require arguments!
+    ____________________________________________________________
+    ```
+
+### Editing an Event
+
+1. Edit a resource
+    1. Prerequisite: A list containing at least one event. Use `eventlist` to see their `ids`.
+    2. Test case: `eventedit /id 0 /t Board Meeting`
+
+       Expected: An edit success message displaying the new details of the edited event.
+    ```
+    Event edited successfully. New event details:
+    0: Board Meeting | 23 Dec 2023 | Board Meeting
+    ____________________________________________________________
+    ```
+
+   2. Test case: `eventedit /id 0 /t Meeting /date 22 Dec 2023 /desc Board Meeting with CEO`
+
+       Expected: An edit success message displaying the new details of the edited event.
+    ```
+    Event edited successfully. New event details:
+    0: Meeting | 22 Dec 2023 | Board Meeting with CEO
+    ____________________________________________________________
+    ```
+2. Edit id given but no parameters were given
+   1. Test case: `eventedit /id 0`
+   
+       Expected: An error message saying "Event was not edited as nothing was changed."
+    ```
+    Event was not edited as nothing was changed.
+    ____________________________________________________________
+    ```
+3. Invalid id was given
+    1. Test case: `eventedit /id 0`
+
+       Expected: An error message saying "Event was not edited as nothing was changed."
+    ```
+    Invalid event index
+    ____________________________________________________________
+    ```
+### Deleting Event
+1. Delete an event
+    1. Prerequisites: At least one resource present.
+    2. Test case: `eventdelete /id 0`
+
+   Expected: Event with ID 0 is removed
+    ```
+    This event is removed:
+    Meeting | 22 Dec 2023 | Board Meeting with CEO
+    ____________________________________________________________
+    ```
+2. Delete an event that is not there
+    1. Prerequisites: Event is non-existent
+    2. Test case: `eventdelete /id 10`
+
+   Expected: Error message saying the event with given ID is not found.
+    ```
+    Index is out of range of the event list!
+    ____________________________________________________________
+    ```
+   
 ### Saving data
 
 The following are some test cases for you to try: 
