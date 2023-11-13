@@ -70,7 +70,7 @@ For more information, please refer to our user guide at: https://bit.ly/SyslibUs
 ____________________________________________________________
 > Summary of Resources:
 Total Resources: 3
-Total Books: [████] 3
+Total Books: [▓▓▓▓] 3
 Total CDs: [] 0
 Total Magazines: [] 0
 Total E-Books: [] 0

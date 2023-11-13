@@ -172,7 +172,7 @@ public class SummaryCommand extends Command {
         StringBuilder bar = new StringBuilder();
 
         for (int i = 0; i < barLength; i++) {
-            bar.append("█");
+            bar.append("▓");
         }
 
         return "[" + bar.toString() + "]";

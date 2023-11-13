@@ -3,6 +3,7 @@ package seedu.commands;
 import org.junit.jupiter.api.Test;
 import seedu.data.events.Event;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +16,19 @@ public class SummaryCommandTest {
     
 
     @Test
-    public void testGenerateBar() {
+    public void testGenerateBar() throws UnsupportedEncodingException {
         SummaryCommand summaryCommand = new SummaryCommand();
         String bar = summaryCommand.generateBar(50);
-        assertEquals("[██████████]", bar);
+        assertEquals("[▓▓▓▓▓▓▓▓▓▓]", bar);
 
         String bar0 = summaryCommand.generateBar(0);
         assertEquals("[]", bar0);
 
         String bar100 = summaryCommand.generateBar(100);
-        assertEquals("[████████████████████]", bar100);
+        assertEquals("[▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓]", bar100);
 
         String bar25 = summaryCommand.generateBar(25);
-        assertEquals("[█████]", bar25);
+        assertEquals("[▓▓▓▓▓]", bar25);
     }
 
     @Test
