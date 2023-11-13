@@ -65,7 +65,7 @@ public class ParseBook {
 
             return args;
         } catch (IllegalStateException e) {
-            throw new SysLibException("B"+ ERROR_FORMAT_BOOK);
+            throw new SysLibException(ERROR_FORMAT_BOOK);
         }
     }
 
