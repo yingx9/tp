@@ -5,13 +5,14 @@
 * [Introduction](#introduction--return-to-contents)
 * [Quick Start](#quick-start--return-to-contents)
 * [Features](#features--return-to-contents)
-    * [Save Your Work](#save-your-work--return-to-contents)
-    * [Add a Listing: `add`](#add-a-listing-add--return-to-contents)
-    * [Delete a Listing: `delete`](#delete-a-listing-delete--return-to-contents)
-    * [List Items: `list`](#list-all-items-list--return-to-contents)
-    * [Find Listing by Search Parameter: `find`](#find-specific-listings-find--return-to-contents)
-    * [Edit a Listing: `edit`](#edit-a-listing-edit--return-to-contents)
-    * [Events](#events--return-to-contents)
+    * [Save your work](#managing-your-resources-and-events-with-ease)
+    * [Resources](#resources)
+      * [Add a Listing: `add`](#add-a-listing-add--return-to-contents)
+      * [Delete a Listing: `delete`](#delete-a-listing-delete--return-to-contents)
+      * [List Items: `list`](#list-all-items-list--return-to-contents)
+      * [Find Listing by Search Parameter: `find`](#find-specific-listings-find--return-to-contents)
+      * [Edit a Listing: `edit`](#edit-a-listing-edit--return-to-contents)
+    * [Events](#events)
       * [Event Adding: `eventadd`](#event-adding-eventadd--return-to-contents)
       * [Event Listing: `eventlist`](#event-listing-eventlist--return-to-contents)
       * [Event Delete: `eventdelete`](#event-delete-eventdelete--return-to-contents)
@@ -35,20 +36,28 @@ Without further ado, let's get started with how to navigate the guide!
 
 ### How to Use the User Guide 
 
-Information about how to use
-the guide (e.g. how to navigate
-the document, meaning of
-icons and formatting used)
+Information about how to use the guide (e.g. how to navigate the document, meaning of icons and formatting used)
 
+**Important pointers to take note of:**
 
-**Note**: Important pointers to take note of
-
-**Format**:
+1. **Format for Commands**:
 - Capital letters - placeholders for your input
 - Small letters - exact commands to enter
 - / - indicates the type of information you are entering 
 - [] - optional arguments
 
+2. **Recommended Terminals**
+
+The following table lists down the operating systems and their respective terminals that Syslib CLI has been tested on to
+work.
+
+| Operating System  | Version                        | Recommended Terminal                                                                                                |
+|:------------------|:-------------------------------|:--------------------------------------------------------------------------------------------------------------------|
+| Microsoft Windows | Windows 10 2004 and above      | Windows Terminal ([User Guide](https://docs.microsoft.com/en-us/windows/terminal/))                                 |
+| Apple macOS       | macOS 10.15 Catalina and above | Terminal ([User Guide](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac)) |
+| Ubuntu Linux      | Ubuntu 20.04.3 (LTS) and above | Bash Terminal ([User Guide](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))          |
+
+> If your operating system is not listed in the table above, it means our application has not been tested on it, and we cannot guarantee that the application will work as intended. We highly encourage you to use one of the recommended operating systems listed in the table above. We apologise for any inconvenience caused.
 
 ## Quick Start | [Return to Contents](#contents)
 1. Make sure that you have Java 11 or above installed on your computer.
@@ -91,59 +100,84 @@ ____________________________________________________________
 
 
 ## Features | [Return to Contents](#contents)
+> Syslib CLI allows System Librarians to create Resources (Books, Magazines, NewsPapers, CD's, eBooks, eMagazines, eNewspapers) as well as Events.
 
-> **Note**:
-> - Items in square brackets `[]` are optional arguments.
+### Managing Your Resources and Events with Ease
+
+Our intuitive system ensures that you never lose track of your valuable resources and events. Here's how it works:
+
+#### 📁 Automatic Saving on Exit
+- **Peace of Mind:** Every resource and event you add to the current list is automatically saved when you exit the program. Rest easy knowing your data is secure.
+```
+  > exit
+  Thanks for using SysLib CLI! We have saved the current resources and events created.
+  Hope to see you again soon!
+```
+
+#### 🔄 Seamless Loading on Startup
+- **Instant Access:** Each time you start the program, we automatically load your resources and events from the last session. Your information is always at your fingertips.
+```
+____________________________________________________________
+Storage file found @ .\data\storage.txt
+Loaded 2 resources and 1 events!
+____________________________________________________________
+```
 
 
-## Save Your Work | [Return to Contents](#contents)
-> - All resources and events in the current list will automatically be saved into an offline file `storage.txt` on exit.
-> - Resources and events from `storage.txt` will be loaded into the program at every start.
-> - The `storage.txt` file will be located in the same directory as the jar file.
-> - On start:
-> ```
-> ____________________________________________________________
-> Storage file found @ .\storage.txt
-> Loaded 2 resources and 1 events!
-> ____________________________________________________________
-> ```
-> - On exit: 
-> ```
-> > exit
-> Thanks for using SysLib CLI! We have saved the current resources and events created.
-> Hope to see you again soon!
-> ```
+#### 📍 File Location
+- **Find Your Data Easily:** Your saved data resides in a file named `storage.txt`, conveniently located in the `data` directory.
+    - Path to your file: `data/storage.txt`
+```
+>   Syslib.jar
+>   data/                              // Primary folder for storage
+>   └── storage.txt                    // Text file containing a list of resources and events saved.
+```
+Happy organizing!
 
-## Add a Listing: `add` | [Return to Contents](#contents)
 
-Adds a new resource to the library inventory.
 
-#### Types of Tags:
-`[B]` - Books
-`[EB]` - eBooks
-`[CD]` - CDs
-`[EB]` - Magazines
-`[M]` - eMagazines
-`[N]` - Newspapers
-`[EN]` - eNewspapers
+## Resources
+### Add a Listing: `add` | [Return to Contents](#contents)
 
-> **Note**:
-> - Anything with `E` prior is an electronic version  
-> i.e. `[EB]` is an eBook, `[EM]` is an eMagazine, `[EN]` is an eNewspaper
+Adding New Resources to Your Library Inventory
 
-#### Types of Status:
-- `AVAILABLE`
-- `BORROWED`
-- `LOST`
+Easily expand your library's collection with our streamlined process for adding new resources. Here's everything you need to know:
 
-> **Note**:
-> - Resource will default to `AVAILABLE` if no status is given
+**Resource Tags - Identify Your Resources**
 
-#### ISBN:
+Choose the right tag to classify each new addition:
+- `[B]` for **Books**
+- `[EB]` for **eBooks**
+- `[CD]` for **CDs**
+- `[M]` for **Magazines**
+- `[EM]` for **eMagazines**
+- `[N]` for **Newspapers**
+- `[EN]` for **eNewspapers**
 
-> **Note**:
-> ISBN should be 13 digits.
 
+**Electronic Versions**
+- Easy Identification: Anything with an `E` is an electronic version.
+- For example, `[EB]` is an eBook, `[EM]` is an eMagazine, and `[EN]` is an eNewspaper.
+
+**Status Types - Keep Track of Availability**
+Set the status to keep your inventory organized:
+- `AVAILABLE` for items ready to be checked out.
+- `BORROWED` for items currently with users.
+- `LOST` for items that are missing.
+
+> **📚 Note:**
+> 
+> Default Status
+> - **Automatic Setting:** If you don't specify a status, we'll automatically set it to `AVAILABLE`.
+> 
+> ISBN requirements
+> - **13-Digit Requirement:** Ensure the ISBN is exactly 13 digits for proper cataloging
+
+**Quick Tips**
+- 🌟 **Double-check your tags and ISBN** for accurate categorization.
+- 💡 **Regularly update the status** of your resources to reflect their current state.
+
+The specific commands for each resource types can be seen below: 
 
 ### Add Book
 
@@ -162,7 +196,7 @@ This book is added:
 ____________________________________________________________
 ```
 
-> **Note**:
+> **📚 Note:**
 > - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.  
 > e.g. Sci-Fi, Fantasy, Comedy
 
@@ -183,7 +217,7 @@ This e-book is added:
 ____________________________________________________________
 ```
 
-> **Note**:
+> **📚 Note:**
 > - Multiple genres are allowed for a single resource. You can separate the different genres using comma followed by a space `, `.
 > - e.g. Sci-Fi, Fantasy, Comedy
 
@@ -268,7 +302,7 @@ This e-newspaper is added:
 ____________________________________________________________
 ```
 
-## Delete a Listing: `delete` | [Return to Contents](#contents)
+### Delete a Listing: `delete` | [Return to Contents](#contents)
 
 Deletes the resource with the specified ID from the library inventory. You can find the ID using the `list` command.
 
@@ -286,7 +320,7 @@ This resource is removed:
 ____________________________________________________________
 ```
 
-## List All Items: `list` | [Return to Contents](#contents)
+### List All Items: `list` | [Return to Contents](#contents)
 
 
 The `list` command displays every resource in the library along with their details and categorized by their type `Book`, `Magazine`,`CD`, or `Newspaper`, giving you a quick and neat overview of all the resources in one place. 
@@ -295,9 +329,9 @@ Looking for a more specific list? `list` also offers you the capability to **fil
 
 **Format:** `list [/tag TAG /g GENRE /s STATUS]`
 
-**Notes:**
-- Including more than one filter will list resources that satisfy **ALL** given filters. 
-- For example, `list /tag B /g Horror` will list Books with Horror genre.
+> **📚 Note:**
+>- Including more than one filter will list resources that satisfy **ALL** given filters. 
+>- For example, `list /tag B /g Horror` will list Books with Horror genre.
 
 **Potential Issues:**
 
@@ -349,15 +383,34 @@ There are currently 8 resource(s).
 ____________________________________________________________
 ```
 
-## Find Specific Listings: `find` | [Return to Contents](#contents)
-Find a resource by title, author, ISBN or given id.
+### Find Specific Listings: `find` | [Return to Contents](#contents)
 
-You can use multiple filters, and only results that match ALL the given criteria will be returned.
+**Find What You Need, Fast!**
 
-> For non-book resources, `author` refers to `publisher`,`creator` and `brand` for Newspapers, CD's and Magazines 
-> respectively.
+Our advanced search capabilities make it easy to locate the resources you need. Here's how you can make the most out of our search tool:
 
-Format: `find [/t TITLE OR /i ISBN OR /a AUTHOR/PUBLISHER/BRAND/CREATOR OR /id ID]`
+- **Flexible Options:** Find resources using a variety of identifiers:
+    - **Title:** Pinpoint resources by their titles.
+    - **Author:** Search for books by their authors.
+    - **ISBN:** Use this unique identifier for precise book searches.
+    - **ID:** Every resource has an ID for quick identification.
+  
+
+- **Targeted Results:** Combine multiple filters in your search. We'll show you results that match **ALL** your specified criteria for pinpoint precision.
+
+> **📚 Note:**
+> - `AUTHOR` also refers to the following:
+>     - For **Newspapers**, `publisher` will be used.
+>     - For **CDs**, `creator` will be used.
+>     - For **Magazines**, `brand` will be used.
+
+**Quick Tips**
+- 💡 **Familiarize yourself with the search terms** for different resource types for efficient searching.
+
+
+Discover exactly what you're looking for, effortlessly!
+
+**Format:** `find [/t TITLE OR /i ISBN OR /a AUTHOR/PUBLISHER/BRAND/CREATOR OR /id ID]`
 
 **Example input:**
 ```
@@ -383,7 +436,7 @@ There are currently 1 resource(s).
 ____________________________________________________________
 ```
 
-## Edit a Listing: `edit` | [Return to Contents](#contents)
+### Edit a Listing: `edit` | [Return to Contents](#contents)
 
 We all know the horror of making a typo and having to delete and add a resource again—it's absolutely _dreadful_. 
 
@@ -391,11 +444,11 @@ Fear not! Update a resource's details using the `edit` command and fix your typo
 
 **Format:** `edit /id ID /argumentname ARGUMENT [/argumentname2 ARGUMENT2..]`
 
-**Notes:**
-
-- If you have forgotten the **ID**, execute `list` to locate your target resource and ID.
-- At least **one** argument to edit must be given. 
-- You can edit multiple details in one go by specifying multiple arguments. E.g `edit /id 1 /t NEWTITLE /a NEWAUTHOR` updates title and author. 
+> **📚 Note:**
+> 
+> - If you have forgotten the **ID**, execute `list` to locate your target resource and ID.
+> - At least **one** argument to edit must be given. 
+> - You can edit multiple details in one go by specifying multiple arguments. E.g `edit /id 1 /t NEWTITLE /a NEWAUTHOR` updates title and author. 
 
 **Argument Names:**
 
@@ -426,13 +479,13 @@ Successfully updated! Your updated resource:
 ____________________________________________________________
 ```
 
-## Events | [Return to Contents](#contents)
->Note:
+## Events
+>**📚 Note:**
 > - Events are stored separately from resources
 > - They are stored in chronological order(events that are happening sooner are closer to index 0)
 
-## Event Adding: `eventadd` | [Return to Contents](#contents)
->Notes about description:
+### Event Adding: `eventadd` | [Return to Contents](#contents)
+>**📚 Note:**
 > - `desc` is optional for all events
 > - Any event without description will be shown as `null`
 
@@ -452,7 +505,7 @@ Event inserted at: 0
 ____________________________________________________________
 ```
 
-## Event Listing: `eventlist` | [Return to Contents](#contents)
+### Event Listing: `eventlist` | [Return to Contents](#contents)
 
 Displays all events in the database.
 
@@ -471,8 +524,8 @@ This is the current event list:
 ____________________________________________________________
 ```
 
-## Event Delete: `eventdelete` | [Return to Contents](#contents)
->Notes about INDEX:
+### Event Delete: `eventdelete` | [Return to Contents](#contents)
+>**📚 Note:**
 > - INDEX starts from 0 and can be viewed by calling `eventlist`
 > - INDEX might change as those with earlier dates are sorted first
 
@@ -492,12 +545,12 @@ Fan meetup for xxx | 11-11-2001 | null
 ____________________________________________________________
 ```
 
-## Event Edit: `eventedit` | [Return to Contents](#contents)
->Notes about INDEX:
+### Event Edit: `eventedit` | [Return to Contents](#contents)
+>**📚 Note:**
 > - INDEX starts from 0 and can be viewed by calling `eventlist`
 > - INDEX might change as those with earlier dates are sorted first
 
-edits attributes of an event based on information provided.
+Edits attributes of an event based on information provided.
 
 Format: `eventedit /id INDEX [/t TITLE /date DATE /desc DESCRIPTION]`
 
@@ -514,7 +567,7 @@ Event edited successfully. New event details:
 ____________________________________________________________
 ```
 
-## Summary: `summary` | [Return to Contents](#contents)
+### Summary: `summary` | [Return to Contents](#contents)
 Provide a summary of resources added and upcoming 3 events
 
 Format: `summary`
@@ -544,7 +597,7 @@ Upcoming Events (Next 3):
 3. New Year | 01 Jan 2024 | null
 ____________________________________________________________
 ```
-## Exiting the Program : `exit` | [Return to Contents](#contents)
+### Exiting the Program : `exit` | [Return to Contents](#contents)
 Exits the program, all data in resource list and event list will be saved to a storage file.
 
 Format: `exit`
@@ -556,7 +609,7 @@ Thanks for using SysLib CLI! We have saved the current resources and events crea
 Hope to see you again soon!
 ```
 
-## Viewing Help : `help` | [Return to Contents](#contents)
+### Viewing Help : `help` | [Return to Contents](#contents)
 Displays a list of available commands with examples and their syntax format.
 
 Format: `help`
