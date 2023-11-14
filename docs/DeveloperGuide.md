@@ -847,6 +847,66 @@ With quick command-based actions, they can manage library's resources and events
 
 <div style="page-break-after: always;"></div>
 
+### Use case: Delete a resource
+
+#### MSS
+
+1. User requests to list resources
+2. SysLib shows a table of resources and their details
+3. User requests to delete a resource by specifying their ID shown in list.
+4. SysLib removes the specified resource from the list.
+
+   Use case ends.
+
+#### Extensions
+
+- 1a. List is empty
+    - SysLib shows a message there are no resources to list.
+    - Use case ends.
+
+- 3a. Provided ID does not exist
+    - SysLib shows a message stating resource not found.
+    - Use case ends.
+
+- 3b. User does not provide any arguments to edit
+    - SysLib shows a message prompting for at least one argument.
+    - Use case ends.
+
+- 3c. User provides the wrong arguments for the type of resource they specified
+    - SysLib shows an invalid argument message and displays the right arguments for the resource type
+    - Use case ends.
+
+<div style="page-break-after: always;"></div>
+
+### Use case: Find a resource
+
+#### MSS
+
+1. User requests to list resources
+2. SysLib shows a table of resources and their details
+3. User requests to Find a resource by specifying their ID shown in list.
+4. SysLib returns the resource with the ID specified by the user.
+
+   Use case ends.
+
+#### Extensions
+
+- 1a. List is empty
+    - SysLib shows a message there are no resources to list.
+    - Use case ends.
+
+- 3a. Provided ID does not exist
+    - SysLib shows a message stating resource not found.
+    - Use case ends.
+
+- 3b. User does not provide any arguments to edit
+    - SysLib shows a message prompting for at least one argument.
+    - Use case ends.
+
+- 3c. User provides the wrong arguments for the type of resource they specified
+    - SysLib shows an invalid argument message and displays the right arguments for the resource type
+    - Use case ends.
+
 ## Non-Functional Requirements | [Return to contents](#table-of-contents)
 
 - Should work on any mainstream OS as long as it has Java 11 or above installed.

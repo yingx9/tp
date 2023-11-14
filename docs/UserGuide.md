@@ -439,18 +439,7 @@ find /a Vogue
 ```
 
 **Example output:**
-```
-Here are resources that matched the given filters:
-                                                                                [MAGAZINES]
-----------------------------------------------------------------------------------------------------------------------------------------------------
-ID             Tag  Title               ISBN          Brand                    Issue                        Link           Status    Received Date  
-----------------------------------------------------------------------------------------------------------------------------------------------------
-5              M    2023 Hottest Trends 9780763630188 Vogue                    Volume 32, Issue 5, May 2023 null           AVAILABLE 07 Nov 2023    
-
-
-There are currently 1 resource(s).
-____________________________________________________________
-```
+![img.png](images/findcommandoutput.png)
 
 <div style="page-break-after: always;"></div>
 
