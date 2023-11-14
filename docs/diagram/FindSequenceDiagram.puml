@@ -19,22 +19,30 @@ UI -[UI_COLOR]> FINDCOMMAND : execute()
 activate FINDCOMMAND COMMAND_COLOR
 
 FINDCOMMAND -[COMMAND_COLOR]> FINDCOMMAND: parseArgument()
+activate FINDCOMMAND COMMAND_COLOR
 FINDCOMMAND --[COMMAND_COLOR]> FINDCOMMAND: String[] values
+deactivate FINDCOMMAND COMMAND_COLOR
 
 FINDCOMMAND -[COMMAND_COLOR]> FINDCOMMAND: validateStatement(values)
-alt areAllValuesNull
+activate FINDCOMMAND COMMAND_COLOR
+FINDCOMMAND --[COMMAND_COLOR]> FINDCOMMAND: return
+deactivate FINDCOMMAND COMMAND_COLOR
+
+alt allValuesNull
     FINDCOMMAND --[COMMAND_COLOR]> UI: INVALID_ARGUMENT_MESSAGE
-else notAllValuesNull
+else !allValuesNull
     FINDCOMMAND -[COMMAND_COLOR]> GENERICLIST: getResourcesList()
     activate GENERICLIST STORAGE_COLOR
     GENERICLIST --[STORAGE_COLOR]> FINDCOMMAND: List<Resource> resources
     deactivate GENERICLIST STORAGE_COLOR
+    destroy GENERICLIST
 
     loop for each Resource in resources
         FINDCOMMAND -[COMMAND_COLOR]> RESOURCE: isResourceMatch(values)
         activate RESOURCE PARSER_COLOR
         RESOURCE --[PARSER_COLOR]> FINDCOMMAND: boolean match
         deactivate RESOURCE PARSER_COLOR
+        destroy RESOURCE
 
         alt match
             FINDCOMMAND -[COMMAND_COLOR]> FINDCOMMAND : Add to matchedResources
@@ -44,6 +52,8 @@ else notAllValuesNull
     FINDCOMMAND --[COMMAND_COLOR]> UI: displayResults(matchedResources)
     deactivate UI UI_COLOR
     deactivate FINDCOMMAND COMMAND_COLOR
+    destroy FINDCOMMAND
+    destroy UI
 end
-deactivate FINDCOMMAND COMMAND_COLOR
+
 @enduml

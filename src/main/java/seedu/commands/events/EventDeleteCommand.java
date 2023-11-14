@@ -51,6 +51,7 @@ public class EventDeleteCommand extends Command {
             throws IllegalArgumentException, IllegalStateException, SysLibException {
         feedbackToUser = "";
         String[] values = parseArgument(statement);
+        validateStatement(statement, values);
         int index = parseCalendarInt(values[0], container);
         System.out.println("This event is removed:");
         System.out.println(container.getEventsList().get(index).toString());

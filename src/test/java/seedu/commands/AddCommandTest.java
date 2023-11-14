@@ -60,6 +60,43 @@ public class AddCommandTest {
     }
 
     @Test
+    public void addCommandMultipleTitle() {
+        assertThrows(SysLibException.class, ()->addCommand.execute(
+                "add /i 9783161484100 /t Crime and Punishment /t Crime and Punishment2 /a Dostoevsky /tag B" +
+                "/t The Minds of Billy Milligan /a Daniel Keyes /tag B", parser.container));
+
+    }
+
+    @Test
+    public void addCommandMultipleAuthors() {
+        assertThrows(SysLibException.class, ()->addCommand.execute(
+                "add /i 9783161484100 /t Crime and Punishment /a Dostoevsky /a Dostoevsky2 /tag B" +
+                        "/t The Minds of Billy Milligan /a Daniel Keyes /tag B", parser.container));
+
+    }
+
+    @Test
+    public void addCommandInvalidArguments() {
+        assertThrows(SysLibException.class, ()->addCommand.execute(
+                "add /ddd /i 1234567890123 /t abc /a qqq /tag b", parser.container));
+
+    }
+
+    @Test
+    public void addCommandInvalidArguments2() {
+        assertThrows(SysLibException.class, ()->addCommand.execute(
+                "add jesus /i 1234567890123 /t abc /a qqq /tag b", parser.container));
+
+    }
+
+    @Test
+    public void addCommandInvalidArguments3() {
+        assertThrows(SysLibException.class, ()->addCommand.execute(
+                "add /// /i 1234567890123 /t abc /a qqq /tag b", parser.container));
+
+    }
+
+    @Test
     public void addCommandInsufficientData() {
         assertThrows(SysLibException.class, ()->addCommand.execute("/i ", parser.container));
     }

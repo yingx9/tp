@@ -19,7 +19,7 @@ class ExitCommandTest {
         exitCommand.execute("", parser.container);
 
         String output = outputStream.toString();
-        String expectedOutput = "Thanks for using SysLib CLI! We have saved the current resources and events."
+        String expectedOutput = "Thanks for using SysLib! We have saved the current resources and events."
                 + System.lineSeparator() +
                 "See you next time!" + System.lineSeparator() +
                 "____________________________________________________________" + System.lineSeparator();
