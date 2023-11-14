@@ -1,9 +1,9 @@
 # Developer Guide
 
 ## Table of Contents
-* [About this guide](#about-this-guide)
+* [About This guide](#about-this-guide)
 * [Acknowledgements](#acknowledgements)
-* [Setting up](#setting-up--getting-started)
+* [Setting Up](#setting-up--getting-started)
 * [Design and Implementation](#design--implementation)
     * [Architecture Overview](#architecture-overview--return-to-contents)
     * [Component Overview](#component-overview--return-to-contents)
@@ -345,10 +345,10 @@ Step 3. Next, `parseAddCommand()` will identify the type of resource to add.
 Step 4. If it is a book, it will call `addBook()` where validation and addition of book occurs. 
 If it is none of the listed resources, the add function will stop.  
 Step 5. `parseAddBook()` and `parseBookArgs()` will validate every part of the input.  
-Step 6. If it manages to pass all the validation, it will proceed to the next step. Else, the add function will stop.
-Step 7. A resource is created by passing the parsed data to `createBook()`.
-Step 8. Finally, this newly created book will be added to the `resourceList`.
-Step 9. A message will be displayed to indicate the successful addition of resource.
+Step 6. If it manages to pass all the validation, it will proceed to the next step. Else, the add function will stop.  
+Step 7. A resource is created by passing the parsed data to `createBook()`.  
+Step 8. Finally, this newly created book will be added to the `resourceList`.  
+Step 9. A message will be displayed to indicate the successful addition of resource.  
 Step 10. Lastly, an information is added to the log to record the resource that has been added.
 
 #### Note
@@ -754,9 +754,9 @@ Sequence Diagram:
 
 <div style="page-break-after: always;"></div>
 
-## Product scope | [Return to contents](#table-of-contents)
+## Product Scope | [Return to contents](#table-of-contents)
 
-### Target user profile
+### Target User Profile
 
 System librarians who prefer CLI over GUI and are responsible for inventory and event management.
 
@@ -906,6 +906,73 @@ With quick command-based actions, they can manage library's resources and events
 - 3c. User provides the wrong arguments for the type of resource they specified
     - SysLib shows an invalid argument message and displays the right arguments for the resource type
     - Use case ends.
+
+<div style="page-break-after: always;"></div>
+
+### Use case: Add an event
+
+#### MSS
+1. User requests to add a event
+2. SysLib adds the event
+
+   Use case ends.
+
+#### Extensions
+- 1a. The given `date` is invalid.
+    - 1ai. SysLib displays an error message.
+    - Use case ends.
+
+- 1b. Insufficient data given.
+    - 1bi. SysLib displays an error message.
+    - Use case ends.
+
+<div style="page-break-after: always;"></div>
+
+### Use case: Delete an event
+
+#### MSS
+1. User requests to list the events with `eventlist`
+2. SysLib shows the list of events
+3. User requests to delete a specific event based on `id`
+4. Syslib deletes the event
+
+   Use case ends.
+
+#### Extensions
+- 2a. The list is empty.
+    - 1ai. SysLib displays the message for empty list.
+    - Use case ends.
+
+- 3a. The given index is invalid
+    - 1bi. SysLib displays an error message.
+    - Use case resumes at step 2.
+
+<div style="page-break-after: always;"></div>
+
+### Use case: Edit an event
+
+#### MSS
+1. User requests to list the events with `eventlist`
+2. SysLib shows the list of events
+3. User requests to edit a specific event based on `id`
+4. Syslib edits the event
+
+   Use case ends.
+
+#### Extensions
+- 2a. The list is empty.
+    - 1ai. SysLib displays the message for empty list.
+    - Use case ends.
+
+- 3a. The given index is invalid
+    - 1bi. SysLib displays an error message.
+    - Use case resumes at step 2.
+  
+- 3b. Insufficient data given.
+    - 1bi. SysLib displays an error message.
+    - Use case resumes at step 2.
+      
+<div style="page-break-after: always;"></div>
 
 ## Non-Functional Requirements | [Return to contents](#table-of-contents)
 
