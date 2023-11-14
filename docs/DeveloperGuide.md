@@ -1,9 +1,9 @@
 # Developer Guide
 
 ## Table of Contents
-* [About this guide](#about-this-guide)
+* [About This guide](#about-this-guide)
 * [Acknowledgements](#acknowledgements)
-* [Setting up](#setting-up--getting-started)
+* [Setting Up](#setting-up--getting-started)
 * [Design and Implementation](#design--implementation)
     * [Architecture Overview](#architecture-overview--return-to-contents)
     * [Component Overview](#component-overview--return-to-contents)
@@ -345,10 +345,10 @@ Step 3. Next, `parseAddCommand()` will identify the type of resource to add.
 Step 4. If it is a book, it will call `addBook()` where validation and addition of book occurs. 
 If it is none of the listed resources, the add function will stop.  
 Step 5. `parseAddBook()` and `parseBookArgs()` will validate every part of the input.  
-Step 6. If it manages to pass all the validation, it will proceed to the next step. Else, the add function will stop.
-Step 7. A resource is created by passing the parsed data to `createBook()`.
-Step 8. Finally, this newly created book will be added to the `resourceList`.
-Step 9. A message will be displayed to indicate the successful addition of resource.
+Step 6. If it manages to pass all the validation, it will proceed to the next step. Else, the add function will stop.  
+Step 7. A resource is created by passing the parsed data to `createBook()`.  
+Step 8. Finally, this newly created book will be added to the `resourceList`.  
+Step 9. A message will be displayed to indicate the successful addition of resource.  
 Step 10. Lastly, an information is added to the log to record the resource that has been added.
 
 #### Note
@@ -754,9 +754,9 @@ Sequence Diagram:
 
 <div style="page-break-after: always;"></div>
 
-## Product scope | [Return to contents](#table-of-contents)
+## Product Scope | [Return to contents](#table-of-contents)
 
-### Target user profile
+### Target User Profile
 
 System librarians who prefer CLI over GUI and are responsible for inventory and event management.
 

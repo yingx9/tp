@@ -10,16 +10,17 @@ It offers a wide range of features to manage library resources and events, from 
 
 #### Code Contributed
 
-View the code I contributed [here](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=joannejo&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&tabOpen=true&tabType=authorship&tabAuthor=JoanneJo&tabRepo=AY2324S1-CS2113T-W11-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false).
+View the code I contributed [here](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=joannejo&breakdown=true).
+
 
 #### Enhancements Implemented
 
 **Enhancements**:
 1. Resource classes
 2. Add feature for resources
-3. Validation for adding resources
+3. Parser for adding resources
 4. Exception class
-5. 
+5. Output of messages
 
 **Details**:
 
@@ -29,66 +30,119 @@ Implementation: `Book`, `EBook`, `CD`, `Magazine`, `EMagazine`, `Newspaper`, `EN
 
 Implemented the different resource classes for each resource has different attributes.
 
+Resources and attributes supported:  
+- **Book**
+  - ID, Tag, Title, ISBN, Status, Author, Genres
+- **EBook**
+  - ID, Tag, Title, ISBN, Status, Author, Genres, Link
+- **CD**
+  - ID, Tag, Title, ISBN, Status, Creator, Type
+- **Magazine**
+  - ID, Tag, Title, ISBN, Status, Brand, Issue
+- **EMagazine**
+  - ID, Tag, Title, ISBN, Status, Brand, Issue, Link
+- **Newspaper**
+  - ID, Tag, Title, ISBN, Status, Publisher, Edition
+- **ENewspaper**
+  - ID, Tag, Title, ISBN, Status, Publisher, Edition, Link
+
 **2. Add feature for resources**
 
-Implementation: `AddCommand`, `CreateResource` class
+Implementation: `AddCommand`, `CreateResource` classes
 
 Implemented the **add** feature to add resources into a list of all the resources in the library.
 
 Add feature supports the addition of:
-- Book
-  - Attributes: Title, ISBN, Status, Author,Genres
-- EBook
-  - Attributes: Title, ISBN, Status, Author, Genres, Link
-- CD
-  - Attributes: Title, ISBN, Status, Creator, Type
-- Magazine
-  - Attributes: Title, ISBN, Status, Brand, Issue
-- EMagazine
-  - Attributes: Title, ISBN, Status, Brand, Issue, Link
-- Newspaper
-  - Attributes: Title, ISBN, Status, Publisher, Edition
-- ENewspaper
-  - Attributes: Title, ISBN, Status, Publisher, Edition, Link
+- **Resources**
+  - Book
+  - EBook
+  - CD
+  - Magazine
+  - EMagazine
+  - Newspaper
+  - ENewspaper
+- **Attributes**
+  - Required for all: Title, ISBN
+  - Required for electronic versions (E*): Link
+  - Others required: Author, Creator, Type, Brand, Issue, Publisher, Edition
+  - Optional: Genres, Status
 
-**3. Validation for adding resources**
+**3. Parser for adding resources**
 
-Implementation: `ParseResource`, `ParseBook`, `ParseEBook`, `ParseCD`, `ParseMagazine`, `ParseEMagazine`, `ParseNewspaper`, `ParseENewspaper` classes
+Implementation: `ParseResource`, `ParseAttribute`, `ParseBook`, `ParseEBook`, `ParseCD`, `ParseMagazine`, `ParseEMagazine`, `ParseNewspaper`, `ParseENewspaper` classes &
+`parseAddCommand()`, `checkFirstItem()` in `Parser` class
 
 Implemented the validation and error handling of user input for the **add** feature.
 Checks the user input for all attributes in all resources. Returns error messages to suggest valid input.
+
+**Validation checks for**:
+- **Valid input**
+  - Valid arguments
+  - Valid data 
+- **Optional data**
+  - Presence of data
+  - Breaking down of large data to smaller valid data 
+    - Via comma (and spaces)
+- **Reduce limitations of input**
+  - Allow almost all characters in input 
+- **Limitations**
+  - Allow the use of slashes in data under certain conditions
+    - To specify argument and when it is wrapped with words
+  - "[" and "]" not allowed in genres.
+- **Keywords**
+  - Types of data are checked with arguments 
+    - Arguments are in the format: "/ARGUMENT"
 
 **4. Exception class**
 
 Implementation: `SysLibException` class
 
-Catches exceptions related to SysLib and prevents program from exiting due to exceptions. 
+Catches **exceptions** related to SysLib and prevents program from exiting due to exceptions. 
 Returns error messages to user so that the exception can be prevented with the right user input.
+
+**5. Output of messages**
+
+Implementation: `Messages` class & `formatSeparatorLineDivider()` in `MessageFormatter` class
+
+Messages strings are stored in **Messages**. It consists of mainly error, warning and assertion messages.
+**formatSeparatorLineDivider()** formats the messages neatly for output to user.
+
 
 #### Contributions to the UG
 
 Sections contributed:
-- Add Command
-- 
+- How to Use the User Guide
+- Add a Listing
+- FAQ
+- Command Summary
+
 
 #### Contributions to the DG
 
 Sections contributed:
 - Setting Up & Getting Started
 - Add Resource Feature
+- Add Feature Sequence Diagram
+- Add Feature Activity Diagram
+- Target User Profile
 - Use Case: Add a book
 - Instructions for Manual Testing
-- 
+  - Launch & Shutdown
+  - Adding a Book
 
 #### Contributions to Team-Based Tasks
 
-- Reviewed multiple peer pull request
-- Manage issue tracker
-- 
+- Did general code enhancements
+- Updated UG and DG not specific to feature
+- Check consistency of documentations
+- Managed issues
 
 #### Reviewing / Mentoring Contributions
 
-- Peer reviewed other team's project
-- Test other team's project during PE-D
+- Reviewed peer pull requests
+- Bug tested during implementation
 
 #### Contributions Beyond the Project Team
+
+- Peer reviewed other team's project [here](https://github.com/nus-cs2113-AY2324S1/tp/pull/8)
+- Tested other team's project during PE-D
