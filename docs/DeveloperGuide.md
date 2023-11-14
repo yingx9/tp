@@ -250,7 +250,7 @@ There are seven types of `Resource`:
 - **ENewspaper** has two options:
     - `add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] /l [link]`
     - `add /i [isbn] /t [title] /p [publisher] /ed [edition] /tag [tag] /l [link] /s [status]`
-    - 
+  
 #### Implementation
 
 It implements the following operations:
