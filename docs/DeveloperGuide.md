@@ -847,6 +847,73 @@ With quick command-based actions, they can manage library's resources and events
 
 <div style="page-break-after: always;"></div>
 
+### Use case: Add an event
+
+#### MSS
+1. User requests to add a event
+2. SysLib adds the event
+
+   Use case ends.
+
+#### Extensions
+- 1a. The given `date` is invalid.
+    - 1ai. SysLib displays an error message.
+
+      Use case ends.
+
+- 1b. Insufficient data given.
+    - 1bi. SysLib displays an error message.
+
+      Use case ends.
+
+### Use case: Delete an event
+
+#### MSS
+1. User requests to list the events with `eventlist`
+2. SysLib shows the list of events
+3. User requests to delete a specific event based on `id`
+4. Syslib deletes the event
+
+   Use case ends.
+
+#### Extensions
+- 2a. The list is empty.
+    - 1ai. SysLib displays the message for empty list.
+
+      Use case ends.
+
+- 3a. The given index is invalid
+    - 1bi. SysLib displays an error message.
+
+      Use case resumes at step 2.
+
+<div style="page-break-after: always;"></div>
+
+### Use case: Edit an event
+
+#### MSS
+1. User requests to list the events with `eventlist`
+2. SysLib shows the list of events
+3. User requests to edit a specific event based on `id`
+4. Syslib edits the event
+
+   Use case ends.
+
+#### Extensions
+- 2a. The list is empty.
+    - 1ai. SysLib displays the message for empty list.
+
+      Use case ends.
+
+- 3a. The given index is invalid
+    - 1bi. SysLib displays an error message.
+
+      Use case resumes at step 2.
+  
+- 3b. Insufficient data given.
+    - 1bi. SysLib displays an error message.
+
+      Use case resumes at step 2.
 ## Non-Functional Requirements | [Return to contents](#table-of-contents)
 
 - Should work on any mainstream OS as long as it has Java 11 or above installed.
