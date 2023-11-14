@@ -642,8 +642,12 @@ Example:
 Q: How do I download Java 11 on my computer?  
 A: Follow the guide [here](https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk#:~:text=Head%20to%20Java%20SE%20Development,download%20the%20file%20jdk%2D11.0.)!
 
-Q: How do I open command terminal?  
-A: For **Windows** users, click **Start** and search for **Command Prompt**. For **Mac** users, press `Command ⌘` + `Space` 
+Q: How do I open command terminal?
+
+A: 
+- For **Windows** users, click **Start** and search for **Command Prompt**. 
+
+- For **Mac** users, press `Command ⌘` + `Space` 
 on your keyboard to open Spotlight and type **Terminal** in the search field, then click **Terminal**.
 
 Q: What should I do if I encounter an error or bug?  
