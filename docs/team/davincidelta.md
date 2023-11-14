@@ -11,7 +11,7 @@ From viewing, adding, searching, editing, deleting and saving, SysLib provides a
 
 View the code I contributed via the tp Code Dashboard link [here](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/?search=DavinciDelta&breakdown=true).
 
-#### Features implemented
+#### Enhancements implemented
 1. Command and Delete Command for resources
 2. Parser and suggestParser Class
 3. EventAdd, EventList, EventDelete Command for events
@@ -26,6 +26,7 @@ Main classes and methods implemented:
 - `execute()` in `Command` class
 - `parseArugment()`, `getMatch` and `checkMatch` in `Command` class
 - `validate()` and `checkDuplicate` in `Command` class
+- `getReason()` in `Command` class
 - `parseInt()` in `Command` class
 
 Implemented a class `Command` which is an abstract class to `execute()` each command
@@ -38,17 +39,20 @@ but the implementation is the same.
 Thus `parseArgument()` function will be called to first to get these arguments,
 which loops through the list of `args` that the command requires,
 then `getMatch()` is called to check if the arguments exist in the user input,
-which calls `checkMatch()` to ensure no issues with "/" in arguments
+which calls `checkMatch()` to ensure no issues with "/" in arguments.
 
 After `validate()` is called to verify the user input against the arguments received,
 this then calls `checkDuplicate()` to check for duplicate calls of the same argument.
-At the end, `validate()` checks for additional random variables/commands
+
+At the end, `validate()` checks for additional random variables/commands. 
+If there is, `getReason()` will be called to verify the reason for error to give more
+informative feedback. 
+If the additional command/variable resemble an argument, a suggested argument will be given.
 
 `parseInt()` is by some commands to check for an input of a valid integer.
 
-`DeleteCommand` class is an implementation of `Command` that get takes in the isbn of the resource
-to be deleted.
-
+`DeleteCommand` class is an implementation of `Command` that get takes in the id of the resource
+to be deleted, the id is parsed through the `parseInt()` function
 
 **2. Parser and SuggestParser Class**
 
@@ -90,18 +94,22 @@ This event is then stored at the index where it fits chronologically(earlier dat
 - EventAdd Command
 - EventList Command
 - EventDelete Command
+- FAQ
 
 #### Contributions to the DG:
 
-- Command components and diagram
+- User stories
+- Parsing components and sequence diagram
+- Command components and class diagram
 - Events, including EventAdd, EventList and EventDelete
-- Parsing and EventAdd sequence diagram
+- EventAdd sequence diagram
 
 #### Contributions to team-based tasks
 
 - Reviewed multiple peer pull requests
 - Debug multiple PR that has merge problems
 - Added the foundation for tp project
+- Bug tested for 2.1 jar
 
 #### Review/mentoring contributions:
 

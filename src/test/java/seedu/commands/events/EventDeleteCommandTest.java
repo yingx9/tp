@@ -47,7 +47,21 @@ public class EventDeleteCommandTest {
     }
 
     @Test
-    public void eventDeleteCommandEmpty() throws SysLibException{
+    public void eventDeleteCommandEmpty(){
         assertThrows(SysLibException.class, ()->eventDeleteCommand.execute("/id 0", parser.container));
+    }
+
+    @Test
+    public void eventDeleteDuplicateID() throws SysLibException{
+        eventAddCommand.execute("/t test1 /date 1 dec 2001 /desc testing 123", parser.container);
+        eventAddCommand.execute("/t test2 /date 2 dec 2001 /desc testing 456", parser.container);
+        assertThrows(IllegalArgumentException.class, ()->eventDeleteCommand.execute("/id 0 /id 1", parser.container));
+    }
+
+    @Test
+    public void eventDeleteInvalidArgument() throws SysLibException{
+        eventAddCommand.execute("/t test1 /date 1 dec 2001 /desc testing 123", parser.container);
+        eventAddCommand.execute("/t test2 /date 2 dec 2001 /desc testing 456", parser.container);
+        assertThrows(IllegalArgumentException.class, ()->eventDeleteCommand.execute("not /id 0", parser.container));
     }
 }

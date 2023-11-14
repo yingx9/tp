@@ -41,13 +41,13 @@ public class SummaryCommandTest {
         String expectedMessage = "Summary of Resources:" + System.lineSeparator() +
                 "Total Resources: 9" + System.lineSeparator() +
                 "Total Books: [▓▓▓▓] 3" + System.lineSeparator() +
-                "Total CDs: [▓] 1" + System.lineSeparator() +
-                "Total Magazines: [▓] 1" + System.lineSeparator() +
                 "Total E-Books: [▓] 1" + System.lineSeparator() +
+                "Total Magazines: [▓] 1" + System.lineSeparator() +
                 "Total E-Magazines: [▓] 1" + System.lineSeparator() +
                 "Total Newspapers: [▓] 1" + System.lineSeparator() +
-                "Total E-Newspapers: [▓] 1" + System.lineSeparator()
-                + System.lineSeparator() +
+                "Total E-Newspapers: [▓] 1" + System.lineSeparator() +
+                "Total CDs: [▓] 1" + System.lineSeparator() +
+                System.lineSeparator() +
                 "Summary of Events:" + System.lineSeparator() +
                 "Total Events: 5" + System.lineSeparator() +
                 "Upcoming Events (Next 3):" + System.lineSeparator() +

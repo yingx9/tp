@@ -98,4 +98,25 @@ public class EventEditCommandTest {
         assertThrows(IllegalArgumentException.class, () -> EventEditCommand.checkDate("01-Jan-2023"));
     }
 
+    @Test
+    public void eventEditCommandDuplicateTitle() throws SysLibException {
+        eventAddCommand.execute("/t test1 /date 1 dec 2001 /desc testing 123", parser.container);
+        assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute(
+                "/id 0 /t Hello /t Hello2 /date 20 Jan 2023", parser.container));
+    }
+
+    @Test
+    public void eventAddCommandDuplicateDate() throws SysLibException {
+        eventAddCommand.execute("/t test1 /date 1 dec 2001 /desc testing 123", parser.container);
+        assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute(
+                "/id 0 /t Hello /date 17 Jan 2023 /date 20 Jan 2023", parser.container));
+    }
+
+    @Test
+    public void eventAddCommandInvalidArguments() throws SysLibException {
+        eventAddCommand.execute("/t test1 /date 1 dec 2001 /desc testing 123", parser.container);
+        assertThrows(IllegalArgumentException.class, ()->eventAddCommand.execute(
+                "Invalid /id 0 /t Hello /date 20 Jan 2023", parser.container));
+    }
+
 }
