@@ -987,7 +987,7 @@ should be able to accomplish most of the tasks faster using commands than using 
 
 * *Resource* - A generic term for items in library inventory.
   * Further divided into: Book, EBook, Magazines, EMagazines, Newspapers, ENewspapers, and CDs. 
-  * 
+  
 <div style="page-break-after: always;"></div>
 
 ## Instructions for Manual Testing | [Return to contents](#table-of-contents)

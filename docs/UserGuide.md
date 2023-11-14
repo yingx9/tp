@@ -635,7 +635,7 @@ Format: `help`
 
 Example:
 
-![helpexampleoutput](/Users/bnjm2000/Desktop/4. Sem 3/CS2113T/Codes/tp/docs/images/helpexampleoutput.png)
+![helpexampleoutput](images/helpexampleoutput.png)
 
 ## FAQ | [Return to Contents](#contents)
 
