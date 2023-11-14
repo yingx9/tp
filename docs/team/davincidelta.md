@@ -98,7 +98,7 @@ This event is then stored at the index where it fits chronologically(earlier dat
 
 #### Contributions to the DG:
 
-- User stories
+- User stories and use cases
 - Parsing components and sequence diagram
 - Command components and class diagram
 - Events, including EventAdd, EventList and EventDelete
